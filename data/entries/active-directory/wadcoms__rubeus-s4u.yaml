@@ -12,7 +12,7 @@ privilege_required: domain-user
 sources:
 - project: WADComs
   upstream_url: https://wadcoms.github.io
-  license: verify upstream LICENSE
+  license: GPL-3.0
   upstream_version: a864cd1
   last_synced: '2026-08-25'
 preconditions:

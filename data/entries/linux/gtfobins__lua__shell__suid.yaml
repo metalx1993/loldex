@@ -11,7 +11,7 @@ privilege_required: suid
 sources:
 - project: GTFOBins
   upstream_url: https://gtfobins.github.io
-  license: MIT (verify upstream LICENSE)
+  license: GPL-3.0
   upstream_version: acd5246
   last_synced: '2026-08-25'
 commands:
