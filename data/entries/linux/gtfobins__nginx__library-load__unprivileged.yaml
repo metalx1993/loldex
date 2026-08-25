@@ -1,0 +1,32 @@
+id: gtfobins/nginx/library-load/unprivileged
+type: binary
+platform: linux
+name: nginx
+phases:
+- execution
+- persistence
+capabilities:
+- library-load
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'cat >/path/to/temp-file <<EOF
+
+    load_module /path/to/lib.so;
+
+    EOF
+
+
+    nginx -t -c /path/to/temp-file'
+  comment: Alternatively, the `ssl_engine` directive can be used.
+references:
+- https://gtfobins.github.io/gtfobins/nginx/
+tags:
+- linux
+- unix
+- gtfobins

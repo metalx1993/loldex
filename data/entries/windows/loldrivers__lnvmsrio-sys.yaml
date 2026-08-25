@@ -1,0 +1,38 @@
+id: loldrivers/lnvmsrio-sys
+type: driver
+platform: windows
+name: LnvMSRIO.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create LnvMSRIO binPath=C:\windows\temp\LnvMSRIO.sys type=kernel && sc.exe start LnvMSRIO
+  comment: LnvMSRIO.sys is a Lenovo Dispatcher driver affected by CVE-2025-8061. Vulnerable Lenovo Dispatcher
+    3.0 and 3.1 drivers expose the WinMsrDev device interface with insufficient access control. Public
+    re
+driver_detail:
+  sha256: 7023f08c9f99076a5fb82a0f661847e2951800f095fca1793a0e6bd9c949b478
+  signer: Lenovo
+  original_filename: LnvMSRIO.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/242
+- https://github.com/symeonp/Lenovo-CVE-2025-8061
+- https://blog.quarkslab.com/exploiting-lenovo-driver-cve-2025-8061.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,32 @@
+id: lolbas/visualuiaverifynative/awl-bypass/0
+type: binary
+platform: windows
+name: VisualUiaVerifyNative.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: medium
+  triggers: As a Windows SDK binary, execution on a system may be suspicious
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6b34764215b0e97e32cbc4c6325fc933d2695c3a/rules/windows/process_creation/proc_creation_win_lolbin_visualuiaverifynative.yml
+commands:
+- template: VisualUiaVerifyNative.exe
+  comment: Generate Serialized gadget and save to - `C:\Users\%USERNAME%\AppData\Roaminguiverify.config`
+    before executing.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/VisualUiaVerifyNative/
+tags:
+- windows
+- lolbas

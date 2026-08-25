@@ -1,0 +1,24 @@
+id: gtfobins/dialog/file-read/unprivileged
+type: binary
+platform: linux
+name: dialog
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: dialog --textbox /path/to/input-file 0 0
+  comment: The file is shown in an interactive TUI dialog.
+references:
+- https://gtfobins.github.io/gtfobins/dialog/
+tags:
+- linux
+- unix
+- gtfobins

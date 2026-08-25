@@ -1,0 +1,31 @@
+id: lolbas/printbrm/ads/1
+type: binary
+platform: windows
+name: PrintBrm.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: PrintBrm.exe should not be run on a normal workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/35a7244c62820fbc5a832e50b1e224ac3a1935da/rules/windows/process_creation/proc_creation_win_lolbin_printbrm.yml
+commands:
+- template: PrintBrm -r -f {PATH_ABSOLUTE}:hidden.zip -d {PATH_ABSOLUTE:folder}
+  comment: Extract the contents of a ZIP file stored in an Alternate Data Stream (ADS) and store it in
+    a folder
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/PrintBrm/
+tags:
+- windows
+- lolbas

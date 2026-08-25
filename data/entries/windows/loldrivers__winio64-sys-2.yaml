@@ -1,0 +1,32 @@
+id: loldrivers/winio64-sys-2
+type: driver
+platform: windows
+name: winio64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create winio64.sys binPath=C:\windows\temp\winio64.sys type=kernel && sc.exe start
+    winio64.sys
+driver_detail:
+  sha256: e1980c6592e6d2d92c1a65acad8f1071b6a404097bb6fcce494f3c8ac31385cf
+  category: vulnerable driver
+references:
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,35 @@
+id: loldrivers/trixx-sys
+type: driver
+platform: windows
+name: TRIXX.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create TRIXX binPath=C:\windows\temp\TRIXX.sys type=kernel && sc.exe start TRIXX
+  comment: TRIXX.sys is a shared utility kernel driver distributed by TechPowerUp LLC with Sapphire TRIXX
+    and GPU-Z. The driver provides completely unrestricted hardware access from usermode through 16+ IOCTLs
+    w
+driver_detail:
+  sha256: 69fb21e4c8dbfcab838d53d98ec7357d35e30cbbe5fde9e26457d79242ddd78e
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/291
+- https://github.com/magicsword-io/LOLDrivers/issues/320
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

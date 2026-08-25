@@ -1,0 +1,37 @@
+id: loldrivers/rtsuer-sys
+type: driver
+platform: windows
+name: RtsUer.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create RtsUer.sys binPath=C:\windows\temp\RtsUer.sys type=kernel && sc.exe start RtsUer.sys
+  comment: The Realtek SD card reader driver, RtsUer.sys, versions below or equal to 10.0.22000.31273
+    contain multiple vulnerabilities that pose significant security risks. These flaws allow non-privileged
+    users
+driver_detail:
+  sha256: 39171fcaff172d6b38762acef3d3352f9a375e3db7e54a7b51261a53b3c94266
+  signer: Realsil Semiconductor Corporation
+  original_filename: RTSUER.SYS
+  category: vulnerable driver
+references:
+- https://www.linkedin.com/pulse/vulnerabilities-realtek-sd-card-reader-driver-part-1-myngerbayev-czqmf,
+  https://github.com/zwclose/realteksd
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

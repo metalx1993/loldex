@@ -1,0 +1,36 @@
+id: loldrivers/wintapix-sys
+type: driver
+platform: windows
+name: WinTapix.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create WinTapix.sys binPath=C:\windows\temp\WinTapix.sys type=kernel && sc.exe start
+    WinTapix.sys
+  comment: Wintapix.sys is partially protected by VMProtect, a software protection tool that uses virtualization
+    to protect software applications from reverse engineering and unauthorized usage. It transforms th
+driver_detail:
+  sha256: 8578bff36e3b02cc71495b647db88c67c3c5ca710b5a2bd539148550595d0330
+  signer: Microsoft Corporation
+  original_filename: WinTapix.sys
+  category: malicious
+references:
+- https://www.fortinet.com/blog/threat-research/wintapix-kernal-driver-middle-east-countries
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

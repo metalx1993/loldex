@@ -1,0 +1,38 @@
+id: loldrivers/probmon-sys
+type: driver
+platform: windows
+name: probmon.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create probmon.sys binPath=C:\windows\temp\probmon.sys type=kernel && sc.exe start
+    probmon.sys
+  comment: A vulnerable kernel driver that can be used to terminate arbitrary processes
+driver_detail:
+  sha256: 023d722cbbdd04e3db77de7e6e3cfeabcef21ba5b2f04c3f3a33691801dd45eb
+  signer: ITM SYSTEM
+  original_filename: probmon.sys
+  category: vulnerable driver
+references:
+- Internal Research
+- https://www.welivesecurity.com/en/eset-research/embargo-ransomware-rocknrust/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

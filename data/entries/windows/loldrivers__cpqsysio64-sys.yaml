@@ -1,0 +1,37 @@
+id: loldrivers/cpqsysio64-sys
+type: driver
+platform: windows
+name: cpqsysio64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create cpqsysio binPath=C:\windows\temp\cpqsysio64.sys type=kernel && sc.exe start
+    cpqsysio
+  comment: cpqsysio64.sys is a Hewlett-Packard physical memory driver that ships as part of the HP ProLiant
+    Support Pack and HP firmware ROM update utilities. The driver exposes physical memory read via MmMapIoS
+driver_detail:
+  sha256: 4024b090cebcabaab884c84ec80ffb15622d12632f236383a9b0a470bff9fe33
+  signer: Hewlett-Packard
+  original_filename: cpqsysio.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/311
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

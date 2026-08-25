@@ -1,0 +1,37 @@
+id: loldrivers/dpmemio-sys
+type: driver
+platform: windows
+name: dpmemio.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create dpMemIO binPath=C:\windows\temp\dpmemio.sys type=kernel && sc.exe start dpMemIO
+  comment: ET&T Technology Co., Ltd. dpmemio.sys (ClevoECView) is a 12KB driver with only 9 imports that
+    provides completely unrestricted arbitrary physical memory read/write and I/O port access with no
+    authenti
+driver_detail:
+  sha256: 7cf6881e43337c288b1883fafb234146a450ff94388aee395e05e36202c5afbb
+  original_filename: dpmemio.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/288
+- https://www.virustotal.com/gui/file/7cf6881e43337c288b1883fafb234146a450ff94388aee395e05e36202c5afbb
+- https://www.virustotal.com/gui/file/cd631c54fe1375e4bdd2f63b58bd106066eeee267fc77b3161ceb023ab5fddda
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

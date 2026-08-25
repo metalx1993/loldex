@@ -1,0 +1,38 @@
+id: loldrivers/enportv-sys
+type: driver
+platform: windows
+name: EnPortv.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create EnPortv binPath=C:\windows\temp\EnPortv.sys type=kernel && sc.exe start EnPortv
+  comment: Guidance Software EnPortv.sys is an older EnCase kernel driver documented in KOSEC BYOVD research
+    and in public reporting on signed forensic drivers used by EDR-killer tooling. KOSEC documents a KillP
+driver_detail:
+  sha256: d42f1b420747b82533e33107c710c45c29ff20aa5da3d1c8498b7bed7f9ebc81
+  signer: Guidance Software Inc.
+  original_filename: EnPortv.sys
+  category: vulnerable driver
+references:
+- https://github.com/KOSEC-LLC/BYOVD-Research/tree/main/EnCase
+- https://www.bleepingcomputer.com/news/security/edr-killer-tool-uses-signed-kernel-driver-from-forensic-software/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

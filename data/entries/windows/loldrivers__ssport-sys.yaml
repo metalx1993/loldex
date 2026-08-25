@@ -1,0 +1,34 @@
+id: loldrivers/ssport-sys
+type: driver
+platform: windows
+name: SSPORT.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create SSPORT.sys binPath=C:\windows\temp\SSPORT.sys     type=kernel && sc.exe start
+    SSPORT.sys
+driver_detail:
+  sha256: 7cc9ba2df7b9ea6bb17ee342898edd7f54703b93b6ded6a819e83a7ee9f938b4
+  signer: Samsung Electronics
+  original_filename: SSPORT.sys
+  category: vulnerable driver
+references:
+- https://github.com/VoidSec/Exploit-Development/tree/b82b6d3ac1cce66221101d3e0f4634aa64cb4ca7/windows/x64/kernel/ssport_v1.0
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

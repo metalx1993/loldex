@@ -1,0 +1,23 @@
+id: gtfobins/rpmdb/shell/unprivileged
+type: binary
+platform: linux
+name: rpmdb
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: rpmdb --eval '%(/bin/sh 1>&2)'
+references:
+- https://gtfobins.github.io/gtfobins/rpmdb/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,25 @@
+id: gtfobins/strings/file-read/suid
+type: binary
+platform: linux
+name: strings
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: strings /path/to/input-file
+  comment: This only returns ASCII strings.
+references:
+- https://gtfobins.github.io/gtfobins/strings/
+tags:
+- linux
+- unix
+- gtfobins

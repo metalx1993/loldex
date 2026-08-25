@@ -1,0 +1,25 @@
+id: gtfobins/msguniq/file-read/suid
+type: binary
+platform: linux
+name: msguniq
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: msguniq -P /path/to/input-file
+  comment: The file is parsed and displayed as a Java `.properties` file.
+references:
+- https://gtfobins.github.io/gtfobins/msguniq/
+tags:
+- linux
+- unix
+- gtfobins

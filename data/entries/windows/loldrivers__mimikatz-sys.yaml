@@ -1,0 +1,29 @@
+id: loldrivers/mimikatz-sys
+type: driver
+platform: windows
+name: mimikatz.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+driver_detail:
+  sha256: 3033ff03e6f523726638b43d954bc666cdd26483fa5abcf98307952ff88f80ee
+  category: malicious
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

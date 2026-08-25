@@ -1,0 +1,36 @@
+id: loldrivers/ngstar-sys
+type: driver
+platform: windows
+name: NGStar.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: pnputil /add-driver fdu11.cat && sc.exe create ngstar binPath=C:\windows\temp\NGStar.sys type=kernel
+    && sc.exe start ngstar
+  comment: NGStar.sys is the kernel-mode USB fingerprint sensor driver for NITGEN Fingkey Hamster II/III
+    devices. The driver creates \Device\gstar-0 exposed as \\.\gstar-0 via IoCreateDevice with FILE_DEVICE_UNK
+driver_detail:
+  sha256: 4542b20be7adceb61fa5f538fed8c395951e775dbd7c4a2f7c6aee477c4d924e
+  signer: NITGEN&COMPANY Co., Ltd.
+  original_filename: NGStar.sys
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

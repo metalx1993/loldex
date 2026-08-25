@@ -1,0 +1,38 @@
+id: loldrivers/aswarpot-sys-2
+type: driver
+platform: windows
+name: aswArPot.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create aswArPot.sys binPath=C:\windows\temp\aswArPot.sys type=kernel && sc.exe start
+    aswArPot.sys
+  comment: "Avast\u2019s \u201CAnti Rootkit\u201D driver (also used by AVG) has been found to be vulnerable\
+    \ to two high severity attacks that could potentially lead to privilege escalation by running code\
+    \ in the kernel from a n"
+driver_detail:
+  sha256: 4b5229b3250c8c08b98cb710d6c056144271de099a57ae09f5d2097fc41bd4f1
+  signer: AVAST Software
+  original_filename: aswArPot.sys
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+- 'CVE-2022-26522, CVE-2022-26523: Both of these vulnerabilities were fixed in version 22.1.'
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

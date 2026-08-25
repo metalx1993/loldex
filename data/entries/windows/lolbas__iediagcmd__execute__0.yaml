@@ -1,0 +1,30 @@
+id: lolbas/iediagcmd/execute/0
+type: binary
+platform: windows
+name: iediagcmd.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Sysmon Event ID 1
+  detection_refs:
+  - https://github.com/manasmbellani/mycode_public/blob/master/sigma/rules/win_proc_creation_lolbin_iediagcmd.yml
+commands:
+- template: set windir=c:\test& cd "C:\Program Files\Internet Explorer\" & iediagcmd.exe /out:{PATH_ABSOLUTE:.cab}
+  comment: Executes binary that is pre-planted at C:\test\system32\netsh.exe.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Iediagcmd/
+tags:
+- windows
+- lolbas

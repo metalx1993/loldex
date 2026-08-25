@@ -1,0 +1,34 @@
+id: loldrivers/otipcibus-sys
+type: driver
+platform: windows
+name: otipcibus.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create otipcibus.sys binPath=C:\windows\temp\otipcibus.sys type=kernel && sc.exe start
+    otipcibus.sys
+driver_detail:
+  sha256: 4e3eb5b9bce2fd9f6878ae36288211f0997f6149aa8c290ed91228ba4cdfae80
+  signer: OTi
+  original_filename: otipcibus64.sys
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

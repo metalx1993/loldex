@@ -1,0 +1,38 @@
+id: loldrivers/mimidrv-sys
+type: driver
+platform: windows
+name: mimidrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create mimidrv.sys binPath=C:\windows\temp\mimidrv.sys type=kernel && sc.exe start
+    mimidrv.sys
+  comment: Mimidrv is a signed Windows Driver Model WDM kernel mode software driver meant to be used with
+    the standard Mimikatz executable.
+driver_detail:
+  sha256: 200f98655d1f46d2599c2c8605ebb7e335fee3883a32135ca1a81e09819bc64a
+  signer: gentilkiwi (Benjamin DELPY)
+  original_filename: mimidrv.sys
+  category: malicious
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/55#issuecomment-1537161951
+- https://github.com/hfiref0x/KDU
+- https://posts.specterops.io/mimidrv-in-depth-4d273d19e148
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

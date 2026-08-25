@@ -1,0 +1,36 @@
+id: gtfobins/zic/command/unprivileged
+type: binary
+platform: linux
+name: zic
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''Rule Jordan 0 1 xxx Jan lastSun 2 1:00d -'' >/path/to/temp-file
+
+    echo ''Zone Test 2:00 Jordan CE%sT'' >>/path/to/temp-file
+
+    zic -d . -y /path/to/command /path/to/temp-file'
+  comment: 'This executes the command twice:
+
+
+    - `/path/to/command 0 xxx`
+
+    - `/path/to/command 1 xxx`
+
+
+    Additionally the `Test` file is created.'
+references:
+- https://gtfobins.github.io/gtfobins/zic/
+tags:
+- linux
+- unix
+- gtfobins

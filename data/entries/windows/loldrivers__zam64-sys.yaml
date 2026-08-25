@@ -1,0 +1,34 @@
+id: loldrivers/zam64-sys
+type: driver
+platform: windows
+name: zam64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create zam64.sys binPath=C:\windows\temp\zam64.sys type=kernel && sc.exe start zam64.sys
+driver_detail:
+  sha256: 2bbc6b9dd5e6d0327250b32305be20c89b19b56d33a096522ee33f22d8c82ff1
+  signer: Zemana Ltd.
+  category: vulnerable driver
+references:
+- Internal Research
+- https://www.reddit.com/r/crowdstrike/comments/13wjrgn/20230531_situational_awareness_spyboy_defense/
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

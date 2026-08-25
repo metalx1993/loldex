@@ -1,0 +1,23 @@
+id: lolad/check-ldap-server-status
+type: technique
+platform: active-directory
+name: Check LDAP Server Status
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a25
+  last_synced: '2026-08-25'
+commands:
+- template: nltest /dsgetdc:domain /ldaponly
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd

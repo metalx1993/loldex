@@ -1,0 +1,36 @@
+id: loldrivers/asrcddrv-sys
+type: driver
+platform: windows
+name: AsrCDDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AsrCDDrv binPath=C:\windows\temp\AsrCDDrv.sys type=kernel && sc.exe start AsrCDDrv
+  comment: AsrCDDrv.sys is a kernel driver from ASRock Incorporation that exposes control register read/write
+    (cr0, cr2, cr3, cr4, cr8), arbitrary MSR read/write, arbitrary physical memory read/write via MmMapIo
+driver_detail:
+  sha256: 04cc7df4077e36199b04afa39204c8f568f7f66f045e73010fb9b7685324442f
+  signer: ASRock Incorporation
+  original_filename: AsrCDDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/326
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

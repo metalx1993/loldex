@@ -1,0 +1,36 @@
+id: loldrivers/chinese-cheat-driver-sys
+type: driver
+platform: windows
+name: chinese_cheat_driver.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create chinese_cheat_driver binPath=C:\windows\temp\chinese_cheat_driver.sys type=kernel
+    && sc.exe start chinese_cheat_driver
+  comment: chinese_cheat_driver.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode. Public exploit resea
+driver_detail:
+  sha256: 4f412f9aa89994cda45422d23d6d961809225de9a4f5a8bfbfb9ac0e8725917e
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/magicsword-io/LOLDrivers/issues/351
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

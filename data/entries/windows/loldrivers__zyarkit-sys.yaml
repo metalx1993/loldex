@@ -1,0 +1,38 @@
+id: loldrivers/zyarkit-sys
+type: driver
+platform: windows
+name: ZYArKit.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ZYArKit binPath=C:\windows\temp\ZYArKit.sys type=kernel && sc.exe start ZYArKit
+  comment: V-secure ZYArKit.sys version 2.0.13.5 is a signed kernel driver assessed in public KOSEC BYOVD
+    research. KOSEC documents an IOCTL path that references a user-supplied process handle and reaches
+    ZwTerm
+driver_detail:
+  sha256: 46883bc25c77678f60c1b836f4c438d87158c9af6b229f533522f635a0d5276e
+  signer: ' '
+  original_filename: ZYArKit
+  category: vulnerable driver
+references:
+- https://github.com/KOSEC-LLC/BYOVD-Research/tree/main/V-secure
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

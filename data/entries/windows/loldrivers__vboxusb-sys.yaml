@@ -1,0 +1,32 @@
+id: loldrivers/vboxusb-sys
+type: driver
+platform: windows
+name: VBoxUSB.Sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create VBoxUSB.sys binPath=C:\windows\temp\VBoxUSB.Sys type=kernel && sc.exe start
+    VBoxUSB.Sys
+driver_detail:
+  sha256: 6071db01b50c658cf78665c24f1d21f21b4a12d16bfcfaa6813bf6bbc4d0a1e8
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,27 @@
+id: gtfobins/emacs/file-write/unprivileged
+type: binary
+platform: linux
+name: emacs
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'emacs /path/to/output-file
+
+    DATA
+
+    C-x C-s'
+references:
+- https://gtfobins.github.io/gtfobins/emacs/
+tags:
+- linux
+- unix
+- gtfobins

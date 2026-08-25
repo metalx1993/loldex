@@ -1,0 +1,36 @@
+id: loldrivers/lsigetwin-sliffdriver-sys
+type: driver
+platform: windows
+name: lsigetwin_SliffDriver.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create lsigetwin_SliffDriver binPath=C:\windows\temp\lsigetwin_SliffDriver.sys type=kernel
+    && sc.exe start lsigetwin_SliffDriver
+  comment: lsigetwin_SliffDriver.sys is a Microsoft-signed vulnerable kernel driver that exposes a \\.\SliffDriver
+    device. Public research documents IOCTL 0x80002004 for mapping caller-supplied physical memory i
+driver_detail:
+  sha256: b811da59fbd212eb2c3bc0ed92e8ea2e46ef4df40c2d0991d911e72008bfc1fa
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/magicsword-io/LOLDrivers/issues/370
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,30 @@
+id: gtfobins/bundle/shell/unprivileged
+type: binary
+platform: linux
+name: bundle
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: BUNDLE_GEMFILE=x bundle exec /bin/sh
+- template: 'touch Gemfile
+
+    bundle exec /bin/sh'
+- template: 'echo ''system("/bin/sh")'' >Gemfile
+
+    bundle install'
+  comment: This might run the shell twice, one after the other.
+references:
+- https://gtfobins.github.io/gtfobins/bundle/
+tags:
+- linux
+- unix
+- gtfobins

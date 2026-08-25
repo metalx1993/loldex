@@ -1,0 +1,37 @@
+id: loldrivers/xlha-sys
+type: driver
+platform: windows
+name: XLHA.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create XLHA binPath=C:\windows\temp\XLHA.sys type=kernel && sc.exe start XLHA
+  comment: 'XLHA.sys is a kernel driver from LG Electronics Inc. that exposes physical memory read/write
+    via MmMapIoSpace and MSR read. Two other LG LHA.sys variants are already tracked in LOLDrivers. The
+    driver '
+driver_detail:
+  sha256: 11c9cbc39b6e028f2e8f9e7f83b47ae83ca73961ecfebb2f7213f9478f5446d5
+  signer: LG Electronics Inc.
+  original_filename: XLHA.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/324
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

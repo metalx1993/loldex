@@ -1,0 +1,27 @@
+id: lolbas/xbootmgr/execute/1
+type: binary
+platform: windows
+name: XBootMgr.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+commands:
+- template: xbootmgr.exe -trace "{boot|hibernate|standby|shutdown|rebootCycle}" -preTraceCmd {PATH:.exe}
+  comment: Executes an executable before each trace run using the preTraceCmd parameter.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/XBootMgr/
+tags:
+- windows
+- lolbas

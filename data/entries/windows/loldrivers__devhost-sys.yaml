@@ -1,0 +1,33 @@
+id: loldrivers/devhost-sys
+type: driver
+platform: windows
+name: devhost.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create devhost binPath=C:\windows\temp\devhost.sys type=kernel && sc.exe start devhost
+  comment: devhost.sys is a WHQL attestation-signed kernel driver that exposes arbitrary memory read primitives
+    to usermode. The device object at \\.\devhost has no ACL beyond a device handle. At load, the drive
+driver_detail:
+  sha256: ee8844ffd3879190fb389b0f613cb2dcdcd83375cf0a6994170a648c5ca8c479
+  category: vulnerable driver
+references:
+- https://x.com/nextaboratory/status/1914729845602783262
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

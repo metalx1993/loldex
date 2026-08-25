@@ -1,0 +1,33 @@
+id: loldrivers/fur-sys
+type: driver
+platform: windows
+name: fur.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create fur.sys binPath=C:\windows\temp\fur.sys type=kernel && sc.exe start fur.sys
+  comment: SophosLabs has discovered that threat actors are using a new driver loader called BURNTCIGAR
+    to install a malicious driver signed with Microsoft.
+driver_detail:
+  sha256: 0d10c4b2f56364b475b60bd2933273c8b1ed2176353e59e65f968c61e93b7d99
+  category: malicious
+references:
+- https://www.mandiant.com/resources/blog/hunting-attestation-signed-malware, https://news.sophos.com/en-us/2022/12/13/signed-driver-malware-moves-up-the-software-trust-chain/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

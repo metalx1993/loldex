@@ -1,0 +1,27 @@
+id: gtfobins/exiftool/file-read/sudo
+type: binary
+platform: linux
+name: exiftool
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'exiftool -filename=/path/to/output-file /path/to/input-file
+
+    cat /path/to/output-file'
+  comment: If the permissions allow it, files are moved (instead of copied) to the destination.
+references:
+- https://gtfobins.github.io/gtfobins/exiftool/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,26 @@
+id: gtfobins/mysql/library-load/sudo
+type: binary
+platform: linux
+name: mysql
+phases:
+- execution
+- persistence
+- privilege-escalation
+capabilities:
+- library-load
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: mysql --default-auth ../../../../../path/to/lib
+  comment: The following loads the `/path/to/lib.so` shared object.
+references:
+- https://gtfobins.github.io/gtfobins/mysql/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,36 @@
+id: loldrivers/srswdrv-sys
+type: driver
+platform: windows
+name: srswdrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create srswdrv binPath=C:\windows\temp\srswdrv.sys type=kernel && sc.exe start srswdrv
+  comment: srswdrv.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 57414e532a7a10ae7af7fa6294d1d95ad4d9d506882258c5e59d53b4e4f2c91a
+  signer: Lenovo
+  original_filename: srswdrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

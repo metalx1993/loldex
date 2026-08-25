@@ -1,0 +1,36 @@
+id: loldrivers/rtstpx-sys
+type: driver
+platform: windows
+name: RtsTpx.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create RtsTpx binPath=C:\windows\temp\RtsTpx.sys type=kernel && sc.exe start RtsTpx
+  comment: RtsTpx.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: b19ec8330b026100f705c05b793030ca109e15cbec4ada13b452acf259cc29d5
+  signer: Realtek Semiconductor Corp.
+  original_filename: RtsTpx
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

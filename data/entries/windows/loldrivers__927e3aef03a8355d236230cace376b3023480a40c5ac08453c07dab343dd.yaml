@@ -1,0 +1,41 @@
+id: loldrivers/927e3aef03a8355d236230cace376b3023480a40c5ac08453c07dab343dd
+type: driver
+platform: windows
+name: 927e3aef03a8355d236230cace376b3023480a40c5ac08453c07dab343dd1f11
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create 927e3aef03a8355d236230cace376b3023480a40c5ac08453c07dab343dd1f11 binPath=C:\windows\temp\927e3aef03a8355d236230cace376b3023480a40c5ac08453c07dab343dd1f11
+    type=kernel && sc.exe start 927e3aef03a8355d236230cace376b3023480a40c5ac08453c07dab343dd1f11
+  comment: 'According to Sophos X-Ops
+
+    (Aug 06, 2025), a widely shared EDR-killer toolkit drops/loads a malicious
+
+    kernel driver signed with compromised or revoked certificates to disable
+
+    endpoint protections. Vari'
+driver_detail:
+  sha256: 927e3aef03a8355d236230cace376b3023480a40c5ac08453c07dab343dd1f11
+  category: vulnerable driver
+references:
+- https://news.sophos.com/en-us/2025/08/06/shared-secret-edr-killer-in-the-kill-chain/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

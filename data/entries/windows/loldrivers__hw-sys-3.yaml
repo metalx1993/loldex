@@ -1,0 +1,35 @@
+id: loldrivers/hw-sys-3
+type: driver
+platform: windows
+name: hw.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create hw_sys binPath=C:\windows\temp\hw.sys type=kernel && sc.exe start hw.sys
+driver_detail:
+  sha256: 4880f40f2e557cff38100620b9aa1a3a753cb693af16cd3d95841583edcb57a8
+  signer: Marvin Test Solutions, Inc.
+  original_filename: HW.sys
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+- https://decoded.avast.io/janvojtesek/the-return-of-candiru-zero-days-in-the-middle-east/
+- https://www.virustotal.com/gui/file/6a4875ae86131a594019dec4abd46ac6ba47e57a88287b814d07d929858fe3e5/detection
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

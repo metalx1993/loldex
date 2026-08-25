@@ -1,0 +1,25 @@
+id: gtfobins/ld.so/shell/unprivileged
+type: binary
+platform: linux
+name: ld.so
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: /path/to/ld.so /bin/sh
+  comment: The spawned process will be the loader, not the target executable, this might aid evasion.
+    See <https://shyft.us/posts/20230526_linux_command_proxy.html> for more information.
+references:
+- https://gtfobins.github.io/gtfobins/ld.so/
+tags:
+- linux
+- unix
+- gtfobins

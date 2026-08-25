@@ -1,0 +1,29 @@
+id: loldrivers/tfbfs3ped-sys
+type: driver
+platform: windows
+name: tfbfs3ped.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 0897935ff2e0e7cc23a036ec0791d587b4799a299c8d6d65f364a8bdff645760
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,37 @@
+id: loldrivers/afd-sys
+type: driver
+platform: windows
+name: Afd.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create Afd.sys binPath=C:\windows\temp\Afd.sys type=kernel && sc.exe start Afd.sys
+  comment: Windows Ancillary Function Driver (Afd.sys) for WinSock is vulnerable to an Elevation of Privilege
+    Vulnerability.
+driver_detail:
+  sha256: ebf6be42d39fd5d9361afa43479f883ff8eba97d72f313ece289f78cb51c22f2
+  signer: Microsoft Corporation
+  original_filename: afd.sys
+  category: vulnerable driver
+references:
+- https://securityintelligence.com/x-force/patch-tuesday-exploit-wednesday-pwning-windows-ancillary-function-driver-winsock/
+- https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-21768
+- https://research.checkpoint.com/2026/shattering-the-dream-when-a-job-offer-becomes-a-zero-day-attack/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

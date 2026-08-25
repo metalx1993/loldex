@@ -1,0 +1,35 @@
+id: loldrivers/sysfile-x64-sys
+type: driver
+platform: windows
+name: SysFile_X64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create SysFile_X64 binPath=C:\windows\temp\SysFile_X64.sys type=kernel && sc.exe start
+    SysFile_X64
+  comment: SysFile_X64.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 5b204e0a24b5ea67e79329a8c4eb0513cd52a0e7407b99530323fff4c5b59e34
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

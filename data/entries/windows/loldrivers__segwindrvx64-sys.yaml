@@ -1,0 +1,34 @@
+id: loldrivers/segwindrvx64-sys
+type: driver
+platform: windows
+name: segwindrvx64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create segwindrvx64.sys binPath=C:\windows\temp\segwindrvx64.sys     type=kernel &&
+    sc.exe start segwindrvx64.sys
+driver_detail:
+  sha256: 0d30c6c4fa0216d0637b4049142bc275814fd674859373bd4af520ce173a1c75
+  signer: Insyde Software Corp.
+  original_filename: segwindrvx64.sys
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

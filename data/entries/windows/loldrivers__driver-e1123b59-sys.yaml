@@ -1,0 +1,37 @@
+id: loldrivers/driver-e1123b59-sys
+type: driver
+platform: windows
+name: driver_e1123b59.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create driver_d9f15d91.sys binPath=C:\windows\temp\driver_d9f15d91.sys type=kernel
+    && sc.exe start driver_d9f15d91.sys
+  comment: Sophos, from time to time, has observed a threat actor deploy variants of Poortry on different
+    machines within a single estate during an attack. These variants contain the same payload, but signed
+    wit
+driver_detail:
+  sha256: e1123b59a801e243a64270d0c6ab1277e5e3afba9c19023807409f53c1b0204b
+  signer: "\u6E56\u5317\u76FE\u7F51\u7F51\u7EDC\u79D1\u6280\u6709\u9650\u516C\u53F8"
+  original_filename: dwadsafeload.sys
+  category: malicious
+references:
+- https://news.sophos.com/en-us/2024/08/27/burnt-cigar-2/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

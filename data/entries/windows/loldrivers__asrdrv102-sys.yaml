@@ -1,0 +1,34 @@
+id: loldrivers/asrdrv102-sys
+type: driver
+platform: windows
+name: AsrDrv102.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AsrDrv102.sys binPath=C:\windows\temp\AsrDrv102.sys type=kernel && sc.exe start
+    AsrDrv102.sys
+driver_detail:
+  sha256: a7c2e7910942dd5e43e2f4eb159bcd2b4e71366e34a68109548b9fb12ac0f7cc
+  signer: ASRock Incorporation
+  original_filename: AsrDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

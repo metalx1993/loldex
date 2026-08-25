@@ -1,0 +1,24 @@
+id: gtfobins/nasm/file-read/unprivileged
+type: binary
+platform: linux
+name: nasm
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nasm -@ /path/to/input-file
+  comment: The file content is treated as command line options and disclosed throught error messages.
+references:
+- https://gtfobins.github.io/gtfobins/nasm/
+tags:
+- linux
+- unix
+- gtfobins

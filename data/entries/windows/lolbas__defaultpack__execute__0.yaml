@@ -1,0 +1,30 @@
+id: lolbas/defaultpack/execute/0
+type: binary
+platform: windows
+name: DefaultPack.EXE
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: DefaultPack.EXE spawned an unknown process
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_lolbin_defaultpack.yml
+commands:
+- template: DefaultPack.EXE /C:"{CMD}"
+  comment: Use DefaultPack.EXE to execute arbitrary binaries, with added argument support.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/DefaultPack/
+tags:
+- windows
+- lolbas

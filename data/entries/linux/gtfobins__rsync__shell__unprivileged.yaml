@@ -1,0 +1,23 @@
+id: gtfobins/rsync/shell/unprivileged
+type: binary
+platform: linux
+name: rsync
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: rsync -e '/bin/sh -c "/bin/sh 0<&2 1>&2"' x:x
+references:
+- https://gtfobins.github.io/gtfobins/rsync/
+tags:
+- linux
+- unix
+- gtfobins

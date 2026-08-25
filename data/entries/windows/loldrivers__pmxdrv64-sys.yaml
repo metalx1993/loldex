@@ -1,0 +1,37 @@
+id: loldrivers/pmxdrv64-sys
+type: driver
+platform: windows
+name: pmxdrv64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create pmxdrv64 binPath=C:\windows\temp\pmxdrv64.sys type=kernel && sc.exe start pmxdrv64
+  comment: Intel PMxDrv / pmxdrv64.sys is listed as a KDU provider for Intel Management Engine Tools driver
+    abuse. Public vulnerable-driver research also documents physical-memory access through this driver
+    fami
+driver_detail:
+  sha256: b1a8ee1222eea5f199028d90b9b77c2acf46d6d84a9e125403b2888c6f681c72
+  signer: Intel Corporation
+  original_filename: pmxdrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/hfiref0x/KDU/blob/master/Help/providers.md
+- https://github.com/GetRektBoy724/vuln-drivers/tree/main/pmxdrv.sys
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

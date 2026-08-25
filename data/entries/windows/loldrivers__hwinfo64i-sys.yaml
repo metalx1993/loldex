@@ -1,0 +1,31 @@
+id: loldrivers/hwinfo64i-sys
+type: driver
+platform: windows
+name: HWiNFO64I.SYS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 33c6c622464f80a8d8017a03ff3aa196840da8bb03bfb5212b51612b5cf953dc
+  signer: REALiX(tm)
+  original_filename: HWiNFO64I.SYS
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

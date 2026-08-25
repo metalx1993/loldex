@@ -1,0 +1,33 @@
+id: loldrivers/dellinstrumentation-sys
+type: driver
+platform: windows
+name: dellinstrumentation.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create dellinstrumentation.sys binPath=C:\windows\temp\dellinstrumentation.sys type=kernel
+    && sc.exe start dellinstrumentation.sys
+driver_detail:
+  sha256: bc2606740e4648c3732541db929f2e02ea8567520d35de57c671e93c71e632f3
+  signer: Dell
+  category: vulnerable driver
+references:
+- https://dor00tkit.github.io/Dor00tkit/posts/from-admin-to-kernel-one-year-one-driver-zero-attention/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

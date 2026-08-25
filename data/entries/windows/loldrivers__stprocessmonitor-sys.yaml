@@ -1,0 +1,41 @@
+id: loldrivers/stprocessmonitor-sys
+type: driver
+platform: windows
+name: STProcessMonitor.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create STProcessMonitor binPath=C:\windows\temp\STProcessMonitor.sys type=kernel &&
+    sc.exe start STProcessMonitor
+  comment: Safetica STProcessMonitor / ProcessMonitorDriver.sys exposes process-termination functionality
+    through vulnerable IOCTL paths documented in public BYOVD research. The tracked samples include the
+    11.26
+driver_detail:
+  sha256: 5b4f59236a9b950bcd5191b35d19125f60cfb9e1a1e1aa2e4f914b6745dde9df
+  signer: Safetica Technologies
+  original_filename: ProcessMonitorDriver
+  category: vulnerable driver
+references:
+- https://www.cve.org/CVERecord?id=CVE-2025-70795
+- https://github.com/magicsword-io/LOLDrivers/issues/268
+- https://github.com/KOSEC-LLC/BYOVD-Research/tree/main/Safetica
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

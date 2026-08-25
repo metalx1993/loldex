@@ -1,0 +1,27 @@
+id: gtfobins/wget/shell/unprivileged
+type: binary
+platform: linux
+name: wget
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -e ''#!/bin/sh\n/bin/sh 1>&0'' >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    wget --use-askpass=/path/to/temp-file 0'
+references:
+- https://gtfobins.github.io/gtfobins/wget/
+tags:
+- linux
+- unix
+- gtfobins

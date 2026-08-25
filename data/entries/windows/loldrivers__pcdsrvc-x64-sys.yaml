@@ -1,0 +1,38 @@
+id: loldrivers/pcdsrvc-x64-sys
+type: driver
+platform: windows
+name: pcdsrvc_x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create pcdsrvc_x64 binPath=C:\windows\temp\pcdsrvc_x64.sys type=kernel && sc.exe start
+    pcdsrvc_x64
+  comment: 'PC-Doctor pcdsrvc_x64.sys is listed as a KDU provider for Dell PC Doctor / SupportAssist driver
+    abuse. The driver family is associated with CVE-2019-12280 and exposes kernel access primitives used
+    by '
+driver_detail:
+  sha256: 1d053020079124ac526d84affb17bf4a1563ecd872c83b4b6299c9aa6a732557
+  signer: PC-Doctor, Inc.
+  original_filename: pcdsrvc
+  category: vulnerable driver
+references:
+- https://github.com/hfiref0x/KDU/blob/master/Help/providers.md
+- https://github.com/hsheric0210/SharpKernel/blob/main/provider-list.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

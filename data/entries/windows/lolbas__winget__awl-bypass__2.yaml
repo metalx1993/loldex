@@ -1,0 +1,34 @@
+id: lolbas/winget/awl-bypass/2
+type: binary
+platform: windows
+name: winget.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: medium
+  triggers: winget.exe spawned with local manifest file
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_winget_local_install_via_manifest.yml
+commands:
+- template: winget.exe install --accept-package-agreements -s msstore {name or ID}
+  comment: 'Download and install any software from the Microsoft Store using its name or Store ID, even
+    if the Microsoft Store App itself is blocked on the machine, and even if AppLocker is active on the
+    machine. For example, use "Sysinternals Suite" or `9p7knl5rwt25` for obtaining ProcDump, PsExec via
+    the Sysinternals Suite. Note: a Microsoft account is required for this.'
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Winget/
+tags:
+- windows
+- lolbas

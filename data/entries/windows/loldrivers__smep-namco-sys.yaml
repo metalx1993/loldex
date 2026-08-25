@@ -1,0 +1,32 @@
+id: loldrivers/smep-namco-sys
+type: driver
+platform: windows
+name: smep_namco.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create smep_namco.sys binPath=C:\windows\temp\smep_namco.sys type=kernel && sc.exe
+    start smep_namco.sys
+driver_detail:
+  sha256: 7ec93f34eb323823eb199fbf8d06219086d517d0e8f4b9e348d7afd41ec9fd5d
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

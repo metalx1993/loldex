@@ -1,0 +1,37 @@
+id: loldrivers/smarteio64-sys
+type: driver
+platform: windows
+name: SMARTEIO64.SYS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create SMARTEIO64SYS binPath= C:\windows\temp\SMARTEIO64SYS.sys type=kernel && sc.exe
+    start SMARTEIO64SYS
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: 3c95ebf3f1a87f67d2861dbd1c85dc26c118610af0c9fbf4180428e653ac3e50
+  signer: EVGA Technology Inc.
+  original_filename: SMARTEIO64.SYS
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

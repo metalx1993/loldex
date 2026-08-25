@@ -1,0 +1,34 @@
+id: loldrivers/nchgbios2x64-sys
+type: driver
+platform: windows
+name: NCHGBIOS2x64.SYS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create NCHGBIOS2x64.SYS binPath=C:\windows\temp\NCHGBIOS2x64.SYS     type=kernel &&
+    sc.exe start NCHGBIOS2x64.SYS
+driver_detail:
+  sha256: 314384b40626800b1cde6fbc51ebc7d13e91398be2688c2a58354aa08d00b073
+  signer: TOSHIBA Corporation
+  original_filename: NCHGBIOS2x64.SYS
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

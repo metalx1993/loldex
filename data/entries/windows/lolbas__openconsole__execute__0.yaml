@@ -1,0 +1,30 @@
+id: lolbas/openconsole/execute/0
+type: binary
+platform: windows
+name: OpenConsole.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: OpenConsole.exe spawning unexpected processes
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/9e0ef7251b075f15e7abafbbec16d3230c5fa477/rules/windows/process_creation/proc_creation_win_lolbin_openconsole.yml
+commands:
+- template: OpenConsole.exe {PATH:.exe}
+  comment: Execute specified process with OpenConsole.exe as parent process
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/OpenConsole/
+tags:
+- windows
+- lolbas

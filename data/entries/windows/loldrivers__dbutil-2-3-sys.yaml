@@ -1,0 +1,33 @@
+id: loldrivers/dbutil-2-3-sys
+type: driver
+platform: windows
+name: dbutil_2_3.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create dbutil_2_3.sys binPath=C:\windows\temp\dbutil_2_3.sys type=kernel && sc.exe
+    start dbutil_2_3.sys
+driver_detail:
+  sha256: 0296e2ce999e67c76352613a718e11516fe1b0efc3ffdb8918fc999dd76a73a5
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+- https://www.sentinelone.com/labs/cve-2021-21551-hundreds-of-millions-of-dell-computers-at-risk-due-to-multiple-bios-driver-privilege-escalation-flaws/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

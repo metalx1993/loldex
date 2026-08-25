@@ -1,0 +1,37 @@
+id: loldrivers/fpcie2com-sys
+type: driver
+platform: windows
+name: FPCIE2COM.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create FPCIE2COMsys binPath= C:\windows\temp\FPCIE2COMsys.sys type=kernel && sc.exe
+    start FPCIE2COMsys
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: 17942865680bd3d6e6633c90cc4bd692ae0951a8589dbe103c1e293b3067344d
+  signer: Fintek Corp.
+  original_filename: FPCIE2COM.sys
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

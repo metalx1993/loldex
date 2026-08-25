@@ -1,0 +1,38 @@
+id: loldrivers/dsark64-sys
+type: driver
+platform: windows
+name: DsArk64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create DsArk binPath=C:\windows\temp\DsArk64.sys type=kernel && sc.exe start DsArk
+  comment: DsArk64.sys is a WHQL Microsoft-signed anti-rootkit kernel driver from Qihoo 360 Total Security.
+    It exposes kernel-level process termination via ZwTerminateProcess from Ring 0 (kills PPL-protected
+    pro
+driver_detail:
+  sha256: cd3d1a2e119cbbb41ec0e7d7fb17bac106735d62b33ed3cde10087af1da89403
+  signer: 360.cn
+  original_filename: DsArk64.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/308
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

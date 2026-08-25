@@ -1,0 +1,36 @@
+id: loldrivers/tsdrvx64-sys
+type: driver
+platform: windows
+name: TSDRVX64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create TSDRVX64 binPath=C:\windows\temp\TSDRVX64.sys type=kernel && sc.exe start TSDRVX64
+  comment: Northwave Cyber Security contributed this driver based on in-house research. The driver has
+    a CVSSv3 score of 8.8, indicating a privilege escalation impact. This vulnerability could potentially
+    be exp
+driver_detail:
+  sha256: 9bf84b41789b3d5d5622732b5c4f5630da189ede2098b0ce166fcae331178377
+  signer: ToolHouse Entwicklungs-KG
+  original_filename: TSDRVX64.SYS
+  category: vulnerable driver
+references:
+- https://www.loldrivers.io
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

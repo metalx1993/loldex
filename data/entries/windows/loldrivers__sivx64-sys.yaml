@@ -1,0 +1,37 @@
+id: loldrivers/sivx64-sys
+type: driver
+platform: windows
+name: SIVX64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create SIVDRIVER binPath=C:\windows\temp\SIVX64.sys type=kernel && sc.exe start SIVDRIVER
+  comment: Ray Hinchliffe SIV (System Information Viewer) SIVX64.sys v5.85 dynamically resolves MmMapIoSpace
+    and MmMapIoSpaceEx via MmGetSystemRoutineAddress at runtime (neither appears in the IAT), evading
+    stat
+driver_detail:
+  sha256: 33903e8fa9f0a2acaa4784d645e309b0bd780693824b6c2c5fef257238c77478
+  signer: Ray Hinchliffe
+  original_filename: SIVX64.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/287
+- https://www.virustotal.com/gui/file/33903e8fa9f0a2acaa4784d645e309b0bd780693824b6c2c5fef257238c77478
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

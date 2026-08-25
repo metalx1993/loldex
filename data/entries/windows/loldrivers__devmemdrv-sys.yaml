@@ -1,0 +1,37 @@
+id: loldrivers/devmemdrv-sys
+type: driver
+platform: windows
+name: devMemDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create devMemDrv binPath=C:\windows\temp\devMemDrv.sys type=kernel && sc.exe start
+    devMemDrv
+  comment: devMemDrv.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: b93020428f6d9ca700ab70a14911c7efcbcb1f9b659054add0dd3e7657511eb3
+  signer: Acculogic Inc
+  original_filename: devMemDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

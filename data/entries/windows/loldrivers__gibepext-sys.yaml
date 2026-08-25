@@ -1,0 +1,36 @@
+id: loldrivers/gibepext-sys
+type: driver
+platform: windows
+name: gibepext.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create gibepext binPath=C:\windows\temp\gibepext.sys type=kernel && sc.exe start gibepext
+  comment: gibepext.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 912ee11b2ea9d30519f56735e8a4720101bcacd077c6634cf32eb228b2d96e13
+  signer: Group-IB LTD.
+  original_filename: gibepext.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

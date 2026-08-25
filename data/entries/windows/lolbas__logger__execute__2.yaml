@@ -1,0 +1,27 @@
+id: lolbas/logger/execute/2
+type: binary
+platform: windows
+name: Logger.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+commands:
+- template: logger.exe "{CMD}"
+  comment: Executes the command specified as a child of `logger.exe`.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Logger/
+tags:
+- windows
+- lolbas

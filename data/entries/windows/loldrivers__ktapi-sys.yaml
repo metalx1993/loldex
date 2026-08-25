@@ -1,0 +1,39 @@
+id: loldrivers/ktapi-sys
+type: driver
+platform: windows
+name: ktapi.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ktapi binPath=C:\windows\temp\ktapi.sys type=kernel && sc.exe start ktapi
+  comment: ktapi.sys is a legacy cross-signed Kontron Technology Application Programming Interface driver
+    that exposes the \\.\ktapi device to user mode. IOCTL 0x82007000 accepts a caller-controlled interface
+    ty
+driver_detail:
+  sha256: 7ee17efef04bb7c9de90d5210263ed6993f867e5a11f86e65e3bb1362c7de237
+  signer: Kontron Technology A/S
+  original_filename: ktapi.sys
+  category: vulnerable driver
+references:
+- https://expel.com/blog/not-very-gentlemanly-analyzing-a-zero-day-exploit-used-by-the-gentlemen-ransomware-to-disable-targets-edrs/
+- https://github.com/magicsword-io/LOLDrivers/issues/386
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

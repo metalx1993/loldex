@@ -1,0 +1,38 @@
+id: loldrivers/astra64-sys
+type: driver
+platform: windows
+name: Astra64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create Astra64 binPath=C:\windows\temp\Astra64.sys type=kernel && sc.exe start Astra64
+  comment: ASTRA64.sys is the kernel driver for the ASTRA32 system information tool by Sysinfo Lab (EnTech
+    Taiwan). The driver exposes 31 IOCTLs with zero validation on all parameters including arbitrary physica
+driver_detail:
+  sha256: 4a8b6b462c4271af4a32cf8705fa64913bfcdaefb6cf02d1e722c611d428cb16
+  signer: Licensed for Sysinfo Lab
+  original_filename: Astra64.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/294
+- https://eclypsium.com/research/screwed-drivers-signed-sealed-delivered/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

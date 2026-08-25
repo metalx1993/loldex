@@ -1,0 +1,42 @@
+id: gtfobins/minicom/shell/unprivileged
+type: binary
+platform: linux
+name: minicom
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: minicom -D /dev/null
+  comment: 'Start the following command to open the TUI interface, then:
+
+
+    1. press `Ctrl-A o` and select `Filenames and paths`;
+
+    2. press `e`, type `/bin/sh`, then `Enter`;
+
+    3. Press `Esc` twice;
+
+    4. Press `Ctrl-A k` to drop the shell.
+
+
+    After the shell, exit with `Ctrl-A x`.'
+- template: 'echo ''! exec /bin/sh </dev/tty 1>/dev/tty 2>/dev/tty'' >/path/to/temp-file
+
+    minicom -D /dev/null -S /path/to/temp-file
+
+    reset^J'
+  comment: After the shell, exit with `Ctrl-A x`.
+references:
+- https://gtfobins.github.io/gtfobins/minicom/
+tags:
+- linux
+- unix
+- gtfobins

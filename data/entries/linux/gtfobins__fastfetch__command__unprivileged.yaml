@@ -1,0 +1,25 @@
+id: gtfobins/fastfetch/command/unprivileged
+type: binary
+platform: linux
+name: fastfetch
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''{"modules":[{"type":"command","key":"x","text":"exec /path/to/command"}]}'' >/path/to/temp-file.jsonc
+
+    fastfetch -c /path/to/temp-file.jsonc'
+references:
+- https://gtfobins.github.io/gtfobins/fastfetch/
+tags:
+- linux
+- unix
+- gtfobins

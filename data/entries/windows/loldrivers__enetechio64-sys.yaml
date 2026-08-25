@@ -1,0 +1,33 @@
+id: loldrivers/enetechio64-sys
+type: driver
+platform: windows
+name: EneTechIo64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create EneTechIo64.sys binPath=C:\windows\temp\EneTechIo64.sys     type=kernel && sc.exe
+    start EneTechIo64.sys
+driver_detail:
+  sha256: 06bda5a1594f7121acd2efe38ccb617fbc078bb9a70b665a5f5efd70e3013f50
+  category: vulnerable driver
+references:
+- https://github.com/hfiref0x/KDU/releases/tag/v1.2.0
+- https://gist.github.com/k4nfr3/af970e7facb09195e56f2112e1c9549c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

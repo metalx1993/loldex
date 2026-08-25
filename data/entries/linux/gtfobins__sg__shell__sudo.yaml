@@ -1,0 +1,26 @@
+id: gtfobins/sg/shell/sudo
+type: binary
+platform: linux
+name: sg
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: sg root
+  comment: Commands can be run if the current user's group is specified, therefore no additional permissions
+    are needed.
+references:
+- https://gtfobins.github.io/gtfobins/sg/
+tags:
+- linux
+- unix
+- gtfobins

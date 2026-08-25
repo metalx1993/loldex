@@ -1,0 +1,33 @@
+id: loldrivers/dh-kernel-sys
+type: driver
+platform: windows
+name: Dh_Kernel.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create Dh_Kernel.sys binPath=C:\windows\temp\Dh_Kernel.sys type=kernel && sc.exe start
+    Dh_Kernel.sys
+driver_detail:
+  sha256: bb50818a07b0eb1bd317467139b7eb4bad6cd89053fecdabfeae111689825955
+  signer: YY Inc.
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,37 @@
+id: loldrivers/hp64vision-sys
+type: driver
+platform: windows
+name: hp64vision.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create hp64vision binPath=C:\windows\temp\hp64vision.sys type=kernel && sc.exe start
+    hp64vision
+  comment: hp64vision.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: c1e11e2012216b54b2aad1be37b469d328f39b09352c66e8c74e6032ec858b96
+  signer: Windows (R) Codename Longhorn DDK provider
+  original_filename: hp64vision.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

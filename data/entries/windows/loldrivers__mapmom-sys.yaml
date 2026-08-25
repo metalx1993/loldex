@@ -1,0 +1,29 @@
+id: loldrivers/mapmom-sys
+type: driver
+platform: windows
+name: mapmom.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 18b12a09448244180344d7e5f8028a0ca53ca0f3bddfec06d00f995619c3fc0b
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

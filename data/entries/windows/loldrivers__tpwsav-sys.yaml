@@ -1,0 +1,37 @@
+id: loldrivers/tpwsav-sys
+type: driver
+platform: windows
+name: TPwSav.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create TPwSav.sys binPath=C:\windows\temp\TPwSav.sys type=kernel && sc.exe start TPwSav.sys
+  comment: A driver associated with Toshiba laptops power saving functionality allows arbitary one byte
+    reading and writing mapped physical addresses. Blackpoint Cyber's SOC observed this driver being used
+    as pa
+driver_detail:
+  sha256: 011df46e94218cbb2f0b8da13ab3cec397246fdc63436e58b1bf597550a647f6
+  signer: 'Compal Electronic, Inc. '
+  category: vulnerable driver
+references:
+- https://blackpointcyber.com/resources/blog/qilin-ransomware-and-the-hidden-dangers-of-byovd/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

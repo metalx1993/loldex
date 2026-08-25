@@ -1,0 +1,23 @@
+id: lolad/get-domain-users-last-logon-time
+type: technique
+platform: active-directory
+name: Get Domain Users Last Logon Time
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a25
+  last_synced: '2026-08-25'
+commands:
+- template: Get-ADUser -Filter * -Properties LastLogonDate | Select Name, LastLogonDate
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell

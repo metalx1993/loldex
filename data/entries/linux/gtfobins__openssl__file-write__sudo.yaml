@@ -1,0 +1,25 @@
+id: gtfobins/openssl/file-write/sudo
+type: binary
+platform: linux
+name: openssl
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: echo DATA | openssl enc -out /path/to/output-file
+- template: openssl enc -in /path/to/input-file -out /path/to/output-file
+references:
+- https://gtfobins.github.io/gtfobins/openssl/
+tags:
+- linux
+- unix
+- gtfobins

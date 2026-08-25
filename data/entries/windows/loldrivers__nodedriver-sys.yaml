@@ -1,0 +1,34 @@
+id: loldrivers/nodedriver-sys
+type: driver
+platform: windows
+name: NodeDriver.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create NodeDriver.sys binPath=C:\windows\temp\NodeDriver.sys type=kernel && sc.exe
+    start NodeDriver.sys
+  comment: Driver categorized as POORTRY by Mandiant.
+driver_detail:
+  sha256: 05b146a48a69dd62a02759487e769bd30d39f16374bc76c86453b4ae59e7ffa4
+  category: malicious
+references:
+- https://www.mandiant.com/resources/blog/hunting-attestation-signed-malware
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,25 @@
+id: gtfobins/tbl/file-read/suid
+type: binary
+platform: linux
+name: tbl
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tbl /path/to/input-file
+  comment: The read file content is corrupted by additional text at the beginning.
+references:
+- https://gtfobins.github.io/gtfobins/tbl/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,33 @@
+id: loldrivers/kavservice-bin
+type: driver
+platform: windows
+name: kavservice.bin
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562
+opsec:
+  noise: high
+commands:
+- template: sc.exe create kavservice.sys binPath=C:\windows\temp\kavservice.sys type=kernel && sc.exe
+    start kavservice.sys
+driver_detail:
+  sha256: e055fdfb914e3da936eb7745acb665f50346df9abac597cf43d487262a6a12d5
+  category: malicious
+references:
+- Internal Research
+- https://www.52pojie.cn/thread-1823439-1-1.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

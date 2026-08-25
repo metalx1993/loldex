@@ -1,0 +1,25 @@
+id: gtfobins/nft/file-read/sudo
+type: binary
+platform: linux
+name: nft
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nft -f /path/to/input-file
+  comment: The content is actually parsed and corrupted by the command.
+references:
+- https://gtfobins.github.io/gtfobins/nft/
+tags:
+- linux
+- unix
+- gtfobins

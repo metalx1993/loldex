@@ -1,0 +1,32 @@
+id: lolbas/wuauclt/execute/0
+type: binary
+platform: windows
+name: wuauclt.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: wuauclt run with a parameter of a DLL path
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/network_connection/net_connection_win_wuauclt_network_connection.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_wuauclt.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_wuauclt_execution.yml
+commands:
+- template: wuauclt.exe /UpdateDeploymentProvider {PATH_ABSOLUTE:.dll} /RunHandlerComServer
+  comment: Loads and executes DLL code on attach.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Wuauclt/
+tags:
+- windows
+- lolbas

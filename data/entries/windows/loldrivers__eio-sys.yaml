@@ -1,0 +1,34 @@
+id: loldrivers/eio-sys
+type: driver
+platform: windows
+name: EIO.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create EIO.sys binPath=C:\windows\temp\EIO.sys type=kernel && sc.exe start EIO.sys
+  comment: This is a vulnerable driver per Microsoft.
+driver_detail:
+  sha256: b17507a3246020fa0052a172485d7b3567e0161747927f2edf27c40e310852e0
+  signer: ASUSTeK Computer Inc.
+  original_filename: EIO.sys
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

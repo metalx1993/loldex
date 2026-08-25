@@ -1,0 +1,25 @@
+id: gtfobins/crontab/command/unprivileged
+type: binary
+platform: linux
+name: crontab
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: crontab -e
+  comment: This spaws the default editor to edit the crontab file, commands can be scheduled to run using
+    the [cron syntax](https://en.wikipedia.org/wiki/Cron).
+references:
+- https://gtfobins.github.io/gtfobins/crontab/
+tags:
+- linux
+- unix
+- gtfobins

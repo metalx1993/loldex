@@ -1,0 +1,37 @@
+id: loldrivers/asrdrv107-sys
+type: driver
+platform: windows
+name: AsrDrv107.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AsrDrv107 binPath=C:\windows\temp\AsrDrv107.sys type=kernel && sc.exe start
+    AsrDrv107
+  comment: ASRock AsrDrv107.sys and AsrDrv107n.sys are ASRock IO driver builds listed as KDU providers
+    for ASRock Motherboard Utility versions 3.0.498 and below. The driver family is associated with CVE-2020-153
+driver_detail:
+  sha256: be131e30464c7be03bd2d16f99ea2b04c106b482cc5c52be659e4c0301206348
+  signer: ASRock Incorporation
+  original_filename: AsrDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/hfiref0x/KDU/blob/master/Help/providers.md
+- https://github.com/Barakat/CVE-2020-15368
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

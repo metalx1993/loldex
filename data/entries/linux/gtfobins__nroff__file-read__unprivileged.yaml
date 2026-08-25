@@ -1,0 +1,24 @@
+id: gtfobins/nroff/file-read/unprivileged
+type: binary
+platform: linux
+name: nroff
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nroff /path/to/input-file
+  comment: The file is typeset and some warning messages may appear.
+references:
+- https://gtfobins.github.io/gtfobins/nroff/
+tags:
+- linux
+- unix
+- gtfobins

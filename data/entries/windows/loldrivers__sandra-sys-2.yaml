@@ -1,0 +1,34 @@
+id: loldrivers/sandra-sys-2
+type: driver
+platform: windows
+name: sandra.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create sandra.sys binPath=C:\windows\temp\sandra.sys type=kernel && sc.exe start sandra.sys
+driver_detail:
+  sha256: 1aaf4c1e3cb6774857e2eef27c17e68dc1ae577112e4769665f516c2e8c4e27b
+  signer: SiSoftware
+  original_filename: SANDRA
+  category: vulnerable driver
+references:
+- https://github.com/jbaines-r7/dellicious
+- https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

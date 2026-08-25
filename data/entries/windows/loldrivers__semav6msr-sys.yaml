@@ -1,0 +1,33 @@
+id: loldrivers/semav6msr-sys
+type: driver
+platform: windows
+name: semav6msr.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create semav6msr.sys binPath=C:\windows\temp\semav6msr.sys type=kernel && sc.exe start
+    semav6msr.sys
+driver_detail:
+  sha256: 9f1229cd8dd9092c27a01f5d56e3c0d59c2bb9f0139abf042e56f343637fda33
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

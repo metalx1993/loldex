@@ -1,0 +1,32 @@
+id: lolbas/cl-invocation/execute/0
+type: script
+platform: windows
+name: CL_Invocation.ps1
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+aliases:
+- cl_invocation
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_cl_invocation.yml
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/powershell/powershell_script/posh_ps_cl_invocation_lolscript.yml
+commands:
+- template: . C:\Windows\diagnostics\system\AERO\CL_Invocation.ps1   \nSyncInvoke {CMD}
+  comment: Import the PowerShell Diagnostic CL_Invocation script and call SyncInvoke to launch an executable.
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Cl_invocation/
+tags:
+- windows
+- lolbas

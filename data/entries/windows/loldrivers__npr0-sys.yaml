@@ -1,0 +1,36 @@
+id: loldrivers/npr0-sys
+type: driver
+platform: windows
+name: NPR0.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create NPR0 binPath=C:\windows\temp\NPR0.sys type=kernel && sc.exe start NPR0
+  comment: NPR0.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 3e73d22b534a4c5996121750e3fc0f6913d5ad4c6dbc630b590647201656d714
+  signer: noping.com
+  original_filename: NPR0.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,38 @@
+id: loldrivers/fildds-sys
+type: driver
+platform: windows
+name: fildds.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create fildds.sys binPath=C:\windows\temp\fildds.sys type=kernel && sc.exe start fildds.sys
+  comment: 'Twister Antivirus, fildds.sys, DoS2
+
+    CVE-2023-1444
+
+    From IoControlCode 0x8011206B, a normal user can cause DoS due to writing into null address.'
+driver_detail:
+  sha256: f8c07b6e2066a5a22a92d9f521ecdeb8c68698c400e4b83e0501b9f340957c22
+  signer: Filseclab Corporation
+  original_filename: fildds.sys
+  category: vulnerable driver
+references:
+- https://github.com/zeze-zeze/WindowsKernelVuln/tree/master/CVE-2023-1444
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

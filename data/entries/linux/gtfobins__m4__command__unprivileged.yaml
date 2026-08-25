@@ -1,0 +1,23 @@
+id: gtfobins/m4/command/unprivileged
+type: binary
+platform: linux
+name: m4
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: echo 'esyscmd(/path/to/command)' | m4
+references:
+- https://gtfobins.github.io/gtfobins/m4/
+tags:
+- linux
+- unix
+- gtfobins

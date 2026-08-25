@@ -1,0 +1,30 @@
+id: lolbas/regedit/ads/0
+type: binary
+platform: windows
+name: Regedit.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: regedit.exe reading and writing to alternate data stream
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_regedit_import_keys_ads.yml
+commands:
+- template: regedit /E {PATH_ABSOLUTE}:regfile.reg HKEY_CURRENT_USER\MyCustomRegKey
+  comment: Export the target Registry key to the specified .REG file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Regedit/
+tags:
+- windows
+- lolbas

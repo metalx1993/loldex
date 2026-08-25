@@ -1,0 +1,41 @@
+id: loldrivers/ksld-sys
+type: driver
+platform: windows
+name: KslD.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: reg add "HKLM\SYSTEM\CurrentControlSet\Services\KslD\SharedState" /v AllowedProcessName /t
+    REG_SZ /d "\Device\HarddiskVolumeX\Path\To\Exploit.exe" /f && sc.exe start KslD
+  comment: KslD.sys is a Microsoft-signed Windows Defender support driver that can be abused for kernel
+    memory access after its SharedState process-name check is redirected to an attacker-controlled process.
+    Pub
+driver_detail:
+  sha256: 2b3195346d9b62b08bb61bb61f0da20b2abb0c726186c09a2e4fa926baacbfc5
+  signer: Microsoft Corporation
+  original_filename: KSLD.sys
+  category: vulnerable driver
+references:
+- https://fndsec.net/2025/04/20/uncovering-a-new-loldriver-kaslr-bypass-with-ksld-sys/
+- https://github.com/Pumi96/DefenderDump
+- https://github.com/vergamota/KslKatz
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

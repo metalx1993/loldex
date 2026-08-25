@@ -1,0 +1,34 @@
+id: loldrivers/kregexp-sys
+type: driver
+platform: windows
+name: KRegExp.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create KRegExp binPath=C:\windows\temp\KRegExp.sys type=kernel && sc.exe start KRegExp
+  comment: 'KRegExp.sys is Pavel Yosifovich''s Kernel Registry Explorer driver and is listed as a KDU-compatible
+    provider. KDU uses provider drivers to perform privileged kernel operations including kernel memory '
+driver_detail:
+  sha256: 5c237dcec01f5e31a78cf8c883e41d85c74675b1426379302b46b771d091dce6
+  category: vulnerable driver
+references:
+- https://github.com/hfiref0x/KDU/blob/master/Help/providers.md
+- https://github.com/hsheric0210/SharpKernel/blob/main/provider-list.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

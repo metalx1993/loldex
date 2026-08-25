@@ -1,0 +1,34 @@
+id: loldrivers/winio64-sys-3
+type: driver
+platform: windows
+name: WinIo64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create WinIo64 binPath=C:\windows\temp\WinIo64.sys type=kernel && sc.exe start WinIo64
+  comment: WinIo64.sys is a hardware access driver based on the WinIo library that provides direct physical
+    memory access and I/O port operations from usermode. The driver maps the \Device\PhysicalMemory section
+driver_detail:
+  sha256: eaaed21c1788baca09ee16b06e1a231cb11c8417b3949d7d90596d50305dc604
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/222
+- https://github.com/hfiref0x/KDU
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

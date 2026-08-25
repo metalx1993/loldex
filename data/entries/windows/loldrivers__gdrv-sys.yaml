@@ -1,0 +1,37 @@
+id: loldrivers/gdrv-sys
+type: driver
+platform: windows
+name: gdrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create gdrv.sys binPath=C:\windows\temp\gdrv.sys type=kernel && sc.exe start gdrv.sys
+  comment: 'gdrv.sys is vulnerable to multiple CVEs: CVE-2018-19320, CVE-2018-19322, CVE-2018-19323, CVE-2018-19321.
+    Read/Write Physical memory, read/write to/from IO ports, exposes ring0 memcpy-like functionalit'
+driver_detail:
+  sha256: 31f4cfb4c71da44120752721103a16512444c13c2ac2d857a7e6f13cb679b427
+  signer: Windows (R) Server 2003 DDK provider
+  original_filename: gdrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/hoangprod/DanSpecial
+- https://github.com/namazso/physmem_drivers
+- https://www.secureauth.com/labs/advisories/gigabyte-drivers-elevation-privilege-vulnerabilities
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

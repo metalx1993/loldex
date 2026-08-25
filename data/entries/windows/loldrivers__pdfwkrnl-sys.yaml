@@ -1,0 +1,39 @@
+id: loldrivers/pdfwkrnl-sys
+type: driver
+platform: windows
+name: PDFWKRNL.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create PDFWKRNL.sys binPath=C:\windows\temp\PDFWKRNL.sys type=kernel && sc.exe start
+    PDFWKRNL.sys
+  comment: AMD USB-C Power Delivery Firmware Update Kernel Library driver with arbitrary physical memory
+    read/write capabilities. Identified in ESET EDR killers research (March 2026) as actively abused by
+    threat
+driver_detail:
+  sha256: 6e8b49cf70bf854e8c59c7d27cefa89406caf8978461190dabb86dafcd8554e1
+  signer: Advanced Micro Devices, Inc.
+  original_filename: PDFWKRNL.sys
+  category: vulnerable driver
+references:
+- https://www.welivesecurity.com/en/eset-research/edr-killers-explained/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

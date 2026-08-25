@@ -1,0 +1,41 @@
+id: loldrivers/gamedriverx64-sys
+type: driver
+platform: windows
+name: GameDriverX64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create GameDriverX64 binPath=C:\windows\temp\GameDriverX64.sys type=kernel && sc.exe
+    start GameDriverX64
+  comment: GameDriverX64.sys is a signed Hotta Studio anti-cheat driver affected by CVE-2025-61155. Its
+    device-access and IOCTL checks rely on spoofable module names, process names, PE checksums, and the
+    hardcod
+driver_detail:
+  sha256: b6628d201c2a68d2a3de2a87de7a5acfe21b101a97928e1c8d5c82102d967383
+  signer: GameDriver
+  original_filename: GameDriverX64.sys
+  category: vulnerable driver
+references:
+- https://www.security.com/blog-post/dragonforce-msteams-backdoor
+- https://github.com/magicsword-io/LOLDrivers/issues/360
+- https://github.com/magicsword-io/LOLDrivers/issues/362
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

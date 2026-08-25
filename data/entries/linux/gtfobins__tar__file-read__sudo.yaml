@@ -1,0 +1,25 @@
+id: gtfobins/tar/file-read/sudo
+type: binary
+platform: linux
+name: tar
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tar cf /dev/stdout /path/to/input-file -I 'tar xO'
+  comment: The file is read then passed to the specified command (e.g., `tar xO`) via standard input.
+references:
+- https://gtfobins.github.io/gtfobins/tar/
+tags:
+- linux
+- unix
+- gtfobins

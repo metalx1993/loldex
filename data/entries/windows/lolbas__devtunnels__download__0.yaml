@@ -1,0 +1,31 @@
+id: lolbas/devtunnels/download/0
+type: binary
+platform: windows
+name: devtunnel.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: devtunnel.exe binary spawned
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/dns_query/dns_query_win_devtunnels_communication.yml
+  - https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/network_connection/net_connection_win_domain_devtunnels.yml
+commands:
+- template: devtunnel.exe host -p 8080
+  comment: Enabling a forwarded port for locally hosted service at port 8080 to be exposed on the internet.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/devtunnels/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,35 @@
+id: loldrivers/changsha
+type: driver
+platform: windows
+name: changsha
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create changsha binPath=C:\windows\temp\changsha.sys type=kernel && sc.exe start changsha
+  comment: Malicious rootkit masquerading as legitimate CrowdStrike Falcon Sensor driver (CSAgent.sys).
+    Signed with stolen/expired Chinese certificate from 2015. Detected by 61.6% of AV engines as Rootkit.Win64.
+driver_detail:
+  sha256: 06eccd102c9105957773b32538943531d9c39d0a504ceb3b9b155e97e3b0b134
+  signer: CrowdStrike, Inc.
+  original_filename: CSAgent.sys
+  category: malicious
+references:
+- https://www.virustotal.com/gui/file/06eccd102c9105957773b32538943531d9c39d0a504ceb3b9b155e97e3b0b134
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,37 @@
+id: loldrivers/viverraudio-sys
+type: driver
+platform: windows
+name: ViveRRAudio.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ViveRRAudio binPath=C:\windows\temp\ViveRRAudio.sys type=kernel && sc.exe start
+    ViveRRAudio
+  comment: Northwave Cyber Security contributed this driver based on in-house research. The driver has
+    a CVSSv3 score of 5.5, indicating a information disclosure / local dos impact. This vulnerability
+    could pote
+driver_detail:
+  sha256: 9d5e8700a434838eb63a0573178b4291f07a9d96dabfb4ead40253a3cd9edefd
+  signer: HTC VIVE
+  original_filename: ViveRRAudio.sys
+  category: vulnerable driver
+references:
+- https://northwave-cybersecurity.com/vive-vr-headset-kernel-driver-vulnerable-for-out-of-bounds-memory-read
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

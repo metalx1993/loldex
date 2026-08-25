@@ -1,0 +1,40 @@
+id: loldrivers/bdapiutil-sys
+type: driver
+platform: windows
+name: BdApiUtil.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create BdApiUtil.sys binPath=C:\windows\temp\BdApiUtil.sys type=kernel && sc.exe start
+    BdApiUtil.sys
+  comment: Driver can be used to load unsigned drivers. IOCTL code which takes a PID and terminates it
+    (arbitrary process termination). Admin privileges required to install the driver, but if it's already
+    instal
+driver_detail:
+  sha256: 32198295d2a2700b9895fff999c2b233f9befb0bc175815ec4b71ee926b6edfc
+  signer: Baidu, Inc.
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/204
+- https://github.com/magicsword-io/LOLDrivers/issues/231
+- https://github.com/RainbowDynamix/GoodBaiii
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

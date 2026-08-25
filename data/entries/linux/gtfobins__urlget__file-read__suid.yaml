@@ -1,0 +1,25 @@
+id: gtfobins/urlget/file-read/suid
+type: binary
+platform: linux
+name: urlget
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: urlget - /path/to/input-file
+  comment: This is part of `gettext` and usually not in `PATH`, e.g., on Arch it can be found at `/usr/lib/gettext/urlget`.
+references:
+- https://gtfobins.github.io/gtfobins/urlget/
+tags:
+- linux
+- unix
+- gtfobins

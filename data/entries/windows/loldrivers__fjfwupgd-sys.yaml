@@ -1,0 +1,36 @@
+id: loldrivers/fjfwupgd-sys
+type: driver
+platform: windows
+name: fjfwupgd.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create fjfwupgd binPath=C:\windows\temp\fjfwupgd.sys type=kernel && sc.exe start fjfwupgd
+  comment: fjfwupgd.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 30ee861d6d34db31ed57273fe1b3e08c30260c46fbca2cc00725d08ffd1013f6
+  signer: FUJITSU LIMITED
+  original_filename: fjfwupgd.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

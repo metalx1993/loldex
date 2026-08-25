@@ -1,0 +1,26 @@
+id: gtfobins/split/file-write/suid
+type: binary
+platform: linux
+name: split
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: split -b 999 --additional-suffix suffix /path/to/input-file prefix
+  comment: This copies the input file in the current working directory in a file named `prefixaasuffix`,
+    just make sure to pick a value big enough, instead of `999`.
+references:
+- https://gtfobins.github.io/gtfobins/split/
+tags:
+- linux
+- unix
+- gtfobins

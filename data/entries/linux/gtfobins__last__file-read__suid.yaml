@@ -1,0 +1,26 @@
+id: gtfobins/last/file-read/suid
+type: binary
+platform: linux
+name: last
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: last -a -f /path/to/input-file
+  comment: The output might be corrupted or incomplete if the file does not follow the expected database
+    format.
+references:
+- https://gtfobins.github.io/gtfobins/last/
+tags:
+- linux
+- unix
+- gtfobins

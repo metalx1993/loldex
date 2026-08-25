@@ -1,0 +1,30 @@
+id: lolbas/msedge/execute/2
+type: binary
+platform: windows
+name: Msedge.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.015
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_browsers_msedge_arbitrary_download.yml
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_browsers_chromium_headless_file_download.yml
+commands:
+- template: msedge.exe --disable-gpu-sandbox --gpu-launcher="{CMD} &&"
+  comment: Edge spawns cmd.exe as a child process of msedge.exe and executes the specified command
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Msedge/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,38 @@
+id: loldrivers/appshopdrv103-sys
+type: driver
+platform: windows
+name: AppShopDrv103.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AppShopDrv103 binPath=C:\windows\temp\AppShopDrv103.sys type=kernel && sc.exe
+    start AppShopDrv103
+  comment: AppShopDrv103.sys is a hardware utility driver from ASRock distributed with APP Shop and Auto
+    Driver Installer. The driver exposes 30+ IOCTLs through a BCrypt AES-encrypted command wrapper (IOCTL
+    0x22
+driver_detail:
+  sha256: cea231333781085538127bdcfbf49ef1d7500c057295fba061e962376e8219e6
+  signer: ASRock Incorporation
+  original_filename: AppShopDrv103.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/222
+- https://github.com/hfiref0x/KDU
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,38 @@
+id: loldrivers/ccprotect-sys
+type: driver
+platform: windows
+name: CcProtect.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CcProtect binPath=C:\windows\temp\CcProtect.sys type=kernel && sc.exe start
+    CcProtect
+  comment: CnCrypt CcProtect.sys is a signed kernel driver used by BlackSnufkin BYOVD research as a process-killer
+    provider. The public PoC documents this hash as a vulnerable CcProtect driver and notes that HVC
+driver_detail:
+  sha256: 5f0cfe8357bb52b45068ddbac053e32bc38e6cb5e086746f5402657b0a5cfb1c
+  signer: CnCrypt Foundation
+  original_filename: CcProtect.sys
+  category: vulnerable driver
+references:
+- https://github.com/BlackSnufkin/BYOVD/tree/main/CcProtect-Killer
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

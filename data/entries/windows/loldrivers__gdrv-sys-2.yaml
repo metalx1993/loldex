@@ -1,0 +1,33 @@
+id: loldrivers/gdrv-sys-2
+type: driver
+platform: windows
+name: gdrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create gdrv.sys binPath=C:\windows\temp\gdrv.sys type=kernel && sc.exe start gdrv.sys
+driver_detail:
+  sha256: 092d04284fdeb6762e65e6ac5b813920d6c69a5e99d110769c5c1a78e11c5ba0
+  signer: GIGA-BYTE TECHNOLOGY CO., LTD.
+  original_filename: gdrv.sys
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

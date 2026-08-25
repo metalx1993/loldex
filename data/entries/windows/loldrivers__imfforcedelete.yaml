@@ -1,0 +1,40 @@
+id: loldrivers/imfforcedelete
+type: driver
+platform: windows
+name: IMFForceDelete
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create IMFForceDelete binPath=C:\windows\temp\IMFForceDelete.sys type=kernel && sc.exe
+    start IMFForceDelete
+  comment: IObit Malware Fighter IMFForceDelete.sys is a vulnerable force-delete filter driver. ESET documents
+    GentleKiller's Cleaner variant dropping this driver without the trailing .sys extension, and CVE-201
+driver_detail:
+  sha256: ef4e4b88df24825dbf4e7131e71a41002715d38b7a8c0c432aa936c854152ef3
+  signer: IObit
+  original_filename: ForceDelete.sys
+  category: vulnerable driver
+references:
+- https://www.welivesecurity.com/en/eset-research/killing-me-gently-inside-gentlemens-edr-killer-framework/
+- https://www.eset.com/us/about/newsroom/research/eset-research-gentlemen-ransomware-gang-edr-killers/
+- https://github.com/magicsword-io/LOLDrivers/issues/377
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

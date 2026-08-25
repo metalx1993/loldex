@@ -1,0 +1,26 @@
+id: gtfobins/wc/file-read/suid
+type: binary
+platform: linux
+name: wc
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: wc --files0-from /path/to/input-file
+  comment: The file content is parsed as a sequence of `\x00` separated paths. On error the file content
+    appears in a message.
+references:
+- https://gtfobins.github.io/gtfobins/wc/
+tags:
+- linux
+- unix
+- gtfobins

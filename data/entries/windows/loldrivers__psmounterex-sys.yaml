@@ -1,0 +1,37 @@
+id: loldrivers/psmounterex-sys
+type: driver
+platform: windows
+name: psmounterex.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create psmounterex binPath=C:\windows\temp\psmounterex.sys type=kernel && sc.exe start
+    psmounterex
+  comment: Northwave Cyber Security contributed this driver based on in-house research. The driver has
+    a CVSSv3 score of 8.8, indicating a privelege escalation impact. This vulnerability could potentially
+    be exp
+driver_detail:
+  sha256: 4e99d454a56845bb0e622cfd68b895b7868ef7e8a43424e5b7b803f5a2d25eca
+  signer: Windows (R) Win 7 DDK provider
+  original_filename: psmounterex.sys
+  category: vulnerable driver
+references:
+- https://northwave-cybersecurity.com/exploiting-enterprise-backup-software-for-privilege-escalation-part-one
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

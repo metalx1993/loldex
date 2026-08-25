@@ -1,0 +1,43 @@
+id: loldrivers/cyvrlpc-sys
+type: driver
+platform: windows
+name: cyvrlpc.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create cyvrlpc.sys binPath=C:\windows\temp\cyvrlpc.sys type=kernel && sc.exe start
+    cyvrlpc.sys
+  comment: 'Per Sophos X-Ops research
+
+    (Aug 06, 2025), threat actors deploy an EDR-killer that loads a malicious
+
+    kernel driver (often with a random five-letter name) signed with
+
+    compromised or revoked code-signing'
+driver_detail:
+  sha256: 05f8f514d1367aca856564af5443a75f47d22a30ce63f0b024a41e6b9553a527
+  signer: Palo Alto Networks, Inc.
+  original_filename: cyvrlpc.sys
+  category: vulnerable driver
+references:
+- https://news.sophos.com/en-us/2025/08/06/shared-secret-edr-killer-in-the-kill-chain/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

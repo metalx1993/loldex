@@ -1,0 +1,36 @@
+id: loldrivers/amd-rpmc-biostoolcommondriver-sys
+type: driver
+platform: windows
+name: Amd_RPMC_BiosToolCommonDriver.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create Amd_RPMC_BiosToolCommonDriver binPath=C:\windows\temp\Amd_RPMC_BiosToolCommonDriver.sys
+    type=kernel && sc.exe start Amd_RPMC_BiosToolCommonDriver
+  comment: Amd_RPMC_BiosToolCommonDriver.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 4e913a99b38abea038202c95c6bc5d8d866a6e2869101a14a05079235346d9a1
+  signer: Advanced Micro Devices
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

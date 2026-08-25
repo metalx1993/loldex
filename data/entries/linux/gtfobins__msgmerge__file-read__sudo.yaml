@@ -1,0 +1,25 @@
+id: gtfobins/msgmerge/file-read/sudo
+type: binary
+platform: linux
+name: msgmerge
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: msgmerge -P /path/to/input-file /dev/null
+  comment: The file is parsed and displayed as a Java `.properties` file.
+references:
+- https://gtfobins.github.io/gtfobins/msgmerge/
+tags:
+- linux
+- unix
+- gtfobins

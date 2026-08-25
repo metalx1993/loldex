@@ -1,0 +1,35 @@
+id: loldrivers/winring0-sys
+type: driver
+platform: windows
+name: WinRing0.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create WinRing0.sys binPath=C:\windows\temp\WinRing0.sys type=kernel && sc.exe start
+    WinRing0.sys
+driver_detail:
+  sha256: 3ec5ad51e6879464dfbccb9f4ed76c6325056a42548d5994ba869da9c4c039a8
+  signer: OpenLibSys.org
+  original_filename: WinRing0.sys
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

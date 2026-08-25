@@ -1,0 +1,36 @@
+id: loldrivers/wnbios-sys
+type: driver
+platform: windows
+name: wnbios.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create wnbios.sys binPath=C:\windows\temp\wnbios.sys type=kernel && sc.exe start wnbios.sys
+  comment: 'Utilized in RealBlindingEDR. '
+driver_detail:
+  sha256: 530d9223ec7e4123532a403abef96dfd1af5291eb49497392ff5d14d18fccfbb
+  signer: Windows (R) Win 7 DDK provider
+  original_filename: wnbios.sys
+  category: vulnerable driver
+references:
+- https://github.com/myzxcg/RealBlindingEDR/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

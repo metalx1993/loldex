@@ -1,0 +1,36 @@
+id: loldrivers/windbg-sys-2
+type: driver
+platform: windows
+name: windbg.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create windbg.sys binPath=C:\windows\temp\windbg.sys type=kernel && sc.exe start windbg.sys
+  comment: "These samples are related to CopperStealth campaign found by TrendMicro. CopperStealth\u2019\
+    s infection chain involves dropping and loading a rootkit, which later injects its payload into explorer.exe\
+    \ and "
+driver_detail:
+  sha256: 139f8412a7c6fdc43dcfbbcdba256ee55654eb36a40f338249d5162a1f69b988
+  signer: Microsoft Corporation
+  original_filename: windbg.sys
+  category: malicious
+references:
+- https://www.trendmicro.com/en_us/research/23/e/water-orthrus-new-campaigns-deliver-rootkit-and-phishing-modules.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

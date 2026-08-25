@@ -1,0 +1,24 @@
+id: gtfobins/logrotate/file-write/unprivileged
+type: binary
+platform: linux
+name: logrotate
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: logrotate -l /path/to/output-file DATA
+  comment: The content is written in a log file.
+references:
+- https://gtfobins.github.io/gtfobins/logrotate/
+tags:
+- linux
+- unix
+- gtfobins

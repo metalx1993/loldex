@@ -1,0 +1,37 @@
+id: loldrivers/cg6kwin2k-sys
+type: driver
+platform: windows
+name: cg6kwin2k.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create cg6kwin2ksys binPath= C:\windows\temp\cg6kwin2ksys.sys type=kernel && sc.exe
+    start cg6kwin2ksys
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: 223f61c3f443c5047d1aeb905b0551005a426f084b7a50384905e7e4ecb761a1
+  signer: NMS Communications
+  original_filename: cg6kwin2k.sys
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

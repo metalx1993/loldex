@@ -1,0 +1,34 @@
+id: wadcoms/sharphound-ldap
+type: technique
+platform: active-directory
+name: SharpHound LDAP
+phases:
+- privilege-escalation
+- discovery
+capabilities:
+- privilege-escalation
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+- a valid username
+- a valid password
+commands:
+- template: SharpHound.exe --CollectionMethods All --LdapUsername john --LdapPassword password123 --ZipFileName
+    output.zip
+  comment: SharpHound.exe is the official data collector for BloodHound, written in C# and uses Windows
+    API functions and LDAP namespace functions to collect data from domain controllers and domain-joined
+    Windows systems. This data can then be fed into BloodHound to enumerate potential path
+references:
+- https://github.com/BloodHoundAD/SharpHound3
+- https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound.html
+tags:
+- active-directory
+- wadcoms
+- ldap

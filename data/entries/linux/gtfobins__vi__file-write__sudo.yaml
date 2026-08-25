@@ -1,0 +1,31 @@
+id: gtfobins/vi/file-write/sudo
+type: binary
+platform: linux
+name: vi
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'vi /path/to/output-file
+
+    iDATA
+
+    ^[
+
+    w'
+  comment: Where `^[` is the escape key.
+references:
+- https://gtfobins.github.io/gtfobins/vi/
+tags:
+- linux
+- unix
+- gtfobins

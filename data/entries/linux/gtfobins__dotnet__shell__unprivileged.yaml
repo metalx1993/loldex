@@ -1,0 +1,25 @@
+id: gtfobins/dotnet/shell/unprivileged
+type: binary
+platform: linux
+name: dotnet
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'dotnet fsi
+
+    System.Diagnostics.Process.Start("/bin/sh").WaitForExit();;'
+references:
+- https://gtfobins.github.io/gtfobins/dotnet/
+tags:
+- linux
+- unix
+- gtfobins

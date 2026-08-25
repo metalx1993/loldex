@@ -1,0 +1,36 @@
+id: loldrivers/nicm-sys-2
+type: driver
+platform: windows
+name: nicm.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create nicm.sys binPath=C:\windows\temp \n \n \n  icm.sys type=kernel && sc.exe start
+    nicm.sys
+  comment: nicm.sys is a vulnerable driver. CVE-2013-3956.
+driver_detail:
+  sha256: 7a2cd1dc110d014165c001ce65578da0c0c8d7d41cc1fa44f974e8a82296fc25
+  signer: Novell, Inc.
+  original_filename: NICM.SYS
+  category: vulnerable driver
+references:
+- https://github.com/jbaines-r7/dellicious
+- https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

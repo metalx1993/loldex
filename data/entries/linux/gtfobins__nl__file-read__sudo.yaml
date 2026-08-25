@@ -1,0 +1,25 @@
+id: gtfobins/nl/file-read/sudo
+type: binary
+platform: linux
+name: nl
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nl -bn -w1 -s '' /path/to/input-file
+  comment: The read file content is corrupted by a leading space added to each line.
+references:
+- https://gtfobins.github.io/gtfobins/nl/
+tags:
+- linux
+- unix
+- gtfobins

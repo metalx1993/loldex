@@ -1,0 +1,37 @@
+id: loldrivers/wantd-3-sys
+type: driver
+platform: windows
+name: wantd_3.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create wantd_3.sys binPath=C:\windows\temp\wantd_3.sys type=kernel && sc.exe start
+    wantd_3.sys
+  comment: Driver used in the Daxin malware campaign.
+driver_detail:
+  sha256: 81c7bb39100d358f8286da5e9aa838606c98dfcc263e9a82ed91cd438cb130d1
+  signer: Microsoft Corporation
+  original_filename: wantd.sys
+  category: malicious
+references:
+- https://gist.github.com/MHaggis/9ab3bb795a6018d70fb11fa7c31f8f48
+- https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/daxin-backdoor-espionage
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,35 @@
+id: loldrivers/daxin-blank4-sys
+type: driver
+platform: windows
+name: daxin_blank4.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create daxin_blank4.sys binPath=C:\windows\temp\daxin_blank4.sys     type=kernel &&
+    sc.exe start daxin_blank4.sys
+  comment: Driver used in the Daxin malware campaign.
+driver_detail:
+  sha256: 8dafe5f3d0527b66f6857559e3c81872699003e0f2ffda9202a1b5e29db2002e
+  category: malicious
+references:
+- https://gist.github.com/MHaggis/9ab3bb795a6018d70fb11fa7c31f8f48
+- https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/daxin-backdoor-espionage
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

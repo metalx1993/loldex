@@ -1,0 +1,31 @@
+id: lolbas/wbemtest/execute/0
+type: binary
+platform: windows
+name: wbemtest.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1047
+opsec:
+  noise: high
+  triggers: wbemtest.exe binary spawned
+commands:
+- template: wbemtest.exe
+  comment: Execute arbitary commands through WMI through a GUI managment interface for Web Based Enterprise
+    Management testing (WBEM). Uses WMI to Create and instance of a Win32_Process WMI class with a commandline
+    argument of the target command to spawn. Spawns a GUI so it requires interactive access. For a demo,
+    see link to blog in resources.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Wbemtest/
+tags:
+- windows
+- lolbas

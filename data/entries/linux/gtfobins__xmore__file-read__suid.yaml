@@ -1,0 +1,25 @@
+id: gtfobins/xmore/file-read/suid
+type: binary
+platform: linux
+name: xmore
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: xmore /path/to/input-file
+  comment: The file is displayed in a graphical window.
+references:
+- https://gtfobins.github.io/gtfobins/xmore/
+tags:
+- linux
+- unix
+- gtfobins

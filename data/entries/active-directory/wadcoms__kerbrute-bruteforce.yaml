@@ -1,0 +1,28 @@
+id: wadcoms/kerbrute-bruteforce
+type: technique
+platform: active-directory
+name: Kerbrute BruteForce
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- no credentials required
+commands:
+- template: cat credentials.txt | kerbrute_linux_amd64 -d test.local bruteforce -
+  comment: ropnop's kerbrute bruteforces and enumerates valid Active Directory accounts through Kerberos
+    Pre-Authentication. The following command will attempt to brute force valid username and passwords
+    logins given a list of credentials (in the format `username:password`). Command Referen
+references:
+- https://github.com/ropnop/kerbrute
+tags:
+- active-directory
+- wadcoms
+- kerberos

@@ -1,0 +1,35 @@
+id: loldrivers/tm-filter-sys
+type: driver
+platform: windows
+name: tm_filter.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1056.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create tmfsdrv2 binPath=C:\windows\temp\tmfsdrv2.sys type=kernel && sc.exe start tmfsdrv2
+  comment: Teramind Inc. kernel-mode filter drivers (tm_filter.sys and tmfsdrv2.sys) providing kernel-level
+    input capture including keylogging and screen capture capabilities. Both signed by DigiCert under
+    Teram
+driver_detail:
+  sha256: e9fda504c9bdbe785c55a279ebb27e31783155570ab0c242e1de5bf79fbca6ed
+  signer: Windows (R) Win 7 DDK provider
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/243
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

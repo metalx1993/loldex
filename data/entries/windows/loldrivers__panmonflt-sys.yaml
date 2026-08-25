@@ -1,0 +1,34 @@
+id: loldrivers/panmonflt-sys
+type: driver
+platform: windows
+name: PanMonFlt.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create PanMonFlt.sys binPath=C:\windows\temp\PanMonFlt.sys type=kernel && sc.exe start
+    PanMonFlt.sys
+driver_detail:
+  sha256: 7e0124fcc7c95fdc34408cf154cb41e654dade8b898c71ad587b2090b1da30d7
+  signer: Pan Yazilim Bilisim Teknolojileri Tic. Ltd. Sti.
+  original_filename: PanMonFlt.sys
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

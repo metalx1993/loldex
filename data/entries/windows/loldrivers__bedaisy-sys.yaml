@@ -1,0 +1,34 @@
+id: loldrivers/bedaisy-sys
+type: driver
+platform: windows
+name: bedaisy.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create BEDaisy.sys binPath=C:\windows\temp\BEDaisy.sys type=kernel && sc.exe start
+    BEDaisy.sys
+  comment: BattlEye Anti-Cheat BEDAISY.SYS PPL privesc.
+driver_detail:
+  sha256: 2b120de80a5462f8395cfb7153c86dfd44f29f0776ea156ec4a34fa64e5c4797
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/23
+- https://infosec.exchange/@Rairii/109310279380973806
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

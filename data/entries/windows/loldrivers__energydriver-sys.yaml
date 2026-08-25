@@ -1,0 +1,37 @@
+id: loldrivers/energydriver-sys
+type: driver
+platform: windows
+name: energydriver.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create energydriver binPath=C:\windows\temp\energydriver.sys type=kernel && sc.exe
+    start energydriver
+  comment: EnergyDriver.sys is a kernel driver from Intel Corporation shipped with Intel Power Gadget
+    3.6 (deprecated December 2023). The driver exposes 5 IOCTLs including arbitrary wrmsr (any MSR index,
+    any 64-
+driver_detail:
+  sha256: 6665b05e6fd430b729326a0b125cfcb70c387dbee46ef3f768f7dbdf0e0a6bab
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/magicsword-io/LOLDrivers/issues/329
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

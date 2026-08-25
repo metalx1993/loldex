@@ -1,0 +1,28 @@
+id: lolbas/vslaunchbrowser/execute/1
+type: binary
+platform: windows
+name: VSLaunchBrowser.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: cmd.exe as sub-process of VSLaunchBrowser
+commands:
+- template: VSLaunchBrowser.exe .exe {PATH_ABSOLUTE:.exe}
+  comment: Execute payload via VSLaunchBrowser as parent process
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/VsLaunchBrowser/
+tags:
+- windows
+- lolbas

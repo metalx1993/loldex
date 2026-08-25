@@ -1,0 +1,36 @@
+id: loldrivers/lallamon-sys
+type: driver
+platform: windows
+name: Lallamon.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create Lallamon binPath=C:\windows\temp\Lallamon.sys type=kernel && sc.exe start Lallamon
+  comment: Lallamon.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: d9dc2860ab791755a535786dcc559db186ba19ba99ea75266844f249a1e138a0
+  signer: Lallasoft
+  original_filename: LallaMon.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

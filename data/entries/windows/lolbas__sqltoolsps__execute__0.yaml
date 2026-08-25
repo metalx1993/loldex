@@ -1,0 +1,30 @@
+id: lolbas/sqltoolsps/execute/0
+type: binary
+platform: windows
+name: SQLToolsPS.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_mssql_sqltoolsps_susp_execution.yml
+  - https://github.com/splunk/security_content/blob/aa9f7e0d13a61626c69367290ed1b7b71d1281fd/docs/_posts/2021-10-05-suspicious_copy_on_system32.md
+commands:
+- template: SQLToolsPS.exe -noprofile -command Start-Process {PATH:.exe}
+  comment: Run a SQL Server PowerShell mini-console without Module and ScriptBlock Logging.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Sqltoolsps/
+tags:
+- windows
+- lolbas

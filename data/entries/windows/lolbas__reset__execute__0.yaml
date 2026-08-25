@@ -1,0 +1,31 @@
+id: lolbas/reset/execute/0
+type: binary
+platform: windows
+name: Reset.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: reset.exe being executed and executes rwinsta.exe outside of its normal path of c:\windows\system32\
+    or c:\windows\syswow64\
+commands:
+- template: reset.exe session
+  comment: Once executed, `reset.exe` will execute `rwinsta.exe` in the same folder. Thus, if `reset.exe`
+    is copied to a folder and an arbitrary executable is renamed to `rwinsta.exe`, `reset.exe` will spawn
+    it.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Reset/
+tags:
+- windows
+- lolbas

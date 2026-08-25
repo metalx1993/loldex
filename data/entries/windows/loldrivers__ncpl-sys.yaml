@@ -1,0 +1,36 @@
+id: loldrivers/ncpl-sys
+type: driver
+platform: windows
+name: ncpl.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ncpl.sys binPath=C:\windows\temp \n \n \n  cpl.sys type=kernel && sc.exe start
+    ncpl.sys
+  comment: ncpl.sys is a vulnerable driver. CVE-2013-3956.
+driver_detail:
+  sha256: 6c7120e40fc850e4715058b233f5ad4527d1084a909114fd6a36b7b7573c4a44
+  signer: Novell, Inc.
+  original_filename: NICM.SYS
+  category: vulnerable driver
+references:
+- https://github.com/jbaines-r7/dellicious
+- https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

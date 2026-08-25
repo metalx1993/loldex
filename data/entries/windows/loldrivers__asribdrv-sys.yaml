@@ -1,0 +1,34 @@
+id: loldrivers/asribdrv-sys
+type: driver
+platform: windows
+name: AsrIbDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AsrIbDrv.sys binPath=C:\windows\temp\AsrIbDrv.sys type=kernel && sc.exe start
+    AsrIbDrv.sys
+driver_detail:
+  sha256: 2a652de6b680d5ad92376ad323021850dab2c653abf06edf26120f7714b8e08a
+  signer: RW-Everything
+  original_filename: RwDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

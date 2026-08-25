@@ -1,0 +1,26 @@
+id: gtfobins/zathura/shell/unprivileged
+type: binary
+platform: linux
+name: zathura
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'zathura
+
+    :! /bin/sh -c ''exec /bin/sh 0<&1'''
+  comment: The interaction happens in a GUI window, while the shell is dropped in the terminal.
+references:
+- https://gtfobins.github.io/gtfobins/zathura/
+tags:
+- linux
+- unix
+- gtfobins

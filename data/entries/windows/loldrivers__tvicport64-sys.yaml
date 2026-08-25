@@ -1,0 +1,39 @@
+id: loldrivers/tvicport64-sys
+type: driver
+platform: windows
+name: TVicPort64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create TVicPort64 binPath=C:\windows\temp\TVicPort64.sys type=kernel && sc.exe start
+    TVicPort64
+  comment: Load TVicPort64.sys kernel driver. Once loaded, device \\.\TVicPortDevice0 is accessible from
+    any integrity level (no DACL). Send IOCTL 0x80002008 to map arbitrary physical memory into user-mode
+    VA sp
+driver_detail:
+  sha256: 9C9AB56C8BCF5EC958E7C2346F23A3027F69ABDF8AF923B591518EEE64AD98AD
+  signer: EnTech Taiwan
+  original_filename: TVicPort64.sys
+  category: vulnerable driver
+references:
+- https://www.entechtaiwan.com/dev/port/index.shtm
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

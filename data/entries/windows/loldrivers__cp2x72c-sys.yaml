@@ -1,0 +1,37 @@
+id: loldrivers/cp2x72c-sys
+type: driver
+platform: windows
+name: CP2X72C.SYS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CP2X72CSYS binPath= C:\windows\temp\CP2X72CSYS.sys type=kernel && sc.exe start
+    CP2X72CSYS
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: 05c15a75d183301382a082f6d76bf3ab4c520bf158abca4433d9881134461686
+  signer: Interface Corporation
+  original_filename: CP2X72C.SYS
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

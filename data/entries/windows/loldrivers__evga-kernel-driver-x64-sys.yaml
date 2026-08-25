@@ -1,0 +1,35 @@
+id: loldrivers/evga-kernel-driver-x64-sys
+type: driver
+platform: windows
+name: evga_kernel_driver-x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create evga_kernel_driver-x64 binPath=C:\windows\temp\evga_kernel_driver-x64.sys type=kernel
+    && sc.exe start evga_kernel_driver-x64
+  comment: evga_kernel_driver-x64.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 33da2ce240b4559cc6e847d56c5fbeaa3d644ec160841920ea0a098dcee28d0e
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

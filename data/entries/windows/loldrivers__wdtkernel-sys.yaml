@@ -1,0 +1,40 @@
+id: loldrivers/wdtkernel-sys
+type: driver
+platform: windows
+name: WDTKernel.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create WDTKernel binPath=C:\windows\temp\WDTKernel.sys type=kernel && sc.exe start
+    WDTKernel
+  comment: 'WDTKernel.sys is a Dell Watchdog Timer Kernel Driver that exposes 12 IOCTLs for arbitrary
+    physical memory read/write via MmMapIoSpace with zero validation on user-supplied physical addresses.
+    It also '
+driver_detail:
+  sha256: 0e27bec347ca0050c455467bd8d774175c503b8aa1af3411e94966f7dc6b28b7
+  signer: Dell Inc
+  original_filename: WDTKernel.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/290
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

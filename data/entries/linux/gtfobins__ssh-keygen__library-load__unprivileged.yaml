@@ -1,0 +1,25 @@
+id: gtfobins/ssh-keygen/library-load/unprivileged
+type: binary
+platform: linux
+name: ssh-keygen
+phases:
+- execution
+- persistence
+capabilities:
+- library-load
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ssh-keygen -D /path/to/lib.so
+  comment: The shared library must contain the `void C_GetFunctionList() {}` function.
+references:
+- https://gtfobins.github.io/gtfobins/ssh-keygen/
+tags:
+- linux
+- unix
+- gtfobins

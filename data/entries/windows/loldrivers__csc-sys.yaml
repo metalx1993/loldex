@@ -1,0 +1,36 @@
+id: loldrivers/csc-sys
+type: driver
+platform: windows
+name: CSC.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CSC.sys binPath=C:\windows\temp\CSC.sys type=kernel && sc.exe start CSC.sys
+  comment: Improper Address Validation in IOCTL with METHOD_NEITHER I/O Control Code in the csc.sys driver
+driver_detail:
+  sha256: 828c54cfecb2a08863319544ac716aee3898dfe78a87d7757a0e92f1b1f1daf1
+  signer: Microsoft Corporation
+  original_filename: CSC.Sys
+  category: vulnerable driver
+references:
+- https://github.com/varwara/CVE-2024-26229/tree/main
+- https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-26229
+- https://github.com/zer0condition/ZeroHVCI
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,34 @@
+id: loldrivers/nbiolib-x64-sys
+type: driver
+platform: windows
+name: NBIOLib_X64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create NBIOLib_X64.sys binPath=C:\windows\temp\NBIOLib_X64.sys     type=kernel && sc.exe
+    start NBIOLib_X64.sys
+driver_detail:
+  sha256: 3f2fda9a7a9c57b7138687bbce49a2e156d6095dddabb3454ea09737e02c3fa5
+  signer: MSI
+  original_filename: NTIOLib.sys
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

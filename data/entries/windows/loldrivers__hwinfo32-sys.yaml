@@ -1,0 +1,31 @@
+id: loldrivers/hwinfo32-sys
+type: driver
+platform: windows
+name: HWiNFO32.SYS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 6e9e9e0b9a23deec5f28dc45f0bbe7423565f037f74be2957e82e5f72c886094
+  signer: REALiX(tm)
+  original_filename: HWiNFO32.SYS
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

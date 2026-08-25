@@ -1,0 +1,40 @@
+id: loldrivers/bootrepair-sys
+type: driver
+platform: windows
+name: bootrepair.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create BootRepair binPath=C:\windows\temp\BootRepair.sys type=kernel && sc.exe start
+    BootRepair
+  comment: 'BootRepair.sys is a legitimate Lenovo kernel driver shipped with Lenovo PC Manager (signed
+    by LENOVO via Symantec Class 3 SHA256 Code Signing CA, compile date 2018-01-03). The driver creates
+    a device '
+driver_detail:
+  sha256: 5ab36c116767eaae53a466fbc2dae7cfd608ed77721f65e83312037fbd57c946
+  signer: LENOVO
+  original_filename: BootRepair.sys
+  category: vulnerable driver
+references:
+- https://medium.com/@jehadbudagga/phantom-killer-reverse-engineering-and-weaponizing-a-lenovo-driver-to-terminate-edr-processes-9191cd06374f
+- https://github.com/redteamfortress/PhantomKiller
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

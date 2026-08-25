@@ -1,0 +1,38 @@
+id: loldrivers/rtcore64-sys-2
+type: driver
+platform: windows
+name: RTCore64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create RTCore64.sys binPath=C:\windows\temp\RTCore64.sys type=kernel && sc.exe start
+    RTCore64.sys
+  comment: The driver in Micro-Star MSI Afterburner 4.6.2.15658 (aka RTCore64.sys and RTCore32.sys) allows
+    any authenticated user to read and write to arbitrary memory, I/O ports, and MSRs. This can be exploited
+driver_detail:
+  sha256: 01aa278b07b58dc46c84bd0b1b5c8e9ee4e62ea0bf7a695862444af32e87f1fd
+  category: vulnerable driver
+references:
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+- https://news.sophos.com/en-us/2022/10/04/blackbyte-ransomware-returns/
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

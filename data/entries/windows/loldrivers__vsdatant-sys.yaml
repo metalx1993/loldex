@@ -1,0 +1,36 @@
+id: loldrivers/vsdatant-sys
+type: driver
+platform: windows
+name: vsdatant.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create vsdatant binPath=C:\Windows\Temp\vsdatant.sys type=kernel && sc.exe start vsdatant
+  comment: Check Point ZoneAlarm driver (vsdatant.sys) abused in BYOVD attacks to gain kernel privileges
+    and bypass protections such as Memory Integrity.
+driver_detail:
+  sha256: 1c43f33573a0815c5edc5e18ba1038afdd11f55a7cd8b08ba59b8f7357117e4c
+  signer: Check Point, LTD
+  category: vulnerable driver
+references:
+- https://venaksecurity.com/2025/03/20/cybercriminals-exploit-checkpoints-driver-in-a-byovd-attack/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

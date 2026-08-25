@@ -1,0 +1,35 @@
+id: loldrivers/networklocker-x64-sys
+type: driver
+platform: windows
+name: NetworkLocker_x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create NetworkLocker_x64 binPath=C:\windows\temp\NetworkLocker_x64.sys type=kernel
+    && sc.exe start NetworkLocker_x64
+  comment: NetworkLocker_x64.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: ff0892697771f1a9968423793faa34008cfa0041fee48d5b52b25314f7a6a7b4
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

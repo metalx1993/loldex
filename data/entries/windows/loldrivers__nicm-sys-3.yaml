@@ -1,0 +1,33 @@
+id: loldrivers/nicm-sys-3
+type: driver
+platform: windows
+name: NICM.SYS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create NICM.sys binPath=C:\windows\temp\NICM.SYS type=kernel && sc.exe start NICM.SYS
+driver_detail:
+  sha256: 3a65d14fd3b1b5981084cdbd293dc6f4558911ea18dd80177d1e5b54d85bcaa0
+  signer: Novell, Inc.
+  original_filename: NICM.SYS
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,23 @@
+id: lolad/check-for-kerberos-pre-authentication-disabled-accounts
+type: technique
+platform: active-directory
+name: Check for Kerberos Pre-Authentication Disabled Accounts
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a25
+  last_synced: '2026-08-25'
+commands:
+- template: Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} | Select Name, SamAccountName
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell

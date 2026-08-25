@@ -1,0 +1,31 @@
+id: loldrivers/vboxtap-sys
+type: driver
+platform: windows
+name: VBoxTAP.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 994f322def98c99aec7ea0036ef5f4b802120458782ae3867d116d55215c56e4
+  signer: innotek GmbH
+  original_filename: VBoxTAP.sys
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

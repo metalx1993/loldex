@@ -1,0 +1,34 @@
+id: loldrivers/cpuz141-sys
+type: driver
+platform: windows
+name: cpuz141.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create cpuz141.sys binPath=C:\windows\temp\cpuz141.sys type=kernel && sc.exe start
+    cpuz141.sys
+driver_detail:
+  sha256: ded2927f9a4e64eefd09d0caba78e94f309e3a6292841ae81d5528cab109f95d
+  signer: CPUID
+  original_filename: cpuz.sys
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

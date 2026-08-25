@@ -1,0 +1,33 @@
+id: loldrivers/hostnt-sys
+type: driver
+platform: windows
+name: HOSTNT.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create HOSTNT.sys binPath=C:\windows\temp\HOSTNT.sys type=kernel && sc.exe start HOSTNT.sys
+driver_detail:
+  sha256: 07b6d69bafcfd767f1b63a490a8843c3bb1f8e1bbea56176109b5743c8f7d357
+  signer: SafeNet, Inc.
+  original_filename: Hostnt.sys
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

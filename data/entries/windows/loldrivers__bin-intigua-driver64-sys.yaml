@@ -1,0 +1,36 @@
+id: loldrivers/bin-intigua-driver64-sys
+type: driver
+platform: windows
+name: bin_intigua_driver64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create bin_intigua_driver64 binPath=C:\windows\temp\bin_intigua_driver64.sys type=kernel
+    && sc.exe start bin_intigua_driver64
+  comment: bin_intigua_driver64.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: e9a1c39600193c7fd546733284a575b2d5192e2fd3ff64ca1a33b00739f8d429
+  signer: Intigua
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

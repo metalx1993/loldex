@@ -1,0 +1,25 @@
+id: gtfobins/tsc/file-write/unprivileged
+type: binary
+platform: linux
+name: tsc
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tsc /path/to/input-file.ts --outFile /path/to/output-file
+  comment: Content is leaked as error messages and written to file. The file extension must be one of
+    the supported ones, e.g., `.ts`, `.tsx`, etc.
+references:
+- https://gtfobins.github.io/gtfobins/tsc/
+tags:
+- linux
+- unix
+- gtfobins

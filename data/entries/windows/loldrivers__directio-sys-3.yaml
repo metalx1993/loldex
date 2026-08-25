@@ -1,0 +1,32 @@
+id: loldrivers/directio-sys-3
+type: driver
+platform: windows
+name: DirectIo.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create DirectIo.sys binPath=C:\windows\temp\DirectIo.sys type=kernel && sc.exe start
+    DirectIo.sys
+driver_detail:
+  sha256: 4422851a0a102f654e95d3b79c357ae3af1b096d7d1576663c027cfbc04abaf9
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

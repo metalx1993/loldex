@@ -1,0 +1,25 @@
+id: gtfobins/comm/file-read/suid
+type: binary
+platform: linux
+name: comm
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: comm /path/to/input-file /dev/null
+  comment: A newline is appended to the file.
+references:
+- https://gtfobins.github.io/gtfobins/comm/
+tags:
+- linux
+- unix
+- gtfobins

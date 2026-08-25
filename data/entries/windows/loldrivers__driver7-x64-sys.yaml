@@ -1,0 +1,34 @@
+id: loldrivers/driver7-x64-sys
+type: driver
+platform: windows
+name: driver7-x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create driver7-x64.sys binPath=C:\windows\temp\driver7-x64.sys     type=kernel && sc.exe
+    start driver7-x64.sys
+driver_detail:
+  sha256: 771a8d05f1af6214e0ef0886662be500ee910ab99f0154227067fddcfe08a3dd
+  signer: ASUStek
+  original_filename: Driver7
+  category: vulnerable driver
+references:
+- https://github.com/Chigusa0w0/AsusDriversPrivEscala
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

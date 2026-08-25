@@ -1,0 +1,36 @@
+id: loldrivers/ipctype-sys
+type: driver
+platform: windows
+name: ipctype.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ipctype binPath=C:\windows\temp\ipctype.sys type=kernel && sc.exe start ipctype
+  comment: ipctype.sys is a kernel driver from Digital Electronics Corporation that exposes physical memory
+    read/write via MmMapIoSpace. The driver is available in the KeServiceDescriptorTable/vulnerable-drivers
+driver_detail:
+  sha256: 8e2acce10d704c8b511c8b6211a2be5d8e4ade91ebcbda2ac10018e4c0ae99fb
+  signer: Digital Electronics Corporation
+  original_filename: ipctype.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/313
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

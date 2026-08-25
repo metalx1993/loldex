@@ -1,0 +1,38 @@
+id: loldrivers/driverscloud-amd64-sys
+type: driver
+platform: windows
+name: DriversCloud_amd64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create DriversCloud_amd64 binPath=C:\windows\temp\DriversCloud_amd64.sys type=kernel
+    && sc.exe start DriversCloud_amd64
+  comment: CYBELSOFT DriversCloud_amd64.sys exposes 7 IOCTLs with no access checks and a zero security
+    descriptor on the device object, meaning any user (including low-integrity processes) can open a handle.
+    Pri
+driver_detail:
+  sha256: 2bc72d11fa0beda25dc1dbc372967db49bd3c3a3903913f0877bff6792724dfe
+  signer: CybelSoft
+  original_filename: DriversCloud_amd64.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/284
+- https://www.virustotal.com/gui/file/2bc72d11fa0beda25dc1dbc372967db49bd3c3a3903913f0877bff6792724dfe
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

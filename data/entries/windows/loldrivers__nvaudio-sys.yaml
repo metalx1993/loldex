@@ -1,0 +1,37 @@
+id: loldrivers/nvaudio-sys
+type: driver
+platform: windows
+name: nvaudio.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create nvaudiosys binPath= C:\windows\temp\nvaudiosys.sys type=kernel && sc.exe start
+    nvaudiosys
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: b0dcdbdc62949c981c4fc04ccea64be008676d23506fc05637d9686151a4b77f
+  signer: NVidia Corp.
+  original_filename: nvoclock.sys
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

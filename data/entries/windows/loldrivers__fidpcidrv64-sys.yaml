@@ -1,0 +1,32 @@
+id: loldrivers/fidpcidrv64-sys
+type: driver
+platform: windows
+name: fidpcidrv64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create fidpcidrv64.sys binPath=C:\windows\temp\fidpcidrv64.sys     type=kernel && sc.exe
+    start fidpcidrv64.sys
+driver_detail:
+  sha256: 3ac5e01689a3d745e60925bc7faca8d4306ae693e803b5e19c94906dc30add46
+  category: vulnerable driver
+references:
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

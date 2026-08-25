@@ -1,0 +1,25 @@
+id: gtfobins/runscript/shell/unprivileged
+type: binary
+platform: linux
+name: runscript
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''! exec /bin/sh'' >/path/to/temp-file
+
+    runscript /path/to/temp-file'
+references:
+- https://gtfobins.github.io/gtfobins/runscript/
+tags:
+- linux
+- unix
+- gtfobins

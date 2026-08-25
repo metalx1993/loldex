@@ -1,0 +1,34 @@
+id: loldrivers/hwrwdrv-sys-2
+type: driver
+platform: windows
+name: HwRwDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create HwRwDrv.sys binPath=C:\windows\temp\HwRwDrv.sys type=kernel && sc.exe start
+    HwRwDrv.sys
+driver_detail:
+  sha256: 21ccdd306b5183c00ecfd0475b3152e7d94b921e858e59b68a03e925d1715f21
+  signer: "Windows\xAE winows 7 driver kits provider"
+  original_filename: HwRwDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,31 @@
+id: lolbas/eudcedit/uac-bypass/0
+type: binary
+platform: windows
+name: Eudcedit.exe
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1548.002
+opsec:
+  noise: medium
+  triggers: Processes spawned by eudcedit.exe.
+commands:
+- template: eudcedit
+  comment: Once executed, the Private Charecter Editor will be opened - click OK, then click File -> Font
+    Links. In the next window choose the option "Link with Selected Fonts" and click on Save As, then
+    in the opened enter the command you want to execute.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Eudcedit/
+tags:
+- windows
+- lolbas

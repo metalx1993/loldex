@@ -1,0 +1,30 @@
+id: wadcoms/netexec-smb-timeroasting
+type: technique
+platform: active-directory
+name: NetExec SMB Timeroasting
+phases:
+- credential-access
+capabilities:
+- credential-access
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- an NTLM hash (pass-the-hash)
+- a valid username
+commands:
+- template: nxc smb 10.10.10.1 -M timeroast
+  comment: NetExec (formerly CrackMapExec) performs a Timeroasting attack via the SMB service. This command
+    targets the remote Windows host and abuses the Kerberos protocol by manipulating ticket lifetimes
+    or requesting renewable service tickets. It can help attackers obtain long-lived Kerb
+references:
+- https://github.com/Pennyw0rth/NetExec
+- https://cybersecurity.bureauveritas.com/blog/timeroasting-attacking-trust-accounts-in-active-directory
+tags:
+- active-directory
+- wadcoms
+- smb

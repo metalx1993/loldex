@@ -1,0 +1,37 @@
+id: loldrivers/radhwmgr-sys
+type: driver
+platform: windows
+name: RadHwMgr.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create RadHwMgrsys binPath= C:\windows\temp\RadHwMgrsys.sys type=kernel && sc.exe start
+    RadHwMgrsys
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: 00c3e86952eebb113d91d118629077b3370ebc41eeacb419762d2de30a43c09c
+  signer: 'Radiant Systems, Inc. '
+  original_filename: RadHwMgr.sys
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

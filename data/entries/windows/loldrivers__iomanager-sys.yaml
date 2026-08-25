@@ -1,0 +1,37 @@
+id: loldrivers/iomanager-sys
+type: driver
+platform: windows
+name: IoManager.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create IoManager binPath=C:\windows\temp\IoManager.sys type=kernel && sc.exe start
+    IoManager
+  comment: IoManager.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: d7833a5d77ab264572458a51226000190857f1b5807c556e23e18c39bb950ca6
+  signer: COMPAL ELECTRONIC INC.
+  original_filename: IoManager
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,26 @@
+id: gtfobins/smbclient/shell/unprivileged
+type: binary
+platform: linux
+name: smbclient
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'smbclient ''\\host\share''
+
+    !/bin/sh'
+  comment: A valid SMB/CIFS server must be available.
+references:
+- https://gtfobins.github.io/gtfobins/smbclient/
+tags:
+- linux
+- unix
+- gtfobins

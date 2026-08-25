@@ -1,0 +1,36 @@
+id: loldrivers/gmer64-sys
+type: driver
+platform: windows
+name: gmer64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create gmer64.sys binPath=C:\windows\temp\gmer64.sys type=kernel && sc.exe start gmer64.sys
+  comment: Driver used by the GMER application. Which is an application that detects and removes rootkits
+driver_detail:
+  sha256: 18c909a2b8c5e16821d6ef908f56881aa0ecceeaccb5fa1e54995935fcfd12f7
+  signer: GMER
+  original_filename: gmer64.sys
+  category: malicious
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/55#issuecomment-1537161951
+- http://www.gmer.net/
+- https://github.com/gtworek/PSBits/blob/master/Misc/KillWithLolDriver.ps1
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

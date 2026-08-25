@@ -1,0 +1,37 @@
+id: loldrivers/driver-77225a99-sys
+type: driver
+platform: windows
+name: driver_77225a99.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create driver_c3d48ddd.sys binPath=C:\windows\temp\driver_c3d48ddd.sys type=kernel
+    && sc.exe start driver_c3d48ddd.sys
+  comment: Sophos, from time to time, has observed a threat actor deploy variants of Poortry on different
+    machines within a single estate during an attack. These variants contain the same payload, but signed
+    wit
+driver_detail:
+  sha256: 77225a99b2e0e2b4007fb2f5a96d356e13deab45b9ef54c175d5452de8a211a7
+  signer: Tonec Inc.
+  original_filename: idmtdi.sys
+  category: malicious
+references:
+- https://news.sophos.com/en-us/2024/08/27/burnt-cigar-2/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

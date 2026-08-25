@@ -1,0 +1,36 @@
+id: loldrivers/irec-sys
+type: driver
+platform: windows
+name: irec.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create irec binPath=C:\windows\temp\irec.sys type=kernel && sc.exe start irec.sys
+  comment: The driver in question, identified as \\.\IREC, provides an interface for external programs
+    to directly interact with system processes. Its key functionality is encapsulated in the OPENPROCESS
+    functio
+driver_detail:
+  sha256: dd573f23d656818036fc9ae1064eda31aca86acb9bc44a6e127db3ea112a9094
+  category: vulnerable driver
+references:
+- https://blog.dru1d.ninja/windows-driver-exploit-development-irec-sys-a5eb45093945
+- https://gist.github.com/dru1d-foofus/1af21179f253879f101c3a8d4f718bf0
+- https://www.binalyze.com/irec
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

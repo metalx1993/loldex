@@ -1,0 +1,36 @@
+id: loldrivers/hlpdrv-sys
+type: driver
+platform: windows
+name: hlpdrv.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create KMHLPSVC binPath=C:\windows\temp\hlpdrv.sys type=kernel && sc.exe start KMHLPSVC
+  comment: hlpdrv.sys is a malicious driver used to disable Windows Defender by modifying registry settings.
+    This driver has been observed in Akira ransomware campaigns, where it is deployed to facilitate AV/EDR
+driver_detail:
+  sha256: bd1f381e5a3db22e88776b7873d4d2835e9a1ec620571d2b1da0c58f81c84a56
+  category: malicious
+references:
+- https://www.guidepointsecurity.com/blog/gritrep-akira-sonicwall/
+- https://github.com/magicsword-io/LOLDrivers/raw/main/drivers/cf7cad39407d8cd93135be42b6bd258f.bin
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

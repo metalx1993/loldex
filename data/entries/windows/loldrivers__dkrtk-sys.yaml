@@ -1,0 +1,37 @@
+id: loldrivers/dkrtk-sys
+type: driver
+platform: windows
+name: dkrTK.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create dkrTK.sys binPath=C:\windows\temp\dkrTK.sys type=kernel && sc.exe start dkrTK.sys
+  comment: The User Agent tjr.exe, which is protected via a virtual machine, drops the kernel driver to
+    the user temporary directory C:\%User%\AppData\Local\Temp\Ktgn.sys. It then installs the dropped driver
+    wit
+driver_detail:
+  sha256: 52d5c35325ce701516f8b04380c9fbdb78ec6bcc13b444f758fdb03d545b0677
+  category: malicious
+references:
+- https://www.trendmicro.com/content/dam/trendmicro/global/en/research/23/e/blackcat-ransomware-deploys-new-signed-kernel-driver/indicators-blackcat-ransomware-deploys-new-signed-kernel-driver.txt
+- https://www.trendmicro.com/en_us/research/23/e/blackcat-ransomware-deploys-new-signed-kernel-driver.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

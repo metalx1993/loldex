@@ -1,0 +1,24 @@
+id: gtfobins/capsh/shell/sudo
+type: binary
+platform: linux
+name: capsh
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: capsh --
+references:
+- https://gtfobins.github.io/gtfobins/capsh/
+tags:
+- linux
+- unix
+- gtfobins

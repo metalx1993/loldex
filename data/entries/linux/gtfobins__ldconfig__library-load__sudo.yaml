@@ -1,0 +1,37 @@
+id: gtfobins/ldconfig/library-load/sudo
+type: binary
+platform: linux
+name: ldconfig
+phases:
+- execution
+- persistence
+- privilege-escalation
+capabilities:
+- library-load
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo /path/to/temp-dir/ >/path/to/temp-file
+
+    ldconfig -f /path/to/temp-file
+
+    ping'
+  comment: "This allows to override one or more shared libraries (e.g., `libpcap`) globally, then triggers\
+    \ the execution by running a program that uses it, e.g., `ping`. This is particularly useful if the\
+    \ target binary is SUID. Beware though that it is easy to end up with a broken target system.\n\n\
+    First identify the shared libraries used by the target program, for example:\n\n```\n$ ldd /bin/ping\
+    \ | grep libcap\n        libcap.so.2 => /path/to/temp-dir/libcap.so.2 (0x00007f8417eef000)\n```\n\n\
+    Then create the shared library override, named `libcap.so.2`, and put in in `/path/to/temp-dir/`.\
+    \ The program might require some exported symbols from the library override, in that case make sure\
+    \ to add them (e.g., `void cap_get_flag() {}`)."
+references:
+- https://gtfobins.github.io/gtfobins/ldconfig/
+tags:
+- linux
+- unix
+- gtfobins

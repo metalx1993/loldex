@@ -1,0 +1,31 @@
+id: loldrivers/goad-sys
+type: driver
+platform: windows
+name: goad.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create goad.sys binPath=C:\windows\temp\goad.sys type=kernel && sc.exe start goad.sys
+driver_detail:
+  category: vulnerable driver
+references:
+- https://github.com/jbaines-r7/dellicious
+- https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

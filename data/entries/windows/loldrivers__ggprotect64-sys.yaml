@@ -1,0 +1,41 @@
+id: loldrivers/ggprotect64-sys
+type: driver
+platform: windows
+name: GGProtect64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create GGProtect64 binPath=C:\windows\temp\GGProtect64.sys type=kernel && sc.exe start
+    GGProtect64
+  comment: "GGProtect64.sys is a Microsoft-signed anticheat kernel driver for GG\u79DF\u53F7 that exposes\
+    \ a \\\\.\\GGProtect64 device. Public research documents a bypassable caller-registration flow through\
+    \ IOCTL 0x223C14 and"
+driver_detail:
+  sha256: 0aa69aee93c6be9bc82680a7df99c114591038ae02e6666fc6e42acb09643111
+  signer: "\u6E56\u5357\u5357\u6FB3\u7F51\u7EDC\u79D1\u6280\u6709\u9650\u516C\u53F8"
+  original_filename: GGProtect64.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/magicsword-io/LOLDrivers/issues/368
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

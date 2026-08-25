@@ -1,0 +1,37 @@
+id: loldrivers/fd3b7234419fafc9bdd533f48896ed73-b816c5cd-sys
+type: driver
+platform: windows
+name: fd3b7234419fafc9bdd533f48896ed73_b816c5cd.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create fd3b7234419fafc9bdd533f48896ed73_b816c5cd.sys binPath=C:\windows\temp\fd3b7234419fafc9bdd533f48896ed73_b816c5cd.sys
+    type=kernel && sc.exe start fd3b7234419fafc9bdd533f48896ed73_b816c5cd.sys
+  comment: The criminals signed their AV-killer malware, closely related to one known as BURNTCIGAR, with
+    a legitimate WHCP certificate
+driver_detail:
+  sha256: 274340f7185a0cc047d82ecfb2cce5bd18764ee558b5227894565c2f9fe9f6ab
+  category: vulnerable driver
+references:
+- https://news.sophos.com/en-us/2022/12/13/signed-driver-malware-moves-up-the-software-trust-chain/
+- https://github.com/magicsword-io/LOLDrivers/issues/114
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

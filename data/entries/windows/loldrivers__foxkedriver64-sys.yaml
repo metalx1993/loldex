@@ -1,0 +1,41 @@
+id: loldrivers/foxkedriver64-sys
+type: driver
+platform: windows
+name: FoxKeDriver64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create FoxKeDriver64 binPath=C:\windows\temp\FoxKeDriver64.sys type=kernel && sc.exe
+    start FoxKeDriver64
+  comment: FoxKeDriver64.sys is a vulnerable Foxconn kernel driver that exposes a \\.\Fox_FOXONE_Driver
+    device. Public research documents IOCTL 0x2220C0 for translating a caller-supplied virtual address
+    to a phy
+driver_detail:
+  sha256: eb81e127e7a46c80acdf8a3fc24a350381f24acb06f0fdf9fdcd34ce9b08d084
+  signer: Foxconn (R) Corporation
+  original_filename: FoxKeDriver64.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/magicsword-io/LOLDrivers/issues/370
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,36 @@
+id: loldrivers/nxeng-sys
+type: driver
+platform: windows
+name: nxeng.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create nxeng binPath=C:\windows\temp\nxeng.sys type=kernel && sc.exe start nxeng
+  comment: nxeng.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 68d698a978b8ea3bf467bdea2d75ef3099826c3a0d4a1ddb95b078f48f0ae7a1
+  signer: Beijing Huorong Network Technology Co., Ltd.
+  original_filename: nxeng.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,27 @@
+id: gtfobins/cpio/file-write/sudo
+type: binary
+platform: linux
+name: cpio
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo DATA >/path/to/temp-file
+
+    echo /path/to/temp-file | cpio -R 0:0 -udp .'
+  comment: The whole directory structure is copied to `.`, with the data written to `./path/to/temp-file`.
+references:
+- https://gtfobins.github.io/gtfobins/cpio/
+tags:
+- linux
+- unix
+- gtfobins

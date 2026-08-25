@@ -1,0 +1,36 @@
+id: lolbas/wsreset/uac-bypass/0
+type: binary
+platform: windows
+name: Wsreset.exe
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1548.002
+opsec:
+  noise: medium
+  triggers: wsreset.exe launching child process other than mmc.exe
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_uac_bypass_wsreset_integrity_level.yml
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_uac_bypass_wsreset.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/registry/registry_event/registry_event_bypass_via_wsreset.yml#
+  - https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/wsreset_uac_bypass.yml
+commands:
+- template: wsreset.exe
+  comment: During startup, wsreset.exe checks the registry value HKCU\Software\Classes\AppX82a6gwre4fdg3bt635tn5ctqjf8msdd2\Shell\open\command
+    for the command to run. Binary will be executed as a high-integrity process without a UAC prompt being
+    displayed to the user.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Wsreset/
+tags:
+- windows
+- lolbas

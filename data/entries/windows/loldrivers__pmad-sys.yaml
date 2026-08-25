@@ -1,0 +1,36 @@
+id: loldrivers/pmad-sys
+type: driver
+platform: windows
+name: PMAD.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create PMAD binPath=C:\windows\temp\PMAD.sys type=kernel && sc.exe start PMAD
+  comment: PMAD.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 37784d01f84aa4d60c8738f7a75dac1bf712941fc08ed9f32f3e89d044d9c71f
+  signer: Catalyst Enterprises Inc.
+  original_filename: PMAD.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

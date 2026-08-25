@@ -1,0 +1,34 @@
+id: loldrivers/mtxc9cb-sys
+type: driver
+platform: windows
+name: mtxC9CB.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create mtxC9CB binPath=C:\windows\temp\mtxC9CB.sys type=kernel && sc.exe start mtxC9CB
+  comment: mtxC9CB.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 0414c0d5bb6ddbcc84b3d59ce411acf1ed8b17d17054c6192e0a7594b5146d60
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,35 @@
+id: loldrivers/malicious-sys
+type: driver
+platform: windows
+name: malicious.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create malicious.sys binPath=C:\windows\temp\malicious.sys type=kernel && sc.exe start
+    malicious.sys
+  comment: This demo is a presentation at the CYBERSEC 2023 in Taiwan. The presentation showcases the
+    abuse of RTCore64.sys (CVE-2019-16098) from MSI and the nullification of the DSE flag to load a malicious
+    uns
+driver_detail:
+  sha256: 23e89fd30a1c7db37f3ea81b779ce9acf8a4294397cbb54cff350d54afcfd931
+  category: malicious
+references:
+- https://github.com/zeze-zeze/CYBERSEC2023-BYOVD-Demo
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

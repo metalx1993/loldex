@@ -1,0 +1,32 @@
+id: lolbas/microsoft-nodejstools-pressanykey/execute/0
+type: binary
+platform: windows
+name: Microsoft.NodejsTools.PressAnyKey.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+aliases:
+- microsoft.nodejstools.pressanykey
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_renamed_pressanykey.yml
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_pressanykey_lolbin_execution.yml
+commands:
+- template: Microsoft.NodejsTools.PressAnyKey.exe normal 1 {PATH:.exe}
+  comment: Launch specified executable as a subprocess of Microsoft.NodejsTools.PressAnyKey.exe.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Microsoft.NodejsTools.PressAnyKey/
+tags:
+- windows
+- lolbas

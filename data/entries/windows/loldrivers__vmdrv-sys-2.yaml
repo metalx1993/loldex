@@ -1,0 +1,33 @@
+id: loldrivers/vmdrv-sys-2
+type: driver
+platform: windows
+name: vmdrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create vmdrv.sys binPath=C:\windows\temp\vmdrv.sys type=kernel && sc.exe start vmdrv.sys
+driver_detail:
+  sha256: 32cccc4f249499061c0afa18f534c825d01034a1f6815f5506bf4c4ff55d1351
+  signer: Windows (R) Win 7 DDK provider
+  original_filename: vmdrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,26 @@
+id: gtfobins/dotnet/file-read/sudo
+type: binary
+platform: linux
+name: dotnet
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'dotnet fsi
+
+    System.IO.File.ReadAllText("/path/to/input-file");;'
+references:
+- https://gtfobins.github.io/gtfobins/dotnet/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,30 @@
+id: wadcoms/sharpdump
+type: technique
+platform: active-directory
+name: SharpDump
+phases:
+- privilege-escalation
+- discovery
+capabilities:
+- privilege-escalation
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+commands:
+- template: SharpDump.exe
+  comment: SharpDump.exe is part of the GhostPack suite of tools and is a C# port of PowerSploit's Out-Minidump.ps1.
+    It can dump the process for LSASS or a specific process given it's PID. This dump can then be fed
+    into mimikatz to extract sensitive information. The following command simply
+references:
+- https://github.com/GhostPack/SharpDump
+- https://www.harmj0y.net/blog/redteaming/ghostpack/
+tags:
+- active-directory
+- wadcoms

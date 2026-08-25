@@ -1,0 +1,35 @@
+id: loldrivers/sysinfox64-sys
+type: driver
+platform: windows
+name: SysInfoX64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create SysInfoX64 binPath=C:\windows\temp\SysInfoX64.sys type=kernel && sc.exe start
+    SysInfoX64
+  comment: SysInfoX64.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 52c5ffd62eae04b890e0f4c96b84a3305e9b6571975c4352131cfc3d1b73a024
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

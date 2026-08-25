@@ -1,0 +1,38 @@
+id: loldrivers/dcprotect-sys
+type: driver
+platform: windows
+name: DcProtect.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create DcProtect.sys binPath=C:\windows\temp\DcProtect.sys type=kernel && sc.exe start
+    DcProtect.sys
+  comment: 'bundled with chinese application "DrvCeo" is a set of rootkits. The malicious functionality.
+    prevents registry value writing where the registry key or value includes "dcprotect" or "drvceo".
+    Prevents '
+driver_detail:
+  sha256: b2247e68386c1bdfd48687105c3728ebbad672daffa91b57845b4e49693ffd71
+  signer: Windows (R) Win 7 DDK provider
+  original_filename: DcProtect.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/154
+- https://www.virustotal.com/gui/user/slipstream
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

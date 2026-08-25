@@ -1,0 +1,34 @@
+id: loldrivers/ntiolib-sys
+type: driver
+platform: windows
+name: NTIOLib.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create NTIOLib.sys binPath=C:\windows\temp\NTIOLib.sys type=kernel && sc.exe start
+    NTIOLib.sys
+driver_detail:
+  sha256: 18776682fcc0c6863147143759a8d4050a4115a8ede0136e49a7cf885c8a4805
+  signer: MSI
+  original_filename: NTIOLib.sys
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

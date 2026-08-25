@@ -1,0 +1,34 @@
+id: loldrivers/shimano32-sys
+type: driver
+platform: windows
+name: shimano32.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create shimano binPath=C:\windows\temp\shimano64.sys type=kernel && sc.exe start shimano
+  comment: HyperTech DNP CrackProof DRM kernel drivers (32-bit and 64-bit variants) from Shimano E-TUBE
+    Project. Expose EPROCESS manipulation IOCTLs (0xAA013880, 0xAA013884, 0xAA013888) similar to capcom.sys
+    exp
+driver_detail:
+  sha256: e8b1a0ddc7a4404eb3c46217e07b5ed91723f44464a6ef589634aeb4fb8f5666
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/163
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

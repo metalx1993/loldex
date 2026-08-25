@@ -1,0 +1,36 @@
+id: loldrivers/rtkio-sys
+type: driver
+platform: windows
+name: rtkio.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create rtkio64.sys binPath=C:\windows\temp\rtkio64.sys type=kernel && sc.exe start
+    rtkio64.sys
+driver_detail:
+  sha256: 074ae477c8c7ae76c6f2b0bf77ac17935a8e8ee51b52155d2821d93ab30f3761
+  signer: 'Realtek                                            '
+  original_filename: 'rtkio64.sys '
+  category: vulnerable driver
+references:
+- Internal Research
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+- https://github.com/elastic/protections-artifacts/search?q=rtkio
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

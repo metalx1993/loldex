@@ -1,0 +1,31 @@
+id: loldrivers/vboxusbmon-sys
+type: driver
+platform: windows
+name: VBoxUSBMon.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 3d055be2671e136c937f361cef905e295ddb6983526341f1d5f80a16b7655b40
+  signer: innotek GmbH
+  original_filename: VBoxUSBMon.sys
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

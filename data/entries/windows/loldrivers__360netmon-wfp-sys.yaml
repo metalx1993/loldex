@@ -1,0 +1,41 @@
+id: loldrivers/360netmon-wfp-sys
+type: driver
+platform: windows
+name: 360netmon_wfp.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create 360netmon_wfp binPath=C:\windows\temp\360netmon_wfp.sys type=kernel && sc.exe
+    start 360netmon_wfp
+  comment: 'Qihoo 360netmon_wfp.sys is a signed kernel driver documented by ESET as the driver abused
+    by the GentleKiller Network Blocker variant used in Gentlemen ransomware intrusions. The sample is
+    associated '
+driver_detail:
+  sha256: 3d769a5f1ad0d32fb4e06478d35401d9788bad1a477b813adbdf4fd93b2c2694
+  signer: 360.cn
+  original_filename: 360netmon.sys
+  category: vulnerable driver
+references:
+- https://www.welivesecurity.com/en/eset-research/killing-me-gently-inside-gentlemens-edr-killer-framework/
+- https://www.eset.com/us/about/newsroom/research/eset-research-gentlemen-ransomware-gang-edr-killers/
+- https://github.com/magicsword-io/LOLDrivers/issues/377
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

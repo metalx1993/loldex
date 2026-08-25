@@ -1,0 +1,40 @@
+id: loldrivers/argusmonitor-sys
+type: driver
+platform: windows
+name: ArgusMonitor.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ArgusMonitor binPath=C:\windows\temp\ArgusMonitor.sys type=kernel && sc.exe
+    start ArgusMonitor
+  comment: ArgusMonitor.sys is the kernel driver for the Argus Monitor hardware temperature monitoring
+    and fan control application by Argotronic UG (Germany). The driver exposes 47 IOCTLs providing arbitrary
+    phy
+driver_detail:
+  sha256: df9b2892498c68805fdc0fabb369f8bcf011e784898cb32fdc5d85f6123f1126
+  signer: Argotronic eGbR
+  original_filename: ArgusMonitor.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/297
+- https://www.argusmonitor.com/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

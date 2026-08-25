@@ -1,0 +1,24 @@
+id: gtfobins/yelp/file-read/unprivileged
+type: binary
+platform: linux
+name: yelp
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: yelp man:/path/to/input-file
+  comment: This spawns a graphical window containing the file content somehow corrupted by word wrapping.
+references:
+- https://gtfobins.github.io/gtfobins/yelp/
+tags:
+- linux
+- unix
+- gtfobins

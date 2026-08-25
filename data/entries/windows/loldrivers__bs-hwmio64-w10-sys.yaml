@@ -1,0 +1,34 @@
+id: loldrivers/bs-hwmio64-w10-sys
+type: driver
+platform: windows
+name: BS_HWMIO64_W10.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create BS_HWMIO64_W10.sys binPath=C:\windows\temp\BS_HWMIO64_W10.sys     type=kernel
+    && sc.exe start BS_HWMIO64_W10.sys
+driver_detail:
+  sha256: 1d0397c263d51e9fc95bcc8baf98d1a853e1c0401cd0e27c7bf5da3fba1c93a8
+  signer: BIOSTAR Group
+  original_filename: BS_HWMIO64_W10.sys
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

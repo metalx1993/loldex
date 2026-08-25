@@ -1,0 +1,37 @@
+id: loldrivers/pstrip64-sys
+type: driver
+platform: windows
+name: pstrip64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create pstrip64 binPath=C:\windows\temp\pstrip64.sys type=kernel && sc.exe start pstrip64
+  comment: pstrip64.sys is the EnTech Taiwan PowerStrip x64 kernel-mode driver, signed by EnTech Taiwan.
+    In PowerStrip version 3.90.736 and earlier, the driver's IOCTL dispatcher exposes code 0x80002008,
+    which m
+driver_detail:
+  sha256: ab01485bb7c8bc1a9c86096eeea6d31d8fad557bf4d44072b46373d2203faa6e
+  signer: EnTech Taiwan
+  original_filename: pstrip64.sys
+  category: vulnerable driver
+references:
+- https://nvd.nist.gov/vuln/detail/CVE-2026-29923
+- https://github.com/athenasec16/CVE-2026-29923
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

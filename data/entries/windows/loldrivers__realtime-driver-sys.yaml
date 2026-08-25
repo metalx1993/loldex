@@ -1,0 +1,37 @@
+id: loldrivers/realtime-driver-sys
+type: driver
+platform: windows
+name: Realtime Driver.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create Realtime Driver binPath=C:\windows\temp\Realtime Driver.sys type=kernel && sc.exe
+    start Realtime Driver
+  comment: Realtime Driver.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 1e87c118482101a9acb0952f4545dad155956dd397858b5d2748c63f0d836704
+  signer: Mandiant
+  original_filename: Realtime Driver
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

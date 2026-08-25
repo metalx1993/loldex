@@ -1,0 +1,30 @@
+id: lolbas/forfiles/ads/1
+type: binary
+platform: windows
+name: Forfiles.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_forfiles.yml
+commands:
+- template: forfiles /p c:\windows\system32 /m notepad.exe /c "{PATH_ABSOLUTE}:evil.exe"
+  comment: Executes the evil.exe Alternate Data Stream (AD) since there is a match for notepad.exe in
+    the c:\windows\system32 folder.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Forfiles/
+tags:
+- windows
+- lolbas

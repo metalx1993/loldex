@@ -1,0 +1,39 @@
+id: loldrivers/burntcigar-sys
+type: driver
+platform: windows
+name: burntcigar.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create burntcigar binPath=C:\windows\temp\burntcigar.sys type=kernel && sc.exe start
+    burntcigar
+  comment: BurntCigar (aka POORTRY) is a malicious kernel-mode rootkit driver used by multiple ransomware
+    groups including Cuba, BlackCat, Medusa, LockBit, and RansomHub. Designed to disable and remove EDR
+    solut
+driver_detail:
+  sha256: 7c5329b842cc3eaf1ec6c11b00e09a8c5e38ad14134b40a8bae3eda0a167a919
+  category: malicious
+references:
+- https://www.virustotal.com/gui/file/7c5329b842cc3eaf1ec6c11b00e09a8c5e38ad14134b40a8bae3eda0a167a919
+- https://news.sophos.com/en-us/2024/08/27/burnt-cigar-2/
+- https://www.fortiguard.com/threat-signal-report/4920
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

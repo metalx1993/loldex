@@ -1,0 +1,31 @@
+id: lolbas/teams/execute/1
+type: binary
+platform: windows
+name: Teams.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.015
+opsec:
+  noise: high
+  triggers: '%LOCALAPPDATA%\Microsoft\Teams\current\app directory created'
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/43277f26fc1c81fc98fc79147b711189e901b757/rules/windows/process_creation/proc_creation_win_susp_electron_exeuction_proxy.yml
+commands:
+- template: teams.exe
+  comment: Generate JavaScript payload and package.json, archive in ASAR file and save to "%LOCALAPPDATA%\\Microsoft\\Teams\\current\\app.asar"
+    before executing.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Teams/
+tags:
+- windows
+- lolbas

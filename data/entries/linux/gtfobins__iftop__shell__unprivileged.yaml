@@ -1,0 +1,26 @@
+id: gtfobins/iftop/shell/unprivileged
+type: binary
+platform: linux
+name: iftop
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'iftop
+
+    !/bin/sh'
+  comment: This requires the privilege to capture on some device (specify with `-i` if needed).
+references:
+- https://gtfobins.github.io/gtfobins/iftop/
+tags:
+- linux
+- unix
+- gtfobins

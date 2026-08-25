@@ -1,0 +1,34 @@
+id: lolbas/regasm/awl-bypass/0
+type: binary
+platform: windows
+name: Regasm.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.009
+opsec:
+  noise: medium
+  triggers: regasm.exe executing dll file
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_regasm.yml
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/execution_register_server_program_connecting_to_the_internet.toml
+  - https://github.com/splunk/security_content/blob/bc93e670f5dcb24e96fbe3664d6bcad92df5acad/docs/_stories/suspicious_regsvcs_regasm_activity.md
+  - https://github.com/splunk/security_content/blob/bee2a4cefa533f286c546cbe6798a0b5dec3e5ef/detections/endpoint/detect_regasm_with_network_connection.yml
+commands:
+- template: regasm.exe {PATH:.dll}
+  comment: Loads the target .NET DLL file and executes the RegisterClass function.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Regasm/
+tags:
+- windows
+- lolbas

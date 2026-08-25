@@ -1,0 +1,32 @@
+id: lolbas/extrac32/ads/1
+type: binary
+platform: windows
+name: Extrac32.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_misc_lolbin_connecting_to_the_internet.toml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_extrac32.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_extrac32_ads.yml
+commands:
+- template: extrac32 {PATH_ABSOLUTE:.cab} {PATH_ABSOLUTE}:file.exe
+  comment: Extracts the source CAB file on an unc path into an Alternate Data Stream (ADS) of the target
+    file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Extrac32/
+tags:
+- windows
+- lolbas

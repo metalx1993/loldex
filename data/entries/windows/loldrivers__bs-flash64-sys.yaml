@@ -1,0 +1,32 @@
+id: loldrivers/bs-flash64-sys
+type: driver
+platform: windows
+name: BS_Flash64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create BS_Flash64.sys binPath=C:\windows\temp\BS_Flash64.sys type=kernel && sc.exe
+    start BS_Flash64.sys
+driver_detail:
+  sha256: 86a8e0aa29a5b52c84921188cc1f0eca9a7904dcfe09544602933d8377720219
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,30 @@
+id: lolbas/ilasm/compile/0
+type: binary
+platform: windows
+name: Ilasm.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: Ilasm may not be used often in production environments (such as on endpoints)
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/process_creation/proc_creation_win_lolbin_ilasm.yml
+commands:
+- template: ilasm.exe {PATH_ABSOLUTE:.txt} /exe
+  comment: Binary file used by .NET to compile C#/intermediate (IL) code to .exe
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ilasm/
+tags:
+- windows
+- lolbas

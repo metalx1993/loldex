@@ -1,0 +1,25 @@
+id: gtfobins/xmodmap/file-read/suid
+type: binary
+platform: linux
+name: xmodmap
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: xmodmap -v /path/to/input-file
+  comment: The read file content is corrupted by error prints.
+references:
+- https://gtfobins.github.io/gtfobins/xmodmap/
+tags:
+- linux
+- unix
+- gtfobins

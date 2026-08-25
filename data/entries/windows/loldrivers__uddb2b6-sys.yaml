@@ -1,0 +1,35 @@
+id: loldrivers/uddb2b6-sys
+type: driver
+platform: windows
+name: UDDB2B6.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create UDDB2B6 binPath=C:\windows\temp\UDDB2B6.sys type=kernel && sc.exe start UDDB2B6
+  comment: 'UDDB2B6.sys is a TechPowerUp kernel driver (GPU-Z variant) that exposes I/O port read/write,
+    MSR read/write, MmMapIoSpace map/unmap/read/write, and PCI configuration space read/write. TechPowerUp
+    has '
+driver_detail:
+  sha256: 9af0b89c5c54eb66e5a660b61aee7c1a25b1c92e20a310d8b16552abcf90c0b5
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/323
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

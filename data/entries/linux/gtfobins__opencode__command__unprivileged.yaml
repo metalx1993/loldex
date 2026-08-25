@@ -1,0 +1,25 @@
+id: gtfobins/opencode/command/unprivileged
+type: binary
+platform: linux
+name: opencode
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'opencode
+
+    ! /path/to/command'
+references:
+- https://gtfobins.github.io/gtfobins/opencode/
+tags:
+- linux
+- unix
+- gtfobins

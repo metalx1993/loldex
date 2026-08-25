@@ -1,0 +1,34 @@
+id: loldrivers/bsmemx64-sys
+type: driver
+platform: windows
+name: BSMEMx64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create BSMEMx64.sys binPath=C:\windows\temp\BSMEMx64.sys type=kernel && sc.exe start
+    BSMEMx64.sys
+driver_detail:
+  sha256: f929bead59e9424ab90427b379dcdd63fbfe0c4fb5e1792e3a1685541cd5ec65
+  signer: BIOSTAR Group
+  original_filename: BS_I2cIo.sys
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

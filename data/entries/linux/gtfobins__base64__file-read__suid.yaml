@@ -1,0 +1,24 @@
+id: gtfobins/base64/file-read/suid
+type: binary
+platform: linux
+name: base64
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: base64 /path/to/input-file | base64 --decode
+references:
+- https://gtfobins.github.io/gtfobins/base64/
+tags:
+- linux
+- unix
+- gtfobins

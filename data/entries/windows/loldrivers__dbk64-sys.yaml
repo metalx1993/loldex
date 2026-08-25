@@ -1,0 +1,31 @@
+id: loldrivers/dbk64-sys
+type: driver
+platform: windows
+name: dbk64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create dbk64.sys binPath=C:\windows\temp\dbk64.sys type=kernel && sc.exe start dbk64.sys
+driver_detail:
+  sha256: 18e1707b319c279c7e0204074088cc39286007a1cf6cb6e269d5067d8d0628c6
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

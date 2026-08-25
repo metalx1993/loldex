@@ -1,0 +1,36 @@
+id: loldrivers/idmtdi-sys
+type: driver
+platform: windows
+name: idmtdi.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create idmtdi.sys binPath=C:\windows\temp\idmtdi.sys type=kernel && sc.exe start idmtdi.sys
+  comment: Sophos, from time to time, has observed a threat actor deploy variants of Poortry on different
+    machines within a single estate during an attack. These variants contain the same payload, but signed
+    wit
+driver_detail:
+  sha256: 44ebb0f534e7cdfec06d5234358d219798a313219b214d72aa23afc5a57d7ea9
+  signer: Tonec Inc.
+  original_filename: idmtdi.sys
+  category: malicious
+references:
+- https://news.sophos.com/en-us/2024/08/27/burnt-cigar-2/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

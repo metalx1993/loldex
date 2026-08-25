@@ -1,0 +1,29 @@
+id: gtfobins/autoheader/shell/unprivileged
+type: binary
+platform: linux
+name: autoheader
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''/bin/sh 1>&0'' >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    touch configure.ac
+
+    AUTOM4TE=/path/to/temp-file autoheader'
+references:
+- https://gtfobins.github.io/gtfobins/autoheader/
+tags:
+- linux
+- unix
+- gtfobins

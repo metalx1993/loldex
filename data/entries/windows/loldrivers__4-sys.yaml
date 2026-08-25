@@ -1,0 +1,38 @@
+id: loldrivers/4-sys
+type: driver
+platform: windows
+name: 4.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create 4.sys binPath=C:\windows\temp\4.sys type=kernel && sc.exe start 4.sys
+  comment: 'SentinelOne has observed prominent threat actors abusing legitimately signed Microsoft drivers
+    in active intrusions into telecommunication, BPO, MSSP, and financial services businesses.
+
+    Investigations'
+driver_detail:
+  sha256: 8e035beb02a411f8a9e92d4cf184ad34f52bbd0a81a50c222cdd4706e4e45104
+  category: malicious
+references:
+- https://www.sentinelone.com/labs/driving-through-defenses-targeted-attacks-leverage-signed-malicious-microsoft-drivers/
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

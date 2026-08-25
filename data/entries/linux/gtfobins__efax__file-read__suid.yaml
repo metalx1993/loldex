@@ -1,0 +1,25 @@
+id: gtfobins/efax/file-read/suid
+type: binary
+platform: linux
+name: efax
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: efax -d /path/to/input-file
+  comment: The content is actually parsed by the command.
+references:
+- https://gtfobins.github.io/gtfobins/efax/
+tags:
+- linux
+- unix
+- gtfobins

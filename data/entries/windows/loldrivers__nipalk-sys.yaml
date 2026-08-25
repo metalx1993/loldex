@@ -1,0 +1,38 @@
+id: loldrivers/nipalk-sys
+type: driver
+platform: windows
+name: nipalk.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create nipalk binPath=C:\windows\temp\nipalk.sys type=kernel && sc.exe start nipalk
+  comment: nipalk.sys is the NI-PAL (Platform Abstraction Layer) core kernel driver that ships with every
+    National Instruments product including NI-DAQmx, LabVIEW, and NI-VISA. The driver uses a single IOCTL
+    gat
+driver_detail:
+  sha256: 1a6b4d5ad40c9ddf2599f6a44e94a1336aa3d28bf6a220b775f5c3305faecb2d
+  signer: National Instruments Corporation
+  original_filename: nipalk.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/303
+- https://www.ni.com/en/support/security/available-critical-and-security-updates-for-ni-software/improper-input-validation-in-ni-pal.html
+- https://nvd.nist.gov/vuln/detail/CVE-2021-38304
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

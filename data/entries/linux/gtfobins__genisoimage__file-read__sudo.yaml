@@ -1,0 +1,28 @@
+id: gtfobins/genisoimage/file-read/sudo
+type: binary
+platform: linux
+name: genisoimage
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: genisoimage -q -o - /path/to/input-file
+  comment: The output is placed inside the ISO9660 file system binary format, it can be mounted or extracted
+    with tools like `7z`.
+- template: genisoimage -sort /path/to/input-file
+  comment: The file is parsed, and some of its content is disclosed by the error messages.
+references:
+- https://gtfobins.github.io/gtfobins/genisoimage/
+tags:
+- linux
+- unix
+- gtfobins

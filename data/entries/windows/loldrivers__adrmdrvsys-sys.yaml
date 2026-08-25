@@ -1,0 +1,37 @@
+id: loldrivers/adrmdrvsys-sys
+type: driver
+platform: windows
+name: ADRMDRVSYS.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ADRMDRVSYS binPath=C:\windows\temp\ADRMDRVSYS.sys type=kernel && sc.exe start
+    ADRMDRVSYS
+  comment: Northwave Cyber Security contributed this driver based on in-house research. The driver has
+    a CVSSv3 score of 8.8, indicating a privilege escalation impact. This vulnerability could potentially
+    be exp
+driver_detail:
+  sha256: a1f79a2e1441970bb3e7c838f8c14a8f3d39a46b0ff9648614e922ac475c743d
+  signer: ADLINK Technology, Inc.
+  original_filename: ADRMDRVSYS.sys
+  category: vulnerable driver
+references:
+- https://northwave-cybersecurity.com/vulnerability-notice-adlink-pxi-platform-services?hsLang=en
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

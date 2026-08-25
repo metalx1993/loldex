@@ -1,0 +1,28 @@
+id: gtfobins/ltrace/file-write/sudo
+type: binary
+platform: linux
+name: ltrace
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ltrace -s 999 -o /path/to/input-file ltrace -F DATA
+  comment: The data to be written appears amid the library function call log, quoted and with special
+    characters escaped in octal notation. The string representation will be truncated, pick a value big
+    enough instead of `999`. More generally, any binary that executes whatever library function call passing
+    arbitrary data can be used in place of `ltrace -F DATA`.
+references:
+- https://gtfobins.github.io/gtfobins/ltrace/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,35 @@
+id: loldrivers/shield-sys
+type: driver
+platform: windows
+name: shield.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create shield binPath=C:\windows\temp\shield.sys type=kernel && sc.exe start shield
+  comment: Horizon DataSys Shield drivers expose IOCTL functionality reported to provide arbitrary kernel
+    read/write primitives.
+driver_detail:
+  sha256: b11db76aeab05f29e8f5d51cdfe70898a46fbd50a1245ca1aed39de10aafd401
+  signer: Horizon Datasys, Inc.
+  original_filename: Shield.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/344
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

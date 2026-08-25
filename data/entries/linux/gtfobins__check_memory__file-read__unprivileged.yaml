@@ -1,0 +1,24 @@
+id: gtfobins/check_memory/file-read/unprivileged
+type: binary
+platform: linux
+name: check_memory
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: check_memory --extra-opts=@/path/to/input-file
+  comment: The read file content is limited to the first line.
+references:
+- https://gtfobins.github.io/gtfobins/check_memory/
+tags:
+- linux
+- unix
+- gtfobins

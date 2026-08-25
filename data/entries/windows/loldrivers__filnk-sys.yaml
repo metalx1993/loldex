@@ -1,0 +1,35 @@
+id: loldrivers/filnk-sys
+type: driver
+platform: windows
+name: filnk.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create filnk.sys binPath=C:\windows\temp\filnk.sys type=kernel && sc.exe start filnk.sys
+  comment: "Twister Antivirus, fildds.sys, DoS2\n\n    CVE-2023-1444\n\n    From IoControlCode 0x8011206B,\
+    \ a normal user can cause DoS due to writing into\n    null address."
+driver_detail:
+  sha256: ae55a0e93e5ef3948adecf20fa55b0f555dcf40589917a5bfbaa732075f0cc12
+  signer: Filseclab Corporation
+  original_filename: filnk.sys
+  category: vulnerable driver
+references:
+- https://github.com/zeze-zeze/WindowsKernelVuln/tree/master/CVE-2023-1444
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

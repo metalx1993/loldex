@@ -1,0 +1,36 @@
+id: loldrivers/gofly64-sys
+type: driver
+platform: windows
+name: GoFly64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create GoFly64 binPath=C:\windows\temp\GoFly64.sys type=kernel && sc.exe start GoFly64
+  comment: "GoFly64.sys is a WFP (Windows Filtering Platform) network filter driver signed by a Chinese\
+    \ software company (\u5357\u4EAC\u5072\u8A00\u777F\u7F51\u7EDC\u79D1\u6280\u6709\u9650\u516C\u53F8\
+    \ / Nanjing Siyanrui Network Technology) that exposes 20+ IOCTLs to usermode w"
+driver_detail:
+  sha256: 2fdfdd13a0c548bb68c9d5aa8599a9265d4659da3e237fe7a42ac6ac06b9a06a
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/299
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

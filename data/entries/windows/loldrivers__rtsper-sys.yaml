@@ -1,0 +1,36 @@
+id: loldrivers/rtsper-sys
+type: driver
+platform: windows
+name: RtsPer.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create RtsPer.sys binPath=C:\windows\temp\RtsPer.sys type=kernel && sc.exe start RtsPer.sys
+  comment: The Realtek SD card reader driver, RtsPer.sys, has been found to contain multiple critical
+    vulnerabilities (CVE-2022-25476, CVE-2022-25477, CVE-2022-25478, CVE-2022-25479, CVE-2022-25480, CVE-2024-404
+driver_detail:
+  sha256: a1fa7d8275ccd14a6adc438ef4b950e7de4ed26fcbe4b3e184243663b03c83d6
+  signer: Realtek Semiconductor Corporation
+  original_filename: RTSPER.SYS
+  category: vulnerable driver
+references:
+- https://www.linkedin.com/pulse/vulnerabilities-realtek-sd-card-reader-driver-part-1-myngerbayev-czqmf,
+  https://github.com/zwclose/realteksd
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

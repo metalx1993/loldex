@@ -1,0 +1,36 @@
+id: loldrivers/ctiio64-sys
+type: driver
+platform: windows
+name: CtiIo64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CtiIo64.sys binPath=C:\windows\temp\CtiIo64.sys type=kernel && sc.exe start
+    CtiIo64.sys
+  comment: The driver is part of Dragon Center (or MSI Center?) from MSI. It creates \Device\CtiIo ACLless
+    DO and provides access to memory and IO. The driver is signed with WHQL cert.
+driver_detail:
+  sha256: 2121a2bb8ebbf2e6e82c782b6f3c6b7904f686aa495def25cf1cf52a42e16109
+  signer: Creative Technology Innovation Co., LTd.
+  original_filename: CtiIo64.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/pull/81
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

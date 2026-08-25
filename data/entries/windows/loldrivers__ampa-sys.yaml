@@ -1,0 +1,34 @@
+id: loldrivers/ampa-sys
+type: driver
+platform: windows
+name: ampa.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ampa binPath=C:\windows\temp\ampa.sys type=kernel && sc.exe start ampa
+  comment: Northwave Cyber Security contributed this driver based on in-house research. The driver has
+    a CVSSv3 score of 8.8, indicating a privilege escalation impact. This vulnerability could potentially
+    be exp
+driver_detail:
+  sha256: 01d51df682136cce453bb1da8964073e6bc7297ce4dae7301c753bb618a69469
+  category: vulnerable driver
+references:
+- https://www.loldrivers.io
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

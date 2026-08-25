@@ -1,0 +1,35 @@
+id: loldrivers/filwfp-sys
+type: driver
+platform: windows
+name: filwfp.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create filwfp.sys binPath=C:\windows\temp\filwfp.sys type=kernel && sc.exe start filwfp.sys
+  comment: "Twister Antivirus, fildds.sys, DoS2\n\n    CVE-2023-1444\n\n    From IoControlCode 0x8011206B,\
+    \ a normal user can cause DoS due to writing into\n    null address."
+driver_detail:
+  sha256: 490cfbb540dcd70b7bff4fdd62e7ed7400bbfebaf5083523d49f7184670f7b9a
+  signer: Filseclab Corporation
+  original_filename: filwfp.sys
+  category: vulnerable driver
+references:
+- https://github.com/zeze-zeze/WindowsKernelVuln/tree/master/CVE-2023-1444
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

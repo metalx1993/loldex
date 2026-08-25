@@ -1,0 +1,35 @@
+id: loldrivers/ppa-x64-sys
+type: driver
+platform: windows
+name: ppa_x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ppa_x64 binPath=C:\windows\temp\ppa_x64.sys type=kernel && sc.exe start ppa_x64
+  comment: ppa_x64.sys is a kernel driver by Remko Weijnen that provides physical memory access via the
+    PhysicalMemory section object. The device name PhyMem indicates this is part of the PhyMem driver
+    family, o
+driver_detail:
+  sha256: 988960e31a258ea71cf93a7791ae8c91c8cefb6ad8a50cdbd1b07f73b524aa61
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/315
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

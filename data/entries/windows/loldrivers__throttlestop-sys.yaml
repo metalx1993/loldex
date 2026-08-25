@@ -1,0 +1,37 @@
+id: loldrivers/throttlestop-sys
+type: driver
+platform: windows
+name: throttlestop.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create throttlestop.sys binPath= C:\windows\temp\throttlestop.sys type=kernel && sc.exe
+    start throttlestop.sys
+  comment: 'ThrottleStop is developed by TechPowerUp and is designed to monitor for and correct CPU throttling
+    issues. However, Kaspersky researchers from the Global Emergency Response Team (GERT) found out that '
+driver_detail:
+  sha256: 16f83f056177c4ec24c7e99d01ca9d9d6713bd0497eeedb777a3ffefa99c97f0
+  category: vulnerable driver
+references:
+- https://securelist.com/av-killer-exploiting-throttlestop-sys/117026/
+- https://www.cve.org/CVERecord?id=CVE-2025-7771
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,23 @@
+id: gtfobins/make/file-read/unprivileged
+type: binary
+platform: linux
+name: make
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: make -s --eval='$(file >/dev/stdout,$(file </path/to/input-file))' .
+references:
+- https://gtfobins.github.io/gtfobins/make/
+tags:
+- linux
+- unix
+- gtfobins

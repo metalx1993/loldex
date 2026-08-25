@@ -1,0 +1,35 @@
+id: loldrivers/sdrv-win-sliff-sys
+type: driver
+platform: windows
+name: sdrv_win_sliff.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create sdrv_win_sliff binPath=C:\windows\temp\sdrv_win_sliff.sys type=kernel && sc.exe
+    start sdrv_win_sliff
+  comment: sdrv_win_sliff.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 3e3a6014ae76b9ae43af033c28e17d8d1c2965d59f2fea909b251b14966e92d2
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

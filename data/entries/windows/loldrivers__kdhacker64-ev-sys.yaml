@@ -1,0 +1,39 @@
+id: loldrivers/kdhacker64-ev-sys
+type: driver
+platform: windows
+name: kdhacker64_ev.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create KDHacker binPath=C:\windows\temp\kdhacker64_ev.sys type=kernel && sc.exe start
+    KDHacker
+  comment: kdhacker64_ev.sys is a kernel driver from Beijing Kingsoft Security software bundled with Kingsoft
+    AntiVirus and Liebao Browser. The driver exposes a kernel heap buffer overflow via IOCTL 0x120140
+    wit
+driver_detail:
+  sha256: 597eff2718073b11da3d4bcade9a03fb4684f9be57d184fce65ac70a2ef07246
+  signer: Kingsoft Corporation
+  original_filename: ktdifilt.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/309
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

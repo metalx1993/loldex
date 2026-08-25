@@ -1,0 +1,36 @@
+id: loldrivers/sparkio-sys
+type: driver
+platform: windows
+name: SparkIO.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create SparkIO binPath=C:\windows\temp\SparkIO.sys type=kernel && sc.exe start SparkIO
+  comment: SparkIO.sys is a WHQL-signed kernel driver from Clevo Co. (Taiwan ODM) that ships with Control
+    Center 3.0 and Flexicharger utilities on Clevo-chassis laptops (XMG, Eluktronics, EVOO, Origin PC,
+    System
+driver_detail:
+  sha256: 5a40ee54b975ec19b40dcc0b75f86fd403c829b043a20ac67b7345a6b967c4b3
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/322
+- https://nvd.nist.gov/vuln/detail/CVE-2022-37415
+- https://gist.github.com/alfarom256/220cb75816ca2b5556e7fc8d8d2803a0
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

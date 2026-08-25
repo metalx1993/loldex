@@ -1,0 +1,37 @@
+id: loldrivers/termdd-sys
+type: driver
+platform: windows
+name: termdd.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create termdd.sys binPath=C:\windows\temp\termdd.sys type=kernel && sc.exe start termdd.sys
+  comment: A vulnerable kernel driver that can be used to disable Code Integrity
+driver_detail:
+  sha256: 83bfa50a528762ec52a011302ac3874636fb7e26628cd7acfbf2bdc9faa8110d
+  signer: Microsoft Corporation
+  original_filename: termdd.sys
+  category: vulnerable driver
+references:
+- Internal Research
+- https://kat.lua.cz/posts/Some_fun_with_vintage_bugs_and_driver_signing_enforcement/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

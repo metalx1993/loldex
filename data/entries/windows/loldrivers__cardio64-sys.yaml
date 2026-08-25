@@ -1,0 +1,35 @@
+id: loldrivers/cardio64-sys
+type: driver
+platform: windows
+name: CardIo64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CardIo binPath=C:\windows\temp\CardIo64.sys type=kernel && sc.exe start CardIo
+  comment: CardIo64.sys is a kernel driver from ICP DAS Co., LTD. (Taiwan), an industrial automation and
+    I/O board manufacturer. The driver exposes arbitrary physical memory read/write via MmMapIoSpace,
+    port I/O
+driver_detail:
+  sha256: 8a6265d23d30d6c4c7e159624686de6dbf2ccb86a421b0f45510005f7a40cd1a
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/310
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

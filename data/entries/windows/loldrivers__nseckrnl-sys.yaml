@@ -1,0 +1,34 @@
+id: loldrivers/nseckrnl-sys
+type: driver
+platform: windows
+name: NSecKrnl.sys
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create NSecKrnl binPath=C:\windows\temp\NSecKrnl.sys type=kernel && sc.exe start NSecKrnl
+  comment: Driver used by ValleyRAT malware to terminate security processes via IOCTL 0x2248E0
+driver_detail:
+  sha256: 206f27ae820783b7755bca89f83a0fe096dbb510018dd65b63fc80bd20c03261
+  signer: NSEC Co.,Ltd
+  original_filename: NSecKrnl
+  category: vulnerable driver
+references:
+- https://hexastrike.com/resources/blog/threat-intelligence/valleyrat-exploiting-byovd-to-kill-endpoint-security/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

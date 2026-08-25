@@ -1,0 +1,35 @@
+id: loldrivers/5a4fe297c7d42539303137b6d75b150d-sys
+type: driver
+platform: windows
+name: 5a4fe297c7d42539303137b6d75b150d.sys
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1014
+opsec:
+  noise: high
+commands:
+- template: sc.exe create 5a4fe297c7d42539303137b6d75b150d.sys binPath=C:\windows\temp\5a4fe297c7d42539303137b6d75b150d.sys
+    type=kernel && sc.exe start 5a4fe297c7d42539303137b6d75b150d.sys
+  comment: "Cisco Talos has identified multiple versions of an undocumented malicious driver named \u201C\
+    RedDriver,\u201D a driver-based browser hijacker that uses the Windows Filtering Platform (WFP) to\
+    \ intercept browser "
+driver_detail:
+  sha256: 9a67626fb468d3f114c23ac73fd8057f43d06393d3eca04da1d6676f89da2d40
+  category: malicious
+references:
+- https://blog.talosintelligence.com/undocumented-reddriver/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,36 @@
+id: loldrivers/elrawdsk-sys
+type: driver
+platform: windows
+name: elrawdsk.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create elrawdsk.sys binPath=C:\windows\temp\elrawdsk.sys type=kernel && sc.exe start
+    elrawdsk.sys
+driver_detail:
+  sha256: 4744df6ac02ff0a3f9ad0bf47b15854bbebb73c936dd02f7c79293a2828406f6
+  signer: EldoS Corporation
+  original_filename: elrawdsk.sys
+  category: vulnerable driver
+references:
+- https://github.com/jbaines-r7/dellicious
+- https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/
+- https://securelist.com/shamoon-the-wiper-further-details-part-ii/57784/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

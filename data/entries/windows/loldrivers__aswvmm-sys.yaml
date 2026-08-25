@@ -1,0 +1,34 @@
+id: loldrivers/aswvmm-sys
+type: driver
+platform: windows
+name: aswVmm.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create aswVmm.sys binPath=C:\windows\temp\aswVmm.sys type=kernel && sc.exe start aswVmm.sys
+driver_detail:
+  sha256: 36505921af5a09175395ebaea29c72b2a69a3a9204384a767a5be8a721f31b10
+  signer: AVAST Software
+  original_filename: aswVmm.sys
+  category: vulnerable driver
+references:
+- https://github.com/tanduRE/AvastHV
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

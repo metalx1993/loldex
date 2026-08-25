@@ -1,0 +1,24 @@
+id: gtfobins/stdbuf/shell/sudo
+type: binary
+platform: linux
+name: stdbuf
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: stdbuf -i0 /bin/sh
+references:
+- https://gtfobins.github.io/gtfobins/stdbuf/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,24 @@
+id: gtfobins/python/library-load/unprivileged
+type: binary
+platform: linux
+name: python
+phases:
+- execution
+- persistence
+capabilities:
+- library-load
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: python -c 'from ctypes import cdll; cdll.LoadLibrary("/path/to/lib.so")'
+references:
+- https://gtfobins.github.io/gtfobins/python/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,34 @@
+id: loldrivers/asrautochkupddrv-sys
+type: driver
+platform: windows
+name: AsrAutoChkUpdDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AsrAutoChkUpdDrv.sys binPath=C:\windows\temp\AsrAutoChkUpdDrv.sys     type=kernel
+    && sc.exe start AsrAutoChkUpdDrv.sys
+driver_detail:
+  sha256: 2aa1b08f47fbb1e2bd2e4a492f5d616968e703e1359a921f62b38b8e4662f0c4
+  signer: ASRock Incorporation
+  original_filename: AsrAutoChkUpdDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,36 @@
+id: loldrivers/dddriver-sys
+type: driver
+platform: windows
+name: DDDriver.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create DDDriver binPath=C:\windows\temp\DDDriver.sys type=kernel && sc.exe start DDDriver
+  comment: DDDriver.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: 51562209e16a1c0247d73d7bfc8827ae4a2e57af11350379a8fba1ec44e56e54
+  signer: Dell Computer Corporation
+  original_filename: DDDriver.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

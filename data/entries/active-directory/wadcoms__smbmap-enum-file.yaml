@@ -1,0 +1,30 @@
+id: wadcoms/smbmap-enum-file
+type: technique
+platform: active-directory
+name: SMBMap Enum File
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: python3 smbmap.py --host-file smb-hosts.txt -u john -p 'password123' -d test.local -F password
+  comment: SMBMap is a tool used to enumerate SMB share drives, including listing share drive permissions,
+    share contents, upload/download functionality, file name enumeration, and remote command execution.
+    The following command will enumerate a list of SMB hosts for files and filenames con
+references:
+- https://github.com/ShawnDEvans/smbmap
+- https://www.nopsec.com/blog/smbmap-wield-it-like-the-creator/
+tags:
+- active-directory
+- wadcoms
+- smb

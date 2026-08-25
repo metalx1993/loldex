@@ -1,0 +1,40 @@
+id: loldrivers/wsftprm-sys
+type: driver
+platform: windows
+name: wsftprm.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create wsftprm binPath=C:\windows\temp\wsftprm.sys type=kernel && sc.exe start wsftprm
+  comment: Northwave Cyber Security contributed this driver based on in-house research. The driver has
+    a CVSSv3 score of 6.1, indicating a antivirus killer impact. This vulnerability could potentially
+    be exploit
+driver_detail:
+  sha256: ff5dbdcf6d7ae5d97b6f3ef412df0b977ba4a844c45b30ca78c0eeb2653d69a8
+  signer: Topaz OFD
+  original_filename: wsftprm.sys
+  category: vulnerable driver
+references:
+- https://northwave-cybersecurity.com/vulnerability-notice-topaz-antifraud
+- https://github.com/xM0kht4r/AV-EDR-Killer
+- https://github.com/wesmar/kvcKiller
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

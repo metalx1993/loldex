@@ -1,0 +1,26 @@
+id: gtfobins/nmap/shell/sudo
+type: binary
+platform: linux
+name: nmap
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'nmap --interactive
+
+    !/bin/sh'
+references:
+- https://gtfobins.github.io/gtfobins/nmap/
+tags:
+- linux
+- unix
+- gtfobins

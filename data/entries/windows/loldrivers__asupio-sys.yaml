@@ -1,0 +1,33 @@
+id: loldrivers/asupio-sys
+type: driver
+platform: windows
+name: AsUpIO.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AsUpIO.sys binPath=C:\windows\temp\AsUpIO.sys type=kernel && sc.exe start AsUpIO.sys
+driver_detail:
+  sha256: 8f23313adb35782adb0ba97fefbfbb8bbc5fc40ae272e07f6d4629a5305a3fa2
+  category: vulnerable driver
+references:
+- Internal Research
+- https://github.com/namazso/physmem_drivers
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.m
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

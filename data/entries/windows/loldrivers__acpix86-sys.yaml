@@ -1,0 +1,37 @@
+id: loldrivers/acpix86-sys
+type: driver
+platform: windows
+name: ACPIx86.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ACPIx86.sys binPath=C:\windows\temp\ACPIx86.sys type=kernel && sc.exe start
+    ACPIx86.sys
+  comment: ABYSSWORKER is a malicious driver used in MEDUSA ransomware attacks to disable EDR systems.
+    The driver masquerades as a legitimate CrowdStrike Falcon driver and provides extensive capabilities
+    to term
+driver_detail:
+  sha256: c5400ae731464079590aad494bcf2e0799bb4281ea49baa9580ab2f1ee207861
+  category: vulnerable driver
+references:
+- https://www.elastic.co/security-labs/abyssworker
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

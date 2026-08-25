@@ -1,0 +1,37 @@
+id: loldrivers/msio64-sys-2
+type: driver
+platform: windows
+name: MsIo64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create MsIo64.sys binPath=C:\windows\temp\MsIo64.sys type=kernel && sc.exe start MsIo64.sys
+  comment: The MSI AmbientLink MsIo64 driver 1.0.0.8 has a Buffer Overflow (0x80102040, 0x80102044, 0x80102050,and
+    0x80102054)
+driver_detail:
+  sha256: 43ba8d96d5e8e54cab59d82d495eeca730eeb16e4743ed134cdd495c51a4fc89
+  signer: MICSYS Technology Co., LTd
+  original_filename: MsIo64.sys
+  category: vulnerable driver
+references:
+- https://www.matteomalvica.com/blog/2020/09/24/weaponizing-cve-2020-17382/
+- https://packetstormsecurity.com/files/159315/MSI-Ambient-Link-Driver-1.0.0.8-Privilege-Escalation.html
+- https://www.coresecurity.com/core-labs/advisories/msi-ambient-link-multiple-vulnerabilities
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

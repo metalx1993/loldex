@@ -1,0 +1,34 @@
+id: loldrivers/gpu-z-sys
+type: driver
+platform: windows
+name: GPU-Z.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create GPU-Z.sys binPath=C:\windows\temp\GPU-Z.sys type=kernel && sc.exe start GPU-Z.sys
+  comment: 'Utilized in RealBlindingEDR. '
+driver_detail:
+  sha256: f9418b5e90a235339a4a1a889490faca39cd117a51ba4446daa1011da06c7ecd
+  category: vulnerable driver
+references:
+- https://github.com/myzxcg/RealBlindingEDR/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,31 @@
+id: lolbas/bash/awl-bypass/3
+type: binary
+platform: windows
+name: Bash.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: medium
+  triggers: Child process from bash.exe
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_bash.yml
+commands:
+- template: bash.exe -c "{CMD}"
+  comment: Executes executable from bash.exe
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Bash/
+tags:
+- windows
+- lolbas

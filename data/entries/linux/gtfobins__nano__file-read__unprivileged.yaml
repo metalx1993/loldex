@@ -1,0 +1,24 @@
+id: gtfobins/nano/file-read/unprivileged
+type: binary
+platform: linux
+name: nano
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nano /path/to/input-file
+  comment: The file content is displayed in the terminal interface.
+references:
+- https://gtfobins.github.io/gtfobins/nano/
+tags:
+- linux
+- unix
+- gtfobins

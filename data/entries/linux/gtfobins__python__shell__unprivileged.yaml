@@ -1,0 +1,23 @@
+id: gtfobins/python/shell/unprivileged
+type: binary
+platform: linux
+name: python
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: python -c 'import os; os.execl("/bin/sh", "sh")'
+references:
+- https://gtfobins.github.io/gtfobins/python/
+tags:
+- linux
+- unix
+- gtfobins

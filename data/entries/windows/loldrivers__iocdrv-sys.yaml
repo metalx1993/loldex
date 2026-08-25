@@ -1,0 +1,36 @@
+id: loldrivers/iocdrv-sys
+type: driver
+platform: windows
+name: iOCdrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create iOCdrv binPath=C:\windows\temp\iOCdrv.sys type=kernel && sc.exe start iOCdrv
+  comment: iOCdrv.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: b936c4ba80ccee3b0b3b67fc88c8caa103fcfc47888e976f6d5b6f113d22f41f
+  signer: Intel Corporation
+  original_filename: iOCdrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

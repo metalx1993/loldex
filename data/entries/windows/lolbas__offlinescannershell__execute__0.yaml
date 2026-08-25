@@ -1,0 +1,30 @@
+id: lolbas/offlinescannershell/execute/0
+type: binary
+platform: windows
+name: OfflineScannerShell.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: OfflineScannerShell.exe should not be run on a normal workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/process_creation/proc_creation_win_lolbas_offlinescannershell.yml
+commands:
+- template: OfflineScannerShell
+  comment: Execute mpclient.dll library in the current working directory
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/OfflineScannerShell/
+tags:
+- windows
+- lolbas

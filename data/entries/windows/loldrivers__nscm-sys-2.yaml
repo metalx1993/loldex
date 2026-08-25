@@ -1,0 +1,33 @@
+id: loldrivers/nscm-sys-2
+type: driver
+platform: windows
+name: nscm.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create nscm.sys binPath=C:\windows\temp\nscm.sys type=kernel && sc.exe start nscm.sys
+driver_detail:
+  sha256: 28999af32b55ddb7dcfc26376a244aa2fe297233ce7abe4919a1aef2f7e2cee7
+  signer: Novell, Inc.
+  original_filename: nscm.sys
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

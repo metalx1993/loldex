@@ -1,0 +1,39 @@
+id: loldrivers/biontdrv-sys
+type: driver
+platform: windows
+name: BioNTdrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create BioNTdrv.sys binPath=C:\windows\temp\BioNTdrv.sys type=kernel && sc.exe start
+    BioNTdrv.sys
+  comment: Microsoft has identified five security flaws in the Paragon Partition Manager BioNTdrv.sys
+    driver, one of which was exploited by ransomware gangs in zero-day attacks to gain SYSTEM privileges
+    on Windo
+driver_detail:
+  sha256: fb0dbc3b9c897b7571b94fb2203ffb1ac0facfe366b2cb1f91904ea5335018f0
+  signer: Paragon Software GmbH
+  original_filename: biontdrv.sys
+  category: vulnerable driver
+references:
+- https://www.sdxcentral.com/alerts/paragon-partition-manager-driver-flaws-enable-privilege-escalation-and-dos-attacks/2025/02/
+- https://www.bleepingcomputer.com/news/security/ransomware-gangs-exploit-paragon-partition-manager-bug-in-byovd-attacks/
+- https://paragon-software.zendesk.com/hc/en-us/articles/32993902732817-IMPORTANT-Paragon-Driver-Security-Patch-for-All-Products-of-Hard-Disk-Manager-Product-Line-Biontdrv-sys
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

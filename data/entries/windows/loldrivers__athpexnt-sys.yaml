@@ -1,0 +1,36 @@
+id: loldrivers/athpexnt-sys
+type: driver
+platform: windows
+name: athpexnt.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ATHpExNt binPath=C:\windows\temp\ATHpExNt.sys type=kernel && sc.exe start ATHpExNt
+  comment: AhnLab kernel driver exposing arbitrary physical memory read/write via IOCTL 0x81000000. Device
+    accessible at \\.\ATHpEx. Signed by AhnLab Inc. with VeriSign certificate (first seen 2014). Zero
+    detect
+driver_detail:
+  sha256: fa0902daefbd9e716faaac8e854144ea0573e2a41192796f3b3138fe7a1d19f1
+  signer: AhnLab, Inc.
+  original_filename: ATHpExNt.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/255
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

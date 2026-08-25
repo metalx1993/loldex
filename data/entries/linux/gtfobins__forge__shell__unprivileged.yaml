@@ -1,0 +1,29 @@
+id: gtfobins/forge/shell/unprivileged
+type: binary
+platform: linux
+name: forge
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''#!/bin/sh'' >/path/to/temp-file
+
+    echo -e "/bin/sh <$(tty) >$(tty) 2>$(tty)" >>/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    forge build --use /path/to/temp-file'
+references:
+- https://gtfobins.github.io/gtfobins/forge/
+tags:
+- linux
+- unix
+- gtfobins

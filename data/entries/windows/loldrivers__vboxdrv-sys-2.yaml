@@ -1,0 +1,34 @@
+id: loldrivers/vboxdrv-sys-2
+type: driver
+platform: windows
+name: VBoxDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create VBoxDrv.sys binPath=C:\windows\temp\VBoxDrv.sys type=kernel && sc.exe start
+    VBoxDrv.sys
+driver_detail:
+  sha256: 26f41e4268be59f5de07552b51fa52d18d88be94f8895eb4a16de0f3940cf712
+  signer: Vektor T13 Security Service
+  original_filename: VBoxDrv.sys
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

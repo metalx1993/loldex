@@ -1,0 +1,37 @@
+id: loldrivers/driver-930da474-sys
+type: driver
+platform: windows
+name: driver_930da474.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create driver_c3d48ddd.sys binPath=C:\windows\temp\driver_c3d48ddd.sys type=kernel
+    && sc.exe start driver_c3d48ddd.sys
+  comment: Sophos, from time to time, has observed a threat actor deploy variants of Poortry on different
+    machines within a single estate during an attack. These variants contain the same payload, but signed
+    wit
+driver_detail:
+  sha256: 930da474a6d1be97b54f2c81e883e14d62897aa58622e5b040e412bd36cee0a7
+  signer: Pinchins Technology Co.,Ltd.
+  original_filename: RWTKrl.sys
+  category: malicious
+references:
+- https://news.sophos.com/en-us/2024/08/27/burnt-cigar-2/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

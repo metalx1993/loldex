@@ -1,0 +1,32 @@
+id: gtfobins/bash/file-write/unprivileged
+type: binary
+platform: linux
+name: bash
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: bash -c 'echo DATA >/path/to/output-file'
+- template: 'HISTIGNORE=''history *''
+
+    history -c
+
+    DATA
+
+    history -w /path/to/output-file'
+  comment: This only works interactively from an existing `bash` session. It adds timestamps to the output
+    file.
+references:
+- https://gtfobins.github.io/gtfobins/bash/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,30 @@
+id: lolbas/register-cimprovider/execute/0
+type: binary
+platform: windows
+name: Register-cimprovider.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Register-cimprovider.exe execution and cmdline DLL load may be supsicious
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/35a7244c62820fbc5a832e50b1e224ac3a1935da/rules/windows/process_creation/proc_creation_win_susp_register_cimprovider.yml
+commands:
+- template: Register-cimprovider -path {PATH_ABSOLUTE:.dll}
+  comment: Load the target .DLL.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Register-cimprovider/
+tags:
+- windows
+- lolbas

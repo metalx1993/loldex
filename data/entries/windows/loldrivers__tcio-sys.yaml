@@ -1,0 +1,37 @@
+id: loldrivers/tcio-sys
+type: driver
+platform: windows
+name: TcIo.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create TcIo binPath=C:\windows\temp\TcIo.sys type=kernel && sc.exe start TcIo
+  comment: TcIo.sys and TcRouter.sys are WHQL Microsoft-signed kernel drivers from Beckhoff Automation
+    GmbH (TwinCAT 3 Industrial Automation Runtime). TcIo.sys exposes arbitrary physical memory read/write
+    via Zw
+driver_detail:
+  sha256: e0c58531501d6176ed0f632addca977616b0dab460f32f0a5909d21f828fc63b
+  signer: Beckhoff Automation GmbH
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/296
+- https://www.cisa.gov/news-events/ics-advisories/icsa-18-081-02
+- https://srcincite.io/advisories/src-2018-0007/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,35 @@
+id: loldrivers/mjj0ge-sys
+type: driver
+platform: windows
+name: mJj0ge.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create mJj0ge.sys binPath=C:\windows\temp\mJj0ge.sys type=kernel && sc.exe start mJj0ge.sys
+  comment: The criminals signed their AV-killer malware, closely related to one known as BURNTCIGAR, with
+    a legitimate WHCP certificate
+driver_detail:
+  sha256: 5f6fec8f7890d032461b127332759c88a1b7360aa10c6bd38482572f59d2ba8b
+  category: malicious
+references:
+- https://news.sophos.com/en-us/2022/12/13/signed-driver-malware-moves-up-the-software-trust-chain/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

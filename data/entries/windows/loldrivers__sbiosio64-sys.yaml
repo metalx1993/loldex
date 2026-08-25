@@ -1,0 +1,37 @@
+id: loldrivers/sbiosio64-sys
+type: driver
+platform: windows
+name: SBIOSIO64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create SBIOSIO64sys binPath= C:\windows\temp\SBIOSIO64sys.sys type=kernel && sc.exe
+    start SBIOSIO64sys
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: 1e24c45ce2672ee403db34077c88e8b7d7797d113c6fd161906dce3784da627d
+  signer: Windows (R) Win 7 DDK provider
+  original_filename: SBIOSIO64.sys
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

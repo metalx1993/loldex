@@ -1,0 +1,38 @@
+id: loldrivers/qiomem-sys
+type: driver
+platform: windows
+name: QIOMem.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: acpi.exe
+  comment: QIOMem.sys is the Generic IO & Memory Access driver included with Toshiba and Dynabook password
+    utilities. It binds to ACPI\QCI0701; on systems without that firmware device, the public proof of
+    concep
+driver_detail:
+  sha256: 6abd8d0d541bcf9e257c65122216b1d2ae92cbf8a3a3cb7ce340846e66c449ca
+  signer: TOSHIBA
+  original_filename: QIOMem.sys
+  category: vulnerable driver
+references:
+- https://github.com/valium007/qiomem
+- https://valium007.github.io/posts/toshiba-vuln/
+- https://jvn.jp/vu/JVNVU91051826/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

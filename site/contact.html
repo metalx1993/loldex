@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — loldex</title>
+<meta name="description" content="Get in touch with loldex — contribute an adapter, suggest a source, or report a mapping.">
+<link rel="canonical" href="https://loldex.sh/contact.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#13130E">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="loldex">
+<meta property="og:title" content="Contact — loldex">
+<meta property="og:description" content="Contribute an adapter, suggest a source, or report a mapping.">
+<meta property="og:url" content="https://loldex.sh/contact.html">
+<meta property="og:image" content="https://loldex.sh/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://loldex.sh/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#13130E;--ink-2:#1B1B14;--line:#33322A;--line-soft:#26261E;
+    --text:#E9E5D6;--muted:#918D7A;--amber:#E9A23B;--amber-dim:#8A6526;
+    --ok:#6FC5A6;--err:#E0736B;
+    --mono:'JetBrains Mono',ui-monospace,monospace;--sans:'Space Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--text);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--amber);color:var(--ink)}
+  .wrap{max-width:620px;margin:0 auto;padding:0 24px}
+  .bar{border-bottom:1px solid var(--line-soft)}
+  .bar .wrap{display:flex;align-items:center;gap:16px;height:56px}
+  .mark{font-family:var(--mono);font-weight:700;font-size:15px}
+  .mark b{color:var(--amber)}
+  .mark a{color:inherit;text-decoration:none}
+  .nav{margin-left:auto;display:flex;gap:18px}
+  .nav a{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none}
+  .nav a:hover{color:var(--text)}
+
+  main{padding:56px 0 80px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  h1{font-family:var(--mono);font-weight:700;font-size:34px;letter-spacing:-.03em;margin-bottom:14px}
+  .lede{color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:32px;max-width:52ch}
+
+  form{display:flex;flex-direction:column;gap:16px}
+  label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:7px;display:block}
+  input,textarea{
+    width:100%;background:var(--ink-2);border:1px solid var(--line);border-radius:6px;color:var(--text);
+    font-family:var(--sans);font-size:15px;padding:12px 14px;outline:none;transition:border-color .15s;
+  }
+  textarea{resize:vertical;min-height:130px;font-family:var(--mono);font-size:14px;line-height:1.6}
+  input:focus,textarea:focus{border-color:var(--amber-dim)}
+  input::placeholder,textarea::placeholder{color:var(--muted)}
+  .field-err{color:var(--err);font-size:13px;margin-top:6px;display:none}
+  .field-err.show{display:block}
+
+  button{
+    font-family:var(--mono);font-size:14px;font-weight:500;color:var(--ink);background:var(--amber);
+    border:none;border-radius:5px;padding:13px 22px;cursor:pointer;align-self:flex-start;
+    transition:background .15s,transform .1s;
+  }
+  button:hover:not(:disabled){background:#F4B24A;transform:translateY(-1px)}
+  button:disabled{opacity:.55;cursor:not-allowed}
+
+  .result{font-family:var(--mono);font-size:14px;padding:13px 15px;border-radius:6px;margin-top:6px;display:none}
+  .result.show{display:block}
+  .result.ok{color:var(--ok);border:1px solid #2f5045;background:#141d18}
+  .result.err{color:var(--err);border:1px solid #4a2420;background:#1d1513}
+
+  .note{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-soft);font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7}
+  @media(max-width:560px){h1{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap">
+  <div class="mark"><a href="./index.html">lol<b>dex</b></a></div>
+  <div class="nav"><a href="./search.html">search</a><a href="./index.html">home</a></div>
+</div></div>
+
+<main class="wrap">
+  <div class="eyebrow">get in touch</div>
+  <h1>Contact</h1>
+  <p class="lede">Found a wrong mapping, want to contribute an adapter, or have a source to suggest? Send a message — it lands straight in our inbox.</p>
+
+  <form id="cf" novalidate>
+    <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+    <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name">
+      <div class="field-err" data-for="name">Enter your name</div>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email">
+      <div class="field-err" data-for="email">Enter a valid email</div>
+    </div>
+    <div>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
+      <div class="field-err" data-for="message">Write a short message</div>
+    </div>
+
+    <button id="send" type="submit">Send message</button>
+    <div class="result" id="result"></div>
+  </form>
+
+  <div class="note">
+    Prefer email? Reach us directly once you set up an address.<br>
+    This form is spam-protected and never shares your address.
+  </div>
+</main>
+
+<script>
+(function(){
+  const form = document.getElementById('cf');
+  const btn = document.getElementById('send');
+  const result = document.getElementById('result');
+  const fields = {
+    name: v => v.trim().length > 0,
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    message: v => v.trim().length >= 2,
+  };
+  function showErr(name, on){
+    const el = form.querySelector('.field-err[data-for="'+name+'"]');
+    if(el) el.classList.toggle('show', on);
+  }
+  Object.keys(fields).forEach(name=>{
+    form[name].addEventListener('input', ()=> showErr(name, false));
+  });
+  function setResult(kind, msg){
+    result.className = 'result show ' + kind;
+    result.textContent = msg;
+  }
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    result.className = 'result';
+    let ok = true;
+    for(const [name, test] of Object.entries(fields)){
+      const valid = test(form[name].value);
+      showErr(name, !valid);
+      if(!valid) ok = false;
+    }
+    if(!ok) return;
+
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try{
+      const res = await fetch('./contact.php', {
+        method:'POST',
+        headers:{'Content-Type':'application/json', Accept:'application/json'},
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      const data = await res.json();
+      if(data.success){
+        setResult('ok', data.message || 'Message sent. Thanks — we\'ll get back to you.');
+        form.reset();
+      } else {
+        setResult('err', data.message || 'Something went wrong. Please try again.');
+      }
+    }catch(err){
+      setResult('err', 'Network error — please try again.');
+    }finally{
+      btn.disabled = false; btn.textContent = 'Send message';
+    }
+  });
+})();
+</script>
+</body>
+</html>

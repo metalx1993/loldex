@@ -1,0 +1,23 @@
+id: gtfobins/aws/file-read/unprivileged
+type: binary
+platform: linux
+name: aws
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: aws ec2 describe-instances --filter file:///path/to/input-file
+references:
+- https://gtfobins.github.io/gtfobins/aws/
+tags:
+- linux
+- unix
+- gtfobins

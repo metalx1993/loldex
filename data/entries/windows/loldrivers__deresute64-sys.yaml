@@ -1,0 +1,34 @@
+id: loldrivers/deresute64-sys
+type: driver
+platform: windows
+name: deresute64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create deresute64.sys binPath=C:\windows\temp\deresute64.sys type=kernel && sc.exe
+    start deresute64.sys
+  comment: Create and start driver
+driver_detail:
+  sha256: 09a5ca7673f3734f8987b2b4d69255ffaa05cd2e77cf2d6f72a2d6a3c91139fb
+  original_filename: andappsvc2_64.sys
+  category: vulnerable driver
+references:
+- https://x.com/nextronresearch/status/2051653303893680456
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

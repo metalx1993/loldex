@@ -1,0 +1,37 @@
+id: loldrivers/iscflashx64-sys
+type: driver
+platform: windows
+name: iscflashx64.sys
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+- defense-evasion
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1542
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create iscflashx64.sys binPath=C:\windows\temp\iscflashx64.sys type=kernel && sc.exe
+    start iscflashx64.sys
+  comment: CVE-2021-33834
+driver_detail:
+  sha256: ce0a4430d090ba2f1b46abeaae0cb5fd176ac39a236888fa363bf6f9fd6036d9
+  signer: Insyde Software
+  original_filename: iscflashx64.sys
+  category: vulnerable driver
+references:
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

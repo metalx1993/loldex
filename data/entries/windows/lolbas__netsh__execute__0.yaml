@@ -1,0 +1,33 @@
+id: lolbas/netsh/execute/0
+type: binary
+platform: windows
+name: Netsh.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1546.007
+opsec:
+  noise: high
+  triggers: Netsh initiating a network connection
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_netsh_helper_dll_persistence.yml
+  - https://github.com/splunk/security_content/blob/2b87b26bdc2a84b65b1355ffbd5174bdbdb1879c/detections/endpoint/processes_launching_netsh.yml
+  - https://github.com/splunk/security_content/blob/08ed88bd88259c03c771c30170d2934ed0a8f878/detections/deprecated/processes_created_by_netsh.yml
+commands:
+- template: netsh.exe add helper {PATH_ABSOLUTE:.dll}
+  comment: Use Netsh in order to execute a .dll file and also gain persistence, every time the netsh command
+    is called
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Netsh/
+tags:
+- windows
+- lolbas

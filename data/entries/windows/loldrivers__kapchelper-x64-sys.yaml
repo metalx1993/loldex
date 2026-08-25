@@ -1,0 +1,33 @@
+id: loldrivers/kapchelper-x64-sys
+type: driver
+platform: windows
+name: KApcHelper_x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create KApcHelper_x64.sys binPath=C:\windows\temp\KApcHelper_x64.sys type=kernel &&
+    sc.exe start KApcHelper_x64.sys
+  comment: Vulnerable driving using the stolen Nvidia Certificate.
+driver_detail:
+  sha256: d7c81b0f3c14844f6424e8bdd31a128e773cb96cccef6d05cbff473f0ccb9f9c
+  category: malicious
+references:
+- https://www.mandiant.com/resources/blog/hunting-attestation-signed-malware
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

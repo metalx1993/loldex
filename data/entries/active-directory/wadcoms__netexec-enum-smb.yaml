@@ -1,0 +1,31 @@
+id: wadcoms/netexec-enum-smb
+type: technique
+platform: active-directory
+name: NetExec Enum SMB
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: nxc smb 10.10.10.1 -u 'john' -p 'password123' --groups --local-groups --loggedon-users --rid-brute
+    --sessions --users --shares --pass-pol
+  comment: '"NetExec (a.k.a nxc) is a network service exploitation tool that helps automate assessing
+    the security of large networks." - https://www.netexec.wiki/. This command will enumerate domain groups,
+    local groups, logged on users, relative identifiers (RIDs), sessions, domain users, S'
+references:
+- https://github.com/Pennyw0rth/NetExec
+- https://www.netexec.wiki/
+tags:
+- active-directory
+- wadcoms
+- smb

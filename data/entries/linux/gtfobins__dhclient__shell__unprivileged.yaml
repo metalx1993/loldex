@@ -1,0 +1,23 @@
+id: gtfobins/dhclient/shell/unprivileged
+type: binary
+platform: linux
+name: dhclient
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: dhclient -sf /bin/sh
+references:
+- https://gtfobins.github.io/gtfobins/dhclient/
+tags:
+- linux
+- unix
+- gtfobins

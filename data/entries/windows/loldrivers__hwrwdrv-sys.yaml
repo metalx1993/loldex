@@ -1,0 +1,39 @@
+id: loldrivers/hwrwdrv-sys
+type: driver
+platform: windows
+name: HwRwDrv.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create HwRwDrv.sys binPath=C:\windows\temp\HwRwDrv.sys type=kernel && sc.exe start
+    HwRwDrv.sys
+  comment: Hardware read/write driver signed by a revoked Certum certificate (Open Source Developer, Jun
+    Liu). Provides arbitrary physical memory read/write and PCI bus data access. Identified in ESET EDR
+    killer
+driver_detail:
+  sha256: 017933be6023795e944a2a373e74e2cc6885b5c9bc1554c437036250c20c3a7d
+  signer: "Windows\xAE winows 7 driver kits provider"
+  original_filename: HwRwDrv.sys
+  category: vulnerable driver
+references:
+- https://www.welivesecurity.com/en/eset-research/edr-killers-explained/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

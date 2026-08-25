@@ -1,0 +1,26 @@
+id: gtfobins/time/shell/suid
+type: binary
+platform: linux
+name: time
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: time /bin/sh -p
+  comment: Note that the shell might have its own builtin `time` implementation, which may behave differently
+    than the binary, which is often located at `/usr/bin/time`.
+references:
+- https://gtfobins.github.io/gtfobins/time/
+tags:
+- linux
+- unix
+- gtfobins

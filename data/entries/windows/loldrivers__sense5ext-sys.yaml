@@ -1,0 +1,34 @@
+id: loldrivers/sense5ext-sys
+type: driver
+platform: windows
+name: Sense5Ext.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create Sense5Ext.sys binPath=C:\windows\temp\Sense5Ext.sys type=kernel && sc.exe start
+    Sense5Ext.sys
+  comment: Driver categorized as POORTRY by Mandiant.
+driver_detail:
+  sha256: 7f4555a940ce1156c9bcea9a2a0b801f9a5e44ec9400b61b14a7b1a6404ffdf6
+  signer: Sense5 CORP
+  category: malicious
+references:
+- https://www.mandiant.com/resources/blog/hunting-attestation-signed-malware
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

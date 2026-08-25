@@ -1,0 +1,23 @@
+id: gtfobins/sshfs/command/unprivileged
+type: binary
+platform: linux
+name: sshfs
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'sshfs -o ssh_command=/path/to/command x: /path/to/dir/'
+references:
+- https://gtfobins.github.io/gtfobins/sshfs/
+tags:
+- linux
+- unix
+- gtfobins

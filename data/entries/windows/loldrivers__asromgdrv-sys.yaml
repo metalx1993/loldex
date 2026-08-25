@@ -1,0 +1,34 @@
+id: loldrivers/asromgdrv-sys
+type: driver
+platform: windows
+name: AsrOmgDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AsrOmgDrv.sys binPath=C:\windows\temp\AsrOmgDrv.sys type=kernel && sc.exe start
+    AsrOmgDrv.sys
+driver_detail:
+  sha256: 950a4c0c772021cee26011a92194f0e58d61588f77f2873aa0599dff52a160c9
+  signer: ASRock Incorporation
+  original_filename: AsrDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,35 @@
+id: loldrivers/dtr-ec-sys
+type: driver
+platform: windows
+name: dtr_ec.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create dtr_ec binPath=C:\windows\temp\dtr_ec.sys type=kernel && sc.exe start dtr_ec
+  comment: dtr_ec.sys is a Dell kernel driver that ships as part of the Dell Feature Enhancement Pack
+    (DFEP) on Dell laptops and desktops. The driver provides unrestricted read/write access to Embedded
+    Controlle
+driver_detail:
+  sha256: d6cc311cd7f8232549a5597512facac44e63d5c808878f54c0c1c12482cf270f
+  signer: Dell Technologies
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/293
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,37 @@
+id: loldrivers/seasunprotect-sys
+type: driver
+platform: windows
+name: SeasunProtect.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create SeasunProtect binPath=C:\windows\temp\SeasunProtect.sys type=kernel && sc.exe
+    start SeasunProtect
+  comment: Northwave Cyber Security contributed this driver based on in-house research. The driver has
+    a CVSSv3 score of 8.8, indicating a privilege escalation impact. This vulnerability could potentially
+    be exp
+driver_detail:
+  sha256: 507b07b0dc0e638b65b4a4d11a462b35439c746d42337b9888927bf994176102
+  signer: Chengdu Westhouse Interactive Entertainment Ltd.
+  original_filename: SeasunProtect.sys
+  category: vulnerable driver
+references:
+- https://www.loldrivers.io
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

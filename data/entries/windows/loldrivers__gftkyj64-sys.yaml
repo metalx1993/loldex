@@ -1,0 +1,39 @@
+id: loldrivers/gftkyj64-sys
+type: driver
+platform: windows
+name: gftkyj64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create gftkyj64.sys binPath=C:\windows\temp\gftkyj64.sys type=kernel && sc.exe start
+    gftkyj64.sys
+  comment: 'SentinelOne has observed prominent threat actors abusing legitimately signed Microsoft drivers
+    in active intrusions into telecommunication, BPO, MSSP, and financial services businesses.
+
+    Investigations'
+driver_detail:
+  sha256: 9b1b15a3aacb0e786a608726c3abfc94968915cedcbd239ddf903c4a54bfcf0c
+  category: malicious
+references:
+- https://www.sentinelone.com/labs/driving-through-defenses-targeted-attacks-leverage-signed-malicious-microsoft-drivers/
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,28 @@
+id: gtfobins/clamscan/file-read/suid
+type: binary
+platform: linux
+name: clamscan
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'touch x.yara
+
+    clamscan --no-summary -d x.yara -f /path/to/input-file 2>&1 | sed -nE ''s/^(.*): No such file or directory$/\1/p'''
+  comment: Each line of the file is interpreted as a path and the content is leaked via error messages.
+    The output can optionally be cleaned using `sed`.
+references:
+- https://gtfobins.github.io/gtfobins/clamscan/
+tags:
+- linux
+- unix
+- gtfobins

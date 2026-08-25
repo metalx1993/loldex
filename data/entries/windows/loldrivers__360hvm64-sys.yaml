@@ -1,0 +1,38 @@
+id: loldrivers/360hvm64-sys
+type: driver
+platform: windows
+name: 360hvm64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create 360hvm64 binPath=C:\windows\temp\360hvm64.sys type=kernel && sc.exe start 360hvm64
+  comment: '360hvm64.sys is the kernel-mode hypervisor enforcement driver shipped with Qihoo 360 Total
+    Security. IOCTL 0x22240c on \\.\360Hvm issues a per-CPU DPC broadcast that executes VMXOFF/VMSKINIT
+    on every '
+driver_detail:
+  sha256: f89d5d95b8a59e6d5e50a49217f83d080e4eaf4bb77b80d8f38cd915640ba124
+  signer: "360\u5B89\u5168\u4E2D\u5FC3"
+  original_filename: 360Hvm64.sys
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

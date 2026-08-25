@@ -1,0 +1,33 @@
+id: loldrivers/msr-sys
+type: driver
+platform: windows
+name: msr.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create msr.sys binPath=C:\windows\temp\msr.sys type=kernel && sc.exe start msr.sys
+  comment: 'Identified on the MSFT Driver Block list, non-admin can write MSR. '
+driver_detail:
+  sha256: ede9a3858a12d5ddea21a310e5721bf86c2248539f42c9e0c3c29ae5b0148ba5
+  category: vulnerable driver
+references:
+- https://twitter.com/wdormann/status/1699878227261411699
+- https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/design/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

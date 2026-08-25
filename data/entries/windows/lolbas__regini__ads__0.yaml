@@ -1,0 +1,31 @@
+id: lolbas/regini/ads/0
+type: binary
+platform: windows
+name: Regini.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: regini.exe reading from ADS
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_regini_ads.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_regini_execution.yml
+commands:
+- template: regini.exe {PATH}:hidden.ini
+  comment: Write registry keys from data inside the Alternate data stream.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Regini/
+tags:
+- windows
+- lolbas

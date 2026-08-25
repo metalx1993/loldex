@@ -1,0 +1,35 @@
+id: loldrivers/corsairllaccess64-sys-2
+type: driver
+platform: windows
+name: CorsairLLAccess64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CorsairLLAccess64.sys binPath=C:\windows\temp\CorsairLLAccess64.sys     type=kernel
+    && sc.exe start CorsairLLAccess64.sys
+driver_detail:
+  sha256: 000547560fea0dd4b477eb28bf781ea67bf83c748945ce8923f90fdd14eb7a4b
+  signer: Corsair Memory, Inc.
+  original_filename: Corsair LL Access
+  category: vulnerable driver
+references:
+- https://github.com/elastic/protections-artifacts/search?q=VulnDriver
+- https://github.com/magicsword-io/LOLDrivers/issues/302
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

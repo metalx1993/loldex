@@ -1,0 +1,26 @@
+id: gtfobins/troff/file-read/suid
+type: binary
+platform: linux
+name: troff
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: troff /path/to/input-file
+  comment: The file is typeset but text is still readable in the output, alternatively the output can
+    be read with `man -l`.
+references:
+- https://gtfobins.github.io/gtfobins/troff/
+tags:
+- linux
+- unix
+- gtfobins

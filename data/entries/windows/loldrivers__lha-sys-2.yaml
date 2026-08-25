@@ -1,0 +1,33 @@
+id: loldrivers/lha-sys-2
+type: driver
+platform: windows
+name: LHA.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create LHA.sys binPath=C:\windows\temp\LHA.sys type=kernel && sc.exe start LHA.sys
+driver_detail:
+  sha256: 23ba19352b1e71a965260bf4d5120f0200709ee8657ed381043bec9a938a1ade
+  signer: LG Electronics Inc.
+  original_filename: LHA.sys
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

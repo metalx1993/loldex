@@ -1,0 +1,34 @@
+id: loldrivers/driver7-x86-withoutdbg-sys
+type: driver
+platform: windows
+name: driver7-x86-withoutdbg.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create driver7-x86-withoutdbg.sys binPath=C:\windows\temp\driver7-x86-withoutdbg.sys     type=kernel
+    && sc.exe start driver7-x86-withoutdbg.sys
+driver_detail:
+  sha256: 927c2a580d51a598177fa54c65e9d2610f5f212f1b6cb2fbf2740b64368f010a
+  signer: ASUStek
+  original_filename: Driver7
+  category: vulnerable driver
+references:
+- https://github.com/Chigusa0w0/AsusDriversPrivEscala
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

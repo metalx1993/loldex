@@ -1,0 +1,27 @@
+id: gtfobins/hashcat/file-write/unprivileged
+type: binary
+platform: linux
+name: hashcat
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -n DATA | tee /path/to/wordlist | md5sum | awk ''{print $1}'' >/path/to/hash
+
+    hashcat -m 0 --quiet --potfile-disable -o /path/to/output-file --outfile-format=2 --outfile-autohex-disable
+    /path/to/hash /path/to/wordlist'
+  comment: Append data to the end of the output file, creating if does not exist.
+references:
+- https://gtfobins.github.io/gtfobins/hashcat/
+tags:
+- linux
+- unix
+- gtfobins

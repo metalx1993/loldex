@@ -1,0 +1,34 @@
+id: loldrivers/asrrapidstartdrv-sys
+type: driver
+platform: windows
+name: AsrRapidStartDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create AsrRapidStartDrv.sys binPath=C:\windows\temp\AsrRapidStartDrv.sys     type=kernel
+    && sc.exe start AsrRapidStartDrv.sys
+driver_detail:
+  sha256: 0aafa9f47acf69d46c9542985994ff5321f00842a28df2396d4a3076776a83cb
+  signer: RW-Everything
+  original_filename: RwDrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

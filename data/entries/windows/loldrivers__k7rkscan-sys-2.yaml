@@ -1,0 +1,35 @@
+id: loldrivers/k7rkscan-sys-2
+type: driver
+platform: windows
+name: K7RKScan.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create K7RKScan.sys binPath=C:\windows\temp\K7RKScan.sys type=kernel && sc.exe start
+    K7RKScan.sys
+  comment: Driver can be used to load unsigned drivers
+driver_detail:
+  sha256: b16e217cdca19e00c1b68bdfb28ead53b20adeabd6edcd91542f9fbf48942877
+  signer: K7 Computing Pvt. Ltd.
+  original_filename: K7RKScan
+  category: vulnerable driver
+references:
+- https://github.com/BlackSnufkin/BYOVD
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

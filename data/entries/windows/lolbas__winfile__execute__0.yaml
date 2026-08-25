@@ -1,0 +1,27 @@
+id: lolbas/winfile/execute/0
+type: binary
+platform: windows
+name: winfile.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+commands:
+- template: winfile.exe {PATH:.exe}
+  comment: Execute an executable file with WinFile as a parent process.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/winfile/
+tags:
+- windows
+- lolbas

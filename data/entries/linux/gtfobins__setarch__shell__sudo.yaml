@@ -1,0 +1,24 @@
+id: gtfobins/setarch/shell/sudo
+type: binary
+platform: linux
+name: setarch
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: setarch -3 /bin/sh
+references:
+- https://gtfobins.github.io/gtfobins/setarch/
+tags:
+- linux
+- unix
+- gtfobins

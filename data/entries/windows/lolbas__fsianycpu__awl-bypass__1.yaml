@@ -1,0 +1,31 @@
+id: lolbas/fsianycpu/awl-bypass/1
+type: binary
+platform: windows
+name: FsiAnyCpu.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1059
+opsec:
+  noise: medium
+  triggers: FsiAnyCpu.exe execution may be suspicious on non-developer machines
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6b34764215b0e97e32cbc4c6325fc933d2695c3a/rules/windows/process_creation/proc_creation_win_lolbin_fsharp_interpreters.yml
+commands:
+- template: fsianycpu.exe
+  comment: Execute F# code via interactive command line
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/FsiAnyCpu/
+tags:
+- windows
+- lolbas

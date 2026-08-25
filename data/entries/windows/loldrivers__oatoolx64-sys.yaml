@@ -1,0 +1,37 @@
+id: loldrivers/oatoolx64-sys
+type: driver
+platform: windows
+name: OAToolx64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create OAToolx64 binPath=C:\windows\temp\OAToolx64.sys type=kernel && sc.exe start
+    OAToolx64
+  comment: OAToolx64.sys is a vulnerable kernel driver from the KeServiceDescriptorTable/vulnerable-drivers
+    repository. The driver exposes dangerous kernel primitives to usermode.
+driver_detail:
+  sha256: e8d2424037f63aa395085c546aeac0cd7a09567a4e304c509e087d1b3ce199da
+  signer: Insyde Software
+  original_filename: OAToolx64.sys
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

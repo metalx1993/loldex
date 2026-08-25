@@ -1,0 +1,36 @@
+id: loldrivers/unknown-sys
+type: driver
+platform: windows
+name: unknown.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create unknown binPath=C:\windows\temp\unknown.sys type=kernel && sc.exe start unknown
+  comment: 'unknown.sys is an unattributed signed kernel driver documented in public UnknownKiller / BlackSnufkin
+    BYOVD research. The public PoCs identify the driver as exposing a process-kill primitive suitable '
+driver_detail:
+  sha256: 97bd65e98cdc4e93d49edd4ea905d43a61244df0fd3323e6649330de3b1be091
+  category: vulnerable driver
+references:
+- https://github.com/BlackSnufkin/BYOVD/tree/main/UnknownKiller
+- https://github.com/lukmannurhikma/UnknownKiller
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

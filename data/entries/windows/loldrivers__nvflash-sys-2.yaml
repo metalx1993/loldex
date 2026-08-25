@@ -1,0 +1,34 @@
+id: loldrivers/nvflash-sys-2
+type: driver
+platform: windows
+name: nvflash.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create nvflash.sys binPath=C:\windows\temp \n \n \n  vflash.sys type=kernel && sc.exe
+    start nvflash.sys
+driver_detail:
+  sha256: afdd66562dea51001c3a9de300f91fc3eb965d6848dfce92ccb9b75853e02508
+  signer: NVIDIA Corporation
+  original_filename: nvflash.sys
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

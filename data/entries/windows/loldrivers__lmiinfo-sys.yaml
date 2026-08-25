@@ -1,0 +1,33 @@
+id: loldrivers/lmiinfo-sys
+type: driver
+platform: windows
+name: LMIinfo.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create LMIinfo binPath=C:\windows\temp\LMIinfo.sys type=kernel && sc.exe start LMIinfo.sys
+driver_detail:
+  sha256: 453be8f63cc6b116e2049659e081d896491cf1a426e3d5f029f98146a3f44233
+  signer: LogMeIn, Inc.
+  original_filename: LMIinfo.sys
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

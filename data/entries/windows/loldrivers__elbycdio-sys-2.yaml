@@ -1,0 +1,37 @@
+id: loldrivers/elbycdio-sys-2
+type: driver
+platform: windows
+name: elbycdio.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create elbycdio.sys binPath=C:\windows\temp\elbycdio.sys type=kernel && sc.exe start
+    elbycdio.sys
+  comment: elbycdio.sys is a vulnerable driver. CVE-2009-0824.
+driver_detail:
+  sha256: eea53103e7a5a55dc1df79797395a2a3e96123ebd71cdd2db4b1be80e7b3f02b
+  signer: Elaborate Bytes AG
+  original_filename: ElbyCDIO.sys
+  category: vulnerable driver
+references:
+- https://github.com/jbaines-r7/dellicious
+- https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/
+- https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2018/03/08064459/Equation_group_questions_and_answers.pdf
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

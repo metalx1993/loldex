@@ -1,0 +1,34 @@
+id: loldrivers/kkyum-sys
+type: driver
+platform: windows
+name: KKYUM.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create KKYUM binPath=C:\windows\temp\KKYUM.sys type=kernel && sc.exe start KKYUM
+  comment: The driver creates a device object named "\\.\KKYUM" without strict access controls, allowing
+    low-privileged users to interact with it. It exposes unauthenticated IOCTL control codes "0x22265C"
+    (Read)
+driver_detail:
+  sha256: 72bd55f4459c992b9caa1a33cb6862f1f3085ca35839c58dee8b75db22ca605f
+  category: vulnerable driver
+references:
+- https://github.com/The-Sword-of-Constantine/UsingBYOVD
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

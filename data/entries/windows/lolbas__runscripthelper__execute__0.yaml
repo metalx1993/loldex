@@ -1,0 +1,30 @@
+id: lolbas/runscripthelper/execute/0
+type: binary
+platform: windows
+name: Runscripthelper.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Event ID 4104 - Microsoft-Windows-PowerShell/Operational
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_runscripthelper.yml
+commands:
+- template: runscripthelper.exe surfacecheck \\?\{PATH_ABSOLUTE:.txt} {PATH_ABSOLUTE:folder}
+  comment: Execute the PowerShell script with .txt extension
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Runscripthelper/
+tags:
+- windows
+- lolbas

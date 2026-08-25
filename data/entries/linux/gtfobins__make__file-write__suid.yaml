@@ -1,0 +1,24 @@
+id: gtfobins/make/file-write/suid
+type: binary
+platform: linux
+name: make
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: make -s --eval='$(file >/path/to/output-file,DATA)' .
+references:
+- https://gtfobins.github.io/gtfobins/make/
+tags:
+- linux
+- unix
+- gtfobins

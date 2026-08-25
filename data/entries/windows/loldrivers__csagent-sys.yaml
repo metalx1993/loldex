@@ -1,0 +1,39 @@
+id: loldrivers/csagent-sys
+type: driver
+platform: windows
+name: CSAgent.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1014
+opsec:
+  noise: high
+commands:
+- template: sc.exe create CSAgent.sys binPath=C:\windows\temp\CSAgent.sys type=kernel && sc.exe start
+    CSAgent.sys
+  comment: AbyssWorker rootkit masquerading as a CrowdStrike Falcon sensor driver (CSAgent.sys). Signed
+    with a revoked certificate from Shenzhen yundian Technology Co., Ltd. This is a fully malicious driver
+    that
+driver_detail:
+  sha256: b7703a59c39a0d2f7ef6422945aaeaaf061431af0533557246397551b8eed505
+  signer: CrowdStrike, Inc.
+  original_filename: CSAgent.sys
+  category: malicious
+references:
+- https://www.welivesecurity.com/en/eset-research/edr-killers-explained/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

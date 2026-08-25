@@ -1,0 +1,32 @@
+id: loldrivers/rtcore64-sys
+type: driver
+platform: windows
+name: RTCore64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create RTCore64.sys binPath=C:\windows\temp\RTCore64.sys type=kernel && sc.exe start
+    RTCore64.sys
+driver_detail:
+  sha256: 03e0581432f5c8cc727a8aa387f5b69ff84d38d0df6f1226c19c6e960a81e1e9
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

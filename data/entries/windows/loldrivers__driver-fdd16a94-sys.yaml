@@ -1,0 +1,35 @@
+id: loldrivers/driver-fdd16a94-sys
+type: driver
+platform: windows
+name: driver_fdd16a94.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create driver_fdd16a94.sys binPath=C:\windows\temp\driver_fdd16a94.sys type=kernel
+    && sc.exe start driver_fdd16a94.sys
+  comment: Sophos, from time to time, has observed a threat actor deploy variants of Poortry on different
+    machines within a single estate during an attack. These variants contain the same payload, but signed
+    wit
+driver_detail:
+  sha256: fdd16a94a71644a8bb52c4e0fbfecb93f04cfe37bd91bac599cf9abfb822762f
+  category: malicious
+references:
+- https://news.sophos.com/en-us/2024/08/27/burnt-cigar-2/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,31 @@
+id: loldrivers/asrautochkupddrv-1-0-32-sys
+type: driver
+platform: windows
+name: AsrAutoChkUpdDrv_1_0_32.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 4ae42c1f11a98dee07a0d7199f611699511f1fb95120fabc4c3c349c485467fe
+  signer: ASRock Incorporation
+  original_filename: AsrAutoChkUpdDrv_1_0_32.sys
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

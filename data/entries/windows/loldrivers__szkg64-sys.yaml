@@ -1,0 +1,39 @@
+id: loldrivers/szkg64-sys
+type: driver
+platform: windows
+name: szkg64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create szkg64.sys binPath=C:\windows\temp\szkg64.sys type=kernel && sc.exe start szkg64.sys
+  comment: 'The StopZilla driver is a forgotten but still exploitable vulnerable driver that allows arbitrary
+    kernel memory writes via unvalidated IOCTLs (0x80002063 and 0x8000206F). Attackers can leverage it
+    to '
+driver_detail:
+  sha256: 6bc0e1c104fac4a8caa4237c7ae181ca11a043a3ee26426aeb7a90dc40281fad
+  signer: iS3 Inc.
+  original_filename: szkg64.sys
+  category: vulnerable driver
+references:
+- https://www.greyhathacker.net/?p=1025
+- https://decoder.cloud/2025/01/09/the-almost-forgotten-vulnerable-driver/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

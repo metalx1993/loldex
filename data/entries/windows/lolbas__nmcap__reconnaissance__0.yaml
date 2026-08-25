@@ -1,0 +1,35 @@
+id: lolbas/nmcap/reconnaissance/0
+type: binary
+platform: windows
+name: Nmcap.exe
+phases:
+- discovery
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1040
+opsec:
+  noise: high
+commands:
+- template: nmcap.exe /network * /capture /file {PATH_ABSOLUTE:.cap}
+  comment: 'Start capture on all network adapters and save to specified .cap (circular) file.
+
+    Optionally, one can add:
+
+    - `/TerminateWhen /TimeAfter 30 seconds` to auto-terminate after a relative times (e.g. 30 seconds);
+
+    - `/TerminateWhen /Time 04:52:00 AM 9/17/2025` to auto-terminate after a specific date/time;
+
+    - `/TerminateWhen /KeyPress x` to terminate when a specific key is pressed.'
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Nmcap/
+tags:
+- windows
+- lolbas

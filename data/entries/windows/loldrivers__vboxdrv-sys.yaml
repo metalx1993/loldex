@@ -1,0 +1,37 @@
+id: loldrivers/vboxdrv-sys
+type: driver
+platform: windows
+name: vboxdrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create vboxdrv.sys binPath=C:\windows\temp\vboxdrv.sys type=kernel && sc.exe start
+    vboxdrv.sys
+  comment: Used by unknown actor in Acid Rain malware. vboxdrv.sys is a vulnerable driver.
+driver_detail:
+  sha256: 78827fa00ea48d96ac9af8d1c1e317d02ce11793e7f7f6e4c7aac7b5d7dd490f
+  signer: Sun Microsystems, Inc.
+  original_filename: VBoxDrv.sys
+  category: vulnerable driver
+references:
+- https://unit42.paloaltonetworks.com/acidbox-rare-malware/
+- https://www.coresecurity.com/core-labs/advisories/virtualbox-privilege-escalation-vulnerability
+- https://unit42.paloaltonetworks.com/acidbox-rare-malware/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

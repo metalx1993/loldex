@@ -1,0 +1,30 @@
+id: lolbas/infdefaultinstall/execute/0
+type: binary
+platform: windows
+name: Infdefaultinstall.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_infdefaultinstall_execute_sct_scripts.yml
+commands:
+- template: InfDefaultInstall.exe {PATH:.inf}
+  comment: Executes SCT script using scrobj.dll from a command in entered into a specially prepared INF
+    file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Infdefaultinstall/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,32 @@
+id: loldrivers/winflash64-sys
+type: driver
+platform: windows
+name: WinFlash64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create WinFlash64.sys binPath=C:\windows\temp\WinFlash64.sys type=kernel && sc.exe
+    start WinFlash64.sys
+driver_detail:
+  sha256: 316a27e2bdb86222bc7c8af4e5472166b02aec7f3f526901ce939094e5861f6d
+  category: vulnerable driver
+references:
+- Internal Research
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,41 @@
+id: loldrivers/kfeco10x64-sys
+type: driver
+platform: windows
+name: KfeCo10X64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create KfeCo10X64.sys binPath=C:\windows\temp\KfeCo10X64.sys type=kernel && sc.exe
+    start KfeCo10X64.sys
+  comment: 'Killer exposes COM interfaces that allow non-privileged users 1) to block network for any
+    process 2) to manage any service in the OS. Killer is preinstalled to laptops equipped with Intel
+    Killer NICs '
+driver_detail:
+  sha256: b583414fcee280128788f7b39451c511376fe821f455d4f3702795e96d560704
+  signer: Rivet Networks, LLC.
+  original_filename: KfeCoDrv.sys
+  category: vulnerable driver
+references:
+- https://zwclose.github.io/2023/04/18/killer2.html
+- https://twitter.com/zwclose/status/1648441215808049153
+- https://zwclose.github.io/2022/12/18/killer1.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

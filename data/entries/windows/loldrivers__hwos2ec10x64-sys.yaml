@@ -1,0 +1,34 @@
+id: loldrivers/hwos2ec10x64-sys
+type: driver
+platform: windows
+name: HwOs2Ec10x64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create HwOs2Ec10x64.sys binPath=C:\windows\temp\HwOs2Ec10x64.sys     type=kernel &&
+    sc.exe start HwOs2Ec10x64.sys
+driver_detail:
+  sha256: bb1135b51acca8348d285dc5461d10e8f57260e7d0c8cc4a092734d53fc40cbc
+  signer: Huawei
+  original_filename: HwOs2Ec.sys
+  category: vulnerable driver
+references:
+- https://github.com/eclypsium/Screwed-Drivers/blob/master/DRIVERS.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

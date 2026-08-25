@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — loldex</title>
+<meta name="description" content="What loldex is, how it aggregates living-off-the-land catalogues, and how to contribute.">
+<link rel="canonical" href="https://loldex.sh/about.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#13130E">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="loldex">
+<meta property="og:title" content="About — loldex">
+<meta property="og:description" content="A unified index of living-off-the-land techniques across Linux, Windows, and Active Directory.">
+<meta property="og:url" content="https://loldex.sh/about.html">
+<meta property="og:image" content="https://loldex.sh/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://loldex.sh/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#13130E;--ink-2:#1B1B14;--line:#33322A;--line-soft:#26261E;
+    --text:#E9E5D6;--muted:#918D7A;--amber:#E9A23B;
+    --mono:'JetBrains Mono',ui-monospace,monospace;--sans:'Space Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--amber);color:var(--ink)}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  .bar{border-bottom:1px solid var(--line-soft)}
+  .bar .wrap{display:flex;align-items:center;gap:16px;height:56px}
+  .mark{font-family:var(--mono);font-weight:700;font-size:15px}
+  .mark b{color:var(--amber)} .mark a{color:inherit;text-decoration:none}
+  .nav{margin-left:auto;display:flex;gap:18px}
+  .nav a{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none}
+  .nav a:hover{color:var(--text)}
+  main{padding:60px 0 90px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  h1{font-family:var(--mono);font-weight:700;font-size:34px;letter-spacing:-.03em;margin-bottom:26px}
+  h2{font-family:var(--mono);font-weight:700;font-size:19px;margin:38px 0 14px;color:var(--text)}
+  p{color:#cfcabb;margin-bottom:16px}
+  strong{color:var(--text)}
+  a.link{color:var(--amber);text-decoration:none;border-bottom:1px solid transparent}
+  a.link:hover{border-bottom-color:var(--amber)}
+  ul{margin:0 0 16px 0;padding-left:0;list-style:none}
+  li{color:#cfcabb;padding:7px 0 7px 20px;position:relative}
+  li::before{content:"›";position:absolute;left:0;color:var(--amber)}
+  code{font-family:var(--mono);font-size:.86em;background:var(--ink-2);border:1px solid var(--line-soft);border-radius:4px;padding:1px 6px;color:var(--amber)}
+  table{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:14px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line-soft)}
+  th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  td{font-family:var(--mono);color:#cfcabb}
+  .cta{display:inline-block;font-family:var(--mono);font-size:14px;color:var(--ink);background:var(--amber);border-radius:5px;padding:11px 20px;text-decoration:none;margin-top:8px}
+  .cta:hover{background:#F4B24A}
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap">
+  <div class="mark"><a href="./index.html">lol<b>dex</b></a></div>
+  <div class="nav"><a href="./search.html">search</a><a href="./contact.html">contact</a><a href="./index.html">home</a></div>
+</div></div>
+
+<main class="wrap">
+  <div class="eyebrow">about the project</div>
+  <h1>One index, every LOL technique</h1>
+
+  <p>The security community documents living-off-the-land techniques across a dozen separate catalogues — GTFOBins for Linux, LOLBAS for Windows, LOLDrivers for vulnerable drivers, WADComs and LOLAD for Active Directory. Each has its own format, taxonomy, and search box.</p>
+
+  <p><strong>loldex unifies them into one normalized index</strong> you can pivot across by platform, kill-chain phase, required privilege, and capability — the query a red teamer actually runs on an engagement. Search once, across every domain, instead of tab-hopping between five sites.</p>
+
+  <h2>What's inside</h2>
+  <table>
+    <tr><th>Platform</th><th>Entries</th><th>Sources</th></tr>
+    <tr><td>Linux</td><td>1,708</td><td>GTFOBins</td></tr>
+    <tr><td>Windows</td><td>1,138</td><td>LOLBAS, LOLDrivers</td></tr>
+    <tr><td>Active Directory</td><td>237</td><td>WADComs, LOLAD</td></tr>
+    <tr><td>Total</td><td>3,083</td><td></td></tr>
+  </table>
+  <p>Every entry carries a command, a MITRE ATT&amp;CK mapping, the required privilege, its capability and kill-chain phase, and — where available — opsec and detection notes.</p>
+
+  <h2>Aggregator, not re-cataloguer</h2>
+  <p>loldex does not originate technique data. It <strong>normalizes and enriches what upstream projects already publish</strong>, and links back to every source on every entry. All credit for the underlying research belongs to those projects and their contributors. The data is redistributed under each source's licence.</p>
+
+  <h2>An API, not just a site</h2>
+  <p>loldex is machine-consumable. Point a SIEM, SOAR, or detection pipeline at the query API:</p>
+  <ul>
+    <li><code>/api/search?q=certutil&amp;os=windows</code></li>
+    <li><code>/api/stats</code></li>
+    <li><code>/api/entry/&lt;id&gt;</code></li>
+  </ul>
+
+  <h2>Contributing</h2>
+  <p>loldex grows where it needs hands, not where upstream already has it covered. The useful contributions are:</p>
+  <ul>
+    <li><strong>Adapters</strong> for new sources (LOLESXi, LOLRMM, GTFOArgs, and beyond).</li>
+    <li><strong>Active-Directory curation</strong> — AD sources are prose, and human judgement improves the mapping.</li>
+    <li><strong>Opsec &amp; detection enrichment</strong> — noise ratings, triggers, Sigma/Elastic references.</li>
+  </ul>
+  <p>What loldex does <em>not</em> want is re-cataloguing of techniques the upstream projects already document — contribute there instead, and loldex will pick it up on the next sync.</p>
+
+  <a class="cta" href="https://github.com/metalx1993/loldex" target="_blank" rel="noopener">View the repository →</a>
+
+  <h2>See also</h2>
+  <p>The projects loldex stands on:
+    <a class="link" href="https://gtfobins.github.io" target="_blank" rel="noopener">GTFOBins</a>,
+    <a class="link" href="https://lolbas-project.github.io" target="_blank" rel="noopener">LOLBAS</a>,
+    <a class="link" href="https://www.loldrivers.io" target="_blank" rel="noopener">LOLDrivers</a>,
+    <a class="link" href="https://wadcoms.github.io" target="_blank" rel="noopener">WADComs</a>,
+    <a class="link" href="https://lolad-project.github.io" target="_blank" rel="noopener">LOLAD</a>.
+  </p>
+</main>
+</body>
+</html>

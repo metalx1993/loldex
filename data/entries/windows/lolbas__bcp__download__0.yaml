@@ -1,0 +1,31 @@
+id: lolbas/bcp/download/0
+type: binary
+platform: windows
+name: Bcp.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Process creation of bcp.exe with queryout or Out parameter
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_bcp_export_data.yml
+commands:
+- template: bcp "SELECT payload_data FROM database.dbo.payloads WHERE id=1" queryout "C:\Windows\Temp\payload.exe"
+    -S localhost -T -c
+  comment: Export binary payload stored in SQL Server database to file system.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Bcp/
+tags:
+- windows
+- lolbas

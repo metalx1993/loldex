@@ -1,0 +1,24 @@
+id: gtfobins/basenc/file-read/suid
+type: binary
+platform: linux
+name: basenc
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: basenc --base64 /path/to/input-file | basenc -d --base64
+references:
+- https://gtfobins.github.io/gtfobins/basenc/
+tags:
+- linux
+- unix
+- gtfobins

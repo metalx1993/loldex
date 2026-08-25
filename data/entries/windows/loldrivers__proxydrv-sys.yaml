@@ -1,0 +1,31 @@
+id: loldrivers/proxydrv-sys
+type: driver
+platform: windows
+name: ProxyDrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 0b205838a8271daea89656b1ec7c5bb7244c42a8b8000d7697e92095da6b9b94
+  signer: "\u96F7\u795E\uFF08\u6B66\u6C49\uFF09\u7F51\u7EDC\u6280\u672F\u6709\u9650\u516C\u53F8"
+  original_filename: ProxyDrv.sys
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

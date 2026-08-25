@@ -1,0 +1,25 @@
+id: gtfobins/fastfetch/file-read/suid
+type: binary
+platform: linux
+name: fastfetch
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: fastfetch --file /path/to/input-file
+  comment: The file content is used as the logo while some other information is displayed on its right.
+references:
+- https://gtfobins.github.io/gtfobins/fastfetch/
+tags:
+- linux
+- unix
+- gtfobins

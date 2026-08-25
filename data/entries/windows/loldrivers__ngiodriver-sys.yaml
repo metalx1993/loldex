@@ -1,0 +1,37 @@
+id: loldrivers/ngiodriver-sys
+type: driver
+platform: windows
+name: ngiodriver.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ngiodriversys binPath= C:\windows\temp\ngiodriversys.sys type=kernel && sc.exe
+    start ngiodriversys
+  comment: The Carbon Black Threat Analysis Unit (TAU) discovered 34 unique vulnerable drivers (237 file
+    hashes) accepting firmware access. Six allow kernel memory access. All give full control of the devices
+    to
+driver_detail:
+  sha256: 1072beb3ff6b191b3df1a339e3a8c87a8dc5eae727f2b993ea51b448e837636a
+  signer: AVAST Software
+  original_filename: ngiodriver.sys
+  category: vulnerable driver
+references:
+- https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

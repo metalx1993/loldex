@@ -1,0 +1,39 @@
+id: loldrivers/rootlaser-sys
+type: driver
+platform: windows
+name: RootLaser.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create RootLaser binPath=C:\windows\temp\RootLaser.sys type=kernel && sc.exe start
+    RootLaser
+  comment: Adlice RootLaser.sys version 3.4.1 is a signed kernel driver assessed in public KOSEC BYOVD
+    research. The driver retains a process-termination IOCTL reachable from administrator context and
+    additional
+driver_detail:
+  sha256: 85b69f4e518c66b8ba7154ecb1ac1e8791dfe2fdf1e20b7c3a707f59639ac10d
+  signer: Adlice Software
+  original_filename: Adlice RootLaser
+  category: vulnerable driver
+references:
+- https://github.com/KOSEC-LLC/BYOVD-Research/tree/main/Adlice
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

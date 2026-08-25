@@ -1,0 +1,38 @@
+id: loldrivers/ardrv-sys
+type: driver
+platform: windows
+name: ardrv.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ardrv binPath=C:\windows\temp\ardrv.sys type=kernel && sc.exe start ardrv
+  comment: OPSWAT AppRemover ardrv.sys version 2017.10.02.1551 and earlier exposes a user-accessible \\.\ardrv
+    device. Public research documents IOCTL 0x2420031 reaching process-termination paths, including ZwTe
+driver_detail:
+  sha256: 07c5209bf83065fe760f4fee4ed2308b0c523671f68ca73a3854c2c8c28c0541
+  signer: OPSWAT, Inc.
+  original_filename: ardrv.sys
+  category: vulnerable driver
+references:
+- https://github.com/redteamfortress/CVE-2026-36425
+- https://github.com/magicsword-io/LOLDrivers/issues/374
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

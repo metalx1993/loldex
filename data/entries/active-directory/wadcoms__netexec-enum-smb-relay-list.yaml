@@ -1,0 +1,29 @@
+id: wadcoms/netexec-enum-smb-relay-list
+type: technique
+platform: active-directory
+name: NetExec Enum SMB Relay List
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- no credentials required
+commands:
+- template: nxc smb smb_host.txt --gen-relay-list output.txt
+  comment: '"NetExec (a.k.a nxc) is a network service exploitation tool that helps automate assessing
+    the security of large networks." - https://www.netexec.wiki/. The following command will enumerate
+    a list of SMB hosts with signing not enforced, allowing you to relay credentials to them us'
+references:
+- https://github.com/Pennyw0rth/NetExec
+- https://www.netexec.wiki/
+tags:
+- active-directory
+- wadcoms
+- smb

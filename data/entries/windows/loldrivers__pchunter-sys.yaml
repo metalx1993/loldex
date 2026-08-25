@@ -1,0 +1,30 @@
+id: loldrivers/pchunter-sys
+type: driver
+platform: windows
+name: pchunter.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 3f20ac5dac9171857fc5791865458fdb6eac4fab837d7eabc42cb0a83cb522fc
+  signer: "\u5B89\u82AF\u7F51\u76FE\uFF08\u5317\u4EAC\uFF09\u79D1\u6280\u6709\u9650\u516C\u53F8"
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

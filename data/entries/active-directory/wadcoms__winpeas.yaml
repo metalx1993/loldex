@@ -1,0 +1,29 @@
+id: wadcoms/winpeas
+type: technique
+platform: active-directory
+name: winPEAS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+commands:
+- template: winpeas.exe cmd > output.txt
+  comment: 'winpeas.exe is a script that will search for all possible paths to escalate privileges on
+    Windows hosts. The below command will run all priv esc checks and store the output in a file. Command
+    Reference: Run all checks: cmd Output File: output.txt'
+references:
+- https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS
+- https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/blob/master/winPEAS/winPEASexe/README.md
+- https://book.hacktricks.xyz/windows/windows-local-privilege-escalation
+tags:
+- active-directory
+- wadcoms

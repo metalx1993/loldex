@@ -1,0 +1,35 @@
+id: loldrivers/wamsdk-sys
+type: driver
+platform: windows
+name: wamsdk.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create wamsdk binPath=C:\windows\temp\wamsdk.sys type=kernel && sc.exe start wamsdk
+  comment: Vulnerable WatchDog Antimalware driver used by Silver Fox APT group to load unsigned drivers
+    and execute malicious code in kernel mode
+driver_detail:
+  sha256: 5af1dae21425dda8311a2044209c308525135e1733eeff5dd20649946c6e054c
+  signer: WatchDogDevelopment.com, LLC.
+  original_filename: wamsdk.sys
+  category: vulnerable driver
+references:
+- https://research.checkpoint.com/2025/silver-fox-apt-vulnerable-drivers/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

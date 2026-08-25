@@ -1,0 +1,33 @@
+id: loldrivers/msqpq-sys
+type: driver
+platform: windows
+name: MSqPq.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create MSqPq.sys binPath=C:\windows\temp\MSqPq.sys type=kernel && sc.exe start MSqPq.sys
+  comment: BlackCat Ransomware Deploys New Signed Kernel Driver. BlackCat ransomware incident that occurred
+    in February 2023.
+driver_detail:
+  sha256: 56066ed07bad3b5c1474e8fae5ee2543d17d7977369b34450bd0775517e3b25c
+  category: malicious
+references:
+- https://www.trendmicro.com/en_us/research/23/e/blackcat-ransomware-deploys-new-signed-kernel-driver.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

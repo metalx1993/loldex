@@ -1,0 +1,29 @@
+id: loldrivers/mlgbbiicaihflrnh-sys
+type: driver
+platform: windows
+name: mlgbbiicaihflrnh.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+driver_detail:
+  sha256: 7433f14b40c674c5e87b6210c330d5bcaf2f6f52d632ae29e9b7cf3ca405665b
+  category: malicious
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

@@ -1,0 +1,37 @@
+id: loldrivers/neacsafe64-sys
+type: driver
+platform: windows
+name: NeacSafe64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create NeacSafe64 binPath=C:\windows\temp\NeacSafe64.sys type=kernel && sc.exe start
+    NeacSafe64
+  comment: NetEase NeacSafe64.sys is an anti-cheat mini-filter driver referenced by KDU and public NeacController
+    research. Versions prior to 1.0.0.8 expose IOCTL/message-handler paths that provide arbitrary ker
+driver_detail:
+  sha256: 65447f727801e8be8a51aaaafc07618c8196553e683affb0721da441e2430bad
+  signer: "\u7F51\u6613(\u676D\u5DDE)\u7F51\u7EDC\u6709\u9650\u516C\u53F8\u676D\u5DDE"
+  original_filename: neacsafe
+  category: vulnerable driver
+references:
+- https://github.com/smallzhong/NeacController
+- https://github.com/hfiref0x/KDU/blob/master/Help/providers.md
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

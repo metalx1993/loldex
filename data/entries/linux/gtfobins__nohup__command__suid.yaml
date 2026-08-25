@@ -1,0 +1,27 @@
+id: gtfobins/nohup/command/suid
+type: binary
+platform: linux
+name: nohup
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'nohup /path/to/command
+
+    cat nohup.out'
+  comment: The `nohup.out` file contains the standard output and error of the command.
+references:
+- https://gtfobins.github.io/gtfobins/nohup/
+tags:
+- linux
+- unix
+- gtfobins

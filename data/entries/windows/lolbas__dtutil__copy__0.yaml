@@ -1,0 +1,27 @@
+id: lolbas/dtutil/copy/0
+type: binary
+platform: windows
+name: dtutil.exe
+phases:
+- collection
+capabilities:
+- file-write
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: medium
+commands:
+- template: dtutil.exe /FILE {PATH_ABSOLUTE:.source.ext} /COPY FILE;{PATH_ABSOLUTE:.dest.ext}
+  comment: Copy file from source to destination
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dtutil/
+tags:
+- windows
+- lolbas

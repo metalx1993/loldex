@@ -1,0 +1,37 @@
+id: loldrivers/lecomax64-sys
+type: driver
+platform: windows
+name: LECOMAx64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create LECOMAx64 binPath=C:\windows\temp\LECOMAx64.sys type=kernel && sc.exe start
+    LECOMAx64
+  comment: LECOMAx64.sys is a signed LECO LECOMA device driver referenced by public PPLShade supported-driver
+    research.
+driver_detail:
+  sha256: 0f2dff4116a84241d8cafe534b63454fb4ea26272da8977be03670701ec6631c
+  signer: LECO Corporation
+  original_filename: LECOMAx.SYS
+  category: vulnerable driver
+references:
+- https://github.com/redteamfortress/PPLShade#supported-drivers
+- https://github.com/magicsword-io/LOLDrivers/issues/354
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

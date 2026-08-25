@@ -1,0 +1,25 @@
+id: gtfobins/tic/file-read/unprivileged
+type: binary
+platform: linux
+name: tic
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tic -C /path/to/input-file
+  comment: This translates a terminfo file from source format into compiled format. It will attempt to
+    translate an arbitrary file and output the contents of the file on failure.
+references:
+- https://gtfobins.github.io/gtfobins/tic/
+tags:
+- linux
+- unix
+- gtfobins

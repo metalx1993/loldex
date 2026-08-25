@@ -1,0 +1,37 @@
+id: loldrivers/8492937-2-driver-sys
+type: driver
+platform: windows
+name: 8492937_2_Driver.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: '5554706'
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create 8492937_2_Driver.sys binPath=C:\windows\temp\8492937_2_Driver.sys type=kernel
+    && sc.exe start 8492937_2_Driver.sys
+  comment: ABYSSWORKER is a malicious driver used in MEDUSA ransomware attacks to disable EDR systems.
+    The driver masquerades as a legitimate CrowdStrike Falcon driver and provides extensive capabilities
+    to term
+driver_detail:
+  sha256: d51d00127ddd4551fb1eafe14255715014944ad4c60eabb9e568c3ff98ff4a2e
+  category: vulnerable driver
+references:
+- https://www.elastic.co/security-labs/abyssworker
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
