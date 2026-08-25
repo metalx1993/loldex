@@ -1,0 +1,31 @@
+id: gtfobins/jjs/file-read/unprivileged
+type: binary
+platform: linux
+name: jjs
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'jjs
+
+    var BufferedReader = Java.type(''java.io.BufferedReader'');
+
+    var FileReader = Java.type(''java.io.FileReader'');
+
+    var br = new BufferedReader(new FileReader(''/path/to/input-file''));
+
+    while ((line = br.readLine()) != null) { print(line); }'
+references:
+- https://gtfobins.github.io/gtfobins/jjs/
+tags:
+- linux
+- unix
+- gtfobins

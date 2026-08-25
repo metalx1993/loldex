@@ -1,0 +1,24 @@
+id: gtfobins/codex/shell/sudo
+type: binary
+platform: linux
+name: codex
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: codex sandbox linux /bin/sh
+references:
+- https://gtfobins.github.io/gtfobins/codex/
+tags:
+- linux
+- unix
+- gtfobins

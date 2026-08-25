@@ -1,0 +1,24 @@
+id: gtfobins/ash/file-write/sudo
+type: binary
+platform: linux
+name: ash
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ash -c 'echo DATA >/path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/ash/
+tags:
+- linux
+- unix
+- gtfobins

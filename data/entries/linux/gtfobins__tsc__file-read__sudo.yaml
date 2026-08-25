@@ -1,0 +1,26 @@
+id: gtfobins/tsc/file-read/sudo
+type: binary
+platform: linux
+name: tsc
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tsc /path/to/input-file.ts
+  comment: Content is leaked as error messages. The file extension must be one of the supported ones,
+    e.g., `.ts`, `.tsx`, etc.
+references:
+- https://gtfobins.github.io/gtfobins/tsc/
+tags:
+- linux
+- unix
+- gtfobins

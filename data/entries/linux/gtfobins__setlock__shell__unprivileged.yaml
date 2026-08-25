@@ -1,0 +1,23 @@
+id: gtfobins/setlock/shell/unprivileged
+type: binary
+platform: linux
+name: setlock
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: setlock - /bin/sh
+references:
+- https://gtfobins.github.io/gtfobins/setlock/
+tags:
+- linux
+- unix
+- gtfobins

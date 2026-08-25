@@ -1,0 +1,27 @@
+id: gtfobins/diff/file-read/sudo
+type: binary
+platform: linux
+name: diff
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: diff --line-format=%L /dev/null /path/to/input-file
+- template: diff --recursive /path/to/empty-dir /path/to/input-dir/
+  comment: This lists the content of a directory. `/path/to/empty-dir` can be any directory, but for convenience
+    it is better to use an empty directory to avoid noise output.
+references:
+- https://gtfobins.github.io/gtfobins/diff/
+tags:
+- linux
+- unix
+- gtfobins

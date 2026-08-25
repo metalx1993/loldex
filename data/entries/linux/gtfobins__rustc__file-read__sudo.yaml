@@ -1,0 +1,25 @@
+id: gtfobins/rustc/file-read/sudo
+type: binary
+platform: linux
+name: rustc
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: rustc /path/to/input-file
+  comment: The compiler leaks some file lines in the compiler error.
+references:
+- https://gtfobins.github.io/gtfobins/rustc/
+tags:
+- linux
+- unix
+- gtfobins

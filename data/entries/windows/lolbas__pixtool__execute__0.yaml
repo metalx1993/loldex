@@ -1,0 +1,27 @@
+id: lolbas/pixtool/execute/0
+type: binary
+platform: windows
+name: Pixtool.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+commands:
+- template: pixtool.exe launch {PATH_ABSOLUTE:.exe}
+  comment: Launches an executable via PIX command-line utility.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Pixtool/
+tags:
+- windows
+- lolbas

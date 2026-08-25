@@ -1,0 +1,24 @@
+id: gtfobins/ntpdate/file-read/unprivileged
+type: binary
+platform: linux
+name: ntpdate
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ntpdate -a x -k /path/to/input-file -d localhost
+  comment: The file is actually parsed and lines are leaked through error messages.
+references:
+- https://gtfobins.github.io/gtfobins/ntpdate/
+tags:
+- linux
+- unix
+- gtfobins

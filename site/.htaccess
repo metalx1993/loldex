@@ -1,0 +1,24 @@
+# loldex — SiteGround/Apache config
+DirectoryIndex index.html
+
+# Pretty API routes: /api/search?q=... -> api.php?action=search&q=...
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^api/([a-z]+)/?$ api.php?action=$1 [QSA,L]
+</IfModule>
+
+# Serve correct types
+AddType application/json .json
+AddType image/svg+xml .svg
+
+# Light caching for static assets (not for data.json, which updates)
+<FilesMatch "\.(svg|png|ico)$">
+  Header set Cache-Control "max-age=86400, public"
+</FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

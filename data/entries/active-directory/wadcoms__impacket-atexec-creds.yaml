@@ -1,0 +1,30 @@
+id: wadcoms/impacket-atexec-creds
+type: technique
+platform: active-directory
+name: Impacket atexec Creds
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 atexec.py test.local/john:password123@10.10.10.1 whoami
+  comment: Impacket's atexec.py uses the Task Scheduler service on the remote Windows host to execute
+    the given command. It will create a windows task with a random name, trigger the task, and then delete
+    it. The following command executes `whoami` on the remote Windows host. Command Refere
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/atexec.py
+- https://u0041.co/blog/post/1
+tags:
+- active-directory
+- wadcoms
+- smb

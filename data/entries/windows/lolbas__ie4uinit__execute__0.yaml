@@ -1,0 +1,30 @@
+id: lolbas/ie4uinit/execute/0
+type: binary
+platform: windows
+name: Ie4uinit.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: ie4uinit.exe copied outside of %windir%
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/process_creation/proc_creation_win_lolbin_ie4uinit.yml
+commands:
+- template: ie4uinit.exe -BaseSettings
+  comment: Executes commands from a specially prepared ie4uinit.inf file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ie4uinit/
+tags:
+- windows
+- lolbas

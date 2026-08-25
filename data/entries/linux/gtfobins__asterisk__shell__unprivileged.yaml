@@ -1,0 +1,27 @@
+id: gtfobins/asterisk/shell/unprivileged
+type: binary
+platform: linux
+name: asterisk
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'asterisk -r
+
+    !/bin/sh'
+  comment: A server instance must be already running, otherwise it can be started with `sudo asterisk
+    -F`. Moreover, the invoking user must be able to access the socket.
+references:
+- https://gtfobins.github.io/gtfobins/asterisk/
+tags:
+- linux
+- unix
+- gtfobins

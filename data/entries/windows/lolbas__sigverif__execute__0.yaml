@@ -1,0 +1,29 @@
+id: lolbas/sigverif/execute/0
+type: binary
+platform: windows
+name: Sigverif.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: sigverif.exe spawning unexpected child processes
+commands:
+- template: sigverif.exe
+  comment: Launch sigverif.exe GUI, click 'Advanced', specify arbitrary executable path as 'log file name',
+    then click 'View Log' to execute the binary.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Sigverif/
+tags:
+- windows
+- lolbas

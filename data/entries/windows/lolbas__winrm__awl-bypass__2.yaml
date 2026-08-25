@@ -1,0 +1,34 @@
+id: lolbas/winrm/awl-bypass/2
+type: script
+platform: windows
+name: winrm.vbs
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1220
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_winrm_awl_bypass.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_winrm_execution_via_scripting_api_winrm_vbs.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/file/file_event/file_event_win_winrm_awl_bypass.yml
+commands:
+- template: '%SystemDrive%\BypassDir\cscript //nologo %windir%\System32\winrm.vbs get wmicimv2/Win32_Process?Handle=4
+    -format:pretty'
+  comment: Bypass AWL solutions by copying cscript.exe to an attacker-controlled location; creating a
+    malicious WsmPty.xsl in the same location, and executing winrm.vbs via the relocated cscript.exe.
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Winrm/
+tags:
+- windows
+- lolbas

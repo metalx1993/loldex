@@ -1,0 +1,25 @@
+id: gtfobins/unexpand/file-read/suid
+type: binary
+platform: linux
+name: unexpand
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: unexpand -t999 /path/to/input-file
+  comment: Convert sequences of (e.g., `999`) spaces to tab.
+references:
+- https://gtfobins.github.io/gtfobins/unexpand/
+tags:
+- linux
+- unix
+- gtfobins

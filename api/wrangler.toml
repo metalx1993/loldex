@@ -1,0 +1,10 @@
+name = "loldex-api"
+main = "worker.js"
+compatibility_date = "2026-08-25"
+
+# After first deploy, attach a custom route so the API lives on your domain,
+# e.g. api.loldex.sh. Uncomment and set your zone:
+#
+# routes = [
+#   { pattern = "api.loldex.sh/*", zone_name = "loldex.sh" }
+# ]

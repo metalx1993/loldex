@@ -1,0 +1,30 @@
+id: lolbas/fsutil/tamper/1
+type: binary
+platform: windows
+name: Fsutil.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1485
+opsec:
+  noise: medium
+  triggers: fsutil.exe should not be run on a normal workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/ff5102832031425f6eed011dd3a2e62653008c94/rules/windows/process_creation/proc_creation_win_susp_fsutil_usage.yml
+commands:
+- template: 'fsutil.exe usn deletejournal /d c:'
+  comment: Delete the USN journal volume to hide file creation activity
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Fsutil/
+tags:
+- windows
+- lolbas

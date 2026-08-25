@@ -1,0 +1,25 @@
+id: gtfobins/curl/library-load/suid
+type: binary
+platform: linux
+name: curl
+phases:
+- execution
+- persistence
+- privilege-escalation
+capabilities:
+- library-load
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: curl --engine /path/to/lib.so x
+references:
+- https://gtfobins.github.io/gtfobins/curl/
+tags:
+- linux
+- unix
+- gtfobins

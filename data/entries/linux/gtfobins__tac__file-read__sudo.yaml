@@ -1,0 +1,26 @@
+id: gtfobins/tac/file-read/sudo
+type: binary
+platform: linux
+name: tac
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tac -s 'RANDOM' /path/to/input-file
+  comment: Make sure that `RANDOM` does not appear into the file to read otherwise the content of the
+    file is corrupted by reversing the order of `RANDOM`-separated chunks.
+references:
+- https://gtfobins.github.io/gtfobins/tac/
+tags:
+- linux
+- unix
+- gtfobins

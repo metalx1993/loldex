@@ -1,0 +1,25 @@
+id: gtfobins/restic/command/sudo
+type: binary
+platform: linux
+name: restic
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: RESTIC_PASSWORD_COMMAND='/path/to/command' restic backup
+- template: restic --password-command='/path/to/command' backup
+references:
+- https://gtfobins.github.io/gtfobins/restic/
+tags:
+- linux
+- unix
+- gtfobins

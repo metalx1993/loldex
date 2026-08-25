@@ -1,0 +1,28 @@
+id: gtfobins/aspell/file-read/sudo
+type: binary
+platform: linux
+name: aspell
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: aspell -c /path/to/input-file
+  comment: The textual file is displayed in an interactive TUI showing only the parts that contain mispelled
+    words.
+- template: aspell --conf /path/to/input-file
+  comment: The first word is likely displayed as error messaged, and converted to lowercase.
+references:
+- https://gtfobins.github.io/gtfobins/aspell/
+tags:
+- linux
+- unix
+- gtfobins

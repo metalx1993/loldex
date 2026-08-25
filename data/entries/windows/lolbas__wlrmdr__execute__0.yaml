@@ -1,0 +1,30 @@
+id: lolbas/wlrmdr/execute/0
+type: binary
+platform: windows
+name: Wlrmdr.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: wlrmdr.exe spawning any new processes
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_wlrmdr.yml
+commands:
+- template: wlrmdr.exe -s 3600 -f 0 -t _ -m _ -a 11 -u {PATH:.exe}
+  comment: Execute executable with wlrmdr.exe as parent process
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Wlrmdr/
+tags:
+- windows
+- lolbas

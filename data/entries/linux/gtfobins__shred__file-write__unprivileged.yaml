@@ -1,0 +1,24 @@
+id: gtfobins/shred/file-write/unprivileged
+type: binary
+platform: linux
+name: shred
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: shred -u /path/to/output-file
+  comment: This actually deletes the chosen file.
+references:
+- https://gtfobins.github.io/gtfobins/shred/
+tags:
+- linux
+- unix
+- gtfobins

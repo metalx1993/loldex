@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search — loldex</title>
+<meta name="description" content="Search 1,700+ living-off-the-land techniques across Linux, Windows, and Active Directory. Filter by platform, privilege, capability, and kill-chain phase.">
+<link rel="canonical" href="https://loldex.sh/search.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#13130E">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="loldex">
+<meta property="og:title" content="Search — loldex">
+<meta property="og:description" content="Search living-off-the-land techniques across Linux, Windows, and Active Directory in one place.">
+<meta property="og:url" content="https://loldex.sh/search.html">
+<meta property="og:image" content="https://loldex.sh/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://loldex.sh/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#13130E;--ink-2:#1B1B14;--line:#33322A;--line-soft:#26261E;
+    --text:#E9E5D6;--muted:#918D7A;--amber:#E9A23B;--amber-dim:#8A6526;
+    --linux:#6FC5A6;--win:#7FB0E0;--ad:#B4A2EC;
+    --mono:'JetBrains Mono',ui-monospace,monospace;--sans:'Space Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--text);font-family:var(--sans);font-size:15px;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--amber);color:var(--ink)}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+  .bar{border-bottom:1px solid var(--line-soft);position:sticky;top:0;z-index:5;background:rgba(19,19,14,.9);backdrop-filter:blur(8px)}
+  .bar .wrap{display:flex;align-items:center;gap:16px;height:56px}
+  .mark{font-family:var(--mono);font-weight:700;font-size:15px}
+  .mark b{color:var(--amber)}
+  .mark a{color:inherit;text-decoration:none}
+  .idx{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto}
+
+  .controls{padding:26px 0 14px}
+  #q{width:100%;background:var(--ink-2);border:1px solid var(--line);border-radius:6px;color:var(--text);
+     font-family:var(--mono);font-size:15px;padding:13px 15px;outline:none}
+  #q:focus{border-color:var(--amber-dim)}
+  #q::placeholder{color:var(--muted)}
+  .facets{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .facets select{background:var(--ink-2);border:1px solid var(--line);border-radius:5px;color:var(--text);
+     font-family:var(--mono);font-size:12.5px;padding:8px 10px;outline:none;cursor:pointer}
+  .facets select:focus{border-color:var(--amber-dim)}
+  .count{font-family:var(--mono);font-size:12px;color:var(--muted);padding:6px 0 16px}
+
+  .row{border:1px solid var(--line);border-radius:6px;background:var(--ink-2);padding:15px 17px;margin-bottom:10px}
+  .row .head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .row .name{font-family:var(--mono);font-weight:700;font-size:15px}
+  .plat{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;border:1px solid}
+  .plat.linux{color:var(--linux);border-color:#2f5045}
+  .plat.windows{color:var(--win);border-color:#2c4359}
+  .plat[class*="active"]{color:var(--ad);border-color:#453f5c}
+  .plat.macos{color:var(--muted);border-color:var(--line)}
+  .row .id{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto}
+  .meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:9px;font-family:var(--mono);font-size:12px}
+  .meta b{color:var(--amber);font-weight:400}
+  .meta span{color:var(--muted)}
+  .cmd{margin-top:11px;background:var(--ink);border:1px solid var(--line-soft);border-radius:4px;
+     font-family:var(--mono);font-size:12.5px;padding:9px 11px;color:var(--text);overflow-x:auto;white-space:pre}
+  .cmd::before{content:"$ ";color:var(--muted)}
+  .noise{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:8px}
+  .noise b{color:var(--amber)}
+  a.ext{font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;margin-top:8px;display:inline-block}
+  a.ext:hover{color:var(--text)}
+  .empty{font-family:var(--mono);color:var(--muted);padding:40px 0;text-align:center}
+  @media(max-width:560px){.row .id{margin-left:0;flex-basis:100%}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap">
+  <div class="mark"><a href="./index.html">lol<b>dex</b></a></div>
+  <a href="./contact.html" style="font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none;margin-left:16px">contact</a>
+  <div class="idx" id="idxinfo">loading…</div>
+</div></div>
+
+<div class="wrap">
+  <div class="controls">
+    <input id="q" type="search" placeholder="search a binary, script, or technique…  (tar, certutil, dcsync)" autocomplete="off" autofocus>
+    <div class="facets">
+      <select id="f-platform"><option value="">all platforms</option><option>linux</option><option>windows</option><option>active-directory</option><option>macos</option></select>
+      <select id="f-priv"><option value="">any privilege</option><option>none</option><option>user</option><option>suid</option><option>sudo</option><option>capability</option><option>admin</option><option>system</option><option>domain-user</option><option>specific-right</option></select>
+      <select id="f-cap"><option value="">any capability</option></select>
+      <select id="f-phase"><option value="">any phase</option></select>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
+  <div id="results"></div>
+</div>
+
+<script>
+let ENTRIES = [];
+const $ = s => document.querySelector(s);
+const esc = s => (s||"").replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+async function boot(){
+  try{
+    const r = await fetch('./data.json');
+    const j = await r.json();
+    ENTRIES = j.entries || [];
+    $('#idxinfo').textContent = ENTRIES.length + ' entries indexed';
+    fillFacet('#f-cap', 'capabilities');
+    fillFacet('#f-phase', 'phases');
+    const pq = new URLSearchParams(location.search).get('q');
+    if(pq){ $('#q').value = pq; }
+    render();
+  }catch(e){
+    $('#results').innerHTML = '<div class="empty">could not load data.json — run scripts/build_site_data.py first</div>';
+  }
+}
+function fillFacet(sel, key){
+  const set = new Set();
+  ENTRIES.forEach(e => (e[key]||[]).forEach(v => set.add(v)));
+  [...set].sort().forEach(v => { const o=document.createElement('option'); o.textContent=v; $(sel).appendChild(o); });
+}
+function render(){
+  const q = $('#q').value.trim().toLowerCase();
+  const fp = $('#f-platform').value, fpr = $('#f-priv').value, fc = $('#f-cap').value, fph = $('#f-phase').value;
+  let hits = ENTRIES.filter(e => {
+    if(q){ const hay=(e.name+' '+e.id+' '+(e.aliases||[]).join(' ')).toLowerCase(); if(!hay.includes(q)) return false; }
+    if(fp && e.platform!==fp) return false;
+    if(fpr && e.privilege_required!==fpr) return false;
+    if(fc && !(e.capabilities||[]).includes(fc)) return false;
+    if(fph && !(e.phases||[]).includes(fph)) return false;
+    return true;
+  });
+  $('#count').textContent = hits.length + ' result' + (hits.length===1?'':'s');
+  const shown = hits.slice(0, 200);
+  if(!shown.length){ $('#results').innerHTML = '<div class="empty">no matches</div>'; return; }
+  $('#results').innerHTML = shown.map(row).join('');
+}
+function row(e){
+  const cmd = (e.commands&&e.commands[0]) ? `<div class="cmd">${esc(e.commands[0].template.split('\n')[0])}</div>` : '';
+  const noise = (e.opsec&&e.opsec.noise) ? `<div class="noise">opsec noise: <b>${esc(e.opsec.noise)}</b>${e.opsec.triggers?' · '+esc(e.opsec.triggers):''}</div>` : '';
+  const ref = (e.references&&e.references[0]) ? `<a class="ext" href="${esc(e.references[0])}" target="_blank" rel="noopener">source ↗</a>` : '';
+  const att = (e.attack_techniques||[]).length ? `<span>· ${esc(e.attack_techniques.join(', '))}</span>` : '';
+  return `<div class="row">
+    <div class="head"><span class="name">${esc(e.name)}</span>
+      <span class="plat ${esc(e.platform)}">${esc(e.platform)}</span>
+      <span class="id">${esc(e.id)}</span></div>
+    <div class="meta"><span><b>priv</b> ${esc(e.privilege_required)}</span>
+      <span><b>cap</b> ${esc((e.capabilities||[]).join(', '))}</span>
+      <span><b>phase</b> ${esc((e.phases||[]).join(', '))} ${att}</span></div>
+    ${cmd}${noise}${ref}
+  </div>`;
+}
+['#q','#f-platform','#f-priv','#f-cap','#f-phase'].forEach(s => {
+  document.querySelector(s).addEventListener('input', render);
+});
+boot();
+</script>
+</body>
+</html>

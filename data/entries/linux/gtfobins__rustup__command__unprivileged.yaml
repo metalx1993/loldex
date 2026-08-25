@@ -1,0 +1,33 @@
+id: gtfobins/rustup/command/unprivileged
+type: binary
+platform: linux
+name: rustup
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'mkdir /path/to/temp-dir/bin/
+
+    mkdir /path/to/temp-dir/lib/
+
+    echo ''/path/to/command'' >/path/to/temp-dir/bin/rustc
+
+    chmod +x /path/to/temp-dir/bin/rustc
+
+    rustup toolchain link x /path/to/temp-dir/
+
+    rustup run x rustc'
+references:
+- https://gtfobins.github.io/gtfobins/rustup/
+tags:
+- linux
+- unix
+- gtfobins

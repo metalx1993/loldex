@@ -1,0 +1,30 @@
+id: wadcoms/impacket-samrdump
+type: technique
+platform: active-directory
+name: Impacket SAMRDump
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 samrdump.py test.local/john:password123@10.10.10.1
+  comment: 'Impacket''s samrdump.py communicates with the Security Account Manager Remote (SAMR) interface
+    to list system user accounts, available resource shares, and other sensitive information. Command
+    Reference: Target IP: 10.10.10.1 Domain: test.local Username: john Password: password123'
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/samrdump.py
+- https://www.hackingarticles.in/impacket-guide-smb-msrpc/
+tags:
+- active-directory
+- wadcoms
+- rpc

@@ -1,0 +1,25 @@
+id: gtfobins/openvt/command/sudo
+type: binary
+platform: linux
+name: openvt
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: openvt -- /path/to/command
+  comment: The command execution is displayed on the virtual console.
+references:
+- https://gtfobins.github.io/gtfobins/openvt/
+tags:
+- linux
+- unix
+- gtfobins

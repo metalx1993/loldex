@@ -1,0 +1,26 @@
+id: gtfobins/find/file-read/suid
+type: binary
+platform: linux
+name: find
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: find /path/to/input-file -exec cat {} \;
+  comment: This uses `cat` to actually read the file, but since permissions are not dropped, it's executed
+    with the same privileges as `find`.
+references:
+- https://gtfobins.github.io/gtfobins/find/
+tags:
+- linux
+- unix
+- gtfobins

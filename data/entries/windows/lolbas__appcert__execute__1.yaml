@@ -1,0 +1,28 @@
+id: lolbas/appcert/execute/1
+type: binary
+platform: windows
+name: AppCert.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.007
+opsec:
+  noise: high
+commands:
+- template: appcert.exe test -apptype desktop -setuppath {PATH_ABSOLUTE:.msi} -setupcommandline /q -reportoutputpath
+    {PATH_ABSOLUTE:.xml}
+  comment: Install an MSI file via an msiexec instance spawned via appcert.exe as parent process.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Appcert/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,24 @@
+id: gtfobins/dd/file-read/sudo
+type: binary
+platform: linux
+name: dd
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: dd if=/path/to/input-file
+references:
+- https://gtfobins.github.io/gtfobins/dd/
+tags:
+- linux
+- unix
+- gtfobins

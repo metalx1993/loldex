@@ -1,0 +1,33 @@
+id: lolbas/wsb/execute/0
+type: binary
+platform: windows
+name: wsb.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.006
+opsec:
+  noise: high
+  triggers: wsb.exe command line containing --config with an embedded <LogonCommand> XML element
+commands:
+- template: 'wsb start --config "<Configuration><LogonCommand><Command>{CMD}</Command></LogonCommand></Configuration>"
+
+    wsb exec -r System --id YOUR_ID'
+  comment: 'Executes the given command in a Windows Sandbox from an inline XML configuration with an embedded
+    `<LogonCommand>`, leaving no `.wsb` file on disk. Note: `<LogonCommand>` only fires once `WDAGUtilityAccount`
+    actually logs in, which only happens after an RDP session is established via `wsb connect`, so this
+    pattern opens a visible Sandbox window.'
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wsb/
+tags:
+- windows
+- lolbas

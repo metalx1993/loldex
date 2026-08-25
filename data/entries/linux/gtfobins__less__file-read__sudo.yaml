@@ -1,0 +1,30 @@
+id: gtfobins/less/file-read/sudo
+type: binary
+platform: linux
+name: less
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: less /path/to/input-file
+- template: 'less /etc/hosts
+
+    :e /path/to/input-file'
+  comment: This can be used to read another file, e.g., when invoked as a pager with some fixed content.
+- template: 'LESSOPEN=''echo /path/to/input-file # %s'' less /etc/hosts'
+  comment: This can be used to read another file.
+references:
+- https://gtfobins.github.io/gtfobins/less/
+tags:
+- linux
+- unix
+- gtfobins

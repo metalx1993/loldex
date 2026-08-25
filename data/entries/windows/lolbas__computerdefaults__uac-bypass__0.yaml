@@ -1,0 +1,33 @@
+id: lolbas/computerdefaults/uac-bypass/0
+type: binary
+platform: windows
+name: ComputerDefaults.exe
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1548.002
+opsec:
+  noise: medium
+  triggers: Event ID 10
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_uac_bypass_computerdefaults.yml
+commands:
+- template: ComputerDefaults.exe
+  comment: Upon execution, ComputerDefaults.exe checks two registry values at HKEY_CURRENT_USER\Software\Classes\ms-settings\Shell\open\command;
+    if these are set by an attacker, the set command will be executed as a high-integrity process without
+    a UAC prompt being displayed to the user. See 'resources' for which registry keys/values to set.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/ComputerDefaults/
+tags:
+- windows
+- lolbas

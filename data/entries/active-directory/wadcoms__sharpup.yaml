@@ -1,0 +1,28 @@
+id: wadcoms/sharpup
+type: technique
+platform: active-directory
+name: SharpUp
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+commands:
+- template: SharpUp.exe > output.txt
+  comment: 'SharpUp.exe is part of the GhostPack suite of tools and is a C# port of PowerUp that will
+    perform numerous privilege escalation checks. The following command will run all priv esc checks and
+    store the output in a file. Command Reference: Output File: output.txt'
+references:
+- https://github.com/GhostPack/SharpUp
+- https://www.harmj0y.net/blog/redteaming/ghostpack/
+tags:
+- active-directory
+- wadcoms

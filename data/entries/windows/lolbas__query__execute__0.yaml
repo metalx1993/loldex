@@ -1,0 +1,32 @@
+id: lolbas/query/execute/0
+type: binary
+platform: windows
+name: Query.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: query.exe being executed and executes a child process outside of its normal path of c:\windows\system32\
+    or c:\windows\syswow64\
+commands:
+- template: query.exe user
+  comment: Once executed, `query.exe` will execute `quser.exe` in the same folder. Thus, if `query.exe`
+    is copied to a folder and an arbitrary executable is renamed to `quser.exe`, `query.exe` will spawn
+    it. Instead of `user`, it is also possible to use `session`, `termsession` or `process` as command-line
+    option.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Query/
+tags:
+- windows
+- lolbas

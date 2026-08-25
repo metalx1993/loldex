@@ -1,0 +1,30 @@
+id: lolbas/vsiisexelauncher/execute/0
+type: binary
+platform: windows
+name: VSIISExeLauncher.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: VSIISExeLauncher.exe spawned an unknown process
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_vsiisexelauncher.yml
+commands:
+- template: VSIISExeLauncher.exe -p {PATH:.exe} -a "{CMD:args}"
+  comment: The above binary will execute other binary.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/VSIISExeLauncher/
+tags:
+- windows
+- lolbas

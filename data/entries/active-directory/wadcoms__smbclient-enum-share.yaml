@@ -1,0 +1,30 @@
+id: wadcoms/smbclient-enum-share
+type: technique
+platform: active-directory
+name: SMBClient Enum Share
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: smbclient \\\\test.local\\C$ -I 10.10.10.1 -U john password123
+  comment: 'Smbclient is a tool used to communicate with SMB servers. The following command will connect
+    to an SMB share `C$` using valid credentials. Command Reference: Target IP: 10.10.10.1 Domain: test.local
+    SMB Share: C$ Username: john Password: password123'
+references:
+- https://www.samba.org/samba/docs/current/man-html/smbclient.1.html
+- https://www.madirish.net/59
+tags:
+- active-directory
+- wadcoms
+- smb

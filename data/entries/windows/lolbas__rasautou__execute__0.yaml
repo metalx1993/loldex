@@ -1,0 +1,31 @@
+id: lolbas/rasautou/execute/0
+type: binary
+platform: windows
+name: Rasautou.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: rasautou.exe command line containing -d and -p
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/08ca62cc8860f4660e945805d0dd615ce75258c1/rules/windows/process_creation/win_rasautou_dll_execution.yml
+commands:
+- template: rasautou -d {PATH:.dll} -p export_name -a a -e e
+  comment: Loads the target .DLL specified in -d and executes the export specified in -p. Options removed
+    in Windows 10.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Rasautou/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,24 @@
+id: gtfobins/logrotate/file-read/unprivileged
+type: binary
+platform: linux
+name: logrotate
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: logrotate /path/to/input-file
+  comment: The first word is returned in a error message.
+references:
+- https://gtfobins.github.io/gtfobins/logrotate/
+tags:
+- linux
+- unix
+- gtfobins

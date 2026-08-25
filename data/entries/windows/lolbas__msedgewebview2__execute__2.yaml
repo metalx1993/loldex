@@ -1,0 +1,32 @@
+id: lolbas/msedgewebview2/execute/2
+type: binary
+platform: windows
+name: msedgewebview2.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.015
+opsec:
+  noise: high
+  triggers: 'msedgewebview2.exe spawned with any of the following: --gpu-launcher, --utility-cmd-prefix,
+    --renderer-cmd-prefix, --browser-subprocess-path'
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_susp_electron_execution_proxy.yml
+commands:
+- template: msedgewebview2.exe --disable-gpu-sandbox --gpu-launcher="{CMD}"
+  comment: This command launches the Microsoft Edge WebView2 browser control without sandboxing and will
+    spawn the specified command as its subprocess.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/msedgewebview2/
+tags:
+- windows
+- lolbas

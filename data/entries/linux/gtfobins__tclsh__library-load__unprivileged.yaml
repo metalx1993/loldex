@@ -1,0 +1,26 @@
+id: gtfobins/tclsh/library-load/unprivileged
+type: binary
+platform: linux
+name: tclsh
+phases:
+- execution
+- persistence
+capabilities:
+- library-load
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'tclsh
+
+    load /path/to/lib.so x'
+references:
+- https://gtfobins.github.io/gtfobins/tclsh/
+tags:
+- linux
+- unix
+- gtfobins

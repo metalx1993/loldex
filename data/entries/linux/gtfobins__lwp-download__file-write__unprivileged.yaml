@@ -1,0 +1,27 @@
+id: gtfobins/lwp-download/file-write/unprivileged
+type: binary
+platform: linux
+name: lwp-download
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo DATA >/path/to/temp-file
+
+    lwp-download file:///path/to/temp-file /path/to/output-file'
+- template: lwp-download file:///path/to/input-file /path/to/output-file
+  comment: This actually copies a file to a destination.
+references:
+- https://gtfobins.github.io/gtfobins/lwp-download/
+tags:
+- linux
+- unix
+- gtfobins

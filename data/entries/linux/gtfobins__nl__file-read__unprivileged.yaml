@@ -1,0 +1,24 @@
+id: gtfobins/nl/file-read/unprivileged
+type: binary
+platform: linux
+name: nl
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nl -bn -w1 -s '' /path/to/input-file
+  comment: The read file content is corrupted by a leading space added to each line.
+references:
+- https://gtfobins.github.io/gtfobins/nl/
+tags:
+- linux
+- unix
+- gtfobins

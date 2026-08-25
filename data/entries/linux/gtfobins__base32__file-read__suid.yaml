@@ -1,0 +1,24 @@
+id: gtfobins/base32/file-read/suid
+type: binary
+platform: linux
+name: base32
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: base32 /path/to/input-file | base32 --decode
+references:
+- https://gtfobins.github.io/gtfobins/base32/
+tags:
+- linux
+- unix
+- gtfobins

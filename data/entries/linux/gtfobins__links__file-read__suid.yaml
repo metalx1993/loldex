@@ -1,0 +1,25 @@
+id: gtfobins/links/file-read/suid
+type: binary
+platform: linux
+name: links
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: links /path/to/input-file
+  comment: The result is displayed in a TUI interface.
+references:
+- https://gtfobins.github.io/gtfobins/links/
+tags:
+- linux
+- unix
+- gtfobins

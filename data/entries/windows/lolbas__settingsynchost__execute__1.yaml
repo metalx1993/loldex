@@ -1,0 +1,32 @@
+id: lolbas/settingsynchost/execute/1
+type: binary
+platform: windows
+name: SettingSyncHost.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: SettingSyncHost.exe should not be run on a normal workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_settingsynchost.yml
+commands:
+- template: SettingSyncHost -LoadAndRunDiagScriptNoCab {PATH:.bat}
+  comment: Execute a batch script in the background (no window ever pops up) which can be subverted to
+    running arbitrary programs by setting the current working directory to %TMP% and creating files such
+    as reg.bat/reg.exe in that directory thereby causing them to execute instead of the ones in C:\Windows\System32.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/SettingSyncHost/
+tags:
+- windows
+- lolbas

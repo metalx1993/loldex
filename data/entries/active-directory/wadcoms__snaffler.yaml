@@ -1,0 +1,28 @@
+id: wadcoms/snaffler
+type: technique
+platform: active-directory
+name: Snaffler
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+commands:
+- template: Snaffler.exe -s -o snaffler_output.log -d test.local -c 10.10.10.1
+  comment: Snaffler is a tool used to enumerate sensitive data (passwords, PII, etc.) from file shares
+    in Active Directory. It searches for interesting files based on file extensions, file names, and file
+    content that's matched against regex. It's also highly configurable, allowing you to a
+references:
+- https://github.com/SnaffCon/Snaffler
+tags:
+- active-directory
+- wadcoms
+- smb

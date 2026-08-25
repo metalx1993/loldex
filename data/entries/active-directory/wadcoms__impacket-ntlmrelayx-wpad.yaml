@@ -1,0 +1,30 @@
+id: wadcoms/impacket-ntlmrelayx-wpad
+type: technique
+platform: active-directory
+name: Impacket NTLMRelayX WPAD
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- no credentials required
+commands:
+- template: python3 ntlmrelayx.py -t ldaps://dc.test.local -wh test-wpad --delegate-access
+  comment: Impacket's ntlmrelayx.py performs NTLM Relay Attacks, creating an SMB and HTTP server and relaying
+    credentials to various different protocols (SMB, HTTP, LDAP, etc.). The below command will perform
+    WPAD spoofing to force the victim machine to authenticate to the attacker controll
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py
+- https://dirkjanm.io/worst-of-both-worlds-ntlm-relaying-and-kerberos-delegation/
+tags:
+- active-directory
+- wadcoms
+- ntlm
+- ldap

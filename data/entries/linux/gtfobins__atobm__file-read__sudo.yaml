@@ -1,0 +1,27 @@
+id: gtfobins/atobm/file-read/sudo
+type: binary
+platform: linux
+name: atobm
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: atobm /path/to/input-file
+  comment: Outputs only the first line of the file to standard error without the `-` and `#` characters,
+    this can be customized with the `-c` option, by default is `-c -#`. Content can be retrieved with
+    `awk -F "'" '{printf "%s", $2}'`.
+references:
+- https://gtfobins.github.io/gtfobins/atobm/
+tags:
+- linux
+- unix
+- gtfobins

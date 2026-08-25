@@ -1,0 +1,30 @@
+id: lolbas/odbcad32/uac-bypass/0
+type: binary
+platform: windows
+name: odbcad32.exe
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1548.002
+opsec:
+  noise: medium
+  triggers: odbcad32.exe spawning unexpected child processes.
+commands:
+- template: odbcad32.exe
+  comment: Launch odbcad32.exe GUI, click 'Tracing' tab, click 'Browsing' button, enter abitrary command
+    in the File Dialog's path, press enter.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/odbcad32/
+tags:
+- windows
+- lolbas

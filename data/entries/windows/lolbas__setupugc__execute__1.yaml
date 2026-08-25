@@ -1,0 +1,29 @@
+id: lolbas/setupugc/execute/1
+type: binary
+platform: windows
+name: setupugc.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: '`setupugc.exe` spawning child processes outside of Windows Setup context. Legitimate parents
+    are `setuphost.exe` or `setup.exe`.'
+commands:
+- template: setupugc.exe auditUser
+  comment: Same technique as above, but using the `auditUser` command-line option.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/setupugc/
+tags:
+- windows
+- lolbas

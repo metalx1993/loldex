@@ -1,0 +1,33 @@
+id: lolbas/bash/execute/4
+type: binary
+platform: windows
+name: Bash.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Child process from bash.exe
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_bash.yml
+commands:
+- template: bash.exe
+  comment: When executed, `bash.exe` queries the registry value of `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\MSI\InstallLocation`,
+    which contains a folder path (`c:\program files\wsl` by default). If the value points to another folder
+    containing a file named `wsl.exe`, it will be executed instead of the legitimate `wsl.exe` in the
+    program files folder.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Bash/
+tags:
+- windows
+- lolbas

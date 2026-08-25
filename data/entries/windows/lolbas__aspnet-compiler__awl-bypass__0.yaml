@@ -1,0 +1,33 @@
+id: lolbas/aspnet-compiler/awl-bypass/0
+type: binary
+platform: windows
+name: Aspnet_Compiler.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+aliases:
+- aspnet_compiler
+attack_techniques:
+- T1127
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_aspnet_compiler.yml
+commands:
+- template: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\aspnet_compiler.exe -v none -p C:\users\cpl.internal\desktop\asptest\
+    -f C:\users\cpl.internal\desktop\asptest\none -u
+  comment: Execute C# code with the Build Provider and proper folder structure in place.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Aspnet_Compiler/
+tags:
+- windows
+- lolbas

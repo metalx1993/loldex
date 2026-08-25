@@ -1,0 +1,111 @@
+# loldex — canonical schema
+# The single normalized shape every source is mapped into. This is the
+# intellectual core of the project: it must hold a Linux binary, a Windows
+# script, a vulnerable driver, and an Active Directory technique in the same
+# skeleton, so they can be searched together by platform, phase, privilege,
+# and capability.
+#
+# version: 0
+# Every entry file under data/entries/**/*.yaml MUST validate against this.
+
+entry:
+  # --- identity (all types) ---
+  id:            {type: string, required: true, note: "stable id: <source>/<name>/<vector>, e.g. gtfobins/tar/sudo"}
+  type:          {type: enum, required: true, values: [binary, script, library, driver, technique]}
+  platform:      {type: enum, required: true, values: [linux, windows, macos, active-directory]}
+  name:          {type: string, required: true}
+  aliases:       {type: list, required: false, of: string}
+
+  # --- unifying layer (the pivot — meaningful for EVERY type) ---
+  phases:              {type: list, required: true, of: phase}
+  capabilities:        {type: list, required: true, of: capability}
+  privilege_required:  {type: enum, required: true, values_ref: privilege}
+  preconditions:       {type: list, required: false, of: string}
+  attack_techniques:   {type: list, required: false, of: string, note: "MITRE ATT&CK ids, e.g. T1548.003"}
+
+  # --- opsec (detection, re-framed for operators; also serves defenders) ---
+  opsec:
+    noise:           {type: enum, required: false, values: [low, medium, high]}
+    triggers:        {type: string, required: false}
+    detection_refs:  {type: list, required: false, of: string}
+
+  # --- reference commands, parameterized for the builder ---
+  commands:
+    - template:      {type: string, required: true}
+      placeholders:  {type: list, required: false, of: string, note: "e.g. LHOST, LPORT, DC_IP"}
+      comment:       {type: string, required: false}
+
+  # --- type-specific detail (only populated for its type) ---
+  technique_detail:   {type: object, required: false, note: "for type=technique: required_rights, target_object, native_tooling"}
+  driver_detail:      {type: object, required: false, note: "for type=driver: hash, signed, cve"}
+
+  # --- provenance + licence (per source, never optional in practice) ---
+  sources:
+    - project:          {type: string, required: true}
+      upstream_url:     {type: string, required: true}
+      license:          {type: string, required: true}
+      upstream_version: {type: string, required: false, note: "commit hash or release tag"}
+      last_synced:      {type: date,   required: false}
+
+  references:    {type: list, required: false, of: string}
+  tags:          {type: list, required: false, of: string}
+
+# ---------------------------------------------------------------------------
+# CLOSED TAXONOMIES — adapters must map upstream vocab into these. Adding a
+# value is a deliberate schema change (PR + bump note), not an ad-hoc string.
+# ---------------------------------------------------------------------------
+
+taxonomy:
+  phase:   # kill-chain / ATT&CK tactics
+    - initial-access
+    - execution
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - credential-access
+    - discovery
+    - lateral-movement
+    - collection
+    - command-and-control
+    - exfiltration
+    - impact
+
+  capability:
+    - shell
+    - command-execution
+    - reverse-shell
+    - bind-shell
+    - file-read
+    - file-write
+    - file-download
+    - file-upload
+    - library-load
+    - privilege-escalation
+    - persistence
+    - credential-dump
+    - credential-access
+    - defense-evasion
+    - data-exfiltration
+    - c2
+    - decode
+    - encode
+    - discovery
+    - lateral-movement
+    - kerberoast
+    - coerce
+
+  privilege:   # what you need to already have for the entry to apply
+    - none
+    - user
+    - suid
+    - sudo
+    - capability
+    - admin
+    - system
+    - domain-user
+    - specific-right
+
+  noise:
+    - low
+    - medium
+    - high

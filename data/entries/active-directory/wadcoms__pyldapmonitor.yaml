@@ -1,0 +1,32 @@
+id: wadcoms/pyldapmonitor
+type: technique
+platform: active-directory
+name: PyLDAPmonitor
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid password
+- a valid username
+- an NTLM hash (pass-the-hash)
+commands:
+- template: python3 ldapmonitor.py -u 'john' -d 'TEST.local' -p 'password123' --dc-ip 10.10.10.1
+  comment: 'ldapmonitor.py allows you to monitor creation, deletion and changes to LDAP objects live during
+    your pentest. Command Reference: Target IP: 10.10.10.1 Attacker IP: 10.10.10.2 Domain: test.local
+    Username: john Password: password123'
+references:
+- https://github.com/p0dalirius/LDAPmonitor/tree/master/python
+tags:
+- active-directory
+- wadcoms
+- ldap
+- kerberos
+- ntlm

@@ -1,0 +1,29 @@
+id: gtfobins/pyright/file-read/sudo
+type: binary
+platform: linux
+name: pyright
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: pyright /path/to/input-file
+  comment: Content is leaked as error messages.
+- template: pyright --outputjson /path/to/input-file
+  comment: Content is leaked as error messages in JSON format.
+- template: pyright -w /path/to/input-dir/
+  comment: Recursively walks directories, parsing all Python files and leaking some contents through diagnostics.
+references:
+- https://gtfobins.github.io/gtfobins/pyright/
+tags:
+- linux
+- unix
+- gtfobins

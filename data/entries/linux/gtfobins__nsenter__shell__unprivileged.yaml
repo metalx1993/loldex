@@ -1,0 +1,24 @@
+id: gtfobins/nsenter/shell/unprivileged
+type: binary
+platform: linux
+name: nsenter
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nsenter /bin/sh
+  comment: The shell command can be omitted.
+references:
+- https://gtfobins.github.io/gtfobins/nsenter/
+tags:
+- linux
+- unix
+- gtfobins

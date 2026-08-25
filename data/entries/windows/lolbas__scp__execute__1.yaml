@@ -1,0 +1,29 @@
+id: lolbas/scp/execute/1
+type: binary
+platform: windows
+name: scp.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: '`scp.exe` executions referencing `ProxyCommand`.'
+commands:
+- template: scp.exe -S "{CMD}" . localhost:.
+  comment: Spawns specified command from `scp.exe` -> `ssh.exe`, even if no SSH server is running on localhost
+    (or any other address specified).
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Scp/
+tags:
+- windows
+- lolbas

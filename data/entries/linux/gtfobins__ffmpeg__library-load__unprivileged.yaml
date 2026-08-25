@@ -1,0 +1,26 @@
+id: gtfobins/ffmpeg/library-load/unprivileged
+type: binary
+platform: linux
+name: ffmpeg
+phases:
+- execution
+- persistence
+capabilities:
+- library-load
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'ffmpeg -f lavfi -i anullsrc -af ladspa=file=/path/to/lib.so /path/to/temp-file.wav
+
+    reset^J'
+references:
+- https://gtfobins.github.io/gtfobins/ffmpeg/
+tags:
+- linux
+- unix
+- gtfobins

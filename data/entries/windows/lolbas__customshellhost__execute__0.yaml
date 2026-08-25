@@ -1,0 +1,31 @@
+id: lolbas/customshellhost/execute/0
+type: binary
+platform: windows
+name: CustomShellHost.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: CustomShellHost.exe is unlikely to run on normal workstations
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/ff5102832031425f6eed011dd3a2e62653008c94/rules/windows/process_creation/proc_creation_win_lolbin_customshellhost.yml
+commands:
+- template: CustomShellHost.exe
+  comment: Executes explorer.exe (with command-line argument /NoShellRegistrationCheck) if present in
+    the current working folder.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/CustomShellHost/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,25 @@
+id: gtfobins/rustfmt/file-read/sudo
+type: binary
+platform: linux
+name: rustfmt
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: rustfmt /path/to/input-file
+  comment: Partial content is displayed as error messages.
+references:
+- https://gtfobins.github.io/gtfobins/rustfmt/
+tags:
+- linux
+- unix
+- gtfobins

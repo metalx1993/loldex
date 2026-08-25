@@ -1,0 +1,26 @@
+id: gtfobins/bridge/file-read/sudo
+type: binary
+platform: linux
+name: bridge
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: bridge -b /path/to/input-file
+  comment: Outputs the first line of the file (until the first whitespace) inside an error message to
+    stdandard error.
+references:
+- https://gtfobins.github.io/gtfobins/bridge/
+tags:
+- linux
+- unix
+- gtfobins

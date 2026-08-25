@@ -1,0 +1,30 @@
+id: lolbas/dump64/dump/0
+type: binary
+platform: windows
+name: Dump64.exe
+phases:
+- credential-access
+capabilities:
+- credential-dump
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1003.001
+opsec:
+  noise: high
+  triggers: As a Windows SDK binary, execution on a system may be suspicious
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_dump64.yml
+commands:
+- template: dump64.exe {PID} out.dmp
+  comment: Creates a memory dump of the LSASS process.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dump64/
+tags:
+- windows
+- lolbas

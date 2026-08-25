@@ -1,0 +1,31 @@
+id: lolbas/sftp/execute/1
+type: binary
+platform: windows
+name: Sftp.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: sftp.exe executions with ProxyCommand on the command line
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/pull/5414/files
+commands:
+- template: sftp -D "{CMD}"
+  comment: Spawns ssh.exe which in turn spawns the specified command line. See also this project's entry
+    for ssh.exe.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Sftp/
+tags:
+- windows
+- lolbas

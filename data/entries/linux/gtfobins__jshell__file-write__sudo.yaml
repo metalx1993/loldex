@@ -1,0 +1,29 @@
+id: gtfobins/jshell/file-write/sudo
+type: binary
+platform: linux
+name: jshell
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'jshell
+
+    String x = "DATA";
+
+    /save /path/to/output-file'
+  comment: Writes only the valid Java code to file.
+references:
+- https://gtfobins.github.io/gtfobins/jshell/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,32 @@
+id: lolbas/workfolders/execute/1
+type: binary
+platform: windows
+name: WorkFolders.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: WorkFolders.exe should not be run on a normal workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_susp_workfolders.yml
+commands:
+- template: WorkFolders
+  comment: '`WorkFolders` attempts to execute `control.exe`. By modifying the default value of the App
+    Paths registry key for `control.exe` in `HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\control.exe`,
+    an attacker can achieve proxy execution.'
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/WorkFolders/
+tags:
+- windows
+- lolbas

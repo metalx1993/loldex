@@ -1,0 +1,33 @@
+id: lolbas/vstest-console/awl-bypass/0
+type: binary
+platform: windows
+name: vstest.console.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+aliases:
+- vstest.console
+attack_techniques:
+- T1127
+opsec:
+  noise: medium
+  triggers: vstest.console.exe spawning unexpected processes
+commands:
+- template: vstest.console.exe {PATH:.dll}
+  comment: VSTest functionality may allow an adversary to executes their malware by wrapping it as a test
+    method then build it to a .exe or .dll file to be later run by vstest.console.exe. This may both allow
+    AWL bypass or defense bypass in general
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/vstest.console/
+tags:
+- windows
+- lolbas

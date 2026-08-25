@@ -1,0 +1,28 @@
+id: gtfobins/less/file-write/sudo
+type: binary
+platform: linux
+name: less
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo DATA | less
+
+    s/path/to/output-file
+
+    q'
+references:
+- https://gtfobins.github.io/gtfobins/less/
+tags:
+- linux
+- unix
+- gtfobins

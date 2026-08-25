@@ -1,0 +1,25 @@
+id: gtfobins/mypy/file-write/sudo
+type: binary
+platform: linux
+name: mypy
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: mypy /path/to/input-file --junit-xml /path/to/output-file
+  comment: Partial content is leaked as error messages inside some XML tags.
+references:
+- https://gtfobins.github.io/gtfobins/mypy/
+tags:
+- linux
+- unix
+- gtfobins

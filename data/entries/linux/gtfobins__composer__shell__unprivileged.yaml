@@ -1,0 +1,25 @@
+id: gtfobins/composer/shell/unprivileged
+type: binary
+platform: linux
+name: composer
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''{"scripts":{"x":"/bin/sh"}}'' >composer.json
+
+    composer run-script x'
+references:
+- https://gtfobins.github.io/gtfobins/composer/
+tags:
+- linux
+- unix
+- gtfobins

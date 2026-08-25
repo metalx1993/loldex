@@ -1,0 +1,24 @@
+id: gtfobins/vim/file-read/sudo
+type: binary
+platform: linux
+name: vim
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: vim -c ':redir! >/path/to/output-file | echo "DATA" | redir END | q'
+references:
+- https://gtfobins.github.io/gtfobins/vim/
+tags:
+- linux
+- unix
+- gtfobins

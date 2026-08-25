@@ -1,0 +1,29 @@
+id: lolbas/pcalua/execute/2
+type: binary
+platform: windows
+name: Pcalua.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_pcalua.yml
+commands:
+- template: pcalua.exe -a {PATH_ABSOLUTE:.cpl} -c Java
+  comment: Open the target .CPL file with the Program Compatibility Assistant.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Pcalua/
+tags:
+- windows
+- lolbas

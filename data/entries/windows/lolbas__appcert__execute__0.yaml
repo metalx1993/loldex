@@ -1,0 +1,27 @@
+id: lolbas/appcert/execute/0
+type: binary
+platform: windows
+name: AppCert.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+commands:
+- template: appcert.exe test -apptype desktop -setuppath {PATH_ABSOLUTE:.exe} -reportoutputpath {PATH_ABSOLUTE:.xml}
+  comment: Execute an executable file via the Windows App Certification Kit command-line tool.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Appcert/
+tags:
+- windows
+- lolbas

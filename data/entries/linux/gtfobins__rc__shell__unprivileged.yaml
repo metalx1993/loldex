@@ -1,0 +1,23 @@
+id: gtfobins/rc/shell/unprivileged
+type: binary
+platform: linux
+name: rc
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: rc
+references:
+- https://gtfobins.github.io/gtfobins/rc/
+tags:
+- linux
+- unix
+- gtfobins

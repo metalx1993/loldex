@@ -1,0 +1,26 @@
+id: gtfobins/od/file-read/sudo
+type: binary
+platform: linux
+name: od
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: od -An -c -w999 /path/to/input-file
+  comment: Three spaces are added before each character in the read file (wrapped at the specified value,
+    i.e., `999`), and non-printable chars are printed as backslash escape sequences.
+references:
+- https://gtfobins.github.io/gtfobins/od/
+tags:
+- linux
+- unix
+- gtfobins

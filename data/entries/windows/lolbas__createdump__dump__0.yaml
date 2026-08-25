@@ -1,0 +1,32 @@
+id: lolbas/createdump/dump/0
+type: binary
+platform: windows
+name: Createdump.exe
+phases:
+- credential-access
+capabilities:
+- credential-dump
+privilege_required: system
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1003
+opsec:
+  noise: high
+  triggers: createdump.exe process with a command line containing the lsass.exe process id
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_proc_dump_createdump.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_renamed_createdump.yml
+commands:
+- template: createdump.exe -n -f {PATH:.dmp} {PID}
+  comment: Dump process by PID and create a minidump file. If "-f dump.dmp" is not specified, the file
+    is created as '%TEMP%\dump.%p.dmp' where %p is the PID of the target process.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Createdump/
+tags:
+- windows
+- lolbas

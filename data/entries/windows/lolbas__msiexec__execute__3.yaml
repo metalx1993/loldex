@@ -1,0 +1,33 @@
+id: lolbas/msiexec/execute/3
+type: binary
+platform: windows
+name: Msiexec.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218.007
+opsec:
+  noise: high
+  triggers: msiexec.exe retrieving files from Internet
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_msiexec_web_install.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_msiexec_masquerading.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+  - https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/uninstall_app_using_msiexec.yml
+commands:
+- template: msiexec /z {PATH_ABSOLUTE:.dll}
+  comment: Calls DllUnregisterServer to un-register the target DLL.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Msiexec/
+tags:
+- windows
+- lolbas

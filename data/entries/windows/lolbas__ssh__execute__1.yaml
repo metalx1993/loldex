@@ -1,0 +1,30 @@
+id: lolbas/ssh/execute/1
+type: binary
+platform: windows
+name: ssh.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: Event ID 4624 with process name C:\Windows\System32\OpenSSH\sshd.exe.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_ssh.yml
+commands:
+- template: ssh -o ProxyCommand="{CMD}" .
+  comment: Executes specified command from ssh.exe
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ssh/
+tags:
+- windows
+- lolbas

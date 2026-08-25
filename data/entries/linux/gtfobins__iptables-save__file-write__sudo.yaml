@@ -1,0 +1,29 @@
+id: gtfobins/iptables-save/file-write/sudo
+type: binary
+platform: linux
+name: iptables-save
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'iptables -A INPUT -i lo -j ACCEPT -m comment --comment DATA
+
+    iptables -S
+
+    iptables-save -f /path/to/output-file'
+  comment: The content is written along with a number of `iptables` rules.
+references:
+- https://gtfobins.github.io/gtfobins/iptables-save/
+tags:
+- linux
+- unix
+- gtfobins

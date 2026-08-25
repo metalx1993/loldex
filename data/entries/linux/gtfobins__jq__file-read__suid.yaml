@@ -1,0 +1,24 @@
+id: gtfobins/jq/file-read/suid
+type: binary
+platform: linux
+name: jq
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: jq -Rr . /path/to/input-file
+references:
+- https://gtfobins.github.io/gtfobins/jq/
+tags:
+- linux
+- unix
+- gtfobins

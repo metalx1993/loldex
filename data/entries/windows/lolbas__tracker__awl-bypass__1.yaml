@@ -1,0 +1,31 @@
+id: lolbas/tracker/awl-bypass/1
+type: binary
+platform: windows
+name: Tracker.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_tracker.yml
+commands:
+- template: Tracker.exe /d {PATH:.dll} /c C:\Windows\write.exe
+  comment: Use tracker.exe to proxy execution of an arbitrary DLL into another process. Since tracker.exe
+    is also signed it can be used to bypass application whitelisting solutions.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Tracker/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,26 @@
+id: gtfobins/ar/file-read/sudo
+type: binary
+platform: linux
+name: ar
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'ar r /path/to/output-file /path/to/input-file
+
+    ar p /path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/ar/
+tags:
+- linux
+- unix
+- gtfobins

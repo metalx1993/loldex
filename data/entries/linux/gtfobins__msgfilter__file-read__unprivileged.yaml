@@ -1,0 +1,25 @@
+id: gtfobins/msgfilter/file-read/unprivileged
+type: binary
+platform: linux
+name: msgfilter
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: msgfilter -P -i /path/to/input-file /bin/cat
+  comment: The file is parsed and displayed as a Java `.properties` file. `/bin/cat` can be replaced with
+    any other *filter* program.
+references:
+- https://gtfobins.github.io/gtfobins/msgfilter/
+tags:
+- linux
+- unix
+- gtfobins

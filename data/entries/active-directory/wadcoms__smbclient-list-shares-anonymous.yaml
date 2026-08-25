@@ -1,0 +1,28 @@
+id: wadcoms/smbclient-list-shares-anonymous
+type: technique
+platform: active-directory
+name: SMBClient List Shares Anonymous
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- no credentials required
+commands:
+- template: smbclient -L \\test.local -I 10.10.10.1 -N
+  comment: 'Smbclient is a tool used to communicate with SMB servers. The following command will list
+    out all available shares on the target server using anonymous login. Command Reference: Target IP:
+    10.10.10.1 Domain: test.local'
+references:
+- https://www.samba.org/samba/docs/current/man-html/smbclient.1.html
+tags:
+- active-directory
+- wadcoms
+- smb

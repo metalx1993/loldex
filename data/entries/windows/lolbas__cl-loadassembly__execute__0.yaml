@@ -1,0 +1,32 @@
+id: lolbas/cl-loadassembly/execute/0
+type: script
+platform: windows
+name: CL_LoadAssembly.ps1
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+aliases:
+- cl_loadassembly
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/ff6c54ded6b52f379cec11fe17c1ccb956faa660/rules/windows/process_creation/proc_creation_win_lolbas_cl_loadassembly.yml
+commands:
+- template: powershell.exe -ep bypass -command "set-location -path C:\Windows\diagnostics\system\Audio;
+    import-module .\CL_LoadAssembly.ps1; LoadAssemblyFromPath ..\..\..\..\testing\fun.dll;[Program]::Fun()"
+  comment: Proxy execute Managed DLL with PowerShell
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/CL_LoadAssembly/
+tags:
+- windows
+- lolbas

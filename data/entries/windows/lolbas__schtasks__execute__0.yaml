@@ -1,0 +1,32 @@
+id: lolbas/schtasks/execute/0
+type: binary
+platform: windows
+name: Schtasks.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1053.005
+opsec:
+  noise: high
+  triggers: Suspicious task creation events
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_schtasks_creation.yml
+  - https://github.com/elastic/detection-rules/blob/ef7548f04c4341e0d1a172810330d59453f46a21/rules/windows/persistence_local_scheduled_task_creation.toml
+  - https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/schtasks_scheduling_job_on_remote_system.yml
+commands:
+- template: schtasks /create /sc minute /mo 1 /tn "Reverse shell" /tr "{CMD}"
+  comment: Create a recurring task to execute every minute.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Schtasks/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,32 @@
+id: lolbas/makecab/execute/3
+type: binary
+platform: windows
+name: Makecab.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1036
+opsec:
+  noise: high
+  triggers: Makecab retrieving files from Internet
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_susp_alternate_data_streams.yml
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_misc_lolbin_connecting_to_the_internet.toml
+commands:
+- template: makecab /F {PATH:.ddf}
+  comment: Execute makecab commands as defined in the specified Diamond Definition File (.ddf); see resources
+    for the format specification.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Makecab/
+tags:
+- windows
+- lolbas

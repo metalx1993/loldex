@@ -1,0 +1,30 @@
+id: wadcoms/seatbelt
+type: technique
+platform: active-directory
+name: Seatbelt
+phases:
+- privilege-escalation
+- persistence
+capabilities:
+- privilege-escalation
+- persistence
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+commands:
+- template: Seatbelt.exe -group=all -full > output.txt
+  comment: 'Seatbelt.exe is part of the GhostPack suite of tools that will perform a lot of "safety checks"
+    on the Windows host and collect system data that could be useful for potential privilege escalation
+    or persistence methods. The following command will run all checks on the system and '
+references:
+- https://github.com/GhostPack/Seatbelt
+- https://www.harmj0y.net/blog/redteaming/ghostpack/
+tags:
+- active-directory
+- wadcoms

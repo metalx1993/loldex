@@ -1,0 +1,27 @@
+id: wadcoms/enum4linux-nocreds
+type: technique
+platform: active-directory
+name: Enum4Linux NoCreds
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- no credentials required
+commands:
+- template: enum4linux -a 10.10.10.1
+  comment: 'Enum4Linux is a tool for enumerating information from Windows and Samba systems, using a number
+    of different techniques. The following command will attempt to enumerate information using no credentials.
+    Command Reference: Target IP: 10.10.10.1'
+references:
+- https://github.com/CiscoCXSecurity/enum4linux
+tags:
+- active-directory
+- wadcoms

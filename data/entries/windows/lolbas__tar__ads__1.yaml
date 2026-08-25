@@ -1,0 +1,31 @@
+id: lolbas/tar/ads/1
+type: binary
+platform: windows
+name: Tar.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: tar.exe extracting files from a remote host within the environment
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_tar_compression.yml
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_tar_extraction.yml
+commands:
+- template: tar -xf {PATH}:ads
+  comment: Decompress a compressed file from an alternate data stream (ADS).
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Tar/
+tags:
+- windows
+- lolbas

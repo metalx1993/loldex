@@ -1,0 +1,25 @@
+id: gtfobins/aria2c/file-read/suid
+type: binary
+platform: linux
+name: aria2c
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: aria2c -i /path/to/input-file
+  comment: The file is leaked as error messages.
+references:
+- https://gtfobins.github.io/gtfobins/aria2c/
+tags:
+- linux
+- unix
+- gtfobins

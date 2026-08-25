@@ -1,0 +1,33 @@
+id: lolbas/iscsicpl/uac-bypass/1
+type: binary
+platform: windows
+name: iscsicpl.exe
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1548.002
+opsec:
+  noise: medium
+  triggers: C:\Users\<username>\AppData\Local\Microsoft\WindowsApps\ISCSIEXE.dll
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/image_load/image_load_uac_bypass_iscsicpl.yml
+commands:
+- template: iscsicpl.exe
+  comment: Both `c:\windows\system32\iscsicpl.exe` and `c:\windows\system64\iscsicpl.exe` have UAC bypass
+    through launching iscicpl.exe, then navigating into the Configuration tab, clicking Report, then launching
+    your custom command.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Iscsicpl/
+tags:
+- windows
+- lolbas

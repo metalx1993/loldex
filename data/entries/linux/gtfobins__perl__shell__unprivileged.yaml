@@ -1,0 +1,25 @@
+id: gtfobins/perl/shell/unprivileged
+type: binary
+platform: linux
+name: perl
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: perl -e 'exec "/bin/sh"'
+- template: PERL5OPT=-d PERL5DB='exec "/bin/sh"' perl /dev/null
+  comment: The `/dev/null` part can be omitted, just use `Ctrl-D` in order to spawn the shell.
+references:
+- https://gtfobins.github.io/gtfobins/perl/
+tags:
+- linux
+- unix
+- gtfobins

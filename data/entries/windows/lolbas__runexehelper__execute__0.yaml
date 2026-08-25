@@ -1,0 +1,32 @@
+id: lolbas/runexehelper/execute/0
+type: binary
+platform: windows
+name: Runexehelper.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: c:\windows\system32\runexehelper.exe is run
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/197615345b927682ab7ad7fa3c5f5bb2ed911eed/rules/windows/process_creation/proc_creation_win_lolbin_runexehelper.yml
+commands:
+- template: runexehelper.exe {PATH_ABSOLUTE:.exe}
+  comment: 'Launches the specified exe. Prerequisites: (1) diagtrack_action_output environment variable
+    must be set to an existing, writable folder; (2) runexewithargs_output.txt file cannot exist in the
+    folder indicated by the variable.'
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Runexehelper/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,24 @@
+id: gtfobins/find/file-write/unprivileged
+type: binary
+platform: linux
+name: find
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: find / -fprintf /path/to/output-file DATA -quit
+  comment: '`DATA` is a format string, it supports some escape sequences.'
+references:
+- https://gtfobins.github.io/gtfobins/find/
+tags:
+- linux
+- unix
+- gtfobins

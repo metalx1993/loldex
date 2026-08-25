@@ -1,0 +1,32 @@
+id: gtfobins/tcpdump/command/unprivileged
+type: binary
+platform: linux
+name: tcpdump
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo /path/to/command >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z /path/to/temp-file'
+  comment: This requires some traffic to be actually captured. Also note that the subprocess is immediately
+    sent to the background.
+- template: tcpdump -ln -i lo -w 'command-argument' -W 1 -G 1 -z /path/to/command
+  comment: This require some traffic to be actually captured. Also note that the `command-argument` string
+    is both passed to the command and written as file, hence some restrictions apply.
+references:
+- https://gtfobins.github.io/gtfobins/tcpdump/
+tags:
+- linux
+- unix
+- gtfobins

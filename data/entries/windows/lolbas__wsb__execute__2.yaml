@@ -1,0 +1,35 @@
+id: lolbas/wsb/execute/2
+type: binary
+platform: windows
+name: wsb.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1564.006
+opsec:
+  noise: high
+  triggers: wsb.exe command line containing --config with an embedded <LogonCommand> XML element
+commands:
+- template: 'wsb start
+
+    wsb share --id YOUR_ID -f {PATH_ABSOLUTE:folder} -s c:\SOME_FOLDER --allow-write
+
+    wsb exec -r System --id YOUR_ID -c "cmd.exe /c copy {PATH_ABSOLUTE} c:\SOME_FOLDER"'
+  comment: Allows the specified folder to be accessible from within the Windows Sandbox, mounted at `c:\SOME_FOLDER`.
+    This allows, for example, for copying payloads from the host system into the sandbox, copying payloads
+    from the sandbox back to the host system (seen here), or for accessing arbitrary host system files
+    by the sandbox.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wsb/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,25 @@
+id: gtfobins/ul/file-read/unprivileged
+type: binary
+platform: linux
+name: ul
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: ul /path/to/input-file
+  comment: The read file content is corrupted by replacing occurrences of `$'\b_'` to terminal sequences
+    and by converting tabs to spaces.
+references:
+- https://gtfobins.github.io/gtfobins/ul/
+tags:
+- linux
+- unix
+- gtfobins

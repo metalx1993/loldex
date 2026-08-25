@@ -1,0 +1,30 @@
+id: lolbas/pktmon/reconnaissance/0
+type: binary
+platform: windows
+name: Pktmon.exe
+phases:
+- discovery
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1040
+opsec:
+  noise: high
+  triggers: .etl files found on system
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_pktmon.yml
+commands:
+- template: pktmon.exe start --etw
+  comment: Will start a packet capture and store log file as PktMon.etl. Use pktmon.exe stop
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Pktmon/
+tags:
+- windows
+- lolbas

@@ -1,0 +1,30 @@
+id: lolbas/vsdiagnostics/execute/0
+type: binary
+platform: windows
+name: VSDiagnostics.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/tsale/Sigma_rules/blob/d5b4a09418edfeeb3a2d654f556d5bca82003cd7/LOL_BINs/VSDiagnostics_LoLBin.yml
+commands:
+- template: VSDiagnostics.exe start 1 /launch:{PATH:.exe}
+  comment: Starts a collection session with sessionID 1 and calls kernelbase.CreateProcessW to launch
+    specified executable.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/VSDiagnostics/
+tags:
+- windows
+- lolbas

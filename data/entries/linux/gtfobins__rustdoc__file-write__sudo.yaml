@@ -1,0 +1,28 @@
+id: gtfobins/rustdoc/file-write/sudo
+type: binary
+platform: linux
+name: rustdoc
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'echo ''//! DATA'' >/path/to/temp-file
+
+    rustdoc /path/to/temp-file -o /path/to/output-dir/'
+  comment: This command creates a number of documentation files in the target directory, and the data
+    is written in multiple locations, e.g., `src/temp_file/temp-file.html`, amidst other content.
+references:
+- https://gtfobins.github.io/gtfobins/rustdoc/
+tags:
+- linux
+- unix
+- gtfobins

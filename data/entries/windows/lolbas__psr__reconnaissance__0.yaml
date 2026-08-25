@@ -1,0 +1,31 @@
+id: lolbas/psr/reconnaissance/0
+type: binary
+platform: windows
+name: Psr.exe
+phases:
+- discovery
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0 (verify upstream LICENSE)
+  upstream_version: 9c5e384
+  last_synced: '2026-08-25'
+attack_techniques:
+- T1113
+opsec:
+  noise: high
+  triggers: psr.exe spawned
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_psr_capture_screenshots.yml
+commands:
+- template: psr.exe /start /output {PATH_ABSOLUTE:.zip} /sc 1 /gui 0
+  comment: Record a user screen without creating a GUI. You should use "psr.exe /stop" to stop recording
+    and create output file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Psr/
+tags:
+- windows
+- lolbas

