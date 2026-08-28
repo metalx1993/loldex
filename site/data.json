@@ -1,5 +1,5 @@
 {
-"count": 3083,
+"count": 3086,
 "entries": [
 {
 "id": "wadcoms/adcsenumaration",
@@ -54981,6 +54981,38 @@
 ]
 },
 {
+"id": "loldrivers/alinubx-sys",
+"type": "driver",
+"platform": "windows",
+"name": "Alinubx.sys",
+"phases": [
+"defense-evasion",
+"privilege-escalation"
+],
+"capabilities": [
+"defense-evasion",
+"privilege-escalation"
+],
+"privilege_required": "system",
+"attack_techniques": [
+"T1068"
+],
+"opsec": {
+"noise": "medium"
+},
+"references": [
+"https://www.esentire.com/blog/malware-as-a-service-cocktail-errtraffic-and-cruciferra-killing-your-edr-since-2025",
+"https://github.com/magicsword-io/LOLDrivers/issues/412",
+"https://x.com/YungBinary/status/2092812095456936172"
+],
+"tags": [
+"windows",
+"driver",
+"byovd",
+"loldrivers"
+]
+},
+{
 "id": "loldrivers/amd-rpmc-biostoolcommondriver-sys",
 "type": "driver",
 "platform": "windows",
@@ -59759,6 +59791,37 @@
 "https://github.com/jbaines-r7/dellicious",
 "https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/",
 "https://www.bleepingcomputer.com/news/security/dell-driver-fix-still-allows-windows-kernel-level-attacks/"
+],
+"tags": [
+"windows",
+"driver",
+"byovd",
+"loldrivers"
+]
+},
+{
+"id": "loldrivers/dcrcvdrv-sys",
+"type": "driver",
+"platform": "windows",
+"name": "DCRCVDrv.sys",
+"phases": [
+"defense-evasion",
+"privilege-escalation"
+],
+"capabilities": [
+"defense-evasion",
+"privilege-escalation"
+],
+"privilege_required": "system",
+"attack_techniques": [
+"T1068"
+],
+"opsec": {
+"noise": "medium"
+},
+"references": [
+"https://www.esentire.com/blog/malware-as-a-service-cocktail-errtraffic-and-cruciferra-killing-your-edr-since-2025",
+"https://github.com/magicsword-io/LOLDrivers/issues/412"
 ],
 "tags": [
 "windows",
@@ -76879,6 +76942,41 @@
 },
 "references": [
 "https://lolbas-project.github.io/lolbas/OtherMSBinaries/Vshadow/"
+],
+"tags": [
+"windows",
+"lolbas"
+]
+},
+{
+"id": "lolbas/vssadmin/tamper/0",
+"type": "binary",
+"platform": "windows",
+"name": "Vssadmin.exe",
+"phases": [
+"defense-evasion"
+],
+"capabilities": [
+"defense-evasion"
+],
+"privilege_required": "admin",
+"attack_techniques": [
+"T1490"
+],
+"commands": [
+{
+"template": "vssadmin delete shadows /all /quiet",
+"comment": "Delete all volume shadow copies on the host without prompting"
+}
+],
+"opsec": {
+"noise": "medium",
+"detection_refs": [
+"https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_susp_shadow_copies_deletion.yml"
+]
+},
+"references": [
+"https://lolbas-project.github.io/lolbas/Binaries/Vssadmin/"
 ],
 "tags": [
 "windows",

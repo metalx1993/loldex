@@ -1,0 +1,35 @@
+id: loldrivers/alinubx-sys
+type: driver
+platform: windows
+name: Alinubx.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: c8652a3
+  last_synced: '2026-08-28'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 611b3ba687b7f46319a19609605ddfe5225e6d85277d8e923eea3fdb6f7b5b61
+  signer: CnCrypt Foundation
+  original_filename: Alinubx.sys
+  category: vulnerable driver
+references:
+- https://www.esentire.com/blog/malware-as-a-service-cocktail-errtraffic-and-cruciferra-killing-your-edr-since-2025
+- https://github.com/magicsword-io/LOLDrivers/issues/412
+- https://x.com/YungBinary/status/2092812095456936172
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

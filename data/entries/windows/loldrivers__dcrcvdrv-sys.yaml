@@ -1,0 +1,34 @@
+id: loldrivers/dcrcvdrv-sys
+type: driver
+platform: windows
+name: DCRCVDrv.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: c8652a3
+  last_synced: '2026-08-28'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  sha256: 87e8d39db624f37d3e77aedf487a2dfd197f71a4730ea74f4e7a4341deaec2ff
+  signer: MOCOMSYS & DCRC
+  original_filename: DCRCVDrv.sys
+  category: vulnerable driver
+references:
+- https://www.esentire.com/blog/malware-as-a-service-cocktail-errtraffic-and-cruciferra-killing-your-edr-since-2025
+- https://github.com/magicsword-io/LOLDrivers/issues/412
+tags:
+- windows
+- driver
+- byovd
+- loldrivers

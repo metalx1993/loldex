@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolad-project.github.io
   license: verify upstream LICENSE
   upstream_version: 6ed6a25
-  last_synced: '2026-08-25'
+  last_synced: '2026-08-28'
 commands:
 - template: Get-ADUser -Filter {TrustedForDelegation -eq $true}
 references:

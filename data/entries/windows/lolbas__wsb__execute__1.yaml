@@ -11,8 +11,8 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 9c5e384
-  last_synced: '2026-08-25'
+  upstream_version: 67781fd
+  last_synced: '2026-08-28'
 attack_techniques:
 - T1564.006
 opsec:

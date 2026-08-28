@@ -14,7 +14,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: a864cd1
-  last_synced: '2026-08-25'
+  last_synced: '2026-08-28'
 preconditions:
 - shell
 - a valid username

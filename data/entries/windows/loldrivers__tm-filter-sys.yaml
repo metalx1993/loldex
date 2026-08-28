@@ -11,8 +11,8 @@ sources:
 - project: LOLDrivers
   upstream_url: https://www.loldrivers.io
   license: MIT
-  upstream_version: '5554706'
-  last_synced: '2026-08-25'
+  upstream_version: c8652a3
+  last_synced: '2026-08-28'
 attack_techniques:
 - T1056.001
 opsec:
