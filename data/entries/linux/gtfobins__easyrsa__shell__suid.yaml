@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-25'
+  last_synced: '2026-08-28'
 commands:
 - template: 'echo ''set_var X "$(/bin/sh 1>&0)"'' >/path/to/temp-file
 
@@ -26,3 +26,50 @@ tags:
 - linux
 - unix
 - gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      binary: easyrsa
+      function: shell
+      context: suid
+    upstream_url: https://gtfobins.github.io/gtfobins/easyrsa/
+    upstream_version: acd5246
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  model: layered
+  projected_at: '2026-08-28'
+  source_hashes:
+    GTFOBins: sha256:02b571a93d6a90a6a824a2dd3d4c73f16b7b363c1af0496447db75b84440c9e9

@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-25'
+  last_synced: '2026-08-28'
 commands:
 - template: xmodmap -v /path/to/input-file
   comment: The read file content is corrupted by error prints.
@@ -23,3 +23,50 @@ tags:
 - linux
 - unix
 - gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      binary: xmodmap
+      function: file-read
+      context: suid
+    upstream_url: https://gtfobins.github.io/gtfobins/xmodmap/
+    upstream_version: acd5246
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  model: layered
+  projected_at: '2026-08-28'
+  source_hashes:
+    GTFOBins: sha256:6dc7b4f4bf4122107094ed4c9178d49b3dbf7da2a221886004fbc09416048a76

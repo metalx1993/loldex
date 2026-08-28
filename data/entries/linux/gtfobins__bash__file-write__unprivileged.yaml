@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-25'
+  last_synced: '2026-08-28'
 commands:
 - template: bash -c 'echo DATA >/path/to/output-file'
 - template: 'HISTIGNORE=''history *''
@@ -30,3 +30,43 @@ tags:
 - linux
 - unix
 - gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      binary: bash
+      function: file-write
+      context: unprivileged
+    upstream_url: https://gtfobins.github.io/gtfobins/bash/
+    upstream_version: acd5246
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  model: layered
+  projected_at: '2026-08-28'
+  source_hashes:
+    GTFOBins: sha256:b4f52f384ace1cd13dbb32313ddd6098ae4fb95a1faf7916a2b9da3f74a1b189

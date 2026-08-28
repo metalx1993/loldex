@@ -22,6 +22,7 @@ from typing import Iterable
 import yaml
 
 from .base import Adapter, Entry
+from . import projection
 
 GTFOBINS_REPO = "https://github.com/GTFOBins/GTFOBins.github.io.git"
 
@@ -105,6 +106,16 @@ class GTFOBinsAdapter(Adapter):
 
     def normalize(self, raw) -> Iterable[Entry]:
         src = self.source_stub(upstream_version=raw["rev"])
+        rev = raw["rev"]
+        adapter_tag = f"gtfobins@{rev}"
+
+        def adapter_val(value, *, conf="high"):
+            """One adapter-provenance enriched_value (direct 1:1 mapping)."""
+            return {"value": value,
+                    "provenance": {"type": "adapter", "source": "GTFOBins",
+                                   "adapter": adapter_tag},
+                    "confidence": {"level": conf}}
+
         for path in raw["files"]:
             name = path.name
             data = self._frontmatter(path)
@@ -114,7 +125,7 @@ class GTFOBinsAdapter(Adapter):
                 cap = FUNCTION_CAP.get(func_name)
                 if cap is None:
                     continue
-                # context -> list of {code, comment}
+                # context -> list of {code, comment}  (logic unchanged)
                 per_ctx: dict[str, list[dict]] = {}
                 for ce in (code_entries or []):
                     base_code = (ce.get("code") or "").strip()
@@ -134,14 +145,32 @@ class GTFOBinsAdapter(Adapter):
                     phases = list(CAP_PHASE.get(cap, ["execution"]))
                     if priv in ("sudo", "suid", "capability") and "privilege-escalation" not in phases:
                         phases.append("privilege-escalation")
-                    yield Entry(
+
+                    # LAYER 1 — only what GTFOBins states (its own vocabulary)
+                    source_data = {
+                        "GTFOBins": {
+                            "raw": {"binary": name, "function": func_name,
+                                    "context": ctx_name},
+                            "upstream_url": f"{self.upstream_url}/gtfobins/{name}/",
+                            "upstream_version": rev,
+                            "last_synced": src["last_synced"],
+                        }
+                    }
+                    # LAYER 2 — what loldex maps (each value carries provenance)
+                    enrichment = {
+                        "capabilities": [adapter_val(cap)],
+                        "phases": [adapter_val(p) for p in phases],
+                        "privilege_required": adapter_val(priv),
+                    }
+                    # top-level fields are DERIVED by the projection, not set here
+                    yield projection.make_entry(
+                        source_data=source_data,
+                        enrichment=enrichment,
+                        on=src["last_synced"],
                         id=f"gtfobins/{name}/{func_name}/{ctx_name}",
                         type="binary",
                         platform="linux",
                         name=name,
-                        phases=phases,
-                        capabilities=[cap],
-                        privilege_required=priv,
                         commands=[{k: v for k, v in c.items() if v} for c in cmds],
                         sources=[src],
                         references=[f"{self.upstream_url}/gtfobins/{name}/"],

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-25'
+  last_synced: '2026-08-28'
 commands:
 - template: vim -c ':redir! >/path/to/output-file | echo "DATA" | redir END | q'
 references:
@@ -21,3 +21,43 @@ tags:
 - linux
 - unix
 - gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      binary: vim
+      function: file-read
+      context: unprivileged
+    upstream_url: https://gtfobins.github.io/gtfobins/vim/
+    upstream_version: acd5246
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  model: layered
+  projected_at: '2026-08-28'
+  source_hashes:
+    GTFOBins: sha256:05ede2a6ae509469e69f2789b7cb90ee6ff8033d52b93974f6120bc4a0f1ea32

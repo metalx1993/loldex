@@ -5,7 +5,7 @@
 # skeleton, so they can be searched together by platform, phase, privilege,
 # and capability.
 #
-# version: 0
+# version: 1
 # Every entry file under data/entries/**/*.yaml MUST validate against this.
 
 entry:

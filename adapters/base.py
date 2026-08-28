@@ -36,9 +36,58 @@ PLATFORMS = {"linux", "windows", "macos", "active-directory"}
 TYPES = {"binary", "script", "library", "driver", "technique"}
 
 
+# Keys that must NEVER appear inside source_data.<project>: they represent
+# loldex INTERPRETATION, which belongs in `enrichment`, not in source-attributed
+# data. Enforced by Entry._validate_source_data() and scripts/validate.py.
+# `relationships` is reserved here now though relationships aren't implemented yet.
+LOLDEX_INTERPRETIVE_KEYS = {
+    "capabilities", "phases", "attack_techniques", "privilege_required",
+    "detection", "mitigation", "notes", "enrichment", "relationships",
+}
+
+
+@dataclasses.dataclass
+class EnrichedValue:
+    """One enriched claim: a value + who produced it (provenance) + how sure
+    we are (confidence). provenance.type distinguishes the four cases:
+      upstream  — the source states it directly
+      adapter   — deterministically mapped from source vocab by an adapter
+      heuristic — guessed by an adapter heuristic (needs review)
+      manual    — added/verified by a human
+    confidence.level is orthogonal: low | medium | high | verified.
+    """
+    value: str
+    provenance: dict          # {type, source?, adapter?, note?}
+    confidence: dict          # {level}
+
+    PROV_TYPES = {"upstream", "adapter", "heuristic", "manual"}
+    CONF_LEVELS = {"low", "medium", "high", "verified"}
+
+    def validate(self, ctx: str = "") -> None:
+        assert self.value, f"{ctx}: enriched value empty"
+        pt = self.provenance.get("type")
+        assert pt in self.PROV_TYPES, f"{ctx}: bad provenance.type {pt!r}"
+        cl = self.confidence.get("level")
+        assert cl in self.CONF_LEVELS, f"{ctx}: bad confidence.level {cl!r}"
+
+    def as_dict(self) -> dict:
+        prov = {k: v for k, v in self.provenance.items() if v not in ("", None)}
+        return {"value": self.value, "provenance": prov, "confidence": self.confidence}
+
+
 @dataclasses.dataclass
 class Entry:
-    """One normalized loldex entry. Mirrors schema.yaml `entry`."""
+    """One normalized loldex entry. Mirrors schema.yaml `entry` (v1).
+
+    The enriched top-level fields (capabilities/phases/privilege_required/
+    attack_techniques) are a PROJECTION of `enrichment`, emitted by
+    adapters.projection. They are kept at top level for API/CLI/UI back-compat
+    but are NOT the source of truth.
+
+    Internal/external name mapping: the Python field `meta` is serialized to
+    the YAML key `_meta` (a leading-underscore dataclass field breaks
+    asdict()/init). Enforced by test_meta_serializes_as_underscore.
+    """
     id: str
     type: str
     platform: str
@@ -56,6 +105,10 @@ class Entry:
     driver_detail: dict = dataclasses.field(default_factory=dict)
     references: list[str] = dataclasses.field(default_factory=list)
     tags: list[str] = dataclasses.field(default_factory=list)
+    # --- v1 layers (optional in phase 1; legacy entries omit them) ---
+    source_data: dict = dataclasses.field(default_factory=dict)
+    enrichment: dict = dataclasses.field(default_factory=dict)
+    meta: dict = dataclasses.field(default_factory=dict)   # serialized as "_meta"
 
     def validate(self) -> None:
         assert self.type in TYPES, f"{self.id}: bad type {self.type}"
@@ -67,9 +120,33 @@ class Entry:
         for c in self.capabilities:
             assert c in CAPABILITIES, f"{self.id}: bad capability {c}"
         assert self.sources, f"{self.id}: sources empty (provenance is mandatory)"
+        # --- new-layer checks: only run when the layers are present ---
+        self._validate_source_data()
+        self._validate_enrichment()
+
+    def _validate_source_data(self) -> None:
+        """source_data.<project>: source-specific only, structurally sound."""
+        for project, block in self.source_data.items():
+            leaked = LOLDEX_INTERPRETIVE_KEYS & set(block)
+            assert not leaked, (
+                f"{self.id}: source_data.{project} contains loldex-interpretive "
+                f"keys {sorted(leaked)} — those belong in enrichment")
+            assert isinstance(block.get("raw"), dict), \
+                f"{self.id}: source_data.{project}.raw must be a dict"
+            assert isinstance(block.get("upstream_url"), str) and block.get("upstream_url"), \
+                f"{self.id}: source_data.{project}.upstream_url required (non-empty string)"
+
+    def _validate_enrichment(self) -> None:
+        for field_name, payload in self.enrichment.items():
+            items = payload if isinstance(payload, list) else [payload]
+            for raw in items:
+                EnrichedValue(raw.get("value", ""), raw.get("provenance", {}),
+                              raw.get("confidence", {})).validate(
+                    ctx=f"{self.id}.enrichment.{field_name}")
 
     def to_dict(self) -> dict:
         d = dataclasses.asdict(self)
+        d["_meta"] = d.pop("meta", {})   # internal `meta` -> external `_meta`
         # drop empty optionals for clean YAML
         return {k: v for k, v in d.items() if v not in ([], {}, "", None)}
 

