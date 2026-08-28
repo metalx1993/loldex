@@ -12,7 +12,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 9c5e384
+  upstream_version: 67781fd
   last_synced: '2026-08-28'
 attack_techniques:
 - T1202
@@ -40,7 +40,7 @@ source_data:
       privileges: User
       mitre_id: T1202
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Msdt/
-    upstream_version: 9c5e384
+    upstream_version: 67781fd
     last_synced: '2026-08-28'
 enrichment:
   capabilities:
@@ -48,7 +48,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   phases:
@@ -56,14 +56,14 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   - value: execution
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   attack_techniques:
@@ -71,7 +71,7 @@ enrichment:
     provenance:
       type: upstream
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   privilege_required:
@@ -79,7 +79,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
 _meta:
@@ -87,4 +87,4 @@ _meta:
   generated_by: loldex-projection
   projected_at: '2026-08-28'
   source_hashes:
-    LOLBAS: sha256:9bd259a41758164875ca94558fd000ee535f910acdddd707f9f028ead8a94536
+    LOLBAS: sha256:d5f7d08e1c16214749d593d776966c8d2ecf016cb102c72d5d4d9a5db4e98dd9

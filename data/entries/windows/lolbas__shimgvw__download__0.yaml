@@ -11,7 +11,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 9c5e384
+  upstream_version: 67781fd
   last_synced: '2026-08-28'
 attack_techniques:
 - T1105
@@ -38,7 +38,7 @@ source_data:
       privileges: User
       mitre_id: T1105
     upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Shimgvw/
-    upstream_version: 9c5e384
+    upstream_version: 67781fd
     last_synced: '2026-08-28'
 enrichment:
   capabilities:
@@ -46,7 +46,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   phases:
@@ -54,7 +54,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   attack_techniques:
@@ -62,7 +62,7 @@ enrichment:
     provenance:
       type: upstream
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   privilege_required:
@@ -70,7 +70,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
 _meta:
@@ -78,4 +78,4 @@ _meta:
   generated_by: loldex-projection
   projected_at: '2026-08-28'
   source_hashes:
-    LOLBAS: sha256:8207e937052cbf074ecdebe610e4b746c80def95cc48f0feef1132b11651f8c9
+    LOLBAS: sha256:7bb2e25e14bd710e30bdfe989d6cdd33436938e01835e0b6a8e46bcc201c0114

@@ -12,7 +12,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 9c5e384
+  upstream_version: 67781fd
   last_synced: '2026-08-28'
 aliases:
 - aspnet_compiler
@@ -39,7 +39,7 @@ source_data:
       privileges: User
       mitre_id: T1127
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Aspnet_Compiler/
-    upstream_version: 9c5e384
+    upstream_version: 67781fd
     last_synced: '2026-08-28'
 enrichment:
   capabilities:
@@ -47,7 +47,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   phases:
@@ -55,14 +55,14 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   - value: execution
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   attack_techniques:
@@ -70,7 +70,7 @@ enrichment:
     provenance:
       type: upstream
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   privilege_required:
@@ -78,7 +78,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
 _meta:
@@ -86,4 +86,4 @@ _meta:
   generated_by: loldex-projection
   projected_at: '2026-08-28'
   source_hashes:
-    LOLBAS: sha256:1415c97006055622761b64c6f3fab2bcf15ead417b7247c25e3598493b0c0847
+    LOLBAS: sha256:054a8c1b9329d70c90eacdfa79314de3042ef7954200e0a72c6a1bfd8711e36e

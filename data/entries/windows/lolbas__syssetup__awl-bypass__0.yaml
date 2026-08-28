@@ -12,7 +12,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 9c5e384
+  upstream_version: 67781fd
   last_synced: '2026-08-28'
 attack_techniques:
 - T1218.011
@@ -38,7 +38,7 @@ source_data:
       privileges: User
       mitre_id: T1218.011
     upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Syssetup/
-    upstream_version: 9c5e384
+    upstream_version: 67781fd
     last_synced: '2026-08-28'
 enrichment:
   capabilities:
@@ -46,7 +46,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   phases:
@@ -54,14 +54,14 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   - value: execution
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   attack_techniques:
@@ -69,7 +69,7 @@ enrichment:
     provenance:
       type: upstream
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
   privilege_required:
@@ -77,7 +77,7 @@ enrichment:
     provenance:
       type: adapter
       source: LOLBAS
-      adapter: lolbas@9c5e384
+      adapter: lolbas@67781fd
     confidence:
       level: high
 _meta:
@@ -85,4 +85,4 @@ _meta:
   generated_by: loldex-projection
   projected_at: '2026-08-28'
   source_hashes:
-    LOLBAS: sha256:35222e3adb0d56ced450a555fa9ac79984711642042a3e29829651585a4a471f
+    LOLBAS: sha256:8c086b373dcc0ea1f72206acfef03411349f9a35a752a234017de419e2f31252

@@ -27,3 +27,52 @@ references:
 tags:
 - windows
 - lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Vssadmin.exe
+      category: Tamper
+      privileges: Administrator
+      mitre_id: T1490
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Vssadmin/
+    upstream_version: 67781fd
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@67781fd
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@67781fd
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1490
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@67781fd
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@67781fd
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLBAS: sha256:393c6dfbdb4b4642544c1d83045a222194b3d3fdfc0937b7cb263082504e0357

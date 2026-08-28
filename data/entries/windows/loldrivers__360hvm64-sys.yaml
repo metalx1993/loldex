@@ -13,7 +13,7 @@ sources:
 - project: LOLDrivers
   upstream_url: https://www.loldrivers.io
   license: MIT
-  upstream_version: '5554706'
+  upstream_version: c8652a3
   last_synced: '2026-08-28'
 attack_techniques:
 - T1562.001
@@ -46,7 +46,7 @@ source_data:
       privileges: kernel
       mitre_id: T1562.001
     upstream_url: https://www.loldrivers.io
-    upstream_version: '5554706'
+    upstream_version: c8652a3
     last_synced: '2026-08-28'
 enrichment:
   capabilities:
@@ -54,7 +54,7 @@ enrichment:
     provenance:
       type: heuristic
       source: LOLDrivers
-      adapter: loldrivers@5554706
+      adapter: loldrivers@c8652a3
       note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
     confidence:
       level: low
@@ -62,7 +62,7 @@ enrichment:
     provenance:
       type: heuristic
       source: LOLDrivers
-      adapter: loldrivers@5554706
+      adapter: loldrivers@c8652a3
       note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
     confidence:
       level: low
@@ -71,7 +71,7 @@ enrichment:
     provenance:
       type: heuristic
       source: LOLDrivers
-      adapter: loldrivers@5554706
+      adapter: loldrivers@c8652a3
       note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
     confidence:
       level: low
@@ -79,7 +79,7 @@ enrichment:
     provenance:
       type: heuristic
       source: LOLDrivers
-      adapter: loldrivers@5554706
+      adapter: loldrivers@c8652a3
       note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
     confidence:
       level: low
@@ -88,7 +88,7 @@ enrichment:
     provenance:
       type: upstream
       source: LOLDrivers
-      adapter: loldrivers@5554706
+      adapter: loldrivers@c8652a3
     confidence:
       level: high
   privilege_required:
@@ -96,7 +96,7 @@ enrichment:
     provenance:
       type: heuristic
       source: LOLDrivers
-      adapter: loldrivers@5554706
+      adapter: loldrivers@c8652a3
       note: keyword rule on upstream Privileges (kernel/system -> system; default admin)
     confidence:
       level: low
@@ -105,4 +105,4 @@ _meta:
   generated_by: loldex-projection
   projected_at: '2026-08-28'
   source_hashes:
-    LOLDrivers: sha256:a8f10ab21719d9b7ee9d51d21ed2d708a2b8a9a39b3f982fd99b04396150eebe
+    LOLDrivers: sha256:cc797eb63f073450d924a2497cbd41e78ab3d1081cc7f075f6854c5c57d584b6
