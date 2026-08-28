@@ -29,3 +29,49 @@ tags:
 - wadcoms
 - rpc
 - ntlm
+source_data:
+  WADComs:
+    raw:
+      file: Dementor
+      attack_types:
+      - Exploitation
+      items:
+      - Password
+      - Username
+      services:
+      - RPC
+      - NTLM
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:42577ff0429d702fadee1e09ac9b462c6beac4fad6aadb37404bb6dd1887da00

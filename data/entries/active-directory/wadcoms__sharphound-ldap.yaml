@@ -32,3 +32,64 @@ tags:
 - active-directory
 - wadcoms
 - ldap
+source_data:
+  WADComs:
+    raw:
+      file: SharpHound-LDAP
+      attack_types:
+      - PrivEsc
+      - Enumeration
+      items:
+      - Shell
+      - Username
+      - Password
+      services:
+      - LDAP
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:f4102b7cc02625a8ca93e8415298ab6905b73ecb5badf8fcf5143f13da4aad21

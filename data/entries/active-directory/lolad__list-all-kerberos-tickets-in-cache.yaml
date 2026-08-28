@@ -21,3 +21,46 @@ tags:
 - active-directory
 - lolad
 - cmd
+source_data:
+  LOLAD:
+    raw:
+      name: List All Kerberos Tickets in Cache
+      command: klist
+      type: CMD
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a25
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLAD: sha256:e021dc922d7f7e03d08b18a36a22be89718ecc43b4871019ae97f1fcffb503c0

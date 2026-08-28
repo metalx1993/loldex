@@ -48,3 +48,45 @@ references:
 tags:
 - active-directory
 - wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: PwshADmodule-Initial-Enum
+      attack_types:
+      - Enumeration
+      items: []
+      services: []
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:7a93e67e53be0c7bbcb4cc59b07e0e627eacbd73ff52aa249d86bb6138021659

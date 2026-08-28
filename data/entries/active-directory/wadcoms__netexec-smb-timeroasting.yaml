@@ -28,3 +28,49 @@ tags:
 - active-directory
 - wadcoms
 - smb
+source_data:
+  WADComs:
+    raw:
+      file: NetExec-SMB-Timeroasting
+      attack_types:
+      - Credential Access
+      - Timeroasting
+      items:
+      - Hash
+      - Username
+      services:
+      - SMB
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:410f6ea6e8c464773a3375fea978ea77a4c94b148b2cedab17d2d3999679a72b

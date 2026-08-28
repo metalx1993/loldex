@@ -21,3 +21,46 @@ tags:
 - active-directory
 - lolad
 - powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List Machines with High Privileges
+      command: Get-ADComputer -Filter {PrimaryGroupID -eq 512}
+      type: PowerShell
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a25
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLAD: sha256:4d0bef94a824e1bb9c617ac4cc316442d47cac0aa2d74f2fd389cd4a68878a8b

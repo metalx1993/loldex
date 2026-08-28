@@ -11,7 +11,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 67781fd
+  upstream_version: 9c5e384
   last_synced: '2026-08-28'
 attack_techniques:
 - T1003.001
@@ -30,3 +30,52 @@ references:
 tags:
 - windows
 - lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Comsvcs.dll
+      category: Dump
+      privileges: SYSTEM
+      mitre_id: T1003.001
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/comsvcs/
+    upstream_version: 9c5e384
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: credential-dump
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1003.001
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLBAS: sha256:d80d7e2b610e1cc9f8b2658331f50b3587d2f1c50c1251359b1c10366d41cbc9

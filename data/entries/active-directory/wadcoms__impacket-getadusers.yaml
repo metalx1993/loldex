@@ -27,3 +27,48 @@ tags:
 - active-directory
 - wadcoms
 - kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-GetADUsers
+      attack_types:
+      - Enumeration
+      items:
+      - Username
+      - Password
+      services:
+      - Kerberos
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:12f748d9eb9274de0b97beec623c344064f6e2cbe772aa1fc25ac3787f2e5945

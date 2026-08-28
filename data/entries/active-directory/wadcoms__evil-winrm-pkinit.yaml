@@ -27,3 +27,47 @@ tags:
 - active-directory
 - wadcoms
 - wmi
+source_data:
+  WADComs:
+    raw:
+      file: Evil-Winrm-PKINIT
+      attack_types:
+      - Exploitation
+      items:
+      - PFX
+      services:
+      - WMI
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:9e78f55619c87e70b2f0b9cfb001205bc86a9d83c529e2e604a400dd32d3ee8c

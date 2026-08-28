@@ -26,3 +26,47 @@ tags:
 - active-directory
 - wadcoms
 - kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Kerbrute-BruteUser
+      attack_types:
+      - Enumeration
+      items:
+      - Username
+      services:
+      - Kerberos
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:618000d27e48a9b38edb79c889d73f26a0aff10cc013f8b94b573c6f5531cb9d

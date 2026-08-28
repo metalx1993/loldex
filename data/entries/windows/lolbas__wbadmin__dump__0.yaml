@@ -11,7 +11,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 67781fd
+  upstream_version: 9c5e384
   last_synced: '2026-08-28'
 attack_techniques:
 - T1003.003
@@ -31,3 +31,52 @@ references:
 tags:
 - windows
 - lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: wbadmin.exe
+      category: Dump
+      privileges: Administrator, Backup Operators, SeBackupPrivilege
+      mitre_id: T1003.003
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Wbadmin/
+    upstream_version: 9c5e384
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: credential-dump
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1003.003
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  privilege_required:
+    value: specific-right
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLBAS: sha256:1566a4eed35d5fdf9fd9677de3b8fe7572b28ab32642d723c84e7ef64c288e5b

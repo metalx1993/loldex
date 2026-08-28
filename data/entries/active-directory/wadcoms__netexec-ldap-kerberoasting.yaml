@@ -30,3 +30,50 @@ tags:
 - active-directory
 - wadcoms
 - ldap
+source_data:
+  WADComs:
+    raw:
+      file: NetExec-LDAP-Kerberoasting
+      attack_types:
+      - Credential Access
+      - Kerberoasting
+      items:
+      - Username
+      - Password
+      - Hash
+      services:
+      - LDAP
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:657b6cd0ee8ceba283add5d8ec8f68ec9a4c5f8e3736464f14addfc5baff6492

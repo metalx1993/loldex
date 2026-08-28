@@ -11,7 +11,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 67781fd
+  upstream_version: 9c5e384
   last_synced: '2026-08-28'
 attack_techniques:
 - T1127
@@ -28,3 +28,52 @@ references:
 tags:
 - windows
 - lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Ilasm.exe
+      category: Compile
+      privileges: User
+      mitre_id: T1127
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Ilasm/
+    upstream_version: 9c5e384
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLBAS: sha256:484534ed2aa2dd075e878954b52f9177ca1d6f688274171cd547a11bfb8e3c6f

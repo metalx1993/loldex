@@ -31,3 +31,49 @@ references:
 tags:
 - active-directory
 - wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: CredDumpWithoutMimilkatz
+      attack_types: []
+      items:
+      - Shell
+      - PrivEsc
+      - Exploitation
+      services: []
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: WADComs
+      adapter: wadcoms@a864cd1
+      note: no upstream attack_types; defaulted to discovery
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: WADComs
+      adapter: wadcoms@a864cd1
+      note: no upstream attack_types; defaulted to discovery
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:200af3fda02d159869ccd45a823a606207cafa9b954817170c83d6d13bfaebeb

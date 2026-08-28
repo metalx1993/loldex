@@ -11,7 +11,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 67781fd
+  upstream_version: 9c5e384
   last_synced: '2026-08-28'
 attack_techniques:
 - T1105
@@ -32,3 +32,52 @@ references:
 tags:
 - windows
 - lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Bitsadmin.exe
+      category: Copy
+      privileges: User
+      mitre_id: T1105
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    upstream_version: 9c5e384
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLBAS: sha256:1da4919a3e895e3d63db1c246fbd7242f130e361bd01c9e1142942b8366c889b

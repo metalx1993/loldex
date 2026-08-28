@@ -11,7 +11,7 @@ sources:
 - project: LOLDrivers
   upstream_url: https://www.loldrivers.io
   license: MIT
-  upstream_version: c8652a3
+  upstream_version: '5554706'
   last_synced: '2026-08-28'
 attack_techniques:
 - T1068
@@ -34,3 +34,61 @@ tags:
 - driver
 - byovd
 - loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      id: 5b9a202c-0695-532e-9d92-662cedefee07
+      category: vulnerable driver
+      usecase: "Local privilege escalation to SYSTEM via kernel pool overflow (IOCTLs 0x0022206C and 0x00222070\
+        \ \u2014 fixed 10-byte NonPagedPool alloc passed as uncapped USB bulk receive buffer); confirmed\
+        \ kernel DoS / BSOD via deprecated ExAllocatePool on Windows 11 and Server 2022; device context\
+        \ use-after-free via session counter underflow (IOCTL 0x00222050). All primitives accessible from\
+        \ unprivileged user-mode after driver load. BYOVD: catalog-signed (0/77 VT), FILE_ANY_ACCESS surface\
+        \ reachable from any local process."
+      privileges: kernel
+      mitre_id: T1068
+    upstream_url: https://www.loldrivers.io
+    upstream_version: '5554706'
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: keyword rule on upstream Privileges (kernel/system -> system; default admin)
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLDrivers: sha256:110eca7da9ad1f740d7d9c8480ce8a83afe8d88f0ec4f1533da67ee079c0303c

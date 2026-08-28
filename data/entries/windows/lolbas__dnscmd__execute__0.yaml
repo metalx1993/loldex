@@ -11,7 +11,7 @@ sources:
 - project: LOLBAS
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
-  upstream_version: 67781fd
+  upstream_version: 9c5e384
   last_synced: '2026-08-28'
 attack_techniques:
 - T1543.003
@@ -29,3 +29,52 @@ references:
 tags:
 - windows
 - lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Dnscmd.exe
+      category: Execute
+      privileges: DNS admin
+      mitre_id: T1543.003
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Dnscmd/
+    upstream_version: 9c5e384
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1543.003
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+  privilege_required:
+    value: specific-right
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@9c5e384
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLBAS: sha256:66811715758bb30a8cd0fd900cbdc59f7ee6a1d3152c2f479a68123f4b1e7968

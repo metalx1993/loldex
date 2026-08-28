@@ -54,3 +54,46 @@ references:
 tags:
 - active-directory
 - wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: PwshADmodule-DelegationAttack-Enum
+      attack_types:
+      - Enumeration
+      items:
+      - PowerShell
+      services: []
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:05511b1ce99ff25d73782f4a09eae69eeecb9193f4018eb0a5fc9b0b002d7e29

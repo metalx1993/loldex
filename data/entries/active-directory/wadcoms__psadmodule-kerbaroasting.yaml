@@ -32,3 +32,47 @@ tags:
 - active-directory
 - wadcoms
 - kerberos
+source_data:
+  WADComs:
+    raw:
+      file: PSADmodule-Kerbaroasting
+      attack_types:
+      - Exploitation
+      items:
+      - powershell
+      services:
+      - Kerberos
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:a85b0ce124fb74b75a7acf328be7dd0656c9cda6778c36e2682d15e39442e636

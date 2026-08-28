@@ -27,3 +27,47 @@ tags:
 - active-directory
 - wadcoms
 - wmi
+source_data:
+  WADComs:
+    raw:
+      file: SharpWMI
+      attack_types:
+      - Persistence
+      items:
+      - Shell
+      services:
+      - WMI
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:2d7c634c79e80ee86d787565ef061d8456b9268f413d4f1c2b2d441ec5a403b8

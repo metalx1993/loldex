@@ -21,3 +21,46 @@ tags:
 - active-directory
 - lolad
 - mimikatz
+source_data:
+  LOLAD:
+    raw:
+      name: Pass-the-Hash Attack on Local Account
+      command: 'sekurlsa::pth /user:LocalUser /domain:localhost /ntlm: /run:powershell.exe'
+      type: Mimikatz
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a25
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLAD: sha256:76a3c3d39ac3d9c1f714b529dafee54c4cfce2602679e52bd61f6d3ce8429b5d

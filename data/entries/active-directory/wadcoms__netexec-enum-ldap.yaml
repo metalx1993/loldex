@@ -29,3 +29,48 @@ tags:
 - active-directory
 - wadcoms
 - ldap
+source_data:
+  WADComs:
+    raw:
+      file: NetExec-Enum-LDAP
+      attack_types:
+      - Enumeration
+      items:
+      - Username
+      - Password
+      services:
+      - LDAP
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:7a153c1783e0c4a7c79a073c4697986c00ed78e794876de7665e201112c2e429

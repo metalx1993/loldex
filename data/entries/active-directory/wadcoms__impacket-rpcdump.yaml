@@ -27,3 +27,48 @@ tags:
 - active-directory
 - wadcoms
 - rpc
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-RPCDump
+      attack_types:
+      - Enumeration
+      items:
+      - Password
+      - Username
+      services:
+      - RPC
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:5ebcdce246ac5939750fa3ac56348e78c3574eb991cf0040657c3d769218c6d2

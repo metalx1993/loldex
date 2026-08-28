@@ -27,3 +27,46 @@ references:
 tags:
 - active-directory
 - wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: winPEAS
+      attack_types:
+      - PrivEsc
+      items:
+      - Shell
+      services: []
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:2abfc1130c518b0b9d6b47b6931d8c1f6deeb0a4af51468d8a0d8d9535c3f53f

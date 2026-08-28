@@ -28,3 +28,48 @@ tags:
 - wadcoms
 - ntlm
 - smb
+source_data:
+  WADComs:
+    raw:
+      file: Responder-Analyze
+      attack_types:
+      - Exploitation
+      items:
+      - No_Creds
+      services:
+      - NTLM
+      - SMB
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:4041e2cc8a321f2a64260b307eec0b209ce6d2f9c347ad5b05d9fbad2472e876

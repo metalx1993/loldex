@@ -20,6 +20,7 @@ import subprocess
 from typing import Iterable
 
 from .base import Adapter, Entry
+from . import projection, enrich
 
 LOLAD_REPO = "https://github.com/lolad-project/lolad-project.github.io.git"
 
@@ -130,14 +131,29 @@ class LOLADAdapter(Adapter):
             if ptype:
                 tags.append(ptype.lower())
 
-            yield Entry(
+            tag = f"lolad@{raw['rev']}"
+            note = "classified heuristically from technique name/command"
+            # LOLAD publishes no capability/phase/privilege taxonomy — all three
+            # are GUESSED by classify() from the name+command text -> heuristic/low.
+            enrichment = enrich.assemble(
+                capabilities=enrich.claims([cap], ptype="heuristic", source="LOLAD",
+                                           adapter=tag, confidence="low", note=note),
+                phases=enrich.claims(phases, ptype="heuristic", source="LOLAD",
+                                     adapter=tag, confidence="low", note=note),
+                privilege=enrich.enriched(priv, ptype="heuristic", source="LOLAD",
+                                          adapter=tag, confidence="low", note=note),
+            )
+            source_data = {"LOLAD": enrich.source_block(
+                project_raw={"name": name, "command": command, "type": ptype},
+                upstream_url=self.upstream_url, upstream_version=raw["rev"],
+                last_synced=src["last_synced"])}
+            yield projection.make_entry(
+                source_data=source_data, enrichment=enrichment,
+                on=src["last_synced"],
                 id=eid,
                 type="technique",
                 platform="active-directory",
                 name=name,
-                phases=phases,
-                capabilities=[cap],
-                privilege_required=priv,
                 commands=[{"template": command}],
                 sources=[src],
                 references=[self.upstream_url],

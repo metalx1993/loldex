@@ -21,3 +21,46 @@ tags:
 - active-directory
 - lolad
 - powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Find SID History for Users (SID History Abuse)
+      command: Get-ADUser -Filter * -Properties SIDHistory | Where-Object {$_.SIDHistory}
+      type: PowerShell
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a25
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLAD: sha256:faaff2d08de8836e4550d19c5a66c8d30ece67d8aa6d974fdca8ec01f87548e2

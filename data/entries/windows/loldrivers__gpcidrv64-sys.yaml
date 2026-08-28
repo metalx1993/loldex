@@ -13,7 +13,7 @@ sources:
 - project: LOLDrivers
   upstream_url: https://www.loldrivers.io
   license: MIT
-  upstream_version: c8652a3
+  upstream_version: '5554706'
   last_synced: '2026-08-28'
 attack_techniques:
 - T1542
@@ -32,3 +32,72 @@ tags:
 - driver
 - byovd
 - loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      id: 6736cbe7-33ea-4488-b464-231c0b8d1049
+      category: vulnerable driver
+      usecase: firmware erasing/modification
+      privileges: kernel
+      mitre_id: T1542
+    upstream_url: https://www.loldrivers.io
+    upstream_version: '5554706'
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
+    confidence:
+      level: low
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
+    confidence:
+      level: low
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1542
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: keyword rule on upstream Privileges (kernel/system -> system; default admin)
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLDrivers: sha256:6a00e3118e2dbb676d7688d536cf1f6bc54801880711ea52febfd33561b0f497

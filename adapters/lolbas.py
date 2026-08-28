@@ -24,6 +24,7 @@ from typing import Iterable
 import yaml
 
 from .base import Adapter, Entry
+from . import projection, enrich
 
 LOLBAS_REPO = "https://github.com/LOLBAS-Project/LOLBAS.git"
 
@@ -163,16 +164,35 @@ class LOLBASAdapter(Adapter):
                 desc = (cmd.get("Description") or "").strip() or None
                 cmd_block = [{"template": command, "comment": desc}] if command else []
 
-                yield Entry(
+                tag = f"lolbas@{raw['rev']}"
+                # cap/phase/priv: deterministic maps from explicit upstream
+                # fields (Category, Privileges) -> adapter / high.
+                enrichment = enrich.assemble(
+                    capabilities=enrich.claims([cap], ptype="adapter", source="LOLBAS",
+                                               adapter=tag, confidence="high"),
+                    phases=enrich.claims(phases, ptype="adapter", source="LOLBAS",
+                                         adapter=tag, confidence="high"),
+                    privilege=enrich.enriched(priv, ptype="adapter", source="LOLBAS",
+                                              adapter=tag, confidence="high"),
+                    # attack_techniques: taken straight from upstream MitreID
+                    # -> upstream / high (not the adapter's interpretation).
+                    attack_techniques=enrich.claims(attack, ptype="upstream", source="LOLBAS",
+                                                    adapter=tag, confidence="high"),
+                )
+                source_data = {"LOLBAS": enrich.source_block(
+                    project_raw={"name": name, "category": category,
+                                 "privileges": (cmd.get("Privileges") or "").strip(),
+                                 "mitre_id": str(mitre).strip() if mitre else ""},
+                    upstream_url=page, upstream_version=raw["rev"],
+                    last_synced=src["last_synced"])}
+                yield projection.make_entry(
+                    source_data=source_data, enrichment=enrichment,
+                    on=src["last_synced"],
                     id=f"lolbas/{stem}/{slug(category)}/{seen}",
                     type=etype,
                     platform="windows",
                     name=name,
                     aliases=[alias] if alias != stem else [],
-                    phases=phases,
-                    capabilities=[cap],
-                    privilege_required=priv,
-                    attack_techniques=attack,
                     opsec=opsec,
                     commands=[{k: v for k, v in c.items() if v} for c in cmd_block],
                     sources=[src],

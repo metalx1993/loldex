@@ -18,6 +18,7 @@ from typing import Iterable
 import yaml
 
 from .base import Adapter, Entry
+from . import projection, enrich
 
 LOLDRIVERS_REPO = "https://github.com/magicsword-io/LOLDrivers.git"
 
@@ -117,15 +118,38 @@ class LOLDriversAdapter(Adapter):
             refs = [r for r in (d.get("Resources") or []) if isinstance(r, str)]
             cmds = [{k: v for k, v in {"template": command, "comment": desc[:200] or None}.items() if v}] if command else []
 
-            yield Entry(
+            tag = f"loldrivers@{raw['rev']}"
+            cap_note = ("classified heuristically from driver usecase/description "
+                        "(keyword rules; defaults to privilege-escalation+defense-evasion)")
+            priv_note = "keyword rule on upstream Privileges (kernel/system -> system; default admin)"
+            # MITRE id is stated by upstream -> upstream/high; caps/phases and
+            # privilege are keyword/default guesses -> heuristic/low. Per-claim
+            # provenance keeps the upstream MITRE claim at high confidence even
+            # though the same entry also carries heuristic claims.
+            enrichment = enrich.assemble(
+                capabilities=enrich.claims(caps, ptype="heuristic", source="LOLDrivers",
+                                           adapter=tag, confidence="low", note=cap_note),
+                phases=enrich.claims(phases, ptype="heuristic", source="LOLDrivers",
+                                     adapter=tag, confidence="low", note=cap_note),
+                privilege=enrich.enriched(priv, ptype="heuristic", source="LOLDrivers",
+                                          adapter=tag, confidence="low", note=priv_note),
+                attack_techniques=enrich.claims(attack, ptype="upstream", source="LOLDrivers",
+                                                adapter=tag, confidence="high"),
+            )
+            source_data = {"LOLDrivers": enrich.source_block(
+                project_raw={"id": str(d.get("Id", "")), "category": d.get("Category", ""),
+                             "usecase": usecase,
+                             "privileges": str(cmd.get("Privileges", "")) if isinstance(cmd, dict) else "",
+                             "mitre_id": str(d["MitreID"]).strip() if d.get("MitreID") else ""},
+                upstream_url=self.upstream_url, upstream_version=raw["rev"],
+                last_synced=src["last_synced"])}
+            yield projection.make_entry(
+                source_data=source_data, enrichment=enrichment,
+                on=src["last_synced"],
                 id=eid,
                 type="driver",
                 platform="windows",
                 name=str(name),
-                phases=phases,
-                capabilities=caps,
-                privilege_required=priv,
-                attack_techniques=attack,
                 driver_detail=ddetail,
                 opsec={"noise": "high"} if ddetail.get("category") == "malicious" else {"noise": "medium"},
                 commands=cmds,

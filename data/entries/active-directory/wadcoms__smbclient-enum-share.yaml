@@ -28,3 +28,48 @@ tags:
 - active-directory
 - wadcoms
 - smb
+source_data:
+  WADComs:
+    raw:
+      file: SMBClient-Enum-Share
+      attack_types:
+      - Enumeration
+      items:
+      - Username
+      - Password
+      services:
+      - SMB
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:610e0285bc5481f38fb4eb9d1f003c85751c85915057ae83e64de9913417a4c9

@@ -27,3 +27,47 @@ tags:
 - active-directory
 - wadcoms
 - smb
+source_data:
+  WADComs:
+    raw:
+      file: NetExec-Enum-SMB-Relay-List
+      attack_types:
+      - Enumeration
+      items:
+      - No_Creds
+      services:
+      - SMB
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:d86624c6768a200d2cfaf439a1936e3067b5ec1fcbb2cbd06cb892cc00a39c6f

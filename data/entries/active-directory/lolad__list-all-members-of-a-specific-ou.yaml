@@ -21,3 +21,46 @@ tags:
 - active-directory
 - lolad
 - powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List All Members of a Specific OU
+      command: Get-ADUser -SearchBase "OU=Users,DC=domain,DC=com" -Filter * | Select Name, SamAccountName
+      type: PowerShell
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a25
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLAD: sha256:e0b811e6cb2f96a227dc5c1b120f21a2e7e56455dff89bce3751ff676906a5d8

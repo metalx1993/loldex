@@ -22,3 +22,47 @@ tags:
 - active-directory
 - lolad
 - powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List All Domain Groups and Their Members
+      command: Get-ADGroup -Filter * | ForEach-Object {Get-ADGroupMember -Identity $_.Name | Select Name,
+        SamAccountName}
+      type: PowerShell
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a25
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a25
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLAD: sha256:dbebcb9733b80ee3095e13aaeb0e9bde0dfee70775f3ab206925282f88a66836

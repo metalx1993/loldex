@@ -29,3 +29,49 @@ tags:
 - wadcoms
 - rpc
 - ntlm
+source_data:
+  WADComs:
+    raw:
+      file: PetitPotam
+      attack_types:
+      - Exploitation
+      items:
+      - Password
+      - Username
+      services:
+      - RPC
+      - NTLM
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:f82ce47099f4d78b442fe2821a950852cfd396dcdcd3cfa55ebf57ce233eef01

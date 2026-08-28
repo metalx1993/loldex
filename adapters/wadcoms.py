@@ -24,6 +24,7 @@ from typing import Iterable
 import yaml
 
 from .base import Adapter, Entry
+from . import projection, enrich
 
 WADCOMS_REPO = "https://github.com/WADComs/WADComs.github.io.git"
 
@@ -103,8 +104,9 @@ class WADComsAdapter(Adapter):
                     for ph in mapped[1]:
                         if ph not in phases:
                             phases.append(ph)
+            caps_from_map = bool(caps)          # did upstream attack_types drive it?
             if not caps:
-                caps, phases = ["discovery"], ["discovery"]
+                caps, phases = ["discovery"], ["discovery"]   # heuristic default
 
             items = data.get("items") or []
             preconds = [ITEM_PRECOND.get(str(i).strip(), str(i).strip().replace("_", " ").lower())
@@ -118,14 +120,42 @@ class WADComsAdapter(Adapter):
             desc_raw = str(data.get("description", "")).strip()
             desc = " ".join(desc_raw.split())[:280] or None
 
-            yield Entry(
+            tag = f"wadcoms@{raw['rev']}"
+            if caps_from_map:
+                # deterministic map from upstream attack_types -> adapter / high
+                cap_claims = enrich.claims(caps, ptype="adapter", source="WADComs",
+                                           adapter=tag, confidence="high")
+                phase_claims = enrich.claims(phases, ptype="adapter", source="WADComs",
+                                             adapter=tag, confidence="high")
+            else:
+                # upstream stated no attack_types -> defaulted to discovery
+                note = "no upstream attack_types; defaulted to discovery"
+                cap_claims = enrich.claims(caps, ptype="heuristic", source="WADComs",
+                                           adapter=tag, confidence="low", note=note)
+                phase_claims = enrich.claims(phases, ptype="heuristic", source="WADComs",
+                                             adapter=tag, confidence="low", note=note)
+            enrichment = enrich.assemble(
+                capabilities=cap_claims,
+                phases=phase_claims,
+                # privilege from a deterministic rule on the explicit `items`
+                # token (No_Creds) -> adapter / high.
+                privilege=enrich.enriched(priv, ptype="adapter", source="WADComs",
+                                          adapter=tag, confidence="high"),
+            )
+            source_data = {"WADComs": enrich.source_block(
+                project_raw={"file": path.stem,
+                             "attack_types": [str(a).strip() for a in (data.get("attack_types") or [])],
+                             "items": [str(i).strip() for i in items],
+                             "services": services},
+                upstream_url=self.upstream_url, upstream_version=raw["rev"],
+                last_synced=src["last_synced"])}
+            yield projection.make_entry(
+                source_data=source_data, enrichment=enrichment,
+                on=src["last_synced"],
                 id=f"wadcoms/{slug(path.stem)}",
                 type="technique",
                 platform="active-directory",
                 name=name,
-                phases=phases,
-                capabilities=caps,
-                privilege_required=priv,
                 preconditions=preconds,
                 commands=[{k: v for k, v in {"template": command, "comment": desc}.items() if v}],
                 sources=[src],

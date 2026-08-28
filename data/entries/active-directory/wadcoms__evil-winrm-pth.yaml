@@ -27,3 +27,48 @@ tags:
 - active-directory
 - wadcoms
 - wmi
+source_data:
+  WADComs:
+    raw:
+      file: Evil-WinRM-PTH
+      attack_types:
+      - Exploitation
+      items:
+      - Username
+      - Hash
+      services:
+      - WMI
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:6fa8ce179c65916ba18d000246cf5224f2fdc27ce7b4498d615bcb261d483472

@@ -27,3 +27,47 @@ tags:
 - active-directory
 - wadcoms
 - ldap
+source_data:
+  WADComs:
+    raw:
+      file: BloodHound.py-Remote-Ingestion
+      attack_types:
+      - Enumeration
+      items:
+      - No_Creds
+      services:
+      - LDAP
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:2264e749b3b31b0db45fa88ffa241e0abef7e94be5466060d4fb765a1c3e42d7

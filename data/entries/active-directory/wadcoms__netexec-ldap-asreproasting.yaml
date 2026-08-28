@@ -28,3 +28,49 @@ tags:
 - active-directory
 - wadcoms
 - ldap
+source_data:
+  WADComs:
+    raw:
+      file: NetExec-LDAP-ASREPRoasting
+      attack_types:
+      - Credential Access
+      - AS-REP Roasting
+      items:
+      - Username
+      - Hash
+      services:
+      - LDAP
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:ebb698db23a7f9ab06cb4a1fde36623a4f9acf7e5f3ecc5908ebd6c8138bfd65

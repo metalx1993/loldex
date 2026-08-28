@@ -29,3 +29,48 @@ tags:
 - wadcoms
 - kerberos
 - enumeration
+source_data:
+  WADComs:
+    raw:
+      file: Nmap-Krb5-Enum-Users
+      attack_types:
+      - Enumeration
+      items:
+      - No_Creds
+      services:
+      - Kerberos
+      - Enumeration
+    upstream_url: https://wadcoms.github.io
+    upstream_version: a864cd1
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@a864cd1
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    WADComs: sha256:31414b4063b5dc3983098273f5660a5d57aaaa6e9ceb0e354f6a48bcd876ac16

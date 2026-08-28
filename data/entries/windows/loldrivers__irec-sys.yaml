@@ -11,7 +11,7 @@ sources:
 - project: LOLDrivers
   upstream_url: https://www.loldrivers.io
   license: MIT
-  upstream_version: c8652a3
+  upstream_version: '5554706'
   last_synced: '2026-08-28'
 attack_techniques:
 - T1068
@@ -34,3 +34,56 @@ tags:
 - driver
 - byovd
 - loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      id: d74fdf19-b4b0-4ec2-9c29-4213b064138b
+      category: vulnerable driver
+      usecase: Elevate privileges
+      privileges: kernel
+      mitre_id: T1068
+    upstream_url: https://www.loldrivers.io
+    upstream_version: '5554706'
+    last_synced: '2026-08-28'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: classified heuristically from driver usecase/description (keyword rules; defaults to privilege-escalation+defense-evasion)
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@5554706
+      note: keyword rule on upstream Privileges (kernel/system -> system; default admin)
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-08-28'
+  source_hashes:
+    LOLDrivers: sha256:566918e7ebdcc7ed30911205c76fea6027e8048929a61821a89b31e3260968e1
