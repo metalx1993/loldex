@@ -63,7 +63,7 @@ enrichment:
       level: high
 _meta:
   schema_version: 1
-  model: layered
+  generated_by: loldex-projection
   projected_at: '2026-08-28'
   source_hashes:
     GTFOBins: sha256:10cd6d154f7a73ad0933a0bb6a4b98b9011e238e636ff50c1d8f86f6ee9dd179

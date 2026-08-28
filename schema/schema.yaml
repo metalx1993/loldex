@@ -50,6 +50,78 @@ entry:
   references:    {type: list, required: false, of: string}
   tags:          {type: list, required: false, of: string}
 
+  # =========================================================================
+  # v1 LAYERED MODEL (additive, optional in phase 1)
+  # -------------------------------------------------------------------------
+  # The enriched top-level fields above (capabilities, phases,
+  # privilege_required, attack_techniques) are NOT the source of truth: they
+  # are a PROJECTION of `enrichment`, produced by adapters.projection.build().
+  # These three layers hold the truth they are derived from.
+  #
+  # Optional in phase 1: legacy entries omit all three and still validate.
+  # Only GTFOBins (the phase-1 pilot) currently emits them.
+  # =========================================================================
+
+  # --- LAYER 1: exactly what the upstream source states, its own vocabulary ---
+  # source_data.<project> is a metadata block. Its `raw` payload is OPAQUE:
+  # it is the source's own content and is NOT validated against loldex
+  # taxonomies (a key literally named `capabilities` inside `raw` is fine).
+  # The block's own keys, however, must NOT be loldex-interpretive
+  # (capabilities/phases/attack_techniques/privilege_required/detection/
+  #  mitigation/notes/enrichment/relationships) — those belong in `enrichment`.
+  source_data:
+    required: false
+    of:                       # map keyed by project name, e.g. GTFOBins
+      raw:              {type: object, required: true,  note: "opaque upstream payload — not interpreted"}
+      upstream_url:     {type: string, required: true}
+      upstream_version: {type: string, required: false, note: "commit hash or release tag"}
+      last_synced:      {type: date,   required: false, note: "OUR fetch time — the ONLY home for last_synced"}
+
+  # --- LAYER 2: what loldex maps/derives; the SOLE input to the projection ---
+  # Each value is an `enriched_value` (see type below). privilege_required is a
+  # SINGLE enriched_value; the list fields are lists of enriched_value.
+  enrichment:
+    required: false
+    capabilities:        {type: list,          required: false, of: enriched_value}
+    phases:              {type: list,          required: false, of: enriched_value}
+    attack_techniques:   {type: list,          required: false, of: enriched_value}
+    privilege_required:  {type: enriched_value, required: false}
+    # --- RESERVED, extension only — NOT produced or consumed in phase 1 ---
+    # Documented so the model's shape is stable, but no adapter emits these and
+    # nothing reads them yet. Do not populate until a phase actually owns them.
+    detection:           {type: list, required: false, of: enriched_value, note: "RESERVED — not populated in phase 1"}
+    mitigation:          {type: list, required: false, of: enriched_value, note: "RESERVED — not populated in phase 1"}
+    notes:               {type: list, required: false, of: enriched_value, note: "RESERVED — not populated in phase 1"}
+
+  # --- LAYER 3: pipeline/projection-derived metadata (serialized as `_meta`) ---
+  # ACTIVE contract in phase 1: exactly these four keys.
+  _meta:
+    required: false
+    schema_version:  {type: int,    required: true,  note: "1"}
+    generated_by:    {type: string, required: true,  note: "the projecting component, e.g. loldex-projection"}
+    projected_at:    {type: date,   required: true,  note: "when the projection was stamped"}
+    source_hashes:   {type: object, required: true,  note: "<project>: sha256:... over canonical(raw [+upstream_version]); excludes last_synced/upstream_url"}
+    # --- RESERVED — NOT populated in phase 1 ---
+    last_enriched:   {type: date,   required: false, note: "RESERVED — manual-enrichment lifecycle not handled in phase 1"}
+    # NOTE: there is deliberately NO `_meta.last_synced`. Sync time is
+    # per-source and lives ONLY in source_data.<project>.last_synced.
+
+# ---------------------------------------------------------------------------
+# REUSABLE TYPE — enriched_value
+# Every enrichment value carries WHO produced it (provenance) and HOW SURE we
+# are (confidence). These are two INDEPENDENT axes, never collapsed.
+# ---------------------------------------------------------------------------
+enriched_value:
+  value:        {type: string, required: true}
+  provenance:
+    type:       {type: enum, required: true, values: [upstream, adapter, heuristic, manual],
+                 note: "upstream=source states it; adapter=deterministic map; heuristic=guessed, review; manual=human"}
+    source:     {type: string, required: false, note: "e.g. GTFOBins"}
+    adapter:    {type: string, required: false, note: "e.g. gtfobins@<rev>"}
+    note:       {type: string, required: false}
+  confidence:
+    level:      {type: enum, required: true, values: [low, medium, high, verified]}
+
 # ---------------------------------------------------------------------------
 # CLOSED TAXONOMIES — adapters must map upstream vocab into these. Adding a
 # value is a deliberate schema change (PR + bump note), not an ad-hoc string.

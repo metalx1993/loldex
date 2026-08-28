@@ -30,6 +30,9 @@ import json
 _LIST_FIELDS = ("capabilities", "phases", "attack_techniques")
 _SINGLE_FIELD = "privilege_required"
 
+# identifies the component that produced the projection (stable, no churn)
+GENERATED_BY = "loldex-projection"
+
 
 def _values(enrichment: dict, field: str) -> list[str]:
     """Ordered, de-duplicated values for a list-valued enriched field.
@@ -98,6 +101,7 @@ def apply(entry, *, on=None):
         setattr(entry, f, proj.get(f, []))          # always full projection
     entry.privilege_required = proj.get(_SINGLE_FIELD, "")
     entry.meta.setdefault("schema_version", 1)
+    entry.meta["generated_by"] = GENERATED_BY
     entry.meta.update(project_metadata(entry.source_data, on=on))
     return entry
 
@@ -117,7 +121,7 @@ def make_entry(*, source_data: dict, enrichment: dict,
         **identity_and_structural,
     )
     entry.meta["schema_version"] = 1
-    entry.meta.setdefault("model", "layered")     # tracks migrated adapters
+    entry.meta["generated_by"] = GENERATED_BY
     entry.meta.update(project_metadata(source_data, on=on))
     return entry
 

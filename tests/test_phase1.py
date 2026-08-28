@@ -228,6 +228,45 @@ def test_source_data_rejects_interpretive_keys():
             e.validate()
 
 
+def test_source_data_raw_is_opaque():
+    """raw is the source's OWN payload: it is NOT validated against loldex
+    vocab. A key literally named like a loldex-interpretive field, living
+    INSIDE raw, must be accepted — the validator inspects the block's own
+    keys, never recurses into raw."""
+    for key in ("capabilities", "phases", "attack_techniques",
+                "privilege_required", "relationships", "enrichment"):
+        e = _entry(enr(caps=["file-write"]))
+        e.source_data["GTFOBins"]["raw"][key] = "upstream calls it this"
+        e.validate()   # must NOT raise — raw is opaque
+        # and the value survives round-trip (not stripped/reinterpreted)
+        assert e.source_data["GTFOBins"]["raw"][key] == "upstream calls it this"
+
+
+def test_projection_overwrites_manual_toplevel():
+    """The top-level fields are NOT a source of truth: apply() overwrites any
+    hand-set top-level with the projection of enrichment."""
+    e = _entry(enr(caps=["file-write"], phases=["execution"], priv="suid"))
+    e.capabilities = ["THIS-MUST-NOT-SURVIVE"]
+    e.phases = ["fake-phase"]
+    e.privilege_required = "root"
+    pj.apply(e, on=dt.date(2026, 8, 28))
+    assert e.capabilities == ["file-write"]
+    assert e.phases == ["execution"]
+    assert e.privilege_required == "suid"
+
+
+def test_meta_contract_is_exactly_four_keys():
+    """_meta active contract in phase 1: exactly schema_version, generated_by,
+    projected_at, source_hashes. No `model`, no `_meta.last_synced`."""
+    e = _entry(enr(caps=["file-write"]))
+    assert set(e.meta) == {"schema_version", "generated_by",
+                           "projected_at", "source_hashes"}
+    assert e.meta["generated_by"] == pj.GENERATED_BY
+    assert "model" not in e.meta
+    assert "last_synced" not in e.meta          # sync time is per-source only
+    assert "last_enriched" not in e.meta        # reserved, not populated
+
+
 def test_meta_serializes_as_underscore():
     d = _entry(enr(caps=["file-write"])).to_dict()
     assert "_meta" in d and "meta" not in d
