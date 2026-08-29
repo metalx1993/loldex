@@ -56,8 +56,11 @@ enrichment with **per-claim** provenance/confidence. No public output changes.
 - `top-level == projection(enrichment)` for every entry.
 - `scripts.validate` → 3086 entries, 0 errors.
 - Phase-1 tests → 26/26. Phase-2 tests → 14/14.
-- `site/data.json` byte-identical to the pre-phase-2 baseline (SHA256
-  bcd159a7…639f15e); the layers are internal and never enter data.json.
+- `site/data.json` public output unchanged by the phase-2 migration: the
+  layers (source_data/enrichment/_meta) are internal and never enter data.json.
+  The projected top-level fields are byte-identical to the pre-phase-2 baseline.
+  (Later upstream syncs may change data.json through normal content drift; that
+  is independent of the phase-2 migration.)
 - No other adapter migrated; no schema/contract change; no operational
   capability introduced.
 
@@ -68,15 +71,26 @@ normalization: WADComs raw carries the upstream file stem (`file`), not a
 hyphen->space display name; LOLDrivers `raw.privileges` preserves upstream case
 (no `.lower()`). Guarded by `test_raw_is_not_loldex_normalized`.
 
-## Preexisting legacy orphans (documented exception)
+## The three former legacy orphans (resolved by upstream sync)
 
-Three entries predate phase 2 and are legacy (no source_data/enrichment):
+Three entries had a history worth recording:
 `lolbas/vssadmin/tamper/0`, `loldrivers/alinubx-sys`, `loldrivers/dcrcvdrv-sys`.
-Current upstream no longer produces them, and `run()` overwrites but does not
-delete files, so they persist unchanged from the efe2ac2 baseline. They are a
-preexisting condition, NOT introduced by phase 2, and are deliberately left
-as-is to preserve public-output byte-parity. They are not made layered
-artificially. Cleaning stale orphans is a separate, later decision.
+
+At the phase-2 baseline (`efe2ac2`) they were legacy (no source_data/enrichment):
+the upstream snapshot in use at that point no longer produced them, and `run()`
+overwrites but does not delete files, so they persisted from an earlier import.
+Phase 2 deliberately left them untouched rather than fabricate layers for
+entries the adapters were not emitting — a preexisting condition, not something
+phase 2 introduced.
+
+They are no longer legacy. The scheduled sync bot re-ran the adapters against a
+newer upstream revision that re-includes these three entries, so they were
+regenerated in the normal layered format (source_data + enrichment + _meta),
+exactly like every other entry. No manual intervention was involved. As of the
+current `main`, no legacy orphan entries remain in the four migrated adapters.
+
+Because the layers are internal and never enter `data.json`, this regeneration
+did not change the public output.
 
 ## Out of scope (unchanged)
 

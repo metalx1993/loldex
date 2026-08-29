@@ -19,9 +19,9 @@ what upstream projects already publish, and links back to every source. See
 | Platform | Entries | Sources |
 |----------|--------:|---------|
 | Linux | 1,708 | GTFOBins |
-| Windows | 1,138 | LOLBAS, LOLDrivers |
+| Windows | 1,141 | LOLBAS, LOLDrivers |
 | Active Directory | 237 | WADComs, LOLAD |
-| **Total** | **3,083** | |
+| **Total** | **3,086** | |
 
 Entry types: binaries, scripts, libraries, drivers (BYOVD), and AD techniques.
 Every entry carries a command, MITRE ATT&CK mapping, required privilege,
