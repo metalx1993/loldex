@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: jrunscript -e 'exec("/bin/sh -c $@|sh _ echo sh </dev/tty >/dev/tty 2>/dev/tty")'
 references:
@@ -30,7 +30,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/jrunscript/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:897aacdc7e4cf8b29c69fde7827767027ff764ca65484cd7c8b9df486f3aae23

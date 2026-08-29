@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'echo DATA | less
 
@@ -34,7 +34,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/less/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-write
@@ -70,6 +70,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:668be858765b13a9cd6fd0c8aecc0aa73ed5ad0b1300ef01a4b50f4b271dc094

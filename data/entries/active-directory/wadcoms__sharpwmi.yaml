@@ -12,7 +12,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: a864cd1
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 preconditions:
 - shell
 commands:
@@ -39,7 +39,7 @@ source_data:
       - WMI
     upstream_url: https://wadcoms.github.io
     upstream_version: a864cd1
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: persistence
@@ -68,6 +68,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     WADComs: sha256:2d7c634c79e80ee86d787565ef061d8456b9268f413d4f1c2b2d441ec5a403b8

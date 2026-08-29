@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1127
 opsec:
@@ -38,7 +38,7 @@ source_data:
       mitre_id: T1127
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wfc/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -82,6 +82,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:9ded01d5bb020f1541adeb0573f726fc0ef2f745e6089a93f65e31f7a6559391

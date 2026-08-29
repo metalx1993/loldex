@@ -14,7 +14,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'ffmpeg -f lavfi -i anullsrc -af ladspa=file=/path/to/lib.so /path/to/temp-file.wav
 
@@ -33,7 +33,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/ffmpeg/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: library-load
@@ -76,6 +76,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:0faf61f98b56b9c74c0bd18a74a890fb4e964bd1e5bdc9de1be35137c89e9262

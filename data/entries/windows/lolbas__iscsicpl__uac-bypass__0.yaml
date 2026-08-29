@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1548.002
 opsec:
@@ -39,7 +39,7 @@ source_data:
       mitre_id: T1548.002
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Iscsicpl/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -83,6 +83,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:627fe8854982b0fb28a6973fb7945de90020b90029be53dba91d39ca9faf2950

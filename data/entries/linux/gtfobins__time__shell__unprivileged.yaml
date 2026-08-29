@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: time /bin/sh
   comment: Note that the shell might have its own builtin `time` implementation, which may behave differently
@@ -31,7 +31,7 @@ source_data:
       context: unprivileged
     upstream_url: https://gtfobins.github.io/gtfobins/time/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -60,6 +60,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:f99987a2407c69de75667e40b2baf3710649a05c7bfeeabf6f1e401098d28631

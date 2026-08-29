@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'ed /path/to/input-file
 
@@ -33,7 +33,7 @@ source_data:
       context: unprivileged
     upstream_url: https://gtfobins.github.io/gtfobins/ed/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -62,6 +62,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:03a4620980e3965a64b091e36d856aaca7f0edc202521fdc01590722c7030994

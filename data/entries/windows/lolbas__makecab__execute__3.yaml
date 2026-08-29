@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1036
 opsec:
@@ -39,7 +39,7 @@ source_data:
       mitre_id: T1036
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Makecab/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -76,6 +76,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:4ba80efc42730a3f8c3c1aca3aff8da4e21e84bd69e1dbe862a83d247b4b8734

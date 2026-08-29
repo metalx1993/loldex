@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: run-parts --new-session --regex '^sh$' /bin
 - template: 'cp /bin/sh /path/to/temp-dir/
@@ -33,7 +33,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/run-parts/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -69,6 +69,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:7833263b26073166159f0e067a7d78a45e4af2736e4cf83fc73178a066fee8ae

@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: as @/path/to/input-file
   comment: Lines are likely leaked as error messages.
@@ -31,7 +31,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/as/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:6aa29025a13eecdf33fca6103aaca18fccaecf0eaab31bc4e36ffcd2e7a19bda

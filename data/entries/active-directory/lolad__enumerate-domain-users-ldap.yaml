@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolad-project.github.io
   license: verify upstream LICENSE
   upstream_version: 6ed6a25
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: dsquery user -name *
 references:
@@ -29,7 +29,7 @@ source_data:
       type: CMD
     upstream_url: https://lolad-project.github.io
     upstream_version: 6ed6a25
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: discovery
@@ -61,6 +61,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLAD: sha256:d43b29af6f701c56c307bcfc04d36ff31a2d0d249f9ff4e793e41c88e48c30d6

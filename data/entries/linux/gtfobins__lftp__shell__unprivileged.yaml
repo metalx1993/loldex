@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: lftp -c '!/bin/sh'
 references:
@@ -29,7 +29,7 @@ source_data:
       context: unprivileged
     upstream_url: https://gtfobins.github.io/gtfobins/lftp/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -58,6 +58,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:691e916c4e01e4b2c6733078a07fad6a9aaa6e02c150e8d4cb145502d99df2c6

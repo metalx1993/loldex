@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'vi /path/to/output-file
 
@@ -37,7 +37,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/vi/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-write
@@ -73,6 +73,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:6318c33e72ad4df9d32df1b5ee5d94f2eb8f32f55034749d276745b7fd1df0a5

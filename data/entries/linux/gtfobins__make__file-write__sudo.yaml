@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: make -s --eval='$(file >/path/to/output-file,DATA)' .
 references:
@@ -30,7 +30,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/make/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-write
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:2137122e079ffab82dc53b7ef4ad390adc28a8f611f0f162d986a8ab86fceb97

@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: uuencode /path/to/input-file /dev/stdout | uudecode
 references:
@@ -30,7 +30,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/uuencode/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:450e1275264ba65ce2d2b7611ffc9f8fa7d3fb1ac908eeb5fb8526a79c86f1d6

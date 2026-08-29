@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1218.009
 opsec:
@@ -41,7 +41,7 @@ source_data:
       mitre_id: T1218.009
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Regasm/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -85,6 +85,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:d6349e08a02e888dae891fd9382962891e965cff7d73fa5526476bde417645ef

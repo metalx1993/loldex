@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolad-project.github.io
   license: verify upstream LICENSE
   upstream_version: 6ed6a25
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: Get-NetSession -ComputerName target-machine
 references:
@@ -29,7 +29,7 @@ source_data:
       type: PowerShell (PowerView)
     upstream_url: https://lolad-project.github.io
     upstream_version: 6ed6a25
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: discovery
@@ -61,6 +61,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLAD: sha256:dc3e41de606894536937cbdcbbf7c44dda641a53963f6b24805bd1217fea8dd5

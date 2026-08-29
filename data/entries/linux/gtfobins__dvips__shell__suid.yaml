@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: dvips -R0 texput.dvi
   comment: 'The `texput.dvi` output file produced by `tex` can be created offline and uploaded to the
@@ -39,7 +39,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/dvips/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -75,6 +75,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:f83300d5be9fdbf9388f6006d5f9a1310bc0b02fde867476bbec45762561d9e9

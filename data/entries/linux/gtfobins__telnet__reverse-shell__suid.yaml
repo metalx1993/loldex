@@ -14,7 +14,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'mkfifo /path/to/temp-socket
 
@@ -34,7 +34,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/telnet/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: reverse-shell
@@ -77,6 +77,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:4bfe44f61886c38fde77ec706bc6079042dd1d06007abc688cfe6cdf8b80db95

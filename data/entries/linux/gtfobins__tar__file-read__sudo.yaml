@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: tar cf /dev/stdout /path/to/input-file -I 'tar xO'
   comment: The file is read then passed to the specified command (e.g., `tar xO`) via standard input.
@@ -31,7 +31,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/tar/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:c76ab6325cd2d2ad99bebf8e20e87ac0d9346aaf9e777c29910c057dc9f547c9

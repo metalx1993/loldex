@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: openvpn --dev null --script-security 2 --up '/bin/sh -p -s'
 references:
@@ -30,7 +30,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/openvpn/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:c862952fd88650b115b7a1bd911c442cc6e882b6e1c38508006f1e776d8f36e6

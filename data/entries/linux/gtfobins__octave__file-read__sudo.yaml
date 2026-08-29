@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: octave-cli --eval 'format none; fid = fopen("/path/to/input-file"); while(!feof(fid)); txt
     = fgetl(fid); disp(txt); endwhile; fclose(fid);'
@@ -31,7 +31,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/octave/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:56766fc4fb086155113a23b1d23b4d3ba7b67e1581d8a169e88d41f1b3e461b2

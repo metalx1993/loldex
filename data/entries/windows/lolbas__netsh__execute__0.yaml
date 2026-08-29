@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1546.007
 opsec:
@@ -40,7 +40,7 @@ source_data:
       mitre_id: T1546.007
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Netsh/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -77,6 +77,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:d951e8972b132ce27126eaab1d2d236fcb8aa93e518e6ce208d2c3c8273d5da4

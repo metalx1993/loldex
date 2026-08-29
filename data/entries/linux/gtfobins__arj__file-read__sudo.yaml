@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'arj a /path/to/output-file /path/to/input-file
 
@@ -33,7 +33,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/arj/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -69,6 +69,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:4911b1dd5dcf51cc0134a721c376f694adf8db2d03268f1be2bd5eb31079f3f9

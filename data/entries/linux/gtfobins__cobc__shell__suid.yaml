@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'echo ''CALL "SYSTEM" USING "/bin/sh".'' >/path/to/temp-file
 
@@ -33,7 +33,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/cobc/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -69,6 +69,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:c06db562908049f56c4c210086b93763faa35b831ff7efece5627f4f70deb6ff

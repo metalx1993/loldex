@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolad-project.github.io
   license: verify upstream LICENSE
   upstream_version: 6ed6a25
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: Get-ADDomainController -Filter *
 references:
@@ -29,7 +29,7 @@ source_data:
       type: PowerShell
     upstream_url: https://lolad-project.github.io
     upstream_version: 6ed6a25
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: discovery
@@ -61,6 +61,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLAD: sha256:050bcbf92e01e1f398e4fce32636d0f990e383aa0220e360fb89471eef39fc80

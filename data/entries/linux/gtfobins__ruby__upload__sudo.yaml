@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: ruby -run -e httpd . -p 80
 references:
@@ -30,7 +30,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/ruby/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-upload
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:951fcccdfcbc54951b911107680aaf13a37882f010269939c2792a3b3ef7f2ca

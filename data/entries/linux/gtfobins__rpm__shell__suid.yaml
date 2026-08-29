@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: rpm --eval '%(/bin/sh 1>&2)'
 - template: rpm --pipe '/bin/sh 0<&1'
@@ -31,7 +31,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/rpm/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:29d2357984bda668107c55500de4aa36a51ee809aaf03dc6851c8c5928552055

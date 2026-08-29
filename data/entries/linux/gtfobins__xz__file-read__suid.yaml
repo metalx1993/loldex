@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: xz -c /path/to/input-file | xz -d
 references:
@@ -30,7 +30,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/xz/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:9990d8029a92b84e1d71fd67c5933c56e3dc5db8d507a44f09eef7f94b6b4bf0

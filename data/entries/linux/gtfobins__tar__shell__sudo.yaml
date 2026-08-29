@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: tar cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 - template: tar xf /dev/null -I '/bin/sh -c "/bin/sh 0<&2 1>&2"'
@@ -37,7 +37,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/tar/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -73,6 +73,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:6bf47365263b9fcb94c657f910ff92f4d28c9f1b8f11d7f1c1105d885139e071

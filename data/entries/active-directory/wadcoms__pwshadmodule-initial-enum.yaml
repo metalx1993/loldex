@@ -12,7 +12,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: a864cd1
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: '#Getting all DCs in the forest
 
@@ -58,7 +58,7 @@ source_data:
       services: []
     upstream_url: https://wadcoms.github.io
     upstream_version: a864cd1
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: discovery
@@ -87,6 +87,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     WADComs: sha256:7a93e67e53be0c7bbcb4cc59b07e0e627eacbd73ff52aa249d86bb6138021659

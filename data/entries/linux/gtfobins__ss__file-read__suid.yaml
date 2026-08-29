@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: ss -a -F /path/to/input-file
   comment: The file content is actually parsed so only a part of the first line is returned as a part
@@ -32,7 +32,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/ss/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -68,6 +68,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:9634ccb8e21a604248557ca6d6137e264a6de2af00ec1820e3ffa5cf5c73df4b

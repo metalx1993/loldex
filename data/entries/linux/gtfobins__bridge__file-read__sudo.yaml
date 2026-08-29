@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: bridge -b /path/to/input-file
   comment: Outputs the first line of the file (until the first whitespace) inside an error message to
@@ -32,7 +32,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/bridge/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -68,6 +68,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:cc066a694108dc1e087d9ecebcb2b9cda4a6a3faa5a12982fc034463fad35add

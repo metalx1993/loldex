@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1127
 opsec:
@@ -34,7 +34,7 @@ source_data:
       mitre_id: T1127
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/AppLauncher/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -71,6 +71,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:13554e72a5702de29a7af3605f86fc34625cb1c68ae544d3670114e72331cd2a

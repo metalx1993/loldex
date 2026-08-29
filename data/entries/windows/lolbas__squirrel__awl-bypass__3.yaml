@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1218
 opsec:
@@ -38,7 +38,7 @@ source_data:
       mitre_id: T1218
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Squirrel/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -82,6 +82,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:0167f12d4a1de7bc564b87c1a5786b285066ab6fd557c3f5a97c1ac210db6e32

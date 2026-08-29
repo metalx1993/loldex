@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: dnsmasq --conf-script='/path/to/command 1>&2'
 references:
@@ -30,7 +30,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/dnsmasq/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:abac6ba5a37dd43e2349d4528da3784d5568a39daf993e39710a7f3d3a9ad8db

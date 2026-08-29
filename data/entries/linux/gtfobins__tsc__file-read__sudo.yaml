@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: tsc /path/to/input-file.ts
   comment: Content is leaked as error messages. The file extension must be one of the supported ones,
@@ -32,7 +32,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/tsc/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -68,6 +68,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:0a1688b3114ab26734bb6e8a1f3d458ad0c02796dec75682a5138951cdbc4f0b

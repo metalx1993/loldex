@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'iptables -A INPUT -i lo -j ACCEPT -m comment --comment DATA
 
@@ -35,7 +35,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/iptables-save/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-write
@@ -71,6 +71,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:73700c5ec6c3baf3f733b9a836de5960d6eb56a446ba09101838a1cd8fcc9e41

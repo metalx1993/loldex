@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: nc -l -p 12345 </path/to/input-file
   comment: The file is actually read by the invoking shell.
@@ -33,7 +33,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/nc/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-upload
@@ -69,6 +69,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:ce512a74fc1163155ef29a0ee418b989c7169bfeb34ecdd435115ace6771a6cd

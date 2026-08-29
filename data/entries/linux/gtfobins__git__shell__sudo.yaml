@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: PAGER='/bin/sh -c "exec sh 0<&1"' git -p help
 - template: 'git init .
@@ -44,7 +44,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/git/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -80,6 +80,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:a77d2974c801ef3ecc6d814a3248f7a0248b2d3a7013d4b880102c4f7966b4f7

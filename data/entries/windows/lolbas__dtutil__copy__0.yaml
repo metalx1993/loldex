@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1105
 opsec:
@@ -34,7 +34,7 @@ source_data:
       mitre_id: T1105
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dtutil/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-write
@@ -71,6 +71,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:2e20360d00918b877ea18e3c5c0cee7ffbebc28cbb2c5d79790344bc2546a9b9

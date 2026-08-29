@@ -14,7 +14,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: ruby -e 'require "fiddle"; Fiddle.dlopen("/path/to/lib.so")'
 references:
@@ -31,7 +31,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/ruby/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: library-load
@@ -74,6 +74,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:8ab6e8ea20433429ea3e6f7ff1a4b4bc060f88df273ed5bf59bf229df13616ac

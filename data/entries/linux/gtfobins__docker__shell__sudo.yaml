@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: docker run -v /:/mnt --rm -it alpine chroot /mnt /bin/sh
 - template: 'docker run --rm -it --privileged -u root alpine
@@ -39,7 +39,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/docker/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -75,6 +75,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:6e44dc482567d791e4bb63f4f8d387de4417948a5f7eeb7f810e32d1e57a7bcc

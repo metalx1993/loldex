@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'fail2ban-client add x
 
@@ -83,7 +83,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/fail2ban-client/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -119,6 +119,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:006b7cd14855ad392130a6ff81241fd8d7f02e2578f12163f4b45f3c2cefc7e1

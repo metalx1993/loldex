@@ -14,7 +14,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: python -c 'from ctypes import cdll; cdll.LoadLibrary("/path/to/lib.so")'
 references:
@@ -31,7 +31,7 @@ source_data:
       context: capabilities
     upstream_url: https://gtfobins.github.io/gtfobins/python/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: library-load
@@ -74,6 +74,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:0a786bf3f067f4cef6198c8789e5e2f617063518ce1cfe2d523dd65157d9c3ac

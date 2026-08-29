@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: BUNDLE_GEMFILE=x bundle exec /bin/sh
 - template: 'touch Gemfile
@@ -37,7 +37,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/bundle/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -73,6 +73,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:160c2c1b95e253977959d29d1a029ef3d000b7ea72b31cdfe01f8b17f90ed520

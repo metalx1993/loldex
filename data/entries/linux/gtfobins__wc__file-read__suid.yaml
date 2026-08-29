@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: wc --files0-from /path/to/input-file
   comment: The file content is parsed as a sequence of `\x00` separated paths. On error the file content
@@ -32,7 +32,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/wc/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -68,6 +68,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:096a1bf5f0d023ea84ea7ef5925f6f6658522b49175a2c24de3210c3f343e7c5

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1105
 opsec:
@@ -42,7 +42,7 @@ source_data:
       mitre_id: T1105
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Mshta/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-download
@@ -79,6 +79,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:c6af292a959640889b262e74ca2ab18b820a68e4c16ccd2a5f4de8229e22e057

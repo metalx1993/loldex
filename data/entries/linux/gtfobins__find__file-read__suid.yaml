@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: find /path/to/input-file -exec cat {} \;
   comment: This uses `cat` to actually read the file, but since permissions are not dropped, it's executed
@@ -32,7 +32,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/find/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -68,6 +68,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:bb87086bcef1d38c5c539388f731fc3590f3c421f371a97e685ab887df4693a6

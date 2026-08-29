@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: openvt -- /path/to/command
   comment: The command execution is displayed on the virtual console.
@@ -31,7 +31,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/openvt/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:583b51f42a3f6e684c9aaa4ca330d73c225eb540183c3bb8ed42d02464ace318

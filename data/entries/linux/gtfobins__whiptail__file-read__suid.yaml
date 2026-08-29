@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: whiptail --textbox --scrolltext /path/to/input-file 0 0
   comment: The file is shown in an interactive TUI dialog made for displaying text, arrows can be used
@@ -32,7 +32,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/whiptail/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-read
@@ -68,6 +68,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:82934e81b1bf63f8a22ac5943e9ef807ee80f7087590d79422dce1af17e8534e

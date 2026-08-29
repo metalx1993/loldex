@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: ssh localhost /bin/sh
   comment: Reconnecting may help bypassing restricted shells.
@@ -34,7 +34,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/ssh/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -70,6 +70,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:0464aec32ee9c83fe029b9069157e28f6d25207e7f77244f2187b7d5c114124d

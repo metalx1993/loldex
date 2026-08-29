@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: ltrace -s 999 -o /path/to/input-file ltrace -F DATA
   comment: The data to be written appears amid the library function call log, quoted and with special
@@ -34,7 +34,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/ltrace/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-write
@@ -70,6 +70,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:6de55c7231f872b56609a76c84ba403b2862c374c9cbab48089fa832cce6e296

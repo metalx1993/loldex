@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: ruby -e 'Process::Sys.setuid(0); exec "/bin/sh"'
 references:
@@ -30,7 +30,7 @@ source_data:
       context: capabilities
     upstream_url: https://gtfobins.github.io/gtfobins/ruby/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:201108a84fe47210e984f4217bd63ccd5b9ee0e6329f2b9dc2f7716ee8a92a2d

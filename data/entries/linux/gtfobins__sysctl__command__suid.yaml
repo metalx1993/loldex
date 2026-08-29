@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: sysctl 'kernel.core_pattern=|/path/to/command'
   comment: 'The command is executed by `root` in the background when a core dump occurs.
@@ -43,7 +43,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/sysctl/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -79,6 +79,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:4acc758f62fa067c4fc36e683f7e98d50cc2e5f6369f79ba4ddc6ca86e1714fd

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1105
 opsec:
@@ -38,7 +38,7 @@ source_data:
       mitre_id: T1105
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Diantz/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-download
@@ -75,6 +75,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:7dfa63ef3d3cb0fc32d5a44b69a959f2be87ddef2687bd20b45ad94485fb899c

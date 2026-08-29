@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'echo -e ''#!/bin/sh -p\n/bin/sh -p 1>&0'' >/path/to/temp-file
 
@@ -34,7 +34,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/wget/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -70,6 +70,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:53c38137e12e313d71f4b54a324144ad582bc00c45ac7f8a61c0c2c7512981bf

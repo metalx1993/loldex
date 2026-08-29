@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1218
 opsec:
@@ -37,7 +37,7 @@ source_data:
       mitre_id: T1218
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Msdeploy/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -81,6 +81,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:cae5f36d2979c6e4cd345c725e5a463f3b6d3867fe8776585b69e0c0ce357a7a

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 aliases:
 - microsoft.workflow.compiler
 attack_techniques:
@@ -43,7 +43,7 @@ source_data:
       mitre_id: T1127
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Microsoft.Workflow.Compiler/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -80,6 +80,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:c7b91acf2e446d46f86c74db543e0e74a123afb2e4a12a335000fe21ef7431ee

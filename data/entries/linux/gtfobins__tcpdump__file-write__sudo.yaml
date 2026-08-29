@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: tcpdump -ln -i lo -w /path/to/output-file -c 1 -Z user
   comment: 'This saves the packet dump (count is 1) from the loopback interface to a file. To trigger
@@ -43,7 +43,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/tcpdump/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-write
@@ -79,6 +79,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:105eee0f414809ef00cbcf3c7e9b4cba22bd1f2e065c4ff38a42b84900ee551f

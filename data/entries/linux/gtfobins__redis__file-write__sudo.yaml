@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'redis-cli -h 127.0.0.1
 
@@ -43,7 +43,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/redis/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: file-write
@@ -79,6 +79,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:1180c3e57fb72e5f2f01c83dee2fc3149021a83cea175d36d70a5e2da7ce0e72

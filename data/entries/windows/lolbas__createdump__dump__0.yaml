@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 67781fd
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 attack_techniques:
 - T1003
 opsec:
@@ -39,7 +39,7 @@ source_data:
       mitre_id: T1003
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Createdump/
     upstream_version: 67781fd
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: credential-dump
@@ -76,6 +76,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     LOLBAS: sha256:5ddb909e6ca39c12e4ebc658864a63b3a76d7cab36e06ab592aa264e87e9a172

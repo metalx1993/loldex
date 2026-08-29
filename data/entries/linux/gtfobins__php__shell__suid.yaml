@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: php -r 'system("/bin/sh -i");'
 - template: php -r 'passthru("/bin/sh -i");'
@@ -34,7 +34,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/php/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -70,6 +70,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:5dc63900964ee174f785b8e3177cc714e491f0a4734a213fd13b952611d63730

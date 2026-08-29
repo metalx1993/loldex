@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'cat >/path/to/temp-file.conf <<EOF
 
@@ -40,7 +40,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/wg-quick/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -76,6 +76,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:23ed4960f490daae7a01321c8cb34f21125253df1b2b0f7b82a3e98a53f2e2ef

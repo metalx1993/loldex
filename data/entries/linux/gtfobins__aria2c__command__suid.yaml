@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: 'echo /path/to/command >/path/to/temp-file
 
@@ -39,7 +39,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/aria2c/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -75,6 +75,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:4af6c4117aef4eb173a05acc6e32ac73b3e9a60bdc91cb5900bfa4cc3350da47

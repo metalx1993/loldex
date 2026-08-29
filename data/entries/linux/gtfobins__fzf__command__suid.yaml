@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: fzf --listen=12345
   comment: 'Commands can be issued via POST requests, for example:
@@ -38,7 +38,7 @@ source_data:
       context: suid
     upstream_url: https://gtfobins.github.io/gtfobins/fzf/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: command-execution
@@ -74,6 +74,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:cc665cef8a8d4c07efb03d328e1dd06cf41179f04dc51f6c845b90dd89bbb9ea

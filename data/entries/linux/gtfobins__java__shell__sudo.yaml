@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd5246
-  last_synced: '2026-08-28'
+  last_synced: '2026-08-29'
 commands:
 - template: java Shell
   comment: "The `Shell.class` class file can be compiled offline, then uploaded to the target:\n\n```\n\
@@ -34,7 +34,7 @@ source_data:
       context: sudo
     upstream_url: https://gtfobins.github.io/gtfobins/java/
     upstream_version: acd5246
-    last_synced: '2026-08-28'
+    last_synced: '2026-08-29'
 enrichment:
   capabilities:
   - value: shell
@@ -70,6 +70,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-08-28'
+  projected_at: '2026-08-29'
   source_hashes:
     GTFOBins: sha256:451c8653858fad73cdaeda186e9d5de8a5ba26493618196de0d1023d11d5ce8b
