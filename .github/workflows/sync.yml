@@ -4,8 +4,12 @@ name: sync
 # This is what makes the index self-maintaining.
 
 on:
-  schedule:
-    - cron: "0 4 * * 1"        # every Monday 04:00 UTC
+  # CONTAINMENT (2026-08-31): the scheduled trigger is disabled because this job
+  # can commit and push to main without running the test suite. Re-enable it only
+  # together with the CP5.1 Corrective Amendment A1 test gate. Manual dispatch is
+  # deliberately preserved — the sync has only ever run manually.
+  # schedule:
+  #   - cron: "0 4 * * 1"      # every Monday 04:00 UTC
   workflow_dispatch: {}         # manual trigger
 
 permissions:
