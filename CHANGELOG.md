@@ -1,5 +1,41 @@
 # Changelog
 
+## Phase 5 CORE — CP5.1 Corrective Amendment A1 · FROZEN
+
+- Corrects the boundary between frozen golden evidence and the mutable production
+  corpus, and hardens the sync workflow that boundary depends on. Two opposite
+  defects from one mistake: the production genesis was pinned to a historical
+  snapshot the spec declares mobile, while golden G1 — printed and pinned by §16 —
+  read its input from a corpus file the sync rewrites.
+- Production-genesis values (3,086 entries / 899,886 bytes / sha256:8d78d81b…) are
+  now recorded as evidence verified at 00a9fe2, not asserted: §12 states the
+  production genesis "is corpus-dependent by construction and regenerates whenever
+  the corpus changes". G1's input is an inline frozen fixture reproducing exactly
+  552 bytes and sha256:8e4efac5…, keeping the non-material fields so the §14
+  exclusions stay exercised.
+- Genesis tests now assert independent properties — validate_body on the live
+  corpus, determinism, full ownership resolution, and §12 extraction-contract cases
+  on synthetic fixtures — verified by mutation testing rather than by a snapshot.
+- Sync workflow: the candidate corpus is built, validated, tested and published
+  under one Git base. The base is captured before acquisition and re-checked
+  against origin/main immediately before publication; a mismatch exits having
+  created no commit. No rebase, no force push — a race landing after the check is
+  rejected as non-fast-forward. Actions pinned to immutable commit SHAs,
+  least-privilege permissions, cron disabled.
+- Deployment removed rather than repaired: the FTP action was not commit-atomic
+  and carried a vulnerable basic-ftp. Deferred to amendment A2 — Atomic
+  Deployment; no executable deployment path remains.
+- Four adversarial review rounds. Blockers found and closed: an "advisory" drift
+  test that was in fact a blocking gate reintroducing the corpus pin; a stale
+  candidate publishable after a clean rebase; a non-atomic deployment. Then a local
+  commit created before the base check, and an out-of-scope concurrency mechanism.
+  Final accreditation ran the two-concurrent-publisher race on real Git
+  repositories: the loser is rejected non-fast-forward and never overwrites the
+  winner, with no lock or queue. Zero blockers, majors and minors.
+- Tests: 160 CP5.1 · 159 CP5.2. No phase5/* production module changed; CP5.2
+  byte-identical to its freeze.
+- Next: CP5.3 — verified acquisition and the five adapters.
+
 ## Phase 5 CORE — CP5.2 Transition Engine · FROZEN
 
 - `phase5/transition.py`: `evaluate(committed_body, observation, arrival_token)`
