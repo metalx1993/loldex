@@ -1,32 +1,54 @@
 name: sync
 
-# Auto-sync from upstream catalogues, validate, rebuild site data, and commit.
-# This is what makes the index self-maintaining.
+# Auto-sync from upstream catalogues, validate, test, and commit to main.
+#
+# Deployment is NOT part of this workflow. Publishing site/ to the live host
+# needs an atomic mechanism (versioned staging plus a server-side switch); the
+# previous FTP step could leave public_html half-updated on a mid-transfer
+# failure, so it has been removed rather than left behind a disabled guard.
+# That work is amendment A2 — Atomic Deployment.
+#
+# The cron stays disabled until this hardened form has been reviewed.
 
 on:
-  # CONTAINMENT (2026-08-31): the scheduled trigger is disabled because this job
-  # can commit and push to main without running the test suite. Re-enable it only
-  # together with the CP5.1 Corrective Amendment A1 test gate. Manual dispatch is
-  # deliberately preserved — the sync has only ever run manually.
   # schedule:
-  #   - cron: "0 4 * * 1"      # every Monday 04:00 UTC
-  workflow_dispatch: {}         # manual trigger
+  #   - cron: "0 4 * * 1"      # every Monday 04:00 UTC — re-enable after A1 is applied
+  workflow_dispatch: {}
 
-permissions:
-  contents: write
+permissions: {}
 
 jobs:
   sync:
+    # Publication is only ever allowed from main, including manual dispatch.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    timeout-minutes: 45
+    permissions:
+      contents: write
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.12"
 
-      - name: Install deps
-        run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt pytest
+
+      # The candidate corpus must be built, validated, tested and published under
+      # ONE base commit. Record it before acquisition; re-check it before push.
+      - name: Record acquisition base
+        id: base
+        run: |
+          set -euo pipefail
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Sync adapters
         run: python -m scripts.sync
@@ -37,32 +59,55 @@ jobs:
       - name: Rebuild site data
         run: python -m scripts.build_site_data
 
-      - name: Commit changes
+      - name: Hard test gate
+        run: python -m pytest -q
+
+      # Stage only. No commit is created here: if the acquisition base has moved
+      # the run must end having created nothing at all.
+      - name: Stage candidate
+        id: candidate
         run: |
+          set -euo pipefail
           git config user.name  "loldex-bot"
           git config user.email "bot@users.noreply.github.com"
           git add data/ site/data.json
           if git diff --cached --quiet; then
-            echo "no changes"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "no corpus change"
           else
-            git commit -m "sync: refresh index from upstream ($(date -u +%F))"
-            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      # Deploy the refreshed site to the live host (SiteGround) over FTP.
-      # Requires three repo secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
-      # If they aren't set, this step is skipped and the site stays as-is.
-      - name: Deploy site to SiteGround
-        if: ${{ env.FTP_SERVER != '' }}
+      - name: Publish only onto the unchanged acquisition base
+        if: steps.candidate.outputs.changed == 'true'
         env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./site/
-          server-dir: ./public_html/
-          exclude: |
-            **/.git*
-            **/.git*/**
+          SYNC_TOKEN: ${{ github.token }}
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: |
+          set -euo pipefail
+          origin_url="$(git remote get-url origin)"
+          trap 'git remote set-url origin "$origin_url"' EXIT
+          git remote set-url origin \
+            "https://x-access-token:${SYNC_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          git fetch --no-tags origin main
+          remote_sha="$(git rev-parse origin/main)"
+
+          # Fail closed, before anything is committed. The candidate was acquired,
+          # validated and tested with the code at BASE_SHA; if main has moved, that
+          # code is not what would be published. Deliberately no rebase: rebasing
+          # would publish data produced by the old code on top of the new code. The
+          # next run re-syncs cleanly against the new base.
+          if [ "$remote_sha" != "$BASE_SHA" ]; then
+            echo "main moved from $BASE_SHA to $remote_sha during this run."
+            echo "Discarding the staged candidate; re-run the sync to rebuild on the new base."
+            exit 1
+          fi
+
+          # The base is confirmed unchanged, so the tested tree is the publishable
+          # tree. Only now does a commit exist.
+          git commit -m "sync: refresh index from upstream ($(date -u +%F))"
+
+          # Plain push: a race landing after the check above is rejected as a
+          # non-fast-forward. No force, no lease, no silent overwrite.
+          git push origin HEAD:main

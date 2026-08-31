@@ -8,6 +8,7 @@ The frozen specification ``docs/phase5-core-design-v6-4.md`` is the oracle.
 Golden assertions are on exact bytes AND exact digests, never on "equivalent
 JSON". No network access. No transition engine (that is CP5.2).
 """
+import copy
 import itertools
 import pathlib
 import random
@@ -68,7 +69,57 @@ from phase5.vocabulary import (  # noqa: E402
 from tests import phase5_goldens as G  # noqa: E402
 
 SPEC = ROOT / "docs" / "phase5-core-design-v6-4.md"
-G1_ENTRY = ROOT / "data" / "entries" / "linux" / "gtfobins__diff__file-read__unprivileged.yaml"
+#: Frozen normative input for golden G1 (§16). Inlined deliberately: G1 is a
+#: printed, pinned golden, so its input must not come from ``data/``, which the
+#: sync workflow rewrites. Non-material fields (``sources``, ``source_data``,
+#: ``_meta``) are retained so the §14 exclusion rules stay exercised.
+#:
+#: The live corpus is deliberately NOT compared against this fixture anywhere.
+#: §12 lets the corpus diverge materially; G1 is frozen regardless.
+G1_FROZEN_ENTRY = {
+    "id": "gtfobins/diff/file-read/unprivileged",
+    "type": "binary",
+    "platform": "linux",
+    "name": "diff",
+    "phases": ["collection"],
+    "capabilities": ["file-read"],
+    "privilege_required": "user",
+    "commands": [
+        {"template": "diff --line-format=%L /dev/null /path/to/input-file"},
+        {
+            "template": "diff --recursive /path/to/empty-dir /path/to/input-dir/",
+            "comment": (
+                "This lists the content of a directory. `/path/to/empty-dir` can be "
+                "any directory, but for convenience it is better to use an empty "
+                "directory to avoid noise output."
+            ),
+        },
+    ],
+    "references": ["https://gtfobins.github.io/gtfobins/diff/"],
+    "tags": ["linux", "unix", "gtfobins"],
+    "sources": [
+        {
+            "project": "GTFOBins",
+            "upstream_url": "https://gtfobins.github.io",
+            "license": "GPL-3.0",
+            "upstream_version": "acd5246",
+            "last_synced": "2026-08-29",
+        }
+    ],
+    "source_data": {
+        "GTFOBins": {
+            "raw": {"binary": "diff", "function": "file-read", "context": "unprivileged"},
+            "upstream_url": "https://gtfobins.github.io/gtfobins/diff/",
+            "upstream_version": "acd5246",
+            "last_synced": "2026-08-29",
+        }
+    },
+    "_meta": {
+        "schema_version": 1,
+        "generated_by": "loldex-projection",
+        "projected_at": "2026-08-29",
+    },
+}
 
 G1_DIGEST = "sha256:8e4efac566970088763bfd9f7447b7fdfecc55d61764cfd422f814582ddfccae"
 G2_DIGEST = "sha256:8b687db6f7882e233e2df28f5c55af20300278c5fddb566140f907b9f4a56f42"
@@ -79,9 +130,15 @@ G6_DIGEST = "sha256:09bf118eab6255fbb474263f0491e19ec4234e504dfb91aae3175adb73ca
 PLACEHOLDER_EMPTY_DIGEST = "sha256:6ca27dacaf3439158765ea9c63b78acf011947c321c69956b9617029aeadff0d"
 PLACEHOLDER_NONEMPTY_DIGEST = "sha256:9b85e1a0276222ae7e4eb1f135a3da2f786f5dbe7c7c4d15bd277d6f06ea4552"
 FIXTURE_GENESIS_DIGEST = "sha256:a836d0b4779c6f1ca293acb0fcae9617d594e2753328ebb6d5a9c01214b70d40"
-PRODUCTION_GENESIS_DIGEST = "sha256:8d78d81b92d5fbaea2972fca158b4a15424301d5ed7e111c601bf0f060415ca9"
-PRODUCTION_GENESIS_ENTRIES = 3086
-PRODUCTION_GENESIS_BYTES = 899886
+#: Historical freeze evidence, NOT an invariant. §12: the production genesis "is
+#: corpus-dependent by construction and regenerates whenever the corpus changes".
+#: Verified at 00a9fe2; retained as a record, asserted by nothing.
+HISTORICAL_PRODUCTION_GENESIS = {
+    "commit": "00a9fe2",
+    "entries": 3086,
+    "bytes": 899886,
+    "digest": "sha256:8d78d81b92d5fbaea2972fca158b4a15424301d5ed7e111c601bf0f060415ca9",
+}
 
 PUA = ""
 EMOJI = "\U0001f600"
@@ -285,12 +342,21 @@ def test_material_omit_empty_applies_to_every_shape():
 # --------------------------------------------------------------------------
 # Golden vectors (section 16) — exact bytes AND exact digests
 # --------------------------------------------------------------------------
-def test_golden_G1_material_projection_of_real_entry():
-    entry = yaml.safe_load(G1_ENTRY.read_text(encoding="utf-8"))
-    blob = canonical_bytes(project_material_v1(entry))
+def test_golden_G1_material_projection_of_frozen_entry():
+    """G1 from its frozen input — no dependency on the mutable corpus."""
+    blob = canonical_bytes(project_material_v1(G1_FROZEN_ENTRY))
     assert len(blob) == 552
     assert digest_over(blob) == G1_DIGEST
-    assert material_fingerprint(entry) == G1_DIGEST
+    assert material_fingerprint(G1_FROZEN_ENTRY) == G1_DIGEST
+
+
+def test_G1_frozen_fixture_excludes_non_material_fields():
+    """§14 exclusion, proven by mutating only excluded fields."""
+    drifted = copy.deepcopy(G1_FROZEN_ENTRY)
+    drifted["sources"][0]["last_synced"] = "2099-12-31"
+    drifted["source_data"]["GTFOBins"]["last_synced"] = "2099-12-31"
+    drifted["_meta"]["projected_at"] = "2099-12-31"
+    assert material_fingerprint(drifted) == G1_DIGEST
 
 
 def test_golden_G2_observation_bytes_are_canonical():
@@ -385,18 +451,68 @@ def test_fixture_genesis_validates():
     validate_envelope(serialize_state_file(gen.genesis_body(entries)))
 
 
-def test_production_genesis_reproduces_frozen_oracle():
+def test_production_genesis_is_normatively_valid_for_the_current_corpus():
+    """§12: the production genesis regenerates whenever the corpus changes.
+
+    So no count/size/digest is asserted. validate_body is the independent
+    property: it enforces the §11.2 schema, entry-id sortedness, duplicate ids
+    and every per-entry rule, and fails on a malformed body.
+    """
     entries = gen.build_genesis_inventory(ROOT)
-    assert len(entries) == PRODUCTION_GENESIS_ENTRIES
-    blob = canonical_bytes(gen.genesis_body(entries))
-    assert len(blob) == PRODUCTION_GENESIS_BYTES
-    assert digest_over(blob) == PRODUCTION_GENESIS_DIGEST
+    assert entries, "the production corpus must not be empty"
+    validate_body(gen.genesis_body(entries))
 
 
 def test_production_genesis_ownership_is_fully_resolved():
     entries = gen.build_genesis_inventory(ROOT)
     assert all(canonical_prefix_owner(e["entry_id"]) in e["owner_sources"] for e in entries)
     assert len({e["entry_id"] for e in entries}) == len(entries)
+
+
+def _write_corpus(root, files):
+    base = root / "data" / "entries"
+    base.mkdir(parents=True, exist_ok=True)
+    for name, text in files.items():
+        (base / name).write_text(text, encoding="utf-8")
+    return root
+
+
+def test_genesis_extraction_sorts_and_seeds_by_prefix(tmp_path):
+    """§12 steps 5-8: seed from the id prefix, sort the inventory by entry_id."""
+    _write_corpus(tmp_path, {"z.yaml": "id: gtfobins/z\n", "a.yaml": "id: lolbas/a\n"})
+    entries = gen.build_genesis_inventory(tmp_path)
+    assert [(e["entry_id"], e["owner_sources"]) for e in entries] == [
+        ("gtfobins/z", ["GTFOBins"]),
+        ("lolbas/a", ["LOLBAS"]),
+    ]
+    validate_body(gen.genesis_body(entries))
+
+
+@pytest.mark.parametrize("name,text", [
+    ("unknown_prefix.yaml", "id: nosuchproject/x\n"),   # §12 step 6 — skipped
+    ("malformed.yaml", "[unterminated\n"),              # §12 step 4 — skipped
+    ("not_a_mapping.yaml", "- just\n- a list\n"),       # §12 step 4 — skipped
+    ("no_id.yaml", "type: binary\n"),                   # §12 step 4 — skipped
+    ("empty_id.yaml", "id: ''\n"),                      # §12 step 4 — skipped
+    ("wrong_ext.YAML", "id: gtfobins/wrong-ext\n"),      # §12 step 2 — not accepted
+])
+def test_genesis_extraction_skips_unusable_records(tmp_path, name, text):
+    """§12: these are *skipped*, never hard-invalid — genesis is not a health pass.
+
+    Each case is paired with one good file, so the test fails both if the bad
+    record is admitted and if it wrongly aborts the whole build.
+    """
+    _write_corpus(tmp_path, {"good.yaml": "id: gtfobins/good\n", name: text})
+    entries = gen.build_genesis_inventory(tmp_path)
+    assert [e["entry_id"] for e in entries] == ["gtfobins/good"]
+
+
+def test_genesis_extraction_keeps_the_first_duplicate_id(tmp_path):
+    """§12 step 7: on duplicate ids the first in traversal order wins."""
+    _write_corpus(tmp_path, {"a.yaml": "id: gtfobins/dup\n", "b.yaml": "id: gtfobins/dup\n"})
+    entries = gen.build_genesis_inventory(tmp_path)
+    assert [e["entry_id"] for e in entries] == ["gtfobins/dup"]
+    validate_body(gen.genesis_body(entries))
 
 
 def test_production_genesis_is_deterministic_across_runs():
