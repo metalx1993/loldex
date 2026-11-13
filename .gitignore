@@ -3,3 +3,5 @@ __pycache__/
 /tmp/
 gtfobins_src/
 .DS_Store
+work/
+.pytest_cache/

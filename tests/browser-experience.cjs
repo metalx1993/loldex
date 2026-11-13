@@ -1,0 +1,55 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');fs.mkdirSync('work',{recursive:true});
+const base=process.env.LOLDEX_TEST_URL||'http://127.0.0.1:8765';
+(async()=>{
+const browser=await chromium.launch({headless:true});
+const page=await browser.newPage({viewport:{width:1440,height:1000}});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto(base+'/');
+await page.waitForSelector('#stats .stat');
+await page.keyboard.press('Tab');assert.equal(await page.locator(':focus').textContent(),'Skip to content');
+assert.equal(await page.locator('.stat strong').first().textContent(),'3,086');
+await page.screenshot({path:'work/home-desktop.png',fullPage:true});
+await page.goto(base+'/search.html?q=T1105');
+await page.waitForSelector('.entry-row');
+assert((await page.locator('#result-count').textContent()).includes('results'));
+assert.equal(await page.locator('.entry-row').count(),30);
+await page.selectOption('#f-platform','linux');
+assert((await page.locator('#result-count').textContent()).startsWith('0 results'));
+await page.click('#reset');
+await page.waitForSelector('.entry-row');
+await page.click('#more');assert.equal(await page.locator('.entry-row').count(),60);
+await page.fill('#q','certutil');
+assert(await page.locator('.entry-row').count()>0);
+await page.locator('.rowhead h2 a').first().click();
+await page.waitForSelector('.claims');
+await page.getByText('Inspect original source data',{exact:true}).click();
+await page.waitForSelector('details pre');
+await page.waitForSelector('.graph svg');
+await page.screenshot({path:'work/entry-desktop.png',fullPage:true});
+await page.goto(base+'/technique.html?id=T1105');
+await page.waitForSelector('.graph svg');
+assert.equal(await page.locator('h1').textContent(),'Ingress Tool Transfer');
+await page.goto(base+'/techniques.html');
+await page.waitForSelector('.tech-card');
+await page.fill('#tech-q','ZZZ');assert.equal(await page.locator('.tech-card').count(),0);
+await page.fill('#tech-q','T1105');assert.equal(await page.locator('.tech-card').count(),1);
+for(const path of ['index.html','search.html','techniques.html','entry.html?id=lolbas/certutil/download/0','technique.html?id=T1105']){
+  await page.setViewportSize({width:320,height:780});
+  await page.goto(base+'/'+path);
+  await page.waitForSelector(path.startsWith('index')?'#stats .stat':path.startsWith('search')?'.entry-row':path.startsWith('techniques')?'.tech-card':path.startsWith('entry')?'.claims':'.graph svg');
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),path+' overflows');
+}
+await page.screenshot({path:'work/technique-mobile.png',fullPage:true});
+await page.goto(base+'/technique.html?id=T1562');await page.waitForSelector('.graph svg');assert(await page.getByText('This identifier is revoked in the registry.',{exact:true}).isVisible());
+await page.goto(base+'/search.html?q=Ingress%20Tool%20Transfer');await page.waitForSelector('.entry-row');assert(await page.locator('.entry-row').count()>0);
+// Payloads in source data must stay literal; unsafe protocols must never become links.
+await page.route('**/catalog.json',async route=>{const response=await route.fetch();const json=await response.json();json.entries[0].name='<img src=x onerror=alert(1)>';json.entries[0].references=['javascript:alert(1)'];await route.fulfill({json});});
+await page.goto(base+'/search.html');await page.waitForSelector('.entry-row');
+assert.equal(await page.locator('img').count(),0);
+assert.equal(await page.locator('a[href^="javascript:"]').count(),0);
+assert.deepEqual(errors,[]);
+console.log('Browser checks passed: search, filters, pagination, entry evidence, techniques, 320px layouts, injection rendering.');
+await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

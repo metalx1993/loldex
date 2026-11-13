@@ -1,5 +1,27 @@
 # Changelog
 
+## Local delivery through Phase 6 — 2026-11-13
+
+- Added D1 discovery and verified immutable Git acquisition, five observational
+  adapters, full canonical observations, pure-engine integration and POSIX
+  crash-safe state persistence. Exact retry consumes finalized observation bytes.
+  Frozen CORE/CP5.1/CP5.2 production modules and the existing corpus are unchanged.
+- Added a deterministic derived relationship graph retaining provenance and
+  confidence per edge, with strict integrity validation and visible diagnostics.
+- Added technique aggregation and a pinned MITRE ATT&CK Enterprise 20.1 registry
+  with source hash, offline importer, attribution and revoked/deprecated metadata.
+  Registry matches do not verify or promote entry claims.
+- Added responsive search, correlated claim-confidence/origin filters, source
+  evidence, entry/technique pages and accessible local relationship navigation.
+  UI projection is rederived from claims; absent observations stay NOT_OBSERVED.
+- Added validated offline build_all and a generated-data manifest. The manually
+  dispatched workflow rebuilds the new datasets; cron and deploy remain disabled.
+- Independent adversarial tests target acquisition truncation, typed parsing,
+  collision precedence, health holds, retry/persistence failures, provenance loss,
+  registry confusion and confidence leakage. Final counts: docs/DELIVERY.md.
+- Local implementation only: no upstream corpus refresh, production deployment,
+  ID migration or historical freeze rewrite. A2 and Phases 7–10 remain separate.
+
 ## Phase 5 CORE — CP5.1 Corrective Amendment A1 · FROZEN
 
 - Corrects the boundary between frozen golden evidence and the mutable production

@@ -24,8 +24,9 @@ what upstream projects already publish, and links back to every source. See
 | **Total** | **3,086** | |
 
 Entry types: binaries, scripts, libraries, drivers (BYOVD), and AD techniques.
-Every entry carries a command, MITRE ATT&CK mapping, required privilege,
-capability, kill-chain phase, and — where available — opsec/detection notes.
+Entries expose available commands, required privilege, capabilities and phases.
+ATT&CK mappings and opsec/detection notes are included where supported by the
+source-attributed claims; missing mappings are never fabricated.
 
 ## How it works
 
@@ -49,19 +50,69 @@ upstream catalogues        adapters/            data/entries/
   `scripts/build_site_data.py` — builds the site's search data.
 - `site/` — the static site (landing, client-side search, contact) plus a
   self-contained PHP API (`api.php`) and contact handler (`contact.php`).
-- `.github/workflows/sync.yml` — weekly auto-sync: re-runs adapters, validates,
-  rebuilds, and commits. This is what keeps the index current on its own.
+- `.github/workflows/sync.yml` — manual dispatch only: the legacy corpus sync
+  validates, rebuilds all static knowledge/UI data, tests, and commits onto an
+  unchanged Git base. Cron is disabled and automated deployment is removed; A2
+  remains deferred. This is distinct from the verified CORE observation path.
 
-## Run it locally
+## Build and preview locally
+
+The checked-in corpus is sufficient. No upstream access is needed for a site build.
 
 ```bash
-pip install -r requirements.txt
-python -m scripts.sync              # populate data/entries from all sources
-python -m scripts.validate          # validate every entry against the schema
-python -m scripts.build_site_data   # build site/data.json
+python3 -m pip install -r requirements.txt pytest
+python3 -m scripts.validate
+python3 -m scripts.build_all
+python3 -m http.server 8765 --bind 127.0.0.1 --directory site
 ```
 
-Run a single adapter: `python -m scripts.sync --only lolbas`
+Open `http://127.0.0.1:8765/`. The experience includes global search, combined
+claim-aware filters, entry evidence, technique pages and a local relationship view.
+Technique metadata uses a pinned MITRE ATT&CK Enterprise 20.1 registry; metadata
+matching never raises the confidence of entry claims. Revoked IDs remain labeled.
+
+The architecture stays `source_data → enrichment → projection`. Each graph edge
+retains the individual claim's provenance and confidence. Raw upstream evidence
+is loaded separately; no similarity inference or destructive deduplication occurs.
+
+### Verified CORE observation (Phase 5)
+
+```bash
+python3 -m scripts.observe --source GTFOBins=/path/to/local/upstream-git-repo \
+  --state work/freshness/state.json --observation work/freshness/observation-1.json
+```
+
+Provide `--source` once per source. Omitted sources are NOT_RUN; invalid or
+incomplete acquisitions fail closed. Only immutable verified Git objects are read.
+The command writes only the explicit state/delivery artifacts, never the catalogue.
+Reuse the exact observation file for a retry; a subsequent committed cycle uses a
+new file. Read [the caller and persistence boundary](docs/phase5-completion.md)
+before operation. CORE observes and classifies; publication remains separate.
+
+To show validated CORE classifications in the UI:
+
+```bash
+python3 -m scripts.build_all --state work/freshness/state.json
+```
+
+Without a state, the UI says NOT_OBSERVED. Dates and historical corpus counts are
+never evidence of a healthy observation. Legacy `scripts.sync` remains available
+for explicitly requested catalogue regeneration; it is not the verified observer.
+
+### Checks and project status
+
+```bash
+python3 -m pytest -q
+node tests/test_experience.js
+# Optional browser regression suite with Playwright installed, preview running:
+node tests/browser-experience.cjs
+```
+
+See [current roadmap](docs/ROADMAP.md), [delivery evidence](docs/DELIVERY.md),
+[CORE + D1](docs/phase5-d1.md), [graph contract](docs/phase3-design.md),
+[technique registry](docs/phase4-design.md), and [UI contract](docs/phase6-design.md).
+`site/build-manifest.json` pins the generated data files. Static builds validate
+all derived views before writing; this is not the separate A2 atomic deployment.
 
 ## API
 

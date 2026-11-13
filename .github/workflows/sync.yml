@@ -1,6 +1,6 @@
 name: sync
 
-# Auto-sync from upstream catalogues, validate, test, and commit to main.
+# Manual upstream sync: validate, rebuild all views, test, and commit to main.
 #
 # Deployment is NOT part of this workflow. Publishing site/ to the live host
 # needs an atomic mechanism (versioned staging plus a server-side switch); the
@@ -8,11 +8,11 @@ name: sync
 # failure, so it has been removed rather than left behind a disabled guard.
 # That work is amendment A2 — Atomic Deployment.
 #
-# The cron stays disabled until this hardened form has been reviewed.
+# Cron remains disabled; A2 atomic deployment requires its separate review.
 
 on:
   # schedule:
-  #   - cron: "0 4 * * 1"      # every Monday 04:00 UTC — re-enable after A1 is applied
+  #   - cron: "0 4 * * 1"      # every Monday 04:00 UTC — deferred until A2 review
   workflow_dispatch: {}
 
 permissions: {}
@@ -56,8 +56,8 @@ jobs:
       - name: Validate entries
         run: python -m scripts.validate
 
-      - name: Rebuild site data
-        run: python -m scripts.build_site_data
+      - name: Rebuild validated site and knowledge data
+        run: python -m scripts.build_all
 
       - name: Hard test gate
         run: python -m pytest -q
@@ -70,7 +70,7 @@ jobs:
           set -euo pipefail
           git config user.name  "loldex-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add data/ site/data.json
+          git add data/ site/data.json site/catalog.json site/evidence.json site/graph.json site/techniques.json site/build-manifest.json site/registry-license.txt
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "no corpus change"
