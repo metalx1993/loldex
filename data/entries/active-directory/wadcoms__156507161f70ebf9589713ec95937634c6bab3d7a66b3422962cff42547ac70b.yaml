@@ -1,0 +1,80 @@
+id: wadcoms/Snaffler
+type: technique
+platform: active-directory
+name: Snaffler
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: Snaffler.exe -s -o snaffler_output.log -d test.local -c 10.10.10.1
+  comment: "Snaffler is a tool used to enumerate sensitive data (passwords, PII, etc.) from file shares\
+    \ in Active Directory. It searches for interesting files based on file extensions, file names, and\
+    \ file content that's matched against regex. It's also highly configurable, allowing you to add your\
+    \ own regex searches. The following command will enumerate all machines in the domain and search for\
+    \ accessible file shares, checking for interesting files that might have sensitive data.\n\nCommand\
+    \ Reference:\n\n\tDomain: test.local\n\n\tDomain Controller: 10.10.10.1\n"
+references:
+- https://github.com/SnaffCon/Snaffler
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: Snaffler.md
+      document: "---\ndescription: |\n  Snaffler is a tool used to enumerate sensitive data (passwords,\
+        \ PII, etc.) from file shares in Active Directory. It searches for interesting files based on\
+        \ file extensions, file names, and file content that's matched against regex. It's also highly\
+        \ configurable, allowing you to add your own regex searches. The following command will enumerate\
+        \ all machines in the domain and search for accessible file shares, checking for interesting files\
+        \ that might have sensitive data.\n\n  Command Reference:\n\n  \tDomain: test.local\n\n  \tDomain\
+        \ Controller: 10.10.10.1\n\ncommand: |\n  Snaffler.exe -s -o snaffler_output.log -d test.local\
+        \ -c 10.10.10.1\nitems:\n  - Shell\nservices:\n  - SMB\nOS:\n  - Windows\nattack_types:\n  - Enumeration\n\
+        references:\n  - https://github.com/SnaffCon/Snaffler\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:5337a191b56f19da820b870568d092a9162099adce059c5c6efdbf9c590d1fef

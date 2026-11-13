@@ -1,0 +1,80 @@
+id: lolad/Q2hlY2sgVXNlciBBY2NvdW50IExvY2tvdXQgU3RhdHVz/R2V0LUFEVXNlciAtRmlsdGVyICogLVByb3BlcnRpZXMgTG9ja2VkT3V0IHwgV2hlcmUtT2JqZWN0IHskXy5Mb2NrZWRPdXQgLWVxICR0cnVlfQ/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Check User Account Lockout Status
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADUser -Filter * -Properties LockedOut | Where-Object {$_.LockedOut -eq $true}
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Check User Account Lockout Status
+      command: Get-ADUser -Filter * -Properties LockedOut | Where-Object {$_.LockedOut -eq $true}
+      type: PowerShell
+      reference: Exploit-DB - AD Enumeration Guide
+      physical_rows:
+      - input_ref: index.html#row=17
+        row_utf8: "<tr>\r\n            <td>Check User Account Lockout Status</td>\r\n            <td><code>Get-ADUser\
+          \ -Filter * -Properties LockedOut | Where-Object {$_.LockedOut -eq $true}</code></td>\r\n  \
+          \          <td>PowerShell</td>\r\n            <td><a href=\"https://www.exploit-db.com/docs/english/46990-active-directory-enumeration-with-powershell.pdf?ref=secjuice.com\"\
+          \ target=\"_blank\">Exploit-DB - AD Enumeration Guide</a></td>\r\n        </tr>"
+        row_sha256: sha256:48cf6cf3b9c5692f31fac6c4416f779744fd0f98dad89c387745e1d026c03e02
+        cells:
+        - Check User Account Lockout Status
+        - Get-ADUser -Filter * -Properties LockedOut | Where-Object {$_.LockedOut -eq $true}
+        - PowerShell
+        - Exploit-DB - AD Enumeration Guide
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:3a24328b24e00967fe145aff82a7efdd49e1c2ddd1d2e6b2f6d694604c47ca1e

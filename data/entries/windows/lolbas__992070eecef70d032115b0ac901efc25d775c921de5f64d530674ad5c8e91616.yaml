@@ -1,0 +1,100 @@
+id: lolbas/T1NCaW5hcmllcy9UdHRyYWNlci55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Tttracer.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: Parent child relationship. Tttracer parent for executed command
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_tttracer_mod_load.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/image_load/image_load_tttracer_mod_load.yml
+  - https://github.com/elastic/detection-rules/blob/5bdf70e72c6cd4547624c521108189af994af449/rules/windows/credential_access_cmdline_dump_tool.toml
+commands:
+- template: tttracer.exe {PATH_ABSOLUTE:.exe}
+  comment: Execute specified executable from tttracer.exe. Requires administrator privileges.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Tttracer/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Tttracer.exe
+      category: Execute
+      privileges: Administrator
+      mitre_id: T1127
+      source_file: OSBinaries/Tttracer.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Tttracer.exe\nDescription: Used by Windows 1809 and newer to Debug Time\
+        \ Travel\nAuthor: Oddvar Moe\nCreated: 2019-11-05\nCommands:\n  - Command: tttracer.exe {PATH_ABSOLUTE:.exe}\n\
+        \    Description: Execute specified executable from tttracer.exe. Requires administrator privileges.\n\
+        \    Usecase: Spawn process using other binary\n    Category: Execute\n    Privileges: Administrator\n\
+        \    MitreID: T1127\n    OperatingSystem: Windows 10 1809 and newer, Windows 11\n    Tags:\n \
+        \     - Execute: EXE\n  - Command: TTTracer.exe -dumpFull -attach {PID}\n    Description: Dumps\
+        \ process using tttracer.exe. Requires administrator privileges\n    Usecase: Dump process by\
+        \ PID\n    Category: Dump\n    Privileges: Administrator\n    MitreID: T1003\n    OperatingSystem:\
+        \ Windows 10 1809 and newer, Windows 11\nFull_Path:\n  - Path: C:\\Windows\\System32\\tttracer.exe\n\
+        \  - Path: C:\\Windows\\SysWOW64\\tttracer.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_tttracer_mod_load.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/image_load/image_load_tttracer_mod_load.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/5bdf70e72c6cd4547624c521108189af994af449/rules/windows/credential_access_cmdline_dump_tool.toml\n\
+        \  - IOC: Parent child relationship. Tttracer parent for executed command\nResources:\n  - Link:\
+        \ https://twitter.com/oulusoyum/status/1191329746069655553\n  - Link: https://twitter.com/mattifestation/status/1196390321783025666\n\
+        \  - Link: https://lists.samba.org/archive/cifs-protocol/2016-April/002877.html\nAcknowledgement:\n\
+        \  - Person: Onur Ulusoy\n    Handle: '@oulusoyum'\n  - Person: Matt Graeber\n    Handle: '@mattifestation'\n"
+      document_sha256: sha256:82e485c5ad2c81c3832652a512919f5b47dc7c731e48d3ac0335454fbea5ef93
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Tttracer/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:73edc301942fabd7c1ba910fb66df726727f996241d4fa6ce282b576272eef96

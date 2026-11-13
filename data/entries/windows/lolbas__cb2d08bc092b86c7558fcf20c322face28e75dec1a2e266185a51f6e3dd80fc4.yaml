@@ -1,0 +1,94 @@
+id: lolbas/T1NMaWJyYXJpZXMvWmlwZmxkci55bWw/RXhlY3V0ZQ/0
+type: library
+platform: windows
+name: Zipfldr.dll
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.011
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+commands:
+- template: rundll32.exe zipfldr.dll,RouteTheCall {PATH:.exe}
+  comment: Launch an executable payload by calling RouteTheCall.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Zipfldr/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Zipfldr.dll
+      category: Execute
+      privileges: User
+      mitre_id: T1218.011
+      source_file: OSLibraries/Zipfldr.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Zipfldr.dll\nDescription: Compressed Folder library\nAuthor: LOLBAS Team\n\
+        Created: 2018-05-25\nCommands:\n  - Command: rundll32.exe zipfldr.dll,RouteTheCall {PATH:.exe}\n\
+        \    Description: Launch an executable payload by calling RouteTheCall.\n    Usecase: Launch an\
+        \ executable.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.011\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\n  - Command: rundll32.exe zipfldr.dll,RouteTheCall\
+        \ file://^C^:^/^W^i^n^d^o^w^s^/^s^y^s^t^e^m^3^2^/^c^a^l^c^.^e^x^e\n    Description: Launch an\
+        \ executable payload by calling RouteTheCall (obfuscated).\n    Usecase: Launch an executable.\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1218.011\n    OperatingSystem: Windows\
+        \ 10, Windows 11\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: c:\\windows\\system32\\\
+        zipfldr.dll\n  - Path: c:\\windows\\syswow64\\zipfldr.dll\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml\n\
+        Resources:\n  - Link: https://twitter.com/moriarty_meng/status/977848311603380224\n  - Link: https://twitter.com/bohops/status/997896811904929792\n\
+        \  - Link: https://windows10dll.nirsoft.net/zipfldr_dll.html\nAcknowledgement:\n  - Person: Moriarty\
+        \ (Execution)\n    Handle: '@moriarty_meng'\n  - Person: r0lan (Obfuscation)\n    Handle: '@r0lan'\n"
+      document_sha256: sha256:ea9a2c2cefc10a4c5f3f09bb4ec921f328c6e27be316c8d28115e1ba122e5940
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Zipfldr/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.011
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:2fa628794c46dd13737c15c8dfaa980fb53a17a21d101b8118b004f6f84c6f8d

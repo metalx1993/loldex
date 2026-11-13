@@ -1,0 +1,112 @@
+id: lolbas/T1NCaW5hcmllcy9tc2VkZ2V3ZWJ2aWV3Mi55bWw/RXhlY3V0ZQ/2
+type: binary
+platform: windows
+name: msedgewebview2.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.015
+opsec:
+  noise: high
+  triggers: 'msedgewebview2.exe spawned with any of the following: --gpu-launcher, --utility-cmd-prefix,
+    --renderer-cmd-prefix, --browser-subprocess-path'
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_susp_electron_execution_proxy.yml
+commands:
+- template: msedgewebview2.exe --disable-gpu-sandbox --gpu-launcher="{CMD}"
+  comment: This command launches the Microsoft Edge WebView2 browser control without sandboxing and will
+    spawn the specified command as its subprocess.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/msedgewebview2/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: msedgewebview2.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.015
+      source_file: OSBinaries/msedgewebview2.yml
+      command_source_index: 2
+      document_utf8: "---\nName: msedgewebview2.exe\nDescription: msedgewebview2.exe is the executable\
+        \ file for Microsoft Edge WebView2, which is a web browser control used by applications to display\
+        \ web content.\nAuthor: Matan Bahar\nCreated: 2023-06-15\nCommands:\n  - Command: msedgewebview2.exe\
+        \ --no-sandbox --browser-subprocess-path=\"{PATH_ABSOLUTE:.exe}\"\n    Description: This command\
+        \ launches the Microsoft Edge WebView2 browser control without sandboxing and will spawn the specified\
+        \ executable as its subprocess.\n    Usecase: Proxy execution of binary\n    Category: Execute\n\
+        \    Privileges: Low privileges\n    MitreID: T1218.015\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Execute: EXE\n  - Command: msedgewebview2.exe --utility-cmd-prefix=\"\
+        {CMD}\"\n    Description: This command launches the Microsoft Edge WebView2 browser control without\
+        \ sandboxing and will spawn the specified command as its subprocess.\n    Usecase: Proxy execution\
+        \ of binary\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.015\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: CMD\n  - Command: msedgewebview2.exe --disable-gpu-sandbox\
+        \ --gpu-launcher=\"{CMD}\"\n    Description: This command launches the Microsoft Edge WebView2\
+        \ browser control without sandboxing and will spawn the specified command as its subprocess.\n\
+        \    Usecase: Proxy execution of binary\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1218.015\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: CMD\n  -\
+        \ Command: msedgewebview2.exe --no-sandbox --renderer-cmd-prefix=\"{CMD}\"\n    Description: This\
+        \ command launches the Microsoft Edge WebView2 browser control without sandboxing and will spawn\
+        \ the specified command as its subprocess.\n    Usecase: Proxy execution of binary\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1218.015\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Execute: CMD\nFull_Path:\n  - Path: C:\\Program Files (x86)\\Microsoft\\\
+        Edge\\Application\\114.0.1823.43\\msedgewebview2.exe\n  - Path: C:\\Program Files (x86)\\Microsoft\\\
+        EdgeWebView\\Application\\131.0.2903.70\\msedgewebview2.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_susp_electron_execution_proxy.yml\n\
+        \  - IOC: 'msedgewebview2.exe spawned with any of the following: --gpu-launcher, --utility-cmd-prefix,\
+        \ --renderer-cmd-prefix, --browser-subprocess-path'\nResources:\n  - Link: https://medium.com/@MalFuzzer/one-electron-to-rule-them-all-dc2e9b263daf\n\
+        Acknowledgement:\n  - Person: Uriel Kosayev\n    Handle: '@MalFuzzer'\n  - Person: Hai Vaknin\n\
+        \    Handle: '@VakninHai'\n  - Person: Tamir Yehuda\n    Handle: '@Tamirye94'\n  - Person: Matan\
+        \ Bahar\n    Handle: '@Bl4ckShad3'\n"
+      document_sha256: sha256:96a5626639e2849a179cef6b2676fe6eebf9423dca61fa9a9bd847c13d491d15
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/msedgewebview2/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.015
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:454d8c073ab9f543bc7b93ceee28cc2a35020929c46b14c6d1c568c8e11ee7dc

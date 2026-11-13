@@ -1,0 +1,90 @@
+id: lolbas/T1NCaW5hcmllcy9DbWRrZXkueW1s/Q3JlZGVudGlhbHM/0
+type: binary
+platform: windows
+name: Cmdkey.exe
+phases:
+- credential-access
+capabilities:
+- credential-access
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1078
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_cmdkey_recon.yml
+commands:
+- template: cmdkey /list
+  comment: List cached credentials
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Cmdkey/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Cmdkey.exe
+      category: Credentials
+      privileges: User
+      mitre_id: T1078
+      source_file: OSBinaries/Cmdkey.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Cmdkey.exe\nDescription: creates, lists, and deletes stored user names\
+        \ and passwords or credentials.\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command:\
+        \ cmdkey /list\n    Description: List cached credentials\n    Usecase: Get credential information\
+        \ from host\n    Category: Credentials\n    Privileges: User\n    MitreID: T1078\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path:\
+        \ C:\\Windows\\System32\\cmdkey.exe\n  - Path: C:\\Windows\\SysWOW64\\cmdkey.exe\nDetection:\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_cmdkey_recon.yml\n\
+        Resources:\n  - Link: https://web.archive.org/web/20230202122017/https://www.peew.pw/blog/2017/11/26/exploring-cmdkey-an-edge-case-for-privilege-escalation\n\
+        \  - Link: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/cmdkey\n"
+      document_sha256: sha256:055bb1c3fca9bf4baa4a76d1cebcdd789b69686e207bc6eeb69d22fd71d06e50
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Cmdkey/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1078
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:536f030379e279edd37a4fca0fe51dc15c77ccdca863d0fa59c7b549928f6833

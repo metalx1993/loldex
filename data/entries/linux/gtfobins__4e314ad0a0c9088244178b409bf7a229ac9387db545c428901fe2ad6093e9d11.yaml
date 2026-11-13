@@ -1,0 +1,71 @@
+id: gtfobins/setlock/shell/unprivileged
+type: binary
+platform: linux
+name: setlock
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: setlock - /bin/sh
+references:
+- https://gtfobins.github.io/gtfobins/setlock/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        setlock:
+          functions:
+            shell:
+            - code: setlock - /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: setlock - /bin/sh -p
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/setlock/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:b78d64a3fe40402d2507d7bfac67289cb3a547fc77a4bdfbb6abd29a33468409

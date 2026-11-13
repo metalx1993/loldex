@@ -1,0 +1,102 @@
+id: lolbas/T1NCaW5hcmllcy9zZXR1cHVnYy55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: setupugc.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: '`setupugc.exe` spawning child processes outside of Windows Setup context. Legitimate parents
+    are `setuphost.exe` or `setup.exe`.'
+commands:
+- template: setupugc.exe specialize
+  comment: 'By first setting a command to a specific registry under `Setup-Unattend-Settings`, e.g. via:
+    `reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\Setup-Unattend-Settings\RunSynchronous\1"
+    /v Path /d "{CMD}" /f`, executing the following will cause it to execute the command.'
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/setupugc/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: setupugc.exe
+      category: Execute
+      privileges: Administrator
+      mitre_id: T1218
+      source_file: OSBinaries/setupugc.yml
+      command_source_index: 0
+      document_utf8: "---\nName: setupugc.exe\nDescription: Setup Unattend Generic Command Processor used\
+        \ during Windows deployment.\nAuthor: Ang Kar Min\nCreated: 2026-04-20\nCommands:\n  - Command:\
+        \ setupugc.exe specialize\n    Description: |\n      By first setting a command to a specific\
+        \ registry under `Setup-Unattend-Settings`, e.g. via: `reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\
+        \ NT\\CurrentVersion\\UnattendSettings\\Setup-Unattend-Settings\\RunSynchronous\\1\" /v Path /d\
+        \ \"{CMD}\" /f`, executing the following will cause it to execute the command.\n    Usecase: Execute\
+        \ binary through legitimate proxy\n    Category: Execute\n    Privileges: Administrator\n    MitreID:\
+        \ T1218\n    OperatingSystem: Windows 10, Windows 11, Windows Server 2025\n    Tags:\n      -\
+        \ Execute: CMD\n      - Requires: Registry Change\n  - Command: setupugc.exe auditUser\n    Description:\
+        \ Same technique as above, but using the `auditUser` command-line option.\n    Usecase: Execute\
+        \ binary through legitimate proxy\n    Category: Execute\n    Privileges: Administrator\n    MitreID:\
+        \ T1218\n    OperatingSystem: Windows 10, Windows 11, Windows Server 2025\n    Tags:\n      -\
+        \ Execute: CMD\n      - Requires: Registry Change\nFull_Path:\n  - Path: C:\\Windows\\System32\\\
+        setupugc.exe\n  - Path: C:\\Windows\\SysWOW64\\setupugc.exe\nDetection:\n  - IOC: \"`setupugc.exe`\
+        \ spawning child processes outside of Windows Setup context. Legitimate parents are `setuphost.exe`\
+        \ or `setup.exe`.\"\n  - IOC: Registry writes to `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\\
+        UnattendSettings\\Setup-Unattend-Settings\\RunSynchronous\\` on a deployed system.\nResources:\n\
+        \  - Link: https://strontic.github.io/xcyclopedia/library/setupugc.exe-3CFE082E8656AD66B5B9FFEB28CF4EC3.html\n\
+        Acknowledgement:\n  - Person: Ang Kar Min\n    Handle: '@karminang'\n"
+      document_sha256: sha256:14c1f8db598ca83c27ea316da3609a15a6a48dd56d970ac02bf3a3ac79f14793
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/setupugc/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:32156a11f48ba589f0d5fb84c6a8575373364681fca19e86765e397db8a8340f

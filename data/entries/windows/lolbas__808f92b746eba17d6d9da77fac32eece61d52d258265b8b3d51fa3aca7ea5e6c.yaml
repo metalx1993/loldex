@@ -1,0 +1,95 @@
+id: lolbas/T1NCaW5hcmllcy9SdW5zY3JpcHRoZWxwZXIueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Runscripthelper.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Event ID 4104 - Microsoft-Windows-PowerShell/Operational
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_runscripthelper.yml
+commands:
+- template: runscripthelper.exe surfacecheck \\?\{PATH_ABSOLUTE:.txt} {PATH_ABSOLUTE:folder}
+  comment: Execute the PowerShell script with .txt extension
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Runscripthelper/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Runscripthelper.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Runscripthelper.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Runscripthelper.exe\nDescription: Execute target PowerShell script\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: runscripthelper.exe surfacecheck\
+        \ \\\\?\\{PATH_ABSOLUTE:.txt} {PATH_ABSOLUTE:folder}\n    Description: Execute the PowerShell\
+        \ script with .txt extension\n    Usecase: Bypass constrained language mode and execute Powershell\
+        \ script\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10\n    Tags:\n      - Execute: PowerShell\n\
+        Full_Path:\n  - Path: C:\\Windows\\WinSxS\\amd64_microsoft-windows-u..ed-telemetry-client_31bf3856ad364e35_10.0.16299.15_none_c2df1bba78111118\\\
+        Runscripthelper.exe\n  - Path: C:\\Windows\\WinSxS\\amd64_microsoft-windows-u..ed-telemetry-client_31bf3856ad364e35_10.0.16299.192_none_ad4699b571e00c4a\\\
+        Runscripthelper.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_runscripthelper.yml\n\
+        \  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - IOC: Event ID 4104 - Microsoft-Windows-PowerShell/Operational\n  - IOC: Event ID 400 - Windows\
+        \ PowerShell\nResources:\n  - Link: https://posts.specterops.io/bypassing-application-whitelisting-with-runscripthelper-exe-1906923658fc\n\
+        Acknowledgement:\n  - Person: Matt Graeber\n    Handle: '@mattifestation'\n"
+      document_sha256: sha256:21c0ba953d7dc963a5b133c358ddca86a1e11e53fef87e5ae9268c2d94658d9c
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Runscripthelper/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:386e8c14a9a3923030bd256200158dd4b300140a03714c4075818b48299461f7

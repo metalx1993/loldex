@@ -1,0 +1,99 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1JlbW90ZS55bWw/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Remote.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: remote.exe process spawns
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/197615345b927682ab7ad7fa3c5f5bb2ed911eed/rules/windows/process_creation/proc_creation_win_lolbin_remote.yml
+commands:
+- template: Remote.exe /s {PATH:.exe} anythinghere
+  comment: Spawns specified executable as a child process of remote.exe
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Remote/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Remote.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Remote.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Remote.exe\nDescription: Debugging tool included with Windows Debugging\
+        \ Tools\nAuthor: mr.d0x\nCreated: 2021-06-01\nCommands:\n  - Command: Remote.exe /s {PATH:.exe}\
+        \ anythinghere\n    Description: Spawns specified executable as a child process of remote.exe\n\
+        \    Usecase: Executes a process under a trusted Microsoft signed binary\n    Category: AWL Bypass\n\
+        \    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n      - Execute:\
+        \ EXE\n  - Command: Remote.exe /s {PATH:.exe} anythinghere\n    Description: Spawns specified\
+        \ executable as a child process of remote.exe\n    Usecase: Executes a process under a trusted\
+        \ Microsoft signed binary\n    Category: Execute\n    Privileges: User\n    MitreID: T1127\n \
+        \   OperatingSystem: Windows\n    Tags:\n      - Execute: EXE\n  - Command: Remote.exe /s {PATH_SMB:.exe}\
+        \ anythinghere\n    Description: Run a remote file\n    Usecase: Executing a remote binary without\
+        \ saving file to disk\n    Category: Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem:\
+        \ Windows\n    Tags:\n      - Execute: EXE\n      - Execute: Remote\nFull_Path:\n  - Path: C:\\\
+        Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\remote.exe\n  - Path: C:\\Program Files\
+        \ (x86)\\Windows Kits\\10\\Debuggers\\x86\\remote.exe\nDetection:\n  - IOC: remote.exe process\
+        \ spawns\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/197615345b927682ab7ad7fa3c5f5bb2ed911eed/rules/windows/process_creation/proc_creation_win_lolbin_remote.yml\n\
+        Resources:\n  - Link: https://blog.thecybersecuritytutor.com/Exeuction-AWL-Bypass-Remote-exe-LOLBin/\n\
+        Acknowledgement:\n  - Person: mr.d0x\n    Handle: '@mrd0x'\n"
+      document_sha256: sha256:035bb2fd36224273caef4bd81f260a8f53d7603fe06c86af15e9dc85c698860b
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Remote/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:d9dd734e45dd18c11f6fb994e7d536b30593f11c3b64e962b428f3de1424dc1b

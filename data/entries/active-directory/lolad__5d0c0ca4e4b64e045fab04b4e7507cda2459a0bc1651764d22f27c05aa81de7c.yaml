@@ -1,0 +1,80 @@
+id: lolad/TGlzdCBNYWNoaW5lcyB3aXRoIEhpZ2ggUHJpdmlsZWdlcw/R2V0LUFEQ29tcHV0ZXIgLUZpbHRlciB7UHJpbWFyeUdyb3VwSUQgLWVxIDUxMn0/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: List Machines with High Privileges
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADComputer -Filter {PrimaryGroupID -eq 512}
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List Machines with High Privileges
+      command: Get-ADComputer -Filter {PrimaryGroupID -eq 512}
+      type: PowerShell
+      reference: Medium - AD Enumeration
+      physical_rows:
+      - input_ref: index.html#row=84
+        row_utf8: "<tr>\r\n\t\t\t<td>List Machines with High Privileges</td>\r\n\t\t\t<td><code>Get-ADComputer\
+          \ -Filter {PrimaryGroupID -eq 512}</code></td>\r\n\t\t\t<td>PowerShell</td>\r\n\t\t\t<td><a\
+          \ href=\"https://medium.com/r3d-buck3t/domain-enumeration-with-active-directory-powershell-module-7ce4fcfe91d3\"\
+          \ target=\"_blank\">Medium - AD Enumeration</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:6ab612c97ada653c844732146d0c510247e5b441f68b9ac93b30bb760d022c2d
+        cells:
+        - List Machines with High Privileges
+        - Get-ADComputer -Filter {PrimaryGroupID -eq 512}
+        - PowerShell
+        - Medium - AD Enumeration
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:330d4757a7caf763438b4f929fff8d07b0bd1528ae89c22a4b715359e68f9a48

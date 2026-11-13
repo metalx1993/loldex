@@ -1,0 +1,87 @@
+id: gtfobins/ssh-keygen/library-load/suid
+type: binary
+platform: linux
+name: ssh-keygen
+phases:
+- execution
+- persistence
+- privilege-escalation
+capabilities:
+- library-load
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: ssh-keygen -D /path/to/lib.so
+  comment: The shared library must contain the `void C_GetFunctionList() {}` function.
+references:
+- https://gtfobins.github.io/gtfobins/ssh-keygen/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        ssh-keygen:
+          functions:
+            library-load:
+            - code: ssh-keygen -D /path/to/lib.so
+              comment: The shared library must contain the `void C_GetFunctionList() {}` function.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/ssh-keygen/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: library-load
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:e0317b4fcab30a8952a61d5761e411642beb5d71a15c0787c3afe274c0aacd64

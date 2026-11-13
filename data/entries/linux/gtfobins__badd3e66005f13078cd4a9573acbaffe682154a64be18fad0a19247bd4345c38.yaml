@@ -1,0 +1,89 @@
+id: gtfobins/gem/shell/unprivileged
+type: binary
+platform: linux
+name: gem
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: gem open -e '/bin/sh -s' debug
+  comment: This requires the name of an installed gem to be provided, e.g., `debug` is usually installed.
+references:
+- https://gtfobins.github.io/gtfobins/gem/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        gem:
+          functions:
+            inherit:
+            - code: gem open debug
+              comment: This requires the name of an installed gem to be provided, e.g., `debug` is usually
+                installed.
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: vi
+            - code: gem build /path/to/script.rb
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: ruby
+            - code: gem install --file /path/to/script.rb
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: ruby
+            shell:
+            - code: gem open -e '/bin/sh -s' debug
+              comment: This requires the name of an installed gem to be provided, e.g., `debug` is usually
+                installed.
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/gem/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:4c4ad11683dac986a50d248bc65c5962df506c871577491e9992359640cab0b6

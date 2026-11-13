@@ -1,0 +1,106 @@
+id: wadcoms/SharpHound-LDAP
+type: technique
+platform: active-directory
+name: SharpHound LDAP
+phases:
+- privilege-escalation
+- discovery
+capabilities:
+- privilege-escalation
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+- a valid username
+- a valid password
+commands:
+- template: SharpHound.exe --CollectionMethods All --LdapUsername john --LdapPassword password123 --ZipFileName
+    output.zip
+  comment: "SharpHound.exe is the official data collector for BloodHound, written in C# and uses Windows\
+    \ API functions and LDAP namespace functions to collect data from domain controllers and domain-joined\
+    \ Windows systems. This data can then be fed into BloodHound to enumerate potential paths of privilege\
+    \ escalation. The following command peforms all collection methods and will use the provided LDAP\
+    \ credentials when performing LDAP collection methods, and stores the output in a zip file that can\
+    \ be directly placed in the BloodHound GUI.\n\nCommand Reference:\n\n\tLDAP Username: john\n\n\tLDAP\
+    \ Password: password123\n\n\tOutput File: output.zip\n"
+references:
+- https://github.com/BloodHoundAD/SharpHound3
+- https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound.html
+tags:
+- active-directory
+- wadcoms
+- ldap
+source_data:
+  WADComs:
+    raw:
+      file: SharpHound-LDAP.md
+      document: "---\ndescription: |\n  SharpHound.exe is the official data collector for BloodHound,\
+        \ written in C# and uses Windows API functions and LDAP namespace functions to collect data from\
+        \ domain controllers and domain-joined Windows systems. This data can then be fed into BloodHound\
+        \ to enumerate potential paths of privilege escalation. The following command peforms all collection\
+        \ methods and will use the provided LDAP credentials when performing LDAP collection methods,\
+        \ and stores the output in a zip file that can be directly placed in the BloodHound GUI.\n\n \
+        \ Command Reference:\n\n  \tLDAP Username: john\n\n  \tLDAP Password: password123\n\n  \tOutput\
+        \ File: output.zip\n\ncommand: |\n  SharpHound.exe --CollectionMethods All --LdapUsername john\
+        \ --LdapPassword password123 --ZipFileName output.zip\nitems:\n  - Shell\n  - Username\n  - Password\n\
+        services:\n  - LDAP\nOS:\n  - Windows\nattack_types:\n  - PrivEsc\n  - Enumeration\nreferences:\n\
+        \  - https://github.com/BloodHoundAD/SharpHound3\n  - https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound.html\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:e1b5349821ae2c42c14a28c3f57f894b6d40dc2d41c9697d20afc2c89b2e6ab1

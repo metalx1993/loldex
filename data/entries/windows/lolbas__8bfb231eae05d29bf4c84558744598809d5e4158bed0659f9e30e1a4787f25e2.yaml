@@ -1,0 +1,90 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL050c2QueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Ntsd.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+commands:
+- template: ntsd.exe -g {CMD}
+  comment: Launches command through the debugging process; optionally add `-G` to exit the debugger automatically.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Ntsd/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Ntsd.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Ntsd.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Ntsd.exe\nDescription: Symbolic Debugger for Windows.\nAuthor: Avihay\
+        \ Eldad\nCreated: 2025-07-16\nCommands:\n  - Command: ntsd.exe -g {CMD}\n    Description: Launches\
+        \ command through the debugging process; optionally add `-G` to exit the debugger automatically.\n\
+        \    Usecase: Executes an executable under a trusted microsoft signed binary.\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n      - Execute:\
+        \ CMD\nFull_Path:\n  - Path: C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\ntsd.exe\n\
+        \  - Path: C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x86\\ntsd.exe\n  - Path: C:\\\
+        Program Files (x86)\\Windows Kits\\10\\Debuggers\\arm\\ntsd.exe\n  - Path: C:\\Program Files (x86)\\\
+        Windows Kits\\10\\Debuggers\\arm64\\ntsd.exe\nResources:\n  - Link: https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/cdb-command-line-options\n\
+        \  - Link: https://strontic.github.io/xcyclopedia/library/ntsd.exe-629EA12D527237B9CD945AC44C2DE80D.html\n\
+        Acknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:35c56a77f6e50f3a88d7497179090931adc180650ea7cce19b1b42dea2ca3ddb
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Ntsd/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:6b15f44905f587720231858285ed67ab7e5eb39e121d733856fc90a9cca08891

@@ -1,0 +1,79 @@
+id: lolad/TGlzdCBBbGwgVXNlcnMgaW4gdGhlIERvbWFpbg/bmV0IHVzZXIgL2RvbWFpbg/Q01E
+type: technique
+platform: active-directory
+name: List All Users in the Domain
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: net user /domain
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: List All Users in the Domain
+      command: net user /domain
+      type: CMD
+      reference: Active Directory Pro
+      physical_rows:
+      - input_ref: index.html#row=43
+        row_utf8: "<tr>\r\n\t\t\t<td>List All Users in the Domain</td>\r\n\t\t\t<td><code>net user /domain</code></td>\r\
+          \n\t\t\t<td>CMD</td>\r\n\t\t\t<td><a href=\"https://activedirectorypro.com/powershell-commands/\"\
+          \ target=\"_blank\">Active Directory Pro</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:d8ed42f8e3df4945802c7b3a01c7b65bd528852b81b3ab191274c131afd7b3ce
+        cells:
+        - List All Users in the Domain
+        - net user /domain
+        - CMD
+        - Active Directory Pro
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:633d51a9b7883f20e093029f64ee3d6a8e60d70b86727deec4a1b2d2f45bff04

@@ -1,0 +1,91 @@
+id: lolbas/T1NMaWJyYXJpZXMvTXNodG1sLnltbA/RXhlY3V0ZQ/0
+type: library
+platform: windows
+name: Mshtml.dll
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.011
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+commands:
+- template: rundll32.exe Mshtml.dll,PrintHTML {PATH_ABSOLUTE:.hta}
+  comment: 'Invoke an HTML Application via mshta.exe (note: pops a security warning and a print dialogue
+    box).'
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Mshtml/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Mshtml.dll
+      category: Execute
+      privileges: User
+      mitre_id: T1218.011
+      source_file: OSLibraries/Mshtml.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Mshtml.dll\nDescription: Microsoft HTML Viewer\nAuthor: LOLBAS Team\n\
+        Created: 2018-05-25\nCommands:\n  - Command: rundll32.exe Mshtml.dll,PrintHTML {PATH_ABSOLUTE:.hta}\n\
+        \    Description: \"Invoke an HTML Application via mshta.exe (note: pops a security warning and\
+        \ a print dialogue box).\"\n    Usecase: Launch an HTA application.\n    Category: Execute\n \
+        \   Privileges: User\n    MitreID: T1218.011\n    OperatingSystem: Windows 10, Windows 11\n  \
+        \  Tags:\n      - Execute: HTA\nFull_Path:\n  - Path: c:\\windows\\system32\\mshtml.dll\n  - Path:\
+        \ c:\\windows\\syswow64\\mshtml.dll\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml\n\
+        Resources:\n  - Link: https://twitter.com/pabraeken/status/998567549670477824\n  - Link: https://windows10dll.nirsoft.net/mshtml_dll.html\n\
+        Acknowledgement:\n  - Person: Pierre-Alexandre Braeken\n    Handle: '@pabraeken'\n"
+      document_sha256: sha256:54e993cccc6c71a4979a126fe45370cfed26fc1c41dae3b70c5b6c400abf9359
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Mshtml/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.011
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:ab59eaafe51ddc7e08f523d89c4241ecfb82d4f925efec9a0e4bf907c4f911c3

@@ -1,0 +1,270 @@
+id: loldrivers/eef1fcf4-8c54-420b-8d38-9c5f95129dcc
+type: driver
+platform: windows
+name: ntbios.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create ntbios.sys binPath=C:\windows\temp \n \n \n  tbios.sys type=kernel && sc.exe
+    start ntbios.sys
+  comment: Driver used in the Daxin malware campaign.
+driver_detail:
+  samples:
+  - Authentihash:
+      MD5: dd3f6fe14dadb95f5d8c963006dec9d7
+      SHA1: 2374491565e5798dccd4db2dc2af7e9bbefafd5b
+      SHA256: 50f9323eaf7c49cfca5890c6c46d729574d0caca89f7acc9f608c8226f54a975
+    Company: Microsoft Corporation
+    Copyright: 版权所有 (C) 2003
+    CreationTimestamp: '2009-11-19 05:26:14'
+    Date: ''
+    Description: ntbios driver
+    ExportedFunctions: ''
+    FileVersion: 5, 0, 2, 1
+    Filename: ntbios.sys
+    ImportedFunctions:
+    - MmUnlockPages
+    - MmProbeAndLockPages
+    - IoAllocateMdl
+    - IoQueueWorkItem
+    - IoAllocateWorkItem
+    - IoGetCurrentProcess
+    - _stricmp
+    - IoFreeWorkItem
+    - RtlFreeUnicodeString
+    - ZwClose
+    - ZwWriteFile
+    - ZwCreateFile
+    - RtlAnsiStringToUnicodeString
+    - _strnicmp
+    - RtlUnwind
+    - RtlCopyUnicodeString
+    - wcsncmp
+    - swprintf
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - KeInitializeSpinLock
+    - ExfInterlockedInsertTailList
+    - RtlInitUnicodeString
+    - MmMapLockedPagesSpecifyCache
+    - IoFreeMdl
+    - InterlockedDecrement
+    - InterlockedIncrement
+    - InterlockedExchange
+    - IoDeleteSymbolicLink
+    - IoDeleteDevice
+    - ExfInterlockedRemoveHeadList
+    - IofCompleteRequest
+    - ExAllocatePoolWithTag
+    - strncmp
+    - ExFreePool
+    - KfAcquireSpinLock
+    - KfReleaseSpinLock
+    - KeInitializeApc
+    - KeInsertQueueApc
+    - KeAttachProcess
+    - KeDetachProcess
+    - NtQuerySystemInformation
+    - NdisAllocatePacket
+    - NdisCopyFromPacketToPacket
+    - NdisAllocateMemory
+    - NdisFreePacket
+    - NdisAllocateBuffer
+    - NdisSetEvent
+    - NdisResetEvent
+    - NdisFreeBufferPool
+    - NdisFreePacketPool
+    - NdisFreeMemory
+    - NdisWaitEvent
+    - NdisQueryAdapterInstanceName
+    - NdisOpenAdapter
+    - NdisInitializeEvent
+    - NdisAllocatePacketPool
+    - NdisRegisterProtocol
+    - NdisAllocateBufferPool
+    - NdisCloseAdapter
+    - NdisDeregisterProtocol
+    Imports:
+    - NTOSKRNL.EXE
+    - HAL.DLL
+    - ntoskrnl.exe
+    - NDIS.SYS
+    InternalName: ntbio.sys
+    MD5: 14580bd59c55185115fd3abe73b016a2
+    MachineType: I386
+    MagicHeader: 50 45 0 0
+    OriginalFilename: ntbios.sys
+    Product: ' Microsoft(R) Windows (R) NT Operating System'
+    ProductVersion: 5, 0, 2, 1
+    Publisher: n/a
+    RichPEHeaderHash:
+      MD5: ebd225fe8cf34907033d6b6123047339
+      SHA1: 642936e6d95c6231c8427a1c7a76dd99910fc635
+      SHA256: b04e0a7d507b0838174bb9df686e4ce60c5b81e183867441ed5951a5d3555510
+    SHA1: 71469dce9c2f38d0e0243a289f915131bf6dd2a8
+    SHA256: 96bf3ee7c6673b69c6aa173bb44e21fa636b1c2c73f4356a7599c121284a51cc
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.406428066873703'
+        Virtual Size: '0x39b8'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.157708038266207'
+        Virtual Size: '0x221'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '1.9267671732967222'
+        Virtual Size: '0x4eb9c'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.1775498523671'
+        Virtual Size: '0x67c'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.325586936369158'
+        Virtual Size: '0x370'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '4.172193963992313'
+        Virtual Size: '0x768'
+    Signature: Unsigned
+    Signatures: {}
+    Imphash: a7bd820fa5b895fab06f20739c9f24b8
+    LoadsDespiteHVCI: 'TRUE'
+  sha256: 96bf3ee7c6673b69c6aa173bb44e21fa636b1c2c73f4356a7599c121284a51cc
+  signer: Microsoft Corporation
+  original_filename: ntbios.sys
+  command_metadata:
+  - Command: sc.exe create ntbios.sys binPath=C:\windows\temp \n \n \n  tbios.sys type=kernel && sc.exe
+      start ntbios.sys
+    Description: Driver used in the Daxin malware campaign.
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: malicious
+references:
+- https://gist.github.com/MHaggis/9ab3bb795a6018d70fb11fa7c31f8f48
+- https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/daxin-backdoor-espionage
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: eef1fcf4-8c54-420b-8d38-9c5f95129dcc.yaml
+      document: "Id: eef1fcf4-8c54-420b-8d38-9c5f95129dcc\nTags:\n- ntbios.sys\nVerified: 'TRUE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-02-28'\nMitreID: T1068\nCategory: malicious\nCommands:\n  Command:\
+        \ sc.exe create ntbios.sys binPath=C:\\windows\\temp \\n \\n \\n  tbios.sys type=kernel\n    &&\
+        \ sc.exe start ntbios.sys\n  Description: Driver used in the Daxin malware campaign.\n  OperatingSystem:\
+        \ Windows 10\n  Privileges: kernel\n  Usecase: Elevate privileges\nResources:\n- https://gist.github.com/MHaggis/9ab3bb795a6018d70fb11fa7c31f8f48\n\
+        - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/daxin-backdoor-espionage\n\
+        - ''\nDetection:\n- type: yara_signature\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/yara/96bf3ee7c6673b69c6aa173bb44e21fa636b1c2c73f4356a7599c121284a51cc.yara\n\
+        - type: sigma_hash\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers.yml\n\
+        - type: sigma_names\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers_names.yml\n\
+        - type: sysmon_hash_detect\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes.xml\n\
+        - type: sysmon_hash_block\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes_block.xml\n\
+        - type: yara_signature\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/yara/yara-rules_mal_drivers_strict.yar\n\
+        - type: sigma_hash\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers.yml\n\
+        - type: sigma_names\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers_names.yml\n\
+        - type: sysmon_hash_detect\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes.xml\n\
+        - type: sysmon_hash_block\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes_block.xml\n\
+        Acknowledgement:\n  Handle: ''\n  Person: ''\nKnownVulnerableSamples:\n- Authentihash:\n    MD5:\
+        \ dd3f6fe14dadb95f5d8c963006dec9d7\n    SHA1: 2374491565e5798dccd4db2dc2af7e9bbefafd5b\n    SHA256:\
+        \ 50f9323eaf7c49cfca5890c6c46d729574d0caca89f7acc9f608c8226f54a975\n  Company: Microsoft Corporation\n\
+        \  Copyright: \"\\u7248\\u6743\\u6240\\u6709 (C) 2003\"\n  CreationTimestamp: '2009-11-19 05:26:14'\n\
+        \  Date: ''\n  Description: ntbios driver\n  ExportedFunctions: ''\n  FileVersion: 5, 0, 2, 1\n\
+        \  Filename: ntbios.sys\n  ImportedFunctions:\n  - MmUnlockPages\n  - MmProbeAndLockPages\n  -\
+        \ IoAllocateMdl\n  - IoQueueWorkItem\n  - IoAllocateWorkItem\n  - IoGetCurrentProcess\n  - _stricmp\n\
+        \  - IoFreeWorkItem\n  - RtlFreeUnicodeString\n  - ZwClose\n  - ZwWriteFile\n  - ZwCreateFile\n\
+        \  - RtlAnsiStringToUnicodeString\n  - _strnicmp\n  - RtlUnwind\n  - RtlCopyUnicodeString\n  -\
+        \ wcsncmp\n  - swprintf\n  - IoCreateDevice\n  - IoCreateSymbolicLink\n  - KeInitializeSpinLock\n\
+        \  - ExfInterlockedInsertTailList\n  - RtlInitUnicodeString\n  - MmMapLockedPagesSpecifyCache\n\
+        \  - IoFreeMdl\n  - InterlockedDecrement\n  - InterlockedIncrement\n  - InterlockedExchange\n\
+        \  - IoDeleteSymbolicLink\n  - IoDeleteDevice\n  - ExfInterlockedRemoveHeadList\n  - IofCompleteRequest\n\
+        \  - ExAllocatePoolWithTag\n  - strncmp\n  - ExFreePool\n  - KfAcquireSpinLock\n  - KfReleaseSpinLock\n\
+        \  - KeInitializeApc\n  - KeInsertQueueApc\n  - KeAttachProcess\n  - KeDetachProcess\n  - NtQuerySystemInformation\n\
+        \  - NdisAllocatePacket\n  - NdisCopyFromPacketToPacket\n  - NdisAllocateMemory\n  - NdisFreePacket\n\
+        \  - NdisAllocateBuffer\n  - NdisSetEvent\n  - NdisResetEvent\n  - NdisFreeBufferPool\n  - NdisFreePacketPool\n\
+        \  - NdisFreeMemory\n  - NdisWaitEvent\n  - NdisQueryAdapterInstanceName\n  - NdisOpenAdapter\n\
+        \  - NdisInitializeEvent\n  - NdisAllocatePacketPool\n  - NdisRegisterProtocol\n  - NdisAllocateBufferPool\n\
+        \  - NdisCloseAdapter\n  - NdisDeregisterProtocol\n  Imports:\n  - NTOSKRNL.EXE\n  - HAL.DLL\n\
+        \  - ntoskrnl.exe\n  - NDIS.SYS\n  InternalName: ntbio.sys\n  MD5: 14580bd59c55185115fd3abe73b016a2\n\
+        \  MachineType: I386\n  MagicHeader: 50 45 0 0\n  OriginalFilename: ntbios.sys\n  Product: ' Microsoft(R)\
+        \ Windows (R) NT Operating System'\n  ProductVersion: 5, 0, 2, 1\n  Publisher: n/a\n  RichPEHeaderHash:\n\
+        \    MD5: ebd225fe8cf34907033d6b6123047339\n    SHA1: 642936e6d95c6231c8427a1c7a76dd99910fc635\n\
+        \    SHA256: b04e0a7d507b0838174bb9df686e4ce60c5b81e183867441ed5951a5d3555510\n  SHA1: 71469dce9c2f38d0e0243a289f915131bf6dd2a8\n\
+        \  SHA256: 96bf3ee7c6673b69c6aa173bb44e21fa636b1c2c73f4356a7599c121284a51cc\n  Sections:\n   \
+        \ .text:\n      Entropy: 6.406428066873703\n      Virtual Size: '0x39b8'\n    .rdata:\n      Entropy:\
+        \ 4.157708038266207\n      Virtual Size: '0x221'\n    .data:\n      Entropy: 1.9267671732967222\n\
+        \      Virtual Size: '0x4eb9c'\n    INIT:\n      Entropy: 5.1775498523671\n      Virtual Size:\
+        \ '0x67c'\n    .rsrc:\n      Entropy: 3.325586936369158\n      Virtual Size: '0x370'\n    .reloc:\n\
+        \      Entropy: 4.172193963992313\n      Virtual Size: '0x768'\n  Signature: Unsigned\n  Signatures:\
+        \ {}\n  Imphash: a7bd820fa5b895fab06f20739c9f24b8\n  LoadsDespiteHVCI: 'TRUE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:a36cbfe7b983fbff653156044853e7851ffaf0305c3453c5eb2c74e33033f933

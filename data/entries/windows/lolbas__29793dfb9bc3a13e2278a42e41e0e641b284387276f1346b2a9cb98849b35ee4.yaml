@@ -1,0 +1,106 @@
+id: lolbas/T1NCaW5hcmllcy9Bc3BuZXRfQ29tcGlsZXIueW1s/QVdMIEJ5cGFzcw/0
+type: binary
+platform: windows
+name: Aspnet_Compiler.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+aliases:
+- aspnet_compiler
+attack_techniques:
+- T1127
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_aspnet_compiler.yml
+commands:
+- template: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\aspnet_compiler.exe -v none -p C:\users\cpl.internal\desktop\asptest\
+    -f C:\users\cpl.internal\desktop\asptest\none -u
+  comment: Execute C# code with the Build Provider and proper folder structure in place.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Aspnet_Compiler/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Aspnet_Compiler.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1127
+      source_file: OSBinaries/Aspnet_Compiler.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Aspnet_Compiler.exe\nDescription: ASP.NET Compilation Tool\nAuthor: Jimmy\
+        \ (@bohops)\nCreated: 2021-09-26\nCommands:\n  - Command: C:\\Windows\\Microsoft.NET\\Framework64\\\
+        v4.0.30319\\aspnet_compiler.exe -v none -p C:\\users\\cpl.internal\\desktop\\asptest\\ -f C:\\\
+        users\\cpl.internal\\desktop\\asptest\\none -u\n    Description: Execute C# code with the Build\
+        \ Provider and proper folder structure in place.\n    Usecase: Execute proxied payload with Microsoft\
+        \ signed binary to bypass application control solutions\n    Category: AWL Bypass\n    Privileges:\
+        \ User\n    MitreID: T1127\n    OperatingSystem: Windows 10, Windows 11\nFull_Path:\n  - Path:\
+        \ c:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\aspnet_compiler.exe\n  - Path: c:\\Windows\\\
+        Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_compiler.exe\nCode_Sample:\n  - Code: https://github.com/ThunderGunExpress/BringYourOwnBuilder\n\
+        Detection:\n  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_aspnet_compiler.yml\n\
+        Resources:\n  - Link: https://ijustwannared.team/2020/08/01/the-curious-case-of-aspnet_compiler-exe/\n\
+        \  - Link: https://docs.microsoft.com/en-us/dotnet/api/system.web.compilation.buildprovider.generatecode?view=netframework-4.8\n\
+        Acknowledgement:\n  - Person: cpl\n    Handle: '@cpl3h'\n"
+      document_sha256: sha256:b158744a8080a2125f0182a7980c54333e1bebd948d2b9d070b5d93c4588c75e
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Aspnet_Compiler/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:1998eacc78a463770ed0ca41745c8bae9ab633bc5dfc3eea2bf81c4756baef33

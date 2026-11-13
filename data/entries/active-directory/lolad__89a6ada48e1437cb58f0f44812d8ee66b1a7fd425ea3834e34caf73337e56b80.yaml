@@ -1,0 +1,80 @@
+id: lolad/Q2hlY2sgRG9tYWluIENvbnRyb2xsZXJzIFJlcGxpY2F0aW9uIFN0YXR1cw/R2V0LUFEUmVwbGljYXRpb25QYXJ0bmVyTWV0YWRhdGEgLVRhcmdldCAiREM9ZG9tYWluLERDPWNvbSI/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Check Domain Controllers Replication Status
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADReplicationPartnerMetadata -Target "DC=domain,DC=com"
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Check Domain Controllers Replication Status
+      command: Get-ADReplicationPartnerMetadata -Target "DC=domain,DC=com"
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=106
+        row_utf8: "<tr>\r\n\t\t    <td>Check Domain Controllers Replication Status</td>\r\n\t\t    <td><code>Get-ADReplicationPartnerMetadata\
+          \ -Target \"DC=domain,DC=com\"</code></td>\r\n\t\t    <td>PowerShell</td>\r\n\t\t    <td><a\
+          \ href=\"https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationpartnermetadata\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:ae955515dba23e5f9b480e5a61edcf747cba9e6974f79a2151d1f89a27b07f73
+        cells:
+        - Check Domain Controllers Replication Status
+        - Get-ADReplicationPartnerMetadata -Target "DC=domain,DC=com"
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:e50211724dd6ea5da2659637c799bf9b3718c9af41ba041f484aeb0ded6507a4

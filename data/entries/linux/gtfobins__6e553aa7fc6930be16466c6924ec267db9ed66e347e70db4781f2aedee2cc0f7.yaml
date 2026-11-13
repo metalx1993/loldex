@@ -1,0 +1,73 @@
+id: gtfobins/cmp/file-read/unprivileged
+type: binary
+platform: linux
+name: cmp
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: cmp /path/to/input-file /dev/zero -b -l
+  comment: Dump the bytes of the input file that are different from the NUL byte in a tabular format.
+references:
+- https://gtfobins.github.io/gtfobins/cmp/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        cmp:
+          functions:
+            file-read:
+            - binary: false
+              code: cmp /path/to/input-file /dev/zero -b -l
+              comment: Dump the bytes of the input file that are different from the NUL byte in a tabular
+                format.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/cmp/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:4b534cb9e790a742af3f94fa16b8978dc8554fffe1c437aab619ce5431f8880f

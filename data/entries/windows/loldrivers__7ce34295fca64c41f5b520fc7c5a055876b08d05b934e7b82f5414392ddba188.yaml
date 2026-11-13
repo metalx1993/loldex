@@ -1,0 +1,111 @@
+id: loldrivers/ddbd60c3-0611-4a59-894d-aec84203906f
+type: driver
+platform: windows
+name: full.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create full.sys binPath=C:\windows\temp\full.sys type=kernel && sc.exe start full.sys
+driver_detail:
+  samples:
+  - Company: ''
+    Date: ''
+    Description: ''
+    FileVersion: ''
+    Filename: full.sys
+    MachineType: ''
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    Signature: []
+    LoadsDespiteHVCI: 'FALSE'
+    Authentihash:
+      SHA1: 4b8c0445075f09aeef542ab1c86e5de6b06e91a3
+      SHA256: 0988d366572a57b3015d875b60704517d05115580678e8f2e126f771eda28f7b
+  command_metadata:
+  - Command: sc.exe create full.sys binPath=C:\windows\temp\full.sys type=kernel && sc.exe start full.sys
+    Description: ''
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: ddbd60c3-0611-4a59-894d-aec84203906f.yaml
+      document: "Id: ddbd60c3-0611-4a59-894d-aec84203906f\nTags:\n- full.sys\nVerified: 'FALSE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-01-09'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \    Command: sc.exe create full.sys binPath=C:\\windows\\temp\\full.sys type=kernel &&\n    \
+        \    sc.exe start full.sys\n    Description: ''\n    OperatingSystem: Windows 10\n    Privileges:\
+        \ kernel\n    Usecase: Elevate privileges\nResources:\n- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules\n\
+        Detection: []\nAcknowledgement:\n    Handle: ''\n    Person: ''\nKnownVulnerableSamples:\n-  \
+        \ Company: ''\n    Date: ''\n    Description: ''\n    FileVersion: ''\n    Filename: full.sys\n\
+        \    MachineType: ''\n    OriginalFilename: ''\n    Product: ''\n    ProductVersion: ''\n    Publisher:\
+        \ ''\n    Signature: []\n    LoadsDespiteHVCI: 'FALSE'\n    Authentihash:\n        SHA1: 4b8c0445075f09aeef542ab1c86e5de6b06e91a3\n\
+        \        SHA256: 0988d366572a57b3015d875b60704517d05115580678e8f2e126f771eda28f7b\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:b9ce131cf1e7067d2bd563412410eb47493ccc42b519d75a01a459e9b84f2d83

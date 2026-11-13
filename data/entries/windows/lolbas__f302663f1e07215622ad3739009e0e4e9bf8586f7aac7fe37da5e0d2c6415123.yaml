@@ -1,0 +1,95 @@
+id: lolbas/T1NCaW5hcmllcy9SZWdlZGl0LnltbA/QURT/0
+type: binary
+platform: windows
+name: Regedit.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: regedit.exe reading and writing to alternate data stream
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_regedit_import_keys_ads.yml
+commands:
+- template: regedit /E {PATH_ABSOLUTE}:regfile.reg HKEY_CURRENT_USER\MyCustomRegKey
+  comment: Export the target Registry key to the specified .REG file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Regedit/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Regedit.exe
+      category: ADS
+      privileges: User
+      mitre_id: T1564.004
+      source_file: OSBinaries/Regedit.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Regedit.exe\nDescription: Used by Windows to manipulate registry\nAuthor:\
+        \ Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: regedit /E {PATH_ABSOLUTE}:regfile.reg\
+        \ HKEY_CURRENT_USER\\MyCustomRegKey\n    Description: Export the target Registry key to the specified\
+        \ .REG file.\n    Usecase: Hide registry data in alternate data stream\n    Category: ADS\n  \
+        \  Privileges: User\n    MitreID: T1564.004\n    OperatingSystem: Windows vista, Windows 7, Windows\
+        \ 8, Windows 8.1, Windows 10, Windows 11\n  - Command: regedit {PATH_ABSOLUTE}:regfile.reg\n \
+        \   Description: Import the target .REG file into the Registry.\n    Usecase: Import hidden registry\
+        \ data from alternate data stream\n    Category: ADS\n    Privileges: User\n    MitreID: T1564.004\n\
+        \    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n\
+        Full_Path:\n  - Path: C:\\Windows\\regedit.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_regedit_import_keys_ads.yml\n\
+        \  - IOC: regedit.exe reading and writing to alternate data stream\n  - IOC: regedit.exe should\
+        \ normally not be executed by end-users\nResources:\n  - Link: https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f\n\
+        Acknowledgement:\n  - Person: Oddvar Moe\n    Handle: '@oddvarmoe'\n"
+      document_sha256: sha256:42b32edfc8a5269a4d01bf37e7ab4b8ef74cd5ba2113d9690abb7101eaf13237
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Regedit/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1564.004
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:caedbb8492f9f2bdf2610d8d393ab6f29d09fa8566c23a021e15fe21fef333e2

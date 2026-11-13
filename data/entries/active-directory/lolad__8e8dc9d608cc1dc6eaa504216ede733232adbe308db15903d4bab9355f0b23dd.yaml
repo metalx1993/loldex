@@ -1,0 +1,79 @@
+id: lolad/Q2hlY2sgQWN0aXZlIERpcmVjdG9yeSBSZXBsaWNhdGlvbiBRdWV1ZQ/cmVwYWRtaW4gL3F1ZXVl/Q01E
+type: technique
+platform: active-directory
+name: Check Active Directory Replication Queue
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: repadmin /queue
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: Check Active Directory Replication Queue
+      command: repadmin /queue
+      type: CMD
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=100
+        row_utf8: "<tr>\r\n\t\t    <td>Check Active Directory Replication Queue</td>\r\n\t\t    <td><code>repadmin\
+          \ /queue</code></td>\r\n\t\t    <td>CMD</td>\r\n\t\t    <td><a href=\"https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/repadmin\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:2fd7ac2f8e08778a4825c6bb871702fd70a99707b73207afd09f248c9c847781
+        cells:
+        - Check Active Directory Replication Queue
+        - repadmin /queue
+        - CMD
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:96e6f547e7eaec08e6ac88a5ff9fb885d8b8d4b74409f97848369113519a24d3

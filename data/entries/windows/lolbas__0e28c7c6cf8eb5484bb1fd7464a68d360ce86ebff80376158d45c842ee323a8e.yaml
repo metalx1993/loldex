@@ -1,0 +1,92 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1ZTSUlTRXhlTGF1bmNoZXIueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: VSIISExeLauncher.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: VSIISExeLauncher.exe spawned an unknown process
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_vsiisexelauncher.yml
+commands:
+- template: VSIISExeLauncher.exe -p {PATH:.exe} -a "{CMD:args}"
+  comment: The above binary will execute other binary.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/VSIISExeLauncher/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: VSIISExeLauncher.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/VSIISExeLauncher.yml
+      command_source_index: 0
+      document_utf8: "---\nName: VSIISExeLauncher.exe\nDescription: Binary will execute specified binary.\
+        \ Part of VS/VScode installation.\nAuthor: timwhite\nCreated: 2021-09-24\nCommands:\n  - Command:\
+        \ VSIISExeLauncher.exe -p {PATH:.exe} -a \"{CMD:args}\"\n    Description: The above binary will\
+        \ execute other binary.\n    Usecase: Execute any binary with given arguments.\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 10 and up with\
+        \ VS/VScode installed\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: 'C:\\Program Files\
+        \ (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\IDE\\Extensions\\Microsoft\\Web Tools\\\
+        ProjectSystem\\VSIISExeLauncher.exe'\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_vsiisexelauncher.yml\n\
+        \  - IOC: VSIISExeLauncher.exe spawned an unknown process\nResources:\n  - Link: https://github.com/timwhitez\n\
+        Acknowledgement:\n  - Person: timwhite\n"
+      document_sha256: sha256:51386770bf7c45ee066af0eaeff93f90f0e2868123c7e52af7e786c511e714ab
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/VSIISExeLauncher/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:792b3f413c24caac273265db4aba775ed56eab516414ed9145f4bbd50ee4f861

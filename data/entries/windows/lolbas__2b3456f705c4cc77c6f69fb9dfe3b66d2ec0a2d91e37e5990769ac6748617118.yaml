@@ -1,0 +1,94 @@
+id: lolbas/T1NCaW5hcmllcy9XYmVtdGVzdC55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: wbemtest.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1047
+opsec:
+  noise: high
+  triggers: wbemtest.exe binary spawned
+commands:
+- template: wbemtest.exe
+  comment: Execute arbitary commands through WMI through a GUI managment interface for Web Based Enterprise
+    Management testing (WBEM). Uses WMI to Create and instance of a Win32_Process WMI class with a commandline
+    argument of the target command to spawn. Spawns a GUI so it requires interactive access. For a demo,
+    see link to blog in resources.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Wbemtest/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: wbemtest.exe
+      category: Execute
+      privileges: Any
+      mitre_id: T1047
+      source_file: OSBinaries/Wbemtest.yml
+      command_source_index: 0
+      document_utf8: "---\nName: wbemtest.exe\nDescription: WMI/WBEM Test Binary\nAuthor: saulpanders\n\
+        Created: 2025-04-22\nCommands:\n  - Command: wbemtest.exe\n    Description: Execute arbitary commands\
+        \ through WMI through a GUI managment interface for Web Based Enterprise Management testing (WBEM).\
+        \ Uses WMI to Create and instance of a Win32_Process WMI class with a commandline argument of\
+        \ the target command to spawn. Spawns a GUI so it requires interactive access. For a demo, see\
+        \ link to blog in resources.\n    Usecase: Execute arbitrary commands through WMI classes\n  \
+        \  Category: Execute\n    Privileges: Any\n    MitreID: T1047\n    OperatingSystem: Windows 10,\
+        \ Windows 11\n    Tags:\n      - Application: GUI\n      - Execute: CMD\nFull_Path:\n  - Path:\
+        \ c:\\windows\\system32\\wbem\\wbemtest.exe\nDetection:\n  - IOC: wbemtest.exe binary spawned\n\
+        Resources:\n  - Link: https://saulpanders.github.io/2025/01/20/lolbas-wbemtest.html\nAcknowledgement:\n\
+        \  - Person: Paul Sanders\n    Handle: '@saulpanders'\n"
+      document_sha256: sha256:0b8554cd35fcf7236e30ad4b132891c934a4961074ba471f8d0b55841900d183
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Wbemtest/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1047
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:f835459aa43dcb8a98ec3aa62e4ae962ac61ccff8df26b5ada4797dae931afb2

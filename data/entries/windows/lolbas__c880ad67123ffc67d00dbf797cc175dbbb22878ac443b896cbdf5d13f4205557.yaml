@@ -1,0 +1,92 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL3ZzbHMtYWdlbnQueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: vsls-agent.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_vslsagent_agentextensionpath_load.yml
+commands:
+- template: vsls-agent.exe --agentExtensionPath {PATH_ABSOLUTE:.dll}
+  comment: Load a library payload using the --agentExtensionPath parameter (32-bit)
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/vsls-agent/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: vsls-agent.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/vsls-agent.yml
+      command_source_index: 0
+      document_utf8: "---\nName: vsls-agent.exe\nDescription: Agent for Visual Studio Live Share (Code\
+        \ Collaboration)\nAuthor: Jimmy (@bohops)\nCreated: 2022-11-01\nCommands:\n  - Command: vsls-agent.exe\
+        \ --agentExtensionPath {PATH_ABSOLUTE:.dll}\n    Description: Load a library payload using the\
+        \ --agentExtensionPath parameter (32-bit)\n    Usecase: Execute proxied payload with Microsoft\
+        \ signed binary\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows 10 21H2 (likely previous and newer versions with modern versions of Visual Studio installed)\n\
+        \    Tags:\n      - Execute: DLL\nFull_Path:\n  - Path: c:\\Program Files (x86)\\Microsoft Visual\
+        \ Studio\\2019\\Professional\\Common7\\IDE\\Extensions\\Microsoft\\LiveShare\\Agent\\vsls-agent.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_vslsagent_agentextensionpath_load.yml\n\
+        Resources:\n  - Link: https://twitter.com/bohops/status/1583916360404729857\nAcknowledgement:\n\
+        \  - Person: Jimmy\n    Handle: '@bohops'\n"
+      document_sha256: sha256:59b6176322b25a62bbf47b61f335b801e1430ffbe0353e72dcfa9013ad301fd2
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/vsls-agent/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:e8f68906d51c3db51955d697fb92fcf0fb42ac0c738255b0f9a96d7ef1b6e5f9

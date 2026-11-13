@@ -1,0 +1,105 @@
+id: lolbas/T1NCaW5hcmllcy9SZWdhc20ueW1s/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Regasm.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.009
+opsec:
+  noise: high
+  triggers: regasm.exe executing dll file
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_regasm.yml
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/execution_register_server_program_connecting_to_the_internet.toml
+  - https://github.com/splunk/security_content/blob/bc93e670f5dcb24e96fbe3664d6bcad92df5acad/docs/_stories/suspicious_regsvcs_regasm_activity.md
+  - https://github.com/splunk/security_content/blob/bee2a4cefa533f286c546cbe6798a0b5dec3e5ef/detections/endpoint/detect_regasm_with_network_connection.yml
+commands:
+- template: regasm.exe /U {PATH:.dll}
+  comment: Loads the target .DLL file and executes the UnRegisterClass function.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Regasm/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Regasm.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.009
+      source_file: OSBinaries/Regasm.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Regasm.exe\nDescription: Part of .NET\nAuthor: Oddvar Moe\nCreated: 2018-05-25\n\
+        Commands:\n  - Command: regasm.exe {PATH:.dll}\n    Description: Loads the target .NET DLL file\
+        \ and executes the RegisterClass function.\n    Usecase: Execute code and bypass Application whitelisting\n\
+        \    Category: AWL Bypass\n    Privileges: Local Admin\n    MitreID: T1218.009\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: DLL (.NET)\n  - Command: regasm.exe /U {PATH:.dll}\n    Description: Loads the target\
+        \ .DLL file and executes the UnRegisterClass function.\n    Usecase: Execute code and bypass Application\
+        \ whitelisting\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.009\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: DLL (.NET)\nFull_Path:\n  - Path: C:\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\\
+        regasm.exe\n  - Path: C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\regasm.exe\n  - Path:\
+        \ C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regasm.exe\n  - Path: C:\\Windows\\Microsoft.NET\\\
+        Framework64\\v4.0.30319\\regasm.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_regasm.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/execution_register_server_program_connecting_to_the_internet.toml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/bc93e670f5dcb24e96fbe3664d6bcad92df5acad/docs/_stories/suspicious_regsvcs_regasm_activity.md\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/bee2a4cefa533f286c546cbe6798a0b5dec3e5ef/detections/endpoint/detect_regasm_with_network_connection.yml\n\
+        \  - IOC: regasm.exe executing dll file\nResources:\n  - Link: https://pentestlab.blog/2017/05/19/applocker-bypass-regasm-and-regsvcs/\n\
+        \  - Link: https://oddvar.moe/2017/12/13/applocker-case-study-how-insecure-is-it-really-part-1/\n\
+        \  - Link: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1218.009/T1218.009.md\n\
+        Acknowledgement:\n  - Person: Casey Smith\n    Handle: '@subtee'\n"
+      document_sha256: sha256:3ea5c45f313d3f62e7659911d4b6e94e44e74c999596ccbc63a7cc163e63e6e2
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Regasm/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.009
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:b6c24f972aed881b17ecb7e4c4dcc621c96237687520f6fcfea0330e1f8c7ea6

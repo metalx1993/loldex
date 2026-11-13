@@ -1,0 +1,105 @@
+id: lolbas/T1NMaWJyYXJpZXMvU3lzc2V0dXAueW1s/RXhlY3V0ZQ/1
+type: library
+platform: windows
+name: Syssetup.dll
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.011
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+  - https://github.com/splunk/security_content/blob/86a5b644a44240f01274c8b74d19a435c7dae66e/detections/endpoint/detect_rundll32_application_control_bypass___syssetup.yml
+commands:
+- template: rundll32 syssetup.dll,SetupInfObjectInstallAction DefaultInstall 128 {PATH_ABSOLUTE:.inf}
+  comment: Launch an executable file via the SetupInfObjectInstallAction function and .inf file section
+    directive.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Syssetup/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Syssetup.dll
+      category: Execute
+      privileges: User
+      mitre_id: T1218.011
+      source_file: OSLibraries/Syssetup.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Syssetup.dll\nDescription: Windows NT System Setup\nAuthor: LOLBAS Team\n\
+        Created: 2018-05-25\nCommands:\n  - Command: rundll32 syssetup.dll,SetupInfObjectInstallAction\
+        \ DefaultInstall 128 {PATH_ABSOLUTE:.inf}\n    Description: Execute the specified (local or remote)\
+        \ .wsh/.sct script with scrobj.dll in the .inf file by calling an information file directive (section\
+        \ name specified).\n    Usecase: Run local or remote script(let) code through INF file specification\
+        \ (Note May pop an error window).\n    Category: AWL Bypass\n    Privileges: User\n    MitreID:\
+        \ T1218.011\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: INF\n  -\
+        \ Command: rundll32 syssetup.dll,SetupInfObjectInstallAction DefaultInstall 128 {PATH_ABSOLUTE:.inf}\n\
+        \    Description: Launch an executable file via the SetupInfObjectInstallAction function and .inf\
+        \ file section directive.\n    Usecase: Load an executable payload.\n    Category: Execute\n \
+        \   Privileges: User\n    MitreID: T1218.011\n    OperatingSystem: Windows 10, Windows 11\n  \
+        \  Tags:\n      - Execute: INF\nFull_Path:\n  - Path: c:\\windows\\system32\\syssetup.dll\n  -\
+        \ Path: c:\\windows\\syswow64\\syssetup.dll\nCode_Sample:\n  - Code: https://raw.githubusercontent.com/huntresslabs/evading-autoruns/master/shady.inf\n\
+        \  - Code: https://gist.github.com/enigma0x3/469d82d1b7ecaf84f4fb9e6c392d25ba#file-backdoor-minimalist-sct\n\
+        \  - Code: https://gist.github.com/homjxi0e/87b29da0d4f504cb675bb1140a931415\nDetection:\n  -\
+        \ Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/86a5b644a44240f01274c8b74d19a435c7dae66e/detections/endpoint/detect_rundll32_application_control_bypass___syssetup.yml\n\
+        Resources:\n  - Link: https://twitter.com/pabraeken/status/994392481927258113\n  - Link: https://twitter.com/harr0ey/status/975350238184697857\n\
+        \  - Link: https://twitter.com/bohops/status/975549525938135040\n  - Link: https://windows10dll.nirsoft.net/syssetup_dll.html\n\
+        Acknowledgement:\n  - Person: Pierre-Alexandre Braeken (Execute)\n    Handle: '@pabraeken'\n \
+        \ - Person: Matt harr0ey (Execute)\n    Handle: '@harr0ey'\n  - Person: Jimmy (Scriptlet)\n  \
+        \  Handle: '@bohops'\n"
+      document_sha256: sha256:e90b613f1bf9653be580804f449ce4815a474015abe0e99b97ff5fdeb637ce8c
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Syssetup/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.011
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:9aab4cbba5713058dcff616fe5fc0d509925343cc69b9485999ee9a6bd140bd5

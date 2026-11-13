@@ -1,0 +1,462 @@
+id: loldrivers/76b5dfae-b384-45ce-8646-b2eec6b76a1e
+type: driver
+platform: windows
+name: KfeCo11X64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create KfeCo11X64.sys binPath=C:\windows\temp\KfeCo11X64.sys type=kernel && sc.exe
+    start KfeCo11X64.sys
+  comment: Killer exposes COM interfaces that allow non-privileged users 1) to block network for any process
+    2) to manage any service in the OS. Killer is preinstalled to laptops equipped with Intel Killer NICs
+    (e.g. Dell). Since Intel patched the vulnerability quietly, it's not clear which version is safe.
+    Also, it is unclear which OEMs are affected. Dell is definitely in the list, but it is likely that
+    other vendors with Killer NICs on board, such as Acer and MSI, are affected too. Some users think
+    that Killer suite is required for the NIC to work properly, so they install it even after a fresh
+    Windows install. This version is confirmed vulnerable based on the script usage from zwclose.
+driver_detail:
+  samples:
+  - Authentihash:
+      MD5: 758090532f58b19865d76a41389c2d58
+      SHA1: 6aa5070d7346f164d618915d32ddb9cfe1c1fecc
+      SHA256: a7047cee090ddbd150d7337a9357e03ccea56f004a2d29ddb7b8a0636a396240
+    Company: Rivet Networks, LLC.
+    Copyright: Copyright (C) 2015-2018 Rivet Networks, LLC.
+    CreationTimestamp: '2022-03-29 13:25:42'
+    Date: ''
+    Description: Killer Traffic Control Callout Driver
+    ExportedFunctions: ''
+    FileVersion: 9.8.4.59
+    Filename: KfeCo11X64.sys
+    ImportedFunctions:
+    - ExFreePoolWithTag
+    - KeReleaseInStackQueuedSpinLockFromDpcLevel
+    - RtlCopyUnicodeString
+    - DbgPrintEx
+    - KeInitializeEvent
+    - strstr
+    - RtlCompareMemory
+    - RtlIpv4StringToAddressA
+    - RtlIpv6StringToAddressA
+    - memchr
+    - ObfDereferenceObject
+    - MmBuildMdlForNonPagedPool
+    - KeInitializeSpinLock
+    - KeSetTimer
+    - KeCancelTimer
+    - KeInitializeTimer
+    - KeSetPriorityThread
+    - KeSetImportanceDpc
+    - KeInsertQueueDpc
+    - KeInitializeDpc
+    - IoQueueWorkItem
+    - IoFreeWorkItem
+    - IoAllocateWorkItem
+    - PsTerminateSystemThread
+    - KeWaitForMultipleObjects
+    - KeDelayExecutionThread
+    - KeClearEvent
+    - RtlEthernetAddressToStringW
+    - RtlRandomEx
+    - ZwClose
+    - PsCreateSystemThread
+    - KeWaitForSingleObject
+    - KeSetEvent
+    - KeQueryInterruptTimePrecise
+    - ExEventObjectType
+    - __C_specific_handler
+    - ObReferenceObjectByHandle
+    - MmMapLockedPagesSpecifyCache
+    - MmUnlockPages
+    - MmProbeAndLockPages
+    - ProbeForWrite
+    - ProbeForRead
+    - IoFreeMdl
+    - ExAllocatePool2
+    - IoAllocateMdl
+    - KeAcquireInStackQueuedSpinLockAtDpcLevel
+    - KeReleaseInStackQueuedSpinLock
+    - KeAcquireInStackQueuedSpinLock
+    - KeGetCurrentIrql
+    - NdisRetreatNetBufferDataStart
+    - NdisAdvanceNetBufferDataStart
+    - NdisGetDataBuffer
+    - NdisCopySendNetBufferListInfo
+    - NdisFreeNetBufferPool
+    - NdisAllocateNetBufferPool
+    - NdisFreeNetBufferListPool
+    - NdisAllocateNetBufferListPool
+    - NdisFreeGenericObject
+    - NdisCopyReceiveNetBufferListInfo
+    - NdisAllocateGenericObject
+    - FwpsInjectTransportReceiveAsync0
+    - FwpsQueryConnectionRedirectState0
+    - FwpsRedirectHandleDestroy0
+    - FwpsRedirectHandleCreate0
+    - FwpsApplyModifiedLayerData0
+    - FwpsAcquireWritableLayerDataPointer0
+    - FwpsCompleteClassify0
+    - FwpsPendClassify0
+    - FwpsReleaseClassifyHandle0
+    - FwpsAcquireClassifyHandle0
+    - FwpsCalloutUnregisterByKey0
+    - FwpsConstructIpHeaderForTransportPacket0
+    - FwpsDereferenceNetBufferList0
+    - FwpsReferenceNetBufferList0
+    - FwpsInjectMacSendAsync0
+    - FwpsInjectMacReceiveAsync0
+    - FwpsAllocateCloneNetBufferList0
+    - FwpsFreeNetBufferList0
+    - FwpsAllocateNetBufferAndNetBufferList0
+    - FwpmFilterDeleteById0
+    - FwpsCalloutRegister3
+    - FwpmFilterAdd0
+    - FwpmCalloutDeleteByKey0
+    - FwpmSubLayerDeleteByKey0
+    - FwpmProviderContextDeleteByKey0
+    - FwpsInjectTransportSendAsync1
+    - FwpsFreeCloneNetBufferList0
+    - FwpsFlowRemoveContext0
+    - FwpsFlowAssociateContext0
+    - FwpsCalloutUnregisterById0
+    - FwpmCalloutAdd0
+    - FwpmSubLayerAdd0
+    - FwpmProviderAdd0
+    - FwpmTransactionAbort0
+    - FwpmTransactionCommit0
+    - FwpmTransactionBegin0
+    - FwpmEngineClose0
+    - FwpmEngineOpen0
+    - FwpsInjectionHandleDestroy0
+    - FwpsInjectionHandleCreate0
+    - FwpsQueryPacketInjectionState0
+    - FwpsGetPacketListSecurityInformation0
+    - WdfVersionUnbind
+    - WdfVersionBindClass
+    - WdfVersionUnbindClass
+    - WdfVersionBind
+    Imports:
+    - ntoskrnl.exe
+    - NDIS.SYS
+    - fwpkclnt.sys
+    - WDFLDR.SYS
+    InternalName: KfeCoDrv.sys
+    MD5: c901887f28bbb55a10eb934755b47227
+    MachineType: AMD64
+    MagicHeader: 50 45 0 0
+    OriginalFilename: KfeCoDrv.sys
+    Product: Killer Traffic Control
+    ProductVersion: 9.8.4.59
+    Publisher: ''
+    RichPEHeaderHash:
+      MD5: c02c92737cc75210cbdb22db9985bd7c
+      SHA1: 91b9fe88004bdda4bff995e0c46393f755e4d6fc
+      SHA256: 4642f08acdd1a88ef296c925ce1fcaecf013e5e98de934eb839ac24a4e06f467
+    SHA1: 2540205480ea3d59e4031de3c6632e3ce2596459
+    SHA256: 9a91d6e83b8fdec536580f6617f10dfc64eedf14ead29a6a644eb154426622ba
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.401436855573186'
+        Virtual Size: '0x20be6'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '5.653552737913285'
+        Virtual Size: '0x33d0'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '5.555301615962117'
+        Virtual Size: '0x13ba258'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '5.387931457488882'
+        Virtual Size: '0x1644'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.361670872068078'
+        Virtual Size: '0xeb0'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.6430731262668115'
+        Virtual Size: '0xc40'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '4.191396558286582'
+        Virtual Size: '0x34'
+    Signature: ''
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=California, L=Santa Clara, O=Intel Corporation, OU=Intel(R) Connectivity Innovation,
+          CN=Intel Corporation
+        ValidFrom: '2021-04-01 00:00:00'
+        ValidTo: '2023-04-01 23:59:59'
+        Signature: 1b7cfebb08c68ed60abcba3a04dbad328d046911c5325ffe46fb569e1d0c3c9f3413ff65a1d8ec402ac7c08f375ce9f48eb9212e1cb9ae1d4460e6c6e680d2553c47885c2119915d8401830970df37563b1a1649f0485848b55617a993a59612fb47cfeb541b0fa464fb781e87f4e8c1557600774719a502f23f4197963127c78a0d4641b34e0bcb8f86faacecfbd4c9798bdf92797bb629240970d04cd9267566d9e8226e41e6b2fe167dde6e3a471340982eb23969e27769a60d2f802d31601d6152c64019662357278b43a3965359050bca6ff45466d65fd54ba05a1f8eacc08660cdd55050249b001237f0fa9c6e28779f310b7de38a994f1637d8b387ec
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 00bfcce9854e3f154ff8e62c2ce2fde84d
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 6e52024b4fb80fcfdb67508172f48293
+          SHA1: 30760fb50b6398765ff477da4c21f1178e5408ca
+          SHA256: c3e02d446cd74203a21e7a6cf8be25669401c7d9e8a893698a8cb8b4f57ae2b4
+          SHA384: 7aef7d354f49169034ea09963d73e3d927dd6b796ff3ce3f83d1762e7280845e56582ff1a15cce812dde13468bc7d5d9
+      - Subject: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Code Signing
+          CA
+        ValidFrom: '2018-11-02 00:00:00'
+        ValidTo: '2030-12-31 23:59:59'
+        Signature: 4d6350ed47344a61a4dbde6a2a8c9bf100001e1d627b3ad732c2f6b3e063b3fb6100889a1b6d1007044fbeb8ea897822eb0f46ecf3465e40468912f40b775a9c2a413afcd6f4ebe7f7159533c3a18328b7de2fe494f78533832d4a4048bf9ac24f4ab18f24f4b38137d3b764b0a6236a596852425fff04ebe174657908f5a993de6b71409996ba78f1b9c8e2c30816b1ab635ac815806d745e4a757ea5b8c36cb5cfdf4a79875cc7404d6335f630d3cfb50a0e0b047fa04baebba3a5d08400933e535d34a50035696cbe9f2025100d19fb509061be398f7a8e4df69f0e1efe075112668326194895ce4ac9c17ff33a059bf96fdf887fc0239ed21e437a4531c19c4da9f059b25919e86a8d290402777c4b4bcd70be3ab2555a783ebcbb6f0310257715348af936cc4392e4ba4ff1629328255729fb5119c7a125406a8457c6b29db1bc1c0ada7c677e7d2ee9284c187ec47b3141719a4b29ec0b3d5750d2caddfd9e0551e54478dd01deb175980d5424fdf04ee3e2f883bd72bacb3d3aeef05e1792686dc861f9a6f12a0a0ba5b9f49eee983205859eebf98329d3c62c7dbd3a772e8b3742a06a82ed3b4aaa9410a4e10df817c5b65a79331892e3b575f8a1e98e0a251ee41ef19f5a8723ff9fa4519efb398011cddbb5c4a7a8806fe553d4e0e3a2c2d25b1afa32262d6a57701c3ca4582ea3f35b4b07dc3259f387a71a6d58
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.12
+        IsCertificateAuthority: true
+        SerialNumber: 1da248306f9b2618d082e0967d33d36a
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: true
+        IsCA: true
+        TBS:
+          MD5: c1eabfb5994258ad955adb7c2df165e6
+          SHA1: fa33b3c00cebc469b269220d9eab26926c9b8ad8
+          SHA256: 70dffac37eb787b2198816982c7d44f541d2e39a7dac069d37b367dc9f354b32
+          SHA384: 20adc5b59cb532e215f01ba09a9c745898c206555613512fea7c295ccfd17ced4fe2c5bc3274ca8a270fc68799b8343c
+      - Subject: C=US, ST=New Jersey, L=Jersey City, O=The USERTRUST Network, CN=USERTrust RSA Certification
+          Authority
+        ValidFrom: '2015-07-22 21:03:49'
+        ValidTo: '2025-07-22 21:03:49'
+        Signature: 6b22933c3d395471646b0ef2e43c3011c5204a4b860f92f1ff33793ad9e498a70e40a022807e61b2e0a719cf2695312a65d46a4f3186eac0c62ec5648c3d4859cd0b2f743d9426131042d49798275e3c76d278691d1a64e7057275e0eb6640439f8f0c46ff9760a6c867ad10089b62a6e9be3a8ad3074d9f729325bc0611e02c90383e671cfd19d79e90ce3dc2e0e761acc0e504f51e99540c910d01567137ae27d49e4322a5c927cd4de571123924a5415687ffbc55140f25ca89eec797e5d213ff3d7e1aa08f3fc82cd7a370d0c760c0fcd83e51e797c63e3bedcf78be8acae3c4f2a7a7ed9eae08028fa052db721ed53bc34d9f8efa9b70c7f8e3bf6c3f929be4373eec6a8c29f9c1a2bf8b3e1a6966fb1c634f2601c902c43ed2ffc343a81bfd99fad4bca5b9e2932f3b01c5d1f43a2f68c3e064b75a955e46cc078369bb3c05925673357345984e7cd812a5b742e9a263f642601870d13b6f31c087c7e671e1f34616e9f5b872b3e96d1f622649a3498bdd68c78b6856f7defcfa8724b80381178fe5f1676a1daed374f78ca55db30b8e422996ce49c4777e667c01171a6c1424c3b0177705d81a40b7866bd8e47b40ac7edf4e6f24f92080828c33e7e5fa29d89dda8b705d2bc91d824c0b67cb84419ee7067e1183442d8a19eef47f9add791c37191e9f3f8c29ba0d5c1086376c48cd455dcd70bcbcd14d5dd8c5b876
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.5
+        IsCertificateAuthority: true
+        SerialNumber: 3300000044b73ffcef5acfa27a000000000044
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: true
+        IsCA: true
+        TBS:
+          MD5: a2d2ae7554f77f6e9ffb0b1a9b700ac4
+          SHA1: 9f69ff166f5dc446578a45d7d69482373755e141
+          SHA256: ad394b7e5cb9ccf6429762405f9840b648e38e8faf2de376f1aa375c6729abb7
+          SHA384: eda103bac2997f31d778637ce8d1fa1263485a9d6a77d6e381bad8312e6bbec020ce5036e16ca96087e50f6ab200944a
+      Signer:
+      - SerialNumber: 00bfcce9854e3f154ff8e62c2ce2fde84d
+        Issuer: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Code Signing
+          CA
+        Version: 1
+    Imphash: 13300d56528646611f26704266713952
+    LoadsDespiteHVCI: 'TRUE'
+  sha256: 9a91d6e83b8fdec536580f6617f10dfc64eedf14ead29a6a644eb154426622ba
+  signer: Rivet Networks, LLC.
+  original_filename: KfeCoDrv.sys
+  command_metadata:
+  - Command: sc.exe create KfeCo11X64.sys binPath=C:\windows\temp\KfeCo11X64.sys type=kernel && sc.exe
+      start KfeCo11X64.sys
+    Description: Killer exposes COM interfaces that allow non-privileged users 1) to block network for
+      any process 2) to manage any service in the OS. Killer is preinstalled to laptops equipped with
+      Intel Killer NICs (e.g. Dell). Since Intel patched the vulnerability quietly, it's not clear which
+      version is safe. Also, it is unclear which OEMs are affected. Dell is definitely in the list, but
+      it is likely that other vendors with Killer NICs on board, such as Acer and MSI, are affected too.
+      Some users think that Killer suite is required for the NIC to work properly, so they install it
+      even after a fresh Windows install. This version is confirmed vulnerable based on the script usage
+      from zwclose.
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://zwclose.github.io/2023/04/18/killer2.html
+- https://twitter.com/zwclose/status/1648441215808049153
+- https://zwclose.github.io/2022/12/18/killer1.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 76b5dfae-b384-45ce-8646-b2eec6b76a1e.yaml
+      document: "Id: 76b5dfae-b384-45ce-8646-b2eec6b76a1e\nTags:\n- KfeCo11X64.sys\nVerified: 'TRUE'\n\
+        Author: Paul Michaud\nCreated: '2023-05-12'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \  Command: sc.exe create KfeCo11X64.sys binPath=C:\\windows\\temp\\KfeCo11X64.sys type=kernel\n\
+        \    && sc.exe start KfeCo11X64.sys\n  Description: Killer exposes COM interfaces that allow non-privileged\
+        \ users 1) to\n    block network for any process 2) to manage any service in the OS. Killer is\
+        \ preinstalled\n    to laptops equipped with Intel Killer NICs (e.g. Dell). Since Intel patched\
+        \ the\n    vulnerability quietly, it's not clear which version is safe. Also, it is unclear\n\
+        \    which OEMs are affected. Dell is definitely in the list, but it is likely that\n    other\
+        \ vendors with Killer NICs on board, such as Acer and MSI, are affected too.\n    Some users think\
+        \ that Killer suite is required for the NIC to work properly, so\n    they install it even after\
+        \ a fresh Windows install. This version is confirmed\n    vulnerable based on the script usage\
+        \ from zwclose.\n  OperatingSystem: Windows 10\n  Privileges: kernel\n  Usecase: Elevate privileges\n\
+        Resources:\n- https://zwclose.github.io/2023/04/18/killer2.html\n- https://twitter.com/zwclose/status/1648441215808049153\n\
+        - https://zwclose.github.io/2022/12/18/killer1.html\nDetection:\n- type: yara_signature\n  value:\
+        \ https://github.com/magicsword-io/LOLDrivers/blob/main/detections/yara/9a91d6e83b8fdec536580f6617f10dfc64eedf14ead29a6a644eb154426622ba.yara\n\
+        - type: sigma_hash\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers.yml\n\
+        - type: sigma_names\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers_names.yml\n\
+        - type: sysmon_hash_detect\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes.xml\n\
+        - type: sysmon_hash_block\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes_block.xml\n\
+        - type: yara_signature\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/yara/yara-rules_vuln_drivers_strict_renamed.yar\n\
+        - type: sigma_hash\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers.yml\n\
+        - type: sigma_names\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers_names.yml\n\
+        - type: sysmon_hash_detect\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes.xml\n\
+        - type: sysmon_hash_block\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes_block.xml\n\
+        Acknowledgement:\n  Handle: zwclose\n  Person: zwclose\nKnownVulnerableSamples:\n- Authentihash:\n\
+        \    MD5: 758090532f58b19865d76a41389c2d58\n    SHA1: 6aa5070d7346f164d618915d32ddb9cfe1c1fecc\n\
+        \    SHA256: a7047cee090ddbd150d7337a9357e03ccea56f004a2d29ddb7b8a0636a396240\n  Company: Rivet\
+        \ Networks, LLC.\n  Copyright: Copyright (C) 2015-2018 Rivet Networks, LLC.\n  CreationTimestamp:\
+        \ '2022-03-29 13:25:42'\n  Date: ''\n  Description: Killer Traffic Control Callout Driver\n  ExportedFunctions:\
+        \ ''\n  FileVersion: 9.8.4.59\n  Filename: KfeCo11X64.sys\n  ImportedFunctions:\n  - ExFreePoolWithTag\n\
+        \  - KeReleaseInStackQueuedSpinLockFromDpcLevel\n  - RtlCopyUnicodeString\n  - DbgPrintEx\n  -\
+        \ KeInitializeEvent\n  - strstr\n  - RtlCompareMemory\n  - RtlIpv4StringToAddressA\n  - RtlIpv6StringToAddressA\n\
+        \  - memchr\n  - ObfDereferenceObject\n  - MmBuildMdlForNonPagedPool\n  - KeInitializeSpinLock\n\
+        \  - KeSetTimer\n  - KeCancelTimer\n  - KeInitializeTimer\n  - KeSetPriorityThread\n  - KeSetImportanceDpc\n\
+        \  - KeInsertQueueDpc\n  - KeInitializeDpc\n  - IoQueueWorkItem\n  - IoFreeWorkItem\n  - IoAllocateWorkItem\n\
+        \  - PsTerminateSystemThread\n  - KeWaitForMultipleObjects\n  - KeDelayExecutionThread\n  - KeClearEvent\n\
+        \  - RtlEthernetAddressToStringW\n  - RtlRandomEx\n  - ZwClose\n  - PsCreateSystemThread\n  -\
+        \ KeWaitForSingleObject\n  - KeSetEvent\n  - KeQueryInterruptTimePrecise\n  - ExEventObjectType\n\
+        \  - __C_specific_handler\n  - ObReferenceObjectByHandle\n  - MmMapLockedPagesSpecifyCache\n \
+        \ - MmUnlockPages\n  - MmProbeAndLockPages\n  - ProbeForWrite\n  - ProbeForRead\n  - IoFreeMdl\n\
+        \  - ExAllocatePool2\n  - IoAllocateMdl\n  - KeAcquireInStackQueuedSpinLockAtDpcLevel\n  - KeReleaseInStackQueuedSpinLock\n\
+        \  - KeAcquireInStackQueuedSpinLock\n  - KeGetCurrentIrql\n  - NdisRetreatNetBufferDataStart\n\
+        \  - NdisAdvanceNetBufferDataStart\n  - NdisGetDataBuffer\n  - NdisCopySendNetBufferListInfo\n\
+        \  - NdisFreeNetBufferPool\n  - NdisAllocateNetBufferPool\n  - NdisFreeNetBufferListPool\n  -\
+        \ NdisAllocateNetBufferListPool\n  - NdisFreeGenericObject\n  - NdisCopyReceiveNetBufferListInfo\n\
+        \  - NdisAllocateGenericObject\n  - FwpsInjectTransportReceiveAsync0\n  - FwpsQueryConnectionRedirectState0\n\
+        \  - FwpsRedirectHandleDestroy0\n  - FwpsRedirectHandleCreate0\n  - FwpsApplyModifiedLayerData0\n\
+        \  - FwpsAcquireWritableLayerDataPointer0\n  - FwpsCompleteClassify0\n  - FwpsPendClassify0\n\
+        \  - FwpsReleaseClassifyHandle0\n  - FwpsAcquireClassifyHandle0\n  - FwpsCalloutUnregisterByKey0\n\
+        \  - FwpsConstructIpHeaderForTransportPacket0\n  - FwpsDereferenceNetBufferList0\n  - FwpsReferenceNetBufferList0\n\
+        \  - FwpsInjectMacSendAsync0\n  - FwpsInjectMacReceiveAsync0\n  - FwpsAllocateCloneNetBufferList0\n\
+        \  - FwpsFreeNetBufferList0\n  - FwpsAllocateNetBufferAndNetBufferList0\n  - FwpmFilterDeleteById0\n\
+        \  - FwpsCalloutRegister3\n  - FwpmFilterAdd0\n  - FwpmCalloutDeleteByKey0\n  - FwpmSubLayerDeleteByKey0\n\
+        \  - FwpmProviderContextDeleteByKey0\n  - FwpsInjectTransportSendAsync1\n  - FwpsFreeCloneNetBufferList0\n\
+        \  - FwpsFlowRemoveContext0\n  - FwpsFlowAssociateContext0\n  - FwpsCalloutUnregisterById0\n \
+        \ - FwpmCalloutAdd0\n  - FwpmSubLayerAdd0\n  - FwpmProviderAdd0\n  - FwpmTransactionAbort0\n \
+        \ - FwpmTransactionCommit0\n  - FwpmTransactionBegin0\n  - FwpmEngineClose0\n  - FwpmEngineOpen0\n\
+        \  - FwpsInjectionHandleDestroy0\n  - FwpsInjectionHandleCreate0\n  - FwpsQueryPacketInjectionState0\n\
+        \  - FwpsGetPacketListSecurityInformation0\n  - WdfVersionUnbind\n  - WdfVersionBindClass\n  -\
+        \ WdfVersionUnbindClass\n  - WdfVersionBind\n  Imports:\n  - ntoskrnl.exe\n  - NDIS.SYS\n  - fwpkclnt.sys\n\
+        \  - WDFLDR.SYS\n  InternalName: KfeCoDrv.sys\n  MD5: c901887f28bbb55a10eb934755b47227\n  MachineType:\
+        \ AMD64\n  MagicHeader: 50 45 0 0\n  OriginalFilename: KfeCoDrv.sys\n  Product: Killer Traffic\
+        \ Control\n  ProductVersion: 9.8.4.59\n  Publisher: ''\n  RichPEHeaderHash:\n    MD5: c02c92737cc75210cbdb22db9985bd7c\n\
+        \    SHA1: 91b9fe88004bdda4bff995e0c46393f755e4d6fc\n    SHA256: 4642f08acdd1a88ef296c925ce1fcaecf013e5e98de934eb839ac24a4e06f467\n\
+        \  SHA1: 2540205480ea3d59e4031de3c6632e3ce2596459\n  SHA256: 9a91d6e83b8fdec536580f6617f10dfc64eedf14ead29a6a644eb154426622ba\n\
+        \  Sections:\n    .text:\n      Entropy: 6.401436855573186\n      Virtual Size: '0x20be6'\n  \
+        \  .rdata:\n      Entropy: 5.653552737913285\n      Virtual Size: '0x33d0'\n    .data:\n     \
+        \ Entropy: 5.555301615962117\n      Virtual Size: '0x13ba258'\n    .pdata:\n      Entropy: 5.387931457488882\n\
+        \      Virtual Size: '0x1644'\n    INIT:\n      Entropy: 5.361670872068078\n      Virtual Size:\
+        \ '0xeb0'\n    .rsrc:\n      Entropy: 3.6430731262668115\n      Virtual Size: '0xc40'\n    .reloc:\n\
+        \      Entropy: 4.191396558286582\n      Virtual Size: '0x34'\n  Signature: ''\n  Signatures:\n\
+        \  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n    - Subject: C=US, ST=California,\
+        \ L=Santa Clara, O=Intel Corporation, OU=Intel(R)\n        Connectivity Innovation, CN=Intel Corporation\n\
+        \      ValidFrom: '2021-04-01 00:00:00'\n      ValidTo: '2023-04-01 23:59:59'\n      Signature:\
+        \ 1b7cfebb08c68ed60abcba3a04dbad328d046911c5325ffe46fb569e1d0c3c9f3413ff65a1d8ec402ac7c08f375ce9f48eb9212e1cb9ae1d4460e6c6e680d2553c47885c2119915d8401830970df37563b1a1649f0485848b55617a993a59612fb47cfeb541b0fa464fb781e87f4e8c1557600774719a502f23f4197963127c78a0d4641b34e0bcb8f86faacecfbd4c9798bdf92797bb629240970d04cd9267566d9e8226e41e6b2fe167dde6e3a471340982eb23969e27769a60d2f802d31601d6152c64019662357278b43a3965359050bca6ff45466d65fd54ba05a1f8eacc08660cdd55050249b001237f0fa9c6e28779f310b7de38a994f1637d8b387ec\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 00bfcce9854e3f154ff8e62c2ce2fde84d\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ 6e52024b4fb80fcfdb67508172f48293\n        SHA1: 30760fb50b6398765ff477da4c21f1178e5408ca\n \
+        \       SHA256: c3e02d446cd74203a21e7a6cf8be25669401c7d9e8a893698a8cb8b4f57ae2b4\n        SHA384:\
+        \ 7aef7d354f49169034ea09963d73e3d927dd6b796ff3ce3f83d1762e7280845e56582ff1a15cce812dde13468bc7d5d9\n\
+        \    - Subject: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo\n      \
+        \  RSA Code Signing CA\n      ValidFrom: '2018-11-02 00:00:00'\n      ValidTo: '2030-12-31 23:59:59'\n\
+        \      Signature: 4d6350ed47344a61a4dbde6a2a8c9bf100001e1d627b3ad732c2f6b3e063b3fb6100889a1b6d1007044fbeb8ea897822eb0f46ecf3465e40468912f40b775a9c2a413afcd6f4ebe7f7159533c3a18328b7de2fe494f78533832d4a4048bf9ac24f4ab18f24f4b38137d3b764b0a6236a596852425fff04ebe174657908f5a993de6b71409996ba78f1b9c8e2c30816b1ab635ac815806d745e4a757ea5b8c36cb5cfdf4a79875cc7404d6335f630d3cfb50a0e0b047fa04baebba3a5d08400933e535d34a50035696cbe9f2025100d19fb509061be398f7a8e4df69f0e1efe075112668326194895ce4ac9c17ff33a059bf96fdf887fc0239ed21e437a4531c19c4da9f059b25919e86a8d290402777c4b4bcd70be3ab2555a783ebcbb6f0310257715348af936cc4392e4ba4ff1629328255729fb5119c7a125406a8457c6b29db1bc1c0ada7c677e7d2ee9284c187ec47b3141719a4b29ec0b3d5750d2caddfd9e0551e54478dd01deb175980d5424fdf04ee3e2f883bd72bacb3d3aeef05e1792686dc861f9a6f12a0a0ba5b9f49eee983205859eebf98329d3c62c7dbd3a772e8b3742a06a82ed3b4aaa9410a4e10df817c5b65a79331892e3b575f8a1e98e0a251ee41ef19f5a8723ff9fa4519efb398011cddbb5c4a7a8806fe553d4e0e3a2c2d25b1afa32262d6a57701c3ca4582ea3f35b4b07dc3259f387a71a6d58\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.12\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 1da248306f9b2618d082e0967d33d36a\n      Version: 3\n      CertificateType: CA\n\
+        \      IsCodeSigning: true\n      IsCA: true\n      TBS:\n        MD5: c1eabfb5994258ad955adb7c2df165e6\n\
+        \        SHA1: fa33b3c00cebc469b269220d9eab26926c9b8ad8\n        SHA256: 70dffac37eb787b2198816982c7d44f541d2e39a7dac069d37b367dc9f354b32\n\
+        \        SHA384: 20adc5b59cb532e215f01ba09a9c745898c206555613512fea7c295ccfd17ced4fe2c5bc3274ca8a270fc68799b8343c\n\
+        \    - Subject: C=US, ST=New Jersey, L=Jersey City, O=The USERTRUST Network, CN=USERTrust\n  \
+        \      RSA Certification Authority\n      ValidFrom: '2015-07-22 21:03:49'\n      ValidTo: '2025-07-22\
+        \ 21:03:49'\n      Signature: 6b22933c3d395471646b0ef2e43c3011c5204a4b860f92f1ff33793ad9e498a70e40a022807e61b2e0a719cf2695312a65d46a4f3186eac0c62ec5648c3d4859cd0b2f743d9426131042d49798275e3c76d278691d1a64e7057275e0eb6640439f8f0c46ff9760a6c867ad10089b62a6e9be3a8ad3074d9f729325bc0611e02c90383e671cfd19d79e90ce3dc2e0e761acc0e504f51e99540c910d01567137ae27d49e4322a5c927cd4de571123924a5415687ffbc55140f25ca89eec797e5d213ff3d7e1aa08f3fc82cd7a370d0c760c0fcd83e51e797c63e3bedcf78be8acae3c4f2a7a7ed9eae08028fa052db721ed53bc34d9f8efa9b70c7f8e3bf6c3f929be4373eec6a8c29f9c1a2bf8b3e1a6966fb1c634f2601c902c43ed2ffc343a81bfd99fad4bca5b9e2932f3b01c5d1f43a2f68c3e064b75a955e46cc078369bb3c05925673357345984e7cd812a5b742e9a263f642601870d13b6f31c087c7e671e1f34616e9f5b872b3e96d1f622649a3498bdd68c78b6856f7defcfa8724b80381178fe5f1676a1daed374f78ca55db30b8e422996ce49c4777e667c01171a6c1424c3b0177705d81a40b7866bd8e47b40ac7edf4e6f24f92080828c33e7e5fa29d89dda8b705d2bc91d824c0b67cb84419ee7067e1183442d8a19eef47f9add791c37191e9f3f8c29ba0d5c1086376c48cd455dcd70bcbcd14d5dd8c5b876\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.5\n      IsCertificateAuthority: true\n     \
+        \ SerialNumber: 3300000044b73ffcef5acfa27a000000000044\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: true\n      IsCA: true\n      TBS:\n        MD5: a2d2ae7554f77f6e9ffb0b1a9b700ac4\n\
+        \        SHA1: 9f69ff166f5dc446578a45d7d69482373755e141\n        SHA256: ad394b7e5cb9ccf6429762405f9840b648e38e8faf2de376f1aa375c6729abb7\n\
+        \        SHA384: eda103bac2997f31d778637ce8d1fa1263485a9d6a77d6e381bad8312e6bbec020ce5036e16ca96087e50f6ab200944a\n\
+        \    Signer:\n    - SerialNumber: 00bfcce9854e3f154ff8e62c2ce2fde84d\n      Issuer: C=GB, ST=Greater\
+        \ Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo\n        RSA Code Signing CA\n      Version:\
+        \ 1\n  Imphash: 13300d56528646611f26704266713952\n  LoadsDespiteHVCI: 'TRUE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:4f1eb03a4bcd935714386740664ffff442888766e752885b6fdcf797539c1cbb

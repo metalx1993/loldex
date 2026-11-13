@@ -1,0 +1,91 @@
+id: lolbas/T1NCaW5hcmllcy9PZmZsaW5lU2Nhbm5lclNoZWxsLnltbA/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: OfflineScannerShell.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: OfflineScannerShell.exe should not be run on a normal workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/process_creation/proc_creation_win_lolbas_offlinescannershell.yml
+commands:
+- template: OfflineScannerShell
+  comment: Execute mpclient.dll library in the current working directory
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/OfflineScannerShell/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: OfflineScannerShell.exe
+      category: Execute
+      privileges: Administrator
+      mitre_id: T1218
+      source_file: OSBinaries/OfflineScannerShell.yml
+      command_source_index: 0
+      document_utf8: "---\nName: OfflineScannerShell.exe\nDescription: Windows Defender Offline Shell\n\
+        Author: 'Elliot Killick'\nCreated: 2021-08-16\nCommands:\n  - Command: OfflineScannerShell\n \
+        \   Description: Execute mpclient.dll library in the current working directory\n    Usecase: Can\
+        \ be used to evade defensive countermeasures or to hide as a persistence mechanism\n    Category:\
+        \ Execute\n    Privileges: Administrator\n    MitreID: T1218\n    OperatingSystem: Windows 10,\
+        \ Windows 11\n    Tags:\n      - Execute: DLL\nFull_Path:\n  - Path: C:\\Program Files\\Windows\
+        \ Defender\\Offline\\OfflineScannerShell.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/process_creation/proc_creation_win_lolbas_offlinescannershell.yml\n\
+        \  - IOC: OfflineScannerShell.exe should not be run on a normal workstation\nAcknowledgement:\n\
+        \  - Person: Elliot Killick\n    Handle: '@elliotkillick'\n"
+      document_sha256: sha256:7a0e69fbb7ccbb28005f27f456a745d72d3bda866424d12a44cfe6c07093d71d
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/OfflineScannerShell/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:04867276eabe42e43c3b819790eaf6c3576604fb0a81159967da223aaee33b30

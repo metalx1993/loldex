@@ -1,0 +1,108 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1Zpc3VhbFVpYVZlcmlmeU5hdGl2ZS55bWw/QVdMIEJ5cGFzcw/0
+type: binary
+platform: windows
+name: VisualUiaVerifyNative.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: medium
+  triggers: As a Windows SDK binary, execution on a system may be suspicious
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6b34764215b0e97e32cbc4c6325fc933d2695c3a/rules/windows/process_creation/proc_creation_win_lolbin_visualuiaverifynative.yml
+commands:
+- template: VisualUiaVerifyNative.exe
+  comment: Generate Serialized gadget and save to - `C:\Users\%USERNAME%\AppData\Roaminguiverify.config`
+    before executing.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/VisualUiaVerifyNative/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: VisualUiaVerifyNative.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/VisualUiaVerifyNative.yml
+      command_source_index: 0
+      document_utf8: "---\nName: VisualUiaVerifyNative.exe\nDescription: A Windows SDK binary for manual\
+        \ and automated testing of Microsoft UI Automation implementation and controls.\nAuthor: Jimmy\
+        \ (@bohops)\nCreated: 2021-09-26\nCommands:\n  - Command: VisualUiaVerifyNative.exe\n    Description:\
+        \ Generate Serialized gadget and save to - `C:\\Users\\%USERNAME%\\AppData\\Roaminguiverify.config`\
+        \ before executing.\n    Usecase: Execute proxied payload with Microsoft signed binary to bypass\
+        \ WDAC policies\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows 10 2004 (likely previous and newer versions as well)\n    Tags:\n      - Execute: .NetObjects\n\
+        Full_Path:\n  - Path: c:\\Program Files (x86)\\Windows Kits\\10\\bin\\<version>\\arm64\\UIAVerify\\\
+        VisualUiaVerifyNative.exe\n  - Path: c:\\Program Files (x86)\\Windows Kits\\10\\bin\\<version>\\\
+        x64\\UIAVerify\\VisualUiaVerifyNative.exe\n  - Path: c:\\Program Files (x86)\\Windows Kits\\10\\\
+        bin\\<version>\\UIAVerify\\VisualUiaVerifyNative.exe\nDetection:\n  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/6b34764215b0e97e32cbc4c6325fc933d2695c3a/rules/windows/process_creation/proc_creation_win_lolbin_visualuiaverifynative.yml\n\
+        \  - IOC: As a Windows SDK binary, execution on a system may be suspicious\nResources:\n  - Link:\
+        \ https://bohops.com/2020/10/15/exploring-the-wdac-microsoft-recommended-block-rules-visualuiaverifynative/\n\
+        \  - Link: https://github.com/MicrosoftDocs/windows-itpro-docs/commit/937db704b9148e9cee7c7010cad4d00ce9c4fdad\n\
+        Acknowledgement:\n  - Person: Lee Christensen\n    Handle: '@tifkin'\n  - Person: Jimmy\n    Handle:\
+        \ '@bohops'\n"
+      document_sha256: sha256:962b44bbe5f5722bc6c16cd535acf3efe6ed4c5caa4156086e1d44adc151e138
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/VisualUiaVerifyNative/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:549405dfae36b002afb4b0c3afe2f30594b0eb9084d6638de860219a453c3d71

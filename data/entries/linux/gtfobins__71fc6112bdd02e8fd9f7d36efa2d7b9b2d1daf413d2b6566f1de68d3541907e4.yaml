@@ -1,0 +1,71 @@
+id: gtfobins/check_memory/file-read/unprivileged
+type: binary
+platform: linux
+name: check_memory
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: check_memory --extra-opts=@/path/to/input-file
+  comment: The read file content is limited to the first line.
+references:
+- https://gtfobins.github.io/gtfobins/check_memory/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        check_memory:
+          comment: This is the `check_memory` Nagios plugin, available e.g. in `/usr/lib/nagios/plugins/`.
+          functions:
+            file-read:
+            - code: check_memory --extra-opts=@/path/to/input-file
+              comment: The read file content is limited to the first line.
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/check_memory/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:d6061a2d57597f7baac3520e8cfbff07614c175512384c32252f4efe19bc1fa5

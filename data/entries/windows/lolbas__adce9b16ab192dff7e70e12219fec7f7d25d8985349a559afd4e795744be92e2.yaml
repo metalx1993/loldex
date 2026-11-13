@@ -1,0 +1,99 @@
+id: lolbas/T1NCaW5hcmllcy9TY2h0YXNrcy55bWw/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Schtasks.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1053.005
+opsec:
+  noise: high
+  triggers: Suspicious task creation events
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_schtasks_creation.yml
+  - https://github.com/elastic/detection-rules/blob/ef7548f04c4341e0d1a172810330d59453f46a21/rules/windows/persistence_local_scheduled_task_creation.toml
+  - https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/schtasks_scheduling_job_on_remote_system.yml
+commands:
+- template: schtasks /create /s targetmachine /tn "MyTask" /tr "{CMD}" /sc daily
+  comment: Create a scheduled task on a remote computer for persistence/lateral movement
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Schtasks/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Schtasks.exe
+      category: Execute
+      privileges: Administrator
+      mitre_id: T1053.005
+      source_file: OSBinaries/Schtasks.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Schtasks.exe\nDescription: Schedule periodic tasks\nAuthor: Oddvar Moe\n\
+        Created: 2018-05-25\nCommands:\n  - Command: schtasks /create /sc minute /mo 1 /tn \"Reverse shell\"\
+        \ /tr \"{CMD}\"\n    Description: Create a recurring task to execute every minute.\n    Usecase:\
+        \ Create a recurring task to keep reverse shell session(s) alive\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1053.005\n    OperatingSystem: Windows 7, Windows 8, Windows 8.1, Windows\
+        \ 10, Windows 11\n    Tags:\n      - Execute: CMD\n  - Command: schtasks /create /s targetmachine\
+        \ /tn \"MyTask\" /tr \"{CMD}\" /sc daily\n    Description: Create a scheduled task on a remote\
+        \ computer for persistence/lateral movement\n    Usecase: Create a remote task to run daily relative\
+        \ to the the time of creation\n    Category: Execute\n    Privileges: Administrator\n    MitreID:\
+        \ T1053.005\n    OperatingSystem: Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n\
+        \    Tags:\n      - Execute: CMD\nFull_Path:\n  - Path: c:\\windows\\system32\\schtasks.exe\n\
+        \  - Path: c:\\windows\\syswow64\\schtasks.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_schtasks_creation.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/ef7548f04c4341e0d1a172810330d59453f46a21/rules/windows/persistence_local_scheduled_task_creation.toml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/schtasks_scheduling_job_on_remote_system.yml\n\
+        \  - IOC: Suspicious task creation events\nResources:\n  - Link: https://isc.sans.edu/forums/diary/Adding+Persistence+Via+Scheduled+Tasks/23633/\n"
+      document_sha256: sha256:7fe2f1a2ecbadc9eed62347e5c2d410b2b1dceafd2f818e3ce06b10c0501f775
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Schtasks/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1053.005
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:50eddaaabc3d6c960a7a10f4c00e96357cc73a3af8b013e7509bee1fe619089d

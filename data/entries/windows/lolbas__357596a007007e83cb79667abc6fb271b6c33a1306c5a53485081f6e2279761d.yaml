@@ -1,0 +1,93 @@
+id: lolbas/T1NCaW5hcmllcy9TaWd2ZXJpZi55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Sigverif.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: sigverif.exe spawning unexpected child processes
+commands:
+- template: sigverif.exe
+  comment: Launch sigverif.exe GUI, click 'Advanced', specify arbitrary executable path as 'log file name',
+    then click 'View Log' to execute the binary.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Sigverif/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Sigverif.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Sigverif.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Sigverif.exe\nDescription: File Signature Verification utility to verify\
+        \ digital signatures of files\nAuthor: Moshe Kaplan\nCreated: 2021-11-08\nCommands:\n  - Command:\
+        \ sigverif.exe\n    Description: Launch sigverif.exe GUI, click 'Advanced', specify arbitrary\
+        \ executable path as 'log file name', then click 'View Log' to execute the binary.\n    Usecase:\
+        \ Execute arbitrary programs through a trusted Microsoft-signed binary to bypass application whitelisting.\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\n     \
+        \ - Application: GUI\nFull_Path:\n  - Path: C:\\Windows\\System32\\sigverif.exe\n  - Path: C:\\\
+        Windows\\SysWOW64\\sigverif.exe\nDetection:\n  - IOC: sigverif.exe spawning unexpected child processes\n\
+        Resources:\n  - Link: https://twitter.com/0gtweet/status/1457676633809330184\n  - Link: https://www.hexacorn.com/blog/2018/04/27/i-shot-the-sigverif-exe-the-gui-based-lolbin/\n\
+        Acknowledgement:\n  - Person: Grzegorz Tworek\n    Handle: '@0gtweet'\n  - Person: Adam\n    Handle:\
+        \ '@Hexacorn'\n"
+      document_sha256: sha256:f73112230cffb39f8bb8c30e8229dd8df25b5a7b0a32ad0314d9152a5c0bcb27
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Sigverif/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:200efc766b4e165eff675760534efca6b82ab64ec1d5f63befb26b3f707ddc47

@@ -1,0 +1,87 @@
+id: gtfobins/rlwrap/shell/sudo
+type: binary
+platform: linux
+name: rlwrap
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: rlwrap /bin/sh
+references:
+- https://gtfobins.github.io/gtfobins/rlwrap/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        rlwrap:
+          functions:
+            file-write:
+            - binary: false
+              code: rlwrap -l /path/to/output-file echo DATA
+              comment: This adds timestamps to the output file. This relies on the external `echo` command.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: rlwrap /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: rlwrap /bin/sh -p
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/rlwrap/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:b395652dffc78498fb8f59249d741b55314273a659dc572200f36af381166648

@@ -1,0 +1,81 @@
+id: gtfobins/bridge/file-read/suid
+type: binary
+platform: linux
+name: bridge
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: bridge -b /path/to/input-file
+  comment: Outputs the first line of the file (until the first whitespace) inside an error message to
+    stdandard error.
+references:
+- https://gtfobins.github.io/gtfobins/bridge/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        bridge:
+          functions:
+            file-read:
+            - code: bridge -b /path/to/input-file
+              comment: Outputs the first line of the file (until the first whitespace) inside an error
+                message to stdandard error.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/bridge/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:9973ba585eff9d9355d03f8bb88941761499ef4bd19bb4e716dea85df185a194

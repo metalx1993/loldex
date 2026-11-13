@@ -1,0 +1,101 @@
+id: lolbas/T1NCaW5hcmllcy9TdG9yZGlhZy55bWw/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Stordiag.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: systeminfo.exe, fltmc.exe or schtasks.exe or powershell.exe being executed outside of their
+    normal path of c:\windows\system32\ or c:\windows\syswow64\
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_stordiag_susp_child_process.yml
+commands:
+- template: stordiag.exe
+  comment: Once executed, Stordiag.exe will execute schtasks.exe and powershell.exe - if stordiag.exe
+    is copied to a folder and an arbitrary executable is renamed to one of these names, stordiag.exe will
+    execute it.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Stordiag/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Stordiag.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Stordiag.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Stordiag.exe\nDescription: Storage diagnostic tool\nAuthor: 'Eral4m'\n\
+        Created: 2021-10-21\nCommands:\n  - Command: stordiag.exe\n    Description: Once executed, Stordiag.exe\
+        \ will execute schtasks.exe systeminfo.exe and fltmc.exe - if stordiag.exe is copied to a folder\
+        \ and an arbitrary executable is renamed to one of these names, stordiag.exe will execute it.\n\
+        \    Usecase: Possible defence evasion purposes.\n    Category: Execute\n    Privileges: User\n\
+        \    MitreID: T1218\n    OperatingSystem: Windows 10\n    Tags:\n      - Execute: EXE\n  - Command:\
+        \ stordiag.exe\n    Description: Once executed, Stordiag.exe will execute schtasks.exe and powershell.exe\
+        \ - if stordiag.exe is copied to a folder and an arbitrary executable is renamed to one of these\
+        \ names, stordiag.exe will execute it.\n    Usecase: Possible defence evasion purposes.\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 11\n    Tags:\n\
+        \      - Execute: EXE\nFull_Path:\n  - Path: c:\\windows\\system32\\stordiag.exe\n  - Path: c:\\\
+        windows\\syswow64\\stordiag.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_stordiag_susp_child_process.yml\n\
+        \  - IOC: systeminfo.exe, fltmc.exe or schtasks.exe or powershell.exe being executed outside of\
+        \ their normal path of c:\\windows\\system32\\ or c:\\windows\\syswow64\\\nResources:\n  - Link:\
+        \ https://twitter.com/eral4m/status/1451112385041911809\nAcknowledgement:\n  - Person: Eral4m\n\
+        \    Handle: '@eral4m'\n  - Person: Ekitji\n    Handle: '@eki_erk'\n"
+      document_sha256: sha256:25c841386c67f890e765533d999f9c7acfe219d51ad09e77fbd9e708e7e58f5a
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Stordiag/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:f221ff3e48cdc545155254da007ff35c5311626a420c9d35e73d69ff17747a17

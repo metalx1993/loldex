@@ -1,0 +1,79 @@
+id: lolad/TGlzdCBBbGwgQ29tcHV0ZXJzIGluIERvbWFpbg/R2V0LUFEQ29tcHV0ZXIgLUZpbHRlciAq/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: List All Computers in Domain
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADComputer -Filter *
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List All Computers in Domain
+      command: Get-ADComputer -Filter *
+      type: PowerShell
+      reference: Active Directory Pro
+      physical_rows:
+      - input_ref: index.html#row=48
+        row_utf8: "<tr>\r\n\t\t\t<td>List All Computers in Domain</td>\r\n\t\t\t<td><code>Get-ADComputer\
+          \ -Filter *</code></td>\r\n\t\t\t<td>PowerShell</td>\r\n\t\t\t<td><a href=\"https://activedirectorypro.com/powershell-commands/\"\
+          \ target=\"_blank\">Active Directory Pro</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:81fd2b6ac7559beb2c6e91ffac2a67be8f56674892385d566bc29e93a37f4b68
+        cells:
+        - List All Computers in Domain
+        - Get-ADComputer -Filter *
+        - PowerShell
+        - Active Directory Pro
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:42f540143aa385e23f938ad4772a7b8288783a6ec039a630ee2f2381b9512e4a

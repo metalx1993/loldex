@@ -1,0 +1,77 @@
+id: wadcoms/Impacket-Services
+type: technique
+platform: active-directory
+name: Impacket Services
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 services.py test.local/john:password123@10.10.10.1 list
+  comment: "Impacket's services.py communicates with Windows services using the MSRPC interface. It can\
+    \ perform many different actions on any service.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\
+    \n\tDomain: test.local\n\n\tUsername: john\n\n\tPassword: password123\n\n\tAction: list\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/services.py
+- https://www.hackingarticles.in/impacket-guide-smb-msrpc/
+tags:
+- active-directory
+- wadcoms
+- rpc
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-Services.md
+      document: "---\ndescription: |\n  Impacket's services.py communicates with Windows services using\
+        \ the MSRPC interface. It can perform many different actions on any service.\n\n  Command Reference:\n\
+        \n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\n  \tUsername: john\n\n  \tPassword: password123\n\
+        \n  \tAction: list\n\ncommand: |\n  python3 services.py test.local/john:password123@10.10.10.1\
+        \ list\nitems:\n  - Password\n  - Username\nservices:\n  - RPC\nOS:\n  - Linux\n  - Windows\n\
+        attack_types:\n  - Enumeration\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/services.py\n\
+        \  - https://www.hackingarticles.in/impacket-guide-smb-msrpc/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:0ead9afb877cf674720d86e302d79aae4702012b0f782dbd5631687ec6c42957

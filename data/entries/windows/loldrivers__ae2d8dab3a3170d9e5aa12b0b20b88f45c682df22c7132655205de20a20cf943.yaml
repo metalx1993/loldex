@@ -1,0 +1,251 @@
+id: loldrivers/3d1439e9-9a7d-497a-8c6c-74513f825d6a
+type: driver
+platform: windows
+name: daxin_blank6.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create daxin_blank6.sys binPath=C:\windows\temp\daxin_blank6.sys     type=kernel &&
+    sc.exe start daxin_blank6.sys
+  comment: Driver used in the Daxin malware campaign.
+driver_detail:
+  samples:
+  - Authentihash:
+      MD5: d59fbf4aa759286d1dd9abb40733f7b2
+      SHA1: 3c34c7c5916b987420fbfb4f3e3fef7400471831
+      SHA256: a8c558e74ebe35a095a5b79d4bb26c10b18f8ebb449365e742f856d4e032555c
+    Company: ''
+    Copyright: ''
+    CreationTimestamp: '2009-03-25 22:44:42'
+    Date: ''
+    Description: ''
+    ExportedFunctions: ''
+    FileVersion: ''
+    Filename: daxin_blank6.sys
+    ImportedFunctions:
+    - MmUnlockPages
+    - MmProbeAndLockPages
+    - IoAllocateMdl
+    - IoQueueWorkItem
+    - IoAllocateWorkItem
+    - IoGetCurrentProcess
+    - _stricmp
+    - IoFreeWorkItem
+    - RtlFreeUnicodeString
+    - ZwClose
+    - ZwWriteFile
+    - ZwCreateFile
+    - RtlAnsiStringToUnicodeString
+    - _strnicmp
+    - RtlUnwind
+    - RtlCopyUnicodeString
+    - wcsncmp
+    - swprintf
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - KeInitializeSpinLock
+    - ExfInterlockedInsertTailList
+    - RtlInitUnicodeString
+    - MmMapLockedPagesSpecifyCache
+    - IoFreeMdl
+    - InterlockedDecrement
+    - InterlockedIncrement
+    - InterlockedExchange
+    - IoDeleteSymbolicLink
+    - IoDeleteDevice
+    - ExfInterlockedRemoveHeadList
+    - IofCompleteRequest
+    - ExAllocatePoolWithTag
+    - strncmp
+    - ExFreePool
+    - KfAcquireSpinLock
+    - KfReleaseSpinLock
+    - KeInitializeApc
+    - KeInsertQueueApc
+    - KeAttachProcess
+    - KeDetachProcess
+    - NtQuerySystemInformation
+    - NdisAllocatePacket
+    - NdisCopyFromPacketToPacket
+    - NdisAllocateMemory
+    - NdisFreePacket
+    - NdisAllocateBuffer
+    - NdisSetEvent
+    - NdisResetEvent
+    - NdisFreeBufferPool
+    - NdisFreePacketPool
+    - NdisFreeMemory
+    - NdisWaitEvent
+    - NdisQueryAdapterInstanceName
+    - NdisOpenAdapter
+    - NdisInitializeEvent
+    - NdisAllocatePacketPool
+    - NdisRegisterProtocol
+    - NdisAllocateBufferPool
+    - NdisCloseAdapter
+    - NdisDeregisterProtocol
+    Imports:
+    - NTOSKRNL.EXE
+    - HAL.DLL
+    - ntoskrnl.exe
+    - NDIS.SYS
+    InternalName: ''
+    MD5: 0ae30291c6cbfa7be39320badd6e8de0
+    MachineType: I386
+    MagicHeader: 50 45 0 0
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: n/a
+    RichPEHeaderHash:
+      MD5: 909f63d34ab6d10273023d528b1722a0
+      SHA1: 2e7dbeb35bb60bf672f840375926888760d4ad58
+      SHA256: 64d9f0289f8d52b49a1beb95e9248e2e08d06e94c9d2fc86b3b85536cf7697c1
+    SHA1: c257aa4094539719a3c7b7950598ef872dbf9518
+    SHA256: e6a7b0bc01a627a7d0ffb07faddb3a4dd96b6f5208ac26107bdaeb3ab1ec8217
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.395124735617589'
+        Virtual Size: '0x3968'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.136188883876631'
+        Virtual Size: '0x221'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '1.9267671732967222'
+        Virtual Size: '0x4eb9c'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.1775498523671'
+        Virtual Size: '0x67c'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '4.179055975760782'
+        Virtual Size: '0x752'
+    Signature: Unsigned
+    Signatures: {}
+    Imphash: a7bd820fa5b895fab06f20739c9f24b8
+    LoadsDespiteHVCI: 'TRUE'
+  sha256: e6a7b0bc01a627a7d0ffb07faddb3a4dd96b6f5208ac26107bdaeb3ab1ec8217
+  command_metadata:
+  - Command: sc.exe create daxin_blank6.sys binPath=C:\windows\temp\daxin_blank6.sys     type=kernel &&
+      sc.exe start daxin_blank6.sys
+    Description: Driver used in the Daxin malware campaign.
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: malicious
+references:
+- https://gist.github.com/MHaggis/9ab3bb795a6018d70fb11fa7c31f8f48
+- https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/daxin-backdoor-espionage
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 3d1439e9-9a7d-497a-8c6c-74513f825d6a.yaml
+      document: "Id: 3d1439e9-9a7d-497a-8c6c-74513f825d6a\nTags:\n- daxin_blank6.sys\nVerified: 'TRUE'\n\
+        Author: Michael Haag\nCreated: '2023-02-28'\nMitreID: T1068\nCategory: malicious\nCommands:\n\
+        \  Command: sc.exe create daxin_blank6.sys binPath=C:\\windows\\temp\\daxin_blank6.sys     type=kernel\n\
+        \    && sc.exe start daxin_blank6.sys\n  Description: Driver used in the Daxin malware campaign.\n\
+        \  OperatingSystem: Windows 10\n  Privileges: kernel\n  Usecase: Elevate privileges\nResources:\n\
+        - https://gist.github.com/MHaggis/9ab3bb795a6018d70fb11fa7c31f8f48\n- https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/daxin-backdoor-espionage\n\
+        - ''\nDetection: []\nAcknowledgement:\n  Handle: ''\n  Person: ''\nKnownVulnerableSamples:\n-\
+        \ Authentihash:\n    MD5: d59fbf4aa759286d1dd9abb40733f7b2\n    SHA1: 3c34c7c5916b987420fbfb4f3e3fef7400471831\n\
+        \    SHA256: a8c558e74ebe35a095a5b79d4bb26c10b18f8ebb449365e742f856d4e032555c\n  Company: ''\n\
+        \  Copyright: ''\n  CreationTimestamp: '2009-03-25 22:44:42'\n  Date: ''\n  Description: ''\n\
+        \  ExportedFunctions: ''\n  FileVersion: ''\n  Filename: daxin_blank6.sys\n  ImportedFunctions:\n\
+        \  - MmUnlockPages\n  - MmProbeAndLockPages\n  - IoAllocateMdl\n  - IoQueueWorkItem\n  - IoAllocateWorkItem\n\
+        \  - IoGetCurrentProcess\n  - _stricmp\n  - IoFreeWorkItem\n  - RtlFreeUnicodeString\n  - ZwClose\n\
+        \  - ZwWriteFile\n  - ZwCreateFile\n  - RtlAnsiStringToUnicodeString\n  - _strnicmp\n  - RtlUnwind\n\
+        \  - RtlCopyUnicodeString\n  - wcsncmp\n  - swprintf\n  - IoCreateDevice\n  - IoCreateSymbolicLink\n\
+        \  - KeInitializeSpinLock\n  - ExfInterlockedInsertTailList\n  - RtlInitUnicodeString\n  - MmMapLockedPagesSpecifyCache\n\
+        \  - IoFreeMdl\n  - InterlockedDecrement\n  - InterlockedIncrement\n  - InterlockedExchange\n\
+        \  - IoDeleteSymbolicLink\n  - IoDeleteDevice\n  - ExfInterlockedRemoveHeadList\n  - IofCompleteRequest\n\
+        \  - ExAllocatePoolWithTag\n  - strncmp\n  - ExFreePool\n  - KfAcquireSpinLock\n  - KfReleaseSpinLock\n\
+        \  - KeInitializeApc\n  - KeInsertQueueApc\n  - KeAttachProcess\n  - KeDetachProcess\n  - NtQuerySystemInformation\n\
+        \  - NdisAllocatePacket\n  - NdisCopyFromPacketToPacket\n  - NdisAllocateMemory\n  - NdisFreePacket\n\
+        \  - NdisAllocateBuffer\n  - NdisSetEvent\n  - NdisResetEvent\n  - NdisFreeBufferPool\n  - NdisFreePacketPool\n\
+        \  - NdisFreeMemory\n  - NdisWaitEvent\n  - NdisQueryAdapterInstanceName\n  - NdisOpenAdapter\n\
+        \  - NdisInitializeEvent\n  - NdisAllocatePacketPool\n  - NdisRegisterProtocol\n  - NdisAllocateBufferPool\n\
+        \  - NdisCloseAdapter\n  - NdisDeregisterProtocol\n  Imports:\n  - NTOSKRNL.EXE\n  - HAL.DLL\n\
+        \  - ntoskrnl.exe\n  - NDIS.SYS\n  InternalName: ''\n  MD5: 0ae30291c6cbfa7be39320badd6e8de0\n\
+        \  MachineType: I386\n  MagicHeader: 50 45 0 0\n  OriginalFilename: ''\n  Product: ''\n  ProductVersion:\
+        \ ''\n  Publisher: n/a\n  RichPEHeaderHash:\n    MD5: 909f63d34ab6d10273023d528b1722a0\n    SHA1:\
+        \ 2e7dbeb35bb60bf672f840375926888760d4ad58\n    SHA256: 64d9f0289f8d52b49a1beb95e9248e2e08d06e94c9d2fc86b3b85536cf7697c1\n\
+        \  SHA1: c257aa4094539719a3c7b7950598ef872dbf9518\n  SHA256: e6a7b0bc01a627a7d0ffb07faddb3a4dd96b6f5208ac26107bdaeb3ab1ec8217\n\
+        \  Sections:\n    .text:\n      Entropy: 6.395124735617589\n      Virtual Size: '0x3968'\n   \
+        \ .rdata:\n      Entropy: 4.136188883876631\n      Virtual Size: '0x221'\n    .data:\n      Entropy:\
+        \ 1.9267671732967222\n      Virtual Size: '0x4eb9c'\n    INIT:\n      Entropy: 5.1775498523671\n\
+        \      Virtual Size: '0x67c'\n    .reloc:\n      Entropy: 4.179055975760782\n      Virtual Size:\
+        \ '0x752'\n  Signature: Unsigned\n  Signatures: {}\n  Imphash: a7bd820fa5b895fab06f20739c9f24b8\n\
+        \  LoadsDespiteHVCI: 'TRUE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:ce3af4df8122bdee46e156f7acf86e97dac9b085ddfffb5d2e99096bd658bab6

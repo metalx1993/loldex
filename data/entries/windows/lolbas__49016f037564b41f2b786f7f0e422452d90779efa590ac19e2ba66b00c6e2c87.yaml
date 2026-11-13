@@ -1,0 +1,103 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1RlYW1zLnltbA/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Teams.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.015
+opsec:
+  noise: high
+  triggers: '%LOCALAPPDATA%\Microsoft\Teams\current\app directory created'
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/43277f26fc1c81fc98fc79147b711189e901b757/rules/windows/process_creation/proc_creation_win_susp_electron_exeuction_proxy.yml
+commands:
+- template: teams.exe
+  comment: Generate JavaScript payload and package.json, archive in ASAR file and save to "%LOCALAPPDATA%\\Microsoft\\Teams\\current\\app.asar"
+    before executing.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Teams/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Teams.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.015
+      source_file: OtherMSBinaries/Teams.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Teams.exe\nDescription: Electron runtime binary which runs the Teams\
+        \ application\nAuthor: Andrew Kisliakov\nCreated: 2022-01-17\nCommands:\n  - Command: teams.exe\n\
+        \    Description: Generate JavaScript payload and package.json, and save to \"%LOCALAPPDATA%\\\
+        \\Microsoft\\\\Teams\\\\current\\\\app\\\\\" before executing.\n    Usecase: Execute JavaScript\
+        \ code\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.015\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: Node.JS\n  - Command: teams.exe\n    Description:\
+        \ Generate JavaScript payload and package.json, archive in ASAR file and save to \"%LOCALAPPDATA%\\\
+        \\Microsoft\\\\Teams\\\\current\\\\app.asar\" before executing.\n    Usecase: Execute JavaScript\
+        \ code\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.015\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: Node.JS\n  - Command: teams.exe --disable-gpu-sandbox\
+        \ --gpu-launcher=\"{CMD} &&\"\n    Description: Teams spawns cmd.exe as a child process of teams.exe\
+        \ and executes the ping command\n    Usecase: Executes a process under a trusted Microsoft signed\
+        \ binary\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.015\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: CMD\nFull_Path:\n  - Path: 'C:\\Users\\\
+        <username>\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe'\nCode_Sample:\n  - Code: https://github.com/lltltk/LOLBAS-research/tree/master/Teams\n\
+        Detection:\n  - IOC: \"%LOCALAPPDATA%\\\\Microsoft\\\\Teams\\\\current\\\\app directory created\"\
+        \n  - IOC: \"%LOCALAPPDATA%\\\\Microsoft\\\\Teams\\\\current\\\\app.asar file created/modified\
+        \ by non-Teams installer/updater\"\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/43277f26fc1c81fc98fc79147b711189e901b757/rules/windows/process_creation/proc_creation_win_susp_electron_exeuction_proxy.yml\n\
+        Resources:\n  - Link: https://l--k.uk/2022/01/16/microsoft-teams-and-other-electron-apps-as-lolbins/\n\
+        Acknowledgement:\n  - Person: Andrew Kisliakov\n  - Person: mr.d0x\n    Handle: '@mrd0x'\n"
+      document_sha256: sha256:44043b39f356ff9b29e2f6f539928cde298df973d09c381ef5ad021772cdef62
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Teams/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.015
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:84ebd4fc8f9773410cf3935e3336c0daff2e2663bfadd5e2e16cb2aba595fb70

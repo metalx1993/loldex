@@ -1,0 +1,79 @@
+id: lolad/R2V0IERvbWFpbiBGb3Jlc3QgSW5mb3JtYXRpb24/R2V0LUFERm9yZXN0/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Get Domain Forest Information
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADForest
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Get Domain Forest Information
+      command: Get-ADForest
+      type: PowerShell
+      reference: CBT Nuggets - Common AD Commands
+      physical_rows:
+      - input_ref: index.html#row=22
+        row_utf8: "<tr>\r\n            <td>Get Domain Forest Information</td>\r\n            <td><code>Get-ADForest</code></td>\r\
+          \n            <td>PowerShell</td>\r\n            <td><a href=\"https://www.cbtnuggets.com/blog/certifications/microsoft/6-common-active-directory-powershell-commands\"\
+          \ target=\"_blank\">CBT Nuggets - Common AD Commands</a></td>\r\n        </tr>"
+        row_sha256: sha256:0943c53e55a32dafb78a961bd10291b6fcbe0967d80b53f603c57ec51167a9b6
+        cells:
+        - Get Domain Forest Information
+        - Get-ADForest
+        - PowerShell
+        - CBT Nuggets - Common AD Commands
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:63c2278b2fc49d57b5fac4c8b49bd7cc8cf37c5af5f6d682596c2dac48278094

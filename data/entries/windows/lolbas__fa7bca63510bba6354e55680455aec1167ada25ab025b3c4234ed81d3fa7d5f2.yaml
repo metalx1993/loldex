@@ -1,0 +1,97 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0xvZ2dlci55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Logger.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+commands:
+- template: logger.exe RUN "{CMD}"
+  comment: Executes the command specified after the `RUN` parameter as a child of `logger.exe`.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Logger/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Logger.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OtherMSBinaries/Logger.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Logger.exe\nDescription: A logging configuration tool from the Windows\
+        \ Kits used to start and manage process logging.\nAuthor: Avihay Eldad\nCreated: 2025-07-13\n\
+        Commands:\n  - Command: logger.exe RUN \"{CMD}\"\n    Description: Executes the command specified\
+        \ after the `RUN` parameter as a child of `logger.exe`.\n    Usecase: Executes an abitrary command\
+        \ via a signed binary to evade detection.\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1202\n    OperatingSystem: Windows\n    Tags:\n      - Execute: CMD\n  - Command: logger.exe\
+        \ RUNW \"{CMD}\"\n    Description: Executes the command specified after the `RUNW` parameter as\
+        \ a child of `logger.exe`.\n    Usecase: Executes an abitrary command via a signed binary to evade\
+        \ detection.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem:\
+        \ Windows\n    Tags:\n      - Execute: CMD\n  - Command: logger.exe \"{CMD}\"\n    Description:\
+        \ Executes the command specified as a child of `logger.exe`.\n    Usecase: Executes an abitrary\
+        \ command via a signed binary to evade detection.\n    Category: Execute\n    Privileges: User\n\
+        \    MitreID: T1202\n    OperatingSystem: Windows\n    Tags:\n      - Execute: CMD\nFull_Path:\n\
+        \  - Path: C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x86\\logger.exe\n  - Path: C:\\\
+        Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\logger.exe\n  - Path: C:\\Program Files\\\
+        Windows Kits\\10\\Debuggers\\x86\\logger.exe\n  - Path: C:\\Program Files\\Windows Kits\\10\\\
+        Debuggers\\x64\\logger.exe\nResources:\n  - Link: https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/logger\n\
+        Acknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:ef52f131455877d2662b8c6aeea410b9eaf785958b8f28a7d4c9f583dacd7d49
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Logger/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:df27e2663a04dd4c753197c62fb3449cbaf1c598fbb104e826d66bd9cb594c3d

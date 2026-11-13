@@ -1,0 +1,99 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL05tY2FwLnltbA/UmVjb25uYWlzc2FuY2U/0
+type: binary
+platform: windows
+name: Nmcap.exe
+phases:
+- discovery
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1040
+opsec:
+  noise: high
+commands:
+- template: nmcap.exe /network * /capture /file {PATH_ABSOLUTE:.cap}
+  comment: 'Start capture on all network adapters and save to specified .cap (circular) file.
+
+    Optionally, one can add:
+
+    - `/TerminateWhen /TimeAfter 30 seconds` to auto-terminate after a relative times (e.g. 30 seconds);
+
+    - `/TerminateWhen /Time 04:52:00 AM 9/17/2025` to auto-terminate after a specific date/time;
+
+    - `/TerminateWhen /KeyPress x` to terminate when a specific key is pressed.'
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Nmcap/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Nmcap.exe
+      category: Reconnaissance
+      privileges: Administrator
+      mitre_id: T1040
+      source_file: OtherMSBinaries/Nmcap.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Nmcap.exe\nDescription: Command-line packet capture utility from Microsoft\
+        \ Network Monitor 3.x.\nAuthor: Avihay Eldad\nCreated: 2025-09-16\nCommands:\n  - Command: nmcap.exe\
+        \ /network * /capture /file {PATH_ABSOLUTE:.cap}\n    Description: |\n      Start capture on all\
+        \ network adapters and save to specified .cap (circular) file.\n      Optionally, one can add:\n\
+        \      - `/TerminateWhen /TimeAfter 30 seconds` to auto-terminate after a relative times (e.g.\
+        \ 30 seconds);\n      - `/TerminateWhen /Time 04:52:00 AM 9/17/2025` to auto-terminate after a\
+        \ specific date/time;\n      - `/TerminateWhen /KeyPress x` to terminate when a specific key is\
+        \ pressed.\n    Usecase: Capture network traffic on windows to collect sensitive data.\n    Category:\
+        \ Reconnaissance\n    Privileges: Administrator\n    MitreID: T1040\n    OperatingSystem: Windows\n\
+        Full_Path:\n  - Path: C:\\Program Files\\Microsoft Network Monitor 3\\nmcap.exe\n  - Path: C:\\\
+        Program Files (x86)\\Microsoft Network Monitor 3\\nmcap.exe\nResources:\n  - Link: https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/network-monitor-3\n\
+        Acknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:d9a9e05c0ebde6df4a798eb97612a15d5b1f7849cac49247058e5c0dac5e4311
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Nmcap/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1040
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:575435c7c0f77cd9933a59f282a7517e87e5191873672fcb55b35522daac7d37

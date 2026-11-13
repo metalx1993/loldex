@@ -1,0 +1,81 @@
+id: gtfobins/od/file-read/sudo
+type: binary
+platform: linux
+name: od
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: od -An -c -w999 /path/to/input-file
+  comment: Three spaces are added before each character in the read file (wrapped at the specified value,
+    i.e., `999`), and non-printable chars are printed as backslash escape sequences.
+references:
+- https://gtfobins.github.io/gtfobins/od/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        od:
+          functions:
+            file-read:
+            - code: od -An -c -w999 /path/to/input-file
+              comment: Three spaces are added before each character in the read file (wrapped at the specified
+                value, i.e., `999`), and non-printable chars are printed as backslash escape sequences.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/od/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:43dadd55119de35b4742619953a3d7ff9e6590be0f272a6eec93e1d6096c9ea4

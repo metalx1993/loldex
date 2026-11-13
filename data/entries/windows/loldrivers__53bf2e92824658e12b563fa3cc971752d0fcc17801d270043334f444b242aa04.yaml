@@ -1,0 +1,110 @@
+id: loldrivers/29cb263b-b0b0-40d5-a97d-5ddf4ba79c1e
+type: driver
+platform: windows
+name: goad.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create goad.sys binPath=C:\windows\temp\goad.sys type=kernel && sc.exe start goad.sys
+driver_detail:
+  samples:
+  - Company: ''
+    Date: ''
+    Description: ''
+    FileVersion: ''
+    Filename: goad.sys
+    MD5: 312e31851e0fc2072dbf9a128557d6ef
+    MachineType: ''
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    Signature: []
+    LoadsDespiteHVCI: 'TRUE'
+  command_metadata:
+  - Command: sc.exe create goad.sys binPath=C:\windows\temp\goad.sys type=kernel && sc.exe start goad.sys
+    Description: ''
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://github.com/jbaines-r7/dellicious
+- https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 29cb263b-b0b0-40d5-a97d-5ddf4ba79c1e.yaml
+      document: "Id: 29cb263b-b0b0-40d5-a97d-5ddf4ba79c1e\nTags:\n- goad.sys\nVerified: 'FALSE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-01-09'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \    Command: sc.exe create goad.sys binPath=C:\\windows\\temp\\goad.sys type=kernel &&\n    \
+        \    sc.exe start goad.sys\n    Description: ''\n    OperatingSystem: Windows 10\n    Privileges:\
+        \ kernel\n    Usecase: Elevate privileges\nResources:\n- https://github.com/jbaines-r7/dellicious\n\
+        - https://www.rapid7.com/blog/post/2021/12/13/driver-based-attacks-past-and-present/\nDetection:\
+        \ []\nAcknowledgement:\n    Handle: ''\n    Person: ''\nKnownVulnerableSamples:\n-   Company:\
+        \ ''\n    Date: ''\n    Description: ''\n    FileVersion: ''\n    Filename: goad.sys\n    MD5:\
+        \ 312e31851e0fc2072dbf9a128557d6ef\n    MachineType: ''\n    OriginalFilename: ''\n    Product:\
+        \ ''\n    ProductVersion: ''\n    Publisher: ''\n    Signature: []\n    LoadsDespiteHVCI: 'TRUE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:b257da2f2b64c2f1fc60ced43d3af66131b251789d61b1a7bfd909c0d1e99a42

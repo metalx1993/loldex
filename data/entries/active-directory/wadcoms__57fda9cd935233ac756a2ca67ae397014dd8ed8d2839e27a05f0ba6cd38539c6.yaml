@@ -1,0 +1,80 @@
+id: wadcoms/Responder-Analyze
+type: technique
+platform: active-directory
+name: Responder Analyze
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: Responder -I eth0 -A
+  comment: "Responder is an LLMNR, NBT-NS, and MDNS poisoner. It will answer to specific NBT-NS (NetBIOS\
+    \ Name Service) queries based on their name suffix. By default, the tool will only answer to File\
+    \ Server Service request, which is for SMB. The following command will put Responder in analyze mode,\
+    \ listening for NBT-NS, BROWSER, and LLMNR requests without responding.\n\nCommand Reference:\n\n\t\
+    Interface: eth0\n"
+references:
+- https://github.com/lgandx/Responder
+- https://www.ivoidwarranties.tech/posts/pentesting-tuts/responder/cheatsheet/
+tags:
+- active-directory
+- wadcoms
+- ntlm
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: Responder-Analyze.md
+      document: "---\ndescription: |\n  Responder is an LLMNR, NBT-NS, and MDNS poisoner. It will answer\
+        \ to specific NBT-NS (NetBIOS Name Service) queries based on their name suffix. By default, the\
+        \ tool will only answer to File Server Service request, which is for SMB. The following command\
+        \ will put Responder in analyze mode, listening for NBT-NS, BROWSER, and LLMNR requests without\
+        \ responding.\n\n  Command Reference:\n\n  \tInterface: eth0\n\ncommand: |\n  Responder -I eth0\
+        \ -A\nitems:\n  - No_Creds\nservices:\n  - NTLM\n  - SMB\nOS:\n  - Linux\n  - Windows\nattack_types:\n\
+        \  - Exploitation\nreferences:\n  - https://github.com/lgandx/Responder\n  - https://www.ivoidwarranties.tech/posts/pentesting-tuts/responder/cheatsheet/\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:ad380231ccb7c5911cacb4ee79f06503f3fedcf26dd8e9ebf4d874bd53a6e209

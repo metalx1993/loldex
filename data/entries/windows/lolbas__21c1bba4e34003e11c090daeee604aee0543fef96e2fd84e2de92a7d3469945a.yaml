@@ -1,0 +1,95 @@
+id: lolbas/T1NTY3JpcHRzL0NMX0xvYWRBc3NlbWJseS55bWw/RXhlY3V0ZQ/0
+type: script
+platform: windows
+name: CL_LoadAssembly.ps1
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+aliases:
+- cl_loadassembly
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/ff6c54ded6b52f379cec11fe17c1ccb956faa660/rules/windows/process_creation/proc_creation_win_lolbas_cl_loadassembly.yml
+commands:
+- template: powershell.exe -ep bypass -command "set-location -path C:\Windows\diagnostics\system\Audio;
+    import-module .\CL_LoadAssembly.ps1; LoadAssemblyFromPath ..\..\..\..\testing\fun.dll;[Program]::Fun()"
+  comment: Proxy execute Managed DLL with PowerShell
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/CL_LoadAssembly/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: CL_LoadAssembly.ps1
+      category: Execute
+      privileges: User
+      mitre_id: T1216
+      source_file: OSScripts/CL_LoadAssembly.yml
+      command_source_index: 0
+      document_utf8: "---\nName: CL_LoadAssembly.ps1\nDescription: PowerShell Diagnostic Script\nAuthor:\
+        \ Jimmy (@bohops)\nCreated: 2021-09-26\nCommands:\n  - Command: 'powershell.exe -ep bypass -command\
+        \ \"set-location -path C:\\Windows\\diagnostics\\system\\Audio; import-module .\\CL_LoadAssembly.ps1;\
+        \ LoadAssemblyFromPath ..\\..\\..\\..\\testing\\fun.dll;[Program]::Fun()\"'\n    Description:\
+        \ Proxy execute Managed DLL with PowerShell\n    Usecase: Execute proxied payload with Microsoft\
+        \ signed binary\n    Category: Execute\n    Privileges: User\n    MitreID: T1216\n    OperatingSystem:\
+        \ Windows 10 21H1 (likely other versions as well), Windows 11\n    Tags:\n      - Execute: DLL\
+        \ (.NET)\nFull_Path:\n  - Path: C:\\Windows\\diagnostics\\system\\Audio\\CL_LoadAssembly.ps1\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/ff6c54ded6b52f379cec11fe17c1ccb956faa660/rules/windows/process_creation/proc_creation_win_lolbas_cl_loadassembly.yml\n\
+        Resources:\n  - Link: https://bohops.com/2018/01/07/executing-commands-and-bypassing-applocker-with-powershell-diagnostic-scripts/\n\
+        Acknowledgement:\n  - Person: Jimmy\n    Handle: '@bohops'\n"
+      document_sha256: sha256:22e5b3f1b1a081b0ae0c5701697bdc56481138f4cd11e60582bd9ac9ee97801a
+    upstream_url: https://lolbas-project.github.io/lolbas/Scripts/CL_LoadAssembly/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1216
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:920c736088ba1948748dba4d033b106c32778e49118aefdde1948b073812e568

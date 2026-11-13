@@ -1,0 +1,174 @@
+id: loldrivers/dbb58de1-a1e5-4c7f-8fe0-4033502b1c63
+type: driver
+platform: windows
+name: asas.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  samples:
+  - Authentihash:
+      MD5: 37458813b5115cbf06552da28fefbbbb
+      SHA1: 1d1cafc73c97c6bcd2331f8777d90fdca57125a3
+      SHA256: faa08cb609a5b7be6bfdb61f1e4a5e8adf2f5a1d2492f262483df7326934f5d4
+    Company: ''
+    Copyright: ''
+    CreationTimestamp: '2016-09-05 02:43:33'
+    Date: ''
+    Description: ''
+    ExportedFunctions: ''
+    FileVersion: ''
+    Filename: ''
+    ImportedFunctions:
+    - IoDeleteSymbolicLink
+    - RtlInitUnicodeString
+    - IofCompleteRequest
+    - MmGetSystemRoutineAddress
+    - IoCreateSymbolicLink
+    - IoCreateDevice
+    - IoDeleteDevice
+    Imports:
+    - ntoskrnl.exe
+    InternalName: ''
+    MD5: f5938db81d1e620b5c89ca0c5f157a33
+    MachineType: AMD64
+    MagicHeader: 50 45 0 0
+    OriginalFilename: ''
+    PDBPath: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    RichPEHeaderHash:
+      MD5: b2f23c03be4553a744ff25735a80073c
+      SHA1: 2703d60c8f12df9d6adf5ae475bfeb1786486888
+      SHA256: 46ffd109664b6694974986a39d508002d564434d60a0fb9f861401f2cb2c83f1
+    SHA1: d10a054c6c3b1243cb13ff6648cd5de21a0b6548
+    SHA256: 6165491e8391eac9c0e3b9a2a31e1692a567c16cbfa36d7a88c401ffae1f6c63
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '5.848826218029174'
+        Virtual Size: '0x4e0'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '-0.0'
+        Virtual Size: '0xc0'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.006469661076665'
+        Virtual Size: '0x48'
+      .info:
+        Entropy:
+          $yaml_type: float
+          value: '1.3665783978789787'
+        Virtual Size: '0xa0'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '4.123682579107587'
+        Virtual Size: '0x114'
+    Signature: ''
+    Signatures: {}
+    Imphash: 45bfe170e0cd654bc1e2ae3fca3ac3f4
+    LoadsDespiteHVCI: 'FALSE'
+  sha256: 6165491e8391eac9c0e3b9a2a31e1692a567c16cbfa36d7a88c401ffae1f6c63
+  command_metadata:
+  - Command: ''
+    Description: Confirmed vulnerable driver from Microsoft Block List
+    OperatingSystem: Windows
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: dbb58de1-a1e5-4c7f-8fe0-4033502b1c63.yaml
+      document: "Id: dbb58de1-a1e5-4c7f-8fe0-4033502b1c63\nTags:\n- asas.sys\nVerified: 'TRUE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-07-22'\nMitreID: T1068\nCVE:\n- ''\nCategory: vulnerable driver\n\
+        Commands:\n  Command: ''\n  Description: Confirmed vulnerable driver from Microsoft Block List\n\
+        \  OperatingSystem: Windows\n  Privileges: kernel\n  Usecase: Elevate privileges\nResources:\n\
+        - https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c\nDetection:\n- type: ''\n\
+        \  value: ''\nAcknowledgement:\n  Handle: ''\n  Person: ''\nKnownVulnerableSamples:\n- Authentihash:\n\
+        \    MD5: 37458813b5115cbf06552da28fefbbbb\n    SHA1: 1d1cafc73c97c6bcd2331f8777d90fdca57125a3\n\
+        \    SHA256: faa08cb609a5b7be6bfdb61f1e4a5e8adf2f5a1d2492f262483df7326934f5d4\n  Company: ''\n\
+        \  Copyright: ''\n  CreationTimestamp: '2016-09-05 02:43:33'\n  Date: ''\n  Description: ''\n\
+        \  ExportedFunctions: ''\n  FileVersion: ''\n  Filename: ''\n  ImportedFunctions:\n  - IoDeleteSymbolicLink\n\
+        \  - RtlInitUnicodeString\n  - IofCompleteRequest\n  - MmGetSystemRoutineAddress\n  - IoCreateSymbolicLink\n\
+        \  - IoCreateDevice\n  - IoDeleteDevice\n  Imports:\n  - ntoskrnl.exe\n  InternalName: ''\n  MD5:\
+        \ f5938db81d1e620b5c89ca0c5f157a33\n  MachineType: AMD64\n  MagicHeader: 50 45 0 0\n  OriginalFilename:\
+        \ ''\n  PDBPath: ''\n  Product: ''\n  ProductVersion: ''\n  Publisher: ''\n  RichPEHeaderHash:\n\
+        \    MD5: b2f23c03be4553a744ff25735a80073c\n    SHA1: 2703d60c8f12df9d6adf5ae475bfeb1786486888\n\
+        \    SHA256: 46ffd109664b6694974986a39d508002d564434d60a0fb9f861401f2cb2c83f1\n  SHA1: d10a054c6c3b1243cb13ff6648cd5de21a0b6548\n\
+        \  SHA256: 6165491e8391eac9c0e3b9a2a31e1692a567c16cbfa36d7a88c401ffae1f6c63\n  Sections:\n   \
+        \ .text:\n      Entropy: 5.848826218029174\n      Virtual Size: '0x4e0'\n    .data:\n      Entropy:\
+        \ -0.0\n      Virtual Size: '0xc0'\n    .pdata:\n      Entropy: 3.006469661076665\n      Virtual\
+        \ Size: '0x48'\n    .info:\n      Entropy: 1.3665783978789787\n      Virtual Size: '0xa0'\n  \
+        \  INIT:\n      Entropy: 4.123682579107587\n      Virtual Size: '0x114'\n  Signature: ''\n  Signatures:\
+        \ {}\n  Imphash: 45bfe170e0cd654bc1e2ae3fca3ac3f4\n  LoadsDespiteHVCI: 'FALSE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:dce808999d1dda18349ddeeb7002dd35b1987d466e07f6c0296e1c069dc30951

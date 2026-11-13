@@ -1,0 +1,104 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0R4Y2FwLnltbA/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Dxcap.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: dxcap.exe executing from outside of System32/SysWOW64
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_susp_dxcap.yml
+commands:
+- template: Dxcap.exe -c {PATH_ABSOLUTE:.exe}
+  comment: Launch specified executable as a subprocess of dxcap.exe. Note that you should have write permissions
+    in the current working directory for the command to succeed; alternatively, add '-file c:\path\to\writable\location.ext'
+    as first argument.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dxcap/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Dxcap.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Dxcap.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Dxcap.exe\nDescription: DirectX diagnostics/debugger included with Visual\
+        \ Studio.\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: Dxcap.exe -c {PATH_ABSOLUTE:.exe}\n\
+        \    Description: 'Launch specified executable as a subprocess of dxcap.exe. Note that you should\
+        \ have write permissions in the current working directory for the command to succeed; alternatively,\
+        \ add ''-file c:\\path\\to\\writable\\location.ext'' as first argument.'\n    Usecase: Local execution\
+        \ of a process as a subprocess of dxcap.exe\n    Category: Execute\n    Privileges: User\n   \
+        \ MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n      - Execute: EXE\n  - Command:\
+        \ dxcap.exe -usage\n    Description: Once executed, `dxcap.exe` will execute `xperf.exe` in the\
+        \ same folder. Thus, if `dxcap.exe` is copied to a folder and an arbitrary executable is renamed\
+        \ to `xperf.exe`, `dxcap.exe` will spawn it.\n    Usecase: Execute an arbitrary executable via\
+        \ trusted system executable.\n    Category: Execute\n    Privileges: User\n    MitreID: T1127\n\
+        \    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\n      - Requires:\
+        \ Rename\nFull_Path:\n  - Path: C:\\Windows\\System32\\dxcap.exe\n  - Path: C:\\Windows\\SysWOW64\\\
+        dxcap.exe\nCode_Sample:\n  - Code: https://gist.github.com/ghosts621/1d0e0f43f7288c826035d5d011b6ca51\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_susp_dxcap.yml\n\
+        \  - IOC: dxcap.exe executing from outside of System32/SysWOW64\n  - IOC: dxcap.exe spawning Xperf.exe\n\
+        \  - IOC: Xperf.exe executing from unusual directories (if not running from ADK path)\nResources:\n\
+        \  - Link: https://twitter.com/harr0ey/status/992008180904419328\nAcknowledgement:\n  - Person:\
+        \ Matt harr0ey\n    Handle: '@harr0ey'\n  - Person: Vikas Singh\n    Handle: '@vikas891'\n  -\
+        \ Person: Naor Evgi\n    Handle: '@ghosts621'\n"
+      document_sha256: sha256:92bba7d39de4d4c0c7144ded40704b0bb64082831cf85ca4b85ebd882dba93d7
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dxcap/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:6d7435ab97daadadc9e5c9b2bea1ba9b4005b03ea70b784fc2f262cf81a3f184

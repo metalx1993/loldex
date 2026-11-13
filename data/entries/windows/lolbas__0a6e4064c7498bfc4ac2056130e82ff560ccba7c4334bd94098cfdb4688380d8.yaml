@@ -1,0 +1,101 @@
+id: lolbas/T1NCaW5hcmllcy9BdC55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: At.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1053.002
+opsec:
+  noise: high
+  triggers: C:\Windows\System32\Tasks\At1 (substitute 1 with subsequent number of at job)
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_at_interactive_execution.yml
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/network/zeek/zeek_smb_converted_win_atsvc_task.yml
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/builtin/security/win_security_atsvc_task.yml
+commands:
+- template: C:\Windows\System32\at.exe 09:00 /interactive /every:m,t,w,th,f,s,su {CMD}
+  comment: Create a recurring task to execute every day at a specific time.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/At/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: At.exe
+      category: Execute
+      privileges: Local Admin
+      mitre_id: T1053.002
+      source_file: OSBinaries/At.yml
+      command_source_index: 0
+      document_utf8: "---\nName: At.exe\nDescription: Schedule periodic tasks\nAuthor: 'Freddie Barr-Smith'\n\
+        Created: 2019-09-20\nCommands:\n  - Command: C:\\Windows\\System32\\at.exe 09:00 /interactive\
+        \ /every:m,t,w,th,f,s,su {CMD}\n    Description: Create a recurring task to execute every day\
+        \ at a specific time.\n    Usecase: Create a recurring task, to eg. to keep reverse shell session(s)\
+        \ alive\n    Category: Execute\n    Privileges: Local Admin\n    MitreID: T1053.002\n    OperatingSystem:\
+        \ Windows 7 or older\n    Tags:\n      - Execute: CMD\nFull_Path:\n  - Path: C:\\WINDOWS\\System32\\\
+        At.exe\n  - Path: C:\\WINDOWS\\SysWOW64\\At.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_at_interactive_execution.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/network/zeek/zeek_smb_converted_win_atsvc_task.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/builtin/security/win_security_atsvc_task.yml\n\
+        \  - IOC: C:\\Windows\\System32\\Tasks\\At1 (substitute 1 with subsequent number of at job)\n\
+        \  - IOC: C:\\Windows\\Tasks\\At1.job\n  - IOC: Registry Key - Microsoft\\Windows NT\\CurrentVersion\\\
+        Schedule\\TaskCache\\Tree\\At1.\nResources:\n  - Link: https://freddiebarrsmith.com/at.txt\n \
+        \ - Link: https://sushant747.gitbooks.io/total-oscp-guide/privilege_escalation_windows.html\n\
+        \  - Link: https://www.secureworks.com/blog/where-you-at-indicators-of-lateral-movement-using-at-exe-on-windows-7-systems\n\
+        Acknowledgement:\n  - Person: 'Freddie Barr-Smith'\n    Handle:\n  - Person: 'Riccardo Spolaor'\n\
+        \    Handle:\n  - Person: 'Mariano Graziano'\n    Handle:\n  - Person: 'Xabier Ugarte-Pedrero'\n\
+        \    Handle:\n"
+      document_sha256: sha256:9a414317b3d90c7769d3494b9cf3014b9f48a9b6bba9d92ff56ba904009fadf5
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/At/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1053.002
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:e1156ab1cc802dba48e0c4810fbbb2115001228c5204842ebffca987d26478cd

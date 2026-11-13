@@ -1,0 +1,84 @@
+id: lolad/RmluZCBIaWdoLVZhbHVlIFRhcmdldHMgKGUuZy4sIEFkbWlucyB3aXRoIFNQTik/R2V0LUFEVXNlciAtRmlsdGVyIHtTZXJ2aWNlUHJpbmNpcGFsTmFtZSAtbmUgIiRudWxsIiAtYW5kIE1lbWJlck9mIC1saWtlICIqRG9tYWluIEFkbWlucyoifSB8IFNlbGVjdCBOYW1lLCBTZXJ2aWNlUHJpbmNpcGFsTmFtZQ/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Find High-Value Targets (e.g., Admins with SPN)
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADUser -Filter {ServicePrincipalName -ne "$null" -and MemberOf -like "*Domain Admins*"}
+    | Select Name, ServicePrincipalName
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Find High-Value Targets (e.g., Admins with SPN)
+      command: Get-ADUser -Filter {ServicePrincipalName -ne "$null" -and MemberOf -like "*Domain Admins*"}
+        | Select Name, ServicePrincipalName
+      type: PowerShell
+      reference: AD Exploitation Cheat Sheet
+      physical_rows:
+      - input_ref: index.html#row=87
+        row_utf8: "<tr>\r\n\t\t    <td>Find High-Value Targets (e.g., Admins with SPN)</td>\r\n\t\t  \
+          \  <td><code>Get-ADUser -Filter {ServicePrincipalName -ne \"$null\" -and MemberOf -like \"*Domain\
+          \ Admins*\"} | Select Name, ServicePrincipalName</code></td>\r\n\t\t    <td>PowerShell</td>\r\
+          \n\t\t    <td><a href=\"https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet\"\
+          \ target=\"_blank\">AD Exploitation Cheat Sheet</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:e11e4968e37ca5f25a72647d6f586728f44e79851755b0f62542b1a54aaed952
+        cells:
+        - Find High-Value Targets (e.g., Admins with SPN)
+        - Get-ADUser -Filter {ServicePrincipalName -ne "$null" -and MemberOf -like "*Domain Admins*"}
+          | Select Name, ServicePrincipalName
+        - PowerShell
+        - AD Exploitation Cheat Sheet
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:dec661ef06a78db6016e8866a463004a6782dbc0e508a7a59b8b212b0dc84b0b

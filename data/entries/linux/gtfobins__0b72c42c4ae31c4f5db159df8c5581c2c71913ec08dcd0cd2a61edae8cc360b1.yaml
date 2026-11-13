@@ -1,0 +1,115 @@
+id: gtfobins/exiftool/file-read/sudo
+type: binary
+platform: linux
+name: exiftool
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'exiftool -filename=/path/to/output-file /path/to/input-file
+
+    cat /path/to/output-file'
+  comment: If the permissions allow it, files are moved (instead of copied) to the destination.
+references:
+- https://gtfobins.github.io/gtfobins/exiftool/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        exiftool:
+          functions:
+            file-read:
+            - code: 'exiftool -filename=/path/to/output-file /path/to/input-file
+
+                cat /path/to/output-file'
+              comment: If the permissions allow it, files are moved (instead of copied) to the destination.
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-write:
+            - code: exiftool -filename=/path/to/output-file /path/to/input-file
+              comment: If the permissions allow it, files are moved (instead of copied) to the destination.
+              contexts:
+                sudo: null
+                unprivileged: null
+            - binary: false
+              code: exiftool "-description<=/path/to/input-file --filename /path/to/output-file
+              comment: The output file must exists, either empty or be a supported image file. The content
+                is written amidst other content.
+              contexts:
+                sudo: null
+                unprivileged: null
+            - binary: false
+              code: exiftool "-description=DATA --filename /path/to/output-file
+              comment: The output file must exists, either empty or be a supported image file. The content
+                is written amidst other content.
+              contexts:
+                sudo: null
+                unprivileged: null
+            - binary: false
+              code: exiftool -description -W /path/to/output-file --filename /path/to/input-file
+              comment: Writes the metadata tags of the input file in textual format to the output.
+              contexts:
+                sudo: null
+                unprivileged: null
+            inherit:
+            - code: exiftool -if '...' /etc/passwd
+              comment: This allows to run Perl code (`...`).
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: perl
+    upstream_url: https://gtfobins.github.io/gtfobins/exiftool/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:35022eaf4cb5e3dcc6582317c067bf056f6f873e6f4199c057c1f772d4275529

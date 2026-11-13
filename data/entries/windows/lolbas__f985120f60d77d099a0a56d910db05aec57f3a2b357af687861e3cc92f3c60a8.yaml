@@ -1,0 +1,87 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL01waWV4ZWMueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Mpiexec.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+commands:
+- template: mpiexec.exe {CMD}
+  comment: Executes a command via MPI command-line tool.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Mpiexec/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Mpiexec.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Mpiexec.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Mpiexec.exe\nDescription: Command-line tool for running Message Passing\
+        \ Interface (MPI) applications.\nAuthor: Avihay Eldad\nCreated: 2025-09-25\nCommands:\n  - Command:\
+        \ mpiexec.exe {CMD}\n    Description: Executes a command via MPI command-line tool.\n    Usecase:\
+        \ Executes commands under a trusted, Microsoft signed binary.\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n      - Execute: CMD\nFull_Path:\n\
+        \  - Path: C:\\Program Files\\Microsoft MPI\\Bin\\mpiexec.exe\n  - Path: C:\\Program Files (x86)\\\
+        Microsoft MPI\\Bin\\mpiexec.exe\nResources:\n  - Link: https://learn.microsoft.com/en-us/powershell/high-performance-computing/mpiexec\n\
+        Acknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:df138daab2b071412ca2729d8c90dc59f57ac9254c7d7d9d14c65232213250fe
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Mpiexec/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:bb43f793ec159f0af0e00c22ae1456100708fc852d3c2f6beb7223b007bab3ab

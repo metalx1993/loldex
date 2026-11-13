@@ -1,0 +1,349 @@
+id: loldrivers/24fb7bab-b8c3-46ea-a370-c84d2f0ff614
+type: driver
+platform: windows
+name: ADV64DRV.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create ADV64DRV.sys binPath=C:\windows\temp\ADV64DRV.sys type=kernel && sc.exe start
+    ADV64DRV.sys
+driver_detail:
+  samples:
+  - Authentihash:
+      MD5: e1c188570d8720f9c35e194e17a7fd36
+      SHA1: ca6b0d932e5ac9dbe1242aca48ba93a14cf9d151
+      SHA256: b2b37ef379ada79d2abe78375312bfcd4b518139bc525a522c2a6329ba097cc4
+    Company: FUJITSU LIMITED.
+    Copyright: Copyright(C) FUJITSU LIMITED 2005
+    CreationTimestamp: '2005-09-16 05:50:59'
+    Date: ''
+    Description: ''
+    ExportedFunctions: ''
+    FileVersion: 2, 0, 0, 0
+    Filename: ADV64DRV.sys
+    ImportedFunctions:
+    - RtlAppendUnicodeToString
+    - RtlInitUnicodeString
+    - MmUnmapIoSpace
+    - MmMapIoSpace
+    - IoWriteErrorLogEntry
+    - IoDeleteSymbolicLink
+    - IoDeleteDevice
+    - IoCreateSymbolicLink
+    - IoCreateDevice
+    - KeBugCheckEx
+    - IoAllocateErrorLogEntry
+    - IofCompleteRequest
+    - HalTranslateBusAddress
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    InternalName: ADV64DRV.sys
+    MD5: 778b7feea3c750d44745d3bf294bd4ce
+    MachineType: AMD64
+    MagicHeader: 50 45 0 0
+    OriginalFilename: ADV64DRV.sys
+    Product: MicrosoftR WindowsR Operating System
+    ProductVersion: 2, 0, 0, 0
+    Publisher: FUJITSU LIMITED
+    RichPEHeaderHash:
+      MD5: 1b19b7c8c29ee1a90f9c2b13eb7d131b
+      SHA1: 7adbedde877708b811bc96acc23a31532d6f4f83
+      SHA256: 25afa73a325285db7c250742fbb2de5dc0ce869553c6dc16149ae0c66372c42b
+    SHA1: 2261198385d62d2117f50f631652eded0ecc71db
+    SHA256: 04a85e359525d662338cae86c1e59b1d7aa9bd12b920e8067503723dc1e03162
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '5.903584171694268'
+        Virtual Size: '0x962'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.136425539237833'
+        Virtual Size: '0x1d4'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '0.5159719988134768'
+        Virtual Size: '0x110'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.195198013509955'
+        Virtual Size: '0x90'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '4.823287376137565'
+        Virtual Size: '0x252'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.331846154390591'
+        Virtual Size: '0x3f0'
+    Signature:
+    - 'FUJITSU LIMITED '
+    - VeriSign Class 3 Code Signing 2004 CA
+    - VeriSign Class 3 Public Primary CA
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, O=VeriSign, Inc., CN=VeriSign Time Stamping Services CA
+        ValidFrom: '2003-12-04 00:00:00'
+        ValidTo: '2013-12-03 23:59:59'
+        Signature: 4a6bf9ea58c2441c318979992b96bf82ac01d61c4ccdb08a586edf0829a35ec8ca9313e704520def47272f0038b0e4c9934e9ad4226215f73f37214f703180f18b3887b3e8e89700fecf55964e24d2a9274e7aaeb76141f32acee7c9d95eddbb2b853eb59db5d9e157ffbeb4c57ef5cf0c9ef097fe2bd33b521b1b3827f73f4a
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.5
+        IsCertificateAuthority: true
+        SerialNumber: 47bf1995df8d524643f7db6d480d31a4
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 518d2ea8a21e879c942d504824ac211c
+          SHA1: 21ce87d827077e61abddf2beba69fde5432ea031
+          SHA256: 1ec3b4f02e03930a470020e0e48d24b84678bb558f46182888d870541f5e25c7
+          SHA384: 53e346bbde23779a5d116cc9d86fdd71c97b1f1b343439f8a11aa1d3c87af63864bb8488a5aeb2d0c26a6a1e0b15f03f
+      - Subject: C=US, O=VeriSign, Inc., CN=VeriSign Time Stamping Services Signer
+        ValidFrom: '2003-12-04 00:00:00'
+        ValidTo: '2008-12-03 23:59:59'
+        Signature: 877870da4e5201205be079c98230c4fdb91996bd9100c3bdcdcdc6f40ed8fff94dc033623011c5f5741bd492de5f9c2013b17c45be50cd83e7801783a72793671346fbcab8984103cc9b515b058b7fa86ff31b501b242ef2698d6c22f7bbca1695ed0c74c06877d9eb996287c17390f889747a23aba3987b97b1f78f29714d2e751b4841daf0b50d2054d677a097826369fd09cf8af075bb099bd9f91155269a6132be7a02b07b86bea2c38b222c78d13576bc92735cf9b9e64c150a23cce4d2d4342e4940153c0f607a24c6a566ef96cf70eb3ee7f40d7edcd17ca3767169c19c4f47303521b1a2af1a623c2bd98eaa2a077bd818b35c7be29da56ffe3c89ad
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.5
+        IsCertificateAuthority: false
+        SerialNumber: 0de92bf0d4d82988183205095e9a7688
+        Version: 3
+        CertificateType: Intermediate
+        IsCodeSigning: false
+        IsCA: false
+        TBS:
+          MD5: 45c204b8a20f6abb0188d2d38a3fb0c9
+          SHA1: cdf3a3c5c2eda4c29621f30fd3154f9f8c765739
+          SHA256: e32839dddc0f4ed2474efaf37f59d46db400c700fd19533cb0895a111124bc77
+          SHA384: ee9c75832cb252218b3201619852209df490d2ef7a5f7a28afdb37f1c1dd56f4604898838e558f615b1c798d4a488223
+      - Subject: C=US, O=VeriSign, Inc., OU=VeriSign Trust Network, OU=Terms of use at https://www.verisign.com/rpa
+          (c)04, CN=VeriSign Class 3 Code Signing 2004 CA
+        ValidFrom: '2004-07-16 00:00:00'
+        ValidTo: '2014-07-15 23:59:59'
+        Signature: ae3a17b84a7b55fa6455ec40a4ed494190999c89bcaf2e1dca7823f91c190f7feb68bc32d98838dedc3fd389b43fb18296f1a45abaed2e26d3de7c016e000a00a4069211480940f91c1879672324e0bbd5e150ae1bf50edde02e81cd80a36c524f9175558aba22f2d2ea4175882f63557d1e545a9559cad93481c05f5ef67ab5
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.5
+        IsCertificateAuthority: true
+        SerialNumber: 4191a15a3978dfcf496566381d4c75c2
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: true
+        IsCA: true
+        TBS:
+          MD5: 41011f8d0e7c7a6408334ca387914c61
+          SHA1: c7fc1727f5b75a6421a1f95c73bbdb23580c48e5
+          SHA256: 88dd3952638ee82738c03168e6fd863fe4eab1059ee5e2926ad8cb587c255dc0
+          SHA384: a00aa5ed457c41e37967882644d63366bae014f03a986576d8514164d7027acf7d0b5e03d764db2558f60db148954459
+      - Subject: C=US, O=VeriSign, Inc., OU=Class 3 Public Primary Certification Authority
+        ValidFrom: '2006-05-23 17:01:29'
+        ValidTo: '2016-05-23 17:11:29'
+        Signature: 01e446b33b457f7513877e5f43de468ecb8abdb64741bccccc7491d8ce395195a4a6b547c0efd2da7b8f5711f4328c7ccd3fee42da04214af7c843884a6f5cca14fc4bd19f4cbdd4556ecc02be0da6888f8609baa425bde8b0f0fa8b714e67b0cb82a8d78e55f737ebf03e88efe4e08afd1c6e2e61414875b4b02c1d28d8490fd715f02473253ccc880cde284c6554fe5eae8cea19ad2c51b29b3a47f53c80350117e24987d6544afb4bab07bcbf7d79cfbf35005cbb9ecffc82891b39a05197b6dec0b307ff449644c0342a195cabeef03bec294eb513c537857e75d5b4d60d066eb5d26c237167eaf1718eaf4e74aa0cf9ecbf4c58fa5e909b6d39cb86883f8b1ca81632d5fe6db9f1f8b3ead791f6364778c0272a15c768d6f4c5fc4f4ec8673f102d409ff11ec96148e7a703fc31730cf04688fe56da492995ef09daa3e5beef60ecd954a0599c28bd54ef66157f874c84dba60e95672e517b3439b641c28c846826dc240209e7818e0a972defeea7b998a60f818dc710b5e1ed982f486f53854964789bec5dac970b5526c3efba8dc8d1a52f5a7f936b611a339b18b8a26210de24ea76e12f43ebecdd7c12342489da2855aee5754e312b6763b6a8d7ab730a03cec5ea593fc7eb2a45aea8625b2f009939abb45f73c308ec80118f470e8f2a1343e191066255bbffba3da9a93d260faeca7d628b155589d694344dd665
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.5
+        IsCertificateAuthority: true
+        SerialNumber: 610c120600000000001b
+        Version: 3
+        CertificateType: Intermediate
+        IsCodeSigning: false
+        IsCA: false
+        TBS:
+          MD5: 53c41bc1164e09e0cd1617a5bf913efd
+          SHA1: 93c03aac8951d494ecd5696b1c08658541b18727
+          SHA256: 40bddadac24dc61ca4fb5cab2a2bc5d876bc36808311039a7a3e1a4066f7489b
+          SHA384: f51d4e75ba638f7314cd59b8d6d45f3b34d35ce6986e9d205cd6f333e8e8d8e9c91f636e6bc84731b6661673f40963d8
+      - Subject: 'C=JP, ST=Kanagawa, L=Kawasaki, O=FUJITSU LIMITED , OU=Digital ID Class 3 , Microsoft
+          Software Validation v2, OU=Personal Systems Business Unit, CN=FUJITSU LIMITED '
+        ValidFrom: '2006-05-31 00:00:00'
+        ValidTo: '2007-06-01 23:59:59'
+        Signature: 78ab202d129483254db90615ecfc16a8057fe3f49f614b5d04d92d593ef3aad056d06e29f50323337adb77ef869b046e060dbc793f2142cfdf59de270f02c3d5486ddfda1456be32f76fb5047ef6eefc08c99305a9029753af10ac21b04e76ba8b0651e80d64eccec56353f1fd7082ec8d38737b2f13b6f2d8db5720fe070285bf8ab99d932b52ac8a614cdc11ed0d52b119219dea9b2eeb31a2ea229f0a9de4d770c124872fb0c1154395c8e8cc967205ece6fcc4c976744874f9409a7cab02e612f08924794f8d9f8c1f026acdd269516a43042ebc0d055cae803266e8cc70b0121d8946650c9cbe6cb7f5c359ab80174c0e9208ff07c44980930c244bfc43
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.5
+        IsCertificateAuthority: false
+        SerialNumber: 6b7f98e2e421c2f95c47f321abf1aef1
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 3aef8abc12c5f5a0b32350fbb16f4548
+          SHA1: c568d06e1fd94c11c9f1db167c15497e84a86abf
+          SHA256: d0b6a09973254b6b93b041e24f6ecdb4a14bdc27a571bcefa81a4a39a5734600
+          SHA384: ff2116806abeab8dc17757bed5f000fcc14b4cc6cc3c91503caeef6863ff9d04887e6f14abfe1f26d3d4528156d2760b
+      Signer:
+      - SerialNumber: 6b7f98e2e421c2f95c47f321abf1aef1
+        Issuer: C=US, O=VeriSign, Inc., OU=VeriSign Trust Network, OU=Terms of use at https://www.verisign.com/rpa
+          (c)04, CN=VeriSign Class 3 Code Signing 2004 CA
+        Version: 1
+    Imphash: 1d9cdf46ff335712634c292180c06755
+    LoadsDespiteHVCI: 'FALSE'
+  sha256: 04a85e359525d662338cae86c1e59b1d7aa9bd12b920e8067503723dc1e03162
+  signer: FUJITSU LIMITED.
+  original_filename: ADV64DRV.sys
+  command_metadata:
+  - Command: sc.exe create ADV64DRV.sys binPath=C:\windows\temp\ADV64DRV.sys type=kernel && sc.exe start
+      ADV64DRV.sys
+    Description: ''
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://github.com/namazso/physmem_drivers
+- https://github.com/Haider303/trinity-2.0-lpe
+- https://medium.com/@haider303mustafa/teaccess-sys-adv64drv-sys-phymem-sys-kaslr-bypass-to-system-token-theft-69441310b7f4
+- https://github.com/magicsword-io/LOLDrivers/issues/395
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 24fb7bab-b8c3-46ea-a370-c84d2f0ff614.yaml
+      document: "Id: 24fb7bab-b8c3-46ea-a370-c84d2f0ff614\nTags:\n- ADV64DRV.sys\nVerified: 'TRUE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-01-09'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \  Command: sc.exe create ADV64DRV.sys binPath=C:\\windows\\temp\\ADV64DRV.sys type=kernel\n \
+        \   && sc.exe start ADV64DRV.sys\n  Description: ''\n  OperatingSystem: Windows 10\n  Privileges:\
+        \ kernel\n  Usecase: Elevate privileges\nResources:\n- https://github.com/namazso/physmem_drivers\n\
+        - https://github.com/Haider303/trinity-2.0-lpe\n- https://medium.com/@haider303mustafa/teaccess-sys-adv64drv-sys-phymem-sys-kaslr-bypass-to-system-token-theft-69441310b7f4\n\
+        - https://github.com/magicsword-io/LOLDrivers/issues/395\nDetection:\n- type: BlockRule\n  value:\
+        \ https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        - type: IOC\n  value: Utilize Windows Event Code 7045 to monitor for new kernel driver installation.\n\
+        - type: yara_signature\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/yara/04a85e359525d662338cae86c1e59b1d7aa9bd12b920e8067503723dc1e03162.yara\n\
+        - type: sigma_hash\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers.yml\n\
+        - type: sigma_names\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers_names.yml\n\
+        - type: sysmon_hash_detect\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes.xml\n\
+        - type: sysmon_hash_block\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes_block.xml\n\
+        - type: yara_signature\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/yara/yara-rules_vuln_drivers_strict_renamed.yar\n\
+        - type: sigma_hash\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers.yml\n\
+        - type: sigma_names\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers_names.yml\n\
+        - type: sysmon_hash_detect\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes.xml\n\
+        - type: sysmon_hash_block\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes_block.xml\n\
+        Acknowledgement:\n  Handle: ''\n  Person: ''\nKnownVulnerableSamples:\n- Authentihash:\n    MD5:\
+        \ e1c188570d8720f9c35e194e17a7fd36\n    SHA1: ca6b0d932e5ac9dbe1242aca48ba93a14cf9d151\n    SHA256:\
+        \ b2b37ef379ada79d2abe78375312bfcd4b518139bc525a522c2a6329ba097cc4\n  Company: FUJITSU LIMITED.\n\
+        \  Copyright: Copyright(C) FUJITSU LIMITED 2005\n  CreationTimestamp: '2005-09-16 05:50:59'\n\
+        \  Date: ''\n  Description: ''\n  ExportedFunctions: ''\n  FileVersion: 2, 0, 0, 0\n  Filename:\
+        \ ADV64DRV.sys\n  ImportedFunctions:\n  - RtlAppendUnicodeToString\n  - RtlInitUnicodeString\n\
+        \  - MmUnmapIoSpace\n  - MmMapIoSpace\n  - IoWriteErrorLogEntry\n  - IoDeleteSymbolicLink\n  -\
+        \ IoDeleteDevice\n  - IoCreateSymbolicLink\n  - IoCreateDevice\n  - KeBugCheckEx\n  - IoAllocateErrorLogEntry\n\
+        \  - IofCompleteRequest\n  - HalTranslateBusAddress\n  Imports:\n  - ntoskrnl.exe\n  - HAL.dll\n\
+        \  InternalName: ADV64DRV.sys\n  MD5: 778b7feea3c750d44745d3bf294bd4ce\n  MachineType: AMD64\n\
+        \  MagicHeader: 50 45 0 0\n  OriginalFilename: ADV64DRV.sys\n  Product: MicrosoftR WindowsR Operating\
+        \ System\n  ProductVersion: 2, 0, 0, 0\n  Publisher: FUJITSU LIMITED\n  RichPEHeaderHash:\n  \
+        \  MD5: 1b19b7c8c29ee1a90f9c2b13eb7d131b\n    SHA1: 7adbedde877708b811bc96acc23a31532d6f4f83\n\
+        \    SHA256: 25afa73a325285db7c250742fbb2de5dc0ce869553c6dc16149ae0c66372c42b\n  SHA1: 2261198385d62d2117f50f631652eded0ecc71db\n\
+        \  SHA256: 04a85e359525d662338cae86c1e59b1d7aa9bd12b920e8067503723dc1e03162\n  Sections:\n   \
+        \ .text:\n      Entropy: 5.903584171694268\n      Virtual Size: '0x962'\n    .rdata:\n      Entropy:\
+        \ 4.136425539237833\n      Virtual Size: '0x1d4'\n    .data:\n      Entropy: 0.5159719988134768\n\
+        \      Virtual Size: '0x110'\n    .pdata:\n      Entropy: 3.195198013509955\n      Virtual Size:\
+        \ '0x90'\n    INIT:\n      Entropy: 4.823287376137565\n      Virtual Size: '0x252'\n    .rsrc:\n\
+        \      Entropy: 3.331846154390591\n      Virtual Size: '0x3f0'\n  Signature:\n  - 'FUJITSU LIMITED\
+        \ '\n  - VeriSign Class 3 Code Signing 2004 CA\n  - VeriSign Class 3 Public Primary CA\n  Signatures:\n\
+        \  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n    - Subject: C=US, O=VeriSign,\
+        \ Inc., CN=VeriSign Time Stamping Services CA\n      ValidFrom: '2003-12-04 00:00:00'\n      ValidTo:\
+        \ '2013-12-03 23:59:59'\n      Signature: 4a6bf9ea58c2441c318979992b96bf82ac01d61c4ccdb08a586edf0829a35ec8ca9313e704520def47272f0038b0e4c9934e9ad4226215f73f37214f703180f18b3887b3e8e89700fecf55964e24d2a9274e7aaeb76141f32acee7c9d95eddbb2b853eb59db5d9e157ffbeb4c57ef5cf0c9ef097fe2bd33b521b1b3827f73f4a\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.5\n      IsCertificateAuthority: true\n     \
+        \ SerialNumber: 47bf1995df8d524643f7db6d480d31a4\n      Version: 3\n      CertificateType: CA\n\
+        \      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 518d2ea8a21e879c942d504824ac211c\n\
+        \        SHA1: 21ce87d827077e61abddf2beba69fde5432ea031\n        SHA256: 1ec3b4f02e03930a470020e0e48d24b84678bb558f46182888d870541f5e25c7\n\
+        \        SHA384: 53e346bbde23779a5d116cc9d86fdd71c97b1f1b343439f8a11aa1d3c87af63864bb8488a5aeb2d0c26a6a1e0b15f03f\n\
+        \    - Subject: C=US, O=VeriSign, Inc., CN=VeriSign Time Stamping Services Signer\n      ValidFrom:\
+        \ '2003-12-04 00:00:00'\n      ValidTo: '2008-12-03 23:59:59'\n      Signature: 877870da4e5201205be079c98230c4fdb91996bd9100c3bdcdcdc6f40ed8fff94dc033623011c5f5741bd492de5f9c2013b17c45be50cd83e7801783a72793671346fbcab8984103cc9b515b058b7fa86ff31b501b242ef2698d6c22f7bbca1695ed0c74c06877d9eb996287c17390f889747a23aba3987b97b1f78f29714d2e751b4841daf0b50d2054d677a097826369fd09cf8af075bb099bd9f91155269a6132be7a02b07b86bea2c38b222c78d13576bc92735cf9b9e64c150a23cce4d2d4342e4940153c0f607a24c6a566ef96cf70eb3ee7f40d7edcd17ca3767169c19c4f47303521b1a2af1a623c2bd98eaa2a077bd818b35c7be29da56ffe3c89ad\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.5\n      IsCertificateAuthority: false\n    \
+        \  SerialNumber: 0de92bf0d4d82988183205095e9a7688\n      Version: 3\n      CertificateType: Intermediate\n\
+        \      IsCodeSigning: false\n      IsCA: false\n      TBS:\n        MD5: 45c204b8a20f6abb0188d2d38a3fb0c9\n\
+        \        SHA1: cdf3a3c5c2eda4c29621f30fd3154f9f8c765739\n        SHA256: e32839dddc0f4ed2474efaf37f59d46db400c700fd19533cb0895a111124bc77\n\
+        \        SHA384: ee9c75832cb252218b3201619852209df490d2ef7a5f7a28afdb37f1c1dd56f4604898838e558f615b1c798d4a488223\n\
+        \    - Subject: C=US, O=VeriSign, Inc., OU=VeriSign Trust Network, OU=Terms of use\n        at\
+        \ https://www.verisign.com/rpa (c)04, CN=VeriSign Class 3 Code Signing 2004\n        CA\n    \
+        \  ValidFrom: '2004-07-16 00:00:00'\n      ValidTo: '2014-07-15 23:59:59'\n      Signature: ae3a17b84a7b55fa6455ec40a4ed494190999c89bcaf2e1dca7823f91c190f7feb68bc32d98838dedc3fd389b43fb18296f1a45abaed2e26d3de7c016e000a00a4069211480940f91c1879672324e0bbd5e150ae1bf50edde02e81cd80a36c524f9175558aba22f2d2ea4175882f63557d1e545a9559cad93481c05f5ef67ab5\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.5\n      IsCertificateAuthority: true\n     \
+        \ SerialNumber: 4191a15a3978dfcf496566381d4c75c2\n      Version: 3\n      CertificateType: CA\n\
+        \      IsCodeSigning: true\n      IsCA: true\n      TBS:\n        MD5: 41011f8d0e7c7a6408334ca387914c61\n\
+        \        SHA1: c7fc1727f5b75a6421a1f95c73bbdb23580c48e5\n        SHA256: 88dd3952638ee82738c03168e6fd863fe4eab1059ee5e2926ad8cb587c255dc0\n\
+        \        SHA384: a00aa5ed457c41e37967882644d63366bae014f03a986576d8514164d7027acf7d0b5e03d764db2558f60db148954459\n\
+        \    - Subject: C=US, O=VeriSign, Inc., OU=Class 3 Public Primary Certification Authority\n  \
+        \    ValidFrom: '2006-05-23 17:01:29'\n      ValidTo: '2016-05-23 17:11:29'\n      Signature:\
+        \ 01e446b33b457f7513877e5f43de468ecb8abdb64741bccccc7491d8ce395195a4a6b547c0efd2da7b8f5711f4328c7ccd3fee42da04214af7c843884a6f5cca14fc4bd19f4cbdd4556ecc02be0da6888f8609baa425bde8b0f0fa8b714e67b0cb82a8d78e55f737ebf03e88efe4e08afd1c6e2e61414875b4b02c1d28d8490fd715f02473253ccc880cde284c6554fe5eae8cea19ad2c51b29b3a47f53c80350117e24987d6544afb4bab07bcbf7d79cfbf35005cbb9ecffc82891b39a05197b6dec0b307ff449644c0342a195cabeef03bec294eb513c537857e75d5b4d60d066eb5d26c237167eaf1718eaf4e74aa0cf9ecbf4c58fa5e909b6d39cb86883f8b1ca81632d5fe6db9f1f8b3ead791f6364778c0272a15c768d6f4c5fc4f4ec8673f102d409ff11ec96148e7a703fc31730cf04688fe56da492995ef09daa3e5beef60ecd954a0599c28bd54ef66157f874c84dba60e95672e517b3439b641c28c846826dc240209e7818e0a972defeea7b998a60f818dc710b5e1ed982f486f53854964789bec5dac970b5526c3efba8dc8d1a52f5a7f936b611a339b18b8a26210de24ea76e12f43ebecdd7c12342489da2855aee5754e312b6763b6a8d7ab730a03cec5ea593fc7eb2a45aea8625b2f009939abb45f73c308ec80118f470e8f2a1343e191066255bbffba3da9a93d260faeca7d628b155589d694344dd665\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.5\n      IsCertificateAuthority: true\n     \
+        \ SerialNumber: 610c120600000000001b\n      Version: 3\n      CertificateType: Intermediate\n\
+        \      IsCodeSigning: false\n      IsCA: false\n      TBS:\n        MD5: 53c41bc1164e09e0cd1617a5bf913efd\n\
+        \        SHA1: 93c03aac8951d494ecd5696b1c08658541b18727\n        SHA256: 40bddadac24dc61ca4fb5cab2a2bc5d876bc36808311039a7a3e1a4066f7489b\n\
+        \        SHA384: f51d4e75ba638f7314cd59b8d6d45f3b34d35ce6986e9d205cd6f333e8e8d8e9c91f636e6bc84731b6661673f40963d8\n\
+        \    - Subject: 'C=JP, ST=Kanagawa, L=Kawasaki, O=FUJITSU LIMITED , OU=Digital ID Class\n    \
+        \    3 , Microsoft Software Validation v2, OU=Personal Systems Business Unit, CN=FUJITSU\n   \
+        \     LIMITED '\n      ValidFrom: '2006-05-31 00:00:00'\n      ValidTo: '2007-06-01 23:59:59'\n\
+        \      Signature: 78ab202d129483254db90615ecfc16a8057fe3f49f614b5d04d92d593ef3aad056d06e29f50323337adb77ef869b046e060dbc793f2142cfdf59de270f02c3d5486ddfda1456be32f76fb5047ef6eefc08c99305a9029753af10ac21b04e76ba8b0651e80d64eccec56353f1fd7082ec8d38737b2f13b6f2d8db5720fe070285bf8ab99d932b52ac8a614cdc11ed0d52b119219dea9b2eeb31a2ea229f0a9de4d770c124872fb0c1154395c8e8cc967205ece6fcc4c976744874f9409a7cab02e612f08924794f8d9f8c1f026acdd269516a43042ebc0d055cae803266e8cc70b0121d8946650c9cbe6cb7f5c359ab80174c0e9208ff07c44980930c244bfc43\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.5\n      IsCertificateAuthority: false\n    \
+        \  SerialNumber: 6b7f98e2e421c2f95c47f321abf1aef1\n      Version: 3\n      CertificateType: Leaf\
+        \ (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5: 3aef8abc12c5f5a0b32350fbb16f4548\n\
+        \        SHA1: c568d06e1fd94c11c9f1db167c15497e84a86abf\n        SHA256: d0b6a09973254b6b93b041e24f6ecdb4a14bdc27a571bcefa81a4a39a5734600\n\
+        \        SHA384: ff2116806abeab8dc17757bed5f000fcc14b4cc6cc3c91503caeef6863ff9d04887e6f14abfe1f26d3d4528156d2760b\n\
+        \    Signer:\n    - SerialNumber: 6b7f98e2e421c2f95c47f321abf1aef1\n      Issuer: C=US, O=VeriSign,\
+        \ Inc., OU=VeriSign Trust Network, OU=Terms of use at\n        https://www.verisign.com/rpa (c)04,\
+        \ CN=VeriSign Class 3 Code Signing 2004\n        CA\n      Version: 1\n  Imphash: 1d9cdf46ff335712634c292180c06755\n\
+        \  LoadsDespiteHVCI: 'FALSE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:6f3b6eac8d710a8f163ce95902dab821fe37f9717592afbfd4f7037940133e90

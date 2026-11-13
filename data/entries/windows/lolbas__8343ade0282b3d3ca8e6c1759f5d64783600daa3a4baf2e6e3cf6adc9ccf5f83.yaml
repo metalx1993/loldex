@@ -1,0 +1,98 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0NzaS55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: csi.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_csi_execution.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_csi_use_of_csharp_console.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+commands:
+- template: csi.exe {PATH:.cs}
+  comment: Use csi.exe to run unsigned C# code.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Csi/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: csi.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Csi.yml
+      command_source_index: 0
+      document_utf8: "---\nName: csi.exe\nDescription: Command line interface included with Visual Studio.\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: csi.exe {PATH:.cs}\n    Description:\
+        \ Use csi.exe to run unsigned C# code.\n    Usecase: Local execution of unsigned C# code.\n  \
+        \  Category: Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n\
+        \    Tags:\n      - Execute: CSharp\nFull_Path:\n  - Path: c:\\Program Files (x86)\\Microsoft\
+        \ Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\Roslyn\\csi.exe\n  - Path: c:\\Program Files\
+        \ (x86)\\Microsoft Web Tools\\Packages\\Microsoft.Net.Compilers.X.Y.Z\\tools\\csi.exe\nDetection:\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_csi_execution.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_csi_use_of_csharp_console.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml\n\
+        \  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        Resources:\n  - Link: https://twitter.com/subTee/status/781208810723549188\n  - Link: https://enigma0x3.net/2016/11/17/bypassing-application-whitelisting-by-using-dnx-exe/\n\
+        Acknowledgement:\n  - Person: Casey Smith\n    Handle: '@subtee'\n"
+      document_sha256: sha256:300466bea48a3ebf34c96cd51900b6271e154611e7e2cd8d58461dc91cd4489c
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Csi/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:d69074de22ec58db725abaf6d16d2015d52d183c6ead23acb77980b062885456

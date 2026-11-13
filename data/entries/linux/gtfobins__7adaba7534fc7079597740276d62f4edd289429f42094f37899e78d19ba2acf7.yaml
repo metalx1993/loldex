@@ -1,0 +1,86 @@
+id: gtfobins/crontab/command/sudo
+type: binary
+platform: linux
+name: crontab
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: crontab -e
+  comment: This spaws the default editor to edit the crontab file, commands can be scheduled to run using
+    the [cron syntax](https://en.wikipedia.org/wiki/Cron).
+references:
+- https://gtfobins.github.io/gtfobins/crontab/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        crontab:
+          functions:
+            command:
+            - code: crontab -e
+              comment: This spaws the default editor to edit the crontab file, commands can be scheduled
+                to run using the [cron syntax](https://en.wikipedia.org/wiki/Cron).
+              contexts:
+                sudo: null
+                unprivileged: null
+            inherit:
+            - code: crontab -e
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: vi
+    upstream_url: https://gtfobins.github.io/gtfobins/crontab/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:c408076073dea3667fc7b5f59e0c8673bef9daf81880e21bbbb789094304ac8e

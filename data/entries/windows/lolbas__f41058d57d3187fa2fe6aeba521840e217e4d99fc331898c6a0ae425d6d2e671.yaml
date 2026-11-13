@@ -1,0 +1,94 @@
+id: lolbas/T1NCaW5hcmllcy9XbHJtZHIueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Wlrmdr.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: wlrmdr.exe spawning any new processes
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_wlrmdr.yml
+commands:
+- template: wlrmdr.exe -s 3600 -f 0 -t _ -m _ -a 11 -u {PATH:.exe}
+  comment: Execute executable with wlrmdr.exe as parent process
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Wlrmdr/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Wlrmdr.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OSBinaries/Wlrmdr.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Wlrmdr.exe\nDescription: Windows Logon Reminder executable\nAuthor: Moshe\
+        \ Kaplan\nCreated: 2022-02-16\nCommands:\n  - Command: \"wlrmdr.exe -s 3600 -f 0 -t _ -m _ -a\
+        \ 11 -u {PATH:.exe}\"\n    Description: Execute executable with wlrmdr.exe as parent process\n\
+        \    Usecase: Use wlrmdr as a proxy binary to evade defensive countermeasures\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n\
+        \      - Execute: EXE\nFull_Path:\n  - Path: c:\\windows\\system32\\wlrmdr.exe\nDetection:\n \
+        \ - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_wlrmdr.yml\n\
+        \  - IOC: wlrmdr.exe spawning any new processes\nResources:\n  - Link: https://twitter.com/0gtweet/status/1493963591745220608\n\
+        \  - Link: https://twitter.com/Oddvarmoe/status/927437787242090496\n  - Link: https://twitter.com/falsneg/status/1461625526640992260\n\
+        \  - Link: https://docs.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-notifyicondataw\n\
+        Acknowledgement:\n  - Person: Grzegorz Tworek\n    Handle: '@0gtweet'\n  - Person: Oddvar Moe\n\
+        \    Handle: '@Oddvarmoe'\n  - Person: Freddy\n    Handle: '@falsneg'\n"
+      document_sha256: sha256:a2b45d6940272691716a01b5e5973cdc76cf2fb1b5cb32709efcb1e8629abb9c
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Wlrmdr/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:5796de9725e1c46acbdd0505a555425888fbdc262c40285827040d357a687584

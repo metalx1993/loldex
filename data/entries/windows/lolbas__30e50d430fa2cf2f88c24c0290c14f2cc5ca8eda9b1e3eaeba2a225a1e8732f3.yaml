@@ -1,0 +1,96 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0RldnRvb2xzbGF1bmNoZXIueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Devtoolslauncher.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: DeveloperToolsSvc.exe spawned an unknown process
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_devtoolslauncher.yml
+commands:
+- template: devtoolslauncher.exe LaunchForDeploy {PATH_ABSOLUTE:.exe} "{CMD:args}" test
+  comment: The above binary will execute other binary.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Devtoolslauncher/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Devtoolslauncher.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Devtoolslauncher.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Devtoolslauncher.exe\nDescription: Binary will execute specified binary.\
+        \ Part of VS/VScode installation.\nAuthor: felamos\nCreated: 2019-10-04\nCommands:\n  - Command:\
+        \ devtoolslauncher.exe LaunchForDeploy {PATH_ABSOLUTE:.exe} \"{CMD:args}\" test\n    Description:\
+        \ The above binary will execute other binary.\n    Usecase: Execute any binary with given arguments\
+        \ and it will call `developertoolssvc.exe`. `developertoolssvc` is actually executing the binary.\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n\
+        \    Tags:\n      - Execute: CMD\n  - Command: devtoolslauncher.exe LaunchForDebug {PATH_ABSOLUTE:.exe}\
+        \ \"{CMD:args}\" test\n    Description: The above binary will execute other binary.\n    Usecase:\
+        \ Execute any binary with given arguments.\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1127\n    OperatingSystem: Windows\n    Tags:\n      - Execute: CMD\nFull_Path:\n  - Path:\
+        \ 'c:\\windows\\system32\\devtoolslauncher.exe'\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_devtoolslauncher.yml\n\
+        \  - IOC: DeveloperToolsSvc.exe spawned an unknown process\nResources:\n  - Link: https://twitter.com/_felamos/status/1179811992841797632\n\
+        \  - Link: https://www.virustotal.com/gui/file/84877a507af8b70c145777a87eaf28a8327c50a1563fe650f34572bef8a42ff6/details\n\
+        Acknowledgement:\n  - Person: felamos\n    Handle: '@_felamos'\n"
+      document_sha256: sha256:5276d7572eb497a91aee59766c210ae5d02818ff98c9cbde0d09ad9c9db8ad8e
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Devtoolslauncher/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:1a30988fdf560def92a9db309c7ab516a0f2a6c3380e22a89bc604023ba853df

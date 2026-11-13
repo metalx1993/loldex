@@ -1,0 +1,104 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1dmYy55bWw/QVdMIEJ5cGFzcw/0
+type: binary
+platform: windows
+name: Wfc.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: medium
+  triggers: As a Windows SDK binary, execution on a system may be suspicious
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6b34764215b0e97e32cbc4c6325fc933d2695c3a/rules/windows/process_creation/proc_creation_win_lolbin_wfc.yml
+commands:
+- template: wfc.exe {PATH_ABSOLUTE:.xoml}
+  comment: Execute arbitrary C# code embedded in a XOML file.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wfc/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Wfc.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Wfc.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Wfc.exe\nDescription: The Workflow Command-line Compiler tool is included\
+        \ with the Windows Software Development Kit (SDK).\nAuthor: Jimmy (@bohops)\nCreated: 2021-09-26\n\
+        Commands:\n  - Command: wfc.exe {PATH_ABSOLUTE:.xoml}\n    Description: Execute arbitrary C# code\
+        \ embedded in a XOML file.\n    Usecase: Execute proxied payload with Microsoft signed binary\
+        \ to bypass WDAC policies\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1127\n\
+        \    OperatingSystem: Windows 10 2004 (likely previous and newer versions as well)\n    Tags:\n\
+        \      - Execute: XOML\nFull_Path:\n  - Path: C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\\
+        v10.0A\\bin\\NETFX 4.8 Tools\\wfc.exe\nCode_Sample:\n  - Code: https://bohops.com/2020/11/02/exploring-the-wdac-microsoft-recommended-block-rules-part-ii-wfc-fsi/\n\
+        Detection:\n  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/6b34764215b0e97e32cbc4c6325fc933d2695c3a/rules/windows/process_creation/proc_creation_win_lolbin_wfc.yml\n\
+        \  - IOC: As a Windows SDK binary, execution on a system may be suspicious\nResources:\n  - Link:\
+        \ https://bohops.com/2020/11/02/exploring-the-wdac-microsoft-recommended-block-rules-part-ii-wfc-fsi/\n\
+        Acknowledgement:\n  - Person: Matt Graeber\n    Handle: '@mattifestation'\n  - Person: Jimmy\n\
+        \    Handle: '@bohops'\n"
+      document_sha256: sha256:1bc0ccd2fa44290377b28d18215025ddbd6e8f2766ad52022a6d350c1d5becc6
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wfc/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:f5a073c712dc72d2a9d35b6065d9acc22a0fb3f5270ea7d269e9e96c8f9ed0de

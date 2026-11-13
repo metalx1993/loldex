@@ -1,0 +1,101 @@
+id: lolbas/T1NCaW5hcmllcy9Nb2Zjb21wLnltbA/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Mofcomp.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1047
+opsec:
+  noise: high
+  triggers: strange parent processes spawning mofcomp.exe like cmd.exe or powershell.exe
+  detection_refs:
+  - https://github.com/The-DFIR-Report/Sigma-Rules/blob/75260568a7ffe61b2458ca05f6f25914efb44337/win_mofcomp_execution.yml
+commands:
+- template: mofcomp.exe {PATH_ABSOLUTE:.mof}
+  comment: Abuse of mofcomp.exe to parse a file which contains MOF statements in order create new classes
+    as part of the WMI repository
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Mofcomp/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Mofcomp.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1047
+      source_file: OSBinaries/Mofcomp.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Mofcomp.exe\nDescription: Compiler that parses a file containing MOF\
+        \ statements and adds the classes and class instances defined in the file to the WMI repository.\
+        \ Threat actors can leverage this binary to install malicious MOF scripts\nAuthor: Daniel Gott\n\
+        Created: 2022-07-19\nCommands:\n  - Command: mofcomp.exe {PATH_ABSOLUTE:.mof}\n    Description:\
+        \ Abuse of mofcomp.exe to parse a file which contains MOF statements in order create new classes\
+        \ as part of the WMI repository\n    Usecase: Threat actors can use mofcomp.exe to register a\
+        \ malicious MOF file as a new class in the WMI repository\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1047\n    OperatingSystem: Windows Vista, Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11, Windows Server 2008+\n    Tags:\n      - Execute: MOF\nFull_Path:\n\
+        \  - Path: C:\\Windows\\System32\\wbem\\mofcomp.exe\n  - Path: C:\\Windows\\SysWOW64\\wbem\\mofcomp.exe\n\
+        Detection:\n  - IOC: strange parent processes spawning mofcomp.exe like cmd.exe or powershell.exe\n\
+        \  - Sigma: https://github.com/The-DFIR-Report/Sigma-Rules/blob/75260568a7ffe61b2458ca05f6f25914efb44337/win_mofcomp_execution.yml\n\
+        Resources:\n  - Link: https://docs.microsoft.com/en-us/windows/win32/wmisdk/mofcomp\n  - Link:\
+        \ https://docs.microsoft.com/en-us/windows/win32/wmisdk/managed-object-format--mof-\n  - Link:\
+        \ https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/\n  - Link: https://in.security/2019/04/03/an-intro-into-abusing-and-identifying-wmi-event-subscriptions-for-persistence/\n\
+        \  - Link: https://medium.com/threatpunter/detecting-removing-wmi-persistence-60ccbb7dff96\nAcknowledgement:\n\
+        \  - Person: Daniel Gott\n    Handle: '@gott_cyber'\n  - Person: The DFIR Report\n    Handle:\
+        \ '@TheDFIRReport'\n  - Person: Nasreddine Bencherchali\n    Handle: '@nas_bench'\n"
+      document_sha256: sha256:2d25ff47b12ba1c2c91f7bf205a6bcb58e72c577ce3501790e8857ad1d116083
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Mofcomp/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1047
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:b2a14a7e641cfdfcef7d942c7330e24811104fbd885b6d4266285ee1ddad6a23

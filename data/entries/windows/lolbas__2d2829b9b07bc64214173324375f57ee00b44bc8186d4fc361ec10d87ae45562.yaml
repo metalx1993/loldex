@@ -1,0 +1,95 @@
+id: lolbas/T1NCaW5hcmllcy9DbWRsMzIueW1s/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: cmdl32.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Reports of downloading from suspicious URLs in %TMP%\config.log
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_cmdl32.yml
+commands:
+- template: cmdl32 /vpn /lan %cd%\config
+  comment: Download a file from the web address specified in the configuration file. The downloaded file
+    will be in %TMP% under the name VPNXXXX.tmp where "X" denotes a random number or letter.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Cmdl32/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: cmdl32.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Cmdl32.yml
+      command_source_index: 0
+      document_utf8: "---\nName: cmdl32.exe\nDescription: Microsoft Connection Manager Auto-Download\n\
+        Author: Elliot Killick\nCreated: 2021-08-26\nCommands:\n  - Command: cmdl32 /vpn /lan %cd%\\config\n\
+        \    Description: Download a file from the web address specified in the configuration file. The\
+        \ downloaded file will be in %TMP% under the name VPNXXXX.tmp where \"X\" denotes a random number\
+        \ or letter.\n    Usecase: Download file from Internet\n    Category: Download\n    Privileges:\
+        \ User\n    MitreID: T1105\n    OperatingSystem: Windows Vista, Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path: C:\\Windows\\System32\\cmdl32.exe\n  - Path:\
+        \ C:\\Windows\\SysWOW64\\cmdl32.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_cmdl32.yml\n\
+        \  - IOC: Reports of downloading from suspicious URLs in %TMP%\\config.log\n  - IOC: Useragent\
+        \ Microsoft(R) Connection Manager Vpn File Update\nResources:\n  - Link: https://github.com/LOLBAS-Project/LOLBAS/pull/151\n\
+        \  - Link: https://twitter.com/ElliotKillick/status/1455897435063074824\n  - Link: https://elliotonsecurity.com/living-off-the-land-reverse-engineering-methodology-plus-tips-and-tricks-cmdl32-case-study/\n\
+        Acknowledgement:\n  - Person: Elliot Killick\n    Handle: '@elliotkillick'\n"
+      document_sha256: sha256:82f6b0b368136521eb149b63d8a6f3e32f0bc31f090c4e305338016c5abda393
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Cmdl32/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:02bbe55586657e7ad106237435704719e5caf6a4bbb5a38e34cbc75655d5c837

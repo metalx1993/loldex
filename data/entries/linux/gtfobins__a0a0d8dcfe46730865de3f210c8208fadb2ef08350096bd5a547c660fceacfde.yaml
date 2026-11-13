@@ -1,0 +1,91 @@
+id: gtfobins/csvtool/file-write/unprivileged
+type: binary
+platform: linux
+name: csvtool
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'echo DATA >/path/to/temp-file
+
+    csvtool trim t /path/to/temp-file -o /path/to/output-file'
+  comment: The file is actually parsed and manipulated as CSV.
+references:
+- https://gtfobins.github.io/gtfobins/csvtool/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        csvtool:
+          functions:
+            file-read:
+            - binary: false
+              code: csvtool trim t /path/to/input-file
+              comment: The file is actually parsed and manipulated as CSV.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - binary: false
+              code: 'echo DATA >/path/to/temp-file
+
+                csvtool trim t /path/to/temp-file -o /path/to/output-file'
+              comment: The file is actually parsed and manipulated as CSV.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: csvtool call '/bin/sh;false' /etc/hosts
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/csvtool/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:8059342481900b5f2d1c88de93212ad7860ba329307bc18a2085f2d53f3c15fb

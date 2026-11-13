@@ -1,0 +1,94 @@
+id: wadcoms/SharpDump
+type: technique
+platform: active-directory
+name: SharpDump
+phases:
+- privilege-escalation
+- discovery
+capabilities:
+- privilege-escalation
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: SharpDump.exe
+  comment: 'SharpDump.exe is part of the GhostPack suite of tools and is a C# port of PowerSploit''s Out-Minidump.ps1.
+    It can dump the process for LSASS or a specific process given it''s PID. This dump can then be fed
+    into mimikatz to extract sensitive information. The following command simply dumps the LSASS process.
+
+    '
+references:
+- https://github.com/GhostPack/SharpDump
+- https://www.harmj0y.net/blog/redteaming/ghostpack/
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: SharpDump.md
+      document: "---\ndescription: |\n  SharpDump.exe is part of the GhostPack suite of tools and is a\
+        \ C# port of PowerSploit's Out-Minidump.ps1. It can dump the process for LSASS or a specific process\
+        \ given it's PID. This dump can then be fed into mimikatz to extract sensitive information. The\
+        \ following command simply dumps the LSASS process.\n\ncommand: |\n  SharpDump.exe\nitems:\n \
+        \ - Shell\nOS:\n  - Windows\nattack_types:\n  - PrivEsc\n  - Enumeration\nreferences:\n  - https://github.com/GhostPack/SharpDump\n\
+        \  - https://www.harmj0y.net/blog/redteaming/ghostpack/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:374928587cd9f53e379dc9b3b8fb9e2fdd29eecddcb579cdb69c3872de6427b5

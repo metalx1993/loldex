@@ -1,0 +1,83 @@
+id: wadcoms/ADCSEnumaration
+type: technique
+platform: active-directory
+name: ADCSEnumaration
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: "#Note that we are just enumarating here. We are not preforming exploitation. There is a linux\
+    \ equalivent called certipy that works much the same way\n# Find CAs \nC:Tools\\Certify.exe cas \n\
+    \n# Find templates\nC:Tools\\Certify.exe find \n\n# Find vulnerable templates\nC:Tools\\Certify.exe\
+    \ find /vulnerable"
+  comment: "Active Directory Certifcate Services or ADCS provide an alternative way to authenticate within\
+    \ a AD enviroment that contains a PKI as well as \nbeing configured with a Certifcate Authority. References\
+    \ below will provide technical info on ADCS as well as exploitation techniques from \nspectorops certfied\
+    \ preowned white paper.\n"
+references:
+- https://github.com/GhostPack/Certify
+- https://posts.specterops.io/certified-pre-owned-d95910965cd2
+- https://www.thehacker.recipes/ad/movement/adcs/
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: ADCSEnumaration.md
+      document: "---\n\ndescription: |\n  Active Directory Certifcate Services or ADCS provide an alternative\
+        \ way to authenticate within a AD enviroment that contains a PKI as well as \n  being configured\
+        \ with a Certifcate Authority. References below will provide technical info on ADCS as well as\
+        \ exploitation techniques from \n  spectorops certfied preowned white paper.\n\ncommand: |\n \
+        \ #Note that we are just enumarating here. We are not preforming exploitation. There is a linux\
+        \ equalivent called certipy that works much the same way\n  # Find CAs \n  C:Tools\\Certify.exe\
+        \ cas \n\n  # Find templates\n  C:Tools\\Certify.exe find \n\n  # Find vulnerable templates\n\
+        \  C:Tools\\Certify.exe find /vulnerable \n\n\nitems:\n  - Shell\nOS:\n  - Windows\nattack_types:\n\
+        \  - Enumeration\nreferences:\n  - https://github.com/GhostPack/Certify\n  - https://posts.specterops.io/certified-pre-owned-d95910965cd2\n\
+        \  - https://www.thehacker.recipes/ad/movement/adcs/\n\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:89e9f600e7b46cd454a50de79467270a6ceb2fb2b6e356a22a8d151bd7875cac

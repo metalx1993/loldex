@@ -1,0 +1,72 @@
+id: gtfobins/install/privilege-escalation/suid
+type: binary
+platform: linux
+name: install
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: install -m 6777 /path/to/input-file /path/to/output-dir/
+  comment: This can be run with elevated privileges to change permissions (`6` denotes the SUID bits)
+    and then read, write, or execute a file.
+references:
+- https://gtfobins.github.io/gtfobins/install/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        install:
+          functions:
+            privilege-escalation:
+            - code: install -m 6777 /path/to/input-file /path/to/output-dir/
+              comment: This can be run with elevated privileges to change permissions (`6` denotes the
+                SUID bits) and then read, write, or execute a file.
+              contexts:
+                sudo: null
+                suid: null
+    upstream_url: https://gtfobins.github.io/gtfobins/install/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:285346f16d920f57696b38e27127d4d8277da07de6fbdafd4db210e236270730

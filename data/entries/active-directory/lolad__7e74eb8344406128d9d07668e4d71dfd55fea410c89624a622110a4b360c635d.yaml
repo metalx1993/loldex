@@ -1,0 +1,80 @@
+id: lolad/Q2hlY2sgZm9yIEtlcmJlcm9zIFByZS1BdXRoZW50aWNhdGlvbiBEaXNhYmxlZCBBY2NvdW50cw/R2V0LUFEVXNlciAtRmlsdGVyIHtEb2VzTm90UmVxdWlyZVByZUF1dGggLWVxICR0cnVlfSB8IFNlbGVjdCBOYW1lLCBTYW1BY2NvdW50TmFtZQ/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Check for Kerberos Pre-Authentication Disabled Accounts
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} | Select Name, SamAccountName
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Check for Kerberos Pre-Authentication Disabled Accounts
+      command: Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} | Select Name, SamAccountName
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=91
+        row_utf8: "<tr>\r\n\t\t    <td>Check for Kerberos Pre-Authentication Disabled Accounts</td>\r\n\
+          \t\t    <td><code>Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} | Select Name, SamAccountName</code></td>\r\
+          \n\t\t    <td>PowerShell</td>\r\n\t\t    <td><a href=\"https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-aduser\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:83e5b4c06e14d178ddefa33a7e32e0ef8bb08c6c164f0a9cd1532326eb43596b
+        cells:
+        - Check for Kerberos Pre-Authentication Disabled Accounts
+        - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} | Select Name, SamAccountName
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:559973ad73e82a9cd2372fb579908106932ae70377104eca2d7f5f13a5471475

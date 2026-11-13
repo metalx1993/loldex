@@ -1,0 +1,95 @@
+id: gtfobins/pandoc/file-write/sudo
+type: binary
+platform: linux
+name: pandoc
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: echo DATA | pandoc -t plain -o /path/to/output-file
+references:
+- https://gtfobins.github.io/gtfobins/pandoc/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        pandoc:
+          functions:
+            file-read:
+            - binary: false
+              code: pandoc -t plain /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - binary: false
+              code: echo DATA | pandoc -t plain -o /path/to/output-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            inherit:
+            - code: 'echo ''...'' >/path/to/temp-file
+
+                pandoc -L /path/to/temp-file /dev/null'
+              comment: This allows to run Lua code (`...`).
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: lua
+    upstream_url: https://gtfobins.github.io/gtfobins/pandoc/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:ef25a7dd3820db497449356f679e7a6588739e83807934f6c88bb0d621abb917

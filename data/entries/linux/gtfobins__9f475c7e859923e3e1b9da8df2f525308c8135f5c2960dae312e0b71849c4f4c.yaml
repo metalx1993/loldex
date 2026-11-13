@@ -1,0 +1,83 @@
+id: gtfobins/atobm/file-read/suid
+type: binary
+platform: linux
+name: atobm
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: atobm /path/to/input-file
+  comment: Outputs only the first line of the file to standard error without the `-` and `#` characters,
+    this can be customized with the `-c` option, by default is `-c -#`. Content can be retrieved with
+    `awk -F "'" '{printf "%s", $2}'`.
+references:
+- https://gtfobins.github.io/gtfobins/atobm/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        atobm:
+          functions:
+            file-read:
+            - code: atobm /path/to/input-file
+              comment: Outputs only the first line of the file to standard error without the `-` and `#`
+                characters, this can be customized with the `-c` option, by default is `-c -#`. Content
+                can be retrieved with `awk -F "'" '{printf "%s", $2}'`.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/atobm/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:a02b152d5725109815dc9b1bc79217df1c3dcaa2d9c00e0d3f1cb72e592d2830

@@ -1,0 +1,81 @@
+id: wadcoms/Windapsearch
+type: technique
+platform: active-directory
+name: Windapsearch
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: python3 windapsearch --dc-ip 10.10.10.1 -u test.local\\john -p password123 -U -G --da -m "Remote
+    Desktop Users" -C -r
+  comment: "windapsearch enumerates users, groups, and computers from a Windows domain through LDAP queries.\
+    \ The following command enumerates all 3 of the above mentioned using provided credentials.\n\nCommand\
+    \ Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\tUsername: john\n\n\tPassword:\
+    \ password123\n\n\tEnum Users: -U\n\n\tEnum Groups: -G\n\n\tEnum Domain Admins: --da\n\n\tEnum members\
+    \ of group: -m \"Remote Desktop Users\"\n\n\tEnum Computers and resolve DNS: -C -r\n"
+references:
+- https://github.com/ropnop/windapsearch
+- https://www.attackdebris.com/?p=470
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: Windapsearch.md
+      document: "---\ndescription: |\n  windapsearch enumerates users, groups, and computers from a Windows\
+        \ domain through LDAP queries. The following command enumerates all 3 of the above mentioned using\
+        \ provided credentials.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\
+        \n  \tUsername: john\n\n  \tPassword: password123\n\n  \tEnum Users: -U\n\n  \tEnum Groups: -G\n\
+        \n  \tEnum Domain Admins: --da\n\n  \tEnum members of group: -m \"Remote Desktop Users\"\n\n \
+        \ \tEnum Computers and resolve DNS: -C -r\n\ncommand: |\n  python3 windapsearch --dc-ip 10.10.10.1\
+        \ -u test.local\\\\john -p password123 -U -G --da -m \"Remote Desktop Users\" -C -r\nitems:\n\
+        \  - Username\n  - Password\nattack_types:\n  - Enumeration\nOS:\n  - Linux\n  - Windows\nreferences:\n\
+        \  - https://github.com/ropnop/windapsearch\n  - https://www.attackdebris.com/?p=470\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:5b52c00b5b152c59fba022e7dd37d55d7519ac7a817803f065567ec47eb528b5

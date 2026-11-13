@@ -1,0 +1,198 @@
+id: loldrivers/58509acb-50b4-41a0-9de3-76c571a459e3
+type: driver
+platform: windows
+name: msio32.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+driver_detail:
+  samples:
+  - Authentihash:
+      MD5: d7acc8a58b2163f0b070d647e81c49fd
+      SHA1: 0cb0fd5bea730e4eaaec1426b0c15376ccac6d83
+      SHA256: 0d0962db9dc6879067270134801ad425c1f3e85b0dc39877c02aaa9c54aca14e
+    Company: ''
+    Copyright: ''
+    CreationTimestamp: '2018-02-12 02:57:28'
+    Date: ''
+    Description: ''
+    ExportedFunctions: ''
+    FileVersion: ''
+    Filename: ''
+    ImportedFunctions:
+    - ObfDereferenceObject
+    - ZwUnmapViewOfSection
+    - IofCompleteRequest
+    - MmAllocateNonCachedMemory
+    - MmFreeNonCachedMemory
+    - Ke386SetIoAccessMap
+    - ZwOpenSection
+    - IoGetCurrentProcess
+    - IoCreateSymbolicLink
+    - IoCreateDevice
+    - KeTickCount
+    - ObReferenceObjectByHandle
+    - ZwMapViewOfSection
+    - ZwClose
+    - DbgPrint
+    - RtlInitUnicodeString
+    - IoDeleteSymbolicLink
+    - Ke386IoSetAccessProcess
+    - IoDeleteDevice
+    - WRITE_PORT_USHORT
+    - WRITE_PORT_UCHAR
+    - READ_PORT_ULONG
+    - READ_PORT_USHORT
+    - READ_PORT_UCHAR
+    - HalTranslateBusAddress
+    - WRITE_PORT_ULONG
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    InternalName: ''
+    MD5: 9c00a44418a8e719c0034f0d55802693
+    MachineType: I386
+    MagicHeader: 50 45 0 0
+    OriginalFilename: ''
+    PDBPath: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    RichPEHeaderHash:
+      MD5: d1c5b39e151846c2dcb30d3116cba10d
+      SHA1: ef12b9e4550f27b0c74b09f9f6c4e1cfa6d757f7
+      SHA256: ace4fba2c26bcc6e806e2ad3abec8dd0852907ccd429053608e3c639a514d1bc
+    SHA1: 7478eb19b453f82ef99734b8aed1e0911aab9d55
+    SHA256: c7d4943ddac34e1a38692c624d799e634ad4c4e3ae7e3bb2ae4cf0d8eb8985bc
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.282770026975047'
+        Virtual Size: '0x9f0'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.257419198996188'
+        Virtual Size: '0xc3'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '2.5'
+        Virtual Size: '0x8'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.4236305547105035'
+        Virtual Size: '0x32e'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '4.3106029983367184'
+        Virtual Size: '0xe8'
+    Signature: ''
+    Signatures: {}
+    Imphash: 24b344cd341f8b20003ac85be08df979
+    LoadsDespiteHVCI: 'FALSE'
+  sha256: c7d4943ddac34e1a38692c624d799e634ad4c4e3ae7e3bb2ae4cf0d8eb8985bc
+  command_metadata:
+  - Command: ''
+    Description: Confirmed vulnerable driver from Microsoft Block List
+    OperatingSystem: Windows
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 58509acb-50b4-41a0-9de3-76c571a459e3.yaml
+      document: "Id: 58509acb-50b4-41a0-9de3-76c571a459e3\nTags:\n- msio32.sys\nVerified: 'TRUE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-07-22'\nMitreID: T1068\nCVE:\n- ''\nCategory: vulnerable driver\n\
+        Commands:\n  Command: ''\n  Description: Confirmed vulnerable driver from Microsoft Block List\n\
+        \  OperatingSystem: Windows\n  Privileges: kernel\n  Usecase: Elevate privileges\nResources:\n\
+        - https://gist.github.com/mgraeber-rc/1bde6a2a83237f17b463d051d32e802c\nDetection:\n- type: ''\n\
+        \  value: ''\nAcknowledgement:\n  Handle: ''\n  Person: ''\nKnownVulnerableSamples:\n- Authentihash:\n\
+        \    MD5: d7acc8a58b2163f0b070d647e81c49fd\n    SHA1: 0cb0fd5bea730e4eaaec1426b0c15376ccac6d83\n\
+        \    SHA256: 0d0962db9dc6879067270134801ad425c1f3e85b0dc39877c02aaa9c54aca14e\n  Company: ''\n\
+        \  Copyright: ''\n  CreationTimestamp: '2018-02-12 02:57:28'\n  Date: ''\n  Description: ''\n\
+        \  ExportedFunctions: ''\n  FileVersion: ''\n  Filename: ''\n  ImportedFunctions:\n  - ObfDereferenceObject\n\
+        \  - ZwUnmapViewOfSection\n  - IofCompleteRequest\n  - MmAllocateNonCachedMemory\n  - MmFreeNonCachedMemory\n\
+        \  - Ke386SetIoAccessMap\n  - ZwOpenSection\n  - IoGetCurrentProcess\n  - IoCreateSymbolicLink\n\
+        \  - IoCreateDevice\n  - KeTickCount\n  - ObReferenceObjectByHandle\n  - ZwMapViewOfSection\n\
+        \  - ZwClose\n  - DbgPrint\n  - RtlInitUnicodeString\n  - IoDeleteSymbolicLink\n  - Ke386IoSetAccessProcess\n\
+        \  - IoDeleteDevice\n  - WRITE_PORT_USHORT\n  - WRITE_PORT_UCHAR\n  - READ_PORT_ULONG\n  - READ_PORT_USHORT\n\
+        \  - READ_PORT_UCHAR\n  - HalTranslateBusAddress\n  - WRITE_PORT_ULONG\n  Imports:\n  - ntoskrnl.exe\n\
+        \  - HAL.dll\n  InternalName: ''\n  MD5: 9c00a44418a8e719c0034f0d55802693\n  MachineType: I386\n\
+        \  MagicHeader: 50 45 0 0\n  OriginalFilename: ''\n  PDBPath: ''\n  Product: ''\n  ProductVersion:\
+        \ ''\n  Publisher: ''\n  RichPEHeaderHash:\n    MD5: d1c5b39e151846c2dcb30d3116cba10d\n    SHA1:\
+        \ ef12b9e4550f27b0c74b09f9f6c4e1cfa6d757f7\n    SHA256: ace4fba2c26bcc6e806e2ad3abec8dd0852907ccd429053608e3c639a514d1bc\n\
+        \  SHA1: 7478eb19b453f82ef99734b8aed1e0911aab9d55\n  SHA256: c7d4943ddac34e1a38692c624d799e634ad4c4e3ae7e3bb2ae4cf0d8eb8985bc\n\
+        \  Sections:\n    .text:\n      Entropy: 6.282770026975047\n      Virtual Size: '0x9f0'\n    .rdata:\n\
+        \      Entropy: 4.257419198996188\n      Virtual Size: '0xc3'\n    .data:\n      Entropy: 2.5\n\
+        \      Virtual Size: '0x8'\n    INIT:\n      Entropy: 5.4236305547105035\n      Virtual Size:\
+        \ '0x32e'\n    .reloc:\n      Entropy: 4.3106029983367184\n      Virtual Size: '0xe8'\n  Signature:\
+        \ ''\n  Signatures: {}\n  Imphash: 24b344cd341f8b20003ac85be08df979\n  LoadsDespiteHVCI: 'FALSE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:c9e284f5f109e48dcfef3a162a47365d3f3ace4151f3e4982d64bed18cf05ca5

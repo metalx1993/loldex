@@ -1,0 +1,76 @@
+id: wadcoms/LDAPSearch-NoCreds
+type: technique
+platform: active-directory
+name: LDAPSearch NoCreds
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: ldapsearch -LLL -x -H ldap://test.local -b'' -s base '(objectclass=\*)'
+  comment: "ldapsearch is a Linux based tool that opens a connection to an LDAP server, binds, and performs\
+    \ a search using specified parameters. The following command will attempt to find sensitive information\
+    \ (such as leaked creds), by querying all LDAP objects, essentially dumping all the data that an anonymous\
+    \ user can access.\n\nCommand Reference:\n\n\tDomain: test.local\n"
+references:
+- https://linux.die.net/man/1/ldapsearch
+tags:
+- active-directory
+- wadcoms
+- ldap
+source_data:
+  WADComs:
+    raw:
+      file: LDAPSearch-NoCreds.md
+      document: "---\ndescription: |\n  ldapsearch is a Linux based tool that opens a connection to an\
+        \ LDAP server, binds, and performs a search using specified parameters. The following command\
+        \ will attempt to find sensitive information (such as leaked creds), by querying all LDAP objects,\
+        \ essentially dumping all the data that an anonymous user can access.\n\n  Command Reference:\n\
+        \n  \tDomain: test.local\n\ncommand: |\n  ldapsearch -LLL -x -H ldap://test.local -b'' -s base\
+        \ '(objectclass=\\*)'\nitems:\n  - No_Creds\nservices:\n  - LDAP\nOS:\n  - Linux\nattack_types:\n\
+        \  - Enumeration\nreferences:\n  - https://linux.die.net/man/1/ldapsearch\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:540cd3a8394b5a633b0d5774b45558d09772d981b2fc2e51bb3c251ee57666e7

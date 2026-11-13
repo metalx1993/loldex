@@ -1,0 +1,109 @@
+id: lolbas/T1NCaW5hcmllcy9Db250cm9sLnltbA/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Control.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.002
+opsec:
+  noise: high
+  triggers: Control.exe executing files from alternate data streams
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules-emerging-threats/2021/Exploits/CVE-2021-40444/proc_creation_win_exploit_cve_2021_40444.yml
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_control_dll_load.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+  - https://github.com/elastic/detection-rules/blob/0875c1e4c4370ab9fbf453c8160bb5abc8ad95e7/rules/windows/defense_evasion_execution_control_panel_suspicious_args.toml
+  - https://github.com/elastic/detection-rules/blob/61afb1c1c0c3f50637b1bb194f3e6fb09f476e50/rules/windows/defense_evasion_unusual_dir_ads.toml
+commands:
+- template: control.exe {PATH_ABSOLUTE:.cpl}
+  comment: Execute .cpl file. A CPL is a DLL file with CPlApplet export function)
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Control/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Control.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.002
+      source_file: OSBinaries/Control.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Control.exe\nDescription: Binary used to launch controlpanel items in\
+        \ Windows\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: control.exe {PATH_ABSOLUTE}:evil.dll\n\
+        \    Description: Execute evil.dll which is stored in an Alternate Data Stream (ADS).\n    Usecase:\
+        \ Can be used to evade defensive countermeasures or to hide as a persistence mechanism\n    Category:\
+        \ ADS\n    Privileges: User\n    MitreID: T1218.002\n    OperatingSystem: Windows vista, Windows\
+        \ 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\n  - Command:\
+        \ control.exe {PATH_ABSOLUTE:.cpl}\n    Description: Execute .cpl file. A CPL is a DLL file with\
+        \ CPlApplet export function)\n    Usecase: Use to execute code and bypass application whitelisting\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1218.002\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute:\
+        \ DLL\nFull_Path:\n  - Path: C:\\Windows\\System32\\control.exe\n  - Path: C:\\Windows\\SysWOW64\\\
+        control.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules-emerging-threats/2021/Exploits/CVE-2021-40444/proc_creation_win_exploit_cve_2021_40444.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_control_dll_load.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/0875c1e4c4370ab9fbf453c8160bb5abc8ad95e7/rules/windows/defense_evasion_execution_control_panel_suspicious_args.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/61afb1c1c0c3f50637b1bb194f3e6fb09f476e50/rules/windows/defense_evasion_unusual_dir_ads.toml\n\
+        \  - IOC: Control.exe executing files from alternate data streams\n  - IOC: Control.exe executing\
+        \ library file without cpl extension\n  - IOC: Suspicious network connections from control.exe\n\
+        Resources:\n  - Link: https://pentestlab.blog/2017/05/24/applocker-bypass-control-panel/\n  -\
+        \ Link: https://www.contextis.com/resources/blog/applocker-bypass-registry-key-manipulation/\n\
+        \  - Link: https://twitter.com/bohops/status/955659561008017409\n  - Link: https://docs.microsoft.com/en-us/windows/desktop/shell/executing-control-panel-items\n\
+        \  - Link: https://bohops.com/2018/01/23/loading-alternate-data-stream-ads-dll-cpl-binaries-to-bypass-applocker/\n\
+        Acknowledgement:\n  - Person: Jimmy\n    Handle: '@bohops'\n"
+      document_sha256: sha256:a6020ab74352f4cef7a7e0a15785b481f1d5ff6ddcda73e4f0294331f71348c6
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Control/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.002
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:4e51b80a31926742f1e3476ff3169585e4a4d48b21b13062269be78351c018e1

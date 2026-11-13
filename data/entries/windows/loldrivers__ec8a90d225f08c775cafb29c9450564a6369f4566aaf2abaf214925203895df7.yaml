@@ -1,0 +1,147 @@
+id: loldrivers/a2177b22-0401-4c31-8ae4-40a7e2a53653
+type: driver
+platform: windows
+name: dtr_ec.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create dtr_ec binPath=C:\windows\temp\dtr_ec.sys type=kernel && sc.exe start dtr_ec
+  comment: dtr_ec.sys is a Dell kernel driver that ships as part of the Dell Feature Enhancement Pack
+    (DFEP) on Dell laptops and desktops. The driver provides unrestricted read/write access to Embedded
+    Controller (EC) registers across 5 ACPI address spaces from usermode with no validation on the register
+    addresses or values. The Embedded Controller manages critical hardware functions including thermal
+    management, battery charging, fan control, power states, and keyboard input. Unrestricted EC register
+    access allows manipulation of thermal thresholds to cause hardware damage or forced shutdowns, modification
+    of fan speed controls, interference with battery charging logic, and alteration of power management
+    behavior. Dell PSIRT has confirmed the vulnerability and triaged it as P2 severity on Bugcrowd.
+driver_detail:
+  samples:
+  - Filename: dtr_ec.sys
+    SHA256: d6cc311cd7f8232549a5597512facac44e63d5c808878f54c0c1c12482cf270f
+    Signature: ''
+    Date: ''
+    Publisher: ''
+    Company: Dell Technologies
+    Description: Dell Thermal Resource
+    Product: Dell Feature Enhancement Pack
+    ProductVersion: ''
+    FileVersion: ''
+    MachineType: AMD64
+    OriginalFilename: ''
+    Sections: {}
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: ''
+    InternalName: ''
+    Copyright: ''
+    Imports: []
+    ExportedFunctions: ''
+    ImportedFunctions: ''
+    Signatures: []
+    LoadsDespiteHVCI: 'FALSE'
+  sha256: d6cc311cd7f8232549a5597512facac44e63d5c808878f54c0c1c12482cf270f
+  signer: Dell Technologies
+  command_metadata:
+  - Command: sc.exe create dtr_ec binPath=C:\windows\temp\dtr_ec.sys type=kernel && sc.exe start dtr_ec
+    Description: dtr_ec.sys is a Dell kernel driver that ships as part of the Dell Feature Enhancement
+      Pack (DFEP) on Dell laptops and desktops. The driver provides unrestricted read/write access to
+      Embedded Controller (EC) registers across 5 ACPI address spaces from usermode with no validation
+      on the register addresses or values. The Embedded Controller manages critical hardware functions
+      including thermal management, battery charging, fan control, power states, and keyboard input. Unrestricted
+      EC register access allows manipulation of thermal thresholds to cause hardware damage or forced
+      shutdowns, modification of fan speed controls, interference with battery charging logic, and alteration
+      of power management behavior. Dell PSIRT has confirmed the vulnerability and triaged it as P2 severity
+      on Bugcrowd.
+    Usecase: Elevate privileges
+    Privileges: kernel
+    OperatingSystem: Windows 10
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/293
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: a2177b22-0401-4c31-8ae4-40a7e2a53653.yaml
+      document: "Id: a2177b22-0401-4c31-8ae4-40a7e2a53653\nTags:\n- dtr_ec.sys\nVerified: 'FALSE'\nAuthor:\
+        \ Michael Haag\nCreated: '2026-04-13'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \  Command: sc.exe create dtr_ec binPath=C:\\windows\\temp\\dtr_ec.sys type=kernel &&\n    sc.exe\
+        \ start dtr_ec\n  Description: dtr_ec.sys is a Dell kernel driver that ships as part of the Dell\n\
+        \    Feature Enhancement Pack (DFEP) on Dell laptops and desktops. The driver provides\n    unrestricted\
+        \ read/write access to Embedded Controller (EC) registers across 5 ACPI\n    address spaces from\
+        \ usermode with no validation on the register addresses or values.\n    The Embedded Controller\
+        \ manages critical hardware functions including thermal\n    management, battery charging, fan\
+        \ control, power states, and keyboard input.\n    Unrestricted EC register access allows manipulation\
+        \ of thermal thresholds to cause\n    hardware damage or forced shutdowns, modification of fan\
+        \ speed controls, interference\n    with battery charging logic, and alteration of power management\
+        \ behavior. Dell PSIRT\n    has confirmed the vulnerability and triaged it as P2 severity on Bugcrowd.\n\
+        \  Usecase: Elevate privileges\n  Privileges: kernel\n  OperatingSystem: Windows 10\nResources:\n\
+        - https://github.com/magicsword-io/LOLDrivers/issues/293\nDetection: []\nAcknowledgement:\n  Person:\
+        \ Patrick Saif\n  Handle: '@weezerOSINT'\nKnownVulnerableSamples:\n- Filename: dtr_ec.sys\n  SHA256:\
+        \ d6cc311cd7f8232549a5597512facac44e63d5c808878f54c0c1c12482cf270f\n  Signature: ''\n  Date: ''\n\
+        \  Publisher: ''\n  Company: Dell Technologies\n  Description: Dell Thermal Resource\n  Product:\
+        \ Dell Feature Enhancement Pack\n  ProductVersion: ''\n  FileVersion: ''\n  MachineType: AMD64\n\
+        \  OriginalFilename: ''\n  Sections: {}\n  MagicHeader: 50 45 0 0\n  CreationTimestamp: ''\n \
+        \ InternalName: ''\n  Copyright: ''\n  Imports: []\n  ExportedFunctions: ''\n  ImportedFunctions:\
+        \ ''\n  Signatures: []\n  LoadsDespiteHVCI: 'FALSE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:83fd3d57adfe12ee6c8fe137d3763abe6e93ff8d6c71af355f0158f3904620bd

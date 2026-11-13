@@ -1,0 +1,116 @@
+id: wadcoms/PwshADmodule-Initial-Enum
+type: technique
+platform: active-directory
+name: PwshADmodule Initial Enum
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+commands:
+- template: '#Getting all DCs in the forest
+
+    (Get-ADForest).Domains | % { Get-ADDomainController -DomainName $_ -Discover }
+
+
+    #Getting all users in the forest
+
+    (Get-ADForest).Domains | % { Get-ADUser -Filter * -Server $_ }
+
+
+    #Getting all computers in the forest
+
+    (Get-ADForest).Domains | % { Get-ADComputer -Filter * -Server $_ }
+
+
+    #Mapping out entire trust relationships
+
+    Get-ADTrust -Filter ''(intraForest -ne $True) -and (ForestTransitive -ne $True)'' | Select-Object
+    Source,Target,Name
+
+
+    #Getting all groups in a domain. Note that the select statement will limit the output to only the
+    matching fields the object contains
+
+    Get-ADGroup -Filter * | Select-Object SamAccountName, GroupScope, DistinguishedName'
+  comment: 'These commands provide a quick refernece for using the AD module to get situational awerness
+    of the AD environment.
+
+    Note that to get more commands that you can run, use the get command cmdlet, e.g. `Get-Command -Module
+    ActiveDirectory` But Thes
+
+    are the standard commands that will get you standard. Feel free to replace the first pipe with the
+    -server "your domain" if you dont want
+
+    to enumarate the entire forest. For more info on using the AD module, please check out our discussion
+    on the AD module in WADCOMs.
+
+    '
+references:
+- https://docs.microsoft.com/en-us/powershell/module/activedirectory/
+- https://github.com/samratashok/ADModule
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: PwshADmodule-Initial-Enum.md
+      document: "---\ndescription: |\n  These commands provide a quick refernece for using the AD module\
+        \ to get situational awerness of the AD environment.\n  Note that to get more commands that you\
+        \ can run, use the get command cmdlet, e.g. `Get-Command -Module ActiveDirectory` But Thes\n \
+        \ are the standard commands that will get you standard. Feel free to replace the first pipe with\
+        \ the -server \"your domain\" if you dont want\n  to enumarate the entire forest. For more info\
+        \ on using the AD module, please check out our discussion on the AD module in WADCOMs.\n\ncommand:\
+        \ |\n  #Getting all DCs in the forest\n  (Get-ADForest).Domains | % { Get-ADDomainController -DomainName\
+        \ $_ -Discover }\n\n  #Getting all users in the forest\n  (Get-ADForest).Domains | % { Get-ADUser\
+        \ -Filter * -Server $_ }\n\n  #Getting all computers in the forest\n  (Get-ADForest).Domains |\
+        \ % { Get-ADComputer -Filter * -Server $_ }\n\n  #Mapping out entire trust relationships\n  Get-ADTrust\
+        \ -Filter '(intraForest -ne $True) -and (ForestTransitive -ne $True)' | Select-Object Source,Target,Name\n\
+        \n  #Getting all groups in a domain. Note that the select statement will limit the output to only\
+        \ the matching fields the object contains\n  Get-ADGroup -Filter * | Select-Object SamAccountName,\
+        \ GroupScope, DistinguishedName\n\nOS:\n  - Windows\nattack_types:\n  - Enumeration\nreferences:\n\
+        \  - https://docs.microsoft.com/en-us/powershell/module/activedirectory/\n  - https://github.com/samratashok/ADModule\n\
+        ---"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:70de95a82841c460884f18b135ea98ffcd93cfb9f87e724d7cab4d022e233ff1

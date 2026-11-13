@@ -1,0 +1,90 @@
+id: lolbas/T1NMaWJyYXJpZXMvUGN3dXRsLnltbA/RXhlY3V0ZQ/0
+type: library
+platform: windows
+name: Pcwutl.dll
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.011
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+commands:
+- template: rundll32.exe pcwutl.dll,LaunchApplication {PATH:.exe}
+  comment: Launch executable by calling the LaunchApplication function.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Pcwutl/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Pcwutl.dll
+      category: Execute
+      privileges: User
+      mitre_id: T1218.011
+      source_file: OSLibraries/Pcwutl.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Pcwutl.dll\nDescription: Microsoft HTML Viewer\nAuthor: LOLBAS Team\n\
+        Created: 2018-05-25\nCommands:\n  - Command: rundll32.exe pcwutl.dll,LaunchApplication {PATH:.exe}\n\
+        \    Description: Launch executable by calling the LaunchApplication function.\n    Usecase: Launch\
+        \ an executable.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.011\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: c:\\windows\\\
+        system32\\pcwutl.dll\n  - Path: c:\\windows\\syswow64\\pcwutl.dll\nDetection:\n  - Analysis: https://redcanary.com/threat-detection-report/techniques/rundll32/\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml\n\
+        Resources:\n  - Link: https://twitter.com/harr0ey/status/989617817849876488\n  - Link: https://windows10dll.nirsoft.net/pcwutl_dll.html\n\
+        Acknowledgement:\n  - Person: Matt harr0ey\n    Handle: '@harr0ey'\n"
+      document_sha256: sha256:db70b10c81176f2ac8982eeff5aa4e1fab7e7fae69e75e0e8ea22cde8479be3e
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Pcwutl/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.011
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:0bc9918b5dbdbb9ae555c376ea2ef93f3c939ffc63eb9ca4b5fc06f60da6a24f

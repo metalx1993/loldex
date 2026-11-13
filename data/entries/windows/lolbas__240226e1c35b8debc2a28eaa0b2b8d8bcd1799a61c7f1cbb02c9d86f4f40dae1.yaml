@@ -1,0 +1,100 @@
+id: lolbas/T1NCaW5hcmllcy9OZXRzaC55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Netsh.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1546.007
+opsec:
+  noise: high
+  triggers: Netsh initiating a network connection
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_netsh_helper_dll_persistence.yml
+  - https://github.com/splunk/security_content/blob/2b87b26bdc2a84b65b1355ffbd5174bdbdb1879c/detections/endpoint/processes_launching_netsh.yml
+  - https://github.com/splunk/security_content/blob/08ed88bd88259c03c771c30170d2934ed0a8f878/detections/deprecated/processes_created_by_netsh.yml
+commands:
+- template: netsh.exe add helper {PATH_ABSOLUTE:.dll}
+  comment: Use Netsh in order to execute a .dll file and also gain persistence, every time the netsh command
+    is called
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Netsh/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Netsh.exe
+      category: Execute
+      privileges: Admin
+      mitre_id: T1546.007
+      source_file: OSBinaries/Netsh.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Netsh.exe\nDescription: Netsh is a Windows tool used to manipulate network\
+        \ interface settings.\nAuthor: Freddie Barr-Smith\nCreated: 2019-12-24\nCommands:\n  - Command:\
+        \ netsh.exe add helper {PATH_ABSOLUTE:.dll}\n    Description: Use Netsh in order to execute a\
+        \ .dll file and also gain persistence, every time the netsh command is called\n    Usecase: Proxy\
+        \ execution of .dll\n    Category: Execute\n    Privileges: Admin\n    MitreID: T1546.007\n  \
+        \  OperatingSystem: Windows Vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n\
+        \    Tags:\n      - Execute: DLL\nFull_Path:\n  - Path: C:\\WINDOWS\\System32\\Netsh.exe\n  -\
+        \ Path: C:\\WINDOWS\\SysWOW64\\Netsh.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_netsh_helper_dll_persistence.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/2b87b26bdc2a84b65b1355ffbd5174bdbdb1879c/detections/endpoint/processes_launching_netsh.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/08ed88bd88259c03c771c30170d2934ed0a8f878/detections/deprecated/processes_created_by_netsh.yml\n\
+        \  - IOC: Netsh initiating a network connection\nResources:\n  - Link: https://freddiebarrsmith.com/trix/trix.html\n\
+        \  - Link: https://htmlpreview.github.io/?https://github.com/MatthewDemaske/blogbackup/blob/master/netshell.html\n\
+        \  - Link: https://liberty-shell.com/sec/2018/07/28/netshlep/\nAcknowledgement:\n  - Person: 'Freddie\
+        \ Barr-Smith'\n    Handle:\n  - Person: 'Riccardo Spolaor'\n    Handle:\n  - Person: 'Mariano\
+        \ Graziano'\n    Handle:\n  - Person: 'Xabier Ugarte-Pedrero'\n    Handle:\n"
+      document_sha256: sha256:badd871521bc2f789b3e9d3013ca3df896dc1a0dcc1202ffcf4c80cd49daa744
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Netsh/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1546.007
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:fb7fdd581011ce2af2794673f30b2765a8e0c6f595bc19a6d928faf47e844e1e

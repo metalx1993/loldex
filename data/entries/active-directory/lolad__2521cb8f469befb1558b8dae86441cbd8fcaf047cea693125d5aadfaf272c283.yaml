@@ -1,0 +1,80 @@
+id: lolad/TGlzdCBQcml2aWxlZ2VzIGZvciBhIFNwZWNpZmljIEdyb3Vw/R2V0LUFER3JvdXBNZW1iZXIgLUlkZW50aXR5ICJFbnRlcnByaXNlIEFkbWlucyIgfCBTZWxlY3QgTmFtZSwgU2FtQWNjb3VudE5hbWU/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: List Privileges for a Specific Group
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADGroupMember -Identity "Enterprise Admins" | Select Name, SamAccountName
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List Privileges for a Specific Group
+      command: Get-ADGroupMember -Identity "Enterprise Admins" | Select Name, SamAccountName
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=104
+        row_utf8: "<tr>\r\n\t\t    <td>List Privileges for a Specific Group</td>\r\n\t\t    <td><code>Get-ADGroupMember\
+          \ -Identity \"Enterprise Admins\" | Select Name, SamAccountName</code></td>\r\n\t\t    <td>PowerShell</td>\r\
+          \n\t\t    <td><a href=\"https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adgroupmember\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:fa424d3e7805e2c8210e0fbd63b1b0d39846c04b31e7adb6447137bcaa53618e
+        cells:
+        - List Privileges for a Specific Group
+        - Get-ADGroupMember -Identity "Enterprise Admins" | Select Name, SamAccountName
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:f327fa3d3fcb5357af016986375a28dca147cd0c82700d1fd9ebe459fdd5b5bd

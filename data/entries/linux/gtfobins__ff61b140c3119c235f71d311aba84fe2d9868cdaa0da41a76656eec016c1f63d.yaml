@@ -1,0 +1,86 @@
+id: gtfobins/npm/shell/unprivileged
+type: binary
+platform: linux
+name: npm
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: npm exec /bin/sh
+- template: 'echo ''{"scripts": {"preinstall": "/bin/sh"}}'' >package.json
+
+    npm -C . i'
+- template: 'echo ''{"scripts": {"xxx": "/bin/sh"}}'' >package.json
+
+    npm -C . run xxx'
+references:
+- https://gtfobins.github.io/gtfobins/npm/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        npm:
+          functions:
+            shell:
+            - code: npm exec /bin/sh
+              contexts:
+                sudo: null
+                unprivileged: null
+            - code: 'echo ''{"scripts": {"preinstall": "/bin/sh"}}'' >package.json
+
+                npm -C . i'
+              contexts:
+                sudo: null
+                unprivileged: null
+            - code: 'echo ''{"scripts": {"xxx": "/bin/sh"}}'' >package.json
+
+                npm -C . run xxx'
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/npm/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:2a48737383a3a4303cd1524617ca9d341bc9d316c4b2ea97f678021d7666ec2d

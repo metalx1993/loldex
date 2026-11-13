@@ -1,0 +1,79 @@
+id: lolad/RW51bWVyYXRlIEFsbCBSZWdpc3RyeSBLZXlz/cmVnIHF1ZXJ5IEhLTE0/Q01E
+type: technique
+platform: active-directory
+name: Enumerate All Registry Keys
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: reg query HKLM
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: Enumerate All Registry Keys
+      command: reg query HKLM
+      type: CMD
+      reference: SS64 - Reg Command
+      physical_rows:
+      - input_ref: index.html#row=112
+        row_utf8: "<tr>\r\n\t            <td>Enumerate All Registry Keys</td>\r\n\t            <td><code>reg\
+          \ query HKLM</code></td>\r\n\t            <td>CMD</td>\r\n\t            <td><a href=\"https://ss64.com/nt/\"\
+          \ target=\"_blank\">SS64 - Reg Command</a></td>\r\n\t        </tr>"
+        row_sha256: sha256:4aef392639c3354ba3265a56b32d7e0381b7eaf69a4b2b5858af8ce1124aa3c4
+        cells:
+        - Enumerate All Registry Keys
+        - reg query HKLM
+        - CMD
+        - SS64 - Reg Command
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:8a4ef39be9e4241268e4613a24e926b7e3d4732f0d2cf0190312a75715db83ab

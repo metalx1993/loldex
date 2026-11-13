@@ -1,0 +1,83 @@
+id: wadcoms/Impacket-NTLMRelayX-WPAD
+type: technique
+platform: active-directory
+name: Impacket NTLMRelayX WPAD
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: python3 ntlmrelayx.py -t ldaps://dc.test.local -wh test-wpad --delegate-access
+  comment: "Impacket's ntlmrelayx.py performs NTLM Relay Attacks, creating an SMB and HTTP server and\
+    \ relaying credentials to various different protocols (SMB, HTTP, LDAP, etc.).\n\nThe below command\
+    \ will perform WPAD spoofing to force the victim machine to authenticate to the attacker controlled\
+    \ host. The command will then relay the authentication to create a new computer object and grant it\
+    \ delegation rights to impersonate users on the victim machine. This command should be used in conjunction\
+    \ with mitm6.\n\nCommand Reference:\n\n\tTarget Domain Controller: dc.test.local\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py
+- https://dirkjanm.io/worst-of-both-worlds-ntlm-relaying-and-kerberos-delegation/
+tags:
+- active-directory
+- wadcoms
+- ntlm
+- ldap
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-NTLMRelayX-WPAD.md
+      document: "---\ndescription: |\n  Impacket's ntlmrelayx.py performs NTLM Relay Attacks, creating\
+        \ an SMB and HTTP server and relaying credentials to various different protocols (SMB, HTTP, LDAP,\
+        \ etc.).\n\n  The below command will perform WPAD spoofing to force the victim machine to authenticate\
+        \ to the attacker controlled host. The command will then relay the authentication to create a\
+        \ new computer object and grant it delegation rights to impersonate users on the victim machine.\
+        \ This command should be used in conjunction with mitm6.\n\n  Command Reference:\n\n  \tTarget\
+        \ Domain Controller: dc.test.local\n\ncommand: |\n  python3 ntlmrelayx.py -t ldaps://dc.test.local\
+        \ -wh test-wpad --delegate-access\nitems:\n  - No_Creds\nservices:\n  - NTLM\n  - LDAP\nOS:\n\
+        \  - Linux\n  - Windows\nattack_types:\n  - Exploitation\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py\n\
+        \  - https://dirkjanm.io/worst-of-both-worlds-ntlm-relaying-and-kerberos-delegation/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:f0d123ebda4dfc77679f68c45b01b73d95fae77b2666c2fd467807afdc3b79e7

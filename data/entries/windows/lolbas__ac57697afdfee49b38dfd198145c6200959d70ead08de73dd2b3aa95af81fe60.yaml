@@ -1,0 +1,96 @@
+id: lolbas/T1NCaW5hcmllcy9Nc2NvbmZpZy55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Msconfig.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: mscfgtlc.xml changes in system32 folder
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_uac_bypass_msconfig_gui.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/file/file_event/file_event_win_uac_bypass_msconfig_gui.yml
+commands:
+- template: Msconfig.exe -5
+  comment: Executes command embeded in crafted c:\windows\system32\mscfgtlc.xml.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Msconfig/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Msconfig.exe
+      category: Execute
+      privileges: Administrator
+      mitre_id: T1218
+      source_file: OSBinaries/Msconfig.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Msconfig.exe\nDescription: MSConfig is a troubleshooting tool which is\
+        \ used to temporarily disable or re-enable software, device drivers or Windows services that run\
+        \ during startup process to help the user determine the cause of a problem with Windows\nAuthor:\
+        \ Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: Msconfig.exe -5\n    Description: Executes\
+        \ command embeded in crafted c:\\windows\\system32\\mscfgtlc.xml.\n    Usecase: Code execution\
+        \ using Msconfig.exe\n    Category: Execute\n    Privileges: Administrator\n    MitreID: T1218\n\
+        \    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10\n    Tags:\n\
+        \      - Execute: CMD\nFull_Path:\n  - Path: C:\\Windows\\System32\\msconfig.exe\nCode_Sample:\n\
+        \  - Code: https://raw.githubusercontent.com/LOLBAS-Project/LOLBAS/master/OSBinaries/Payload/mscfgtlc.xml\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_uac_bypass_msconfig_gui.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/file/file_event/file_event_win_uac_bypass_msconfig_gui.yml\n\
+        \  - IOC: mscfgtlc.xml changes in system32 folder\nResources:\n  - Link: https://twitter.com/pabraeken/status/991314564896690177\n\
+        Acknowledgement:\n  - Person: Pierre-Alexandre Braeken\n    Handle: '@pabraeken'\n"
+      document_sha256: sha256:da62e72fff8a220c08166b47765e8f446eb75da8595368939530e642eddac04f
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Msconfig/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:0d5a0ff82fd3c97920378b3e145a5d81a9db7c8cb3a191ee766a75305f6bad23

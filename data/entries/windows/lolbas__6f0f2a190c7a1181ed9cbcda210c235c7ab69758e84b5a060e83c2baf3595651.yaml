@@ -1,0 +1,112 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0FjY0NoZWNrQ29uc29sZS55bWw/QVdMIEJ5cGFzcw/1
+type: binary
+platform: windows
+name: AccCheckConsole.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: medium
+  triggers: Sysmon Event ID 1 - Process Creation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_susp_acccheckconsole.yml
+commands:
+- template: AccCheckConsole.exe -window "Untitled - Notepad" {PATH_ABSOLUTE:.dll}
+  comment: Load a managed DLL in the context of AccCheckConsole.exe. The -window switch value can be set
+    to an arbitrary active window name.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/AccCheckConsole/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: AccCheckConsole.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/AccCheckConsole.yml
+      command_source_index: 1
+      document_utf8: "---\nName: AccCheckConsole.exe\nDescription: Verifies UI accessibility requirements\n\
+        Author: bohops\nCreated: 2022-01-02\nCommands:\n  - Command: AccCheckConsole.exe -window \"Untitled\
+        \ - Notepad\" {PATH_ABSOLUTE:.dll}\n    Description: Load a managed DLL in the context of AccCheckConsole.exe.\
+        \ The -window switch value can be set to an arbitrary active window name.\n    Usecase: Local\
+        \ execution of managed code from assembly DLL.\n    Category: Execute\n    Privileges: User\n\
+        \    MitreID: T1218\n    OperatingSystem: Windows\n    Tags:\n      - Execute: DLL (.NET)\n  -\
+        \ Command: AccCheckConsole.exe -window \"Untitled - Notepad\" {PATH_ABSOLUTE:.dll}\n    Description:\
+        \ Load a managed DLL in the context of AccCheckConsole.exe. The -window switch value can be set\
+        \ to an arbitrary active window name.\n    Usecase: Local execution of managed code to bypass\
+        \ AppLocker.\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows\n    Tags:\n      - Execute: DLL (.NET)\nFull_Path:\n  - Path: C:\\Program Files (x86)\\\
+        Windows Kits\\10\\bin\\10.0.22000.0\\x86\\AccChecker\\AccCheckConsole.exe\n  - Path: C:\\Program\
+        \ Files (x86)\\Windows Kits\\10\\bin\\10.0.22000.0\\x64\\AccChecker\\AccCheckConsole.exe\n  -\
+        \ Path: C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.22000.0\\arm\\AccChecker\\AccCheckConsole.exe\n\
+        \  - Path: C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.22000.0\\arm64\\AccChecker\\AccCheckConsole.exe\n\
+        Code_Sample:\n  - Code: https://docs.microsoft.com/en-us/windows/win32/winauto/custom-verification-routines\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_susp_acccheckconsole.yml\n\
+        \  - IOC: Sysmon Event ID 1 - Process Creation\n  - Analysis: https://gist.github.com/bohops/2444129419c8acf837aedda5f0e7f340\n\
+        Resources:\n  - Link: https://gist.github.com/bohops/2444129419c8acf837aedda5f0e7f340\n  - Link:\
+        \ https://twitter.com/bohops/status/1477717351017680899\nAcknowledgement:\n  - Person: Jimmy\n\
+        \    Handle: '@bohops'\n"
+      document_sha256: sha256:3d8cb58288a6910c8bab7a249a75e01f379bdc32bf4d34d2b55e8cf0e33f6da2
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/AccCheckConsole/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:547a83df00a7893ecdfe6ecefc3fafdfb3a66ea137477b8615681376ba976927

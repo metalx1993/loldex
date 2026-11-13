@@ -1,0 +1,81 @@
+id: gtfobins/opencode/command/unprivileged
+type: binary
+platform: linux
+name: opencode
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'opencode
+
+    ! /path/to/command'
+references:
+- https://gtfobins.github.io/gtfobins/opencode/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        opencode:
+          functions:
+            command:
+            - code: 'opencode
+
+                ! /path/to/command'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            inherit:
+            - code: opencode db '...'
+              comment: This allows to run SQLite queries (`...`) provided that `sqlite3` is installed.
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: sqlite3
+    upstream_url: https://gtfobins.github.io/gtfobins/opencode/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:78221f39cf3130ffe0ca390fdce55c63e2f3507bbdabdb21b3b7aeb8dc44423a

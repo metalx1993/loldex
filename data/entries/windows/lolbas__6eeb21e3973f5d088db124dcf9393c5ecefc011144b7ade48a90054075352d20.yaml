@@ -1,0 +1,95 @@
+id: lolbas/T1NTY3JpcHRzL0NsX2ludm9jYXRpb24ueW1s/RXhlY3V0ZQ/0
+type: script
+platform: windows
+name: CL_Invocation.ps1
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+aliases:
+- cl_invocation
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_cl_invocation.yml
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/powershell/powershell_script/posh_ps_cl_invocation_lolscript.yml
+commands:
+- template: . C:\Windows\diagnostics\system\AERO\CL_Invocation.ps1   \nSyncInvoke {CMD}
+  comment: Import the PowerShell Diagnostic CL_Invocation script and call SyncInvoke to launch an executable.
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Cl_invocation/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: CL_Invocation.ps1
+      category: Execute
+      privileges: User
+      mitre_id: T1216
+      source_file: OSScripts/Cl_invocation.yml
+      command_source_index: 0
+      document_utf8: "---\nName: CL_Invocation.ps1\nDescription: Aero diagnostics script\nAuthor: Oddvar\
+        \ Moe\nCreated: 2018-05-25\nCommands:\n  - Command: . C:\\Windows\\diagnostics\\system\\AERO\\\
+        CL_Invocation.ps1   \\nSyncInvoke {CMD}\n    Description: Import the PowerShell Diagnostic CL_Invocation\
+        \ script and call SyncInvoke to launch an executable.\n    Usecase: Proxy execution\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1216\n    OperatingSystem: Windows 10\n    Tags:\n\
+        \      - Execute: CMD\nFull_Path:\n  - Path: C:\\Windows\\diagnostics\\system\\AERO\\CL_Invocation.ps1\n\
+        \  - Path: C:\\Windows\\diagnostics\\system\\Audio\\CL_Invocation.ps1\n  - Path: C:\\Windows\\\
+        diagnostics\\system\\WindowsUpdate\\CL_Invocation.ps1\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_cl_invocation.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/powershell/powershell_script/posh_ps_cl_invocation_lolscript.yml\n\
+        Acknowledgement:\n  - Person: Jimmy\n    Handle: '@bohops'\n  - Person: Pierre-Alexandre Braeken\n\
+        \    Handle: '@pabraeken'\n"
+      document_sha256: sha256:dd382b984e9c0f9526b1dba7b0760a7045e8c017ca56b8808a39bce5f9902588
+    upstream_url: https://lolbas-project.github.io/lolbas/Scripts/Cl_invocation/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1216
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:d223fbf7e787e167c20749e4d0878b0b8667ad641993a6565932f22a76591b95

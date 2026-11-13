@@ -1,0 +1,96 @@
+id: gtfobins/jshell/file-write/unprivileged
+type: binary
+platform: linux
+name: jshell
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'jshell
+
+    String x = "DATA";
+
+    /save /path/to/output-file'
+  comment: Writes only the valid Java code to file.
+references:
+- https://gtfobins.github.io/gtfobins/jshell/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        jshell:
+          functions:
+            file-read:
+            - binary: false
+              code: 'jshell
+
+                jshell> /open /path/to/input-file'
+              comment: The content is leaked as error messages.
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-write:
+            - binary: false
+              code: 'jshell
+
+                String x = "DATA";
+
+                /save /path/to/output-file'
+              comment: Writes only the valid Java code to file.
+              contexts:
+                sudo: null
+                unprivileged: null
+            shell:
+            - blind: true
+              code: 'jshell
+
+                Runtime.getRuntime().exec("/path/to/command");'
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/jshell/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:a4910dc581acbeb3a0daac245dd1beca192ee10bb6f2739a9a76e1fadae698a2

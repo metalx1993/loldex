@@ -1,0 +1,121 @@
+id: lolbas/T1NCaW5hcmllcy9NaWNyb3NvZnQuV29ya2Zsb3cuQ29tcGlsZXIueW1s/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Microsoft.Workflow.Compiler.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+aliases:
+- microsoft.workflow.compiler
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: Microsoft.Workflow.Compiler.exe would not normally be run on workstations.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_workflow_compiler.yml
+  - https://github.com/splunk/security_content/blob/961a81d4a5cb5c5febec4894d6d812497171a85c/detections/endpoint/suspicious_microsoft_workflow_compiler_usage.yml
+  - https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/suspicious_microsoft_workflow_compiler_rename.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+commands:
+- template: Microsoft.Workflow.Compiler.exe {PATH} {PATH:.log}
+  comment: Compile and execute C# or VB.net code in a XOML file referenced in the test.txt file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Microsoft.Workflow.Compiler/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Microsoft.Workflow.Compiler.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OSBinaries/Microsoft.Workflow.Compiler.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Microsoft.Workflow.Compiler.exe\nDescription: A utility included with\
+        \ .NET that is capable of compiling and executing C# or VB.net code.\nAuthor: Conor Richard\n\
+        Created: 2018-10-22\nCommands:\n  - Command: Microsoft.Workflow.Compiler.exe {PATH} {PATH:.log}\n\
+        \    Description: Compile and execute C# or VB.net code in a XOML file referenced in the first\
+        \ argument (any extension accepted).\n    Usecase: Compile and run code\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows 10S, Windows 11\n    Tags:\n\
+        \      - Execute: VB.Net\n      - Execute: Csharp\n  - Command: Microsoft.Workflow.Compiler.exe\
+        \ {PATH} {PATH:.log}\n    Description: Compile and execute C# or VB.net code in a XOML file referenced\
+        \ in the test.txt file.\n    Usecase: Compile and run code\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1127\n    OperatingSystem: Windows 10S, Windows 11\n    Tags:\n      - Execute:\
+        \ XOML\n  - Command: Microsoft.Workflow.Compiler.exe {PATH} {PATH:.log}\n    Description: Compile\
+        \ and execute C# or VB.net code in a XOML file referenced in the test.txt file.\n    Usecase:\
+        \ Compile and run code\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1127\n \
+        \   OperatingSystem: Windows 10S, Windows 11\n    Tags:\n      - Execute: XOML\nFull_Path:\n \
+        \ - Path: C:\\Windows\\Microsoft.Net\\Framework64\\v4.0.30319\\Microsoft.Workflow.Compiler.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_workflow_compiler.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/961a81d4a5cb5c5febec4894d6d812497171a85c/detections/endpoint/suspicious_microsoft_workflow_compiler_usage.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/18f63553a9dc1a34122fa123deae2b2f9b9ea391/detections/endpoint/suspicious_microsoft_workflow_compiler_rename.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml\n\
+        \  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - IOC: Microsoft.Workflow.Compiler.exe would not normally be run on workstations.\n  - IOC:\
+        \ The presence of csc.exe or vbc.exe as child processes of Microsoft.Workflow.Compiler.exe\n \
+        \ - IOC: Presence of \"<CompilerInput\" in a text file.\nResources:\n  - Link: https://twitter.com/mattifestation/status/1030445200475185154\n\
+        \  - Link: https://posts.specterops.io/arbitrary-unsigned-code-execution-vector-in-microsoft-workflow-compiler-exe-3d9294bc5efb\n\
+        \  - Link: https://gist.github.com/mattifestation/3e28d391adbd7fe3e0c722a107a25aba#file-workflowcompilerdetectiontests-ps1\n\
+        \  - Link: https://gist.github.com/mattifestation/7ba8fc8f724600a9f525714c9cf767fd#file-createcompilerinputxml-ps1\n\
+        \  - Link: https://www.forcepoint.com/blog/security-labs/using-c-post-powershell-attacks\n  -\
+        \ Link: https://www.fortynorthsecurity.com/microsoft-workflow-compiler-exe-veil-and-cobalt-strike/\n\
+        \  - Link: https://medium.com/@Bank_Security/undetectable-c-c-reverse-shells-fab4c0ec4f15\nAcknowledgement:\n\
+        \  - Person: Matt Graeber\n    Handle: '@mattifestation'\n  - Person: John Bergbom\n    Handle:\
+        \ '@BergbomJohn'\n  - Person: FortyNorth Security\n    Handle: '@FortyNorthSec'\n  - Person: Bank\
+        \ Security\n    Handle: '@Bank_Security'\n"
+      document_sha256: sha256:43d148c0d9448a3e9bf5becdac3f6556b00294c4ec69b301c74faa7240ce197b
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Microsoft.Workflow.Compiler/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:1ee8bb64aa433fdd24c784fcc8ad5e269f0b985fe7a1c5d80afd3d38079ce479

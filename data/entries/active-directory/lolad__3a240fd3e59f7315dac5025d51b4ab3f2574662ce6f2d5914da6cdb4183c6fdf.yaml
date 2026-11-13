@@ -1,0 +1,80 @@
+id: lolad/SWRlbnRpZnkgTWVtYmVycyBvZiBEb21haW4gQWRtaW5z/R2V0LUFER3JvdXBNZW1iZXIgLUlkZW50aXR5ICJEb21haW4gQWRtaW5zIg/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Identify Members of Domain Admins
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADGroupMember -Identity "Domain Admins"
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Identify Members of Domain Admins
+      command: Get-ADGroupMember -Identity "Domain Admins"
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=6
+        row_utf8: "<tr>\r\n            <td>Identify Members of Domain Admins</td>\r\n            <td><code>Get-ADGroupMember\
+          \ -Identity \"Domain Admins\"</code></td>\r\n            <td>PowerShell</td>\r\n           \
+          \ <td><a href=\"https://docs.microsoft.com/en-us/powershell/module/activedirectory/get-adgroupmember\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n        </tr>"
+        row_sha256: sha256:7c8041cb0cdfb3fcc9708551bb3515d4031f8f22cf6be2021354a01bde678a4e
+        cells:
+        - Identify Members of Domain Admins
+        - Get-ADGroupMember -Identity "Domain Admins"
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:d2df090f4b3ecac769fa152565c80d3ac327b461820eb485a5ae1f37a5c25dab

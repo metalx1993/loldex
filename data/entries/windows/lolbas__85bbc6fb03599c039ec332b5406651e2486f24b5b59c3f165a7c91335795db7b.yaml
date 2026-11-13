@@ -1,0 +1,98 @@
+id: lolbas/T1NCaW5hcmllcy9QY2FsdWEueW1s/RXhlY3V0ZQ/2
+type: binary
+platform: windows
+name: Pcalua.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_pcalua.yml
+commands:
+- template: pcalua.exe -a {PATH_ABSOLUTE:.cpl} -c Java
+  comment: Open the target .CPL file with the Program Compatibility Assistant.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Pcalua/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Pcalua.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OSBinaries/Pcalua.yml
+      command_source_index: 2
+      document_utf8: "---\nName: Pcalua.exe\nDescription: Program Compatibility Assistant\nAuthor: Oddvar\
+        \ Moe\nCreated: 2018-05-25\nCommands:\n  - Command: pcalua.exe -a {PATH:.exe}\n    Description:\
+        \ Open the target .EXE using the Program Compatibility Assistant.\n    Usecase: Proxy execution\
+        \ of binary\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: EXE\n  - Command: pcalua.exe -a {PATH_SMB:.dll}\n    Description: Open the target .DLL\
+        \ file with the Program Compatibilty Assistant.\n    Usecase: Proxy execution of remote dll file\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 8.1, Windows 10\n    Tags:\n      - Execute: DLL\n    \
+        \  - Execute: Remote\n  - Command: pcalua.exe -a {PATH_ABSOLUTE:.cpl} -c Java\n    Description:\
+        \ Open the target .CPL file with the Program Compatibility Assistant.\n    Usecase: Execution\
+        \ of CPL files\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: DLL\nFull_Path:\n  - Path: C:\\Windows\\System32\\pcalua.exe\nDetection:\n  - Sigma:\
+        \ https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_pcalua.yml\n\
+        Resources:\n  - Link: https://twitter.com/KyleHanslovan/status/912659279806640128\nAcknowledgement:\n\
+        \  - Person: Kyle Hanslovan\n    Handle: '@kylehanslovan'\n  - Person: Fab\n    Handle: '@0rbz_'\n"
+      document_sha256: sha256:fe9ca77b723f3d6c1bc0642160af5bb63b5b6ffba5fef4a17c0d449321d7363d
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Pcalua/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:d6ca3f7b4058c0128b4d08dfc19223c95dc51f078adcc80acd29ba92bd569659

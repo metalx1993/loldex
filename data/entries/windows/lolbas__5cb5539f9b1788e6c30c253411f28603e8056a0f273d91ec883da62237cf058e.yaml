@@ -1,0 +1,97 @@
+id: lolbas/T1NTY3JpcHRzL0NMX211dGV4dmVyaWZpZXJzLnltbA/RXhlY3V0ZQ/0
+type: script
+platform: windows
+name: CL_Mutexverifiers.ps1
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+aliases:
+- cl_mutexverifiers
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_cl_mutexverifiers.yml
+commands:
+- template: . C:\Windows\diagnostics\system\AERO\CL_Mutexverifiers.ps1   \nrunAfterCancelProcess {PATH:.ps1}
+  comment: Import the PowerShell Diagnostic CL_Mutexverifiers script and call runAfterCancelProcess to
+    launch an executable.
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/CL_mutexverifiers/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: CL_Mutexverifiers.ps1
+      category: Execute
+      privileges: User
+      mitre_id: T1216
+      source_file: OSScripts/CL_mutexverifiers.yml
+      command_source_index: 0
+      document_utf8: "---\nName: CL_Mutexverifiers.ps1\nDescription: Proxy execution with CL_Mutexverifiers.ps1\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: . C:\\Windows\\diagnostics\\\
+        system\\AERO\\CL_Mutexverifiers.ps1   \\nrunAfterCancelProcess {PATH:.ps1}\n    Description: Import\
+        \ the PowerShell Diagnostic CL_Mutexverifiers script and call runAfterCancelProcess to launch\
+        \ an executable.\n    Usecase: Proxy execution\n    Category: Execute\n    Privileges: User\n\
+        \    MitreID: T1216\n    OperatingSystem: Windows 10\n    Tags:\n      - Execute: PowerShell\n\
+        Full_Path:\n  - Path: C:\\Windows\\diagnostics\\system\\WindowsUpdate\\CL_Mutexverifiers.ps1\n\
+        \  - Path: C:\\Windows\\diagnostics\\system\\Audio\\CL_Mutexverifiers.ps1\n  - Path: C:\\Windows\\\
+        diagnostics\\system\\WindowsUpdate\\CL_Mutexverifiers.ps1\n  - Path: C:\\Windows\\diagnostics\\\
+        system\\Video\\CL_Mutexverifiers.ps1\n  - Path: C:\\Windows\\diagnostics\\system\\Speech\\CL_Mutexverifiers.ps1\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_cl_mutexverifiers.yml\n\
+        Resources:\n  - Link: https://twitter.com/pabraeken/status/995111125447577600\nAcknowledgement:\n\
+        \  - Person: Pierre-Alexandre Braeken\n    Handle: '@pabraeken'\n"
+      document_sha256: sha256:2d9123563191165bce722b38ae5b7c06d893a4ca726f5ee8e0b06f74f4b4f5bc
+    upstream_url: https://lolbas-project.github.io/lolbas/Scripts/CL_mutexverifiers/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1216
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:0f89d5999b42516c132f6caceb7f15eadaa80b4e4f4389518f1873fa5da25eb7

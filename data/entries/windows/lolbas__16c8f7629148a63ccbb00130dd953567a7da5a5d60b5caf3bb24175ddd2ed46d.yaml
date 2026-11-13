@@ -1,0 +1,97 @@
+id: lolbas/T1NCaW5hcmllcy9HcHNjcmlwdC55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Gpscript.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Scripts added in local group policy
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_gpscript.yml
+commands:
+- template: Gpscript /logon
+  comment: Executes logon scripts configured in Group Policy.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Gpscript/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Gpscript.exe
+      category: Execute
+      privileges: Administrator
+      mitre_id: T1218
+      source_file: OSBinaries/Gpscript.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Gpscript.exe\nDescription: Used by group policy to process scripts\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: Gpscript /logon\n    Description:\
+        \ Executes logon scripts configured in Group Policy.\n    Usecase: Add local group policy logon\
+        \ script to execute file and hide from defensive counter measures\n    Category: Execute\n   \
+        \ Privileges: Administrator\n    MitreID: T1218\n    OperatingSystem: Windows vista, Windows 7,\
+        \ Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: CMD\n  - Command:\
+        \ Gpscript /startup\n    Description: Executes startup scripts configured in Group Policy\n  \
+        \  Usecase: Add local group policy logon script to execute file and hide from defensive counter\
+        \ measures\n    Category: Execute\n    Privileges: Administrator\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: CMD\nFull_Path:\n  - Path: C:\\Windows\\System32\\gpscript.exe\n  - Path: C:\\Windows\\\
+        SysWOW64\\gpscript.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_gpscript.yml\n\
+        \  - IOC: Scripts added in local group policy\n  - IOC: Execution of Gpscript.exe after logon\n\
+        Resources:\n  - Link: https://oddvar.moe/2018/04/27/gpscript-exe-another-lolbin-to-the-list/\n\
+        Acknowledgement:\n  - Person: Oddvar Moe\n    Handle: '@oddvarmoe'\n"
+      document_sha256: sha256:f43b0fe7b95c729db145ae21565c1f62503cd2be0896741ef4ef1ea66ba3c4b2
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Gpscript/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:8abee0125ccde0666c6105f044c2a1942250b19dac65062d80efff3cf5bfdfc1

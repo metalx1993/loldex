@@ -1,0 +1,130 @@
+id: loldrivers/75a933b4-82d8-4eb8-8ed5-a0a2178630a3
+type: driver
+platform: windows
+name: fiddrv.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create fiddrv.sys binPath=C:\windows\temp\fiddrv.sys type=kernel && sc.exe start fiddrv.sys
+driver_detail:
+  samples:
+  - Company: ''
+    Date: ''
+    Description: ''
+    FileVersion: ''
+    Filename: fiddrv.sys
+    MachineType: ''
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    Signature: []
+    LoadsDespiteHVCI: 'FALSE'
+    Authentihash:
+      SHA1: 8cc8974a05e81678e3d28acfe434e7804abd019c
+      SHA256: 97b976f7e7e5df7af0781bbbb33cb5f3f7a59efdd07995253b31de8123352a67
+  - Company: ''
+    Date: ''
+    Description: ''
+    FileVersion: ''
+    Filename: fiddrv.sys
+    MachineType: ''
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    Signature: []
+    LoadsDespiteHVCI: 'FALSE'
+    Authentihash:
+      SHA1: 8cc8974a05e81678e3d28acfe434e7804abd019c
+      SHA256: 97b976f7e7e5df7af0781bbbb33cb5f3f7a59efdd07995253b31de8123352a67
+  command_metadata:
+  - Command: sc.exe create fiddrv.sys binPath=C:\windows\temp\fiddrv.sys type=kernel && sc.exe start fiddrv.sys
+    Description: ''
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 75a933b4-82d8-4eb8-8ed5-a0a2178630a3.yaml
+      document: "Id: 75a933b4-82d8-4eb8-8ed5-a0a2178630a3\nTags:\n- fiddrv.sys\nVerified: 'FALSE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-01-09'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \    Command: sc.exe create fiddrv.sys binPath=C:\\windows\\temp\\fiddrv.sys type=kernel\n   \
+        \     && sc.exe start fiddrv.sys\n    Description: ''\n    OperatingSystem: Windows 10\n    Privileges:\
+        \ kernel\n    Usecase: Elevate privileges\nResources:\n- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules\n\
+        Detection: []\nAcknowledgement:\n    Handle: ''\n    Person: ''\nKnownVulnerableSamples:\n-  \
+        \ Company: ''\n    Date: ''\n    Description: ''\n    FileVersion: ''\n    Filename: fiddrv.sys\n\
+        \    MachineType: ''\n    OriginalFilename: ''\n    Product: ''\n    ProductVersion: ''\n    Publisher:\
+        \ ''\n    Signature: []\n    LoadsDespiteHVCI: 'FALSE'\n    Authentihash:\n        SHA1: 8cc8974a05e81678e3d28acfe434e7804abd019c\n\
+        \        SHA256: 97b976f7e7e5df7af0781bbbb33cb5f3f7a59efdd07995253b31de8123352a67\n-   Company:\
+        \ ''\n    Date: ''\n    Description: ''\n    FileVersion: ''\n    Filename: fiddrv.sys\n    MachineType:\
+        \ ''\n    OriginalFilename: ''\n    Product: ''\n    ProductVersion: ''\n    Publisher: ''\n \
+        \   Signature: []\n    LoadsDespiteHVCI: 'FALSE'\n    Authentihash:\n        SHA1: 8cc8974a05e81678e3d28acfe434e7804abd019c\n\
+        \        SHA256: 97b976f7e7e5df7af0781bbbb33cb5f3f7a59efdd07995253b31de8123352a67\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:a0a22c25193763eeec94ed77253faa9c0ae6734311cf5ce48a89580477cafe1f

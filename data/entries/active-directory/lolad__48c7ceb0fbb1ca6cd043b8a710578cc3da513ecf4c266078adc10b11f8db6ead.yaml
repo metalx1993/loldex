@@ -1,0 +1,79 @@
+id: lolad/R2V0IEFsbCBTdWJuZXRzIGluIHRoZSBGb3Jlc3Q/R2V0LUFEUmVwbGljYXRpb25TdWJuZXQgLUZpbHRlciAq/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Get All Subnets in the Forest
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADReplicationSubnet -Filter *
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Get All Subnets in the Forest
+      command: Get-ADReplicationSubnet -Filter *
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=49
+        row_utf8: "<tr>\r\n\t\t\t<td>Get All Subnets in the Forest</td>\r\n\t\t\t<td><code>Get-ADReplicationSubnet\
+          \ -Filter *</code></td>\r\n\t\t\t<td>PowerShell</td>\r\n\t\t\t<td><a href=\"https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationsubnet\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:afbc0b01400fdce961900f2a9102f2f7f8d70d95fb8f4f4077e48591e0501b81
+        cells:
+        - Get All Subnets in the Forest
+        - Get-ADReplicationSubnet -Filter *
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:352584a7c476d491a1de93ca97e6d92b1c22762f7f488729e72288f4eb8b17f9

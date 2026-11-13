@@ -1,0 +1,104 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1RyYWNrZXIueW1s/QVdMIEJ5cGFzcw/1
+type: binary
+platform: windows
+name: Tracker.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_tracker.yml
+commands:
+- template: Tracker.exe /d {PATH:.dll} /c C:\Windows\write.exe
+  comment: Use tracker.exe to proxy execution of an arbitrary DLL into another process. Since tracker.exe
+    is also signed it can be used to bypass application whitelisting solutions.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Tracker/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Tracker.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Tracker.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Tracker.exe\nDescription: Tool included with Microsoft .Net Framework.\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: Tracker.exe /d {PATH:.dll} /c\
+        \ C:\\Windows\\write.exe\n    Description: Use tracker.exe to proxy execution of an arbitrary\
+        \ DLL into another process. Since tracker.exe is also signed it can be used to bypass application\
+        \ whitelisting solutions.\n    Usecase: Injection of locally stored DLL file into target process.\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n\
+        \    Tags:\n      - Execute: DLL\n  - Command: Tracker.exe /d {PATH:.dll} /c C:\\Windows\\write.exe\n\
+        \    Description: Use tracker.exe to proxy execution of an arbitrary DLL into another process.\
+        \ Since tracker.exe is also signed it can be used to bypass application whitelisting solutions.\n\
+        \    Usecase: Injection of locally stored DLL file into target process.\n    Category: AWL Bypass\n\
+        \    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n      - Execute:\
+        \ DLL\nFull_Path:\n  - Path: no default\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_tracker.yml\n\
+        Resources:\n  - Link: https://twitter.com/subTee/status/793151392185589760\n  - Link: https://attack.mitre.org/wiki/Execution\n\
+        Acknowledgement:\n  - Person: Casey Smith\n    Handle: '@subTee'\n"
+      document_sha256: sha256:245c9bb7f1c4953b9dec193cb306ec9bc60ac57a743d333bcf76d84fcc629280
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Tracker/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:a7af2909350cb6c2f2ba16b5ccc7207fc52ac187f8495773de38107f834d4b28

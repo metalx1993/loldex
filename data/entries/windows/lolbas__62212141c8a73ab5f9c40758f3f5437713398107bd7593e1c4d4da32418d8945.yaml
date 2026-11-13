@@ -1,0 +1,87 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1BpeHRvb2wueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Pixtool.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+commands:
+- template: pixtool.exe launch {PATH_ABSOLUTE:.exe}
+  comment: Launches an executable via PIX command-line utility.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Pixtool/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Pixtool.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Pixtool.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Pixtool.exe\nDescription: Command line utility for taking and analyzing\
+        \ PIX GPU captures.\nAuthor: Avihay Eldad\nCreated: 2025-09-21\nCommands:\n  - Command: pixtool.exe\
+        \ launch {PATH_ABSOLUTE:.exe}\n    Description: Launches an executable via PIX command-line utility.\n\
+        \    Usecase: Executes an executable under a trusted, Microsoft signed binary.\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n\
+        \      - Execute: EXE\nFull_Path:\n  - Path: C:\\Program Files\\Microsoft PIX\\pixtool.exe\n \
+        \ - Path: C:\\Program Files (x86)\\Microsoft PIX\\pixtool.exe\nResources:\n  - Link: https://devblogs.microsoft.com/pix/pixtool/\n\
+        Acknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:882a981fd3194bf8be7fd63416c41d556ecfc7388cc9721bcaaa3b513cf16886
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Pixtool/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:07ad6c4835ef04f7d2da4c246f4a5ba4d194603ccde842c83d41e957e87cc706

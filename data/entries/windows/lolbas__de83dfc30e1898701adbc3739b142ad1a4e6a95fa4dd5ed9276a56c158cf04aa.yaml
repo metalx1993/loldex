@@ -1,0 +1,105 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL01zZGVwbG95LnltbA/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Msdeploy.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_msdeploy.yml
+commands:
+- template: msdeploy.exe -verb:sync -source:RunCommand -dest:runCommand="{PATH_ABSOLUTE:.bat}"
+  comment: Launch .bat file via msdeploy.exe.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Msdeploy/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Msdeploy.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/Msdeploy.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Msdeploy.exe\nDescription: Microsoft tool used to deploy Web Applications.\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: msdeploy.exe -verb:sync -source:RunCommand\
+        \ -dest:runCommand=\"{PATH_ABSOLUTE:.bat}\"\n    Description: Launch .bat file via msdeploy.exe.\n\
+        \    Usecase: Local execution of batch file using msdeploy.exe.\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1218\n    OperatingSystem: Windows 7, Windows 8, Windows 8.1, Windows 10,\
+        \ Windows 11, Windows Server\n    Tags:\n      - Execute: CMD\n  - Command: msdeploy.exe -verb:sync\
+        \ -source:RunCommand -dest:runCommand=\"{PATH_ABSOLUTE:.bat}\"\n    Description: Launch .bat file\
+        \ via msdeploy.exe.\n    Usecase: Local execution of batch file using msdeploy.exe.\n    Category:\
+        \ AWL Bypass\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 7, Windows\
+        \ 8, Windows 8.1, Windows 10, Windows 11, Windows Server\n    Tags:\n      - Execute: CMD\n  -\
+        \ Command: msdeploy.exe -verb:sync -source:filePath={PATH_ABSOLUTE:.source.ext} -dest:filePath={PATH_ABSOLUTE:.dest.ext}\n\
+        \    Description: Copy file from source to destination.\n    Usecase: Copy file.\n    Category:\
+        \ Copy\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11, Windows Server\nFull_Path:\n  - Path: C:\\Program Files\\IIS\\\
+        Microsoft Web Deploy V2\\msdeploy.exe\n  - Path: C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy\
+        \ V2\\msdeploy.exe\n  - Path: C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\n\
+        \  - Path: C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\n  - Path: C:\\\
+        Program Files\\IIS\\Microsoft Web Deploy V4\\msdeploy.exe\n  - Path: C:\\Program Files (x86)\\\
+        IIS\\Microsoft Web Deploy V4\\msdeploy.exe\n  - Path: C:\\Program Files\\IIS\\Microsoft Web Deploy\
+        \ V5\\msdeploy.exe\n  - Path: C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V5\\msdeploy.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_msdeploy.yml\n\
+        Resources:\n  - Link: https://twitter.com/pabraeken/status/995837734379032576\n  - Link: https://twitter.com/pabraeken/status/999090532839313408\n\
+        Acknowledgement:\n  - Person: Pierre-Alexandre Braeken\n    Handle: '@pabraeken'\n  - Person:\
+        \ Avihay Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:03248fdffad0005981fa48b5d080920d4b7b7ac8291f4f9b4623bb2e4b473430
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Msdeploy/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:8e15fce9b1deba58bb7e193ee2ad0b2f3b4eb2c9a412f58e3f182a39f2838065

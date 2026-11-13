@@ -1,0 +1,201 @@
+id: loldrivers/50bbae3f-f6d8-4881-8fd7-a70002d52841
+type: driver
+platform: windows
+name: giveio.sys
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+- defense-evasion
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create giveio binPath= C:\windows\temp\giveio.sys type= kernel && sc.exe start giveio
+  comment: The 32-bit giveio driver bundled with SpeedFan creates the \\.\giveio device and handles IRP_MJ_CREATE
+    by applying a zeroed 8 KiB I/O permission map to the opening process through Ke386IoSetAccessProcess
+    and Ke386SetIoAccessMap. This grants unrestricted direct access to all x86 I/O ports without validating
+    the caller.
+driver_detail:
+  samples:
+  - Filename: giveio.sys
+    MD5: 77ebf3e9386daa51551af429052d88d0
+    SHA1: bd4f3e24f531e974fbaac43381120b42e804fbaf
+    SHA256: 94c3294bb9e14b07448734ae65b37801d3ff15bec987d182a929a017fef7b276
+    Imphash: b5986408bbf7e1b5028742a5d8adac66
+    Authentihash:
+      MD5: 196f8a68da8632173d1243354d124484
+      SHA1: bdd62bb96cda70580b9a0abec86432fb1cdf7f60
+      SHA256: daf4d9df4b1e64ca7c800500a7f290b9af5fdc5c63c5afadb7d6630480688ddc
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '5.451405826272336'
+        Virtual Size: '0x168'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '2.073478759373367'
+        Virtual Size: '0x54'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '2.3039580038764'
+        Virtual Size: '0x4a'
+      .idata:
+        Entropy:
+          $yaml_type: float
+          value: '4.5908291157247785'
+        Virtual Size: '0x192'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '3.327969535943128'
+        Virtual Size: '0x48'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '1996-04-03 19:33:25'
+    Description: ''
+    Company: ''
+    InternalName: ''
+    OriginalFilename: ''
+    FileVersion: ''
+    Product: ''
+    ProductVersion: ''
+    Copyright: ''
+    MachineType: I386
+    Imports:
+    - ntoskrnl.exe
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - IoGetCurrentProcess
+    - IoDeleteSymbolicLink
+    - RtlInitUnicodeString
+    - MmFreeNonCachedMemory
+    - Ke386SetIoAccessMap
+    - Ke386IoSetAccessProcess
+    - IoDeleteDevice
+    - IofCompleteRequest
+    - IoCreateSymbolicLink
+    - IoCreateDevice
+    - MmAllocateNonCachedMemory
+    Signatures: {}
+  sha256: 94c3294bb9e14b07448734ae65b37801d3ff15bec987d182a929a017fef7b276
+  command_metadata:
+  - Command: sc.exe create giveio binPath= C:\windows\temp\giveio.sys type= kernel && sc.exe start giveio
+    Description: The 32-bit giveio driver bundled with SpeedFan creates the \\.\giveio device and handles
+      IRP_MJ_CREATE by applying a zeroed 8 KiB I/O permission map to the opening process through Ke386IoSetAccessProcess
+      and Ke386SetIoAccessMap. This grants unrestricted direct access to all x86 I/O ports without validating
+      the caller.
+    Usecase: Grant a user-mode process unrestricted access to hardware I/O ports.
+    Privileges: Administrator required to install; opening the device grants port access without an additional
+      caller check
+    OperatingSystem: 32-bit Windows NT, Windows 2000, Windows XP
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/407
+- https://www.almico.com/speedfan.php
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 50bbae3f-f6d8-4881-8fd7-a70002d52841.yaml
+      document: "Id: 50bbae3f-f6d8-4881-8fd7-a70002d52841\nTags:\n- giveio.sys\nVerified: 'TRUE'\nAuthor:\
+        \ impudent\nCreated: '2026-08-29'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n  Command:\
+        \ sc.exe create giveio binPath= C:\\windows\\temp\\giveio.sys type= kernel &&\n    sc.exe start\
+        \ giveio\n  Description: The 32-bit giveio driver bundled with SpeedFan creates the \\\\.\\giveio\n\
+        \    device and handles IRP_MJ_CREATE by applying a zeroed 8 KiB I/O permission map\n    to the\
+        \ opening process through Ke386IoSetAccessProcess and Ke386SetIoAccessMap.\n    This grants unrestricted\
+        \ direct access to all x86 I/O ports without validating\n    the caller.\n  Usecase: Grant a user-mode\
+        \ process unrestricted access to hardware I/O ports.\n  Privileges: Administrator required to\
+        \ install; opening the device grants port access\n    without an additional caller check\n  OperatingSystem:\
+        \ 32-bit Windows NT, Windows 2000, Windows XP\nResources:\n- https://github.com/magicsword-io/LOLDrivers/issues/407\n\
+        - https://www.almico.com/speedfan.php\nDetection: []\nAcknowledgement:\n  Person: impudent\n \
+        \ Handle: '@dsavxc'\nKnownVulnerableSamples:\n- Filename: giveio.sys\n  MD5: 77ebf3e9386daa51551af429052d88d0\n\
+        \  SHA1: bd4f3e24f531e974fbaac43381120b42e804fbaf\n  SHA256: 94c3294bb9e14b07448734ae65b37801d3ff15bec987d182a929a017fef7b276\n\
+        \  Imphash: b5986408bbf7e1b5028742a5d8adac66\n  Authentihash:\n    MD5: 196f8a68da8632173d1243354d124484\n\
+        \    SHA1: bdd62bb96cda70580b9a0abec86432fb1cdf7f60\n    SHA256: daf4d9df4b1e64ca7c800500a7f290b9af5fdc5c63c5afadb7d6630480688ddc\n\
+        \  Sections:\n    .text:\n      Entropy: 5.451405826272336\n      Virtual Size: '0x168'\n    .rdata:\n\
+        \      Entropy: 2.073478759373367\n      Virtual Size: '0x54'\n    .data:\n      Entropy: 2.3039580038764\n\
+        \      Virtual Size: '0x4a'\n    .idata:\n      Entropy: 4.5908291157247785\n      Virtual Size:\
+        \ '0x192'\n    .reloc:\n      Entropy: 3.327969535943128\n      Virtual Size: '0x48'\n  MagicHeader:\
+        \ 50 45 0 0\n  CreationTimestamp: '1996-04-03 19:33:25'\n  Description: ''\n  Company: ''\n  InternalName:\
+        \ ''\n  OriginalFilename: ''\n  FileVersion: ''\n  Product: ''\n  ProductVersion: ''\n  Copyright:\
+        \ ''\n  MachineType: I386\n  Imports:\n  - ntoskrnl.exe\n  ExportedFunctions: ''\n  ImportedFunctions:\n\
+        \  - IoGetCurrentProcess\n  - IoDeleteSymbolicLink\n  - RtlInitUnicodeString\n  - MmFreeNonCachedMemory\n\
+        \  - Ke386SetIoAccessMap\n  - Ke386IoSetAccessProcess\n  - IoDeleteDevice\n  - IofCompleteRequest\n\
+        \  - IoCreateSymbolicLink\n  - IoCreateDevice\n  - MmAllocateNonCachedMemory\n  Signatures: {}\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:b449c0cbb058f7aaab7800a76f359c8ac0d4d6b502f8e6e1b274f00951eaa0c5

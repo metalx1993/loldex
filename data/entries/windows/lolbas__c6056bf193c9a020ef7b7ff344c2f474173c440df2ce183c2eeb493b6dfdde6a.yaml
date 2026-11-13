@@ -1,0 +1,92 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1hCb290TWdyU2xlZXAueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: XBootMgrSleep.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+commands:
+- template: xbootmgrsleep.exe 1000 {PATH:.exe}
+  comment: Execute executable via XBootMgrSleep, with a 1 second (=1000 milliseconds) delay. Alternatively,
+    it is also possible to replace the delay with any string for immediate execution.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/XBootMgrSleep/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: XBootMgrSleep.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OtherMSBinaries/XBootMgrSleep.yml
+      command_source_index: 0
+      document_utf8: "---\nName: XBootMgrSleep.exe\nDescription: Windows Performance Toolkit binary used\
+        \ for tracing and analyzing system performance during sleep and resume transitions.\nAuthor: Avihay\
+        \ Eldad\nCreated: 2024-06-13\nCommands:\n  - Command: xbootmgrsleep.exe 1000 {PATH:.exe}\n   \
+        \ Description: Execute executable via XBootMgrSleep, with a 1 second (=1000 milliseconds) delay.\
+        \ Alternatively, it is also possible to replace the delay with any string for immediate execution.\n\
+        \    Usecase: Performs execution of specified executable, can be used as a defense evasion\n \
+        \   Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows\n\
+        \    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Program Files\\Windows Kits\\10\\\
+        Windows Performance Toolkit\\xbootmgrsleep.exe\n  - Path: C:\\Program Files (x86)\\Windows Kits\\\
+        10\\Windows Performance Toolkit\\xbootmgrsleep.exe\nResources:\n  - Link: https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/reference\n\
+        Acknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@AvihayEldad'\n  - Person: Yuval Saban\n\
+        \    Handle: '@yuvalsaban3'\n"
+      document_sha256: sha256:a6a36cdb5daee83450ab57836e3d378d6ce66e8d02a7254926995c748c8073e2
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/XBootMgrSleep/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:b4a20148534bed0c724d78cd1a05f902a36a0942cc2ef718687dc2401813bba0

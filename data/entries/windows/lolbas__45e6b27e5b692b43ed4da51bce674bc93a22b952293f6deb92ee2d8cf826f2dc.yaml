@@ -1,0 +1,93 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0RlZmF1bHRQYWNrLnltbA/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: DefaultPack.EXE
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: DefaultPack.EXE spawned an unknown process
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_lolbin_defaultpack.yml
+commands:
+- template: DefaultPack.EXE /C:"{CMD}"
+  comment: Use DefaultPack.EXE to execute arbitrary binaries, with added argument support.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/DefaultPack/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: DefaultPack.EXE
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/DefaultPack.yml
+      command_source_index: 0
+      document_utf8: "---\nName: DefaultPack.EXE\nDescription: This binary can be downloaded along side\
+        \ multiple software downloads on the Microsoft website. It gets downloaded when the user forgets\
+        \ to uncheck the option to set Bing as the default search provider.\nAuthor: '@checkymander'\n\
+        Created: 2020-10-01\nCommands:\n  - Command: DefaultPack.EXE /C:\"{CMD}\"\n    Description: Use\
+        \ DefaultPack.EXE to execute arbitrary binaries, with added argument support.\n    Usecase: Can\
+        \ be used to execute stagers, binaries, and other malicious commands.\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\n    Tags:\n      - Execute:\
+        \ CMD\nFull_Path:\n  - Path: C:\\Program Files (x86)\\Microsoft\\DefaultPack\\DefaultPack.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_lolbin_defaultpack.yml\n\
+        \  - IOC: DefaultPack.EXE spawned an unknown process\nResources:\n  - Link: https://twitter.com/checkymander/status/1311509470275604480.\n\
+        Acknowledgement:\n  - Person: checkymander\n    Handle: '@checkymander'\n"
+      document_sha256: sha256:a4f4dcc65cd82c344ee6b1fc2943453495e41eeb24dca3fc60a5ff8426c1aab2
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/DefaultPack/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:e37cce30733d4785cfea4f031ff89c149ee24833f49f413d1d799f2a9817fa41

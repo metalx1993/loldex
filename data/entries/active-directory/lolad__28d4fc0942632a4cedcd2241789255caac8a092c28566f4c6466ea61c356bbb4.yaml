@@ -1,0 +1,80 @@
+id: lolad/TGlzdCBQcml2aWxlZ2VkIEFjY291bnRzIGluIERvbWFpbg/R2V0LUFEVXNlciAtRmlsdGVyIHtBZG1pbkNvdW50IC1lcSAxfSB8IFNlbGVjdC1PYmplY3QgTmFtZSwgU2FtQWNjb3VudE5hbWU/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: List Privileged Accounts in Domain
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADUser -Filter {AdminCount -eq 1} | Select-Object Name, SamAccountName
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List Privileged Accounts in Domain
+      command: Get-ADUser -Filter {AdminCount -eq 1} | Select-Object Name, SamAccountName
+      type: PowerShell
+      reference: Medium - AD Enumeration
+      physical_rows:
+      - input_ref: index.html#row=72
+        row_utf8: "<tr>\r\n\t\t\t<td>List Privileged Accounts in Domain</td>\r\n\t\t\t<td><code>Get-ADUser\
+          \ -Filter {AdminCount -eq 1} | Select-Object Name, SamAccountName</code></td>\r\n\t\t\t<td>PowerShell</td>\r\
+          \n\t\t\t<td><a href=\"https://medium.com/r3d-buck3t/domain-enumeration-with-active-directory-powershell-module-7ce4fcfe91d3\"\
+          \ target=\"_blank\">Medium - AD Enumeration</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:3c7a70cb79e7369a74047e3fc4680a6036a9e9a982227964bee9748ed845e101
+        cells:
+        - List Privileged Accounts in Domain
+        - Get-ADUser -Filter {AdminCount -eq 1} | Select-Object Name, SamAccountName
+        - PowerShell
+        - Medium - AD Enumeration
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:98efb5aec7a83ffcd763eb1232a53a1ed8c4cd065a4b1d2a7ff1ed840c329ddb

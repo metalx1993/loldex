@@ -1,0 +1,103 @@
+id: lolbas/T1NCaW5hcmllcy9NbWMueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Mmc.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.014
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_mmc_susp_child_process.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/file/file_event/file_event_win_uac_bypass_dotnet_profiler.yml
+commands:
+- template: mmc.exe -Embedding {PATH_ABSOLUTE:.msc}
+  comment: Launch a 'backgrounded' MMC process and invoke a COM payload
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Mmc/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Mmc.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.014
+      source_file: OSBinaries/Mmc.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Mmc.exe\nDescription: Load snap-ins to locally and remotely manage Windows\
+        \ systems\nAuthor: '@bohops'\nCreated: 2018-12-04\nCommands:\n  - Command: mmc.exe -Embedding\
+        \ {PATH_ABSOLUTE:.msc}\n    Description: Launch a 'backgrounded' MMC process and invoke a COM\
+        \ payload\n    Usecase: Configure a snap-in to load a COM custom class (CLSID) that has been added\
+        \ to the registry\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.014\n    OperatingSystem:\
+        \ Windows 10 (and possibly earlier versions), Windows 11\n    Tags:\n      - Execute: COM\n  -\
+        \ Command: mmc.exe gpedit.msc\n    Description: Load an arbitrary payload DLL by configuring COR\
+        \ Profiler registry settings and launching MMC to bypass UAC.\n    Usecase: Modify HKCU\\Environment\
+        \ key in Registry with COR profiler values then launch MMC to load the payload DLL.\n    Category:\
+        \ UAC Bypass\n    Privileges: Administrator\n    MitreID: T1218.014\n    OperatingSystem: Windows\
+        \ 10 (and possibly earlier versions), Windows 11\n    Tags:\n      - Execute: DLL\n  - Command:\
+        \ mmc.exe -Embedding {PATH_ABSOLUTE:.msc}\n    Description: Download and save an executable to\
+        \ disk\n    Usecase: Download file from Internet\n    Category: Download\n    Privileges: User\n\
+        \    MitreID: T1218.014\n    OperatingSystem: Windows 10 (and possibly earlier versions), Windows\
+        \ 11\n    Tags:\n      - Application: GUI\nFull_Path:\n  - Path: C:\\Windows\\System32\\mmc.exe\n\
+        \  - Path: C:\\Windows\\SysWOW64\\mmc.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_mmc_susp_child_process.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/file/file_event/file_event_win_uac_bypass_dotnet_profiler.yml\n\
+        Resources:\n  - Link: https://bohops.com/2018/08/18/abusing-the-com-registry-structure-part-2-loading-techniques-for-evasion-and-persistence/\n\
+        \  - Link: https://offsec.almond.consulting/UAC-bypass-dotnet.html\n  - Link: https://www.youtube.com/watch?v=LFgZOTmhzeA\n\
+        Acknowledgement:\n  - Person: Jimmy\n    Handle: '@bohops'\n  - Person: clem\n    Handle: '@clavoillotte'\n\
+        \  - Person: Fredrik H. Brathen\n"
+      document_sha256: sha256:021733ffe0159debab8c0c114fe65611dc6aa51cfa65c8feb094be54e306ce48
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Mmc/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.014
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:4cf90e421f91ca0090d1f9b3e006c1073472816514f057e9422f3b20266cb340

@@ -1,0 +1,102 @@
+id: lolbas/T1NCaW5hcmllcy9TZXR0aW5nU3luY0hvc3QueW1s/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: SettingSyncHost.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: SettingSyncHost.exe should not be run on a normal workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_settingsynchost.yml
+commands:
+- template: SettingSyncHost -LoadAndRunDiagScriptNoCab {PATH:.bat}
+  comment: Execute a batch script in the background (no window ever pops up) which can be subverted to
+    running arbitrary programs by setting the current working directory to %TMP% and creating files such
+    as reg.bat/reg.exe in that directory thereby causing them to execute instead of the ones in C:\Windows\System32.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/SettingSyncHost/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: SettingSyncHost.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/SettingSyncHost.yml
+      command_source_index: 1
+      document_utf8: "---\nName: SettingSyncHost.exe\nDescription: Host Process for Setting Synchronization\n\
+        Author: Elliot Killick\nCreated: 2021-08-26\nCommands:\n  - Command: SettingSyncHost -LoadAndRunDiagScript\
+        \ {PATH:.exe}\n    Description: Execute file specified in %COMSPEC%\n    Usecase: Can be used\
+        \ to evade defensive countermeasures or to hide as a persistence mechanism\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 8, Windows 8.1, Windows\
+        \ 10\n    Tags:\n      - Execute: EXE\n  - Command: SettingSyncHost -LoadAndRunDiagScriptNoCab\
+        \ {PATH:.bat}\n    Description: Execute a batch script in the background (no window ever pops\
+        \ up) which can be subverted to running arbitrary programs by setting the current working directory\
+        \ to %TMP% and creating files such as reg.bat/reg.exe in that directory thereby causing them to\
+        \ execute instead of the ones in C:\\Windows\\System32.\n    Usecase: Can be used to evade defensive\
+        \ countermeasures or to hide as a persistence mechanism. Additionally, effectively act as a -WindowStyle\
+        \ Hidden option (as there is in PowerShell) for any arbitrary batch file.\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 8, Windows 8.1, Windows\
+        \ 10\n    Tags:\n      - Execute: CMD\nFull_Path:\n  - Path: C:\\Windows\\System32\\SettingSyncHost.exe\n\
+        \  - Path: C:\\Windows\\SysWOW64\\SettingSyncHost.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_settingsynchost.yml\n\
+        \  - IOC: SettingSyncHost.exe should not be run on a normal workstation\nResources:\n  - Link:\
+        \ https://www.hexacorn.com/blog/2020/02/02/settingsynchost-exe-as-a-lolbin/\nAcknowledgement:\n\
+        \  - Person: Adam\n    Handle: '@hexacorn'\n  - Person: Elliot Killick\n    Handle: '@elliotkillick'\n"
+      document_sha256: sha256:ffc24e2a34a327b159c56a7687a6e6914e5110ef7f4818ed5443a27d8176f30b
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/SettingSyncHost/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:6c09feb05b0bbea3b681a8154ed61397feef7d00ad69426560f0e3a25100980a

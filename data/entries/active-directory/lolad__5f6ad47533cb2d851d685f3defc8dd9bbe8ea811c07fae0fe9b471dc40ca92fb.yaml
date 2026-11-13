@@ -1,0 +1,79 @@
+id: lolad/Rm9yY2UgR3JvdXAgUG9saWN5IFVwZGF0ZQ/Z3B1cGRhdGUgL2ZvcmNl/Q01E
+type: technique
+platform: active-directory
+name: Force Group Policy Update
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: gpupdate /force
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: Force Group Policy Update
+      command: gpupdate /force
+      type: CMD
+      reference: SS64 - Gpupdate Command
+      physical_rows:
+      - input_ref: index.html#row=116
+        row_utf8: "<tr>\r\n\t            <td>Force Group Policy Update</td>\r\n\t            <td><code>gpupdate\
+          \ /force</code></td>\r\n\t            <td>CMD</td>\r\n\t            <td><a href=\"https://ss64.com/nt/\"\
+          \ target=\"_blank\">SS64 - Gpupdate Command</a></td>\r\n\t        </tr>"
+        row_sha256: sha256:e22e1defdd39e451fa99c181ea52ae8e863bdec6b7929fb9a8d482b385bb2ae8
+        cells:
+        - Force Group Policy Update
+        - gpupdate /force
+        - CMD
+        - SS64 - Gpupdate Command
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:5062ce1a1d46fe984131fd6843fdf96425af3f99525244a6f6c943a84a32d87b

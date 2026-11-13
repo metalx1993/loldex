@@ -1,0 +1,104 @@
+id: lolbas/T1NCaW5hcmllcy9FeHBsb3Jlci55bWw/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Explorer.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: Multiple instances of explorer.exe or explorer.exe using the /root command line is suspicious.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_explorer_break_process_tree.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_explorer_lolbin_execution.yml
+  - https://github.com/elastic/detection-rules/blob/f2bc0c685d83db7db395fc3dc4b9729759cd4329/rules/windows/initial_access_via_explorer_suspicious_child_parent_args.toml
+commands:
+- template: explorer.exe {PATH_ABSOLUTE:.exe}
+  comment: Execute notepad.exe with the parent process spawning from a new instance of explorer.exe
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Explorer/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Explorer.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OSBinaries/Explorer.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Explorer.exe\nDescription: Binary used for managing files and system\
+        \ components within Windows\nAuthor: Jai Minton\nCreated: 2020-06-24\nCommands:\n  - Command:\
+        \ explorer.exe /root,\"{PATH_ABSOLUTE:.exe}\"\n    Description: Execute specified .exe with the\
+        \ parent process spawning from a new instance of explorer.exe\n    Usecase: Performs execution\
+        \ of specified file with explorer parent process breaking the process tree, can be used for defense\
+        \ evasion.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem:\
+        \ Windows XP, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute:\
+        \ EXE\n  - Command: explorer.exe {PATH_ABSOLUTE:.exe}\n    Description: Execute notepad.exe with\
+        \ the parent process spawning from a new instance of explorer.exe\n    Usecase: Performs execution\
+        \ of specified file with explorer parent process breaking the process tree, can be used for defense\
+        \ evasion.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Windows\\\
+        explorer.exe\n  - Path: C:\\Windows\\SysWOW64\\explorer.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_explorer_break_process_tree.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_explorer_lolbin_execution.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/f2bc0c685d83db7db395fc3dc4b9729759cd4329/rules/windows/initial_access_via_explorer_suspicious_child_parent_args.toml\n\
+        \  - IOC: Multiple instances of explorer.exe or explorer.exe using the /root command line is suspicious.\n\
+        Resources:\n  - Link: https://twitter.com/CyberRaiju/status/1273597319322058752?s=20\n  - Link:\
+        \ https://twitter.com/bohops/status/1276356245541335048\n  - Link: https://twitter.com/bohops/status/986984122563391488\n\
+        Acknowledgement:\n  - Person: Jai Minton\n    Handle: '@CyberRaiju'\n  - Person: Jimmy\n    Handle:\
+        \ '@bohops'\n"
+      document_sha256: sha256:69cf6b4fd2d0343aa8e38f0f61c06612a86accfb6808d4c700312eb9f0712d0c
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Explorer/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:c20f86cdd1ce53f7ecbccd702cee7df6c5609ea3883ed6a2808c3ca26030d4f3

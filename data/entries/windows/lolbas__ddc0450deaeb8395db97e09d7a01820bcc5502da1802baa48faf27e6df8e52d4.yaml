@@ -1,0 +1,94 @@
+id: lolbas/T1NCaW5hcmllcy9SZXNldC55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Reset.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: reset.exe being executed and executes rwinsta.exe outside of its normal path of c:\windows\system32\
+    or c:\windows\syswow64\
+commands:
+- template: reset.exe session
+  comment: Once executed, `reset.exe` will execute `rwinsta.exe` in the same folder. Thus, if `reset.exe`
+    is copied to a folder and an arbitrary executable is renamed to `rwinsta.exe`, `reset.exe` will spawn
+    it.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Reset/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Reset.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Reset.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Reset.exe\nDescription: Remote Desktop Services Reset Utility\nAuthor:\
+        \ Matan Bahar\nCreated: 2025-07-31\nCommands:\n  - Command: reset.exe session\n    Description:\
+        \ Once executed, `reset.exe` will execute `rwinsta.exe` in the same folder. Thus, if `reset.exe`\
+        \ is copied to a folder and an arbitrary executable is renamed to `rwinsta.exe`, `reset.exe` will\
+        \ spawn it.\n    Usecase: Execute an arbitrary executable via trusted system executable.\n   \
+        \ Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 10,\
+        \ Windows 11\n    Tags:\n      - Execute: EXE\n      - Requires: Rename\nFull_Path:\n  - Path:\
+        \ c:\\windows\\system32\\reset.exe\n  - Path: c:\\windows\\syswow64\\reset.exe\nDetection:\n \
+        \ - IOC: reset.exe being executed and executes rwinsta.exe outside of its normal path of c:\\\
+        windows\\system32\\ or c:\\windows\\syswow64\\\nAcknowledgement:\n  - Person: Matan Bahar\n  \
+        \  Handle: '@Bl4ckShad3'\n"
+      document_sha256: sha256:71f62a174923d8c4b3cb32638200888577131e5e5f4eabe6102f06f7c564eb00
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Reset/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:fe0a70ecb16ee30201ea0acc7082be5b769f83d655dc830fc3e05dbd27d3588c

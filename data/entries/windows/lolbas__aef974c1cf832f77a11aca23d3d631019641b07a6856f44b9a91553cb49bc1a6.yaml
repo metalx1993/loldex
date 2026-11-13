@@ -1,0 +1,94 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL2RvdG5ldC10cmFjZS55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: dotnet-trace.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: Process creation with command line containing "dotnet-trace collect" and "--"
+commands:
+- template: dotnet-trace.exe collect --duration 00:00:01 -- {PATH:.exe}
+  comment: Launches the specified executable as a child process while collecting runtime trace data for
+    1 second during execution.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/dotnet-trace/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: dotnet-trace.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/dotnet-trace.yml
+      command_source_index: 0
+      document_utf8: "---\nName: dotnet-trace.exe\nDescription: .NET diagnostic tool for collecting runtime\
+        \ traces from .NET applications. Installed via 'dotnet tool install --global dotnet-trace' (.NET\
+        \ SDK required).\nAuthor: Iván Cabrera\nCreated: 2026-08-27\nCommands:\n  - Command: dotnet-trace.exe\
+        \ collect --duration 00:00:01 -- {PATH:.exe}\n    Description: Launches the specified executable\
+        \ as a child process while collecting runtime trace data for 1 second during execution.\n    Usecase:\
+        \ Execute a child process under the guise of a legitimate .NET diagnostic tool.\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Users\\<user>\\.dotnet\\tools\\\
+        dotnet-trace.exe\nCode_Sample:\n  - Code: https://github.com/dotnet/diagnostics/tree/main/src/Tools/dotnet-trace\n\
+        Detection:\n  - IOC: Process creation with command line containing \"dotnet-trace collect\" and\
+        \ \"--\"\nResources:\n  - Link: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-trace\n\
+        \  - Link: https://github.com/dotnet/diagnostics\nAcknowledgement:\n  - Person: Iván Cabrera\n\
+        \    Handle: '@ivancabrera02'\n"
+      document_sha256: sha256:cd5c9dcbee2b0420875e45e937d715f43814a4d1e203623758e747fbd9c81aa0
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/dotnet-trace/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:82606e3efc5753254081aeea452840fced73629dcde5c77a750211ac7500bde8

@@ -1,0 +1,1051 @@
+id: loldrivers/a9d9cbb7-b5f6-4e74-97a5-29993263280e
+type: driver
+platform: windows
+name: CorsairLLAccess64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CorsairLLAccess64.sys binPath=C:\windows\temp\CorsairLLAccess64.sys type=kernel
+    && sc.exe start CorsairLLAccess64.sys
+  comment: Corsair LL Access 1.0.22.0 maps caller-selected physical addresses with MmMapIoSpace and can
+    expose the mapped pages to user mode through MmMapLockedPagesSpecifyCache. These physical-memory access
+    primitives can be abused for kernel tampering by an attacker able to load and open the driver.
+driver_detail:
+  samples:
+  - Filename: CorsairLLAccess64.sys
+    MD5: b34361d151c793415ef92ee5d368c053
+    SHA1: 89656051126c3e97477a9985d363fbdde0bc159e
+    SHA256: 29a90ae1dcee66335ece4287a06482716530509912be863c85a2a03a6450a5b6
+    Authentihash:
+      MD5: 7158180c7f219093d504d695240c2173
+      SHA1: 0302854ea87dc07a493aca60e8e7e63422932e42
+      SHA256: b5606dc2a76350916cd77348cfdfe502256d759a4743dd4af503d2f7f348eb70
+    Description: Corsair LL Access
+    Company: Corsair Memory, Inc.
+    InternalName: Corsair LL Access
+    OriginalFilename: Corsair LL Access
+    FileVersion: 1.0.16.0
+    Product: Corsair LL Access
+    ProductVersion: 1.0.16.0
+    Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved
+    MachineType: AMD64
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - RtlInitUnicodeString
+    - KeInitializeMutex
+    - KeReleaseMutex
+    - KeWaitForSingleObject
+    - ExQueryDepthSList
+    - ExpInterlockedPopEntrySList
+    - ExpInterlockedPushEntrySList
+    - ExInitializeNPagedLookasideList
+    - ExDeleteNPagedLookasideList
+    - MmBuildMdlForNonPagedPool
+    - MmMapLockedPagesSpecifyCache
+    - wcsncmp
+    - MmMapIoSpace
+    - MmUnmapIoSpace
+    - IoAllocateMdl
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - IoDeleteDevice
+    - IoDeleteSymbolicLink
+    - IoFreeMdl
+    - IoGetRequestorProcessId
+    - __C_specific_handler
+    - KeBugCheckEx
+    - wcsncat_s
+    - MmUnmapLockedPages
+    - wcscpy_s
+    - HalSetBusDataByOffset
+    - HalGetBusDataByOffset
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware
+          Compatibility Publisher
+        ValidFrom: '2019-06-05 18:34:00'
+        ValidTo: '2020-06-03 18:34:00'
+        Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 33000000319479a318f5522d06000000000031
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 5b81fd0f706522a8d7c9f2957283c0b4
+          SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc
+          SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4
+          SHA384: 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        ValidFrom: '2014-10-15 20:31:27'
+        ValidTo: '2029-10-15 20:41:27'
+        Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: true
+        SerialNumber: 330000000d690d5d7893d076df00000000000d
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 83f69422963f11c3c340b81712eef319
+          SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601
+          SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae
+          SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63
+      Signer:
+      - SerialNumber: 33000000319479a318f5522d06000000000031
+        Issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        Version: 1
+    RichPEHeaderHash:
+      MD5: 09623177d73b03f02ff61716a62d38b6
+      SHA1: fc2c790bf9784da7780d70f55636f2f322103f3e
+      SHA256: ea3ff622c09db0daef057ac5c3d82ffbf16b6da419c63adf30bd26a81f2135be
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.181915217167236'
+        Virtual Size: '0xf0a'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.94248927081244'
+        Virtual Size: '0x5dc'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '0.28109187076190567'
+        Virtual Size: '0x340'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.682008270072732'
+        Virtual Size: '0xfc'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.252106196995887'
+        Virtual Size: '0x454'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.5003243984815375'
+        Virtual Size: '0x428'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '2.7588718484453603'
+        Virtual Size: '0x14'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2019-09-05 23:33:31'
+    Imphash: 163436e69f8e582bdc1c1e6f735de23b
+    LoadsDespiteHVCI: 'FALSE'
+  - Filename: CorsairLLAccess64.sys
+    MD5: 3b9698a9ee85f0b4edf150deef790ccd
+    SHA1: fbfabf309680fbf7c0f6f14c5a0e4840c894e393
+    SHA256: 5fad3775feb8b6f6dcbd1642ae6b6a565ff7b64eadfc9bf9777918b51696ab36
+    Authentihash:
+      MD5: 2c91bc52c8cda89db47907b88590a2a0
+      SHA1: 2129fd9cf3839001abea6bab0bbde224abad967c
+      SHA256: a52a6fe55bd1c294d6f26b68839770d97850e9ccd5ecfd7f96b9dc4386e0ff08
+    Description: Corsair LL Access
+    Company: Corsair Memory, Inc.
+    InternalName: Corsair LL Access
+    OriginalFilename: Corsair LL Access
+    FileVersion: 1.0.16.0
+    Product: Corsair LL Access
+    ProductVersion: 1.0.16.0
+    Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved
+    MachineType: I386
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - WRITE_REGISTER_ULONG
+    - KeInitializeMutex
+    - KeReleaseMutex
+    - KeWaitForSingleObject
+    - InterlockedPopEntrySList
+    - InterlockedPushEntrySList
+    - ExInitializeNPagedLookasideList
+    - ExDeleteNPagedLookasideList
+    - MmBuildMdlForNonPagedPool
+    - MmMapLockedPagesSpecifyCache
+    - MmUnmapLockedPages
+    - WRITE_REGISTER_USHORT
+    - MmUnmapIoSpace
+    - IoAllocateMdl
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - IoDeleteDevice
+    - IoDeleteSymbolicLink
+    - IoFreeMdl
+    - IoGetRequestorProcessId
+    - KeBugCheckEx
+    - WRITE_REGISTER_UCHAR
+    - RtlUnwind
+    - READ_REGISTER_ULONG
+    - READ_REGISTER_USHORT
+    - READ_REGISTER_UCHAR
+    - RtlInitUnicodeString
+    - wcsncmp
+    - wcsncat_s
+    - MmMapIoSpace
+    - wcscpy_s
+    - WRITE_PORT_ULONG
+    - WRITE_PORT_USHORT
+    - WRITE_PORT_UCHAR
+    - READ_PORT_ULONG
+    - READ_PORT_USHORT
+    - READ_PORT_UCHAR
+    - HalSetBusDataByOffset
+    - HalGetBusDataByOffset
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware
+          Compatibility Publisher
+        ValidFrom: '2019-06-05 18:34:00'
+        ValidTo: '2020-06-03 18:34:00'
+        Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 33000000319479a318f5522d06000000000031
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 5b81fd0f706522a8d7c9f2957283c0b4
+          SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc
+          SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4
+          SHA384: 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        ValidFrom: '2014-10-15 20:31:27'
+        ValidTo: '2029-10-15 20:41:27'
+        Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: true
+        SerialNumber: 330000000d690d5d7893d076df00000000000d
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 83f69422963f11c3c340b81712eef319
+          SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601
+          SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae
+          SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63
+      Signer:
+      - SerialNumber: 33000000319479a318f5522d06000000000031
+        Issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        Version: 1
+    RichPEHeaderHash:
+      MD5: 2bd9998d5a3d752be9fda27c05556bf0
+      SHA1: 22bc82c127fad9e77e36eba619c52e4bf09bdf9a
+      SHA256: 4964d8c6bdbd9500a657897213fb509c83b324af6304964f422080ba3068d4a3
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.326201043124514'
+        Virtual Size: '0xeec'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.051426020700893'
+        Virtual Size: '0x3f4'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '0.24044503450968063'
+        Virtual Size: '0x290'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.533447382112606'
+        Virtual Size: '0x496'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.495146038515065'
+        Virtual Size: '0x428'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '5.904008861740888'
+        Virtual Size: '0x11c'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2019-09-05 23:33:16'
+    Imphash: 44cbd2ee295f1a35795eb4cd7cdd0864
+    LoadsDespiteHVCI: 'FALSE'
+  - Filename: CorsairLLAccess64.sys
+    MD5: 30efb7d485fc9c28fe82a97deac29626
+    SHA1: 85941b94524da181be8aad290127aa18fc71895c
+    SHA256: a334bdf0c0ab07803380eb6ef83eefe7c147d6962595dd9c943a6a76f2200b0d
+    Authentihash:
+      MD5: e5c1ddfd9df7a473d9394ec219ffaa15
+      SHA1: c0e1d74e70c5350e23c51209aa8b5df87bdf5642
+      SHA256: cff3fc66d54279b755ceedf89268847dbb5139227739e4689f5d9271b1d7923b
+    Description: Corsair LL Access
+    Company: Corsair Memory, Inc.
+    InternalName: Corsair LL Access
+    OriginalFilename: Corsair LL Access
+    FileVersion: 1.0.18.0
+    Product: Corsair LL Access
+    ProductVersion: 1.0.18.0
+    Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved
+    MachineType: I386
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - WRITE_REGISTER_USHORT
+    - WRITE_REGISTER_ULONG
+    - KeInitializeMutex
+    - KeReleaseMutex
+    - KeWaitForSingleObject
+    - InterlockedPopEntrySList
+    - InterlockedPushEntrySList
+    - ExInitializeNPagedLookasideList
+    - ExDeleteNPagedLookasideList
+    - MmBuildMdlForNonPagedPool
+    - MmMapLockedPagesSpecifyCache
+    - WRITE_REGISTER_UCHAR
+    - MmMapIoSpace
+    - MmUnmapIoSpace
+    - IoAllocateMdl
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - IoDeleteDevice
+    - IoDeleteSymbolicLink
+    - IoFreeMdl
+    - IoGetRequestorProcessId
+    - KeBugCheckEx
+    - READ_REGISTER_ULONG
+    - RtlUnwind
+    - READ_REGISTER_USHORT
+    - READ_REGISTER_UCHAR
+    - RtlGetVersion
+    - RtlInitUnicodeString
+    - wcsncmp
+    - wcsncat_s
+    - MmUnmapLockedPages
+    - wcscpy_s
+    - WRITE_PORT_ULONG
+    - WRITE_PORT_USHORT
+    - WRITE_PORT_UCHAR
+    - READ_PORT_ULONG
+    - READ_PORT_USHORT
+    - READ_PORT_UCHAR
+    - HalSetBusDataByOffset
+    - HalGetBusDataByOffset
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware
+          Compatibility Publisher
+        ValidFrom: '2019-06-05 18:34:00'
+        ValidTo: '2020-06-03 18:34:00'
+        Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 33000000319479a318f5522d06000000000031
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 5b81fd0f706522a8d7c9f2957283c0b4
+          SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc
+          SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4
+          SHA384: 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        ValidFrom: '2014-10-15 20:31:27'
+        ValidTo: '2029-10-15 20:41:27'
+        Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: true
+        SerialNumber: 330000000d690d5d7893d076df00000000000d
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 83f69422963f11c3c340b81712eef319
+          SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601
+          SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae
+          SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63
+      Signer:
+      - SerialNumber: 33000000319479a318f5522d06000000000031
+        Issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        Version: 1
+    RichPEHeaderHash:
+      MD5: b3c51d93de6657ea03bfded31907268d
+      SHA1: 4b863e10ff72c56d9f5092920beae2ef1c060a29
+      SHA256: 8cce9adc0a3123b98608fd0a4bd3ed9249390fbaf9962b59c431833a7d1a12dc
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.333999663714496'
+        Virtual Size: '0xf2c'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.008877803842863'
+        Virtual Size: '0x404'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '0.24044503450968063'
+        Virtual Size: '0x298'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.5353242381008565'
+        Virtual Size: '0x4aa'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.4890462029928155'
+        Virtual Size: '0x428'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '5.926808995856722'
+        Virtual Size: '0x128'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2019-10-28 19:18:58'
+    Imphash: 82e75304c5b7ed87121b8b89c82f2389
+    LoadsDespiteHVCI: 'FALSE'
+  - Filename: CorsairLLAccess64.sys
+    MD5: f042e8318cf20957c2339d96690c3186
+    SHA1: 2871a631f36cd1ea2fd268036087d28070ef2c52
+    SHA256: f15ae970e222ce06dbf3752b223270d0e726fb78ebec3598b4f8225b5a0880b1
+    Authentihash:
+      MD5: 0249d3e10b361ce69d1e7a44889ed8b7
+      SHA1: fc577f0a129354623164e81fd287ebd6546c8ca3
+      SHA256: 09bc9d0606d8b96f1d9fb18741bdb43aa5c188981d298df047b8c75351d68653
+    Description: Corsair LL Access
+    Company: Corsair Memory, Inc.
+    InternalName: Corsair LL Access
+    OriginalFilename: Corsair LL Access
+    FileVersion: 1.0.15.0
+    Product: Corsair LL Access
+    ProductVersion: 1.0.15.0
+    Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved
+    MachineType: I386
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - WRITE_REGISTER_ULONG
+    - KeInitializeMutex
+    - KeReleaseMutex
+    - KeWaitForSingleObject
+    - InterlockedPopEntrySList
+    - InterlockedPushEntrySList
+    - ExInitializeNPagedLookasideList
+    - ExDeleteNPagedLookasideList
+    - MmBuildMdlForNonPagedPool
+    - MmMapLockedPagesSpecifyCache
+    - MmUnmapLockedPages
+    - WRITE_REGISTER_USHORT
+    - MmUnmapIoSpace
+    - IoAllocateMdl
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - IoDeleteDevice
+    - IoDeleteSymbolicLink
+    - IoFreeMdl
+    - IoGetRequestorProcessId
+    - KeBugCheckEx
+    - WRITE_REGISTER_UCHAR
+    - RtlUnwind
+    - READ_REGISTER_ULONG
+    - READ_REGISTER_USHORT
+    - READ_REGISTER_UCHAR
+    - RtlInitUnicodeString
+    - wcsncmp
+    - wcsncat_s
+    - MmMapIoSpace
+    - wcscpy_s
+    - WRITE_PORT_ULONG
+    - WRITE_PORT_USHORT
+    - WRITE_PORT_UCHAR
+    - READ_PORT_ULONG
+    - READ_PORT_USHORT
+    - READ_PORT_UCHAR
+    - HalSetBusDataByOffset
+    - HalGetBusDataByOffset
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware
+          Compatibility Publisher
+        ValidFrom: '2019-06-05 18:34:00'
+        ValidTo: '2020-06-03 18:34:00'
+        Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 33000000319479a318f5522d06000000000031
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 5b81fd0f706522a8d7c9f2957283c0b4
+          SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc
+          SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4
+          SHA384: 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        ValidFrom: '2014-10-15 20:31:27'
+        ValidTo: '2029-10-15 20:41:27'
+        Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: true
+        SerialNumber: 330000000d690d5d7893d076df00000000000d
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 83f69422963f11c3c340b81712eef319
+          SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601
+          SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae
+          SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63
+      Signer:
+      - SerialNumber: 33000000319479a318f5522d06000000000031
+        Issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        Version: 1
+    RichPEHeaderHash:
+      MD5: 2bd9998d5a3d752be9fda27c05556bf0
+      SHA1: 22bc82c127fad9e77e36eba619c52e4bf09bdf9a
+      SHA256: 4964d8c6bdbd9500a657897213fb509c83b324af6304964f422080ba3068d4a3
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.3522393849805745'
+        Virtual Size: '0xdfc'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.026363426305179'
+        Virtual Size: '0x3b4'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '0.24044503450968063'
+        Virtual Size: '0x290'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.53174380459983'
+        Virtual Size: '0x496'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.4977352184983013'
+        Virtual Size: '0x428'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '5.9065976115977605'
+        Virtual Size: '0x110'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2019-08-26 03:16:05'
+    Imphash: 44cbd2ee295f1a35795eb4cd7cdd0864
+    LoadsDespiteHVCI: 'FALSE'
+  - Filename: Corsair LL Access
+    MD5: 3b41f4ccee2c1f132ffc7cdd9e5dd98e
+    SHA1: 76f17945b736ee3fd1a887833f88ed1775ba0aab
+    SHA256: 6c264246efbfb2db0e5c82e8a4e9ad896872cd306c71af5b7b242fb7b3ff3ab1
+    LoadsDespiteHVCI: 'FALSE'
+    Imphash: b1de401efd9d1c08f251d13cbbdf568d
+    Authentihash:
+      MD5: abeb82efc4510e3e854e77b812779150
+      SHA1: 41e3810fd1918bc262bea7f61171ecf07bdb3566
+      SHA256: a88a6133e7c838f38ea832c163333e7acf1c90277442ff7f51e1999338961604
+    RichPEHeaderHash:
+      MD5: 20828ab1c594c66acf9953ede3d9c31a
+      SHA1: 5d2bdeedb3a9f6227cef09cdd8aa3e6de4ff9e55
+      SHA256: f35e6c177531561e7c941f53650218ed0d985b4883f9b94d0ab50a1c4765a261
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.20021494727114'
+        Virtual Size: '0x104a'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.9397908556257217'
+        Virtual Size: '0x614'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '0.28109187076190567'
+        Virtual Size: '0x348'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.5862603651765945'
+        Virtual Size: '0xfc'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.243509755740983'
+        Virtual Size: '0x4aa'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.4942245629592885'
+        Virtual Size: '0x428'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '2.7638651219508543'
+        Virtual Size: '0x14'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2019-12-25 21:03:50'
+    Description: Corsair LL Access
+    Company: Corsair Memory, Inc.
+    InternalName: Corsair LL Access
+    OriginalFilename: Corsair LL Access
+    FileVersion: 1.0.22.0
+    Product: Corsair LL Access
+    ProductVersion: 1.0.22.0
+    Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved
+    MachineType: AMD64
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - RtlInitUnicodeString
+    - RtlGetVersion
+    - KeInitializeMutex
+    - KeReleaseMutex
+    - KeWaitForSingleObject
+    - ExFreePoolWithTag
+    - ExQueryDepthSList
+    - ExpInterlockedPopEntrySList
+    - ExpInterlockedPushEntrySList
+    - ExInitializeNPagedLookasideList
+    - ExDeleteNPagedLookasideList
+    - MmBuildMdlForNonPagedPool
+    - MmMapLockedPagesSpecifyCache
+    - wcsncmp
+    - MmMapIoSpace
+    - MmUnmapIoSpace
+    - IoAllocateMdl
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - IoDeleteDevice
+    - IoDeleteSymbolicLink
+    - IoFreeMdl
+    - SeQueryInformationToken
+    - IoGetRequestorProcessId
+    - __C_specific_handler
+    - KeBugCheckEx
+    - wcsncat_s
+    - MmUnmapLockedPages
+    - wcscpy_s
+    - HalGetBusDataByOffset
+    - HalSetBusDataByOffset
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware
+          Compatibility Publisher
+        ValidFrom: '2019-06-05 18:34:00'
+        ValidTo: '2020-06-03 18:34:00'
+        Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 33000000319479a318f5522d06000000000031
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 5b81fd0f706522a8d7c9f2957283c0b4
+          SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc
+          SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4
+          SHA384: 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        ValidFrom: '2014-10-15 20:31:27'
+        ValidTo: '2029-10-15 20:41:27'
+        Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: true
+        SerialNumber: 330000000d690d5d7893d076df00000000000d
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 83f69422963f11c3c340b81712eef319
+          SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601
+          SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae
+          SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63
+      Signer:
+      - SerialNumber: 33000000319479a318f5522d06000000000031
+        Issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        Version: 1
+  sha256: 29a90ae1dcee66335ece4287a06482716530509912be863c85a2a03a6450a5b6
+  signer: Corsair Memory, Inc.
+  original_filename: Corsair LL Access
+  command_metadata:
+  - Command: sc.exe create CorsairLLAccess64.sys binPath=C:\windows\temp\CorsairLLAccess64.sys type=kernel
+      && sc.exe start CorsairLLAccess64.sys
+    Description: Corsair LL Access 1.0.22.0 maps caller-selected physical addresses with MmMapIoSpace
+      and can expose the mapped pages to user mode through MmMapLockedPagesSpecifyCache. These physical-memory
+      access primitives can be abused for kernel tampering by an attacker able to load and open the driver.
+    Usecase: Elevate privileges
+    Privileges: kernel
+    OperatingSystem: Windows 10
+  category: vulnerable driver
+references:
+- Internal Research
+- https://github.com/magicsword-io/LOLDrivers/issues/302
+- https://nvd.nist.gov/vuln/detail/CVE-2020-8808
+- https://github.com/fluffycats31/vulnerable-drivers
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: a9d9cbb7-b5f6-4e74-97a5-29993263280e.yaml
+      document: "Id: a9d9cbb7-b5f6-4e74-97a5-29993263280e\nTags:\n- CorsairLLAccess64.sys\nVerified: 'TRUE'\n\
+        Author: Nasreddine Bencherchali\nCreated: '2023-05-06'\nMitreID: T1068\nCategory: vulnerable driver\n\
+        Commands:\n  Command: sc.exe create CorsairLLAccess64.sys binPath=C:\\windows\\temp\\CorsairLLAccess64.sys\n\
+        \    type=kernel && sc.exe start CorsairLLAccess64.sys\n  Description: Corsair LL Access 1.0.22.0\
+        \ maps caller-selected physical addresses\n    with MmMapIoSpace and can expose the mapped pages\
+        \ to user mode through MmMapLockedPagesSpecifyCache.\n    These physical-memory access primitives\
+        \ can be abused for kernel tampering by\n    an attacker able to load and open the driver.\n \
+        \ Usecase: Elevate privileges\n  Privileges: kernel\n  OperatingSystem: Windows 10\nResources:\n\
+        - Internal Research\n- https://github.com/magicsword-io/LOLDrivers/issues/302\n- https://nvd.nist.gov/vuln/detail/CVE-2020-8808\n\
+        - https://github.com/fluffycats31/vulnerable-drivers\nDetection:\n- type: yara_signature\n  value:\
+        \ https://github.com/magicsword-io/LOLDrivers/blob/main/detections/yara/yara-rules_vuln_drivers_strict_renamed.yar\n\
+        - type: sigma_hash\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers.yml\n\
+        - type: sigma_names\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sigma/driver_load_win_vuln_drivers_names.yml\n\
+        - type: sysmon_hash_detect\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes.xml\n\
+        - type: sysmon_hash_block\n  value: https://github.com/magicsword-io/LOLDrivers/blob/main/detections/sysmon/sysmon_config_vulnerable_hashes_block.xml\n\
+        Acknowledgement:\n  Person: Patrick Saif, fluffycats31\n  Handle: '@weezerOSINT, @fluffycats31'\n\
+        KnownVulnerableSamples:\n- Filename: CorsairLLAccess64.sys\n  MD5: b34361d151c793415ef92ee5d368c053\n\
+        \  SHA1: 89656051126c3e97477a9985d363fbdde0bc159e\n  SHA256: 29a90ae1dcee66335ece4287a06482716530509912be863c85a2a03a6450a5b6\n\
+        \  Authentihash:\n    MD5: 7158180c7f219093d504d695240c2173\n    SHA1: 0302854ea87dc07a493aca60e8e7e63422932e42\n\
+        \    SHA256: b5606dc2a76350916cd77348cfdfe502256d759a4743dd4af503d2f7f348eb70\n  Description:\
+        \ Corsair LL Access\n  Company: Corsair Memory, Inc.\n  InternalName: Corsair LL Access\n  OriginalFilename:\
+        \ Corsair LL Access\n  FileVersion: 1.0.16.0\n  Product: Corsair LL Access\n  ProductVersion:\
+        \ 1.0.16.0\n  Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved\n  MachineType: AMD64\n\
+        \  Imports:\n  - ntoskrnl.exe\n  - HAL.dll\n  ExportedFunctions: ''\n  ImportedFunctions:\n  -\
+        \ RtlInitUnicodeString\n  - KeInitializeMutex\n  - KeReleaseMutex\n  - KeWaitForSingleObject\n\
+        \  - ExQueryDepthSList\n  - ExpInterlockedPopEntrySList\n  - ExpInterlockedPushEntrySList\n  -\
+        \ ExInitializeNPagedLookasideList\n  - ExDeleteNPagedLookasideList\n  - MmBuildMdlForNonPagedPool\n\
+        \  - MmMapLockedPagesSpecifyCache\n  - wcsncmp\n  - MmMapIoSpace\n  - MmUnmapIoSpace\n  - IoAllocateMdl\n\
+        \  - IofCompleteRequest\n  - IoCreateDevice\n  - IoCreateSymbolicLink\n  - IoDeleteDevice\n  -\
+        \ IoDeleteSymbolicLink\n  - IoFreeMdl\n  - IoGetRequestorProcessId\n  - __C_specific_handler\n\
+        \  - KeBugCheckEx\n  - wcsncat_s\n  - MmUnmapLockedPages\n  - wcscpy_s\n  - HalSetBusDataByOffset\n\
+        \  - HalGetBusDataByOffset\n  Signatures:\n  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Hardware Compatibility Publisher\n      ValidFrom: '2019-06-05 18:34:00'\n      ValidTo:\
+        \ '2020-06-03 18:34:00'\n      Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 33000000319479a318f5522d06000000000031\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ 5b81fd0f706522a8d7c9f2957283c0b4\n        SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc\n \
+        \       SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4\n        SHA384:\
+        \ 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Third Party Component CA 2014\n      ValidFrom: '2014-10-15 20:31:27'\n      ValidTo:\
+        \ '2029-10-15 20:41:27'\n      Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 330000000d690d5d7893d076df00000000000d\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 83f69422963f11c3c340b81712eef319\n\
+        \        SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601\n        SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae\n\
+        \        SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63\n\
+        \    Signer:\n    - SerialNumber: 33000000319479a318f5522d06000000000031\n      Issuer: C=US,\
+        \ ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Third Party\
+        \ Component CA 2014\n      Version: 1\n  RichPEHeaderHash:\n    MD5: 09623177d73b03f02ff61716a62d38b6\n\
+        \    SHA1: fc2c790bf9784da7780d70f55636f2f322103f3e\n    SHA256: ea3ff622c09db0daef057ac5c3d82ffbf16b6da419c63adf30bd26a81f2135be\n\
+        \  Sections:\n    .text:\n      Entropy: 6.181915217167236\n      Virtual Size: '0xf0a'\n    .rdata:\n\
+        \      Entropy: 3.94248927081244\n      Virtual Size: '0x5dc'\n    .data:\n      Entropy: 0.28109187076190567\n\
+        \      Virtual Size: '0x340'\n    .pdata:\n      Entropy: 3.682008270072732\n      Virtual Size:\
+        \ '0xfc'\n    INIT:\n      Entropy: 5.252106196995887\n      Virtual Size: '0x454'\n    .rsrc:\n\
+        \      Entropy: 3.5003243984815375\n      Virtual Size: '0x428'\n    .reloc:\n      Entropy: 2.7588718484453603\n\
+        \      Virtual Size: '0x14'\n  MagicHeader: 50 45 0 0\n  CreationTimestamp: '2019-09-05 23:33:31'\n\
+        \  Imphash: 163436e69f8e582bdc1c1e6f735de23b\n  LoadsDespiteHVCI: 'FALSE'\n- Filename: CorsairLLAccess64.sys\n\
+        \  MD5: 3b9698a9ee85f0b4edf150deef790ccd\n  SHA1: fbfabf309680fbf7c0f6f14c5a0e4840c894e393\n \
+        \ SHA256: 5fad3775feb8b6f6dcbd1642ae6b6a565ff7b64eadfc9bf9777918b51696ab36\n  Authentihash:\n\
+        \    MD5: 2c91bc52c8cda89db47907b88590a2a0\n    SHA1: 2129fd9cf3839001abea6bab0bbde224abad967c\n\
+        \    SHA256: a52a6fe55bd1c294d6f26b68839770d97850e9ccd5ecfd7f96b9dc4386e0ff08\n  Description:\
+        \ Corsair LL Access\n  Company: Corsair Memory, Inc.\n  InternalName: Corsair LL Access\n  OriginalFilename:\
+        \ Corsair LL Access\n  FileVersion: 1.0.16.0\n  Product: Corsair LL Access\n  ProductVersion:\
+        \ 1.0.16.0\n  Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved\n  MachineType: I386\n\
+        \  Imports:\n  - ntoskrnl.exe\n  - HAL.dll\n  ExportedFunctions: ''\n  ImportedFunctions:\n  -\
+        \ WRITE_REGISTER_ULONG\n  - KeInitializeMutex\n  - KeReleaseMutex\n  - KeWaitForSingleObject\n\
+        \  - InterlockedPopEntrySList\n  - InterlockedPushEntrySList\n  - ExInitializeNPagedLookasideList\n\
+        \  - ExDeleteNPagedLookasideList\n  - MmBuildMdlForNonPagedPool\n  - MmMapLockedPagesSpecifyCache\n\
+        \  - MmUnmapLockedPages\n  - WRITE_REGISTER_USHORT\n  - MmUnmapIoSpace\n  - IoAllocateMdl\n  -\
+        \ IofCompleteRequest\n  - IoCreateDevice\n  - IoCreateSymbolicLink\n  - IoDeleteDevice\n  - IoDeleteSymbolicLink\n\
+        \  - IoFreeMdl\n  - IoGetRequestorProcessId\n  - KeBugCheckEx\n  - WRITE_REGISTER_UCHAR\n  - RtlUnwind\n\
+        \  - READ_REGISTER_ULONG\n  - READ_REGISTER_USHORT\n  - READ_REGISTER_UCHAR\n  - RtlInitUnicodeString\n\
+        \  - wcsncmp\n  - wcsncat_s\n  - MmMapIoSpace\n  - wcscpy_s\n  - WRITE_PORT_ULONG\n  - WRITE_PORT_USHORT\n\
+        \  - WRITE_PORT_UCHAR\n  - READ_PORT_ULONG\n  - READ_PORT_USHORT\n  - READ_PORT_UCHAR\n  - HalSetBusDataByOffset\n\
+        \  - HalGetBusDataByOffset\n  Signatures:\n  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Hardware Compatibility Publisher\n      ValidFrom: '2019-06-05 18:34:00'\n      ValidTo:\
+        \ '2020-06-03 18:34:00'\n      Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 33000000319479a318f5522d06000000000031\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ 5b81fd0f706522a8d7c9f2957283c0b4\n        SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc\n \
+        \       SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4\n        SHA384:\
+        \ 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Third Party Component CA 2014\n      ValidFrom: '2014-10-15 20:31:27'\n      ValidTo:\
+        \ '2029-10-15 20:41:27'\n      Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 330000000d690d5d7893d076df00000000000d\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 83f69422963f11c3c340b81712eef319\n\
+        \        SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601\n        SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae\n\
+        \        SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63\n\
+        \    Signer:\n    - SerialNumber: 33000000319479a318f5522d06000000000031\n      Issuer: C=US,\
+        \ ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Third Party\
+        \ Component CA 2014\n      Version: 1\n  RichPEHeaderHash:\n    MD5: 2bd9998d5a3d752be9fda27c05556bf0\n\
+        \    SHA1: 22bc82c127fad9e77e36eba619c52e4bf09bdf9a\n    SHA256: 4964d8c6bdbd9500a657897213fb509c83b324af6304964f422080ba3068d4a3\n\
+        \  Sections:\n    .text:\n      Entropy: 6.326201043124514\n      Virtual Size: '0xeec'\n    .rdata:\n\
+        \      Entropy: 4.051426020700893\n      Virtual Size: '0x3f4'\n    .data:\n      Entropy: 0.24044503450968063\n\
+        \      Virtual Size: '0x290'\n    INIT:\n      Entropy: 5.533447382112606\n      Virtual Size:\
+        \ '0x496'\n    .rsrc:\n      Entropy: 3.495146038515065\n      Virtual Size: '0x428'\n    .reloc:\n\
+        \      Entropy: 5.904008861740888\n      Virtual Size: '0x11c'\n  MagicHeader: 50 45 0 0\n  CreationTimestamp:\
+        \ '2019-09-05 23:33:16'\n  Imphash: 44cbd2ee295f1a35795eb4cd7cdd0864\n  LoadsDespiteHVCI: 'FALSE'\n\
+        - Filename: CorsairLLAccess64.sys\n  MD5: 30efb7d485fc9c28fe82a97deac29626\n  SHA1: 85941b94524da181be8aad290127aa18fc71895c\n\
+        \  SHA256: a334bdf0c0ab07803380eb6ef83eefe7c147d6962595dd9c943a6a76f2200b0d\n  Authentihash:\n\
+        \    MD5: e5c1ddfd9df7a473d9394ec219ffaa15\n    SHA1: c0e1d74e70c5350e23c51209aa8b5df87bdf5642\n\
+        \    SHA256: cff3fc66d54279b755ceedf89268847dbb5139227739e4689f5d9271b1d7923b\n  Description:\
+        \ Corsair LL Access\n  Company: Corsair Memory, Inc.\n  InternalName: Corsair LL Access\n  OriginalFilename:\
+        \ Corsair LL Access\n  FileVersion: 1.0.18.0\n  Product: Corsair LL Access\n  ProductVersion:\
+        \ 1.0.18.0\n  Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved\n  MachineType: I386\n\
+        \  Imports:\n  - ntoskrnl.exe\n  - HAL.dll\n  ExportedFunctions: ''\n  ImportedFunctions:\n  -\
+        \ WRITE_REGISTER_USHORT\n  - WRITE_REGISTER_ULONG\n  - KeInitializeMutex\n  - KeReleaseMutex\n\
+        \  - KeWaitForSingleObject\n  - InterlockedPopEntrySList\n  - InterlockedPushEntrySList\n  - ExInitializeNPagedLookasideList\n\
+        \  - ExDeleteNPagedLookasideList\n  - MmBuildMdlForNonPagedPool\n  - MmMapLockedPagesSpecifyCache\n\
+        \  - WRITE_REGISTER_UCHAR\n  - MmMapIoSpace\n  - MmUnmapIoSpace\n  - IoAllocateMdl\n  - IofCompleteRequest\n\
+        \  - IoCreateDevice\n  - IoCreateSymbolicLink\n  - IoDeleteDevice\n  - IoDeleteSymbolicLink\n\
+        \  - IoFreeMdl\n  - IoGetRequestorProcessId\n  - KeBugCheckEx\n  - READ_REGISTER_ULONG\n  - RtlUnwind\n\
+        \  - READ_REGISTER_USHORT\n  - READ_REGISTER_UCHAR\n  - RtlGetVersion\n  - RtlInitUnicodeString\n\
+        \  - wcsncmp\n  - wcsncat_s\n  - MmUnmapLockedPages\n  - wcscpy_s\n  - WRITE_PORT_ULONG\n  - WRITE_PORT_USHORT\n\
+        \  - WRITE_PORT_UCHAR\n  - READ_PORT_ULONG\n  - READ_PORT_USHORT\n  - READ_PORT_UCHAR\n  - HalSetBusDataByOffset\n\
+        \  - HalGetBusDataByOffset\n  Signatures:\n  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Hardware Compatibility Publisher\n      ValidFrom: '2019-06-05 18:34:00'\n      ValidTo:\
+        \ '2020-06-03 18:34:00'\n      Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 33000000319479a318f5522d06000000000031\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ 5b81fd0f706522a8d7c9f2957283c0b4\n        SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc\n \
+        \       SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4\n        SHA384:\
+        \ 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Third Party Component CA 2014\n      ValidFrom: '2014-10-15 20:31:27'\n      ValidTo:\
+        \ '2029-10-15 20:41:27'\n      Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 330000000d690d5d7893d076df00000000000d\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 83f69422963f11c3c340b81712eef319\n\
+        \        SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601\n        SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae\n\
+        \        SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63\n\
+        \    Signer:\n    - SerialNumber: 33000000319479a318f5522d06000000000031\n      Issuer: C=US,\
+        \ ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Third Party\
+        \ Component CA 2014\n      Version: 1\n  RichPEHeaderHash:\n    MD5: b3c51d93de6657ea03bfded31907268d\n\
+        \    SHA1: 4b863e10ff72c56d9f5092920beae2ef1c060a29\n    SHA256: 8cce9adc0a3123b98608fd0a4bd3ed9249390fbaf9962b59c431833a7d1a12dc\n\
+        \  Sections:\n    .text:\n      Entropy: 6.333999663714496\n      Virtual Size: '0xf2c'\n    .rdata:\n\
+        \      Entropy: 4.008877803842863\n      Virtual Size: '0x404'\n    .data:\n      Entropy: 0.24044503450968063\n\
+        \      Virtual Size: '0x298'\n    INIT:\n      Entropy: 5.5353242381008565\n      Virtual Size:\
+        \ '0x4aa'\n    .rsrc:\n      Entropy: 3.4890462029928155\n      Virtual Size: '0x428'\n    .reloc:\n\
+        \      Entropy: 5.926808995856722\n      Virtual Size: '0x128'\n  MagicHeader: 50 45 0 0\n  CreationTimestamp:\
+        \ '2019-10-28 19:18:58'\n  Imphash: 82e75304c5b7ed87121b8b89c82f2389\n  LoadsDespiteHVCI: 'FALSE'\n\
+        - Filename: CorsairLLAccess64.sys\n  MD5: f042e8318cf20957c2339d96690c3186\n  SHA1: 2871a631f36cd1ea2fd268036087d28070ef2c52\n\
+        \  SHA256: f15ae970e222ce06dbf3752b223270d0e726fb78ebec3598b4f8225b5a0880b1\n  Authentihash:\n\
+        \    MD5: 0249d3e10b361ce69d1e7a44889ed8b7\n    SHA1: fc577f0a129354623164e81fd287ebd6546c8ca3\n\
+        \    SHA256: 09bc9d0606d8b96f1d9fb18741bdb43aa5c188981d298df047b8c75351d68653\n  Description:\
+        \ Corsair LL Access\n  Company: Corsair Memory, Inc.\n  InternalName: Corsair LL Access\n  OriginalFilename:\
+        \ Corsair LL Access\n  FileVersion: 1.0.15.0\n  Product: Corsair LL Access\n  ProductVersion:\
+        \ 1.0.15.0\n  Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved\n  MachineType: I386\n\
+        \  Imports:\n  - ntoskrnl.exe\n  - HAL.dll\n  ExportedFunctions: ''\n  ImportedFunctions:\n  -\
+        \ WRITE_REGISTER_ULONG\n  - KeInitializeMutex\n  - KeReleaseMutex\n  - KeWaitForSingleObject\n\
+        \  - InterlockedPopEntrySList\n  - InterlockedPushEntrySList\n  - ExInitializeNPagedLookasideList\n\
+        \  - ExDeleteNPagedLookasideList\n  - MmBuildMdlForNonPagedPool\n  - MmMapLockedPagesSpecifyCache\n\
+        \  - MmUnmapLockedPages\n  - WRITE_REGISTER_USHORT\n  - MmUnmapIoSpace\n  - IoAllocateMdl\n  -\
+        \ IofCompleteRequest\n  - IoCreateDevice\n  - IoCreateSymbolicLink\n  - IoDeleteDevice\n  - IoDeleteSymbolicLink\n\
+        \  - IoFreeMdl\n  - IoGetRequestorProcessId\n  - KeBugCheckEx\n  - WRITE_REGISTER_UCHAR\n  - RtlUnwind\n\
+        \  - READ_REGISTER_ULONG\n  - READ_REGISTER_USHORT\n  - READ_REGISTER_UCHAR\n  - RtlInitUnicodeString\n\
+        \  - wcsncmp\n  - wcsncat_s\n  - MmMapIoSpace\n  - wcscpy_s\n  - WRITE_PORT_ULONG\n  - WRITE_PORT_USHORT\n\
+        \  - WRITE_PORT_UCHAR\n  - READ_PORT_ULONG\n  - READ_PORT_USHORT\n  - READ_PORT_UCHAR\n  - HalSetBusDataByOffset\n\
+        \  - HalGetBusDataByOffset\n  Signatures:\n  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Hardware Compatibility Publisher\n      ValidFrom: '2019-06-05 18:34:00'\n      ValidTo:\
+        \ '2020-06-03 18:34:00'\n      Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 33000000319479a318f5522d06000000000031\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ 5b81fd0f706522a8d7c9f2957283c0b4\n        SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc\n \
+        \       SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4\n        SHA384:\
+        \ 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Third Party Component CA 2014\n      ValidFrom: '2014-10-15 20:31:27'\n      ValidTo:\
+        \ '2029-10-15 20:41:27'\n      Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 330000000d690d5d7893d076df00000000000d\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 83f69422963f11c3c340b81712eef319\n\
+        \        SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601\n        SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae\n\
+        \        SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63\n\
+        \    Signer:\n    - SerialNumber: 33000000319479a318f5522d06000000000031\n      Issuer: C=US,\
+        \ ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Third Party\
+        \ Component CA 2014\n      Version: 1\n  RichPEHeaderHash:\n    MD5: 2bd9998d5a3d752be9fda27c05556bf0\n\
+        \    SHA1: 22bc82c127fad9e77e36eba619c52e4bf09bdf9a\n    SHA256: 4964d8c6bdbd9500a657897213fb509c83b324af6304964f422080ba3068d4a3\n\
+        \  Sections:\n    .text:\n      Entropy: 6.3522393849805745\n      Virtual Size: '0xdfc'\n   \
+        \ .rdata:\n      Entropy: 4.026363426305179\n      Virtual Size: '0x3b4'\n    .data:\n      Entropy:\
+        \ 0.24044503450968063\n      Virtual Size: '0x290'\n    INIT:\n      Entropy: 5.53174380459983\n\
+        \      Virtual Size: '0x496'\n    .rsrc:\n      Entropy: 3.4977352184983013\n      Virtual Size:\
+        \ '0x428'\n    .reloc:\n      Entropy: 5.9065976115977605\n      Virtual Size: '0x110'\n  MagicHeader:\
+        \ 50 45 0 0\n  CreationTimestamp: '2019-08-26 03:16:05'\n  Imphash: 44cbd2ee295f1a35795eb4cd7cdd0864\n\
+        \  LoadsDespiteHVCI: 'FALSE'\n- Filename: Corsair LL Access\n  MD5: 3b41f4ccee2c1f132ffc7cdd9e5dd98e\n\
+        \  SHA1: 76f17945b736ee3fd1a887833f88ed1775ba0aab\n  SHA256: 6c264246efbfb2db0e5c82e8a4e9ad896872cd306c71af5b7b242fb7b3ff3ab1\n\
+        \  LoadsDespiteHVCI: 'FALSE'\n  Imphash: b1de401efd9d1c08f251d13cbbdf568d\n  Authentihash:\n \
+        \   MD5: abeb82efc4510e3e854e77b812779150\n    SHA1: 41e3810fd1918bc262bea7f61171ecf07bdb3566\n\
+        \    SHA256: a88a6133e7c838f38ea832c163333e7acf1c90277442ff7f51e1999338961604\n  RichPEHeaderHash:\n\
+        \    MD5: 20828ab1c594c66acf9953ede3d9c31a\n    SHA1: 5d2bdeedb3a9f6227cef09cdd8aa3e6de4ff9e55\n\
+        \    SHA256: f35e6c177531561e7c941f53650218ed0d985b4883f9b94d0ab50a1c4765a261\n  Sections:\n \
+        \   .text:\n      Entropy: 6.20021494727114\n      Virtual Size: '0x104a'\n    .rdata:\n     \
+        \ Entropy: 3.9397908556257217\n      Virtual Size: '0x614'\n    .data:\n      Entropy: 0.28109187076190567\n\
+        \      Virtual Size: '0x348'\n    .pdata:\n      Entropy: 3.5862603651765945\n      Virtual Size:\
+        \ '0xfc'\n    INIT:\n      Entropy: 5.243509755740983\n      Virtual Size: '0x4aa'\n    .rsrc:\n\
+        \      Entropy: 3.4942245629592885\n      Virtual Size: '0x428'\n    .reloc:\n      Entropy: 2.7638651219508543\n\
+        \      Virtual Size: '0x14'\n  MagicHeader: 50 45 0 0\n  CreationTimestamp: '2019-12-25 21:03:50'\n\
+        \  Description: Corsair LL Access\n  Company: Corsair Memory, Inc.\n  InternalName: Corsair LL\
+        \ Access\n  OriginalFilename: Corsair LL Access\n  FileVersion: 1.0.22.0\n  Product: Corsair LL\
+        \ Access\n  ProductVersion: 1.0.22.0\n  Copyright: Corsair Memory, Inc. (c) 2019, All rights reserved\n\
+        \  MachineType: AMD64\n  Imports:\n  - ntoskrnl.exe\n  - HAL.dll\n  ExportedFunctions: ''\n  ImportedFunctions:\n\
+        \  - RtlInitUnicodeString\n  - RtlGetVersion\n  - KeInitializeMutex\n  - KeReleaseMutex\n  - KeWaitForSingleObject\n\
+        \  - ExFreePoolWithTag\n  - ExQueryDepthSList\n  - ExpInterlockedPopEntrySList\n  - ExpInterlockedPushEntrySList\n\
+        \  - ExInitializeNPagedLookasideList\n  - ExDeleteNPagedLookasideList\n  - MmBuildMdlForNonPagedPool\n\
+        \  - MmMapLockedPagesSpecifyCache\n  - wcsncmp\n  - MmMapIoSpace\n  - MmUnmapIoSpace\n  - IoAllocateMdl\n\
+        \  - IofCompleteRequest\n  - IoCreateDevice\n  - IoCreateSymbolicLink\n  - IoDeleteDevice\n  -\
+        \ IoDeleteSymbolicLink\n  - IoFreeMdl\n  - SeQueryInformationToken\n  - IoGetRequestorProcessId\n\
+        \  - __C_specific_handler\n  - KeBugCheckEx\n  - wcsncat_s\n  - MmUnmapLockedPages\n  - wcscpy_s\n\
+        \  - HalGetBusDataByOffset\n  - HalSetBusDataByOffset\n  Signatures:\n  - CertificatesInfo: ''\n\
+        \    SignerInfo: ''\n    Certificates:\n    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft\
+        \ Corporation, CN=Microsoft\n        Windows Hardware Compatibility Publisher\n      ValidFrom:\
+        \ '2019-06-05 18:34:00'\n      ValidTo: '2020-06-03 18:34:00'\n      Signature: 312314217055afc1a5751181c7d2d7619b23ba17166e6ae6f358b16921c925c6e3b75c31b93035f357c154fe4d347019e927db1957193b741e3371b46f4d6212b3bec972d6ff2297e8b1f2391f840045471ee31c524d4f5bf1cae4a32b73f6e48f51f777bb5b8a726db2a387c7c8df42289540f4f3d27b37d4ab4854efba809021879f3257d5670d70003a51d62bbc68e345a769f37ccb3ad336b7b3c494f5d56ef8300228d29835e5129b070742a220f83b6c9d5e2589cf2e7a1f7b59cfc81cda3232fc2fa448d736db546dc4b274cad3da83433deaa3eb9919b23ad08dc4055a8026711adcfccdb47d7a7c1adb2671ecc7198a786973807699a0ee236a46771f88913b769693b0b8ce9b002a40c2aa426edfd9a98368f89817b0d174458a390e11628e21f77e751431fae13831228e0e357610a24d89806d85390e9b3831792f62688bf04f91ee9a854b252452de7e752f39e57765a09a4ff41ae96144593a8a99688c6c9ad6b9fcaba1189ef2372b99e96db3fe6402b0e125b17f36c6f70fc1eb83257ce639b6c691a9ec031dddb9fa6536bb8e6080c9db976533f4ddfb73309b6498543cc94d3283d43668d614dd60a4fe707eb3b871da3204c534c8cc73cbc66aeb36cefd765439eef68d7ee9c515eb617f051a72097d0a25003df2dceccc9a0c4be1fd27e473955cc83ee9dba626748b1cb723c3b1c8b8ebc59321a0f5\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 33000000319479a318f5522d06000000000031\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ 5b81fd0f706522a8d7c9f2957283c0b4\n        SHA1: 84d894599653a8ed0e0b2802db3197dc177908cc\n \
+        \       SHA256: 4fa629304df4287c97ae5b7e481974316e9daf776b0cdeffab1671e7dca68fb4\n        SHA384:\
+        \ 0b89dc122fc7ebf80881a5047ffbbcb0bec30636516aff4f43307e2a925a476cabfc26e2cc392ad748d655f6ec4c8b75\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Third Party Component CA 2014\n      ValidFrom: '2014-10-15 20:31:27'\n      ValidTo:\
+        \ '2029-10-15 20:41:27'\n      Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 330000000d690d5d7893d076df00000000000d\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 83f69422963f11c3c340b81712eef319\n\
+        \        SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601\n        SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae\n\
+        \        SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63\n\
+        \    Signer:\n    - SerialNumber: 33000000319479a318f5522d06000000000031\n      Issuer: C=US,\
+        \ ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Third Party\
+        \ Component CA 2014\n      Version: 1\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:88a3c2c9cba0c3f080d1e2e8ace9656edeb7c5d5efe9a1dd4dd588917d23b463

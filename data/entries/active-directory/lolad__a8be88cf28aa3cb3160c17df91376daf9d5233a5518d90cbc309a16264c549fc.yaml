@@ -1,0 +1,80 @@
+id: lolad/R2V0IEFEIERvbWFpbiBTaXRlcyBhbmQgU3VibmV0cw/R2V0LUFEUmVwbGljYXRpb25TaXRlIHwgU2VsZWN0LU9iamVjdCBOYW1lLCBTaXRlT2JqZWN0R1VJRA/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Get AD Domain Sites and Subnets
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADReplicationSite | Select-Object Name, SiteObjectGUID
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Get AD Domain Sites and Subnets
+      command: Get-ADReplicationSite | Select-Object Name, SiteObjectGUID
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=85
+        row_utf8: "<tr>\r\n\t\t    <td>Get AD Domain Sites and Subnets</td>\r\n\t\t    <td><code>Get-ADReplicationSite\
+          \ | Select-Object Name, SiteObjectGUID</code></td>\r\n\t\t    <td>PowerShell</td>\r\n\t\t  \
+          \  <td><a href=\"https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationsite\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:f76fef833bd99bb41c0170bec963a7a04853f6c247230bdc810e6038fec4b0f5
+        cells:
+        - Get AD Domain Sites and Subnets
+        - Get-ADReplicationSite | Select-Object Name, SiteObjectGUID
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:f10d9e3f6cecbdb2c5944be9b6465b57496b4ae3cd39d517797f7f23c32ecb20

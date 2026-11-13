@@ -1,0 +1,82 @@
+id: wadcoms/PyWhisker
+type: technique
+platform: active-directory
+name: PyWhisker
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 pywhisker.py -d "test.local" -u "john" -p "password123" --target "user2" --action
+    "list" --dc-ip "10.10.10.1"
+  comment: "pyWhisker is a tool allowing users to manipulate the msDS-KeyCredentialLink attribute of a\
+    \ target user/computer to obtain full control over that object. It's based on Impacket and on our\
+    \ Python equivalent of Michael Grafnetter's DSInternals called PyDSInternals. This tool, along with\
+    \ Dirk-jan's PKINITtools allow for a complete primitive exploitation on UNIX-based systems only.\n\
+    \nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\tUsername: john\n\n\t\
+    Password: password123\n"
+references:
+- https://github.com/shutdownrepo/pywhisker
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: PyWhisker.md
+      document: "---\ndescription: |\n  pyWhisker is a tool allowing users to manipulate the msDS-KeyCredentialLink\
+        \ attribute of a target user/computer to obtain full control over that object. It's based on Impacket\
+        \ and on our Python equivalent of Michael Grafnetter's DSInternals called PyDSInternals. This\
+        \ tool, along with Dirk-jan's PKINITtools allow for a complete primitive exploitation on UNIX-based\
+        \ systems only.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\
+        \n  \tUsername: john\n\n  \tPassword: password123\n\ncommand: |\n  python3 pywhisker.py -d \"\
+        test.local\" -u \"john\" -p \"password123\" --target \"user2\" --action \"list\" --dc-ip \"10.10.10.1\"\
+        \nitems:\n  - Password\n  - Username\nservices:\n  - Kerberos\nOS:\n  - Linux\nattack_types:\n\
+        \  - Exploitation\nreferences:\n  - https://github.com/shutdownrepo/pywhisker\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:e10beddaf62b6fe2c284f255161a679aed08457661ab549138e386d65e8b7c4c

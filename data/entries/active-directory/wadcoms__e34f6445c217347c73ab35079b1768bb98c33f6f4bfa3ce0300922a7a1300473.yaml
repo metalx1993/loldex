@@ -1,0 +1,78 @@
+id: wadcoms/SharpWMI
+type: technique
+platform: active-directory
+name: SharpWMI
+phases:
+- persistence
+capabilities:
+- persistence
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: SharpWMI.exe action=query query="select * from win32_process"
+  comment: "SharpWMI.exe is part of the GhostPack suite of tools that provides WMI functionality, such\
+    \ as local/remote WMI queries, remote WMI process creation, and remote execution of arbitrary VBS\
+    \ through WMI events. The following command will simply list all processes running on the local system.\n\
+    \nCommand Reference:\n\n\tGet all processes: \"select * from win32_process\"\n"
+references:
+- https://github.com/GhostPack/SharpWMI
+- https://www.harmj0y.net/blog/redteaming/ghostpack/
+tags:
+- active-directory
+- wadcoms
+- wmi
+source_data:
+  WADComs:
+    raw:
+      file: SharpWMI.md
+      document: "---\ndescription: |\n  SharpWMI.exe is part of the GhostPack suite of tools that provides\
+        \ WMI functionality, such as local/remote WMI queries, remote WMI process creation, and remote\
+        \ execution of arbitrary VBS through WMI events. The following command will simply list all processes\
+        \ running on the local system.\n\n  Command Reference:\n\n  \tGet all processes: \"select * from\
+        \ win32_process\"\n\ncommand: |\n  SharpWMI.exe action=query query=\"select * from win32_process\"\
+        \nitems:\n  - Shell\nservices:\n  - WMI\nOS:\n  - Windows\nattack_types:\n  - Persistence\nreferences:\n\
+        \  - https://github.com/GhostPack/SharpWMI\n  - https://www.harmj0y.net/blog/redteaming/ghostpack/\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:3dadd9ac341ce5e6f07ca52229b619cd4fc017d3893d36622d433a600d37c33b

@@ -1,0 +1,91 @@
+id: gtfobins/eb/inherit/sudo
+type: binary
+platform: linux
+name: eb
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: eb logs
+references:
+- https://gtfobins.github.io/gtfobins/eb/
+- https://gtfobins.github.io/gtfobins/journalctl/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        eb:
+          comment: For this to work the target must be connected to an AWS instance via EB CLI.
+          functions:
+            inherit:
+            - code: eb logs
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: journalctl
+        journalctl:
+          comment: This might not work if run by unprivileged users depending on the system configuration.
+          functions:
+            inherit:
+            - code: journalctl
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: less
+    upstream_url: https://gtfobins.github.io/gtfobins/eb/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:19eeb1af7658116c85a4b7a3c041ee7617afe05f13d910c981a16550d5fdecd2

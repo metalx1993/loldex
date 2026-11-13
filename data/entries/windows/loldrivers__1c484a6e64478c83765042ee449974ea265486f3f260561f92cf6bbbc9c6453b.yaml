@@ -1,0 +1,178 @@
+id: loldrivers/0e272ccf-81e5-4612-95d2-365e7ded6eac
+type: driver
+platform: windows
+name: shield.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+aliases:
+- shield-async.sys
+- shieldwp.sys
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create shield binPath=C:\windows\temp\shield.sys type=kernel && sc.exe start shield
+  comment: Horizon DataSys Shield drivers expose IOCTL functionality reported to provide arbitrary kernel
+    read/write primitives.
+driver_detail:
+  samples:
+  - Filename: shield.sys
+    MD5: 97d6d9e9164354e40b5bcc828c6da3df
+    SHA1: 4d0f2a70ce5cd0c868454de9afe9b4b09fcef5df
+    SHA256: b11db76aeab05f29e8f5d51cdfe70898a46fbd50a1245ca1aed39de10aafd401
+    Signature:
+    - New Horizon Datasys Inc
+    Date: 07:33 PM 02/13/2026
+    Publisher: New Horizon Datasys Inc
+    Company: Horizon Datasys, Inc.
+    Description: Shield disk filter driver
+    Product: Reboot Restore Standard
+    ProductVersion: v13.1
+    FileVersion: v13.1
+    MachineType: AMD64
+    OriginalFilename: Shield.sys
+    InternalName: Shield.sys
+    Copyright: Copyright (C) Horizon Datasys, Inc. All rights reserved.
+    Imphash: 814ff5123980aa72132abc2d18aef873
+  - Filename: shield-async.sys
+    MD5: 77e6a2b6883fb823d95d2d7659fedb1c
+    SHA1: fde65f0c98d0ca07144febb877d658f0287d2c12
+    SHA256: da3315363989b564a1b8b690bddfeb3bd81c1690a3da5813ca0c46a715fe94b0
+    Signature:
+    - New Horizon Datasys Inc
+    Date: 07:33 PM 02/13/2026
+    Publisher: New Horizon Datasys Inc
+    Company: Horizon Datasys, Inc.
+    Description: Shield async disk filter driver
+    Product: Reboot Restore Standard
+    ProductVersion: v13.1
+    FileVersion: v13.1
+    MachineType: AMD64
+    OriginalFilename: Shield-async.sys
+    InternalName: Shield-async.sys
+    Copyright: Copyright (C) Horizon Datasys, Inc. All rights reserved.
+    Imphash: ac0b82ea403e2908815d3497b8178fe8
+  - Filename: shieldwp.sys
+    MD5: e2bfb13653b0569e4c3ddbde10f89493
+    SHA1: 46ac52bc089575a393e6fc9adec6b63f63190e1c
+    SHA256: b1547490f3040b1e3668ee195adbf2d312024809915d01a71ed75fae72971a9d
+    Signature:
+    - New Horizon Datasys Inc
+    Date: 07:34 PM 02/13/2026
+    Publisher: New Horizon Datasys Inc
+    Company: Horizon Datasys, Inc.
+    Description: Shield disk filter driver
+    Product: Reboot Restore Standard
+    ProductVersion: v13.1
+    FileVersion: v13.1
+    MachineType: AMD64
+    OriginalFilename: Shield.sys
+    InternalName: Shield.sys
+    Copyright: Copyright (C) Horizon Datasys, Inc. All rights reserved.
+    Imphash: 5a177e1c90aa9a1b811debb084c64f92
+  sha256: b11db76aeab05f29e8f5d51cdfe70898a46fbd50a1245ca1aed39de10aafd401
+  signer: Horizon Datasys, Inc.
+  original_filename: Shield.sys
+  command_metadata:
+  - Command: sc.exe create shield binPath=C:\windows\temp\shield.sys type=kernel && sc.exe start shield
+    Description: Horizon DataSys Shield drivers expose IOCTL functionality reported to provide arbitrary
+      kernel read/write primitives.
+    Usecase: Load vulnerable signed disk filter drivers for kernel memory access
+    Privileges: kernel
+    OperatingSystem: Windows 10, Windows 11
+  category: vulnerable driver
+references:
+- https://github.com/magicsword-io/LOLDrivers/issues/344
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 0e272ccf-81e5-4612-95d2-365e7ded6eac.yaml
+      document: "Id: 0e272ccf-81e5-4612-95d2-365e7ded6eac\nTags:\n- shield.sys\n- shield-async.sys\n-\
+        \ shieldwp.sys\nVerified: 'TRUE'\nAuthor: Michael Haag\nCreated: '2026-06-16'\nMitreID: T1068\n\
+        Category: vulnerable driver\nCommands:\n  Command: sc.exe create shield binPath=C:\\windows\\\
+        temp\\shield.sys type=kernel && sc.exe start shield\n  Description: Horizon DataSys Shield drivers\
+        \ expose IOCTL functionality reported to provide arbitrary kernel read/write primitives.\n  Usecase:\
+        \ Load vulnerable signed disk filter drivers for kernel memory access\n  Privileges: kernel\n\
+        \  OperatingSystem: Windows 10, Windows 11\nResources:\n- https://github.com/magicsword-io/LOLDrivers/issues/344\n\
+        Detection: []\nAcknowledgement:\n  Person: ''\n  Handle: DellaNotto\nKnownVulnerableSamples:\n\
+        - Filename: shield.sys\n  MD5: 97d6d9e9164354e40b5bcc828c6da3df\n  SHA1: 4d0f2a70ce5cd0c868454de9afe9b4b09fcef5df\n\
+        \  SHA256: b11db76aeab05f29e8f5d51cdfe70898a46fbd50a1245ca1aed39de10aafd401\n  Signature:\n  -\
+        \ New Horizon Datasys Inc\n  Date: '07:33 PM 02/13/2026'\n  Publisher: New Horizon Datasys Inc\n\
+        \  Company: Horizon Datasys, Inc.\n  Description: Shield disk filter driver\n  Product: Reboot\
+        \ Restore Standard\n  ProductVersion: v13.1\n  FileVersion: v13.1\n  MachineType: AMD64\n  OriginalFilename:\
+        \ Shield.sys\n  InternalName: Shield.sys\n  Copyright: Copyright (C) Horizon Datasys, Inc. All\
+        \ rights reserved.\n  Imphash: 814ff5123980aa72132abc2d18aef873\n- Filename: shield-async.sys\n\
+        \  MD5: 77e6a2b6883fb823d95d2d7659fedb1c\n  SHA1: fde65f0c98d0ca07144febb877d658f0287d2c12\n \
+        \ SHA256: da3315363989b564a1b8b690bddfeb3bd81c1690a3da5813ca0c46a715fe94b0\n  Signature:\n  -\
+        \ New Horizon Datasys Inc\n  Date: '07:33 PM 02/13/2026'\n  Publisher: New Horizon Datasys Inc\n\
+        \  Company: Horizon Datasys, Inc.\n  Description: Shield async disk filter driver\n  Product:\
+        \ Reboot Restore Standard\n  ProductVersion: v13.1\n  FileVersion: v13.1\n  MachineType: AMD64\n\
+        \  OriginalFilename: Shield-async.sys\n  InternalName: Shield-async.sys\n  Copyright: Copyright\
+        \ (C) Horizon Datasys, Inc. All rights reserved.\n  Imphash: ac0b82ea403e2908815d3497b8178fe8\n\
+        - Filename: shieldwp.sys\n  MD5: e2bfb13653b0569e4c3ddbde10f89493\n  SHA1: 46ac52bc089575a393e6fc9adec6b63f63190e1c\n\
+        \  SHA256: b1547490f3040b1e3668ee195adbf2d312024809915d01a71ed75fae72971a9d\n  Signature:\n  -\
+        \ New Horizon Datasys Inc\n  Date: '07:34 PM 02/13/2026'\n  Publisher: New Horizon Datasys Inc\n\
+        \  Company: Horizon Datasys, Inc.\n  Description: Shield disk filter driver\n  Product: Reboot\
+        \ Restore Standard\n  ProductVersion: v13.1\n  FileVersion: v13.1\n  MachineType: AMD64\n  OriginalFilename:\
+        \ Shield.sys\n  InternalName: Shield.sys\n  Copyright: Copyright (C) Horizon Datasys, Inc. All\
+        \ rights reserved.\n  Imphash: 5a177e1c90aa9a1b811debb084c64f92\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:986db8c5df11316d000b790baddef33ab936684962884b0c502ab2d75777df74

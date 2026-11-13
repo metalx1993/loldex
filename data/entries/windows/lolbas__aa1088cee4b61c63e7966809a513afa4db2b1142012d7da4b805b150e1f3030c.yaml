@@ -1,0 +1,100 @@
+id: lolbas/T1NCaW5hcmllcy9FeHBhbmQueW1s/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: Expand.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_expand_cabinet_files.yml
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_misc_lolbin_connecting_to_the_internet.toml
+commands:
+- template: expand {PATH_SMB:.bat} {PATH_ABSOLUTE:.bat}
+  comment: Copies source file to destination.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Expand/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Expand.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Expand.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Expand.exe\nDescription: Binary that expands one or more compressed files\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: expand {PATH_SMB:.bat} {PATH_ABSOLUTE:.bat}\n\
+        \    Description: Copies source file to destination.\n    Usecase: Use to copies the source file\
+        \ to the destination file\n    Category: Download\n    Privileges: User\n    MitreID: T1105\n\
+        \    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n\
+        \  - Command: expand {PATH_ABSOLUTE:.source.ext} {PATH_ABSOLUTE:.dest.ext}\n    Description: Copies\
+        \ source file to destination.\n    Usecase: Copies files from A to B\n    Category: Copy\n   \
+        \ Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows vista, Windows 7, Windows\
+        \ 8, Windows 8.1, Windows 10, Windows 11\n  - Command: expand {PATH_SMB:.bat} {PATH_ABSOLUTE}:file.bat\n\
+        \    Description: Copies source file to destination Alternate Data Stream (ADS)\n    Usecase:\
+        \ Copies files from A to B\n    Category: ADS\n    Privileges: User\n    MitreID: T1564.004\n\
+        \    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n\
+        Full_Path:\n  - Path: C:\\Windows\\System32\\Expand.exe\n  - Path: C:\\Windows\\SysWOW64\\Expand.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_expand_cabinet_files.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_misc_lolbin_connecting_to_the_internet.toml\n\
+        Resources:\n  - Link: https://twitter.com/infosecn1nja/status/986628482858807297\n  - Link: https://twitter.com/Oddvarmoe/status/986709068759949319\n\
+        Acknowledgement:\n  - Person: Rahmat Nurfauzi\n    Handle: '@infosecn1nja'\n  - Person: Oddvar\
+        \ Moe\n    Handle: '@oddvarmoe'\n"
+      document_sha256: sha256:c90c1bf87967b95bc32c0634725156d60bb66f8e6636cb09078e187a25d92ab9
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Expand/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:13a1bee4e246e553a48aecbe1423979ddcf36e494450893fd1ede8a22b967310

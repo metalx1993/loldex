@@ -1,0 +1,79 @@
+id: lolad/TGlzdCBPcmdhbml6YXRpb25hbCBVbml0cyAoT1VzKQ/R2V0LUFET3JnYW5pemF0aW9uYWxVbml0IC1GaWx0ZXIgKg/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: List Organizational Units (OUs)
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADOrganizationalUnit -Filter *
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List Organizational Units (OUs)
+      command: Get-ADOrganizationalUnit -Filter *
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=58
+        row_utf8: "<tr>\r\n\t\t\t<td>List Organizational Units (OUs)</td>\r\n\t\t\t<td><code>Get-ADOrganizationalUnit\
+          \ -Filter *</code></td>\r\n\t\t\t<td>PowerShell</td>\r\n\t\t\t<td><a href=\"https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adorganizationalunit\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:9a6c3308aeacf56045051f3a2e77b9653d7778a44caf265f4f5391b0e512de6a
+        cells:
+        - List Organizational Units (OUs)
+        - Get-ADOrganizationalUnit -Filter *
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:9e3f8c8f898fe976e2ecccd82ac0ffdbbcf5d0a59e4ac206a4b9e495712a77e3

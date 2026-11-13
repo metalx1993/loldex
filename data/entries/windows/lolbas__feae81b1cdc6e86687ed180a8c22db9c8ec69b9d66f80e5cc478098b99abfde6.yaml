@@ -1,0 +1,102 @@
+id: lolbas/T1NTY3JpcHRzL01hbmFnZS1iZGUueW1s/RXhlY3V0ZQ/1
+type: script
+platform: windows
+name: Manage-bde.wsf
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  triggers: Manage-bde.wsf should not be invoked by a standard user under normal situations
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_manage_bde.yml
+commands:
+- template: copy c:\users\person\evil.exe c:\users\public\manage-bde.exe & cd c:\users\public\ & cscript.exe
+    c:\windows\system32\manage-bde.wsf
+  comment: Run the manage-bde.wsf script with a payload named manage-bde.exe in the same directory to
+    run the payload file.
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Manage-bde/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Manage-bde.wsf
+      category: Execute
+      privileges: User
+      mitre_id: T1216
+      source_file: OSScripts/Manage-bde.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Manage-bde.wsf\nDescription: Script for managing BitLocker\nAuthor: Oddvar\
+        \ Moe\nCreated: 2018-05-25\nCommands:\n  - Command: set comspec={PATH_ABSOLUTE:.exe} & cscript\
+        \ c:\\windows\\system32\\manage-bde.wsf\n    Description: Set the comspec variable to another\
+        \ executable prior to calling manage-bde.wsf for execution.\n    Usecase: Proxy execution from\
+        \ script\n    Category: Execute\n    Privileges: User\n    MitreID: T1216\n    OperatingSystem:\
+        \ Windows Vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: EXE\n  - Command: copy c:\\users\\person\\evil.exe c:\\users\\public\\manage-bde.exe\
+        \ & cd c:\\users\\public\\ & cscript.exe c:\\windows\\system32\\manage-bde.wsf\n    Description:\
+        \ Run the manage-bde.wsf script with a payload named manage-bde.exe in the same directory to run\
+        \ the payload file.\n    Usecase: Proxy execution from script\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1216\n    OperatingSystem: Windows Vista, Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Windows\\\
+        System32\\manage-bde.wsf\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_manage_bde.yml\n\
+        \  - IOC: Manage-bde.wsf should not be invoked by a standard user under normal situations\nResources:\n\
+        \  - Link: https://gist.github.com/bohops/735edb7494fe1bd1010d67823842b712\n  - Link: https://twitter.com/bohops/status/980659399495741441\n\
+        \  - Link: https://twitter.com/JohnLaTwC/status/1223292479270600706\nAcknowledgement:\n  - Person:\
+        \ Jimmy\n    Handle: '@bohops'\n  - Person: Daniel Bohannon\n    Handle: '@danielbohannon'\n \
+        \ - Person: John Lambert\n    Handle: '@JohnLaTwC'\n"
+      document_sha256: sha256:24159aae99e112e8d9758c02f28bd28a1aa055634a1ce0157baf7bb94d4185c1
+    upstream_url: https://lolbas-project.github.io/lolbas/Scripts/Manage-bde/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1216
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:cbfd38b7ae83a977c5e91f93734a9583c283bfcb4c4b05a1e4a442eaa5bb545c

@@ -1,0 +1,80 @@
+id: lolad/Q2hlY2sgUmVnaXN0cnkgS2V5cyBmb3IgUGVyc2lzdGVuY2U/cmVnIHF1ZXJ5IEhLQ1VcU29mdHdhcmVcTWljcm9zb2Z0XFdpbmRvd3NcQ3VycmVudFZlcnNpb25cUnVu/Q01E
+type: technique
+platform: active-directory
+name: Check Registry Keys for Persistence
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: Check Registry Keys for Persistence
+      command: reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+      type: CMD
+      reference: SS64 - Reg Command
+      physical_rows:
+      - input_ref: index.html#row=130
+        row_utf8: "<tr>\r\n\t            <td>Check Registry Keys for Persistence</td>\r\n\t          \
+          \  <td><code>reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run</code></td>\r\
+          \n\t            <td>CMD</td>\r\n\t            <td><a href=\"https://ss64.com/nt/\" target=\"\
+          _blank\">SS64 - Reg Command</a></td>\r\n\t        </tr>"
+        row_sha256: sha256:36ae92d57f1f7f9109fd25cdd9035e71029334510d121569c06568db01ad3fbb
+        cells:
+        - Check Registry Keys for Persistence
+        - reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+        - CMD
+        - SS64 - Reg Command
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:f68340afaffdafa665d982fdf213f26a12cfe430e5b2a668ffa9aa3d1d86834e

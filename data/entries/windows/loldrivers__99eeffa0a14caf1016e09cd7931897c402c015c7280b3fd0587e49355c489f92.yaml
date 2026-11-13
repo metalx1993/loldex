@@ -1,0 +1,323 @@
+id: loldrivers/05d7cfea-1fb9-4559-8837-d97b713254fe
+type: driver
+platform: windows
+name: 4.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create 4.sys binPath=C:\windows\temp\4.sys type=kernel && sc.exe start 4.sys
+  comment: 'SentinelOne has observed prominent threat actors abusing legitimately signed Microsoft drivers
+    in active intrusions into telecommunication, BPO, MSSP, and financial services businesses.
+
+    Investigations into these intrusions led to the discovery of POORTRY and STONESTOP malware, part of
+    a small toolkit designed to terminate AV and EDR processes.
+
+    We first reported our discovery to Microsoft’s Security Response Center (MSRC) in October 2022 and
+    received an official case number (75361). Today, MSRC released an associated advisory under ADV220005.
+
+    This research is being released alongside Mandiant, a SentinelOne technology and incident response
+    partner. '
+driver_detail:
+  samples:
+  - Authentihash:
+      MD5: 72b24aa23f596d91a5596e57b1c306d0
+      SHA1: 60316c8ebadad30d9dd33ae87e8202b6e0c17cb4
+      SHA256: 1716d4c523aeea9703032ca93eb9668b9a16f542c00cec248b0a1c132d80bb15
+    Company: ''
+    Copyright: ''
+    CreationTimestamp: '2022-06-02 06:09:08'
+    Date: ''
+    Description: ''
+    ExportedFunctions: ''
+    FileVersion: ''
+    Filename: 4.sys
+    ImportedFunctions:
+    - rand
+    - ExAllocatePool
+    - NtQuerySystemInformation
+    - ExFreePoolWithTag
+    - IoAllocateMdl
+    - MmProbeAndLockPages
+    - MmMapLockedPagesSpecifyCache
+    - MmUnlockPages
+    - IoFreeMdl
+    - KeQueryActiveProcessors
+    - KeSetSystemAffinityThread
+    - KeRevertToUserAffinityThread
+    - DbgPrint
+    - KeQueryPerformanceCounter
+    Imports:
+    - ntoskrnl.exe
+    - ntoskrnl.exe
+    - HAL.dll
+    InternalName: ''
+    MD5: 6fcf56f6ca3210ec397e55f727353c4a
+    MachineType: AMD64
+    MagicHeader: 50 45 0 0
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    RichPEHeaderHash:
+      MD5: ffdf660eb1ebf020a1d0a55a90712dfb
+      SHA1: 3e905e3d061d0d59de61fcf39c994fcb0ec1bab3
+      SHA256: 2b3f99a94b7a7132854be769e27b331419c53989ef42f686d6f5ba09ddefefd6
+    SHA1: 6debce728bcff73d9d1d334df0c6b1c3735e295c
+    SHA256: 8e035beb02a411f8a9e92d4cf184ad34f52bbd0a81a50c222cdd4706e4e45104
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '0.0'
+        Virtual Size: '0x16a8'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '0.0'
+        Virtual Size: '0x5b0'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '0.0'
+        Virtual Size: '0x110'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '0.0'
+        Virtual Size: '0x15c'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '0.0'
+        Virtual Size: '0x3ee'
+      .vmp0:
+        Entropy:
+          $yaml_type: float
+          value: '0.0'
+        Virtual Size: '0x146f47'
+      .vmp1:
+        Entropy:
+          $yaml_type: float
+          value: '2.75'
+        Virtual Size: '0x8'
+      .vmp2:
+        Entropy:
+          $yaml_type: float
+          value: '7.687230732544206'
+        Virtual Size: '0x28aae4'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '4.111279543411234'
+        Virtual Size: '0xb8'
+    Signature:
+    - Microsoft Windows Hardware Compatibility Publisher
+    - Microsoft Windows Third Party Component CA 2014
+    - Microsoft Root Certificate Authority 2010
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware
+          Compatibility Publisher
+        ValidFrom: '2022-06-07 18:08:06'
+        ValidTo: '2023-06-01 18:08:06'
+        Signature: 0a835e40cdb627d4f0a0d3dbbf64a46a05c132d0b5df9d11cd9c195d7037737057d57a342732ae68d67de47f460e7211c7c40dc29b0a079caff871c4834a9a2fc85e759de9b78659ad6fd79b7320e538e9ba5d52227ad67cc00b0a770ef662af3d743a558643ad89cfb015591709a69b6271a9b65db71898e7cb9964c6376dc474898301a6133198b486b518fdd9d7b9723dcffc441e026833f7c72e27986026c97b9184a0048b10d1fe6847ae467f02173f7a69120be780e5b6b9e6399402cc58735a31b537cc33578fbea443135a4a612359150bcf9ab316f6a9248bc71ef3f3480b9b3fa2341692bc3a121d80214688f7bd87d5ec56dcbd0ea61abf2c7ed2b739a07590adb596d401735d955f5f94c591d69ab4363a42f9fca549d439495711ff7990448c03724792ed4acf31f2b35b136c1b2f37aa82b1aabf7daf059dcb2e976e95311ec6e9cc53876dd09632cf512d39c801849a7c1088a565691953e07c7ff17b22518e982dd2dcc0feda8c834ca1f5e247aef1c3af5f13cd4b8cc1b6c0179bc876db88d677047c34366533e349796dbdea86389ad640710b7742ae8cc4ec88f10fa80ede4b1c93f81b55480fc8228216d54813df0327e74b3db9f3512a40c0568e4215827f9b7a2613deea72a7ec4df2def05e5559015049fe83edc83300526045cb128119e131b7d3573b268e24b0a25b9ad59f6301c8fc8f409322
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: false
+        SerialNumber: 3300000057ee4d659a923e7c10000000000057
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: fdc11a5676aed4e9cc0c09eeb7450dfb
+          SHA1: 4902077d9a05d4231b791d3b05bafa4a79132f03
+          SHA256: 5db56c23d83bf67c7152e28ad4a684a7372b4ae4f52afe7a81ce91eef94caec3
+          SHA384: c952d7f0e0ea5216ce4400601fb7c0829f0f3fcd6eb2b5b9112fbe45d133e00c4abd660f8e1794f7ac4ef95123e2c0ab
+      - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        ValidFrom: '2014-10-15 20:31:27'
+        ValidTo: '2029-10-15 20:41:27'
+        Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.11
+        IsCertificateAuthority: true
+        SerialNumber: 330000000d690d5d7893d076df00000000000d
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 83f69422963f11c3c340b81712eef319
+          SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601
+          SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae
+          SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63
+      Signer:
+      - SerialNumber: 3300000057ee4d659a923e7c10000000000057
+        Issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Third Party
+          Component CA 2014
+        Version: 1
+    Imphash: 2a008187d4a73284ddcc43f1b727b513
+    LoadsDespiteHVCI: 'FALSE'
+  sha256: 8e035beb02a411f8a9e92d4cf184ad34f52bbd0a81a50c222cdd4706e4e45104
+  command_metadata:
+  - Command: sc.exe create 4.sys binPath=C:\windows\temp\4.sys type=kernel && sc.exe start 4.sys
+    Description: 'SentinelOne has observed prominent threat actors abusing legitimately signed Microsoft
+      drivers in active intrusions into telecommunication, BPO, MSSP, and financial services businesses.
+
+      Investigations into these intrusions led to the discovery of POORTRY and STONESTOP malware, part
+      of a small toolkit designed to terminate AV and EDR processes.
+
+      We first reported our discovery to Microsoft’s Security Response Center (MSRC) in October 2022 and
+      received an official case number (75361). Today, MSRC released an associated advisory under ADV220005.
+
+      This research is being released alongside Mandiant, a SentinelOne technology and incident response
+      partner. '
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: malicious
+references:
+- https://www.sentinelone.com/labs/driving-through-defenses-targeted-attacks-leverage-signed-malicious-microsoft-drivers/
+- ''
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 05d7cfea-1fb9-4559-8837-d97b713254fe.yaml
+      document: "Id: 05d7cfea-1fb9-4559-8837-d97b713254fe\nTags:\n- 4.sys\nVerified: 'TRUE'\nAuthor: Michael\
+        \ Haag\nCreated: '2023-03-04'\nMitreID: T1068\nCategory: malicious\nCommands:\n  Command: sc.exe\
+        \ create 4.sys binPath=C:\\windows\\temp\\4.sys type=kernel && sc.exe\n    start 4.sys\n  Description:\
+        \ \"SentinelOne has observed prominent threat actors abusing legitimately\\\n    \\ signed Microsoft\
+        \ drivers in active intrusions into telecommunication, BPO, MSSP,\\\n    \\ and financial services\
+        \ businesses.\\nInvestigations into these intrusions led\\\n    \\ to the discovery of POORTRY\
+        \ and STONESTOP malware, part of a small toolkit designed\\\n    \\ to terminate AV and EDR processes.\\\
+        nWe first reported our discovery to Microsoft\\u2019\\\n    s Security Response Center (MSRC)\
+        \ in October 2022 and received an official case\\\n    \\ number (75361). Today, MSRC released\
+        \ an associated advisory under ADV220005.\\n\\\n    This research is being released alongside\
+        \ Mandiant, a SentinelOne technology and\\\n    \\ incident response partner. \"\n  OperatingSystem:\
+        \ Windows 10\n  Privileges: kernel\n  Usecase: Elevate privileges\nResources:\n- https://www.sentinelone.com/labs/driving-through-defenses-targeted-attacks-leverage-signed-malicious-microsoft-drivers/\n\
+        - ''\nDetection: []\nAcknowledgement:\n  Handle: ''\n  Person: ''\nKnownVulnerableSamples:\n-\
+        \ Authentihash:\n    MD5: 72b24aa23f596d91a5596e57b1c306d0\n    SHA1: 60316c8ebadad30d9dd33ae87e8202b6e0c17cb4\n\
+        \    SHA256: 1716d4c523aeea9703032ca93eb9668b9a16f542c00cec248b0a1c132d80bb15\n  Company: ''\n\
+        \  Copyright: ''\n  CreationTimestamp: '2022-06-02 06:09:08'\n  Date: ''\n  Description: ''\n\
+        \  ExportedFunctions: ''\n  FileVersion: ''\n  Filename: 4.sys\n  ImportedFunctions:\n  - rand\n\
+        \  - ExAllocatePool\n  - NtQuerySystemInformation\n  - ExFreePoolWithTag\n  - IoAllocateMdl\n\
+        \  - MmProbeAndLockPages\n  - MmMapLockedPagesSpecifyCache\n  - MmUnlockPages\n  - IoFreeMdl\n\
+        \  - KeQueryActiveProcessors\n  - KeSetSystemAffinityThread\n  - KeRevertToUserAffinityThread\n\
+        \  - DbgPrint\n  - KeQueryPerformanceCounter\n  Imports:\n  - ntoskrnl.exe\n  - ntoskrnl.exe\n\
+        \  - HAL.dll\n  InternalName: ''\n  MD5: 6fcf56f6ca3210ec397e55f727353c4a\n  MachineType: AMD64\n\
+        \  MagicHeader: 50 45 0 0\n  OriginalFilename: ''\n  Product: ''\n  ProductVersion: ''\n  Publisher:\
+        \ ''\n  RichPEHeaderHash:\n    MD5: ffdf660eb1ebf020a1d0a55a90712dfb\n    SHA1: 3e905e3d061d0d59de61fcf39c994fcb0ec1bab3\n\
+        \    SHA256: 2b3f99a94b7a7132854be769e27b331419c53989ef42f686d6f5ba09ddefefd6\n  SHA1: 6debce728bcff73d9d1d334df0c6b1c3735e295c\n\
+        \  SHA256: 8e035beb02a411f8a9e92d4cf184ad34f52bbd0a81a50c222cdd4706e4e45104\n  Sections:\n   \
+        \ .text:\n      Entropy: 0.0\n      Virtual Size: '0x16a8'\n    .rdata:\n      Entropy: 0.0\n\
+        \      Virtual Size: '0x5b0'\n    .data:\n      Entropy: 0.0\n      Virtual Size: '0x110'\n  \
+        \  .pdata:\n      Entropy: 0.0\n      Virtual Size: '0x15c'\n    INIT:\n      Entropy: 0.0\n \
+        \     Virtual Size: '0x3ee'\n    .vmp0:\n      Entropy: 0.0\n      Virtual Size: '0x146f47'\n\
+        \    .vmp1:\n      Entropy: 2.75\n      Virtual Size: '0x8'\n    .vmp2:\n      Entropy: 7.687230732544206\n\
+        \      Virtual Size: '0x28aae4'\n    .reloc:\n      Entropy: 4.111279543411234\n      Virtual\
+        \ Size: '0xb8'\n  Signature:\n  - Microsoft Windows Hardware Compatibility Publisher\n  - Microsoft\
+        \ Windows Third Party Component CA 2014\n  - Microsoft Root Certificate Authority 2010\n  Signatures:\n\
+        \  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n    - Subject: C=US, ST=Washington,\
+        \ L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Hardware Compatibility Publisher\n\
+        \      ValidFrom: '2022-06-07 18:08:06'\n      ValidTo: '2023-06-01 18:08:06'\n      Signature:\
+        \ 0a835e40cdb627d4f0a0d3dbbf64a46a05c132d0b5df9d11cd9c195d7037737057d57a342732ae68d67de47f460e7211c7c40dc29b0a079caff871c4834a9a2fc85e759de9b78659ad6fd79b7320e538e9ba5d52227ad67cc00b0a770ef662af3d743a558643ad89cfb015591709a69b6271a9b65db71898e7cb9964c6376dc474898301a6133198b486b518fdd9d7b9723dcffc441e026833f7c72e27986026c97b9184a0048b10d1fe6847ae467f02173f7a69120be780e5b6b9e6399402cc58735a31b537cc33578fbea443135a4a612359150bcf9ab316f6a9248bc71ef3f3480b9b3fa2341692bc3a121d80214688f7bd87d5ec56dcbd0ea61abf2c7ed2b739a07590adb596d401735d955f5f94c591d69ab4363a42f9fca549d439495711ff7990448c03724792ed4acf31f2b35b136c1b2f37aa82b1aabf7daf059dcb2e976e95311ec6e9cc53876dd09632cf512d39c801849a7c1088a565691953e07c7ff17b22518e982dd2dcc0feda8c834ca1f5e247aef1c3af5f13cd4b8cc1b6c0179bc876db88d677047c34366533e349796dbdea86389ad640710b7742ae8cc4ec88f10fa80ede4b1c93f81b55480fc8228216d54813df0327e74b3db9f3512a40c0568e4215827f9b7a2613deea72a7ec4df2def05e5559015049fe83edc83300526045cb128119e131b7d3573b268e24b0a25b9ad59f6301c8fc8f409322\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: false\n   \
+        \   SerialNumber: 3300000057ee4d659a923e7c10000000000057\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ fdc11a5676aed4e9cc0c09eeb7450dfb\n        SHA1: 4902077d9a05d4231b791d3b05bafa4a79132f03\n \
+        \       SHA256: 5db56c23d83bf67c7152e28ad4a684a7372b4ae4f52afe7a81ce91eef94caec3\n        SHA384:\
+        \ c952d7f0e0ea5216ce4400601fb7c0829f0f3fcd6eb2b5b9112fbe45d133e00c4abd660f8e1794f7ac4ef95123e2c0ab\n\
+        \    - Subject: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n      \
+        \  Windows Third Party Component CA 2014\n      ValidFrom: '2014-10-15 20:31:27'\n      ValidTo:\
+        \ '2029-10-15 20:41:27'\n      Signature: 96b5c33b31f27b6ba11f59dd742c3764b1bca093f9f33347e9f95df21d89f4579ee33f10a3595018053b142941b6a70e5b81a2ccbd8442c1c4bed184c2c4bd0c8c47bcbd8886fb5a0896ae2c2fdfbf9366a32b20ca848a6945273f732332936a23e9fffdd918edceffbd6b41738d579cf8b46d499805e6a335a9f07e6e86c06ba8086725afc0998cdba7064d4093188ba959e69914b912178144ac57c3ae8eae947bcb3b8edd7ab4715bba2bc3c7d085234b371277a54a2f7f1ab763b94459ed9230cce47c099212111f52f51e0291a4d7d7e58f8047ff189b7fd19c0671dcf376197790d52a0fbc6c12c4c50c2066f50e2f5093d8cafb7fe556ed09d8a753b1c72a6978dcf05fe74b20b6af63b5e1b15c804e9c7aa91d4df72846782106954d32dd6042e4b61ac4f24636de357302c1b5e55fb92b59457a9243d7c4e963dd368f76c728caa8441be8321a66cde5485c4a0a602b469206609698dcd933d721777f886dac4772daa2466eab64682bd24e98fb35cc7fec3f136d11e5db77edc1c37e1f6a4a14f8b4a721c671866770cdd819a35d1fa09b9a7cc55d4d728e74077fa74d00fcdd682412772a557527cda92c1d8e7c19ee692c9f7425338208db38cc7cc74f6c3a6bc237117872fe55596460333e2edfc42de72cd7fb0a82256fb8d70c84a5e1c4746e2a95329ea0fecdb4188fd33bad32b2b19ab86d0543fbff0d0f\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.11\n      IsCertificateAuthority: true\n    \
+        \  SerialNumber: 330000000d690d5d7893d076df00000000000d\n      Version: 3\n      CertificateType:\
+        \ CA\n      IsCodeSigning: false\n      IsCA: true\n      TBS:\n        MD5: 83f69422963f11c3c340b81712eef319\n\
+        \        SHA1: 0c5e5f24590b53bc291e28583acb78e5adc95601\n        SHA256: d8be9e4d9074088ef818bc6f6fb64955e90378b2754155126feebbbd969cf0ae\n\
+        \        SHA384: 260ad59ba706420f68ba212931153bd89f760c464b21be55fba9d014fff322407859d4ebfb78ea9a3330f60dc9821a63\n\
+        \    Signer:\n    - SerialNumber: 3300000057ee4d659a923e7c10000000000057\n      Issuer: C=US,\
+        \ ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft\n        Windows Third Party\
+        \ Component CA 2014\n      Version: 1\n  Imphash: 2a008187d4a73284ddcc43f1b727b513\n  LoadsDespiteHVCI:\
+        \ 'FALSE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:9d1f2ae8e0954ff258591ccaf2e0988138333aacb61d4ecf976e7dd600db3a3b

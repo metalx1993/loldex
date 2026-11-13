@@ -1,0 +1,101 @@
+id: lolbas/T1NCaW5hcmllcy9Kc2MueW1s/Q29tcGlsZQ/0
+type: binary
+platform: windows
+name: Jsc.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: Jsc.exe should normally not run a system unless it is used for development.
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/35a7244c62820fbc5a832e50b1e224ac3a1935da/rules/windows/process_creation/proc_creation_win_lolbin_jsc.yml
+commands:
+- template: jsc.exe {PATH:.js}
+  comment: Use jsc.exe to compile JavaScript code stored in the provided .JS file and generate a .EXE
+    file with the same name.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Jsc/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Jsc.exe
+      category: Compile
+      privileges: User
+      mitre_id: T1127
+      source_file: OSBinaries/Jsc.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Jsc.exe\nDescription: Binary file used by .NET to compile JavaScript\
+        \ code to .exe or .dll format\nAuthor: Oddvar Moe\nCreated: 2019-05-31\nCommands:\n  - Command:\
+        \ jsc.exe {PATH:.js}\n    Description: Use jsc.exe to compile JavaScript code stored in the provided\
+        \ .JS file and generate a .EXE file with the same name.\n    Usecase: Compile attacker code on\
+        \ system. Bypass defensive counter measures.\n    Category: Compile\n    Privileges: User\n  \
+        \  MitreID: T1127\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows\
+        \ 10, Windows 11\n    Tags:\n      - Execute: JScript\n  - Command: jsc.exe /t:library {PATH:.js}\n\
+        \    Description: Use jsc.exe to compile JavaScript code stored in the .JS file and generate a\
+        \ DLL file with the same name.\n    Usecase: Compile attacker code on system. Bypass defensive\
+        \ counter measures.\n    Category: Compile\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n    Tags:\n      -\
+        \ Execute: JScript\nFull_Path:\n  - Path: C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\\
+        Jsc.exe\n  - Path: C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\Jsc.exe\n  - Path: C:\\\
+        Windows\\Microsoft.NET\\Framework\\v2.0.50727\\Jsc.exe\n  - Path: C:\\Windows\\Microsoft.NET\\\
+        Framework64\\v2.0.50727\\Jsc.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/35a7244c62820fbc5a832e50b1e224ac3a1935da/rules/windows/process_creation/proc_creation_win_lolbin_jsc.yml\n\
+        \  - IOC: Jsc.exe should normally not run a system unless it is used for development.\nResources:\n\
+        \  - Link: https://twitter.com/DissectMalware/status/998797808907046913\n  - Link: https://www.phpied.com/make-your-javascript-a-windows-exe/\n\
+        Acknowledgement:\n  - Person: Malwrologist\n    Handle: '@DissectMalware'\n"
+      document_sha256: sha256:e60d3461f965c6c63f7801dd968ef49f6f6ee455a3826dae5e047ce7ff6d9543
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Jsc/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:6084923ee41ec3610da93348efbcc22d06da6ef004189a24e36e655b988ee3f5

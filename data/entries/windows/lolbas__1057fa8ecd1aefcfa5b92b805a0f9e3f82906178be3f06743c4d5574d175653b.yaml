@@ -1,0 +1,101 @@
+id: lolbas/T1NCaW5hcmllcy9FdWRjZWRpdC55bWw/VUFDIEJ5cGFzcw/0
+type: binary
+platform: windows
+name: Eudcedit.exe
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1548.002
+opsec:
+  noise: medium
+  triggers: Processes spawned by eudcedit.exe.
+commands:
+- template: eudcedit
+  comment: Once executed, the Private Charecter Editor will be opened - click OK, then click File -> Font
+    Links. In the next window choose the option "Link with Selected Fonts" and click on Save As, then
+    in the opened enter the command you want to execute.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Eudcedit/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Eudcedit.exe
+      category: UAC Bypass
+      privileges: Administrator
+      mitre_id: T1548.002
+      source_file: OSBinaries/Eudcedit.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Eudcedit.exe\nDescription: Private Character Editor Windows Utility\n\
+        Author: Matan Bahar\nCreated: 2025-08-07\nCommands:\n  - Command: eudcedit\n    Description: Once\
+        \ executed, the Private Charecter Editor will be opened - click OK, then click File -> Font Links.\
+        \ In the next window choose the option \"Link with Selected Fonts\" and click on Save As, then\
+        \ in the opened enter the command you want to execute.\n    Usecase: Execute a binary or script\
+        \ as a high-integrity process without a UAC prompt.\n    Category: UAC Bypass\n    Privileges:\
+        \ Administrator\n    MitreID: T1548.002\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n\
+        \      - Execute: CMD\n      - Application: GUI\nFull_Path:\n  - Path: c:\\windows\\system32\\\
+        eudcedit.exe\n  - Path: c:\\windows\\syswow64\\eudcedit.exe\nDetection:\n  - IOC: Processes spawned\
+        \ by eudcedit.exe.\nResources:\n  - Link: https://medium.com/@matanb707/windows-fonts-exploitation-in-2025-bypassing-uac-with-eudcedit-915599705639\n\
+        Acknowledgement:\n  - Person: Matan Bahar\n    Handle: '@Bl4ckShad3'\n"
+      document_sha256: sha256:92ad0cac954698062cbc2de561fc775ce0a3ac4cb30beba224ff6880dba9829b
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Eudcedit/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1548.002
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:5bba3923043b5bee12ece0676bbe3b8af4eb3af6494d54cfa5bea45919b00fcf

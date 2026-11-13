@@ -1,0 +1,100 @@
+id: lolbas/T1NCaW5hcmllcy9TZnRwLnltbA/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Sftp.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: sftp.exe executions with ProxyCommand on the command line
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/pull/5414/files
+commands:
+- template: sftp -D "{CMD}"
+  comment: Spawns ssh.exe which in turn spawns the specified command line. See also this project's entry
+    for ssh.exe.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Sftp/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Sftp.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OSBinaries/Sftp.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Sftp.exe\nDescription: sftp.exe is a Windows command-line utility that\
+        \ uses the Secure File Transfer Protocol (SFTP) to securely transfer files between a local machine\
+        \ and a remote server.\nAuthor: Swachchhanda Shrawan Poudel\nCreated: 2025-05-13\nCommands:\n\
+        \  - Command: sftp -o ProxyCommand=\"{CMD}\" .\n    Description: \"Spawns ssh.exe which in turn\
+        \ spawns the specified command line. See also this project's entry for ssh.exe.\"\n    Usecase:\
+        \ Proxy execution of specified command, can be used as a defensive evasion.\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n\
+        \      - Execute: CMD\n  - Command: sftp -D \"{CMD}\"\n    Description: \"Spawns ssh.exe which\
+        \ in turn spawns the specified command line. See also this project's entry for ssh.exe.\"\n  \
+        \  Usecase: Proxy execution of specified command, can be used as a defensive evasion.\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Execute: CMD\nFull_Path:\n  - Path: C:\\Windows\\System32\\OpenSSH\\\
+        sftp.exe\nDetection:\n  - IOC: sftp.exe executions with ProxyCommand on the command line\n  -\
+        \ IOC: sftp.exe spawning ssh.exe with ProxyCommand on the command line\n  - Sigma: https://github.com/SigmaHQ/sigma/pull/5414/files\n\
+        Resources:\n  - Link: https://news.sophos.com/en-us/2025/05/09/lumma-stealer-coming-and-going/\n\
+        Acknowledgement:\n  - Person: Swachchhanda Shrawan Poudel\n    Handle: '@_swachchhanda_'\n  -\
+        \ Person: 'Nir Chako (Pentera)'\n    Handle: '@C_h4ck_0'\n"
+      document_sha256: sha256:c640dcb7e9e5d8c79b5d355035b83fc943645e0adf13656f2084e3b5b79f3ece
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Sftp/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:ec6be07073281d4004836cd3b61a1224349a3805847ac06fb9cb4f4b18209bab

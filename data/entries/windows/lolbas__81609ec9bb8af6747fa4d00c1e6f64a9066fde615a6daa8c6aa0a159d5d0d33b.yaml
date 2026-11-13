@@ -1,0 +1,100 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0FnZW50ZXhlY3V0b3IueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: AgentExecutor.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_agentexecutor.yml
+  - https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_agentexecutor_susp_usage.yml
+commands:
+- template: AgentExecutor.exe -powershell "{PATH_ABSOLUTE:.ps1}" "{PATH_ABSOLUTE:.1.log}" "{PATH_ABSOLUTE:.2.log}"
+    "{PATH_ABSOLUTE:.3.log}" 60000 "C:\Windows\SysWOW64\WindowsPowerShell\v1.0" 0 1
+  comment: Spawns powershell.exe and executes a provided powershell script with ExecutionPolicy Bypass
+    argument
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Agentexecutor/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: AgentExecutor.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/Agentexecutor.yml
+      command_source_index: 0
+      document_utf8: "---\nName: AgentExecutor.exe\nDescription: Intune Management Extension included\
+        \ on Intune Managed Devices\nAuthor: Eleftherios Panos\nCreated: 2020-07-23\nCommands:\n  - Command:\
+        \ AgentExecutor.exe -powershell \"{PATH_ABSOLUTE:.ps1}\" \"{PATH_ABSOLUTE:.1.log}\" \"{PATH_ABSOLUTE:.2.log}\"\
+        \ \"{PATH_ABSOLUTE:.3.log}\" 60000 \"C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\" 0 1\n  \
+        \  Description: Spawns powershell.exe and executes a provided powershell script with ExecutionPolicy\
+        \ Bypass argument\n    Usecase: Execute unsigned powershell scripts\n    Category: Execute\n \
+        \   Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 10\n    Tags:\n      -\
+        \ Execute: PowerShell\n  - Command: AgentExecutor.exe -powershell \"{PATH_ABSOLUTE:.ps1}\" \"\
+        {PATH_ABSOLUTE:.1.log}\" \"{PATH_ABSOLUTE:.2.log}\" \"{PATH_ABSOLUTE:.3.log}\" 60000 \"{PATH_ABSOLUTE:folder}\"\
+        \ 0 1\n    Description: If we place a binary named powershell.exe in the specified folder path,\
+        \ agentexecutor.exe will execute it successfully\n    Usecase: Execute a provided EXE\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 10\n    Tags:\n\
+        \      - Execute: EXE\nFull_Path:\n  - Path: C:\\Program Files (x86)\\Microsoft Intune Management\
+        \ Extension\\AgentExecutor.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_agentexecutor.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/19396788dbedc57249a46efed2bb1927abc376d4/rules/windows/process_creation/proc_creation_win_lolbin_agentexecutor_susp_usage.yml\n\
+        Acknowledgement:\n  - Person: Eleftherios Panos\n    Handle: '@lefterispan'\n"
+      document_sha256: sha256:bba98345334a53a804a2557622ccb35ea543d9fd20a0d900d909474fc461b234
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Agentexecutor/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:72430eb32f2343c7c6de68d657bd5bd8626d404772e1de002b8f54243edd899f

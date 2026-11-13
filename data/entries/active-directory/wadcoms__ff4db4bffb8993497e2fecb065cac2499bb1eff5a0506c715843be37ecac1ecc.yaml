@@ -1,0 +1,72 @@
+id: wadcoms/Sift-Local
+type: technique
+platform: active-directory
+name: Sift Local
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: .\sift.exe local --path C:\ --output sift-findings.log
+  comment: "Sift finds credentials, secrets and sensitive files on local filesystems. This command scans\
+    \ the C: drive and writes the findings to a log.\n\nCommand Reference:\n\n  Path: C:\\\n\n  Output\
+    \ File: sift-findings.log\n"
+references:
+- https://github.com/Stratus-Security/Sift
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: Sift-Local.md
+      document: "---\ndescription: |\n  Sift finds credentials, secrets and sensitive files on local filesystems.\
+        \ This command scans the C: drive and writes the findings to a log.\n\n  Command Reference:\n\n\
+        \    Path: C:\\\n\n    Output File: sift-findings.log\n\ncommand: |\n  .\\sift.exe local --path\
+        \ C:\\ --output sift-findings.log\nitems:\n  - Shell\nOS:\n  - Windows\nattack_types:\n  - Enumeration\n\
+        references:\n  - https://github.com/Stratus-Security/Sift\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:56dd480fcdeed79002c4fc58432a9a1be18deb9a4c2376208e7a5cb6a8a2c96a

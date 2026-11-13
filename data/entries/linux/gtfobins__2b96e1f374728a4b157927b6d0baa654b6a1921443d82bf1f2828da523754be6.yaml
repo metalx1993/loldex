@@ -1,0 +1,89 @@
+id: gtfobins/genisoimage/file-read/suid
+type: binary
+platform: linux
+name: genisoimage
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: genisoimage -q -o - /path/to/input-file
+  comment: The output is placed inside the ISO9660 file system binary format, it can be mounted or extracted
+    with tools like `7z`.
+- template: genisoimage -sort /path/to/input-file
+  comment: The file is parsed, and some of its content is disclosed by the error messages.
+references:
+- https://gtfobins.github.io/gtfobins/genisoimage/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        genisoimage:
+          functions:
+            file-read:
+            - code: genisoimage -q -o - /path/to/input-file
+              comment: The output is placed inside the ISO9660 file system binary format, it can be mounted
+                or extracted with tools like `7z`.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            - code: genisoimage -sort /path/to/input-file
+              comment: The file is parsed, and some of its content is disclosed by the error messages.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/genisoimage/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:0c950385c18960e99f9cfc96abdff754574c0efc557eaff8a525a067c3c68b1c

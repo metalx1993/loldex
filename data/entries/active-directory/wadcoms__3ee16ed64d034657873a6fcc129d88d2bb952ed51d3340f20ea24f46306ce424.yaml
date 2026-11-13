@@ -1,0 +1,80 @@
+id: wadcoms/Nmap-Krb5-Enum-Users
+type: technique
+platform: active-directory
+name: Nmap Krb5 Enum Users
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: nmap -p 88 --script=krb5-enum-users --script-args krb5-enum-users.realm='test.local',userdb=usernames.txt
+    10.10.10.1
+  comment: "Nmap's `krb5-enum-users` script attempts to bruteforce and enumerate valid Active Directory\
+    \ accounts through Kerberos Pre-Authentication. The following command will attempt to enumerate valid\
+    \ usernames given a list of usernames to try.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\n\
+    \tDomain: test.local\n\n\tUsername List: usernames.txt\n"
+references:
+- https://nmap.org/download.html
+- https://nmap.org/nsedoc/scripts/krb5-enum-users.html
+tags:
+- active-directory
+- wadcoms
+- kerberos
+- enumeration
+source_data:
+  WADComs:
+    raw:
+      file: Nmap-Krb5-Enum-Users.md
+      document: "---\ndescription: |\n  Nmap's `krb5-enum-users` script attempts to bruteforce and enumerate\
+        \ valid Active Directory accounts through Kerberos Pre-Authentication. The following command will\
+        \ attempt to enumerate valid usernames given a list of usernames to try.\n\n  Command Reference:\n\
+        \n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\n  \tUsername List: usernames.txt\ncommand:\
+        \ |\n  nmap -p 88 --script=krb5-enum-users --script-args krb5-enum-users.realm='test.local',userdb=usernames.txt\
+        \ 10.10.10.1\nitems:\n  - No_Creds\nservices:\n  - Kerberos\n  - Enumeration\nOS:\n  - Linux\n\
+        \  - Windows\nattack_types:\n  - Enumeration\nreferences:\n  - https://nmap.org/download.html\n\
+        \  - https://nmap.org/nsedoc/scripts/krb5-enum-users.html\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:4612866a30d2eda8c82e35be82d77d337da438b0275582fc9129e6a19d5fee8b

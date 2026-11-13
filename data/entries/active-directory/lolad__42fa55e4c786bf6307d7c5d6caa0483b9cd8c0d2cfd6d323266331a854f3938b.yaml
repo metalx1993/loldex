@@ -1,0 +1,80 @@
+id: lolad/TGlzdCBEZWxlZ2F0ZWQgQWRtaW5zIG9uIFNwZWNpZmljIE9V/R2V0LUFDTCAiT1U9VGVzdE9VLERDPWRvbWFpbixEQz1jb20iIHwgRm9ybWF0LUxpc3Q/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: List Delegated Admins on Specific OU
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ACL "OU=TestOU,DC=domain,DC=com" | Format-List
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List Delegated Admins on Specific OU
+      command: Get-ACL "OU=TestOU,DC=domain,DC=com" | Format-List
+      type: PowerShell
+      reference: Medium - AD Enumeration
+      physical_rows:
+      - input_ref: index.html#row=79
+        row_utf8: "<tr>\r\n\t\t\t<td>List Delegated Admins on Specific OU</td>\r\n\t\t\t<td><code>Get-ACL\
+          \ \"OU=TestOU,DC=domain,DC=com\" | Format-List</code></td>\r\n\t\t\t<td>PowerShell</td>\r\n\t\
+          \t\t<td><a href=\"https://medium.com/@zycc2727/enumerating-active-directory-e1356579ebd\" target=\"\
+          _blank\">Medium - AD Enumeration</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:5b9cb075d1ffddf6c1bd74d1756d2bf79e523175cc4414f51f0837b7d8d30df5
+        cells:
+        - List Delegated Admins on Specific OU
+        - Get-ACL "OU=TestOU,DC=domain,DC=com" | Format-List
+        - PowerShell
+        - Medium - AD Enumeration
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:af330260c17f584591fb55ad9cab4d7275663fba51aba5a90e66efff3861d156

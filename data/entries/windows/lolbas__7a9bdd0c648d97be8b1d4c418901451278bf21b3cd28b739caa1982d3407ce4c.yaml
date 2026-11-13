@@ -1,0 +1,104 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0RvdG5ldC55bWw/RXhlY3V0ZQ/2
+type: binary
+platform: windows
+name: Dotnet.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1059
+opsec:
+  noise: high
+  triggers: dotnet.exe spawned an unknown process
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_dotnet.yml
+commands:
+- template: dotnet.exe fsi
+  comment: dotnet.exe will open a console which allows for the execution of arbitrary F# commands
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dotnet/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Dotnet.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1059
+      source_file: OtherMSBinaries/Dotnet.yml
+      command_source_index: 2
+      document_utf8: "---\nName: Dotnet.exe\nDescription: dotnet.exe comes with .NET Framework\nAuthor:\
+        \ felamos\nCreated: 2019-11-12\nCommands:\n  - Command: dotnet.exe {PATH:.dll}\n    Description:\
+        \ dotnet.exe will execute any DLL even if applocker is enabled.\n    Usecase: Execute code bypassing\
+        \ AWL\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows 7 and up with .NET installed\n    Tags:\n      - Execute: DLL (.NET)\n  - Command: dotnet.exe\
+        \ {PATH:.dll}\n    Description: dotnet.exe will execute any DLL.\n    Usecase: Execute DLL\n \
+        \   Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\
+        \ 7 and up with .NET installed\n    Tags:\n      - Execute: DLL (.NET)\n  - Command: dotnet.exe\
+        \ fsi\n    Description: dotnet.exe will open a console which allows for the execution of arbitrary\
+        \ F# commands\n    Usecase: Execute arbitrary F# code\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1059\n    OperatingSystem: Windows 10 and up with .NET SDK installed\n \
+        \   Tags:\n      - Execute: FSharp\n  - Command: dotnet.exe msbuild {PATH:.csproj}\n    Description:\
+        \ dotnet.exe with msbuild (SDK Version) will execute unsigned code\n    Usecase: Execute code\
+        \ bypassing AWL\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem:\
+        \ Windows 10 and up with .NET Core installed\n    Tags:\n      - Execute: CSharp\nFull_Path:\n\
+        \  - Path: 'C:\\Program Files\\dotnet\\dotnet.exe'\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_dotnet.yml\n\
+        \  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - IOC: dotnet.exe spawned an unknown process\nResources:\n  - Link: https://twitter.com/_felamos/status/1204705548668555264\n\
+        \  - Link: https://gist.github.com/bohops/3f645a7238d8022830ecf5511b3ecfbc\n  - Link: https://bohops.com/2019/08/19/dotnet-core-a-vector-for-awl-bypass-defense-evasion/\n\
+        \  - Link: https://learn.microsoft.com/en-us/dotnet/fsharp/tools/fsharp-interactive/\nAcknowledgement:\n\
+        \  - Person: felamos\n    Handle: '@_felamos'\n  - Person: Jimmy\n    Handle: '@bohops'\n  - Person:\
+        \ yamalon\n    Handle: '@mavinject'\n"
+      document_sha256: sha256:bdc1fc04fca3ba04a9b99782001318cc5422cbccfb549d38c5888f88c5f46c32
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dotnet/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1059
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:a25db7ff7056ce12431f0856d4473d2265c6be225d3cc5bb503d843db6fe6c4c

@@ -1,0 +1,92 @@
+id: lolbas/T1NCaW5hcmllcy9Db2xvcmNwbC55bWw/Q29weQ/0
+type: binary
+platform: windows
+name: Colorcpl.exe
+phases:
+- collection
+capabilities:
+- file-write
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1036.005
+opsec:
+  noise: medium
+  triggers: colorcpl.exe writing files
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/file/file_event/file_event_win_susp_colorcpl.yml
+commands:
+- template: colorcpl {PATH}
+  comment: Copies the referenced file to C:\Windows\System32\spool\drivers\color\.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Colorcpl/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Colorcpl.exe
+      category: Copy
+      privileges: User
+      mitre_id: T1036.005
+      source_file: OSBinaries/Colorcpl.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Colorcpl.exe\nDescription: Binary that handles color management\nAuthor:\
+        \ Arjan Onwezen\nCreated: 2023-06-26\nCommands:\n  - Command: colorcpl {PATH}\n    Description:\
+        \ Copies the referenced file to C:\\Windows\\System32\\spool\\drivers\\color\\.\n    Usecase:\
+        \ Copies file(s) to a subfolder of a generally trusted folder (c:\\Windows\\System32), which can\
+        \ be used to hide files or make them blend into the environment.\n    Category: Copy\n    Privileges:\
+        \ User\n    MitreID: T1036.005\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path: C:\\Windows\\System32\\colorcpl.exe\n  -\
+        \ Path: C:\\Windows\\SysWOW64\\colorcpl.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/master/rules/windows/file/file_event/file_event_win_susp_colorcpl.yml\n\
+        \  - IOC: colorcpl.exe writing files\nResources:\n  - Link: https://twitter.com/eral4m/status/1480468728324231172\n\
+        Acknowledgement:\n  - Person: eral4m\n    Handle: '@eral4m'\n"
+      document_sha256: sha256:a5916baca8dafb42c6f398520888bf273ccf362f7cb08f8fc992a4e30c0e0340
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Colorcpl/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1036.005
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:c04d647466633240a33f2414217115bcee71be832af7bcc8b7ba4aa23884e0ac

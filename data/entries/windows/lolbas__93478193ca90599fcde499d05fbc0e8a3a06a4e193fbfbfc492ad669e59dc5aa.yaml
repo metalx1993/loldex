@@ -1,0 +1,94 @@
+id: lolbas/T1NCaW5hcmllcy9DaGFuZ2UueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Change.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: change.exe being executed and executes a child process outside of its normal path of c:\windows\system32\
+    or c:\windows\syswow64\
+commands:
+- template: change.exe user
+  comment: Once executed, `change.exe` will execute `chgusr.exe` in the same folder. Thus, if `change.exe`
+    is copied to a folder and an arbitrary executable is renamed to `chgusr.exe`, `change.exe` will spawn
+    it. Instead of `user`, it is also possible to use `port` or `logon` as command-line option.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Change/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Change.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Change.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Change.exe\nDescription: Remote Desktop Services MultiUser Change Utility\n\
+        Author: 'Idan Lerman'\nCreated: 2025-07-31\nCommands:\n  - Command: change.exe user\n    Description:\
+        \ Once executed, `change.exe` will execute `chgusr.exe` in the same folder. Thus, if `change.exe`\
+        \ is copied to a folder and an arbitrary executable is renamed to `chgusr.exe`, `change.exe` will\
+        \ spawn it. Instead of `user`, it is also possible to use `port` or `logon` as command-line option.\n\
+        \    Usecase: Execute an arbitrary executable via trusted system executable.\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n\
+        \      - Execute: EXE\n      - Requires: Rename\nFull_Path:\n  - Path: c:\\windows\\system32\\\
+        change.exe\n  - Path: c:\\windows\\syswow64\\change.exe\nDetection:\n  - IOC: change.exe being\
+        \ executed and executes a child process outside of its normal path of c:\\windows\\system32\\\
+        \ or c:\\windows\\syswow64\\\nAcknowledgement:\n  - Person: Idan Lerman\n    Handle: '@IdanLerman'\n"
+      document_sha256: sha256:297d06945b7003ffaa19d4e4fffdbf4ca85ac0ac7da66e17e0b7fa0f45cd0547
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Change/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:40d93fbb4a8e735c49dbdfdd82146b5656e04387138ca3bc969ac68671f80e12

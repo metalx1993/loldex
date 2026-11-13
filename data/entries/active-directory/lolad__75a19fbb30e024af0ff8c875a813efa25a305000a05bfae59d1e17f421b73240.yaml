@@ -1,0 +1,80 @@
+id: lolad/Q2hlY2sgQXV0b1N0YXJ0IFByb2dyYW1z/cmVnIHF1ZXJ5IEhLTE1cU29mdHdhcmVcTWljcm9zb2Z0XFdpbmRvd3NcQ3VycmVudFZlcnNpb25cUnVu/Q01E
+type: technique
+platform: active-directory
+name: Check AutoStart Programs
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: Check AutoStart Programs
+      command: reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+      type: CMD
+      reference: HackTricks - Registry Persistence
+      physical_rows:
+      - input_ref: index.html#row=113
+        row_utf8: "<tr>\r\n\t            <td>Check AutoStart Programs</td>\r\n\t            <td><code>reg\
+          \ query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run</code></td>\r\n\t          \
+          \  <td>CMD</td>\r\n\t            <td><a href=\"https://book.hacktricks.xyz/windows-hardening/windows-registry-persistence\"\
+          \ target=\"_blank\">HackTricks - Registry Persistence</a></td>\r\n\t        </tr>"
+        row_sha256: sha256:42d66a717e439d39a295cf8e8122c63105250effc50754a99db7c44646716e1e
+        cells:
+        - Check AutoStart Programs
+        - reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+        - CMD
+        - HackTricks - Registry Persistence
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:c731cea608e51288f693fd712e38ea6247df7b1ad1bf9a6b7d43c001262e8645

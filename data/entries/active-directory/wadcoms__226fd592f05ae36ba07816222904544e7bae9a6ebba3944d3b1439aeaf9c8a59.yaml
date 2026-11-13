@@ -1,0 +1,99 @@
+id: wadcoms/SafetyKatz
+type: technique
+platform: active-directory
+name: SafetyKatz
+phases:
+- privilege-escalation
+- discovery
+capabilities:
+- privilege-escalation
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: safetykatz.exe "privilege::debug" "sekurlsa::evasive-logonpasswords" "exit"
+  comment: 'SafetyKatz.exe is part of the GhostPack suite of tools and is a combination of SharpDump and
+    Mimikatz. The following command will dump the LSASS process and run Mimikatz to extract credentials
+    from the dumped process. Safetykatz also supports a number of mimikatz native commands such as "sekurlsa::evasive-keys"
+    etc. The evasive switch in lab and production enviroments up to windows 2016 has been noted to successfully
+    run where the non "evasive" switches had not
+
+    '
+references:
+- https://github.com/GhostPack/SafetyKatz
+- https://www.harmj0y.net/blog/redteaming/ghostpack/
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: SafetyKatz.md
+      document: "---\ndescription: |\n  SafetyKatz.exe is part of the GhostPack suite of tools and is\
+        \ a combination of SharpDump and Mimikatz. The following command will dump the LSASS process and\
+        \ run Mimikatz to extract credentials from the dumped process. Safetykatz also supports a number\
+        \ of mimikatz native commands such as \"sekurlsa::evasive-keys\" etc. The evasive switch in lab\
+        \ and production enviroments up to windows 2016 has been noted to successfully run where the non\
+        \ \"evasive\" switches had not\n\ncommand: |\n  safetykatz.exe \"privilege::debug\" \"sekurlsa::evasive-logonpasswords\"\
+        \ \"exit\"\nitems:\n  - Shell\nOS:\n  - Windows\nattack_types:\n  - PrivEsc\n  - Enumeration\n\
+        references:\n  - https://github.com/GhostPack/SafetyKatz\n  - https://www.harmj0y.net/blog/redteaming/ghostpack/\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:11af53e0f04f0f3aeb6dbb0ade9d0c81aa0458e5ba0ee4eecde77ab7be1803dd

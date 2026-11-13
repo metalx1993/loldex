@@ -1,0 +1,79 @@
+id: lolad/TGlzdCBBbGwgR3JvdXAgUG9saWNpZXMgaW4gRG9tYWlu/R2V0LUdQTyAtQWxs/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: List All Group Policies in Domain
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-GPO -All
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: List All Group Policies in Domain
+      command: Get-GPO -All
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=119
+        row_utf8: "<tr>\r\n\t            <td>List All Group Policies in Domain</td>\r\n\t            <td><code>Get-GPO\
+          \ -All</code></td>\r\n\t            <td>PowerShell</td>\r\n\t            <td><a href=\"https://learn.microsoft.com/en-us/powershell/module/grouppolicy/get-gpo\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t        </tr>"
+        row_sha256: sha256:839a88c7cdc00c0fa5b985175bdb2f8c2aab68e8991e4a54aa0f3fcc397e1d98
+        cells:
+        - List All Group Policies in Domain
+        - Get-GPO -All
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:c82da059cbf16a446ed634701b5711efcbce5548dbc5aad10010f34a9661f68a

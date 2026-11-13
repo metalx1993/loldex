@@ -1,0 +1,79 @@
+id: lolad/RW51bWVyYXRlIFBhc3N3b3JkIFBvbGljaWVz/R2V0LUFERmluZUdyYWluZWRQYXNzd29yZFBvbGljeQ/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Enumerate Password Policies
+phases:
+- credential-access
+capabilities:
+- credential-access
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADFineGrainedPasswordPolicy
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Enumerate Password Policies
+      command: Get-ADFineGrainedPasswordPolicy
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=86
+        row_utf8: "<tr>\r\n\t\t    <td>Enumerate Password Policies</td>\r\n\t\t    <td><code>Get-ADFineGrainedPasswordPolicy</code></td>\r\
+          \n\t\t    <td>PowerShell</td>\r\n\t\t    <td><a href=\"https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adfinegrainedpasswordpolicy\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:8cba9471c3bbe0c90108940a8747c087272c48360e286b9aecf6dd16dc179e7a
+        cells:
+        - Enumerate Password Policies
+        - Get-ADFineGrainedPasswordPolicy
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: credential-access
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:aa4b68077fb30b9410358fa96b58b88745e9596c5944a59a178f51fddea3c897

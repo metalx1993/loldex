@@ -1,0 +1,136 @@
+id: gtfobins/crontab/inherit/sudo
+type: binary
+platform: linux
+name: crontab
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: crontab -e
+references:
+- https://gtfobins.github.io/gtfobins/crontab/
+- https://gtfobins.github.io/gtfobins/vi/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        crontab:
+          functions:
+            command:
+            - code: crontab -e
+              comment: This spaws the default editor to edit the crontab file, commands can be scheduled
+                to run using the [cron syntax](https://en.wikipedia.org/wiki/Cron).
+              contexts:
+                sudo: null
+                unprivileged: null
+            inherit:
+            - code: crontab -e
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: vi
+        vi:
+          functions:
+            file-read:
+            - code: vi /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: 'vi /path/to/output-file
+
+                iDATA
+
+                ^[
+
+                w'
+              comment: Where `^[` is the escape key.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: vi -c ':!/bin/sh' /dev/null
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':shell'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':set shell=/bin/sh | shell'
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':set shell=/bin/sh\ -p | shell'
+                  shell: false
+                unprivileged: null
+            - code: vi -c :terminal /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':terminal /bin/sh -p'
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/crontab/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:366ac46d6b5b534d95b46b17680e274b8e01e81fd7eafb7aef35d4cac711a9db

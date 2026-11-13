@@ -1,0 +1,79 @@
+id: lolad/RmluZCBEb21haW4gUGFzc3dvcmQgUG9saWN5IFNldHRpbmdz/bmV0IGFjY291bnRzIC9kb21haW4/Q01E
+type: technique
+platform: active-directory
+name: Find Domain Password Policy Settings
+phases:
+- credential-access
+capabilities:
+- credential-access
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: net accounts /domain
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: Find Domain Password Policy Settings
+      command: net accounts /domain
+      type: CMD
+      reference: Active Directory Pro
+      physical_rows:
+      - input_ref: index.html#row=76
+        row_utf8: "<tr>\r\n\t\t\t<td>Find Domain Password Policy Settings</td>\r\n\t\t\t<td><code>net\
+          \ accounts /domain</code></td>\r\n\t\t\t<td>CMD</td>\r\n\t\t\t<td><a href=\"https://activedirectorypro.com/powershell-commands/\"\
+          \ target=\"_blank\">Active Directory Pro</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:e8912b7810248f7b0277cd352aec496ea40a3eb8f899bea12043909d2987fb11
+        cells:
+        - Find Domain Password Policy Settings
+        - net accounts /domain
+        - CMD
+        - Active Directory Pro
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: credential-access
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:1853bee1351a658f3a08188d4b5ec1071da3a43e061b31d75341d8601442fcf5

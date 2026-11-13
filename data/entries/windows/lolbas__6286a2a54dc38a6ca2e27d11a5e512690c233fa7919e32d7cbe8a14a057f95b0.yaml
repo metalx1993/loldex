@@ -1,0 +1,89 @@
+id: lolbas/T1NCaW5hcmllcy9Wc3NhZG1pbi55bWw/VGFtcGVy/0
+type: binary
+platform: windows
+name: Vssadmin.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1490
+opsec:
+  noise: medium
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_susp_shadow_copies_deletion.yml
+commands:
+- template: vssadmin delete shadows /all /quiet
+  comment: Delete all volume shadow copies on the host without prompting
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Vssadmin/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Vssadmin.exe
+      category: Tamper
+      privileges: Administrator
+      mitre_id: T1490
+      source_file: OSBinaries/Vssadmin.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Vssadmin.exe\nDescription: Volume Shadow Copy Service administrative\
+        \ command-line tool\nAuthor: mmadersbacher\nCreated: 2026-08-16\nCommands:\n  - Command: vssadmin\
+        \ delete shadows /all /quiet\n    Description: Delete all volume shadow copies on the host without\
+        \ prompting\n    Usecase: Destroy shadow copies to prevent file and system recovery, a technique\
+        \ commonly used by ransomware\n    Category: Tamper\n    Privileges: Administrator\n    MitreID:\
+        \ T1490\n    OperatingSystem: Windows 11, Windows 10, Windows Server\nFull_Path:\n  - Path: C:\\\
+        Windows\\System32\\vssadmin.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_susp_shadow_copies_deletion.yml\n\
+        Resources:\n  - Link: https://attack.mitre.org/techniques/T1490/\n  - Link: https://github.com/Neo23x0/Raccine\n"
+      document_sha256: sha256:8473d8abc99ee24b26c1cb85dbbf33e6467bee75645963da4f53f53e50bbe674
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Vssadmin/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1490
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:b0e3549ec4f4db6c93ebf9836a7240308779241ff0d9c3b6376388fbc33da09e

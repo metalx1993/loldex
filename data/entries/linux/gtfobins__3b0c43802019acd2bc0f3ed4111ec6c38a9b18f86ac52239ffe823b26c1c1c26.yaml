@@ -1,0 +1,89 @@
+id: gtfobins/tsc/file-write/sudo
+type: binary
+platform: linux
+name: tsc
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: tsc /path/to/input-file.ts --outFile /path/to/output-file
+  comment: Content is leaked as error messages and written to file. The file extension must be one of
+    the supported ones, e.g., `.ts`, `.tsx`, etc.
+references:
+- https://gtfobins.github.io/gtfobins/tsc/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        tsc:
+          functions:
+            file-read:
+            - binary: false
+              code: tsc /path/to/input-file.ts
+              comment: Content is leaked as error messages. The file extension must be one of the supported
+                ones, e.g., `.ts`, `.tsx`, etc.
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-write:
+            - binary: false
+              code: tsc /path/to/input-file.ts --outFile /path/to/output-file
+              comment: Content is leaked as error messages and written to file. The file extension must
+                be one of the supported ones, e.g., `.ts`, `.tsx`, etc.
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/tsc/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:536d954ecf59a682ad2b91cb58c3045390168f95ad31e608b0b38c5cc06470ff

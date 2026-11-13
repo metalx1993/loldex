@@ -1,0 +1,107 @@
+id: lolbas/T1NMaWJyYXJpZXMvU2hlbGwzMi55bWw/RXhlY3V0ZQ/2
+type: library
+platform: windows
+name: Shell32.dll
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.011
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml
+  - https://github.com/splunk/security_content/blob/a1afa0fa605639cbef7d528dec46ce7c8112194a/detections/endpoint/rundll32_control_rundll_hunt.yml
+commands:
+- template: rundll32 SHELL32.DLL,ShellExec_RunDLL {PATH:.exe} {CMD:args}
+  comment: Launch command line by calling the ShellExec_RunDLL function.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/Shell32/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Shell32.dll
+      category: Execute
+      privileges: User
+      mitre_id: T1218.011
+      source_file: OSLibraries/Shell32.yml
+      command_source_index: 2
+      document_utf8: "---\nName: Shell32.dll\nDescription: Windows Shell Common Dll\nAuthor: LOLBAS Team\n\
+        Created: 2018-05-25\nCommands:\n  - Command: rundll32.exe shell32.dll,Control_RunDLL {PATH_ABSOLUTE:.dll}\n\
+        \    Description: Launch a DLL payload by calling the Control_RunDLL function.\n    Usecase: Load\
+        \ a DLL payload.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.011\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\n  - Command: rundll32.exe shell32.dll,ShellExec_RunDLL\
+        \ {PATH:.exe}\n    Description: Launch an executable by calling the ShellExec_RunDLL function.\n\
+        \    Usecase: Run an executable payload.\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1218.011\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: EXE\n  -\
+        \ Command: rundll32 SHELL32.DLL,ShellExec_RunDLL {PATH:.exe} {CMD:args}\n    Description: Launch\
+        \ command line by calling the ShellExec_RunDLL function.\n    Usecase: Run an executable payload.\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1218.011\n    OperatingSystem: Windows\
+        \ 10, Windows 11\n    Tags:\n      - Execute: CMD\n  - Command: rundll32.exe shell32.dll,#44 {PATH:.dll}\n\
+        \    Description: Load a DLL/CPL by calling undocumented Control_RunDLLNoFallback function.\n\
+        \    Usecase: Load a DLL/CPL payload.\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1218.011\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\nFull_Path:\n\
+        \  - Path: c:\\windows\\system32\\shell32.dll\n  - Path: c:\\windows\\syswow64\\shell32.dll\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_rundll32_susp_activity.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/a1afa0fa605639cbef7d528dec46ce7c8112194a/detections/endpoint/rundll32_control_rundll_hunt.yml\n\
+        Resources:\n  - Link: https://twitter.com/Hexacorn/status/885258886428725250\n  - Link: https://twitter.com/pabraeken/status/991768766898941953\n\
+        \  - Link: https://twitter.com/mattifestation/status/776574940128485376\n  - Link: https://twitter.com/KyleHanslovan/status/905189665120149506\n\
+        \  - Link: https://windows10dll.nirsoft.net/shell32_dll.html\n  - Link: https://www.hexacorn.com/blog/2025/05/18/shell32-dll-44-lolbin/\n\
+        Acknowledgement:\n  - Person: Adam (Control_RunDLL, Control_RunDLLNoFallback)\n    Handle: '@hexacorn'\n\
+        \  - Person: Pierre-Alexandre Braeken (ShellExec_RunDLL)\n    Handle: '@pabraeken'\n  - Person:\
+        \ Matt Graeber (ShellExec_RunDLL)\n    Handle: '@mattifestation'\n  - Person: Kyle Hanslovan (ShellExec_RunDLL)\n\
+        \    Handle: '@KyleHanslovan'\n"
+      document_sha256: sha256:7e92a9703f3904491c74cd05a55a34c19b0b873b8167dddfcf6ba517cd208db1
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Shell32/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.011
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:2be1159a51cad41d48b265f9735e9ed9ea41d3438ff37aa5772ba88ce4b6e36a

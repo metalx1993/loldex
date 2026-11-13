@@ -1,0 +1,94 @@
+id: lolbas/T1NCaW5hcmllcy9DaXBoZXIueW1s/VGFtcGVy/1
+type: binary
+platform: windows
+name: Cipher.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1562
+opsec:
+  noise: medium
+  triggers: cipher.exe process with /w on the command line
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/process_creation/proc_creation_win_cipher_overwrite_deleted_data.yml
+commands:
+- template: cipher.exe /e {PATH_ABSOLUTE}
+  comment: Encrypt a file
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Cipher/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Cipher.exe
+      category: Tamper
+      privileges: Admin
+      mitre_id: T1562
+      source_file: OSBinaries/Cipher.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Cipher.exe\nDescription: File Encryption Utility\nAuthor: Adetutu Ogunsowo\n\
+        Created: 2024-11-22\nCommands:\n  - Command: cipher /w:{PATH_ABSOLUTE:folder}\n    Description:\
+        \ Zero out a file\n    Usecase: Can be used to forensically erase a file.\n    Category: Tamper\n\
+        \    Privileges: User\n    MitreID: T1485\n    OperatingSystem: Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11\n  - Command: cipher.exe /e {PATH_ABSOLUTE}\n    Description: Encrypt\
+        \ a file\n    Usecase: Can be used to impair defences by e.g. encrypting a critical EDR solution\
+        \ file.\n    Category: Tamper\n    Privileges: Admin\n    MitreID: T1562\n    OperatingSystem:\
+        \ Windows 10\nFull_Path:\n  - Path: c:\\windows\\system32\\cipher.exe\n  - Path: c:\\windows\\\
+        syswow64\\cipher.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c7998c92b3c5f23ea67045bee8ee364d2ed1a775/rules/windows/process_creation/proc_creation_win_cipher_overwrite_deleted_data.yml\n\
+        \  - IOC: cipher.exe process with /w on the command line\nResources:\n  - Link: https://www.volexity.com/blog/2024/11/22/the-nearest-neighbor-attack-how-a-russian-apt-weaponized-nearby-wi-fi-networks-for-covert-access/\n\
+        Acknowledgement:\n  - Person: Ade Ogunsowo\n    Handle: \"@i_am_tutu\"\n  - Person: Alexander\
+        \ Sennhauser\n    Handle: '@conitrade'\n"
+      document_sha256: sha256:4e06ea0e0553315a570206f73e6fa0788ccd2d7591c7b6470ad0e7bb3bc8d62e
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Cipher/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1562
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:adde8af7a492c2d8f007b9c30fa2a567e82720a8870fc9e77d32180f784e7959

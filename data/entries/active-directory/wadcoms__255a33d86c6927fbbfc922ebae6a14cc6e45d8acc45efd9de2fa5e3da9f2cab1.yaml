@@ -1,0 +1,76 @@
+id: wadcoms/Kerbrute-BruteForce
+type: technique
+platform: active-directory
+name: Kerbrute BruteForce
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: cat credentials.txt | kerbrute_linux_amd64 -d test.local bruteforce -
+  comment: "ropnop's kerbrute bruteforces and enumerates valid Active Directory accounts through Kerberos\
+    \ Pre-Authentication. The following command will attempt to brute force valid username and passwords\
+    \ logins given a list of credentials (in the format `username:password`).\n\nCommand Reference:\n\n\
+    \tDomain: test.local\n\n\tCredential List: credentials.txt\n"
+references:
+- https://github.com/ropnop/kerbrute
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Kerbrute-BruteForce.md
+      document: "---\ndescription: |\n  ropnop's kerbrute bruteforces and enumerates valid Active Directory\
+        \ accounts through Kerberos Pre-Authentication. The following command will attempt to brute force\
+        \ valid username and passwords logins given a list of credentials (in the format `username:password`).\n\
+        \n  Command Reference:\n\n  \tDomain: test.local\n\n  \tCredential List: credentials.txt\ncommand:\
+        \ |\n  cat credentials.txt | kerbrute_linux_amd64 -d test.local bruteforce -\nitems:\n  - No_Creds\n\
+        services:\n  - Kerberos\nOS:\n  - Linux\nattack_types:\n  - Enumeration\nreferences:\n  - https://github.com/ropnop/kerbrute\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:9cf7e82c8ffd2c1e813efea23a50e5f4c22247d4be1799a08e01673e08943111

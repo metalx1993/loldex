@@ -1,0 +1,93 @@
+id: lolbas/T1NCaW5hcmllcy9JZWRpYWdjbWQueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: iediagcmd.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Sysmon Event ID 1
+  detection_refs:
+  - https://github.com/manasmbellani/mycode_public/blob/master/sigma/rules/win_proc_creation_lolbin_iediagcmd.yml
+commands:
+- template: set windir=c:\test& cd "C:\Program Files\Internet Explorer\" & iediagcmd.exe /out:{PATH_ABSOLUTE:.cab}
+  comment: Executes binary that is pre-planted at C:\test\system32\netsh.exe.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Iediagcmd/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: iediagcmd.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/Iediagcmd.yml
+      command_source_index: 0
+      document_utf8: "---\nName: iediagcmd.exe\nDescription: Diagnostics Utility for Internet Explorer\n\
+        Author: manasmbellani\nCreated: 2022-03-29\nCommands:\n  - Command: 'set windir=c:\\test& cd \"\
+        C:\\Program Files\\Internet Explorer\\\" & iediagcmd.exe /out:{PATH_ABSOLUTE:.cab}'\n    Description:\
+        \ Executes binary that is pre-planted at C:\\test\\system32\\netsh.exe.\n    Usecase: Spawn a\
+        \ pre-planted executable from iediagcmd.exe.\n    Category: Execute\n    Privileges: User\n  \
+        \  MitreID: T1218\n    OperatingSystem: Windows 10 1803, Windows 10 1703, Windows 10 22H1, Windows\
+        \ 10 22H2, Windows 11\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Program Files\\\
+        Internet Explorer\\iediagcmd.exe\nDetection:\n  - Sigma: https://github.com/manasmbellani/mycode_public/blob/master/sigma/rules/win_proc_creation_lolbin_iediagcmd.yml\n\
+        \  - IOC: Sysmon Event ID 1\n  - IOC: Execution of process iediagcmd.exe with /out could be suspicious\n\
+        Resources:\n  - Link: https://twitter.com/Hexacorn/status/1507516393859731456\nAcknowledgement:\n\
+        \  - Person: Adam\n    Handle: '@hexacorn'\n"
+      document_sha256: sha256:165e36bcd82e9596be9d6fdef21c419547c4f13fa462255ab7d7531f0b243b09
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Iediagcmd/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:94378a4ca451522c1587cfd0d803f0266ac08d273f28a22bc2825e6bd6cced1a

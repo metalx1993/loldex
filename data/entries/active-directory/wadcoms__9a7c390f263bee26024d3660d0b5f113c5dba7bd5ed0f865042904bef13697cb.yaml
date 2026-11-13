@@ -1,0 +1,80 @@
+id: wadcoms/Mitm6
+type: technique
+platform: active-directory
+name: Mitm6
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: mitm6 -d test.local --ignore-nofqnd
+  comment: "mitm6 is a pentesting tool that exploits the default configuration of Windows to take over\
+    \ the default DNS server. It does this by replying to DHCPv6 messages, providing victims with a link-local\
+    \ IPv6 address and setting the attackers host as default DNS server. The following command will respond\
+    \ to DHCPv6 messages and set the DNS server to the attack host IP. Leverage this command with ntlmrelayx.py\
+    \ to capture the WPAD configuration requests. \n\nCommand Reference:\n\n\tDomain: test.local\n"
+references:
+- https://github.com/dirkjanm/mitm6
+- https://dirkjanm.io/worst-of-both-worlds-ntlm-relaying-and-kerberos-delegation/
+tags:
+- active-directory
+- wadcoms
+- dns
+source_data:
+  WADComs:
+    raw:
+      file: Mitm6.md
+      document: "---\ndescription: |\n  mitm6 is a pentesting tool that exploits the default configuration\
+        \ of Windows to take over the default DNS server. It does this by replying to DHCPv6 messages,\
+        \ providing victims with a link-local IPv6 address and setting the attackers host as default DNS\
+        \ server. The following command will respond to DHCPv6 messages and set the DNS server to the\
+        \ attack host IP. Leverage this command with ntlmrelayx.py to capture the WPAD configuration requests.\
+        \ \n\n  Command Reference:\n\n  \tDomain: test.local\n\ncommand: |\n  mitm6 -d test.local --ignore-nofqnd\n\
+        items:\n  - No_Creds\nservices:\n  - DNS\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Exploitation\n\
+        references:\n  - https://github.com/dirkjanm/mitm6\n  - https://dirkjanm.io/worst-of-both-worlds-ntlm-relaying-and-kerberos-delegation/\n\
+        ---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:fe52c0aa34d2999c7323ea4bb303b265c513283639571aab787f54f7bd02ccbd

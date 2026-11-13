@@ -1,0 +1,290 @@
+id: loldrivers/6eca187c-8fb2-4eae-9c80-fd9ef9d8c91e
+type: driver
+platform: windows
+name: QIOMem.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: admin
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: acpi.exe
+  comment: QIOMem.sys is the Generic IO & Memory Access driver included with Toshiba and Dynabook password
+    utilities. It binds to ACPI\QCI0701; on systems without that firmware device, the public proof of
+    concept creates a matching software PnP device to trigger loading of an already-installed driver package.
+    Six IOCTLs (0x08012000 through 0x08012014) pass an unvalidated 32-bit physical address to MmMapIoSpace,
+    allowing a low-privileged process to read or write one, two, or four bytes of physical memory below
+    4 GiB.
+driver_detail:
+  samples:
+  - Filename: QIOMem.sys
+    Libraries:
+    - ntoskrnl.exe
+    ImportedFunctions:
+    - RtlFreeUnicodeString
+    - KeInitializeSpinLock
+    - IoAttachDeviceToDeviceStack
+    - IofCallDriver
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoDeleteDevice
+    - IoRegisterDeviceInterface
+    - KeInitializeEvent
+    - KeSetEvent
+    - KeWaitForSingleObject
+    - IoDetachDevice
+    - IoSetDeviceInterfaceState
+    - ExAllocatePoolWithTag
+    - ExFreePoolWithTag
+    - MmMapIoSpace
+    - MmUnmapIoSpace
+    - IoWMIOpenBlock
+    - IoWMIQuerySingleInstance
+    - IoWMISetSingleInstance
+    - IoReportTargetDeviceChangeAsynchronous
+    - PoRequestPowerIrp
+    - PoSetPowerState
+    - PoCallDriver
+    - PoStartNextPowerIrp
+    - IoAllocateIrp
+    - IoBuildDeviceIoControlRequest
+    - IoFreeIrp
+    - IoGetAttachedDeviceReference
+    - ObfDereferenceObject
+    ExportedFunctions: ''
+    MD5: 43252ab49c9a43d22aa583c15e96f7b7
+    SHA1: ee37a040b6ec7882b4e240e70da67bc0900fd799
+    SHA256: 6abd8d0d541bcf9e257c65122216b1d2ae92cbf8a3a3cb7ce340846e66c449ca
+    Imphash: 25adb8efbc15f349a1e3578fb2b9bf8f
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2015-05-05 05:40:35'
+    Sections:
+      LOCKED:
+        Entropy:
+          $yaml_type: float
+          value: '5.271371694056955'
+        Virtual Size: '0xe4'
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.014337560743019'
+        Virtual Size: '0x940'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.953261012966467'
+        Virtual Size: '0x3fc'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '3.75'
+        Virtual Size: '0x10'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.6653809535148123'
+        Virtual Size: '0x15c'
+      PAGE:
+        Entropy:
+          $yaml_type: float
+          value: '6.139767828139949'
+        Virtual Size: '0xb50'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.2066281392290445'
+        Virtual Size: '0x4ba'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.2321549912698786'
+        Virtual Size: '0x330'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '2.395461844238322'
+        Virtual Size: '0x14'
+    InternalName: QIOMem
+    OriginalFilename: QIOMem.sys
+    FileVersion: 5.0.0.0
+    ProductVersion: 5.0.0.0
+    Signature:
+    - WDKTestCert 1,130752733198717037
+    - Microsoft Windows Hardware Compatibility Publisher
+    - Microsoft Windows Third Party Component CA 2012
+    - Microsoft Root Certificate Authority 2010
+    Publisher: Microsoft Windows Hardware Compatibility Publisher
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: CN=WDKTestCert 1,130752733198717037
+        ValidFrom: '2015-05-05 04:22:00'
+        ValidTo: '2025-05-05 00:00:00'
+        Signature: 37263cc0f54f52c4e64f0c6352d5ace94b517ef3603ec03fe1d1f319d6e21e92f09dec78062be4bb8bd8bbd186b0244ac737c36a71c1369711ed41d33d3df12ea4e101cf87513257cce90d77b5b2c11124481b2c7af558bfe326909638bcd33dd2b5740db59e314b43e22ccb7bc6b12e66ab8a72a50d818e5beb1e897ae3b43e5f4437a4dccb05ab96ec5a3ea2315325c0399ce0854f14f2e2dbd0a64dc0abcd8b25be28d18eb93b96ee2f661ed467c51b5ae696e55ca46b123ae8c900bdee2124f210ad640a040eac4a6222ba1f880a2e8c214a81c4251ed1b3c33ca7d5f6ce77400f5f20a84fb39e0d27d9e57626fa3acc17e6f387852c461eeac29cd7e738
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.5
+        IsCertificateAuthority: true
+        SerialNumber: 1fa194ec05480faf4587210ed5dadd0e
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: 320eaa8b2d51fe81279df22ddf8ad432
+          SHA1: c4cd618c351fb3ebeb4a311be5309c63c3b9a4c1
+          SHA256: f6b8e27adc02bc59edb9eba387c5e063ff0c3260567c5ab714e397ad8d916551
+          SHA384: e30ec578d02909be1d8cd6a5b7b3d405ccd4422531d8dcd9e738ecdd8155cd4c1216e66ed5e4b96e09f61aed4021bf37
+      Signer:
+      - SerialNumber: 1fa194ec05480faf4587210ed5dadd0e
+        Issuer: CN=WDKTestCert 1,130752733198717037
+        Version: 1
+    Authentihash:
+      MD5: e7d3aa85b456b305803472f276dd29f0
+      SHA1: 927108063af531702e54c89d3beb395f715f9706
+      SHA256: de7b59f676aadcc0173e5a8d6b22f74f6a7f9c0ed906e5cc5f3e0fd821adb813
+    RichPEHeaderHash:
+      MD5: b06ee72c38688c22e116ef8109e4c6c8
+      SHA1: 6fb19cea0bf673048937137ae021785a3c50f51b
+      SHA256: acace1751c5a54f5b9a1906ac66d24a79e8c8fa9148b50b2b8ebd4861ca91f10
+    Description: Generic IO & Memory Access
+    Company: TOSHIBA
+    Product: ''
+    Copyright: Copyright(C) 2009-2016 TOSHIBA. All rights reserved.
+    MachineType: AMD64
+    Imports:
+    - ntoskrnl.exe
+  sha256: 6abd8d0d541bcf9e257c65122216b1d2ae92cbf8a3a3cb7ce340846e66c449ca
+  signer: TOSHIBA
+  original_filename: QIOMem.sys
+  command_metadata:
+  - Command: acpi.exe
+    Description: QIOMem.sys is the Generic IO & Memory Access driver included with Toshiba and Dynabook
+      password utilities. It binds to ACPI\QCI0701; on systems without that firmware device, the public
+      proof of concept creates a matching software PnP device to trigger loading of an already-installed
+      driver package. Six IOCTLs (0x08012000 through 0x08012014) pass an unvalidated 32-bit physical address
+      to MmMapIoSpace, allowing a low-privileged process to read or write one, two, or four bytes of physical
+      memory below 4 GiB.
+    Usecase: Read or write physical memory from a low-privileged process.
+    Privileges: User
+    OperatingSystem: Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11
+  category: vulnerable driver
+references:
+- https://github.com/valium007/qiomem
+- https://valium007.github.io/posts/toshiba-vuln/
+- https://jvn.jp/vu/JVNVU91051826/
+- https://www.cve.org/CVERecord?id=CVE-2026-56129
+- https://dynabook.com/assistpc/info/2026/20260619_security.htm
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 6eca187c-8fb2-4eae-9c80-fd9ef9d8c91e.yaml
+      document: "Id: 6eca187c-8fb2-4eae-9c80-fd9ef9d8c91e\nTags:\n- QIOMem.sys\nAuthor: valium\nCreated:\
+        \ '2026-07-10'\nMitreID: T1068\nCVE:\n- CVE-2026-56129\nCategory: vulnerable driver\nVerified:\
+        \ 'TRUE'\nCommands:\n  Command: acpi.exe\n  Description: QIOMem.sys is the Generic IO & Memory\
+        \ Access driver included with\n    Toshiba and Dynabook password utilities. It binds to ACPI\\\
+        QCI0701; on systems\n    without that firmware device, the public proof of concept creates a matching\n\
+        \    software PnP device to trigger loading of an already-installed driver package.\n    Six IOCTLs\
+        \ (0x08012000 through 0x08012014) pass an unvalidated 32-bit physical\n    address to MmMapIoSpace,\
+        \ allowing a low-privileged process to read or write\n    one, two, or four bytes of physical\
+        \ memory below 4 GiB.\n  Usecase: Read or write physical memory from a low-privileged process.\n\
+        \  Privileges: User\n  OperatingSystem: Windows 7, Windows 8, Windows 8.1, Windows 10, Windows\
+        \ 11\nResources:\n- https://github.com/valium007/qiomem\n- https://valium007.github.io/posts/toshiba-vuln/\n\
+        - https://jvn.jp/vu/JVNVU91051826/\n- https://www.cve.org/CVERecord?id=CVE-2026-56129\n- https://dynabook.com/assistpc/info/2026/20260619_security.htm\n\
+        Acknowledgement:\n  Person: Akshit Yadav\n  Handle: '@valium007'\nDetection: []\nKnownVulnerableSamples:\n\
+        - Filename: QIOMem.sys\n  Libraries:\n  - ntoskrnl.exe\n  ImportedFunctions:\n  - RtlFreeUnicodeString\n\
+        \  - KeInitializeSpinLock\n  - IoAttachDeviceToDeviceStack\n  - IofCallDriver\n  - IofCompleteRequest\n\
+        \  - IoCreateDevice\n  - IoDeleteDevice\n  - IoRegisterDeviceInterface\n  - KeInitializeEvent\n\
+        \  - KeSetEvent\n  - KeWaitForSingleObject\n  - IoDetachDevice\n  - IoSetDeviceInterfaceState\n\
+        \  - ExAllocatePoolWithTag\n  - ExFreePoolWithTag\n  - MmMapIoSpace\n  - MmUnmapIoSpace\n  - IoWMIOpenBlock\n\
+        \  - IoWMIQuerySingleInstance\n  - IoWMISetSingleInstance\n  - IoReportTargetDeviceChangeAsynchronous\n\
+        \  - PoRequestPowerIrp\n  - PoSetPowerState\n  - PoCallDriver\n  - PoStartNextPowerIrp\n  - IoAllocateIrp\n\
+        \  - IoBuildDeviceIoControlRequest\n  - IoFreeIrp\n  - IoGetAttachedDeviceReference\n  - ObfDereferenceObject\n\
+        \  ExportedFunctions: ''\n  MD5: 43252ab49c9a43d22aa583c15e96f7b7\n  SHA1: ee37a040b6ec7882b4e240e70da67bc0900fd799\n\
+        \  SHA256: 6abd8d0d541bcf9e257c65122216b1d2ae92cbf8a3a3cb7ce340846e66c449ca\n  Imphash: 25adb8efbc15f349a1e3578fb2b9bf8f\n\
+        \  MagicHeader: 50 45 0 0\n  CreationTimestamp: '2015-05-05 05:40:35'\n  Sections:\n    LOCKED:\n\
+        \      Entropy: 5.271371694056955\n      Virtual Size: '0xe4'\n    .text:\n      Entropy: 6.014337560743019\n\
+        \      Virtual Size: '0x940'\n    .rdata:\n      Entropy: 3.953261012966467\n      Virtual Size:\
+        \ '0x3fc'\n    .data:\n      Entropy: 3.75\n      Virtual Size: '0x10'\n    .pdata:\n      Entropy:\
+        \ 3.6653809535148123\n      Virtual Size: '0x15c'\n    PAGE:\n      Entropy: 6.139767828139949\n\
+        \      Virtual Size: '0xb50'\n    INIT:\n      Entropy: 5.2066281392290445\n      Virtual Size:\
+        \ '0x4ba'\n    .rsrc:\n      Entropy: 3.2321549912698786\n      Virtual Size: '0x330'\n    .reloc:\n\
+        \      Entropy: 2.395461844238322\n      Virtual Size: '0x14'\n  InternalName: QIOMem\n  OriginalFilename:\
+        \ QIOMem.sys\n  FileVersion: 5.0.0.0\n  ProductVersion: 5.0.0.0\n  Signature:\n  - WDKTestCert\
+        \ 1,130752733198717037\n  - Microsoft Windows Hardware Compatibility Publisher\n  - Microsoft\
+        \ Windows Third Party Component CA 2012\n  - Microsoft Root Certificate Authority 2010\n  Publisher:\
+        \ Microsoft Windows Hardware Compatibility Publisher\n  Signatures:\n  - CertificatesInfo: ''\n\
+        \    SignerInfo: ''\n    Certificates:\n    - Subject: CN=WDKTestCert 1,130752733198717037\n \
+        \     ValidFrom: '2015-05-05 04:22:00'\n      ValidTo: '2025-05-05 00:00:00'\n      Signature:\
+        \ 37263cc0f54f52c4e64f0c6352d5ace94b517ef3603ec03fe1d1f319d6e21e92f09dec78062be4bb8bd8bbd186b0244ac737c36a71c1369711ed41d33d3df12ea4e101cf87513257cce90d77b5b2c11124481b2c7af558bfe326909638bcd33dd2b5740db59e314b43e22ccb7bc6b12e66ab8a72a50d818e5beb1e897ae3b43e5f4437a4dccb05ab96ec5a3ea2315325c0399ce0854f14f2e2dbd0a64dc0abcd8b25be28d18eb93b96ee2f661ed467c51b5ae696e55ca46b123ae8c900bdee2124f210ad640a040eac4a6222ba1f880a2e8c214a81c4251ed1b3c33ca7d5f6ce77400f5f20a84fb39e0d27d9e57626fa3acc17e6f387852c461eeac29cd7e738\n\
+        \      SignatureAlgorithmOID: 1.2.840.113549.1.1.5\n      IsCertificateAuthority: true\n     \
+        \ SerialNumber: 1fa194ec05480faf4587210ed5dadd0e\n      Version: 3\n      CertificateType: Leaf\
+        \ (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5: 320eaa8b2d51fe81279df22ddf8ad432\n\
+        \        SHA1: c4cd618c351fb3ebeb4a311be5309c63c3b9a4c1\n        SHA256: f6b8e27adc02bc59edb9eba387c5e063ff0c3260567c5ab714e397ad8d916551\n\
+        \        SHA384: e30ec578d02909be1d8cd6a5b7b3d405ccd4422531d8dcd9e738ecdd8155cd4c1216e66ed5e4b96e09f61aed4021bf37\n\
+        \    Signer:\n    - SerialNumber: 1fa194ec05480faf4587210ed5dadd0e\n      Issuer: CN=WDKTestCert\
+        \ 1,130752733198717037\n      Version: 1\n  Authentihash:\n    MD5: e7d3aa85b456b305803472f276dd29f0\n\
+        \    SHA1: 927108063af531702e54c89d3beb395f715f9706\n    SHA256: de7b59f676aadcc0173e5a8d6b22f74f6a7f9c0ed906e5cc5f3e0fd821adb813\n\
+        \  RichPEHeaderHash:\n    MD5: b06ee72c38688c22e116ef8109e4c6c8\n    SHA1: 6fb19cea0bf673048937137ae021785a3c50f51b\n\
+        \    SHA256: acace1751c5a54f5b9a1906ac66d24a79e8c8fa9148b50b2b8ebd4861ca91f10\n  Description:\
+        \ Generic IO & Memory Access\n  Company: TOSHIBA\n  Product: ''\n  Copyright: Copyright(C) 2009-2016\
+        \ TOSHIBA. All rights reserved.\n  MachineType: AMD64\n  Imports:\n  - ntoskrnl.exe\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:d6fc9ffd493e487a4ba4e6cc5475c7a6a7d30eb4b24ec6a6171db534e0a84de8

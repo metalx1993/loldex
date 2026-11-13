@@ -1,0 +1,75 @@
+id: wadcoms/NetExec-Enum-SMB-Null
+type: technique
+platform: active-directory
+name: NetExec Enum SMB Null
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: nxc smb 10.10.10.1 -u '' -p ''
+  comment: "\"NetExec (a.k.a nxc) is a network service exploitation tool that helps automate assessing\
+    \ the security of large networks.\" - https://www.netexec.wiki/. This command will enumerate the SMB\
+    \ host using a null session. \n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n"
+references:
+- https://github.com/Pennyw0rth/NetExec
+- https://www.netexec.wiki/
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: NetExec-Enum-SMB-Null.md
+      document: "---\ndescription: |\n  \"NetExec (a.k.a nxc) is a network service exploitation tool that\
+        \ helps automate assessing the security of large networks.\" - https://www.netexec.wiki/. This\
+        \ command will enumerate the SMB host using a null session. \n\n  Command Reference:\n\n  \tTarget\
+        \ IP: 10.10.10.1\n\ncommand: |\n  nxc smb 10.10.10.1 -u '' -p ''\nitems:\n  - No_Creds\nservices:\n\
+        \  - SMB\nattack_types:\n  - Enumeration\nOS:\n  - Linux\nreferences:\n  - https://github.com/Pennyw0rth/NetExec\n\
+        \  - https://www.netexec.wiki/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:cbf42f6c87ffdd97b5d8f12343e49021988dad462986919fe0359a0f8345faa8

@@ -1,0 +1,83 @@
+id: gtfobins/readelf/file-read/sudo
+type: binary
+platform: linux
+name: readelf
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: readelf -a @/path/to/input-file
+  comment: Each line is corrupted by a prefix string and wrapped inside single quotes. Also consider that
+    lines are actually parsed as `readelf` options thus some file contents may lead to unexpected results.
+references:
+- https://gtfobins.github.io/gtfobins/readelf/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        readelf:
+          functions:
+            file-read:
+            - binary: false
+              code: readelf -a @/path/to/input-file
+              comment: Each line is corrupted by a prefix string and wrapped inside single quotes. Also
+                consider that lines are actually parsed as `readelf` options thus some file contents may
+                lead to unexpected results.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/readelf/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:e82a755c61a3234dc1b038ea5603cbce661db89dc268f949f8a7a1a7462d5aa3

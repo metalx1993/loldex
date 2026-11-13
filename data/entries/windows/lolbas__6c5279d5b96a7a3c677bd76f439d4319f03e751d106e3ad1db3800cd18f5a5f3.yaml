@@ -1,0 +1,100 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1NxbGR1bXBlci55bWw/RHVtcA/0
+type: binary
+platform: windows
+name: Sqldumper.exe
+phases:
+- credential-access
+capabilities:
+- credential-dump
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1003
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_susp_sqldumper_activity.yml
+  - https://github.com/elastic/detection-rules/blob/f6421d8c534f295518a2c945f530e8afc4c8ad1b/rules/windows/credential_access_lsass_memdump_file_created.toml
+  - https://github.com/elastic/detection-rules/blob/5bdf70e72c6cd4547624c521108189af994af449/rules/windows/credential_access_cmdline_dump_tool.toml
+commands:
+- template: sqldumper.exe 464 0 0x0110
+  comment: Dump process by PID and create a dump file (Appears to create a dump file called SQLDmprXXXX.mdmp).
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Sqldumper/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Sqldumper.exe
+      category: Dump
+      privileges: Administrator
+      mitre_id: T1003
+      source_file: OtherMSBinaries/Sqldumper.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Sqldumper.exe\nDescription: Debugging utility included with Microsoft\
+        \ SQL.\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: sqldumper.exe 464 0 0x0110\n\
+        \    Description: Dump process by PID and create a dump file (Appears to create a dump file called\
+        \ SQLDmprXXXX.mdmp).\n    Usecase: Dump process using PID.\n    Category: Dump\n    Privileges:\
+        \ Administrator\n    MitreID: T1003\n    OperatingSystem: Windows\n  - Command: sqldumper.exe\
+        \ 540 0 0x01100:40\n    Description: 0x01100:40 flag will create a Mimikatz compatible dump file.\n\
+        \    Usecase: Dump LSASS.exe to Mimikatz compatible dump using PID.\n    Category: Dump\n    Privileges:\
+        \ Administrator\n    MitreID: T1003.001\n    OperatingSystem: Windows\nFull_Path:\n  - Path: C:\\\
+        Program Files\\Microsoft SQL Server\\90\\Shared\\SQLDumper.exe\n  - Path: C:\\Program Files (x86)\\\
+        Microsoft Office\\root\\vfs\\ProgramFilesX86\\Microsoft Analysis\\AS OLEDB\\140\\SQLDumper.exe\n\
+        \  - Path: C:\\Program Files\\Microsoft Power BI Desktop\\bin\\SqlDumper.exe\nDetection:\n  -\
+        \ Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_lolbin_susp_sqldumper_activity.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/f6421d8c534f295518a2c945f530e8afc4c8ad1b/rules/windows/credential_access_lsass_memdump_file_created.toml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/5bdf70e72c6cd4547624c521108189af994af449/rules/windows/credential_access_cmdline_dump_tool.toml\n\
+        Resources:\n  - Link: https://twitter.com/countuponsec/status/910969424215232518\n  - Link: https://twitter.com/countuponsec/status/910977826853068800\n\
+        \  - Link: https://support.microsoft.com/en-us/help/917825/how-to-use-the-sqldumper-exe-utility-to-generate-a-dump-file-in-sql-se\n\
+        Acknowledgement:\n  - Person: Luis Rocha\n    Handle: '@countuponsec'\n"
+      document_sha256: sha256:712179121bf0d0fb2ac01a0229ed95194685e7fd2de01e709b1beb050f634006
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Sqldumper/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-dump
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1003
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:cd1e8b8bd098330e1e72570ec97ed116ca6f70239fb34de0db40511d7bb83467

@@ -1,0 +1,96 @@
+id: wadcoms/Impacket-Reg
+type: technique
+platform: active-directory
+name: Impacket Reg
+phases:
+- execution
+- persistence
+capabilities:
+- command-execution
+- persistence
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 reg.py test.local/john:password123@10.10.10.1 query -keyName HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows
+    -s
+  comment: "Impacket's reg.py is a remote registry manipulation tool, providing similar functionality\
+    \ to reg.exe in Windows.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\
+    \n\tUsername: john\n\n\tPassword: password123\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/reg.py
+- https://www.hackingarticles.in/impacket-guide-smb-msrpc/
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-Reg.md
+      document: "---\ndescription: |\n  Impacket's reg.py is a remote registry manipulation tool, providing\
+        \ similar functionality to reg.exe in Windows.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\
+        \n  \tDomain: test.local\n\n  \tUsername: john\n\n  \tPassword: password123\n\ncommand: |\n  python3\
+        \ reg.py test.local/john:password123@10.10.10.1 query -keyName HKLM\\\\SOFTWARE\\\\Policies\\\\\
+        Microsoft\\\\Windows -s\nitems:\n  - Password\n  - Username\nservices:\n  - SMB\nOS:\n  - Linux\n\
+        \  - Windows\nattack_types:\n  - Exploitation\n  - Persistence\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/reg.py\n\
+        \  - https://www.hackingarticles.in/impacket-guide-smb-msrpc/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: persistence
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Persistence'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:5f09fc4dba18ea3e3a0b26af61fed6ca6de5c2dbe962ab460c6c1bff6edc03fc

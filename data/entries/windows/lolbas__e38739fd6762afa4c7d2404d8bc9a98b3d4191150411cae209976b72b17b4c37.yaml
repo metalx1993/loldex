@@ -1,0 +1,106 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL3ZzdGVzdC5jb25zb2xlLnltbA/QVdMIEJ5cGFzcw/0
+type: binary
+platform: windows
+name: vstest.console.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+aliases:
+- vstest.console
+attack_techniques:
+- T1127
+opsec:
+  noise: medium
+  triggers: vstest.console.exe spawning unexpected processes
+commands:
+- template: vstest.console.exe {PATH:.dll}
+  comment: VSTest functionality may allow an adversary to executes their malware by wrapping it as a test
+    method then build it to a .exe or .dll file to be later run by vstest.console.exe. This may both allow
+    AWL bypass or defense bypass in general
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/vstest.console/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: vstest.console.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/vstest.console.yml
+      command_source_index: 0
+      document_utf8: "---\nName: vstest.console.exe\nDescription: VSTest.Console.exe is the command-line\
+        \ tool to run tests\nAuthor: Onat Uzunyayla\nCreated: 2023-09-08\nCommands:\n  - Command: vstest.console.exe\
+        \ {PATH:.dll}\n    Description: VSTest functionality may allow an adversary to executes their\
+        \ malware by wrapping it as a test method then build it to a .exe or .dll file to be later run\
+        \ by vstest.console.exe. This may both allow AWL bypass or defense bypass in general\n    Usecase:\
+        \ Proxy Execution and AWL bypass, Adversaries may run malicious code embedded inside the test\
+        \ methods of crafted dll/exe\n    Category: AWL Bypass\n    Privileges: User\n    MitreID: T1127\n\
+        \    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\nFull_Path:\n  -\
+        \ Path: C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\\
+        Microsoft\\TestWindow\\vstest.console.exe\n  - Path: C:\\Program Files (x86)\\Microsoft Visual\
+        \ Studio\\2022\\TestAgent\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow\\vstest.console.exe\n\
+        Code_Sample:\n  - Code: https://github.com/onatuzunyayla/vstest-lolbin-example/\nDetection:\n\
+        \  - IOC: vstest.console.exe spawning unexpected processes\nResources:\n  - Link: https://learn.microsoft.com/en-us/visualstudio/test/vstest-console-options?view=vs-2022\n\
+        Acknowledgement:\n  - Person: Onat Uzunyayla\n  - Person: Ayberk Halac\n"
+      document_sha256: sha256:aa5aad1a35802245bbc2c02725c07316696c1cfb2d53c38dc36e7adc123f5110
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/vstest.console/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:3662b647aeaaf5421f66e8dcdb9dbbc5685c5e7f842616889aa6a38b8d7297bb

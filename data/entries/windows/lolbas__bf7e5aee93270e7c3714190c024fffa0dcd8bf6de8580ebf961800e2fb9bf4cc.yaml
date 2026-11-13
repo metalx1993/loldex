@@ -1,0 +1,101 @@
+id: lolbas/T1NCaW5hcmllcy9QcmludC55bWw/QURT/0
+type: binary
+platform: windows
+name: Print.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: Print.exe retrieving files from internet
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_print_remote_file_copy.yml
+commands:
+- template: print /D:{PATH_ABSOLUTE}:file.exe {PATH_ABSOLUTE:.exe}
+  comment: Copy file.exe into the Alternate Data Stream (ADS) of file.txt.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Print/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Print.exe
+      category: ADS
+      privileges: User
+      mitre_id: T1564.004
+      source_file: OSBinaries/Print.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Print.exe\nDescription: Used by Windows to send files to the printer\n\
+        Author: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: print /D:{PATH_ABSOLUTE}:file.exe\
+        \ {PATH_ABSOLUTE:.exe}\n    Description: Copy file.exe into the Alternate Data Stream (ADS) of\
+        \ file.txt.\n    Usecase: Hide binary file in alternate data stream to potentially bypass defensive\
+        \ counter measures\n    Category: ADS\n    Privileges: User\n    MitreID: T1564.004\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n  - Command: print\
+        \ /D:{PATH_ABSOLUTE:.dest.exe} {PATH_ABSOLUTE:.source.exe}\n    Description: Copy file from source\
+        \ to destination\n    Usecase: Copy files\n    Category: Copy\n    Privileges: User\n    MitreID:\
+        \ T1105\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows\
+        \ 11\n  - Command: print /D:{PATH_ABSOLUTE:.dest.exe} {PATH_SMB:.source.exe}\n    Description:\
+        \ Copy File.exe from a network share to the target c:\\OutFolder\\outfile.exe.\n    Usecase: Copy/Download\
+        \ file from remote server\n    Category: Copy\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem:\
+        \ Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path:\
+        \ C:\\Windows\\System32\\print.exe\n  - Path: C:\\Windows\\SysWOW64\\print.exe\nDetection:\n \
+        \ - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_print_remote_file_copy.yml\n\
+        \  - IOC: Print.exe retrieving files from internet\n  - IOC: Print.exe creating executable files\
+        \ on disk\nResources:\n  - Link: https://twitter.com/Oddvarmoe/status/985518877076541440\n  -\
+        \ Link: https://www.youtube.com/watch?v=nPBcSP8M7KE&lc=z22fg1cbdkabdf3x404t1aokgwd2zxasf2j3rbozrswnrk0h00410\n\
+        Acknowledgement:\n  - Person: Oddvar Moe\n    Handle: '@oddvarmoe'\n"
+      document_sha256: sha256:45b16df0ad7ddec46d6f86a0f357bf10cb926d0ca75e17054609f2bc21ce5ae4
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Print/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1564.004
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:37230fd2373b4d1b76b122c7f6c52d28784b68e306d4d0ada0e4cfb7e355f593

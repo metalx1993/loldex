@@ -1,0 +1,149 @@
+id: loldrivers/4137ecf0-05e7-463a-94da-47b7259d4433
+type: driver
+platform: windows
+name: 81.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create 81.sys binPath=C:\windows\temp\81.sys type=kernel && sc.exe start 81.sys
+driver_detail:
+  samples:
+  - Company: ''
+    Date: ''
+    Description: ''
+    FileVersion: ''
+    Filename: 81.sys
+    MachineType: ''
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    Signature: []
+    LoadsDespiteHVCI: 'FALSE'
+    Authentihash:
+      SHA1: faa870b0cb15c9ac2b9bba5d0470bd501ccd4326
+      SHA256: b430d3a0bdb837a5d6625d3b1cef07abd1953f969869ff6cf7ba398ae605431a
+  - Company: ''
+    Date: ''
+    Description: ''
+    FileVersion: ''
+    Filename: 81.sys
+    MachineType: ''
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    Signature: []
+    LoadsDespiteHVCI: 'FALSE'
+    Authentihash:
+      SHA1: aca8e53483b40a06dfdee81bb364b1622f9156fe
+      SHA256: b430d3a0bdb837a5d6625d3b1cef07abd1953f969869ff6cf7ba398ae605431a
+  - Company: ''
+    Date: ''
+    Description: ''
+    FileVersion: ''
+    Filename: 81.sys
+    MachineType: ''
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    Signature: []
+    LoadsDespiteHVCI: 'FALSE'
+    Authentihash:
+      SHA1: 05ac1c64ca16ab0517fe85d4499d08199e63df26
+      SHA256: b430d3a0bdb837a5d6625d3b1cef07abd1953f969869ff6cf7ba398ae605431a
+  command_metadata:
+  - Command: sc.exe create 81.sys binPath=C:\windows\temp\81.sys type=kernel && sc.exe start 81.sys
+    Description: ''
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 4137ecf0-05e7-463a-94da-47b7259d4433.yaml
+      document: "Id: 4137ecf0-05e7-463a-94da-47b7259d4433\nTags:\n- 81.sys\nVerified: 'FALSE'\nAuthor:\
+        \ Michael Haag\nCreated: '2023-01-09'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \    Command: sc.exe create 81.sys binPath=C:\\windows\\temp\\81.sys type=kernel && sc.exe\n \
+        \       start 81.sys\n    Description: ''\n    OperatingSystem: Windows 10\n    Privileges: kernel\n\
+        \    Usecase: Elevate privileges\nResources:\n- https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules\n\
+        Detection: []\nAcknowledgement:\n    Handle: ''\n    Person: ''\nKnownVulnerableSamples:\n-  \
+        \ Company: ''\n    Date: ''\n    Description: ''\n    FileVersion: ''\n    Filename: 81.sys\n\
+        \    MachineType: ''\n    OriginalFilename: ''\n    Product: ''\n    ProductVersion: ''\n    Publisher:\
+        \ ''\n    Signature: []\n    LoadsDespiteHVCI: 'FALSE'\n    Authentihash:\n        SHA1: faa870b0cb15c9ac2b9bba5d0470bd501ccd4326\n\
+        \        SHA256: b430d3a0bdb837a5d6625d3b1cef07abd1953f969869ff6cf7ba398ae605431a\n-   Company:\
+        \ ''\n    Date: ''\n    Description: ''\n    FileVersion: ''\n    Filename: 81.sys\n    MachineType:\
+        \ ''\n    OriginalFilename: ''\n    Product: ''\n    ProductVersion: ''\n    Publisher: ''\n \
+        \   Signature: []\n    LoadsDespiteHVCI: 'FALSE'\n    Authentihash:\n        SHA1: aca8e53483b40a06dfdee81bb364b1622f9156fe\n\
+        \        SHA256: b430d3a0bdb837a5d6625d3b1cef07abd1953f969869ff6cf7ba398ae605431a\n-   Company:\
+        \ ''\n    Date: ''\n    Description: ''\n    FileVersion: ''\n    Filename: 81.sys\n    MachineType:\
+        \ ''\n    OriginalFilename: ''\n    Product: ''\n    ProductVersion: ''\n    Publisher: ''\n \
+        \   Signature: []\n    LoadsDespiteHVCI: 'FALSE'\n    Authentihash:\n        SHA1: 05ac1c64ca16ab0517fe85d4499d08199e63df26\n\
+        \        SHA256: b430d3a0bdb837a5d6625d3b1cef07abd1953f969869ff6cf7ba398ae605431a\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:851a1ac49de04a4cfa4c7ef4e18a652e6531adf3b2a1b57e562692d731618bfd

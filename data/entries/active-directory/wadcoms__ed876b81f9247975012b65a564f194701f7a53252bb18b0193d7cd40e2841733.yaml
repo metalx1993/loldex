@@ -1,0 +1,76 @@
+id: wadcoms/SMBClient-List-Share-PTH
+type: technique
+platform: active-directory
+name: SMBClient List Share PTH
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+- an NTLM hash (pass-the-hash)
+commands:
+- template: smbclient -L \\10.10.10.1 -U test.local/john --pw-nt-hash XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  comment: "Smbclient is a tool used to communicate with SMB servers. The following command will list\
+    \ out all available shares on the target ip using user John hash on test domain.\n\nCommand Reference:\n\
+    \n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\tUsername: john\n\n\tHash: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
+references:
+- https://www.samba.org/samba/docs/current/man-html/smbclient.1.html
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: SMBClient-List-Share-PTH.md
+      document: "---\ndescription: |\n  Smbclient is a tool used to communicate with SMB servers. The\
+        \ following command will list out all available shares on the target ip using user John hash on\
+        \ test domain.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain: test.local\n\
+        \n  \tUsername: john\n\n  \tHash: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\ncommand: |\n  smbclient\
+        \ -L \\\\10.10.10.1 -U test.local/john --pw-nt-hash XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nitems:\n\
+        \  - Username\n  - Hash\nservices:\n  - SMB\nOS:\n  - Linux\nattack_types:\n  - Enumeration\n\
+        references:\n  - https://www.samba.org/samba/docs/current/man-html/smbclient.1.html\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:4c4c7942716fdf67ca7914aa77fb37f25dd101405b59134a700deb34404064d4

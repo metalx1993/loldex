@@ -1,0 +1,129 @@
+id: loldrivers/47d4b71f-eebd-4775-9e7c-b031135e8f1b
+type: driver
+platform: windows
+name: LECOMAx64.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+aliases:
+- LECOMAx.SYS
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create LECOMAx64 binPath=C:\windows\temp\LECOMAx64.sys type=kernel && sc.exe start
+    LECOMAx64
+  comment: LECOMAx64.sys is a signed LECO LECOMA device driver referenced by public PPLShade supported-driver
+    research.
+driver_detail:
+  samples:
+  - Filename: LECOMAx64.sys
+    MD5: 8ac99a014b36c4cf1eeee98f99410cca
+    SHA1: eb817e8af016f6a3ece2b7cf421ec6d96970e285
+    SHA256: 0f2dff4116a84241d8cafe534b63454fb4ea26272da8977be03670701ec6631c
+    Signature:
+    - LECO Corporation
+    Date: 07:30 PM 05/09/2007
+    Publisher: LECO Corporation
+    Company: LECO Corporation
+    Description: LECO LECOMA Device Driver
+    Product: ''
+    ProductVersion: ''
+    FileVersion: '2.31'
+    MachineType: AMD64
+    OriginalFilename: LECOMAx.SYS
+    InternalName: LECOMAx.SYS
+    Copyright: Copyright LECO Corporation 1996-2007, All Rights Reserved
+    Imphash: 4a4d806c1efb1a0f5eb911acb564db83
+  sha256: 0f2dff4116a84241d8cafe534b63454fb4ea26272da8977be03670701ec6631c
+  signer: LECO Corporation
+  original_filename: LECOMAx.SYS
+  command_metadata:
+  - Command: sc.exe create LECOMAx64 binPath=C:\windows\temp\LECOMAx64.sys type=kernel && sc.exe start
+      LECOMAx64
+    Description: LECOMAx64.sys is a signed LECO LECOMA device driver referenced by public PPLShade supported-driver
+      research.
+    Usecase: Load a vulnerable signed kernel driver
+    Privileges: kernel
+    OperatingSystem: Windows 10
+  category: vulnerable driver
+references:
+- https://github.com/redteamfortress/PPLShade#supported-drivers
+- https://github.com/magicsword-io/LOLDrivers/issues/354
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 47d4b71f-eebd-4775-9e7c-b031135e8f1b.yaml
+      document: "Id: 47d4b71f-eebd-4775-9e7c-b031135e8f1b\nTags:\n- LECOMAx64.sys\n- LECOMAx.SYS\nVerified:\
+        \ 'TRUE'\nAuthor: Michael Haag\nCreated: '2026-06-16'\nMitreID: T1068\nCategory: vulnerable driver\n\
+        Commands:\n  Command: sc.exe create LECOMAx64 binPath=C:\\windows\\temp\\LECOMAx64.sys type=kernel\
+        \ && sc.exe start LECOMAx64\n  Description: LECOMAx64.sys is a signed LECO LECOMA device driver\
+        \ referenced by public PPLShade supported-driver research.\n  Usecase: Load a vulnerable signed\
+        \ kernel driver\n  Privileges: kernel\n  OperatingSystem: Windows 10\nResources:\n- https://github.com/redteamfortress/PPLShade#supported-drivers\n\
+        - https://github.com/magicsword-io/LOLDrivers/issues/354\nDetection: []\nAcknowledgement:\n  Person:\
+        \ Arnim Rupp\n  Handle: ruppde\nKnownVulnerableSamples:\n- Filename: LECOMAx64.sys\n  MD5: 8ac99a014b36c4cf1eeee98f99410cca\n\
+        \  SHA1: eb817e8af016f6a3ece2b7cf421ec6d96970e285\n  SHA256: 0f2dff4116a84241d8cafe534b63454fb4ea26272da8977be03670701ec6631c\n\
+        \  Signature:\n  - LECO Corporation\n  Date: '07:30 PM 05/09/2007'\n  Publisher: LECO Corporation\n\
+        \  Company: LECO Corporation\n  Description: LECO LECOMA Device Driver\n  Product: ''\n  ProductVersion:\
+        \ ''\n  FileVersion: '2.31'\n  MachineType: AMD64\n  OriginalFilename: LECOMAx.SYS\n  InternalName:\
+        \ LECOMAx.SYS\n  Copyright: Copyright LECO Corporation 1996-2007, All Rights Reserved\n  Imphash:\
+        \ 4a4d806c1efb1a0f5eb911acb564db83\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:fe2395a8df03477519442a4f3b12fc9afe731b873b2b67710fc442dc99047466

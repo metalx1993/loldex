@@ -1,0 +1,80 @@
+id: lolad/UXVlcnkgRE5TIFNlcnZlcnMgaW4gRG9tYWlu/R2V0LURuc1NlcnZlclJlc291cmNlUmVjb3JkIC1ab25lTmFtZSAiZG9tYWluLmxvY2FsIg/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Query DNS Servers in Domain
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-DnsServerResourceRecord -ZoneName "domain.local"
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Query DNS Servers in Domain
+      command: Get-DnsServerResourceRecord -ZoneName "domain.local"
+      type: PowerShell
+      reference: Microsoft Documentation
+      physical_rows:
+      - input_ref: index.html#row=60
+        row_utf8: "<tr>\r\n\t\t\t<td>Query DNS Servers in Domain</td>\r\n\t\t\t<td><code>Get-DnsServerResourceRecord\
+          \ -ZoneName \"domain.local\"</code></td>\r\n\t\t\t<td>PowerShell</td>\r\n\t\t\t<td><a href=\"\
+          https://learn.microsoft.com/en-us/powershell/module/dnsserver/get-dnsserverresourcerecord\"\
+          \ target=\"_blank\">Microsoft Documentation</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:a0bc9385bf9b1a2be1b615ab57546a9512120b8bc14913c02280e1f68d11f6b4
+        cells:
+        - Query DNS Servers in Domain
+        - Get-DnsServerResourceRecord -ZoneName "domain.local"
+        - PowerShell
+        - Microsoft Documentation
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:378f12115fd607ce5fa42ffe108ca0893e30fe6afdec3bb282ef519c10105715

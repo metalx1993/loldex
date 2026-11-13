@@ -1,0 +1,99 @@
+id: lolbas/T1NCaW5hcmllcy9NYXZpbmplY3QueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Mavinject.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218.013
+opsec:
+  noise: high
+  triggers: mavinject.exe should not run unless APP-v is in use on the workstation
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_mavinject_process_injection.yml
+commands:
+- template: MavInject.exe 3110 /INJECTRUNNING {PATH_ABSOLUTE:.dll}
+  comment: Inject evil.dll into a process with PID 3110.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Mavinject/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Mavinject.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218.013
+      source_file: OSBinaries/Mavinject.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Mavinject.exe\nDescription: Used by App-v in Windows\nAuthor: Oddvar\
+        \ Moe\nCreated: 2018-05-25\nCommands:\n  - Command: MavInject.exe 3110 /INJECTRUNNING {PATH_ABSOLUTE:.dll}\n\
+        \    Description: Inject evil.dll into a process with PID 3110.\n    Usecase: Inject dll file\
+        \ into running process\n    Category: Execute\n    Privileges: User\n    MitreID: T1218.013\n\
+        \    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\n\
+        \    Tags:\n      - Execute: DLL\n  - Command: Mavinject.exe 4172 /INJECTRUNNING {PATH_ABSOLUTE}:file.dll\n\
+        \    Description: Inject file.dll stored as an Alternate Data Stream (ADS) into a process with\
+        \ PID 4172\n    Usecase: Inject dll file into running process\n    Category: ADS\n    Privileges:\
+        \ User\n    MitreID: T1564.004\n    OperatingSystem: Windows vista, Windows 7, Windows 8, Windows\
+        \ 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\nFull_Path:\n  - Path: C:\\Windows\\\
+        System32\\mavinject.exe\n  - Path: C:\\Windows\\SysWOW64\\mavinject.exe\nDetection:\n  - Sigma:\
+        \ https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_lolbin_mavinject_process_injection.yml\n\
+        \  - IOC: mavinject.exe should not run unless APP-v is in use on the workstation\nResources:\n\
+        \  - Link: https://twitter.com/gN3mes1s/status/941315826107510784\n  - Link: https://twitter.com/Hexcorn/status/776122138063409152\n\
+        \  - Link: https://oddvar.moe/2018/01/14/putting-data-in-alternate-data-streams-and-how-to-execute-it/\n\
+        Acknowledgement:\n  - Person: Giuseppe N3mes1s\n    Handle: '@gN3mes1s'\n  - Person: Oddvar Moe\n\
+        \    Handle: '@oddvarmoe'\n"
+      document_sha256: sha256:f40cb0c5f2942fca137a959bd96f4123efdeeae234c942229cf1c66b159972ed
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Mavinject/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218.013
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:c4fe5a662ff95417d2effe85e45b15265e201b85f240adfcf72df553ab0523a3

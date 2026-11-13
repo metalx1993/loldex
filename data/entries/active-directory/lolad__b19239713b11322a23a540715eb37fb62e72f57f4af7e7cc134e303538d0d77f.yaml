@@ -1,0 +1,80 @@
+id: lolad/TW9kaWZ5IFJlZ2lzdHJ5IEtleSBQZXJtaXNzaW9ucw/cmVnIGFkZCBIS0xNXFNvZnR3YXJlXEV4YW1wbGVLZXkgL3YgRXhhbXBsZVZhbHVlIC90IFJFR19TWiAvZCAiRXhhbXBsZURhdGEiIC9m/Q01E
+type: technique
+platform: active-directory
+name: Modify Registry Key Permissions
+phases:
+- persistence
+capabilities:
+- persistence
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: reg add HKLM\Software\ExampleKey /v ExampleValue /t REG_SZ /d "ExampleData" /f
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: Modify Registry Key Permissions
+      command: reg add HKLM\Software\ExampleKey /v ExampleValue /t REG_SZ /d "ExampleData" /f
+      type: CMD
+      reference: SS64 - Reg Add Command
+      physical_rows:
+      - input_ref: index.html#row=114
+        row_utf8: "<tr>\r\n\t            <td>Modify Registry Key Permissions</td>\r\n\t            <td><code>reg\
+          \ add HKLM\\Software\\ExampleKey /v ExampleValue /t REG_SZ /d \"ExampleData\" /f</code></td>\r\
+          \n\t            <td>CMD</td>\r\n\t            <td><a href=\"https://ss64.com/nt/\" target=\"\
+          _blank\">SS64 - Reg Add Command</a></td>\r\n\t        </tr>"
+        row_sha256: sha256:160ac36d1a38c6aba6650a3e023e4352569a03a5ebf9b4725954adce40d9d615
+        cells:
+        - Modify Registry Key Permissions
+        - reg add HKLM\Software\ExampleKey /v ExampleValue /t REG_SZ /d "ExampleData" /f
+        - CMD
+        - SS64 - Reg Add Command
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: persistence
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: persistence
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:094fac2097c0b9a2938fb2f4bfbe7e573ca03e66ebe096f834b6cdb1e6a2ff88

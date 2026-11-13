@@ -1,0 +1,99 @@
+id: lolbas/T1NTY3JpcHRzL0xhdW5jaC1Wc0RldlNoZWxsLnltbA/RXhlY3V0ZQ/1
+type: script
+platform: windows
+name: Launch-VsDevShell.ps1
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1216
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6199a703221a98ae6ad343c79c558da375203e4e/rules/windows/process_creation/proc_creation_win_lolbin_launch_vsdevshell.yml
+commands:
+- template: powershell -ep RemoteSigned -f .\Launch-VsDevShell.ps1 -VsInstallationPath "/../../../../../;
+    {PATH:.exe} ;"
+  comment: Execute binaries and commands from the context of the signed script using the "VsInstallationPath"
+    flag.
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Launch-VsDevShell/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Launch-VsDevShell.ps1
+      category: Execute
+      privileges: User
+      mitre_id: T1216
+      source_file: OSScripts/Launch-VsDevShell.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Launch-VsDevShell.ps1\nDescription: Locates and imports a Developer PowerShell\
+        \ module and calls the Enter-VsDevShell cmdlet\nAuthor: 'Nasreddine Bencherchali'\nCreated: 2022-06-13\n\
+        Commands:\n  - Command: 'powershell -ep RemoteSigned -f .\\Launch-VsDevShell.ps1 -VsWherePath\
+        \ {PATH_ABSOLUTE:.exe}'\n    Description: Execute binaries from the context of the signed script\
+        \ using the \"VsWherePath\" flag.\n    Usecase: Proxy execution\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1216\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute:\
+        \ EXE\n  - Command: 'powershell -ep RemoteSigned -f .\\Launch-VsDevShell.ps1 -VsInstallationPath\
+        \ \"/../../../../../; {PATH:.exe} ;\"'\n    Description: Execute binaries and commands from the\
+        \ context of the signed script using the \"VsInstallationPath\" flag.\n    Usecase: Proxy execution\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1216\n    OperatingSystem: Windows\
+        \ 10, Windows 11\n    Tags:\n      - Execute: EXE\nFull_Path:\n  - Path: C:\\Program Files (x86)\\\
+        Microsoft Visual Studio\\2019\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\n  - Path: C:\\\
+        Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\n\
+        Detection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/6199a703221a98ae6ad343c79c558da375203e4e/rules/windows/process_creation/proc_creation_win_lolbin_launch_vsdevshell.yml\n\
+        Resources:\n  - Link: https://twitter.com/nas_bench/status/1535981653239255040\nAcknowledgement:\n\
+        \  - Person: Nasreddine Bencherchali\n    Handle: '@nas_bench'\n"
+      document_sha256: sha256:9dc4274035c641dbb0eba68aa9547de2e15b37382ba5edc2af4ffca4ccc938d5
+    upstream_url: https://lolbas-project.github.io/lolbas/Scripts/Launch-VsDevShell/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1216
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:c994c9276d65a56b0a0a47f143eb6bab17118279ef159255c3e3892919072e46

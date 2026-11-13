@@ -1,0 +1,94 @@
+id: lolbas/T1NCaW5hcmllcy9SZXBsYWNlLnltbA/RG93bmxvYWQ/1
+type: binary
+platform: windows
+name: Replace.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Replace.exe retrieving files from remote server
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_replace.yml
+commands:
+- template: replace.exe {PATH_SMB:.exe} {PATH_ABSOLUTE:folder} /A
+  comment: Download/Copy executable to specified folder
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Replace/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Replace.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/Replace.yml
+      command_source_index: 1
+      document_utf8: "---\nName: Replace.exe\nDescription: Used to replace file with another file\nAuthor:\
+        \ Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: replace.exe {PATH_ABSOLUTE:.cab} {PATH_ABSOLUTE:folder}\
+        \ /A\n    Description: Copy .cab file to destination\n    Usecase: Copy files\n    Category: Copy\n\
+        \    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows vista, Windows 7, Windows\
+        \ 8, Windows 8.1, Windows 10, Windows 11\n  - Command: replace.exe {PATH_SMB:.exe} {PATH_ABSOLUTE:folder}\
+        \ /A\n    Description: Download/Copy executable to specified folder\n    Usecase: Download file\n\
+        \    Category: Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path: C:\\\
+        Windows\\System32\\replace.exe\n  - Path: C:\\Windows\\SysWOW64\\replace.exe\nDetection:\n  -\
+        \ IOC: Replace.exe retrieving files from remote server\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_lolbin_replace.yml\n\
+        Resources:\n  - Link: https://twitter.com/elceef/status/986334113941655553\n  - Link: https://twitter.com/elceef/status/986842299861782529\n\
+        Acknowledgement:\n  - Person: elceef\n    Handle: '@elceef'\n"
+      document_sha256: sha256:9fe2c84ba0465d4acc1e111f368aa413200c9d304dc59dabce84cc1f7d53b852
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Replace/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:fcb0481ea462c491a9166e6ac2d85e3ad9f26db4a5da3b7819fa7d2a5a7fbdda

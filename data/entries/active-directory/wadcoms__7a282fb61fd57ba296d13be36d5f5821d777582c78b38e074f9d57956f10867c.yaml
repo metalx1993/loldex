@@ -1,0 +1,76 @@
+id: wadcoms/winPEAS
+type: technique
+platform: active-directory
+name: winPEAS
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: winpeas.exe cmd > output.txt
+  comment: "winpeas.exe is a script that will search for all possible paths to escalate privileges on\
+    \ Windows hosts. The below command will run all priv esc checks and store the output in a file.\n\n\
+    Command Reference:\n\n\tRun all checks: cmd\n\n\tOutput File: output.txt\n"
+references:
+- https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS
+- https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/blob/master/winPEAS/winPEASexe/README.md
+- https://book.hacktricks.xyz/windows/windows-local-privilege-escalation
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: winPEAS.md
+      document: "---\ndescription: |\n  winpeas.exe is a script that will search for all possible paths\
+        \ to escalate privileges on Windows hosts. The below command will run all priv esc checks and\
+        \ store the output in a file.\n\n  Command Reference:\n\n  \tRun all checks: cmd\n\n  \tOutput\
+        \ File: output.txt\n\ncommand: |\n  winpeas.exe cmd > output.txt\nitems:\n  - Shell\nOS:\n  -\
+        \ Windows\nattack_types:\n  - PrivEsc\nreferences:\n  - https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS\n\
+        \  - https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/blob/master/winPEAS/winPEASexe/README.md\n\
+        \  - https://book.hacktricks.xyz/windows/windows-local-privilege-escalation\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:ad2c41dd3b3f6a07d99c13e1c78968471eea2883f6749e13255ee2418764dab9

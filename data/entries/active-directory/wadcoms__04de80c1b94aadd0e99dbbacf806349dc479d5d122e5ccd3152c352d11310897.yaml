@@ -1,0 +1,74 @@
+id: wadcoms/SharpUp
+type: technique
+platform: active-directory
+name: SharpUp
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- shell
+commands:
+- template: SharpUp.exe > output.txt
+  comment: "SharpUp.exe is part of the GhostPack suite of tools and is a C# port of PowerUp that will\
+    \ perform numerous privilege escalation checks. The following command will run all priv esc checks\
+    \ and store the output in a file.\n\nCommand Reference:\n\n\tOutput File: output.txt\n"
+references:
+- https://github.com/GhostPack/SharpUp
+- https://www.harmj0y.net/blog/redteaming/ghostpack/
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: SharpUp.md
+      document: "---\ndescription: |\n  SharpUp.exe is part of the GhostPack suite of tools and is a C#\
+        \ port of PowerUp that will perform numerous privilege escalation checks. The following command\
+        \ will run all priv esc checks and store the output in a file.\n\n  Command Reference:\n\n  \t\
+        Output File: output.txt\n\ncommand: |\n  SharpUp.exe > output.txt\nitems:\n  - Shell\nOS:\n  -\
+        \ Windows\nattack_types:\n  - PrivEsc\nreferences:\n  - https://github.com/GhostPack/SharpUp\n\
+        \  - https://www.harmj0y.net/blog/redteaming/ghostpack/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: PrivEsc'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:d283b00b4e94b6068821ef80fa581387a443cf195c8ee2814f51354f9461a3e0

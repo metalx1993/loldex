@@ -1,0 +1,75 @@
+id: wadcoms/enum4linux-ng
+type: technique
+platform: active-directory
+name: enum4linux ng
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: none
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- no credentials required
+commands:
+- template: enum4linux-ng 10.10.10.1
+  comment: "enum4linux-ng is a modern reimplementation of enum4linux written in Python3. It is used to\
+    \ enumerate information from Windows and Samba systems, providing cleaner output and better support\
+    \ for modern protocols. The following command performs a full unauthenticated enumeration of the target.\n\
+    \nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n"
+references:
+- https://github.com/cddmp/enum4linux-ng
+tags:
+- active-directory
+- wadcoms
+- smb
+source_data:
+  WADComs:
+    raw:
+      file: enum4linux-ng.md
+      document: "---\ndescription: |\n  enum4linux-ng is a modern reimplementation of enum4linux written\
+        \ in Python3. It is used to enumerate information from Windows and Samba systems, providing cleaner\
+        \ output and better support for modern protocols. The following command performs a full unauthenticated\
+        \ enumeration of the target.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\ncommand:\
+        \ |\n  enum4linux-ng 10.10.10.1\nitems:\n  - No_Creds\nservices:\n  - SMB\nOS:\n  - Linux\nattack_types:\n\
+        \  - Enumeration\nreferences:\n  - https://github.com/cddmp/enum4linux-ng\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: none
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:b91080f7b70c2d6e0de03db05f058d9ead68d1dd00b10ec532dca8a036beaf45

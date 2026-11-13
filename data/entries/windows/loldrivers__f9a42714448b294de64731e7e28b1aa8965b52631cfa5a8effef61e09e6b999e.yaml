@@ -1,0 +1,238 @@
+id: loldrivers/73bd234a-6c4f-4304-9e7d-5bc7a3f263e2
+type: driver
+platform: windows
+name: hlpdrv.sys
+phases:
+- defense-evasion
+- privilege-escalation
+capabilities:
+- defense-evasion
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create KMHLPSVC binPath=C:\windows\temp\hlpdrv.sys type=kernel && sc.exe start KMHLPSVC
+  comment: hlpdrv.sys is a malicious driver used to disable Windows Defender by modifying registry settings.
+    This driver has been observed in Akira ransomware campaigns, where it is deployed to facilitate AV/EDR
+    evasion or disablement through a Bring Your Own Vulnerable Driver (BYOVD) exploitation chain. The
+    malware modifies the DisableAntiSpyware registry key via regedit.exe execution. In observed intrusions
+    it is dropped to the user %TEMP% folder (C:\Users\<user>\AppData\Local\Temp\hlpdrv.sys) and registered
+    as service KMHLPSVC alongside ThrottleStop.sys dropped as rwdrv.sys (service mgdsrv).
+driver_detail:
+  samples:
+  - Filename: hlpdrv.sys
+    MD5: cf7cad39407d8cd93135be42b6bd258f
+    SHA1: ce1b9909cef820e5281618a7a0099a27a70643dc
+    SHA256: bd1f381e5a3db22e88776b7873d4d2835e9a1ec620571d2b1da0c58f81c84a56
+    Filesize: 9216
+    Signature: ''
+    Date: ''
+    Publisher: ''
+    Company: ''
+    Description: ''
+    Product: ''
+    ProductVersion: ''
+    FileVersion: ''
+    MachineType: AMD64
+    OriginalFilename: ''
+    InternalName: ''
+    Copyright: ''
+    Imports:
+    - ntoskrnl.exe
+    ExportedFunctions: ''
+    ImportedFunctions:
+    - RtlInitUnicodeString
+    - DbgPrint
+    - RtlCreateSecurityDescriptor
+    - RtlSetDaclSecurityDescriptor
+    - ExAllocatePoolWithTag
+    - ExFreePoolWithTag
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - IoDeleteDevice
+    - IoDeleteSymbolicLink
+    - ZwCreateFile
+    - ZwClose
+    - ZwTerminateProcess
+    - RtlCreateAcl
+    - SeLocateProcessImageName
+    - PsLookupProcessByProcessId
+    - ObOpenObjectByPointer
+    - ZwSetSecurityObject
+    - PsProcessType
+    PDBPath: ''
+    Authentihash:
+      MD5: 3e1467f89f1d0e6ff341afd460b61997
+      SHA1: 7be5524927a472e0d6fbb80767fdf1ff1aa4dffc
+      SHA256: a22d5d42dd0cdae016b536799ab9c384c23b42f5662f0b115b3b85ccb9e23242
+    Imphash: bb62d5bfbc06bfc0791bfc589467b350
+    RichPEHeaderHash:
+      MD5: fddfc403cd9bf71fe6619635b05aac6e
+      SHA1: 350c2cbd34cb87b6e06a25c63b3e48ce30a71f15
+      SHA256: b78be3efd3d5c31d858ac832f0ee71fdb7e04a4628f2c0d897e838fa3e8f3866
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.09734513358123'
+        Virtual Size: '0xef2'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '1.6982016121596026'
+        Virtual Size: '0x4f0'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '3.75'
+        Virtual Size: '0x10'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '3.34275631688717'
+        Virtual Size: '0xa8'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.030768435516171'
+        Virtual Size: '0x2ee'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '3.680768321596844'
+        Virtual Size: '0x24'
+    MagicHeader: 50 45 0 0
+    CreationTimestamp: '2025-03-03 04:11:32'
+    Signatures: {}
+  sha256: bd1f381e5a3db22e88776b7873d4d2835e9a1ec620571d2b1da0c58f81c84a56
+  command_metadata:
+  - Command: sc.exe create KMHLPSVC binPath=C:\windows\temp\hlpdrv.sys type=kernel && sc.exe start KMHLPSVC
+    Description: hlpdrv.sys is a malicious driver used to disable Windows Defender by modifying registry
+      settings. This driver has been observed in Akira ransomware campaigns, where it is deployed to facilitate
+      AV/EDR evasion or disablement through a Bring Your Own Vulnerable Driver (BYOVD) exploitation chain.
+      The malware modifies the DisableAntiSpyware registry key via regedit.exe execution. In observed
+      intrusions it is dropped to the user %TEMP% folder (C:\Users\<user>\AppData\Local\Temp\hlpdrv.sys)
+      and registered as service KMHLPSVC alongside ThrottleStop.sys dropped as rwdrv.sys (service mgdsrv).
+    Usecase: Elevate privileges
+    Privileges: kernel
+    OperatingSystem: Windows 10
+  category: malicious
+references:
+- https://www.guidepointsecurity.com/blog/gritrep-akira-sonicwall/
+- https://thedfirreport.com/2026/06/29/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-3/
+- https://github.com/magicsword-io/LOLDrivers/raw/main/drivers/cf7cad39407d8cd93135be42b6bd258f.bin
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 73bd234a-6c4f-4304-9e7d-5bc7a3f263e2.yaml
+      document: "Id: 73bd234a-6c4f-4304-9e7d-5bc7a3f263e2\nTags:\n- hlpdrv.sys\nAuthor: Michael Haag\n\
+        Created: '2025-10-27'\nMitreID: T1068\nCategory: malicious\nVerified: 'TRUE'\nCommands:\n  Command:\
+        \ sc.exe create KMHLPSVC binPath=C:\\windows\\temp\\hlpdrv.sys type=kernel\n    && sc.exe start\
+        \ KMHLPSVC\n  Description: 'hlpdrv.sys is a malicious driver used to disable Windows Defender\n\
+        \    by modifying registry settings. This driver has been observed in Akira ransomware\n    campaigns,\
+        \ where it is deployed to facilitate AV/EDR evasion or disablement through\n    a Bring Your Own\
+        \ Vulnerable Driver (BYOVD) exploitation chain. The malware modifies\n    the DisableAntiSpyware\
+        \ registry key via regedit.exe execution. In observed intrusions\n    it is dropped to the user\
+        \ %TEMP% folder (C:\\Users\\<user>\\AppData\\Local\\Temp\\hlpdrv.sys)\n    and registered as service\
+        \ KMHLPSVC alongside ThrottleStop.sys dropped as rwdrv.sys\n    (service mgdsrv).'\n  Usecase:\
+        \ Elevate privileges\n  Privileges: kernel\n  OperatingSystem: Windows 10\nResources:\n- https://www.guidepointsecurity.com/blog/gritrep-akira-sonicwall/\n\
+        - https://thedfirreport.com/2026/06/29/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-3/\n\
+        - https://github.com/magicsword-io/LOLDrivers/raw/main/drivers/cf7cad39407d8cd93135be42b6bd258f.bin\n\
+        Acknowledgement:\n  Person: GuidePoint Research and Intelligence Team (GRIT)\n  Handle: '@GuidepointSec'\n\
+        Detection:\n- type: yara_signature\n  value: https://www.guidepointsecurity.com/blog/gritrep-akira-sonicwall/\n\
+        KnownVulnerableSamples:\n- Filename: hlpdrv.sys\n  MD5: cf7cad39407d8cd93135be42b6bd258f\n  SHA1:\
+        \ ce1b9909cef820e5281618a7a0099a27a70643dc\n  SHA256: bd1f381e5a3db22e88776b7873d4d2835e9a1ec620571d2b1da0c58f81c84a56\n\
+        \  Filesize: 9216\n  Signature: ''\n  Date: ''\n  Publisher: ''\n  Company: ''\n  Description:\
+        \ ''\n  Product: ''\n  ProductVersion: ''\n  FileVersion: ''\n  MachineType: AMD64\n  OriginalFilename:\
+        \ ''\n  InternalName: ''\n  Copyright: ''\n  Imports:\n  - ntoskrnl.exe\n  ExportedFunctions:\
+        \ ''\n  ImportedFunctions:\n  - RtlInitUnicodeString\n  - DbgPrint\n  - RtlCreateSecurityDescriptor\n\
+        \  - RtlSetDaclSecurityDescriptor\n  - ExAllocatePoolWithTag\n  - ExFreePoolWithTag\n  - IofCompleteRequest\n\
+        \  - IoCreateDevice\n  - IoCreateSymbolicLink\n  - IoDeleteDevice\n  - IoDeleteSymbolicLink\n\
+        \  - ZwCreateFile\n  - ZwClose\n  - ZwTerminateProcess\n  - RtlCreateAcl\n  - SeLocateProcessImageName\n\
+        \  - PsLookupProcessByProcessId\n  - ObOpenObjectByPointer\n  - ZwSetSecurityObject\n  - PsProcessType\n\
+        \  PDBPath: ''\n  Authentihash:\n    MD5: 3e1467f89f1d0e6ff341afd460b61997\n    SHA1: 7be5524927a472e0d6fbb80767fdf1ff1aa4dffc\n\
+        \    SHA256: a22d5d42dd0cdae016b536799ab9c384c23b42f5662f0b115b3b85ccb9e23242\n  Imphash: bb62d5bfbc06bfc0791bfc589467b350\n\
+        \  RichPEHeaderHash:\n    MD5: fddfc403cd9bf71fe6619635b05aac6e\n    SHA1: 350c2cbd34cb87b6e06a25c63b3e48ce30a71f15\n\
+        \    SHA256: b78be3efd3d5c31d858ac832f0ee71fdb7e04a4628f2c0d897e838fa3e8f3866\n  Sections:\n \
+        \   .text:\n      Entropy: 6.09734513358123\n      Virtual Size: '0xef2'\n    .rdata:\n      Entropy:\
+        \ 1.6982016121596026\n      Virtual Size: '0x4f0'\n    .data:\n      Entropy: 3.75\n      Virtual\
+        \ Size: '0x10'\n    .pdata:\n      Entropy: 3.34275631688717\n      Virtual Size: '0xa8'\n   \
+        \ INIT:\n      Entropy: 5.030768435516171\n      Virtual Size: '0x2ee'\n    .reloc:\n      Entropy:\
+        \ 3.680768321596844\n      Virtual Size: '0x24'\n  MagicHeader: 50 45 0 0\n  CreationTimestamp:\
+        \ '2025-03-03 04:11:32'\n  Signatures: {}\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:840d6932e4fc3ff34487f6df6a41025dc1c53d00f62e684c05a96ba7460c1078

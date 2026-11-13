@@ -1,0 +1,115 @@
+id: gtfobins/tcpdump/command/unprivileged
+type: binary
+platform: linux
+name: tcpdump
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'echo /path/to/command >/path/to/temp-file
+
+    chmod +x /path/to/temp-file
+
+    tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z /path/to/temp-file'
+  comment: This requires some traffic to be actually captured. Also note that the subprocess is immediately
+    sent to the background.
+- template: tcpdump -ln -i lo -w 'command-argument' -W 1 -G 1 -z /path/to/command
+  comment: This require some traffic to be actually captured. Also note that the `command-argument` string
+    is both passed to the command and written as file, hence some restrictions apply.
+references:
+- https://gtfobins.github.io/gtfobins/tcpdump/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        tcpdump:
+          functions:
+            command:
+            - code: 'echo /path/to/command >/path/to/temp-file
+
+                chmod +x /path/to/temp-file
+
+                tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z /path/to/temp-file'
+              comment: This requires some traffic to be actually captured. Also note that the subprocess
+                is immediately sent to the background.
+              contexts:
+                sudo:
+                  code: 'echo /path/to/command >/path/to/temp-file
+
+                    chmod +x /path/to/temp-file
+
+                    tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z /path/to/temp-file -Z root'
+                unprivileged: null
+              version: In recent distributions (e.g., Debian 10 and Ubuntu 18) AppArmor limits the `postrotate-command`
+                to a small subset of predefined commands thus preventing the execution of the following.
+            - code: tcpdump -ln -i lo -w 'command-argument' -W 1 -G 1 -z /path/to/command
+              comment: This require some traffic to be actually captured. Also note that the `command-argument`
+                string is both passed to the command and written as file, hence some restrictions apply.
+              contexts:
+                sudo: null
+                unprivileged: null
+            file-write:
+            - code: tcpdump -ln -i lo -w /path/to/output-file -c 1 -Z user
+              comment: 'This saves the packet dump (count is 1) from the loopback interface to a file.
+                To trigger the capture use something like:
+
+
+                ```
+
+                nc -u localhost 1 <<<DATA
+
+                ```
+
+
+                While `user` is the owner of the packet dump file, the invoking user must be able to capture
+                traffic on the device.'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/tcpdump/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:43231777e9d009ebbb2a788622b87ec1e5fc49b26e88f9ec7891e13c90ea7beb

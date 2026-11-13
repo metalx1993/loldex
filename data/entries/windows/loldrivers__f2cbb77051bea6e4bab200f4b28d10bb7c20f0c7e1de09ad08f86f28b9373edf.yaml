@@ -1,0 +1,321 @@
+id: loldrivers/a7c3e2d1-8f4b-4e6a-b5d9-3c1f0e7a9b82
+type: driver
+platform: windows
+name: CorMem.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: medium
+commands:
+- template: sc.exe create CorMem.sys binPath=C:\windows\temp\CorMem.sys type=kernel && sc.exe start CorMem.sys
+  comment: Teledyne Digital Imaging CorMem.sys (Sapera Memory Manager) exposes physical memory read/write,
+    contiguous memory allocation, and I/O port access to user-mode processes via CorMem.dll wrapper functions.
+    The driver provides 36 exported functions including CorMemGetPhysMemory, CorMemMapPhysMemory, CorMemAllocPhysMemory,
+    CorMemReadIo, and CorMemWriteIo. Actively abused for BYOVD with 0/71 VT detection. Execution parents
+    include Cobalt Strike/IcedID malware and game cheat kernel loaders.
+driver_detail:
+  samples:
+  - Filename: CorMem.sys
+    MD5: 78fb9882e498d964f42169ce511f07fc
+    SHA1: bceae6dc87c9c6c33555a4a9008be14c66fd1e20
+    SHA256: 40c855d20d497823716a08a443dc85846233226985ee653770bc3b245cf2ed0f
+    Signature:
+    - Teledyne Digital Imaging Inc.
+    - DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1
+    - DigiCert Trusted Root G4
+    Date: ''
+    Publisher: ''
+    Company: Teledyne Digital Imaging Inc.
+    Description: Sapera Memory Manager
+    Product: Sapera LT
+    ProductVersion: '9.00'
+    FileVersion: '9.00'
+    MachineType: AMD64
+    OriginalFilename: CorMem.sys
+    InternalName: CorMem.sys
+    Copyright: Copyright (c) Teledyne Digital Imaging Inc.1997-2024
+    Authentihash:
+      MD5: 559ede4607c9953fc5804a575c9a661b
+      SHA1: 505b7c56888009ab3b9531caeee6fa9a9b88916a
+      SHA256: 475df18e82d6e8ee09cbc9896f23f75b71aba43b7592d4962737cdc9230eb52d
+    Imports:
+    - ntoskrnl.exe
+    - HAL.dll
+    ImportedFunctions:
+    - RtlQueryRegistryValues
+    - MmGetSystemRoutineAddress
+    - RtlWriteRegistryValue
+    - RtlCopyUnicodeString
+    - RtlAppendUnicodeStringToString
+    - RtlGetVersion
+    - ExAllocatePoolWithTag
+    - ExFreePoolWithTag
+    - ObReferenceObjectByHandle
+    - ZwClose
+    - ZwOpenSection
+    - ZwMapViewOfSection
+    - KeInitializeEvent
+    - IoBuildDeviceIoControlRequest
+    - IofCallDriver
+    - IoGetDeviceObjectPointer
+    - ObReferenceObjectByPointer
+    - ObfDereferenceObject
+    - _vsnprintf
+    - PsGetProcessId
+    - KeInitializeMutex
+    - RtlInitUnicodeString
+    - KeWaitForSingleObject
+    - MmProbeAndLockPages
+    - MmUnlockPages
+    - MmMapLockedPagesSpecifyCache
+    - MmUnmapLockedPages
+    - MmAllocatePagesForMdl
+    - MmFreePagesFromMdl
+    - MmAllocateContiguousMemory
+    - MmFreeContiguousMemory
+    - IoAllocateMdl
+    - IofCompleteRequest
+    - IoCreateDevice
+    - IoCreateSymbolicLink
+    - IoDeleteDevice
+    - IoDeleteSymbolicLink
+    - IoFreeMdl
+    - IoGetCurrentProcess
+    - IoIs32bitProcess
+    - ZwUnmapViewOfSection
+    - MmGetPhysicalAddress
+    - MmIsAddressValid
+    - __C_specific_handler
+    - KeReleaseMutex
+    - HalTranslateBusAddress
+    ExportedFunctions: ''
+    Sections:
+      .text:
+        Entropy:
+          $yaml_type: float
+          value: '6.54'
+        Virtual Size: '0x9059'
+      .rdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.67'
+        Virtual Size: '0xa60'
+      .data:
+        Entropy:
+          $yaml_type: float
+          value: '0.52'
+        Virtual Size: '0x1b0'
+      .pdata:
+        Entropy:
+          $yaml_type: float
+          value: '4.36'
+        Virtual Size: '0x408'
+      NONPAGE:
+        Entropy:
+          $yaml_type: float
+          value: '0.02'
+        Virtual Size: '0x21c0'
+      .gfids:
+        Entropy:
+          $yaml_type: float
+          value: '0.81'
+        Virtual Size: '0x4'
+      INIT:
+        Entropy:
+          $yaml_type: float
+          value: '5.32'
+        Virtual Size: '0x632'
+      .rsrc:
+        Entropy:
+          $yaml_type: float
+          value: '3.48'
+        Virtual Size: '0x410'
+      .reloc:
+        Entropy:
+          $yaml_type: float
+          value: '2.95'
+        Virtual Size: '0x30'
+    Signatures:
+    - CertificatesInfo: ''
+      SignerInfo: ''
+      Certificates:
+      - Subject: C=US, O=DigiCert, Inc., CN=DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1
+        ValidFrom: '2021-04-29 00:00:00'
+        ValidTo: '2036-04-28 23:59:59'
+        Signature: ''
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.12
+        IsCertificateAuthority: true
+        SerialNumber: 08ad40b260d29c4c9f5ecda9bd93aed9
+        Version: 3
+        CertificateType: CA
+        IsCodeSigning: false
+        IsCA: true
+        TBS:
+          MD5: 5d8003a64dfa5a4d88365da1566038cb
+          SHA1: 79465b56bc7ad55a37bdf633943da8bfc84db228
+          SHA256: 84bdc82e2f2a7f7aaa782667dac556ffcb2b33240c1f9c0a00a3264526a98332
+          SHA384: 65b1d4076a89ae273f57e6eeedecb3eae129b4168f76fa7671914cdf461d542255c59d9b85b916ae0ca6fc0fcf7a8e64
+      - Subject: C=CA, ST=Quebec, L=Saint,Laurent, O=Teledyne Digital Imaging Inc., CN=Teledyne Digital
+          Imaging Inc.
+        ValidFrom: '2023-02-02 00:00:00'
+        ValidTo: '2026-03-06 23:59:59'
+        Signature: ''
+        SignatureAlgorithmOID: 1.2.840.113549.1.1.12
+        IsCertificateAuthority: false
+        SerialNumber: 0297014378a2ab05fe62be6d3e7c603c
+        Version: 3
+        CertificateType: Leaf (Code Signing)
+        IsCodeSigning: true
+        IsCA: false
+        TBS:
+          MD5: bf2a8e47bb6af5750895d048d721c56a
+          SHA1: e01a1d7b642c57506cfa33d18de17f7effa4c223
+          SHA256: 8b8e750fe315e9d2a90b47edd334ef8ac9061e755098d4910e112b688b1be065
+          SHA384: 7b3e6d39e0b6fdcd90d176a7fc107a8b2da2ca2f4f4bf7bfc1498a7e1bbe027ba49cd9e2542d39b8f7a7f36ecb985bf7
+      Signer:
+      - SerialNumber: 0297014378a2ab05fe62be6d3e7c603c
+        Issuer: C=US, O=DigiCert, Inc., CN=DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1
+        Version: 1
+    Imphash: d4c9146f538e07774dc7a0e570b47edc
+    LoadsDespiteHVCI: 'FALSE'
+  sha256: 40c855d20d497823716a08a443dc85846233226985ee653770bc3b245cf2ed0f
+  signer: Teledyne Digital Imaging Inc.
+  original_filename: CorMem.sys
+  command_metadata:
+  - Command: sc.exe create CorMem.sys binPath=C:\windows\temp\CorMem.sys type=kernel && sc.exe start CorMem.sys
+    Description: Teledyne Digital Imaging CorMem.sys (Sapera Memory Manager) exposes physical memory read/write,
+      contiguous memory allocation, and I/O port access to user-mode processes via CorMem.dll wrapper
+      functions. The driver provides 36 exported functions including CorMemGetPhysMemory, CorMemMapPhysMemory,
+      CorMemAllocPhysMemory, CorMemReadIo, and CorMemWriteIo. Actively abused for BYOVD with 0/71 VT detection.
+      Execution parents include Cobalt Strike/IcedID malware and game cheat kernel loaders.
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: vulnerable driver
+references:
+- https://github.com/KeServiceDescriptorTable/cormem.sys-vulnerable-driver
+- https://www.virustotal.com/gui/file/40c855d20d497823716a08a443dc85846233226985ee653770bc3b245cf2ed0f
+- https://x.com/skept1kal/status/2040200734570877354
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: a7c3e2d1-8f4b-4e6a-b5d9-3c1f0e7a9b82.yaml
+      document: "Id: a7c3e2d1-8f4b-4e6a-b5d9-3c1f0e7a9b82\nTags:\n- CorMem.sys\nVerified: 'TRUE'\nAuthor:\
+        \ Michael Haag\nCreated: '2026-04-06'\nMitreID: T1068\nCategory: vulnerable driver\nCommands:\n\
+        \  Command: sc.exe create CorMem.sys binPath=C:\\windows\\temp\\CorMem.sys type=kernel\n    &&\
+        \ sc.exe start CorMem.sys\n  Description: Teledyne Digital Imaging CorMem.sys (Sapera Memory Manager)\
+        \ exposes\n    physical memory read/write, contiguous memory allocation, and I/O port access to\n\
+        \    user-mode processes via CorMem.dll wrapper functions. The driver provides 36 exported\n \
+        \   functions including CorMemGetPhysMemory, CorMemMapPhysMemory, CorMemAllocPhysMemory,\n   \
+        \ CorMemReadIo, and CorMemWriteIo. Actively abused for BYOVD with 0/71 VT detection.\n    Execution\
+        \ parents include Cobalt Strike/IcedID malware and game cheat kernel loaders.\n  OperatingSystem:\
+        \ Windows 10\n  Privileges: kernel\n  Usecase: Elevate privileges\nResources:\n- https://github.com/KeServiceDescriptorTable/cormem.sys-vulnerable-driver\n\
+        - https://www.virustotal.com/gui/file/40c855d20d497823716a08a443dc85846233226985ee653770bc3b245cf2ed0f\n\
+        - https://x.com/skept1kal/status/2040200734570877354\nDetection: []\nAcknowledgement:\n  Person:\
+        \ skept1kal\n  Handle: '@skept1kal'\nKnownVulnerableSamples:\n- Filename: CorMem.sys\n  MD5: 78fb9882e498d964f42169ce511f07fc\n\
+        \  SHA1: bceae6dc87c9c6c33555a4a9008be14c66fd1e20\n  SHA256: 40c855d20d497823716a08a443dc85846233226985ee653770bc3b245cf2ed0f\n\
+        \  Signature:\n  - Teledyne Digital Imaging Inc.\n  - DigiCert Trusted G4 Code Signing RSA4096\
+        \ SHA384 2021 CA1\n  - DigiCert Trusted Root G4\n  Date: ''\n  Publisher: ''\n  Company: Teledyne\
+        \ Digital Imaging Inc.\n  Description: Sapera Memory Manager\n  Product: Sapera LT\n  ProductVersion:\
+        \ '9.00'\n  FileVersion: '9.00'\n  MachineType: AMD64\n  OriginalFilename: CorMem.sys\n  InternalName:\
+        \ CorMem.sys\n  Copyright: Copyright (c) Teledyne Digital Imaging Inc.1997-2024\n  Authentihash:\n\
+        \    MD5: 559ede4607c9953fc5804a575c9a661b\n    SHA1: 505b7c56888009ab3b9531caeee6fa9a9b88916a\n\
+        \    SHA256: 475df18e82d6e8ee09cbc9896f23f75b71aba43b7592d4962737cdc9230eb52d\n  Imports:\n  -\
+        \ ntoskrnl.exe\n  - HAL.dll\n  ImportedFunctions:\n  - RtlQueryRegistryValues\n  - MmGetSystemRoutineAddress\n\
+        \  - RtlWriteRegistryValue\n  - RtlCopyUnicodeString\n  - RtlAppendUnicodeStringToString\n  -\
+        \ RtlGetVersion\n  - ExAllocatePoolWithTag\n  - ExFreePoolWithTag\n  - ObReferenceObjectByHandle\n\
+        \  - ZwClose\n  - ZwOpenSection\n  - ZwMapViewOfSection\n  - KeInitializeEvent\n  - IoBuildDeviceIoControlRequest\n\
+        \  - IofCallDriver\n  - IoGetDeviceObjectPointer\n  - ObReferenceObjectByPointer\n  - ObfDereferenceObject\n\
+        \  - _vsnprintf\n  - PsGetProcessId\n  - KeInitializeMutex\n  - RtlInitUnicodeString\n  - KeWaitForSingleObject\n\
+        \  - MmProbeAndLockPages\n  - MmUnlockPages\n  - MmMapLockedPagesSpecifyCache\n  - MmUnmapLockedPages\n\
+        \  - MmAllocatePagesForMdl\n  - MmFreePagesFromMdl\n  - MmAllocateContiguousMemory\n  - MmFreeContiguousMemory\n\
+        \  - IoAllocateMdl\n  - IofCompleteRequest\n  - IoCreateDevice\n  - IoCreateSymbolicLink\n  -\
+        \ IoDeleteDevice\n  - IoDeleteSymbolicLink\n  - IoFreeMdl\n  - IoGetCurrentProcess\n  - IoIs32bitProcess\n\
+        \  - ZwUnmapViewOfSection\n  - MmGetPhysicalAddress\n  - MmIsAddressValid\n  - __C_specific_handler\n\
+        \  - KeReleaseMutex\n  - HalTranslateBusAddress\n  ExportedFunctions: ''\n  Sections:\n    .text:\n\
+        \      Entropy: 6.54\n      Virtual Size: '0x9059'\n    .rdata:\n      Entropy: 4.67\n      Virtual\
+        \ Size: '0xa60'\n    .data:\n      Entropy: 0.52\n      Virtual Size: '0x1b0'\n    .pdata:\n \
+        \     Entropy: 4.36\n      Virtual Size: '0x408'\n    NONPAGE:\n      Entropy: 0.02\n      Virtual\
+        \ Size: '0x21c0'\n    .gfids:\n      Entropy: 0.81\n      Virtual Size: '0x4'\n    INIT:\n   \
+        \   Entropy: 5.32\n      Virtual Size: '0x632'\n    .rsrc:\n      Entropy: 3.48\n      Virtual\
+        \ Size: '0x410'\n    .reloc:\n      Entropy: 2.95\n      Virtual Size: '0x30'\n  Signatures:\n\
+        \  - CertificatesInfo: ''\n    SignerInfo: ''\n    Certificates:\n    - Subject: C=US, O=DigiCert,\
+        \ Inc., CN=DigiCert Trusted G4 Code Signing RSA4096\n        SHA384 2021 CA1\n      ValidFrom:\
+        \ '2021-04-29 00:00:00'\n      ValidTo: '2036-04-28 23:59:59'\n      Signature: ''\n      SignatureAlgorithmOID:\
+        \ 1.2.840.113549.1.1.12\n      IsCertificateAuthority: true\n      SerialNumber: 08ad40b260d29c4c9f5ecda9bd93aed9\n\
+        \      Version: 3\n      CertificateType: CA\n      IsCodeSigning: false\n      IsCA: true\n \
+        \     TBS:\n        MD5: 5d8003a64dfa5a4d88365da1566038cb\n        SHA1: 79465b56bc7ad55a37bdf633943da8bfc84db228\n\
+        \        SHA256: 84bdc82e2f2a7f7aaa782667dac556ffcb2b33240c1f9c0a00a3264526a98332\n        SHA384:\
+        \ 65b1d4076a89ae273f57e6eeedecb3eae129b4168f76fa7671914cdf461d542255c59d9b85b916ae0ca6fc0fcf7a8e64\n\
+        \    - Subject: C=CA, ST=Quebec, L=Saint,Laurent, O=Teledyne Digital Imaging Inc.,\n        CN=Teledyne\
+        \ Digital Imaging Inc.\n      ValidFrom: '2023-02-02 00:00:00'\n      ValidTo: '2026-03-06 23:59:59'\n\
+        \      Signature: ''\n      SignatureAlgorithmOID: 1.2.840.113549.1.1.12\n      IsCertificateAuthority:\
+        \ false\n      SerialNumber: 0297014378a2ab05fe62be6d3e7c603c\n      Version: 3\n      CertificateType:\
+        \ Leaf (Code Signing)\n      IsCodeSigning: true\n      IsCA: false\n      TBS:\n        MD5:\
+        \ bf2a8e47bb6af5750895d048d721c56a\n        SHA1: e01a1d7b642c57506cfa33d18de17f7effa4c223\n \
+        \       SHA256: 8b8e750fe315e9d2a90b47edd334ef8ac9061e755098d4910e112b688b1be065\n        SHA384:\
+        \ 7b3e6d39e0b6fdcd90d176a7fc107a8b2da2ca2f4f4bf7bfc1498a7e1bbe027ba49cd9e2542d39b8f7a7f36ecb985bf7\n\
+        \    Signer:\n    - SerialNumber: 0297014378a2ab05fe62be6d3e7c603c\n      Issuer: C=US, O=DigiCert,\
+        \ Inc., CN=DigiCert Trusted G4 Code Signing RSA4096\n        SHA384 2021 CA1\n      Version: 1\n\
+        \  Imphash: d4c9146f538e07774dc7a0e570b47edc\n  LoadsDespiteHVCI: 'FALSE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:42af1f931075b70964bed38955271465cbdfb3a8ecc367c82cbf54359307e505

@@ -1,0 +1,79 @@
+id: lolad/TGlzdCBBbGwgRG9tYWlucyB3aXRoIFBvd2VyVmlldw/R2V0LU5ldERvbWFpbg/UG93ZXJTaGVsbCAoUG93ZXJWaWV3KQ
+type: technique
+platform: active-directory
+name: List All Domains with PowerView
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: Get-NetDomain
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell (powerview)
+source_data:
+  LOLAD:
+    raw:
+      name: List All Domains with PowerView
+      command: Get-NetDomain
+      type: PowerShell (PowerView)
+      reference: HackTricks - AD Methodology
+      physical_rows:
+      - input_ref: index.html#row=28
+        row_utf8: "<tr>\r\n\t\t\t<td>List All Domains with PowerView</td>\r\n\t\t\t<td><code>Get-NetDomain</code></td>\r\
+          \n\t\t\t<td>PowerShell (PowerView)</td>\r\n\t\t\t<td><a href=\"https://book.hacktricks.xyz/windows-hardening/active-directory-methodology\"\
+          \ target=\"_blank\">HackTricks - AD Methodology</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:4fbea5d40f5fdeda61c143dd979002b0e0b3428f7514c97d0b3afa8170f02160
+        cells:
+        - List All Domains with PowerView
+        - Get-NetDomain
+        - PowerShell (PowerView)
+        - HackTricks - AD Methodology
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:e986ef586e9d4c5163b76ffa3d8d2ec255779c04d01c689fa60095fec7eec96c

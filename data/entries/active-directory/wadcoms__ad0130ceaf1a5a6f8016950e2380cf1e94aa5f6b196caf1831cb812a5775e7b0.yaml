@@ -1,0 +1,78 @@
+id: wadcoms/Impacket-SAMRDump
+type: technique
+platform: active-directory
+name: Impacket SAMRDump
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 samrdump.py test.local/john:password123@10.10.10.1
+  comment: "Impacket's samrdump.py communicates with the Security Account Manager Remote (SAMR) interface\
+    \ to list system user accounts, available resource shares, and other sensitive information.\n\nCommand\
+    \ Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\tUsername: john\n\n\tPassword:\
+    \ password123\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/samrdump.py
+- https://www.hackingarticles.in/impacket-guide-smb-msrpc/
+tags:
+- active-directory
+- wadcoms
+- rpc
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-SAMRDump.md
+      document: "---\ndescription: |\n  Impacket's samrdump.py communicates with the Security Account\
+        \ Manager Remote (SAMR) interface to list system user accounts, available resource shares, and\
+        \ other sensitive information.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tDomain:\
+        \ test.local\n\n  \tUsername: john\n\n  \tPassword: password123\n\ncommand: |\n  python3 samrdump.py\
+        \ test.local/john:password123@10.10.10.1\nitems:\n  - Password\n  - Username\nservices:\n  - RPC\n\
+        OS:\n  - Linux\n  - Windows\nattack_types:\n  - Enumeration\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/samrdump.py\n\
+        \  - https://www.hackingarticles.in/impacket-guide-smb-msrpc/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:9ea5904fd387f3eeb79200d62da1ddead3637d3b755699faf5ad8ac7bd57d447

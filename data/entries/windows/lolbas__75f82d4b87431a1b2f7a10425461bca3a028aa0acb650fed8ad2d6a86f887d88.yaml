@@ -1,0 +1,102 @@
+id: lolbas/T1NCaW5hcmllcy9UYXIueW1s/QURT/0
+type: binary
+platform: windows
+name: Tar.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: tar.exe extracting files from a remote host within the environment
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_tar_compression.yml
+  - https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_tar_extraction.yml
+commands:
+- template: tar -cf {PATH}:ads {PATH_ABSOLUTE:folder}
+  comment: Compress one or more files to an alternate data stream (ADS).
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Tar/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Tar.exe
+      category: ADS
+      privileges: User
+      mitre_id: T1564.004
+      source_file: OSBinaries/Tar.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Tar.exe\nDescription: Used by Windows to extract and create archives.\n\
+        Author: Brian Lucero\nCreated: 2023-01-30\nCommands:\n  - Command: tar -cf {PATH}:ads {PATH_ABSOLUTE:folder}\n\
+        \    Description: Compress one or more files to an alternate data stream (ADS).\n    Usecase:\
+        \ Can be used to evade defensive countermeasures, or to hide as part of a persistence mechanism\n\
+        \    Category: ADS\n    Privileges: User\n    MitreID: T1564.004\n    OperatingSystem: Windows\
+        \ 10, Windows 11\n    Tags:\n      - Type: Compression\n  - Command: tar -xf {PATH}:ads\n    Description:\
+        \ Decompress a compressed file from an alternate data stream (ADS).\n    Usecase: Can be used\
+        \ to evade defensive countermeasures, or to hide as part of a persistence mechanism\n    Category:\
+        \ ADS\n    Privileges: User\n    MitreID: T1564.004\n    OperatingSystem: Windows 10, Windows\
+        \ 11\n    Tags:\n      - Type: Compression\n  - Command: tar -xf {PATH_SMB:.tar}\n    Description:\
+        \ Extracts archive.tar from the remote (internal) host to the current host.\n    Usecase: Copy\
+        \ files\n    Category: Copy\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows\
+        \ 10, Windows 11\n    Tags:\n      - Type: Compression\nFull_Path:\n  - Path: C:\\Windows\\System32\\\
+        tar.exe\n  - Path: C:\\Windows\\SysWOW64\\tar.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_tar_compression.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/e1a713d264ac072bb76b5c4e5f41315a015d3f41/rules/windows/process_creation/proc_creation_win_tar_extraction.yml\n\
+        \  - IOC: tar.exe extracting files from a remote host within the environment\n  - IOC: Abnormal\
+        \ processes spawning tar.exe\n  - IOC: tar.exe interacting with alternate data streams (ADS)\n\
+        Resources:\n  - Link: https://twitter.com/Cyber_Sorcery/status/1619819249886969856\nAcknowledgement:\n\
+        \  - Person: Brian Lucero\n    Handle: '@Cyber_Sorcery'\n  - Person: Avester Fahimipour\n"
+      document_sha256: sha256:fbeabdfce1f396a36726a48dee94edc7453434269b683a56f86420ede7472678
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Tar/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1564.004
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:2aae0009c32d33c59fb040b64601b9668811748bba233b73a1a123ad955f98b2

@@ -1,0 +1,76 @@
+id: wadcoms/Impacket-LookUpSID
+type: technique
+platform: active-directory
+name: Impacket LookUpSID
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 lookupsid.py test.local/john:password123@10.10.10.1
+  comment: "Impacket's lookupsid.py performs bruteforcing of Windows SID's to identify users/groups on\
+    \ the remote target.\n\nCommand Reference:\n\n\tTarget IP: 10.10.10.1\n\n\tDomain: test.local\n\n\t\
+    Username: john\n\n\tPassword: password123\n"
+references:
+- https://github.com/SecureAuthCorp/impacket/blob/master/examples/lookupsid.py
+- https://www.puckiestyle.nl/impacket/
+tags:
+- active-directory
+- wadcoms
+- rpc
+source_data:
+  WADComs:
+    raw:
+      file: Impacket-LookUpSID.md
+      document: "---\ndescription: |\n  Impacket's lookupsid.py performs bruteforcing of Windows SID's\
+        \ to identify users/groups on the remote target.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\
+        \n  \tDomain: test.local\n\n  \tUsername: john\n\n  \tPassword: password123\n\ncommand: |\n  python3\
+        \ lookupsid.py test.local/john:password123@10.10.10.1\nitems:\n  - Password\n  - Username\nservices:\n\
+        \  - RPC\nOS:\n  - Linux\n  - Windows\nattack_types:\n  - Enumeration\nreferences:\n  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/lookupsid.py\n\
+        \  - https://www.puckiestyle.nl/impacket/\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  phases:
+  - value: discovery
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Enumeration'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:3f8b1513ec2f4f3e0a6f170ec4e26ffc4763e9c7f9bdacb7271bde0496cb932a

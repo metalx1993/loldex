@@ -1,0 +1,90 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1Zzaml0ZGVidWdnZXIueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: vsjitdebugger.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1127
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_susp_use_of_vsjitdebugger_bin.yml
+commands:
+- template: Vsjitdebugger.exe {PATH:.exe}
+  comment: Executes specified executable as a subprocess of Vsjitdebugger.exe.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Vsjitdebugger/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: vsjitdebugger.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1127
+      source_file: OtherMSBinaries/Vsjitdebugger.yml
+      command_source_index: 0
+      document_utf8: "---\nName: vsjitdebugger.exe\nDescription: Just-In-Time (JIT) debugger included\
+        \ with Visual Studio\nAuthor: Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: Vsjitdebugger.exe\
+        \ {PATH:.exe}\n    Description: Executes specified executable as a subprocess of Vsjitdebugger.exe.\n\
+        \    Usecase: Execution of local PE file as a subprocess of Vsjitdebugger.exe.\n    Category:\
+        \ Execute\n    Privileges: User\n    MitreID: T1127\n    OperatingSystem: Windows\n    Tags:\n\
+        \      - Execute: EXE\nFull_Path:\n  - Path: c:\\windows\\system32\\vsjitdebugger.exe\nDetection:\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_susp_use_of_vsjitdebugger_bin.yml\n\
+        Resources:\n  - Link: https://twitter.com/pabraeken/status/990758590020452353\nAcknowledgement:\n\
+        \  - Person: Pierre-Alexandre Braeken\n    Handle: '@pabraeken'\n"
+      document_sha256: sha256:bd961c295dbb255ca6fe4bdea0f788c539bdbfb0ee255fc8c3e48d285b10f42e
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Vsjitdebugger/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1127
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:e5987973101e9fcb312a31cb305558de05a337d1ae931647328537f30c506b0a

@@ -1,0 +1,113 @@
+id: loldrivers/833fc08f-217d-4d3f-8c8e-782c61120407
+type: driver
+platform: windows
+name: kt2.sys
+phases:
+- privilege-escalation
+capabilities:
+- privilege-escalation
+privilege_required: system
+sources:
+- project: LOLDrivers
+  upstream_url: https://www.loldrivers.io
+  license: MIT
+  upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1068
+opsec:
+  noise: high
+commands:
+- template: sc.exe create kt2.sys binPath=C:\windows\temp\kt2.sys type=kernel && sc.exe start kt2.sys
+  comment: BlackCat Ransomware Deploys New Signed Kernel Driver. BlackCat ransomware incident that occurred
+    in February 2023.
+driver_detail:
+  samples:
+  - Company: ''
+    Date: ''
+    Description: ''
+    FileVersion: ''
+    Filename: kt2.sys
+    MachineType: ''
+    OriginalFilename: ''
+    Product: ''
+    ProductVersion: ''
+    Publisher: ''
+    SHA1: cb25a5125fb353496b59b910263209f273f3552d
+    Signature: ''
+    LoadsDespiteHVCI: 'TRUE'
+  command_metadata:
+  - Command: sc.exe create kt2.sys binPath=C:\windows\temp\kt2.sys type=kernel && sc.exe start kt2.sys
+    Description: BlackCat Ransomware Deploys New Signed Kernel Driver. BlackCat ransomware incident that
+      occurred in February 2023.
+    OperatingSystem: Windows 10
+    Privileges: kernel
+    Usecase: Elevate privileges
+  category: malicious
+references:
+- https://www.trendmicro.com/en_us/research/23/e/blackcat-ransomware-deploys-new-signed-kernel-driver.html
+tags:
+- windows
+- driver
+- byovd
+- loldrivers
+source_data:
+  LOLDrivers:
+    raw:
+      file: 833fc08f-217d-4d3f-8c8e-782c61120407.yaml
+      document: "Id: 833fc08f-217d-4d3f-8c8e-782c61120407\nTags:\n- kt2.sys\nVerified: 'FALSE'\nAuthor:\
+        \ Guus Verbeek\nCreated: '2023-06-05'\nMitreID: T1068\nCategory: malicious\nCommands:\n    Command:\
+        \ sc.exe create kt2.sys binPath=C:\\windows\\temp\\kt2.sys type=kernel &&\n        sc.exe start\
+        \ kt2.sys\n    Description: BlackCat Ransomware Deploys New Signed Kernel Driver. BlackCat ransomware\n\
+        \        incident that occurred in February 2023.\n    OperatingSystem: Windows 10\n    Privileges:\
+        \ kernel\n    Usecase: Elevate privileges\nResources:\n- https://www.trendmicro.com/en_us/research/23/e/blackcat-ransomware-deploys-new-signed-kernel-driver.html\n\
+        Detection: []\nAcknowledgement:\n    Handle: ''\n    Person: ''\nKnownVulnerableSamples:\n-  \
+        \ Company: ''\n    Date: ''\n    Description: ''\n    FileVersion: ''\n    Filename: kt2.sys\n\
+        \    MachineType: ''\n    OriginalFilename: ''\n    Product: ''\n    ProductVersion: ''\n    Publisher:\
+        \ ''\n    SHA1: cb25a5125fb353496b59b910263209f273f3552d\n    Signature: ''\n    LoadsDespiteHVCI:\
+        \ 'TRUE'\n"
+    upstream_url: https://www.loldrivers.io
+    upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: keyword/default classification from complete Commands[0] usecase/description
+    confidence:
+      level: low
+  attack_techniques:
+  - value: T1068
+    provenance:
+      type: upstream
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+    confidence:
+      level: high
+  privilege_required:
+    value: system
+    provenance:
+      type: heuristic
+      source: LOLDrivers
+      adapter: loldrivers@39c70ca64ae9b66650e2c50e011eec6f7354e9cf
+      note: 'complete command set: kernel/system privilege in any record -> system; otherwise admin'
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLDrivers: sha256:5b285fe040d739f7fd7661ab530a78f11bc5bfc02841794605a00d2e17507bfc

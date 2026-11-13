@@ -1,0 +1,93 @@
+id: lolbas/T1NCaW5hcmllcy9SZWdpbmkueW1s/QURT/0
+type: binary
+platform: windows
+name: Regini.exe
+phases:
+- defense-evasion
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1564.004
+opsec:
+  noise: medium
+  triggers: regini.exe reading from ADS
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_regini_ads.yml
+  - https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_regini_execution.yml
+commands:
+- template: regini.exe {PATH}:hidden.ini
+  comment: Write registry keys from data inside the Alternate data stream.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Regini/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Regini.exe
+      category: ADS
+      privileges: User
+      mitre_id: T1564.004
+      source_file: OSBinaries/Regini.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Regini.exe\nDescription: Used to manipulate the registry\nAuthor: Oddvar\
+        \ Moe\nCreated: 2020-07-03\nCommands:\n  - Command: regini.exe {PATH}:hidden.ini\n    Description:\
+        \ Write registry keys from data inside the Alternate data stream.\n    Usecase: Write to registry\n\
+        \    Category: ADS\n    Privileges: User\n    MitreID: T1564.004\n    OperatingSystem: Windows\
+        \ vista, Windows 7, Windows 8, Windows 8.1, Windows 10, Windows 11\nFull_Path:\n  - Path: C:\\\
+        Windows\\System32\\regini.exe\n  - Path: C:\\Windows\\SysWOW64\\regini.exe\nDetection:\n  - Sigma:\
+        \ https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_regini_ads.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/c04bef2fbbe8beff6c7620d5d7ea6872dbe7acba/rules/windows/process_creation/proc_creation_win_regini_execution.yml\n\
+        \  - IOC: regini.exe reading from ADS\nResources:\n  - Link: https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f\n\
+        Acknowledgement:\n  - Person: Eli Salem\n    Handle: '@elisalem9'\n"
+      document_sha256: sha256:d60d9ad933b0951d9ac5bad6b309edca1c4b26eb4adde4c8e775dfd5d4918946
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Regini/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1564.004
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:27fd0a0e7b45c8c483841fc6a82a7a7560a1b3c90650d89d959d9aaac838bf46

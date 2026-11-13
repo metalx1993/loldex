@@ -1,0 +1,73 @@
+id: gtfobins/alpine/file-read/unprivileged
+type: binary
+platform: linux
+name: alpine
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: alpine -F /path/to/input-file
+  comment: The file is displayed in the terminal interface. Other options might be available, for example,
+    by pressing `S` is possible to save the file content elsewhere.
+references:
+- https://gtfobins.github.io/gtfobins/alpine/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        alpine:
+          functions:
+            file-read:
+            - code: alpine -F /path/to/input-file
+              comment: The file is displayed in the terminal interface. Other options might be available,
+                for example, by pressing `S` is possible to save the file content elsewhere.
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/alpine/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:dffa484921f16d3cdb15474117bc5f1f1c84ed881e91be72e256e1918d6fa3fa

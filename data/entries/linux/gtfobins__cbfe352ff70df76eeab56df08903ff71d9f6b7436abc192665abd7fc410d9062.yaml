@@ -1,0 +1,112 @@
+id: gtfobins/vim/file-read/unprivileged
+type: binary
+platform: linux
+name: vim
+phases:
+- collection
+capabilities:
+- file-read
+privilege_required: user
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+aliases:
+- nvim
+- rview
+- rvim
+- view
+- vimdiff
+commands:
+- template: vim -c ':redir! >/path/to/output-file | echo "DATA" | redir END | q'
+references:
+- https://gtfobins.github.io/gtfobins/vim/
+- https://gtfobins.github.io/gtfobins/nvim/
+- https://gtfobins.github.io/gtfobins/rview/
+- https://gtfobins.github.io/gtfobins/rvim/
+- https://gtfobins.github.io/gtfobins/view/
+- https://gtfobins.github.io/gtfobins/vimdiff/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        nvim:
+          alias: vim
+        rview:
+          alias: view
+        rvim:
+          alias: vim
+        view:
+          alias: vim
+        vim:
+          functions:
+            file-read:
+            - binary: false
+              code: vim -c ':redir! >/path/to/output-file | echo "DATA" | redir END | q'
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+            inherit:
+            - code: vim -c ':py ...'
+              comment: This allows to run Python code (`...`).
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: python
+            - code: vim -c ':lua ...'
+              comment: This allows to run Lua code (`...`).
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: lua
+            - code: vim
+              contexts:
+                sudo: null
+                suid: null
+                unprivileged: null
+              from: vi
+        vimdiff:
+          alias: vim
+    upstream_url: https://gtfobins.github.io/gtfobins/vim/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-read
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: collection
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:7ed9c76708ca7f2e48f72e00bfb0f7a818f7e52009e7bddd7d93d46e270ef06b

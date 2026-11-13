@@ -1,0 +1,111 @@
+id: lolbas/T1NCaW5hcmllcy9Jc2NzaWNwbC55bWw/VUFDIEJ5cGFzcw/1
+type: binary
+platform: windows
+name: iscsicpl.exe
+phases:
+- privilege-escalation
+- defense-evasion
+capabilities:
+- privilege-escalation
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1548.002
+opsec:
+  noise: medium
+  triggers: C:\Users\<username>\AppData\Local\Microsoft\WindowsApps\ISCSIEXE.dll
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/image_load/image_load_uac_bypass_iscsicpl.yml
+commands:
+- template: iscsicpl.exe
+  comment: Both `c:\windows\system32\iscsicpl.exe` and `c:\windows\system64\iscsicpl.exe` have UAC bypass
+    through launching iscicpl.exe, then navigating into the Configuration tab, clicking Report, then launching
+    your custom command.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Iscsicpl/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: iscsicpl.exe
+      category: UAC Bypass
+      privileges: User
+      mitre_id: T1548.002
+      source_file: OSBinaries/Iscsicpl.yml
+      command_source_index: 1
+      document_utf8: "---\nName: iscsicpl.exe\nDescription: Microsoft iSCSI Initiator Control Panel tool\n\
+        Author: Ekitji\nCreated: 2025-08-17\nCommands:\n  - Command: c:\\windows\\syswow64\\iscsicpl.exe\
+        \  # SysWOW64 binary\n    Description: c:\\windows\\syswow64\\iscsicpl.exe has a DLL injection\
+        \ through `C:\\Users\\<username>\\AppData\\Local\\Microsoft\\WindowsApps\\ISCSIEXE.dll`, resulting\
+        \ in UAC bypass.\n    Usecase: Execute a custom DLL via a trusted high-integrity process without\
+        \ a UAC prompt.\n    Category: UAC Bypass\n    Privileges: User\n    MitreID: T1548.002\n    OperatingSystem:\
+        \ Windows 10, Windows 11\n    Tags:\n      - Execute: DLL\n  - Command: iscsicpl.exe  # SysWOW64/System32\
+        \ binary\n    Description: Both `c:\\windows\\system32\\iscsicpl.exe` and `c:\\windows\\system64\\\
+        iscsicpl.exe` have UAC bypass through launching iscicpl.exe, then navigating into the Configuration\
+        \ tab, clicking Report, then launching your custom command.\n    Usecase: Execute a binary or\
+        \ script as a high-integrity process without a UAC prompt.\n    Category: UAC Bypass\n    Privileges:\
+        \ User\n    MitreID: T1548.002\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n     \
+        \ - Execute: CMD\n      - Application: GUI\nFull_Path:\n  - Path: c:\\windows\\system32\\iscsicpl.exe\
+        \  # UAC Bypass by breaking out from application\n  - Path: c:\\windows\\syswow64\\iscsicpl.exe\
+        \  # UAC Bypass by DLL injection and breakout from application\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/master/rules/windows/image_load/image_load_uac_bypass_iscsicpl.yml\n\
+        \  - IOC: C:\\Users\\<username>\\AppData\\Local\\Microsoft\\WindowsApps\\ISCSIEXE.dll\n  - IOC:\
+        \ Suspicious child process to iscsicpl.exe like cmd, powershell etc.\nResources:\n  - Link: https://learn.microsoft.com/en-us/windows-server/storage/iscsi/iscsi-initiator-portal\n\
+        \  - Link: https://github.com/hackerhouse-opensource/iscsicpl_bypassUAC\nAcknowledgement:\n  -\
+        \ Person: hacker.house\n  - Person: Ekitji\n    Handle: '@eki_erk'\n"
+      document_sha256: sha256:7598b78d4d6efdf8ea97c9ded08ba6db8a093a59544b87d5415204411537eaac
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Iscsicpl/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1548.002
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:78b7860c737eec8d7090b1a817b00cb21120101992196186b0b31eb94639409c

