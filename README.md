@@ -96,8 +96,9 @@ python3 -m scripts.build_all --state work/freshness/state.json
 ```
 
 Without a state, the UI says NOT_OBSERVED. Dates and historical corpus counts are
-never evidence of a healthy observation. Legacy `scripts.sync` remains available
-for explicitly requested catalogue regeneration; it is not the verified observer.
+never evidence of a healthy observation. Legacy `scripts.sync` remains a historical compatibility path. The manual
+publication workflow uses the explicit verified D2 snapshot profile; it is separate
+from the frozen observer. See [D2 publication](docs/phase5-d2-publication.md).
 
 ### Checks and project status
 
@@ -112,7 +113,9 @@ See [current roadmap](docs/ROADMAP.md), [delivery evidence](docs/DELIVERY.md),
 [CORE + D1](docs/phase5-d1.md), [graph contract](docs/phase3-design.md),
 [technique registry](docs/phase4-design.md), and [UI contract](docs/phase6-design.md).
 `site/build-manifest.json` pins the generated data files. Static builds validate
-all derived views before writing; this is not the separate A2 atomic deployment.
+all derived views before writing. [A2 deployment](docs/a2-design.md) installs
+immutable committed releases and switches the private active token atomically.
+The live root migration is implemented; scheduling remains an explicit gate.
 
 ## API
 

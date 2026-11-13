@@ -112,20 +112,30 @@ class LOLADAdapter(Adapter):
         return out
 
     def normalize(self, raw) -> Iterable[Entry]:
+        publication = raw.get("profile") == "publication-v2"
         src = self.source_stub(upstream_version=raw["rev"])
         seen_ids = set()
-        for cells in self._rows(raw["html"]):
+        if publication:
+            from phase5.publication_identities import lolad_logical_rows, lolad_entry_id
+            logical, _audit = lolad_logical_rows(raw["html"])
+            records = [(row["cells"], row["occurrences"]) for row in logical]
+        else:
+            records = [(cells, None) for cells in self._rows(raw["html"])]
+        for cells, occurrences in records:
             name, command, ptype = cells[0], cells[1], (cells[2] if len(cells) > 2 else "")
-            if name.lower().startswith("technique") or not command:
+            if (not publication and name.lower().startswith("technique")) or not command:
                 continue  # header row or empty
             cap, phases, priv = classify(name, command)
-            base = f"lolad/{slug(name)}"
-            eid = base
-            n = 1
-            while eid in seen_ids:
-                n += 1
-                eid = f"{base}-{n}"
-            seen_ids.add(eid)
+            if publication:
+                eid = lolad_entry_id(cells)
+            else:
+                base = f"lolad/{slug(name)}"
+                eid = base
+                n = 1
+                while eid in seen_ids:
+                    n += 1
+                    eid = f"{base}-{n}"
+                seen_ids.add(eid)
 
             tags = ["active-directory", "lolad"]
             if ptype:
@@ -143,8 +153,13 @@ class LOLADAdapter(Adapter):
                 privilege=enrich.enriched(priv, ptype="heuristic", source="LOLAD",
                                           adapter=tag, confidence="low", note=note),
             )
+            project_raw = {"name": name, "command": command, "type": ptype}
+            if publication:
+                project_raw.update({"reference": cells[3] if len(cells) > 3 else "",
+                                    "physical_rows": occurrences,
+                                    "physical_occurrence_count": len(occurrences)})
             source_data = {"LOLAD": enrich.source_block(
-                project_raw={"name": name, "command": command, "type": ptype},
+                project_raw=project_raw,
                 upstream_url=self.upstream_url, upstream_version=raw["rev"],
                 last_synced=src["last_synced"])}
             yield projection.make_entry(

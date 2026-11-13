@@ -1,0 +1,16 @@
+# A2 stable routing bootstrap for SiteGround / Apache. Separate first migration.
+Options -Indexes
+DirectoryIndex loldex-router.php
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Keep ACME renewal under the host's existing configuration.
+  RewriteRule ^\.well-known/acme-challenge/ - [L]
+  RewriteRule ^releases/ - [L]
+  RewriteRule ^loldex-router\.php$ - [L]
+  RewriteRule ^ loldex-router.php [L]
+</IfModule>
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

@@ -105,6 +105,10 @@ class GTFOBinsAdapter(Adapter):
         return data if isinstance(data, dict) else None
 
     def normalize(self, raw) -> Iterable[Entry]:
+        if raw.get("profile") == "publication-v2":
+            from phase5.adapters.gtfobins import public_entries
+            yield from public_entries(raw, self)
+            return
         src = self.source_stub(upstream_version=raw["rev"])
         rev = raw["rev"]
         adapter_tag = f"gtfobins@{rev}"

@@ -1,6 +1,6 @@
 name: sync
 
-# Manual upstream sync: validate, rebuild all views, test, and commit to main.
+# Manual verified D2 upstream snapshot: validate, rebuild, test, commit to main.
 #
 # Deployment is NOT part of this workflow. Publishing site/ to the live host
 # needs an atomic mechanism (versioned staging plus a server-side switch); the
@@ -50,8 +50,30 @@ jobs:
           set -euo pipefail
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Sync adapters
-        run: python -m scripts.sync
+      - name: Acquire five public upstream repositories
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/loldex-upstreams"
+          git -c credential.helper= clone --depth 1 --no-checkout https://github.com/GTFOBins/GTFOBins.github.io.git "$RUNNER_TEMP/loldex-upstreams/GTFOBins"
+          git -c credential.helper= clone --depth 1 --no-checkout https://github.com/LOLBAS-Project/LOLBAS.git "$RUNNER_TEMP/loldex-upstreams/LOLBAS"
+          git -c credential.helper= clone --depth 1 --no-checkout https://github.com/magicsword-io/LOLDrivers.git "$RUNNER_TEMP/loldex-upstreams/LOLDrivers"
+          git -c credential.helper= clone --depth 1 --no-checkout https://github.com/lolad-project/lolad-project.github.io.git "$RUNNER_TEMP/loldex-upstreams/LOLAD"
+          git -c credential.helper= clone --depth 1 --no-checkout https://github.com/WADComs/WADComs.github.io.git "$RUNNER_TEMP/loldex-upstreams/WADComs"
+
+      - name: Prepare complete verified D2 snapshot and all derived views
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: |
+          set -euo pipefail
+          python -m scripts.verified_refresh --repo . --expected-base "$BASE_SHA" \
+            --output "$RUNNER_TEMP/loldex-candidate" \
+            --source "GTFOBins=$RUNNER_TEMP/loldex-upstreams/GTFOBins" \
+            --source "LOLBAS=$RUNNER_TEMP/loldex-upstreams/LOLBAS" \
+            --source "LOLDrivers=$RUNNER_TEMP/loldex-upstreams/LOLDrivers" \
+            --source "LOLAD=$RUNNER_TEMP/loldex-upstreams/LOLAD" \
+            --source "WADComs=$RUNNER_TEMP/loldex-upstreams/WADComs"
 
       - name: Validate entries
         run: python -m scripts.validate

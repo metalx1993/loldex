@@ -134,3 +134,18 @@
   No automatic deletion, terminal STALE, publication authority, scheduler,
   queue, or journal/recovery subsystem.
 - Next: CP5.1 implementation — golden vectors become executable tests.
+
+## 2026-11-13 — A2 and explicit D2 publication profile
+
+- Add deterministic committed-object release packages, complete-file hash
+  verification, retained versioned URLs, exact-state activation CAS and rollback.
+- Migrate the SiteGround root through a reviewed private legacy backup; verify
+  HTTPS routing after explicitly authorized dynamic-cache purge.
+- Add opt-in D2 publication adapters for GTFO aliases/inherit, qualified LOLBAS
+  identities, evidence-preserving exact LOLAD occurrence coalescence, full driver
+  sample/command representation and complete WADComs text/references/vocabulary.
+- Preserve frozen CORE/D1 behavior. Independent source oracles bind public IDs,
+  material, raw evidence and claim provenance/confidence before staging.
+- Replace the manual legacy sync path with a verified five-source snapshot,
+  explicit historical-retention ledger and unchanged A1 Git-base protection.
+- Add a credential-free trusted host pull publisher; no scheduler enabled.

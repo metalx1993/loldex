@@ -157,3 +157,109 @@ class LOLDriversAdapter(Adapter):
                 references=refs[:3] or [self.upstream_url],
                 tags=["windows", "driver", "byovd", "loldrivers"],
             )
+
+    def normalize_complete(self, raw) -> Iterable[Entry]:
+        """Explicit D2 profile: no retained subset or first-record truncation."""
+        from .complete_data import read_document, revision
+        rev = revision(raw.get("rev"))
+        on = raw.get("on", self.source_stub(rev)["last_synced"])
+        for path in raw["files"]:
+            document, raw_text = read_document(path)
+            yield complete_entry(document, file_name=path.name, revision=rev,
+                                 on=on, raw_text=raw_text)
+
+    @staticmethod
+    def publication_preflight(raw):
+        return publication_preflight(raw)
+
+
+def complete_entry(document, *, file_name, revision, on, raw_text):
+    """D2-DW complete driver representation. Pure for explicit source/date inputs.
+
+    All command records and sample metadata participate in material projection.
+    Source-order sample/command-detail arrays preserve multiplicity. The raw
+    source text remains authoritative evidence, including its YAML scalar types.
+    """
+    from .complete_data import (array, json_detail, projection_date, raw_evidence, record,
+                                revision as valid_revision, string_items, text,
+                                SourceDataError)
+    from phase5.canonical import nfc
+    document = record(document)
+    revision = valid_revision(revision)
+    on = projection_date(on)
+    identity = document.get("Id")
+    if not isinstance(identity, str) or not identity:
+        raise SourceDataError("MISSING_REQUIRED_FIELD", "driver Id is required")
+    identity = text(identity, required=True)
+    tags = string_items(document.get("Tags"))
+    raw_commands = document.get("Commands")
+    if raw_commands is None:
+        command_records = []
+    elif isinstance(raw_commands, dict):
+        command_records = [raw_commands] if raw_commands else []
+    elif isinstance(raw_commands, list):
+        command_records = [record(command) for command in raw_commands]
+    else:
+        raise SourceDataError("MALFORMED_RECORD", "driver Commands must be mapping or list")
+    sample_records = [record(sample) for sample in array(document.get("KnownVulnerableSamples"))]
+    resources = string_items(document.get("Resources"))
+    category = text(document.get("Category"))
+    capabilities, phases, commands = [], [], []
+    privileges = []
+    tag = "loldrivers@" + revision
+    for index, command in enumerate(command_records or [{}]):
+        usecase, description, template, privilege = (
+            text(command.get(field)) for field in ("Usecase", "Description", "Command", "Privileges"))
+        caps, command_phases = classify(usecase, description)
+        note = f"keyword/default classification from complete Commands[{index}] usecase/description"
+        capabilities.extend(enrich.claims(caps, ptype="heuristic", source="LOLDrivers",
+                                         adapter=tag, confidence="low", note=note))
+        phases.extend(enrich.claims(command_phases, ptype="heuristic", source="LOLDrivers",
+                                   adapter=tag, confidence="low", note=note))
+        privileges.append(privilege)
+        if template.strip():
+            block = {"template": template.strip()}
+            if description:
+                block["comment"] = description
+            commands.append(block)
+    privilege = "system" if any("kernel" in value.lower() or "system" in value.lower()
+                                for value in privileges) else "admin"
+    attack = text(document.get("MitreID")).strip()
+    enrichment = enrich.assemble(
+        capabilities=capabilities, phases=phases,
+        privilege=enrich.enriched(privilege, ptype="heuristic", source="LOLDrivers",
+                                  adapter=tag, confidence="low",
+                                  note="complete command set: kernel/system privilege in any record -> system; otherwise admin"),
+        attack_techniques=enrich.claims([attack] if attack else [], ptype="upstream", source="LOLDrivers",
+                                        adapter=tag, confidence="high"))
+    detail = {}
+    if sample_records:
+        detail["samples"] = [json_detail(sample) for sample in sample_records]
+        for output, source_key in (("sha256", "SHA256"), ("signer", "Company"),
+                                   ("original_filename", "OriginalFilename")):
+            value = text(sample_records[0].get(source_key))
+            if value:
+                detail[output] = value
+    if command_records:
+        detail["command_metadata"] = [json_detail(command) for command in command_records]
+    if category:
+        detail["category"] = category
+    src = {"project": "LOLDrivers", "upstream_url": LOLDriversAdapter.upstream_url,
+           "license": LOLDriversAdapter.license, "upstream_version": revision, "last_synced": on}
+    source_data = {"LOLDrivers": enrich.source_block(
+        project_raw=raw_evidence(document, raw_text, file_name), upstream_url=src["upstream_url"],
+        upstream_version=revision, last_synced=on)}
+    return projection.make_entry(
+        source_data=source_data, enrichment=enrichment, on=on,
+        id="loldrivers/" + nfc(identity), type="driver", platform="windows", name=tags[0] if tags else "",
+        aliases=tags[1:], driver_detail=detail,
+        opsec={"noise": "high" if category == "malicious" else "medium"}, commands=commands,
+        sources=[src], references=resources or [src["upstream_url"]],
+        tags=["windows", "driver", "byovd", "loldrivers"])
+
+
+def publication_preflight(raw):
+    from .complete_data import preflight
+    def derive(document, **kwargs):
+        return complete_entry(document, **kwargs), []
+    return preflight(raw, derive)

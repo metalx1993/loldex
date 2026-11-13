@@ -18,6 +18,7 @@ verify LICENSE in the upstream repo before publishing derived data.
 
 from __future__ import annotations
 import pathlib
+import hashlib
 import subprocess
 from typing import Iterable
 
@@ -118,11 +119,16 @@ class LOLBASAdapter(Adapter):
         return {"iocs": iocs, "refs": refs[:6]}
 
     def normalize(self, raw) -> Iterable[Entry]:
+        publication = raw.get("profile") == "publication-v2"
+        if publication:
+            from phase5.publication_identities import publication_preflight, lolbas_entry_id, lolbas_path
+            publication_preflight("LOLBAS", raw)
         src = self.source_stub(upstream_version=raw["rev"])
         for folder, path in raw["files"]:
             etype, urlseg = FOLDER_MAP[folder]
             try:
-                data = yaml.safe_load(path.read_text(encoding="utf-8", errors="replace"))
+                source_text = path.read_text(encoding="utf-8", errors="strict" if publication else "replace")
+                data = yaml.safe_load(source_text)
             except yaml.YAMLError:
                 continue
             if not isinstance(data, dict) or not data.get("Commands"):
@@ -135,7 +141,7 @@ class LOLBASAdapter(Adapter):
             det = self._detection(data)
 
             seen = 0
-            for cmd in data["Commands"]:
+            for source_index, cmd in enumerate(data["Commands"]):
                 if not isinstance(cmd, dict):
                     continue
                 category = (cmd.get("Category") or "").strip()
@@ -179,16 +185,26 @@ class LOLBASAdapter(Adapter):
                     attack_techniques=enrich.claims(attack, ptype="upstream", source="LOLBAS",
                                                     adapter=tag, confidence="high"),
                 )
+                project_raw = {"name": name, "category": category,
+                               "privileges": (cmd.get("Privileges") or "").strip(),
+                               "mitre_id": str(mitre).strip() if mitre else ""}
+                if publication:
+                    # Raw fields remain upstream values; display fallbacks and
+                    # taxonomy normalization belong to the derived layer only.
+                    project_raw.update({"name": data.get("Name"), "category": cmd.get("Category"),
+                                        "privileges": cmd.get("Privileges"), "mitre_id": cmd.get("MitreID")})
+                    project_raw.update({"source_file": lolbas_path(folder, path),
+                                        "command_source_index": source_index,
+                                        "document_utf8": source_text,
+                                        "document_sha256": "sha256:" + hashlib.sha256(source_text.encode("utf-8")).hexdigest()})
                 source_data = {"LOLBAS": enrich.source_block(
-                    project_raw={"name": name, "category": category,
-                                 "privileges": (cmd.get("Privileges") or "").strip(),
-                                 "mitre_id": str(mitre).strip() if mitre else ""},
+                    project_raw=project_raw,
                     upstream_url=page, upstream_version=raw["rev"],
                     last_synced=src["last_synced"])}
                 yield projection.make_entry(
                     source_data=source_data, enrichment=enrichment,
                     on=src["last_synced"],
-                    id=f"lolbas/{stem}/{slug(category)}/{seen}",
+                    id=lolbas_entry_id(lolbas_path(folder, path), category, source_index) if publication else f"lolbas/{stem}/{slug(category)}/{seen}",
                     type=etype,
                     platform="windows",
                     name=name,

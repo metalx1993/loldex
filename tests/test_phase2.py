@@ -150,7 +150,13 @@ def test_raw_is_not_loldex_normalized():
     for d in _entries("loldrivers"):
         if "source_data" not in d:
             continue                                # preexisting legacy orphan
-        p = d["source_data"]["LOLDrivers"]["raw"].get("privileges", "")
+        raw = d["source_data"]["LOLDrivers"]["raw"]
+        # D2 retains the original whole document instead of a lossy field subset.
+        if "document" in raw:
+            from adapters.complete_data import parse_document
+            p = parse_document(raw["document"]).get("Privileges", "")
+        else:
+            p = raw.get("privileges", "")
         if p and p != p.lower():
             saw_upper = True                       # upstream case preserved somewhere
     # at least one upstream Privileges value has mixed/upper case, proving no .lower()

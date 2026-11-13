@@ -9,7 +9,8 @@ const errors=[];page.on('pageerror',e=>errors.push(e.message));
 await page.goto(base+'/');
 await page.waitForSelector('#stats .stat');
 await page.keyboard.press('Tab');assert.equal(await page.locator(':focus').textContent(),'Skip to content');
-assert.equal(await page.locator('.stat strong').first().textContent(),'3,086');
+const catalog=await (await page.request.get(base+'/catalog.json')).json();
+assert.equal(await page.locator('.stat strong').first().textContent(),catalog.count.toLocaleString('en-US'));
 await page.screenshot({path:'work/home-desktop.png',fullPage:true});
 await page.goto(base+'/search.html?q=T1105');
 await page.waitForSelector('.entry-row');
@@ -22,6 +23,7 @@ await page.waitForSelector('.entry-row');
 await page.click('#more');assert.equal(await page.locator('.entry-row').count(),60);
 await page.fill('#q','certutil');
 assert(await page.locator('.entry-row').count()>0);
+const inspectedId=new URL(await page.locator('.rowhead h2 a').first().getAttribute('href'),page.url()).searchParams.get('id');
 await page.locator('.rowhead h2 a').first().click();
 await page.waitForSelector('.claims');
 await page.getByText('Inspect original source data',{exact:true}).click();
@@ -35,7 +37,7 @@ await page.goto(base+'/techniques.html');
 await page.waitForSelector('.tech-card');
 await page.fill('#tech-q','ZZZ');assert.equal(await page.locator('.tech-card').count(),0);
 await page.fill('#tech-q','T1105');assert.equal(await page.locator('.tech-card').count(),1);
-for(const path of ['index.html','search.html','techniques.html','entry.html?id=lolbas/certutil/download/0','technique.html?id=T1105']){
+for(const path of ['index.html','search.html','techniques.html','entry.html?id='+encodeURIComponent(inspectedId),'technique.html?id=T1105']){
   await page.setViewportSize({width:320,height:780});
   await page.goto(base+'/'+path);
   await page.waitForSelector(path.startsWith('index')?'#stats .stat':path.startsWith('search')?'.entry-row':path.startsWith('techniques')?'.tech-card':path.startsWith('entry')?'.claims':'.graph svg');
