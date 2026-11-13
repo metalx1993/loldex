@@ -32,16 +32,18 @@ approvals are separate. Final verification is in DELIVERY.md.
 - A2 immutable releases, host CAS and rollback are implemented and the production
   root has been migrated. See a2-design.md and a2-siteground-runbook.md.
 - D2 is an explicit publication profile for current source formats, separate from
-  frozen CORE/D1. See phase5-d2-publication.md. Cron remains disabled until the
-  complete manual refresh and host publication acceptance is recorded.
+  frozen CORE/D1. See phase5-d2-publication.md. Full manual GitHub refresh and live
+  publication/rollback acceptance passed: 783 tests, 3,336 entries, five healthy
+  publication sources. See a2-completion.md. Cron is ready for explicit activation
+  and remains disabled until requested.
 - Crash recovery before an observation artifact is finalized remains the
   frozen caller responsibility, not a newly invented reservation service.
 
 ## After this delivery
 
 1. Review the changes and preview before deciding the production publication strategy.
-2. Complete the observed manual D2 refresh and A2 publication acceptance, then
-   decide scheduling explicitly. Never infer automation readiness from unit tests.
+2. A2/D2 production acceptance is complete. Enable the prepared schedules only
+   on explicit request; see cron-activation.md.
 3. Phase 7: stable, versioned public knowledge API (basic legacy APIs already exist).
 4. Phase 8: advanced and explainable search.
 5. Phase 9: durable cross-source identity/clusters without destructive deduplication.

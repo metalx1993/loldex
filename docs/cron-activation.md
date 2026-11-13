@@ -29,9 +29,12 @@ scheduled cycle. Keep all previous releases and the legacy private backup.
 
 - Live A2 package verification, HTTPS activation and rollback: passed.
 - Real five-source D2 candidate with zero diagnostics: passed, 3,336 entries.
-- Manual GitHub full refresh and unchanged-base push: final run outcome must be
-  recorded in a2-completion.md before scheduling.
-- Trusted host pull of that refreshed commit and final UI/API checks: final
-  outcome must be recorded before scheduling.
+- Manual GitHub full refresh and unchanged-base push: passed in run
+  43518679145, with 783 tests passing.
+- Trusted host pull of that refreshed commit, production rollback and final
+  UI/API checks: passed. Live count 3,336; retained old count 3,086.
+
+All acceptance gates are closed: GO for explicit activation. The full evidence
+is in [a2-completion.md](a2-completion.md).
 
 This file is an activation plan, not evidence that either schedule is enabled.

@@ -1,73 +1,99 @@
-# A2 / D2 observed acceptance — 13 November 2026
+# A2 and D2 — completed production acceptance
 
-## Executed evidence
+13 November 2026. **A2 and the five-source publication fixes are implemented,
+reviewed and verified in production. Scheduling can now be enabled explicitly;
+no cron was enabled by this work.**
 
-- Full Python suite: 754 passed (331.48 seconds), collected before the last
-  independent additions; later focused reviews are recorded below/in final report.
-- Router PHP regression: real isolated PHP runtime checks passed for 307,
-  no-store, query/POST preservation, malformed state and release binding.
-- Live browser: search, filters, pagination, source disclosure, technique views,
-  graph rendering, 320-pixel layout and injection rendering passed on loldex.sh.
-- Actual SiteGround private filesystem: rename/fsync/flock, competing processes,
-  injected pre-switch failure, rollback, retained assets and ABA rejection passed.
-- Isolated HTTPS fixture: visible A/B activation and rollback, old version URLs,
-  query and POST preservation passed. No real contact message was submitted.
-- Production root migrated with a 12-file SHA-256 inventory and private backup.
-  Dynamic cache purge was explicitly authorized and Site Tools confirmed success.
-  Plain root, index, data, search, API and contact POST requests now yield 307 with
-  no-store to the selected immutable release.
-- Initial production release is bound to commit
-  `140ecb96cfc2593d568b25e6c5c471ab12ad15e8`; generation 1. Its 20 accessible
-  static files match package bytes. Hosting blocks build-manifest.json with 403;
-  that non-runtime manifest is verified through SSH.
-- Live D2 source proof: all five verified pinned upstreams passed with zero
-  diagnostics, yielding 3,336 entries. All knowledge/UI datasets built together
-  successfully. This is publication health, not a CORE freshness transition.
+## End-to-end result
 
-## Defects exposed by independent attempts
+[GitHub acceptance run 8](https://github.com/metalx1993/loldex/actions/runs/43518679145)
+completed successfully: verified acquisition of all five sources, complete D2
+snapshot preparation, validation of 3,336 entries with zero errors, rebuilding all
+views, **783 Python tests passed in 356.15 seconds**, and unchanged-base/non-force
+Git publication. Snapshot commit:
+`be7ecfc7c8c3b84871b7bb9efcba51589a5644fe`, acquired and tested on base
+`eaa8fa5e3eb19f28041e06362e43c2d08eee60bc`.
 
-Git replacement/object corruption, retained hardlinks, stale-token no-op/ABA,
-unsafe archive/URL escaping, SiteGround direct static delivery and stale dynamic
-cache, alias/inherit and identity collisions, data truncation, raw evidence
-forgery, confidence escalation, normalizer omission, second-pass ID mutation,
-long-ID storage paths, and deletion of late untracked/ignored files were tested.
-The implementation now rejects these failure paths or applies the documented
-explicit source-format/migration amendment. Frozen D1 tests remain unchanged.
+| Source | Published entries | Remaining diagnostics |
+|---|---:|---:|
+| GTFOBins | 1,898 | 0 |
+| LOLBAS | 485 | 0 |
+| LOLDrivers | 713 | 0 |
+| LOLAD | 136 | 0 |
+| WADComs | 104 | 0 |
+| Total | 3,336 | 0 |
 
-## Scheduling boundary
+Exact upstream revisions, physical/logical accounting and independent emission/
+evidence oracles are in `data/source-health.json`. The explicit D2 snapshot ledger
+records 3,086 prior storage files retired from current search and 3,336 new files;
+public identities are preserved inside bounded hashed storage names. Historical
+bytes remain in Git history and retained host releases. LOLAD's 137 physical rows
+become 136 logical entries only under the documented exact-cell coalescence,
+retaining every original occurrence. No cross-source identity merge is performed.
 
-No cron is enabled. GitHub's manual workflow is the full verified source-refresh
-publisher; SiteGround's optional trusted pull command publishes committed site
-artifacts without exporting a private SSH key to GitHub. Manual acceptance of
-both operations must precede enabling their schedules. No claim of a successful
-GitHub Actions run or final refreshed production activation is made until its
-specific observed outcome is recorded.
+## Real SiteGround proof
 
-## Production A2 closure
+The trusted private publisher fetched the accepted GitHub commit, verified its
+objects and dataset manifest, installed and activated release
+`r-c569bac446139075188e3afe8b95b19b9fc13c38f4814d1cf6c3ccef81b3dea4`.
+Its deterministic archive is 6,460,214 bytes, SHA-256:
+`bf4d4155caa0399f550f6cd8ea473e4143372abe20ff99cf2241c615986f2b8d`.
+An independently generated local package has the same release ID and bytes.
 
-The trusted pull publisher was executed manually on the actual SiteGround host.
-It fetched verified public GitHub main commit
-`b46fa27b549efad827f1bd6153f722c4a028fb6c` and activated release
-`r-e1c8ce1c0332ea6236dc2e4564dbce609dabfde09ffa71461e643f669fc791ab`.
-Actual root HTTPS was checked after rollback to the preceding complete release
-and after restoring this release. Generation advanced to 4; both version URLs
-remained readable and root redirects remained 307/no-store. This closes the
-production A2 switch/rollback gate, separately from refreshed-source publication.
+- Actual POSIX rename/fsync/flock, competing processes, injected pre-switch
+  failure, retained assets and stale/ABA refusal passed on this filesystem.
+- Isolated HTTPS switching and rollback passed. The initial 12-file legacy root
+  was moved into a private SHA-256-inventoried backup. SiteGround's cached old
+  homepage required an explicitly user-authorized purge, confirmed in Site Tools.
+- Root/index/data/search/API/contact POST requests bind to one immutable version
+  through 307/no-store; no real contact message was submitted.
+- Twenty public static files matched package bytes. The host blocks the
+  non-runtime build-manifest.json with 403; the publisher verifies it through
+  authenticated filesystem access instead. PHP scripts are verified as files and
+  the live API was exercised separately.
+- Live API reports 3,336 entries. Live browser checks passed for search, filters,
+  pagination, source evidence, technique/graph views, injection rendering and
+  320-pixel layouts. A separate regression passed with a 589-character LOLAD ID,
+  long URLs and provenance at 320/375/768/1440 pixels.
+- The actual refreshed production release was rolled back to the previous
+  complete version and restored, advancing generation to 7. HTTPS followed both
+  changes correctly. Old version URLs still return the old 3,086-entry dataset;
+  new version URLs return the new 3,336-entry dataset. No release was deleted.
 
-The last focused suites passed: 123 source/integration tests and 11 pull-publisher
-checks. A GitHub manual full-refresh acceptance run was requested successfully:
-https://github.com/metalx1993/loldex/actions/runs/43513579159 . Its final outcome
-must be recorded before scheduling readiness is declared.
+Acceptance identifies the tested snapshot above. A later documentation-only
+commit does not change any accepted site payload bytes; the private `status`
+command is the authority for the currently selected commit/generation.
 
-The first GitHub refresh run was deliberately cancelled before staging/push:
-full-corpus Phase 2 tests repeatedly reparsed 56.8 MB of YAML and one raw-case
-regression still used the legacy driver field location. No candidate was committed.
-The test locator now reads original Commands[].Privileges. The test corpus loader
-uses the same safe YAML parser once per root and returns deep independent copies.
-An independent equality scan verified all 3,336 records and their order against
-the old implementation: cold read 45.389 s, 15 subsequent prefix queries 1.712 s.
-No assertions, source checks or test cases were removed.
+## Independent review and preserved contracts
 
-Also corrected a real 320-pixel layout overflow from long D2 identifiers and
-source URLs using two targeted wrapping rules. Browser checks passed on the full
-candidate, including the 589-character LOLAD ID at 320/375/768/1440 pixels.
+Independent agents reproduced omissions, material/evidence tampering, false
+confidence, raw/URL forgery, collisions, truncation, long-ID path failures,
+late untracked/ignored-file deletion, URL/archive escapes, Git object relabeling,
+retained hardlinks and stale concurrent publisher behavior. Relevant fixes and
+regressions are committed. Additional final local full suite: 783 passed in
+177.56 seconds. Router PHP checks ran in a real isolated PHP runtime and passed;
+actual destination PHP syntax/API checks also passed.
+
+The first GitHub acceptance attempt was deliberately cancelled before staging/
+push: Phase 2 tests repeatedly reparsed 56.8 MB of YAML, and a raw-case test still
+used the legacy driver field location. The corrected test reads original
+Commands[].Privileges. The optimized test helper uses the same safe YAML parser
+once per root and returns independent deep copies. Equality of all 3,336 records
+and their order was independently verified; no test or assertion was removed.
+
+Frozen CORE/D1 and its default derivation remain unchanged. CORE specification
+SHA-256 remains `f79aed020b36d1a217b8091319be1e7ec7cf5ac48849c8d0b765a1523f2ef3e0`.
+D2 publication health is not a retroactive successful D1 observation or CORE
+freshness transition. The UI continues to show NOT_OBSERVED without a separately
+validated CORE state. Initial migration does not retroactively version legacy
+HTML already cached by clients. Actual mail delivery was not tested by sending
+messages.
+
+## Cron decision
+
+**GO for explicit scheduling.** Both the GitHub full-refresh workflow and the
+credential-free SiteGround pull publisher have passed their manual acceptance.
+Site Tools showed no existing cron entries, and GitHub's schedule remains
+commented out. The proposed two-operation schedule and exact host command are in
+[cron-activation.md](cron-activation.md). No SSH private key was exported to GitHub,
+no notification recipient was added, and no schedule was activated.
