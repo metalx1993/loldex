@@ -92,8 +92,8 @@ A staged corpus is **not** a publish instruction. Before publishing, callers mus
    preserving A1's no-rebase/non-force publication checks.
 4. Use the reviewed A2 release/activation mechanism and verify the actual host.
 5. Keep cron disabled until source-health and publication integration have both
-   passed their independent gates. The current legacy workflow is not silently
-   switched to this preparation command.
+   passed their independent gates. The updated workflow explicitly selects the
+   separate D2 complete-snapshot policy, rather than silently changing D1.
 
 Example preparation from operator-provided local repositories:
 
@@ -126,7 +126,9 @@ healthy in CORE with material name omitted, while legacy normalization falls bac
 to Id; the material-emission parity check blocks this divergence even though no
 diagnostic is present. If those upstream states are supplied, this
 gate **must abort**. Healthy synthetic fixtures passing are not evidence that
-current live upstream states are healthy. No live fetch was performed here.
+current live upstream states are healthy. The initial D1 gate implementation
+performed no live fetch; subsequent D2 live acceptance is recorded separately in
+[a2-completion.md](a2-completion.md).
 
 A2 host activation also requires capabilities independently verified on the real
 hosting environment. An FTP-only connection does not establish POSIX SSH,

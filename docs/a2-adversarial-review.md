@@ -1,6 +1,8 @@
 # A2 — Independent adversarial review
 
-Status: **local protocol tests pass; production hosting and cutover are not certified.**
+Status: **local protocol review passed.** This report covers the independent
+local review; subsequent actual-host acceptance is recorded separately in
+[a2-completion.md](a2-completion.md).
 
 This review operates only on temporary local Git repositories, release roots and
 control directories. It performs no remote connection, upload to a live host,

@@ -42,3 +42,32 @@ artifacts without exporting a private SSH key to GitHub. Manual acceptance of
 both operations must precede enabling their schedules. No claim of a successful
 GitHub Actions run or final refreshed production activation is made until its
 specific observed outcome is recorded.
+
+## Production A2 closure
+
+The trusted pull publisher was executed manually on the actual SiteGround host.
+It fetched verified public GitHub main commit
+`b46fa27b549efad827f1bd6153f722c4a028fb6c` and activated release
+`r-e1c8ce1c0332ea6236dc2e4564dbce609dabfde09ffa71461e643f669fc791ab`.
+Actual root HTTPS was checked after rollback to the preceding complete release
+and after restoring this release. Generation advanced to 4; both version URLs
+remained readable and root redirects remained 307/no-store. This closes the
+production A2 switch/rollback gate, separately from refreshed-source publication.
+
+The last focused suites passed: 123 source/integration tests and 11 pull-publisher
+checks. A GitHub manual full-refresh acceptance run was requested successfully:
+https://github.com/metalx1993/loldex/actions/runs/43513579159 . Its final outcome
+must be recorded before scheduling readiness is declared.
+
+The first GitHub refresh run was deliberately cancelled before staging/push:
+full-corpus Phase 2 tests repeatedly reparsed 56.8 MB of YAML and one raw-case
+regression still used the legacy driver field location. No candidate was committed.
+The test locator now reads original Commands[].Privileges. The test corpus loader
+uses the same safe YAML parser once per root and returns deep independent copies.
+An independent equality scan verified all 3,336 records and their order against
+the old implementation: cold read 45.389 s, 15 subsequent prefix queries 1.712 s.
+No assertions, source checks or test cases were removed.
+
+Also corrected a real 320-pixel layout overflow from long D2 identifiers and
+source URLs using two targeted wrapping rules. Browser checks passed on the full
+candidate, including the 589-character LOLAD ID at 320/375/768/1440 pixels.

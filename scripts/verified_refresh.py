@@ -27,8 +27,8 @@ def guard_targets(repo):
             raise ValueError('candidate output trees must be real directories')
         if any(path.is_symlink() for path in target.rglob('*')):
             raise ValueError('candidate output trees cannot contain symlinks')
-    for args in (('ls-files','--others','--exclude-standard','--','data/entries','site'),
-                 ('ls-files','--others','--ignored','--exclude-standard','--','data/entries','site')):
+    for args in (('ls-files','--others','--exclude-standard','--','data/entries','site','data/source-health.json','data/publication-ledger.json'),
+                 ('ls-files','--others','--ignored','--exclude-standard','--','data/entries','site','data/source-health.json','data/publication-ledger.json')):
         if git(repo,*args):
             raise ValueError('untracked or ignored candidate files would be overwritten')
 

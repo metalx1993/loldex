@@ -12,6 +12,8 @@ Contract under test (approved):
 Scope discipline: data model only. No operational capability is introduced.
 """
 import glob
+from copy import deepcopy
+from functools import lru_cache
 import inspect
 import pathlib
 import subprocess
@@ -102,13 +104,22 @@ def test_no_direct_toplevel_assignment():
 
 
 # --- behavioral checks on the regenerated data ---------------------------
+@lru_cache(maxsize=None)
+def _corpus_entries(root):
+    """Parse the fixed test corpus once per root, preserving discovery order."""
+    by_prefix = {}
+    for f in glob.glob(str(root / "data/entries/**/*.yaml"), recursive=True):
+        with open(f) as stream:
+            d = yaml.safe_load(stream)
+        prefix, separator, _ = d["id"].partition("/")
+        if separator:
+            by_prefix.setdefault(prefix, []).append(d)
+    return by_prefix
+
+
 def _entries(prefix):
-    out = []
-    for f in glob.glob(str(ROOT / "data/entries/**/*.yaml"), recursive=True):
-        d = yaml.safe_load(open(f))
-        if d["id"].startswith(prefix + "/"):
-            out.append(d)
-    return out
+    # Tests may mutate fixtures without changing any subsequent test's input.
+    return deepcopy(_corpus_entries(pathlib.Path(ROOT)).get(prefix, []))
 
 
 def test_every_migrated_entry_has_layers():
@@ -154,10 +165,14 @@ def test_raw_is_not_loldex_normalized():
         # D2 retains the original whole document instead of a lossy field subset.
         if "document" in raw:
             from adapters.complete_data import parse_document
-            p = parse_document(raw["document"]).get("Privileges", "")
+            document = parse_document(raw["document"])
+            commands = document.get("Commands") or []
+            if isinstance(commands, dict):
+                commands = [commands]
+            privileges = [command.get("Privileges", "") for command in commands]
         else:
-            p = raw.get("privileges", "")
-        if p and p != p.lower():
+            privileges = [raw.get("privileges", "")]
+        if any(p and p != p.lower() for p in privileges):
             saw_upper = True                       # upstream case preserved somewhere
     # at least one upstream Privileges value has mixed/upper case, proving no .lower()
     assert saw_upper, "expected at least one loldrivers raw.privileges with upstream case"

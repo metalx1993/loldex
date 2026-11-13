@@ -95,7 +95,8 @@ nav a[aria-current=page]{color:var(--accent);border-bottom:2px solid var(--accen
 .tech-card a{font:20px var(--mono);color:var(--accent)}
 footer{border-top:1px solid var(--line);padding-block:26px;color:var(--muted);font:11px/1.8 var(--mono)}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.crumb{font:12px var(--mono);color:var(--muted);margin-bottom:28px}
+.crumb{font:12px var(--mono);color:var(--muted);margin-bottom:28px;overflow-wrap:anywhere}
+.detail a{overflow-wrap:anywhere}
 .actionline{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .hidden,[hidden]{display:none!important}
 
