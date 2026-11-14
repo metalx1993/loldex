@@ -18,6 +18,9 @@ const canonical=o=>JSON.stringify(Object.fromEntries(Object.entries(o).sort(([a]
  php.writeFile(file,canonical(token));r=await run('/');assert.equal(r.errors,'');assert.equal(r.httpStatusCode,307);assert.equal(location(r),'/releases/'+id+'/index.html');
  assert((r.headers['cache-control']||[]).join().includes('no-store'));
  r=await run('/api.php?action=search&q=a%20b');assert.equal(r.httpStatusCode,307);assert.equal(location(r),'/releases/'+id+'/api.php?action=search&q=a%20b');
+ r=await run('/api/v1/search?q=tar');assert.equal(r.httpStatusCode,307);assert.equal((r.headers['access-control-allow-origin']||[])[0],'*');
+ r=await run('/api/v1/search','OPTIONS');assert.equal(r.httpStatusCode,204);assert.equal(location(r),undefined);assert((r.headers['access-control-allow-headers']||[]).join().includes('If-None-Match'));
+ r=await run('/api-v1.php?resource=entries','OPTIONS');assert.equal(r.httpStatusCode,204);
  r=await run('/contact.php','POST');assert.equal(r.httpStatusCode,307); // no following or sending mail
  const oldURL=location(await run('/catalog.json'));
  php.writeFile(file,canonical({...token,generation:2,release_id:second,previous_release_id:id}));

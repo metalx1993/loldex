@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101416">
+<meta name="description" content="Explore living-off-the-land techniques across Linux, Windows and Active Directory with traceable per-claim evidence.">
+<link rel="icon" href="./favicon.svg">
+<link rel="stylesheet" href="./experience.css">
+<script defer src="./experience-core.js">
+</script>
+<script defer src="./experience.js">
+</script>
+<title>Public API v1 — LOLDEX</title>
+</head>
+<body data-view="api">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+<div class="wrap">
+<a class="mark" href="./index.html">LOL<span>DEX</span>
+<span aria-hidden="true">.</span>
+</a>
+<nav aria-label="Main">
+<a href="./search.html" >Index</a>
+<a href="./techniques.html">Techniques</a>
+<a href="./identities.html">Identities</a>
+<a href="./api.html">API</a>
+<a href="./about.html">About</a>
+</nav>
+<span class="edition">Living-off-the-land knowledge index</span>
+</div>
+</header>
+<main id="main" class="wrap">
+<div class="subhead"><p class="eyebrow">Public knowledge API · v1</p><h1>The same evidence, in a stable contract.</h1><p class="muted">Read-only JSON from one immutable release. Confidence stays with each claim. Dataset publication health does not imply a successful CORE observation.</p></div><section class="detail"><h2>Resources</h2><p><a href="./api-v1.php?resource=root">API metadata</a> · <a href="./api-v1.php?resource=entries">Entries</a> · <a href="./api-v1.php?resource=techniques">Techniques</a> · <a href="./api-v1.php?resource=identities">Identities</a> · <a href="./openapi-v1.json">OpenAPI contract</a></p><p>Entry, technique, identity and evidence resources accept an exact <code>id</code> query parameter. Lists use bounded <code>limit</code> and <code>offset</code>. Errors have explicit codes. All URLs here stay inside the release you opened.</p><h2>Try an evidence search</h2><form id="api-form"><label for="api-q">Query</label><input id="api-q" type="search" value="source:LOLBAS capability:file-download confidence:high"><button type="submit">Run read-only query</button></form><p id="api-status" role="status"></p><pre id="api-response" tabindex="0"></pre><h2>Search grammar</h2><p>Use field filters, quoted phrases, AND, OR, NOT and parentheses. A confidence or provenance filter qualifies each selected claim in its positive branch. NOT groups own an independent scope. Text is ASCII case-insensitive; other Unicode is exact. Ranking is relevance, never a confidence or risk score.</p><p>Existing unversioned API endpoints remain compatible. The v1 contract exposes the layered knowledge model and version-bound evidence.</p></section>
+</main>
+<footer>
+<div class="wrap">
+<span>Public knowledge. Traceable evidence.</span>
+<span>GTFOBins · LOLBAS · LOLDrivers · LOLAD · WADComs</span>
+<a href="./contact.html">Contact</a>
+</div>
+</footer>
+</body>
+</html>

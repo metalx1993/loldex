@@ -4,6 +4,9 @@ DirectoryIndex index.html
 # Pretty API routes: /api/search?q=... -> api.php?action=search&q=...
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteRule ^api/v1/?$ api-v1.php?resource=root [QSA,L]
+  RewriteRule ^api/v1/(root|entries|entry|search|graph|techniques|technique|identities|identity|evidence|resolve)/?$ api-v1.php?resource=$1 [QSA,L]
+  RewriteRule ^api/v1/ api-v1.php?resource=unknown [QSA,L]
   RewriteRule ^api/([a-z]+)/?$ api.php?action=$1 [QSA,L]
 </IfModule>
 

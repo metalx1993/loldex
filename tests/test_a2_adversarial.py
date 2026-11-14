@@ -247,13 +247,13 @@ def _git(repo, *args):
 
 
 def _production_repo(tmp_path):
-    from deployment.package import DATA_FILES, PRODUCTION_FILES
+    from deployment.package import PRODUCTION_DATA_FILES, PRODUCTION_FILES
     repo = tmp_path / "repo"
     repo.mkdir()
     _git(repo, "init", "-q")
     files = {name: b"{}" if name.endswith(".json") else b"release A" for name in PRODUCTION_FILES}
     manifest = {"version": 1, "entries": 0, "registry_checksum": "sha256:" + "0" * 64,
-                "files": {name: "sha256:" + hashlib.sha256(files[name]).hexdigest() for name in DATA_FILES}}
+                "files": {name: "sha256:" + hashlib.sha256(files[name]).hexdigest() for name in PRODUCTION_DATA_FILES}}
     files["build-manifest.json"] = json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode()
     for name, content in files.items():
         path = repo / "site" / name

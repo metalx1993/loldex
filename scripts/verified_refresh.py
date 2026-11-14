@@ -14,6 +14,7 @@ import subprocess
 from deployment.source_health import prepare_verified_sync
 from phase5.vocabulary import SOURCE_UNIVERSE
 from scripts.build_all import main as build_all
+from knowledge.artifacts import write_artifacts
 
 
 def git(repo, *args):
@@ -64,8 +65,9 @@ def refresh(repositories, repo, output, expected_base):
     # Only a dedicated clean candidate checkout may be mutated by this command.
     shutil.rmtree(repo/'data/entries')
     shutil.copytree(candidate/'data/entries',repo/'data/entries')
-    for path in (candidate/'site').iterdir():
-        shutil.copyfile(path,repo/'site'/path.name)
+    generated = {path.relative_to(candidate/'site').as_posix(): path.read_bytes()
+                 for path in (candidate/'site').rglob('*') if path.is_file()}
+    write_artifacts(repo/'site', generated)
     (repo/'data/publication-ledger.json').write_text(json.dumps(ledger,sort_keys=True,separators=(',',':'))+'\n')
     shutil.copyfile(candidate/'source-health.json',repo/'data/source-health.json')
     return ledger

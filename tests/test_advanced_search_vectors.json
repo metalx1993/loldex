@@ -1,0 +1,945 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "a",
+      "name": "Alpha",
+      "platform": "linux",
+      "type": "binary",
+      "sources": [
+        {
+          "project": "One"
+        }
+      ],
+      "capabilities": [
+        "A",
+        "B",
+        "claim-exclusive"
+      ],
+      "phases": [
+        "discovery"
+      ],
+      "privilege_required": "user",
+      "attack_techniques": [
+        "T1000"
+      ],
+      "commands": [
+        {
+          "template": "echo hello world"
+        }
+      ],
+      "references": [
+        "https://example.org/help"
+      ],
+      "claims": {
+        "capabilities": [
+          {
+            "value": "A",
+            "confidence": {
+              "level": "low"
+            },
+            "provenance": {
+              "type": "adapter",
+              "source": "One"
+            }
+          },
+          {
+            "value": "B",
+            "confidence": {
+              "level": "high"
+            },
+            "provenance": {
+              "type": "adapter",
+              "source": "One"
+            }
+          },
+          {
+            "value": "claim-exclusive",
+            "confidence": {
+              "level": "low"
+            },
+            "provenance": {
+              "type": "adapter",
+              "source": "One"
+            }
+          }
+        ],
+        "phases": [
+          {
+            "value": "discovery",
+            "confidence": {
+              "level": "low"
+            },
+            "provenance": {
+              "type": "heuristic",
+              "source": "One"
+            }
+          }
+        ],
+        "privilege_required": {
+          "value": "user",
+          "confidence": {
+            "level": "low"
+          },
+          "provenance": {
+            "type": "heuristic",
+            "source": "One"
+          }
+        }
+      },
+      "freshness": {
+        "classification": "NOT_OBSERVED"
+      },
+      "aliases": [
+        "\u00c9cho",
+        "caf\u00e9",
+        "\u5de5\u5177"
+      ]
+    },
+    {
+      "id": "b",
+      "name": "Beta",
+      "platform": "linux",
+      "type": "binary",
+      "sources": [
+        {
+          "project": "One"
+        }
+      ],
+      "capabilities": [
+        "A",
+        "claim-exclusive"
+      ],
+      "phases": [
+        "discovery"
+      ],
+      "privilege_required": "user",
+      "attack_techniques": [
+        "T1000"
+      ],
+      "commands": [
+        {
+          "template": "echo hello world"
+        }
+      ],
+      "references": [
+        "https://example.org/help"
+      ],
+      "claims": {
+        "capabilities": [
+          {
+            "value": "A",
+            "confidence": {
+              "level": "high"
+            },
+            "provenance": {
+              "type": "adapter",
+              "source": "One"
+            }
+          },
+          {
+            "value": "claim-exclusive",
+            "confidence": {
+              "level": "high"
+            },
+            "provenance": {
+              "type": "adapter",
+              "source": "One"
+            }
+          }
+        ],
+        "phases": [
+          {
+            "value": "discovery",
+            "confidence": {
+              "level": "low"
+            },
+            "provenance": {
+              "type": "heuristic",
+              "source": "One"
+            }
+          }
+        ],
+        "privilege_required": {
+          "value": "user",
+          "confidence": {
+            "level": "low"
+          },
+          "provenance": {
+            "type": "heuristic",
+            "source": "One"
+          }
+        }
+      },
+      "freshness": {
+        "classification": "NOT_OBSERVED"
+      }
+    },
+    {
+      "id": "c",
+      "name": "Gamma",
+      "platform": "windows",
+      "type": "binary",
+      "sources": [
+        {
+          "project": "Two"
+        }
+      ],
+      "capabilities": [
+        "B"
+      ],
+      "phases": [
+        "discovery"
+      ],
+      "privilege_required": "user",
+      "attack_techniques": [
+        "T1000"
+      ],
+      "commands": [
+        {
+          "template": "echo hello world"
+        }
+      ],
+      "references": [
+        "https://example.org/help"
+      ],
+      "claims": {
+        "capabilities": [
+          {
+            "value": "B",
+            "confidence": {
+              "level": "high"
+            },
+            "provenance": {
+              "type": "adapter",
+              "source": "Two"
+            }
+          }
+        ],
+        "phases": [
+          {
+            "value": "discovery",
+            "confidence": {
+              "level": "low"
+            },
+            "provenance": {
+              "type": "heuristic",
+              "source": "Two"
+            }
+          }
+        ],
+        "privilege_required": {
+          "value": "user",
+          "confidence": {
+            "level": "low"
+          },
+          "provenance": {
+            "type": "heuristic",
+            "source": "Two"
+          }
+        }
+      },
+      "freshness": {
+        "classification": "NOT_OBSERVED"
+      }
+    },
+    {
+      "id": "d",
+      "name": "Delta",
+      "platform": "linux",
+      "type": "binary",
+      "sources": [
+        {
+          "project": "One"
+        }
+      ],
+      "capabilities": [
+        "C"
+      ],
+      "phases": [
+        "discovery"
+      ],
+      "privilege_required": "user",
+      "attack_techniques": [
+        "T1000"
+      ],
+      "commands": [
+        {
+          "template": "echo hello world"
+        }
+      ],
+      "references": [
+        "https://elsewhere.org/only-reference"
+      ],
+      "claims": {
+        "capabilities": [
+          {
+            "value": "C",
+            "confidence": {
+              "level": "low"
+            },
+            "provenance": {
+              "type": "adapter",
+              "source": "One"
+            }
+          }
+        ],
+        "phases": [
+          {
+            "value": "discovery",
+            "confidence": {
+              "level": "low"
+            },
+            "provenance": {
+              "type": "heuristic",
+              "source": "One"
+            }
+          }
+        ],
+        "privilege_required": {
+          "value": "user",
+          "confidence": {
+            "level": "low"
+          },
+          "provenance": {
+            "type": "heuristic",
+            "source": "One"
+          }
+        }
+      },
+      "freshness": {
+        "classification": "ACTIVE"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "query": "",
+      "ids": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "query": "platform:windows",
+      "ids": [
+        "c"
+      ]
+    },
+    {
+      "query": "source:Two",
+      "ids": [
+        "c"
+      ]
+    },
+    {
+      "query": "capability:A confidence:high",
+      "ids": [
+        "b"
+      ]
+    },
+    {
+      "query": "capability:A confidence:low",
+      "ids": [
+        "a"
+      ]
+    },
+    {
+      "query": "capability:A confidence:high OR source:Two",
+      "ids": [
+        "b",
+        "c"
+      ]
+    },
+    {
+      "query": "NOT (capability:A AND confidence:high)",
+      "ids": [
+        "a",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "query": "NOT NOT (capability:A confidence:high)",
+      "ids": [
+        "b"
+      ]
+    },
+    {
+      "query": "(capability:A OR capability:C) confidence:low",
+      "ids": [
+        "a",
+        "d"
+      ]
+    },
+    {
+      "query": "NOT capability:A confidence:high",
+      "ids": [
+        "c"
+      ]
+    },
+    {
+      "query": "NOT (capability:A OR capability:B)",
+      "ids": [
+        "d"
+      ]
+    },
+    {
+      "query": "source:One capability:A provenance:adapter confidence:high",
+      "ids": [
+        "b"
+      ]
+    },
+    {
+      "query": "phase:discovery confidence:high",
+      "ids": []
+    },
+    {
+      "query": "phase:discovery provenance:heuristic confidence:low",
+      "ids": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "query": "confidence:verified",
+      "ids": []
+    },
+    {
+      "query": "freshness:ACTIVE",
+      "ids": [
+        "d"
+      ]
+    },
+    {
+      "query": "freshness:healthy",
+      "ids": []
+    },
+    {
+      "query": "freshness:NOT_OBSERVED",
+      "ids": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "query": "\"hello world\"",
+      "ids": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "query": "only-reference",
+      "ids": [
+        "d"
+      ]
+    },
+    {
+      "query": "\"https://elsewhere.org/only-reference\"",
+      "ids": [
+        "d"
+      ]
+    },
+    {
+      "query": "type:binary privilege:user",
+      "ids": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "query": "capability:A OR capability:B AND platform:windows",
+      "ids": [
+        "c",
+        "a",
+        "b"
+      ]
+    },
+    {
+      "query": "(capability:A OR capability:B) platform:windows",
+      "ids": [
+        "c"
+      ]
+    },
+    {
+      "query": "NOT (NOT capability:A AND confidence:high)",
+      "ids": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "query": "\u00c9cho",
+      "ids": [
+        "a"
+      ]
+    },
+    {
+      "query": "\u00e9cho",
+      "ids": []
+    },
+    {
+      "query": "caf\u00e9",
+      "ids": [
+        "a"
+      ]
+    },
+    {
+      "query": "cafe\u0301",
+      "ids": []
+    },
+    {
+      "query": "\u5de5\u5177",
+      "ids": [
+        "a"
+      ]
+    },
+    {
+      "query": "Alpha\u00a0Beta",
+      "ids": []
+    },
+    {
+      "query": "platform:LINUX",
+      "ids": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "query": "Alpha\tOR\nBeta",
+      "ids": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "query": "claim-exclusive confidence:high",
+      "ids": [
+        "b"
+      ]
+    },
+    {
+      "query": "Alpha confidence:high",
+      "ids": [
+        "a"
+      ]
+    },
+    {
+      "query": "\"hello world\" confidence:high",
+      "ids": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "query": "source:Two \"hello world\" confidence:high",
+      "ids": [
+        "c"
+      ]
+    },
+    {
+      "entries": [
+        {
+          "id": "a",
+          "name": "Alpha",
+          "platform": "linux",
+          "type": "binary",
+          "sources": [
+            {
+              "project": "One"
+            },
+            {
+              "project": "Two"
+            }
+          ],
+          "capabilities": [
+            "A",
+            "B",
+            "claim-exclusive"
+          ],
+          "phases": [
+            "discovery"
+          ],
+          "privilege_required": "user",
+          "attack_techniques": [
+            "T1000"
+          ],
+          "commands": [
+            {
+              "template": "echo hello world"
+            }
+          ],
+          "references": [
+            "https://example.org/help"
+          ],
+          "claims": {
+            "capabilities": [
+              {
+                "value": "A",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              },
+              {
+                "value": "B",
+                "confidence": {
+                  "level": "high"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              },
+              {
+                "value": "claim-exclusive",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              }
+            ],
+            "phases": [
+              {
+                "value": "discovery",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "heuristic",
+                  "source": "One"
+                }
+              }
+            ],
+            "privilege_required": {
+              "value": "user",
+              "confidence": {
+                "level": "low"
+              },
+              "provenance": {
+                "type": "heuristic",
+                "source": "One"
+              }
+            }
+          },
+          "freshness": {
+            "classification": "NOT_OBSERVED"
+          },
+          "aliases": [
+            "\u00c9cho",
+            "caf\u00e9",
+            "\u5de5\u5177"
+          ]
+        }
+      ],
+      "query": "source:Two capability:A",
+      "ids": []
+    },
+    {
+      "entries": [
+        {
+          "id": "a",
+          "name": "Alpha",
+          "platform": "linux",
+          "type": "binary",
+          "sources": [
+            {
+              "project": "One"
+            },
+            {
+              "project": "Two"
+            }
+          ],
+          "capabilities": [
+            "A",
+            "B",
+            "claim-exclusive"
+          ],
+          "phases": [
+            "discovery"
+          ],
+          "privilege_required": "user",
+          "attack_techniques": [
+            "T1000"
+          ],
+          "commands": [
+            {
+              "template": "echo hello world"
+            }
+          ],
+          "references": [
+            "https://example.org/help"
+          ],
+          "claims": {
+            "capabilities": [
+              {
+                "value": "A",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              },
+              {
+                "value": "B",
+                "confidence": {
+                  "level": "high"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              },
+              {
+                "value": "claim-exclusive",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              }
+            ],
+            "phases": [
+              {
+                "value": "discovery",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "heuristic",
+                  "source": "One"
+                }
+              }
+            ],
+            "privilege_required": {
+              "value": "user",
+              "confidence": {
+                "level": "low"
+              },
+              "provenance": {
+                "type": "heuristic",
+                "source": "One"
+              }
+            }
+          },
+          "freshness": {
+            "classification": "NOT_OBSERVED"
+          },
+          "aliases": [
+            "\u00c9cho",
+            "caf\u00e9",
+            "\u5de5\u5177"
+          ]
+        }
+      ],
+      "query": "source:Two claim-exclusive",
+      "ids": []
+    },
+    {
+      "entries": [
+        {
+          "id": "a",
+          "name": "Alpha",
+          "platform": "linux",
+          "type": "binary",
+          "sources": [
+            {
+              "project": "One"
+            },
+            {
+              "project": "Two"
+            }
+          ],
+          "capabilities": [
+            "A",
+            "B",
+            "claim-exclusive"
+          ],
+          "phases": [
+            "discovery"
+          ],
+          "privilege_required": "user",
+          "attack_techniques": [
+            "T1000"
+          ],
+          "commands": [
+            {
+              "template": "echo hello world"
+            }
+          ],
+          "references": [
+            "https://example.org/help"
+          ],
+          "claims": {
+            "capabilities": [
+              {
+                "value": "A",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              },
+              {
+                "value": "B",
+                "confidence": {
+                  "level": "high"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              },
+              {
+                "value": "claim-exclusive",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "adapter",
+                  "source": "One"
+                }
+              }
+            ],
+            "phases": [
+              {
+                "value": "discovery",
+                "confidence": {
+                  "level": "low"
+                },
+                "provenance": {
+                  "type": "heuristic",
+                  "source": "One"
+                }
+              }
+            ],
+            "privilege_required": {
+              "value": "user",
+              "confidence": {
+                "level": "low"
+              },
+              "provenance": {
+                "type": "heuristic",
+                "source": "One"
+              }
+            }
+          },
+          "freshness": {
+            "classification": "NOT_OBSERVED"
+          },
+          "aliases": [
+            "\u00c9cho",
+            "caf\u00e9",
+            "\u5de5\u5177"
+          ]
+        }
+      ],
+      "query": "source:Two Alpha",
+      "ids": [
+        "a"
+      ]
+    },
+    {
+      "entries": [
+        {
+          "id": "bare",
+          "sources": [
+            {
+              "project": "Two"
+            }
+          ]
+        }
+      ],
+      "query": "source:Two",
+      "ids": [
+        "bare"
+      ]
+    }
+  ],
+  "errors": [
+    "AND a",
+    "a OR",
+    "NOT",
+    "()",
+    "(a",
+    "a)",
+    "platform:",
+    "unknown:value",
+    "\"unclosed",
+    "\"\"",
+    "\"bad\\q\"",
+    "a AND OR b",
+    "name:Alpha",
+    "\ud800",
+    "a\u0000b",
+    "a\u007fb",
+    "NOT ((a OR b OR c OR d OR e OR f) AND NOT ((a OR b OR c OR d OR e OR f) AND NOT ((a OR b OR c OR d OR e OR f) AND NOT ((a OR b OR c OR d OR e OR f) AND NOT ((a OR b OR c OR d OR e OR f) AND NOT ((a OR b OR c OR d OR e OR f) AND NOT ((a OR b OR c OR d OR e OR f) AND a)))))))"
+  ],
+  "score_cases": [
+    {
+      "entry": {
+        "id": "rank",
+        "name": "X",
+        "capabilities": [
+          "discovery"
+        ],
+        "phases": [
+          "discovery"
+        ],
+        "claims": {
+          "capabilities": [
+            {
+              "value": "discovery",
+              "confidence": {
+                "level": "low"
+              },
+              "provenance": {
+                "type": "adapter",
+                "source": "One"
+              }
+            }
+          ],
+          "phases": [
+            {
+              "value": "discovery",
+              "confidence": {
+                "level": "high"
+              },
+              "provenance": {
+                "type": "adapter",
+                "source": "One"
+              }
+            }
+          ]
+        }
+      },
+      "query": "discovery confidence:high",
+      "score": 55
+    }
+  ]
+}

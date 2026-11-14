@@ -57,7 +57,7 @@ def test_manual_sync_stages_every_generated_view_under_existing_base_guard():
     from pathlib import Path
     workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/sync.yml").read_text()
     stage = next(line for line in workflow.splitlines() if "git add data/" in line)
-    for name in ["data.json", "catalog.json", "evidence.json", "graph.json", "techniques.json", "build-manifest.json", "registry-license.txt"]:
+    for name in ["data.json", "catalog.json", "evidence.json", "graph.json", "techniques.json", "identities.json", "openapi-v1.json", "evidence-records/", "build-manifest.json", "registry-license.txt"]:
         assert "site/" + name in stage
     assert "# schedule:" in workflow
     assert workflow.index('if [ "$remote_sha" != "$BASE_SHA" ]') < workflow.index('git commit -m')

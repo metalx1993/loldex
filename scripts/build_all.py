@@ -13,6 +13,7 @@ from pathlib import Path
 from knowledge.graph import ROOT, build_graph, read_entries
 from knowledge.registry import DEFAULT_REGISTRY, load_registry
 from knowledge.techniques import build_techniques
+from knowledge.artifacts import evidence_path, write_artifacts
 from adapters.projection import build as project
 from phase5.canonical import nfc
 from phase5.state import validate_envelope
@@ -20,7 +21,7 @@ from scripts.build_experience import build_experience
 from scripts.build_site_data import KEEP
 
 
-def artifacts(entries, registry, state=None):
+def artifacts(entries, registry, state=None, identity_registry=None):
     # Preserve the legacy public API byte contract while refusing contradictory
     # identities/projections across public views. Do not silently migrate IDs.
     for entry in entries:
@@ -35,8 +36,12 @@ def artifacts(entries, registry, state=None):
     legacy_entries = [{key: entry[key] for key in KEEP if key in entry} for entry in entries]
     legacy_entries.sort(key=lambda e: (e["platform"], e["name"], e["id"]))
     legacy = json.dumps({"count": len(legacy_entries), "entries": legacy_entries}, indent=0).encode("utf-8")
+    from knowledge.identities import build_identities
+    identities = build_identities(entries, identity_registry)
     payloads = {"data.json": legacy}
-    for name, value in (("catalog.json", catalog), ("evidence.json", evidence), ("graph.json", graph), ("techniques.json", techniques)):
+    for identity, raw in evidence["entries"].items():
+        payloads[evidence_path(identity)] = (json.dumps(raw, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    for name, value in (("catalog.json", catalog), ("evidence.json", evidence), ("graph.json", graph), ("techniques.json", techniques), ("identities.json", identities)):
         payloads[name] = (json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
     return payloads
 
@@ -51,14 +56,16 @@ def main(argv=None):
     entries = read_entries(args.entries)
     registry = load_registry(args.registry)
     state = validate_envelope(args.state.read_bytes()) if args.state else None
-    payloads = artifacts(entries, registry, state)
+    from knowledge.identities import load_identity_registry, DEFAULT_IDENTITY_REGISTRY
+    parser_identity_path = DEFAULT_IDENTITY_REGISTRY
+    payloads = artifacts(entries, registry, state, load_identity_registry(parser_identity_path))
+    openapi = json.loads((ROOT / "api/openapi-v1.json").read_bytes())
+    payloads["openapi-v1.json"] = (json.dumps(openapi, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
     payloads["registry-license.txt"] = (ROOT / "data/registry/LICENSE-MITRE.txt").read_bytes()
     manifest = {"version": 1, "files": {name: "sha256:" + hashlib.sha256(value).hexdigest() for name, value in sorted(payloads.items())},
                 "entries": len(entries), "registry_checksum": registry["checksum"]}
     payloads["build-manifest.json"] = (json.dumps(manifest, sort_keys=True, separators=(",", ":")) + "\n").encode()
-    args.out.mkdir(parents=True, exist_ok=True)
-    for name, value in payloads.items():
-        (args.out / name).write_bytes(value)
+    write_artifacts(args.out, payloads)
     print(f"Built {len(entries)} entries and all validated graph, technique, evidence and UI datasets")
     return 0
 

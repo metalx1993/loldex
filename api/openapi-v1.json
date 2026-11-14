@@ -1,0 +1,2013 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "LOLDEX public read-only API",
+    "version": "1.0.0",
+    "description": "Release-local immutable API. Stable /api/v1 URLs redirect to a retained release. Use the final retained URL to pin pagination and dependencies. Duplicate parameters and arrays are rejected. ASCII A-Z folding only; Unicode is exact UTF-8. Confidence and provenance belong to individual claims. Search NOT subtrees have independent evidence scope. No authentication or writes. PHP query fallback: ./api-v1.php?resource=search&q=... . Public CORS exposes ETag and X-LOLDEX-Dataset; conditional responses verify consumed file hashes before 304."
+  },
+  "servers": [
+    {
+      "url": "./api/v1"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "API metadata",
+        "parameters": [
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/entries": {
+      "get": {
+        "summary": "Entry projections sorted by stable entry ID",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "capability",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "phase",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "privilege",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "technique",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "confidence",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "provenance",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "freshness",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "capability",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "phase",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "privilege",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "technique",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "confidence",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "provenance",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "freshness",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/entry": {
+      "get": {
+        "summary": "One exact entry; optional original evidence",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "description": "Only evidence is accepted.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "evidence"
+              ]
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "description": "Only evidence is accepted.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "evidence"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/evidence": {
+      "get": {
+        "summary": "Original source_data object, preserving JSON numeric literals",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Advanced search with evidence-correlated ranking and facets",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "description": "Search v1 grammar: NOT > AND/adjacency > OR; parentheses and quoted phrases. Maximum 4096 UTF-8 bytes, 128 tokens, nesting 16, 64 positive alternatives and 4096 expanded atom occurrences including opaque NOT subtrees.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "capability",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "phase",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "privilege",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "technique",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "confidence",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "provenance",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "freshness",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "description": "Search v1 grammar: NOT > AND/adjacency > OR; parentheses and quoted phrases. Maximum 4096 UTF-8 bytes, 128 tokens, nesting 16, 64 positive alternatives and 4096 expanded atom occurrences including opaque NOT subtrees.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "capability",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "phase",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "privilege",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "technique",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "confidence",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "provenance",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "freshness",
+            "in": "query",
+            "required": false,
+            "description": "Exact ASCII-case-insensitive facet value; correlated per-claim evidence scope.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/graph": {
+      "get": {
+        "summary": "Claim-bearing graph edges; nodes limited to page endpoints",
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "query",
+            "required": false,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "relation",
+            "in": "query",
+            "required": false,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "query",
+            "required": false,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "relation",
+            "in": "query",
+            "required": false,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/techniques": {
+      "get": {
+        "summary": "Technique registry records sorted by ID",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "description": "Literal ID/name substring; not advanced search grammar.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "description": "Literal ID/name substring; not advanced search grammar.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/technique": {
+      "get": {
+        "summary": "One exact technique registry record",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/identities": {
+      "get": {
+        "summary": "Explicitly curated tool entities; candidates never become members",
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "query",
+            "required": false,
+            "description": "Restrict to active curated entry_index references.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "query",
+            "required": false,
+            "description": "Restrict to active curated entry_index references.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; default 50, maximum 200.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Canonical decimal integer; no leading zeroes.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000,
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/identity": {
+      "get": {
+        "summary": "Entity and separately labelled candidate memberships",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    },
+    "/resolve": {
+      "get": {
+        "summary": "Resolve a current ID or return an explicit historical alias/split record; never redirect or select a winner",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pinned release-local response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed, duplicate, unsupported or out-of-bounds parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource absent in this pinned dataset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method unsupported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Required release metadata or dataset integrity failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "head": {
+        "summary": "Same validation, headers and ETag as GET; no body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty body; Content-Length describes the GET representation."
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          }
+        }
+      },
+      "options": {
+        "summary": "Public CORS preflight",
+        "responses": {
+          "204": {
+            "description": "Empty body. Allows GET, HEAD, OPTIONS and If-None-Match, Content-Type request headers."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Dataset": {
+        "type": "object",
+        "required": [
+          "manifest_sha256",
+          "entry_count",
+          "registry_checksum",
+          "release_id",
+          "commit"
+        ],
+        "properties": {
+          "manifest_sha256": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "entry_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "registry_checksum": {
+            "type": "string"
+          },
+          "release_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "commit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "required": [
+          "total",
+          "offset",
+          "limit",
+          "next_offset"
+        ],
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "next_offset": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "Envelope": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "dataset",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "const": "1"
+          },
+          "dataset": {
+            "$ref": "#/components/schemas/Dataset"
+          },
+          "data": {
+            "description": "Resource-specific original projections and individual claim records; no merged confidence or inferred equivalence."
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          },
+          "query": {
+            "type": "object"
+          },
+          "facets": {
+            "type": "object"
+          },
+          "identity_policy": {
+            "type": "object"
+          }
+        }
+      },
+      "ErrorEnvelope": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "dataset",
+          "data",
+          "error"
+        ],
+        "properties": {
+          "api_version": {
+            "const": "1"
+          },
+          "dataset": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Dataset"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "data": {
+            "type": "null"
+          },
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "enum": [
+                  "INVALID_QUERY",
+                  "INVALID_PAGINATION",
+                  "INVALID_SEARCH_QUERY",
+                  "METHOD_NOT_ALLOWED",
+                  "NOT_FOUND",
+                  "DATASET_UNAVAILABLE"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

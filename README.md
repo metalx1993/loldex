@@ -18,10 +18,10 @@ what upstream projects already publish, and links back to every source. See
 
 | Platform | Entries | Sources |
 |----------|--------:|---------|
-| Linux | 1,708 | GTFOBins |
-| Windows | 1,141 | LOLBAS, LOLDrivers |
-| Active Directory | 237 | WADComs, LOLAD |
-| **Total** | **3,086** | |
+| Linux | 1,898 | GTFOBins |
+| Windows | 1,198 | LOLBAS, LOLDrivers |
+| Active Directory | 240 | WADComs, LOLAD |
+| **Total** | **3,336** | |
 
 Entry types: binaries, scripts, libraries, drivers (BYOVD), and AD techniques.
 Entries expose available commands, required privilege, capabilities and phases.
@@ -68,7 +68,10 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory site
 ```
 
 Open `http://127.0.0.1:8765/`. The experience includes global search, combined
-claim-aware filters, entry evidence, technique pages and a local relationship view.
+claim-aware advanced queries, entry evidence, technique pages, declared tool identities
+and a local relationship view. Search supports AND/OR/NOT, phrases and parentheses;
+result explanations retain the individual supporting claims. Identity candidates
+and historical aliases stay explicit and never merge techniques.
 Technique metadata uses a pinned MITRE ATT&CK Enterprise 20.1 registry; metadata
 matching never raises the confidence of entry claims. Revoked IDs remain labeled.
 
@@ -108,17 +111,29 @@ python3 -m pytest -q
 node tests/test_experience.js
 # Optional browser regression suite with Playwright installed, preview running:
 node tests/browser-experience.cjs
+node tests/browser_phase9.cjs
 ```
 
 See [current roadmap](docs/ROADMAP.md), [delivery evidence](docs/DELIVERY.md),
 [CORE + D1](docs/phase5-d1.md), [graph contract](docs/phase3-design.md),
-[technique registry](docs/phase4-design.md), and [UI contract](docs/phase6-design.md).
+[technique registry](docs/phase4-design.md), and [UI contract](docs/phase6-design.md), [API v1](docs/phase7-design.md),
+[advanced search](docs/phase8-design.md), and [durable identities](docs/phase9-design.md).
+Phases 7–9 are implemented and tested locally; production acceptance of this
+new delivery is pending and tracked in [the delivery gates](docs/phase9-delivery.md).
+Cron remains OFF until the user explicitly activates the prepared schedules.
 `site/build-manifest.json` pins the generated data files. Static builds validate
 all derived views before writing. [A2 deployment](docs/a2-design.md) installs
 immutable committed releases and switches the private active token atomically.
 The live root migration is implemented; scheduling remains an explicit gate.
 
 ## API
+
+The versioned public contract is [OpenAPI v1](api/openapi-v1.json). Same-release
+`api-v1.php?resource=...` and `/api/v1/...` expose entries, original evidence,
+advanced search with explanations/facets, graph, techniques, identities and
+explicit historical-ID resolution. Responses identify their dataset; retained
+release URLs remain bound to their own data. New API production acceptance is a
+separate gate from local PHP/browser tests. The legacy routes remain available:
 
 ```
 /api/stats

@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="./experience.css">
 <script defer src="./experience-core.js">
 </script>
+<script defer src="./search-engine.js">
+</script>
 <script defer src="./experience.js">
 </script>
 <title>Search — LOLDEX</title>
@@ -23,6 +25,8 @@
 <nav aria-label="Main">
 <a href="./search.html" aria-current="page">Index</a>
 <a href="./techniques.html" >Techniques</a>
+<a href="./identities.html">Identities</a>
+<a href="./api.html">API</a>
 <a href="./about.html">About</a>
 </nav>
 <span class="edition">Living-off-the-land knowledge index</span>
@@ -49,9 +53,10 @@
 <section aria-label="Search results">
 <form class="searchbar" id="search-form" role="search">
 <label class="hidden" for="q">Search entries</label>
-<input id="q" name="q" aria-label="Search entries" type="search" placeholder="Name, command, technique or capability…" autocomplete="off">
+<input id="q" name="q" aria-label="Search entries" type="search" placeholder="certutil OR source:LOLBAS capability:file-download" autocomplete="off">
 <button class="primary" type="submit">Search</button>
 </form>
+<details class="query-help"><summary>Advanced query help</summary><p>Use quoted phrases, <code>AND</code>, <code>OR</code>, <code>NOT</code> and parentheses. Fields: platform, source, capability, phase, type, privilege, technique, confidence, provenance and freshness.</p><p><code>capability:file-download confidence:high source:LOLBAS</code> requires a high-confidence supporting claim from that source. Confidence is never an entry rating. Negated groups have their own evidence scope. Text uses ASCII case-insensitivity; other Unicode is matched exactly.</p><p>Facet counts add each value to all current constraints. Unknown values match nothing; invalid syntax is an error.</p></details>
 <p class="result-summary" id="result-count" role="status">Loading index…</p>
 <div id="results" class="results">
 </div>

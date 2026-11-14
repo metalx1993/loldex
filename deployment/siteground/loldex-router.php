@@ -50,6 +50,17 @@ foreach ($segments as $segment) {
 }
 $query = isset($parts[1]) ? '?' . $parts[1] : '';
 if (preg_match('/[\r\n]/', $query)) { http_response_code(400); exit; }
+// Public read-only API redirects need CORS too. Preflight cannot redirect.
+$isPublicApi = $path === 'api-v1.php' || $path === 'api/v1' || strpos($path, 'api/v1/') === 0;
+if ($isPublicApi) {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, HEAD, OPTIONS');
+    header('Access-Control-Allow-Headers: If-None-Match, Content-Type');
+    header('Access-Control-Expose-Headers: ETag, X-LOLDEX-Dataset');
+    if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        http_response_code(204); exit;
+    }
+}
 // A visible version prefix binds all relative requests to this retained release.
 // 307 preserves POST (contact) and query strings. No permanent redirect caching.
 header('Location: /releases/' . $release . '/' . implode('/', $encoded) . $query, true, 307);

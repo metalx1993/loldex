@@ -20,9 +20,12 @@ _COMMIT = re.compile(r'[0-9a-f]{40}\Z')
 _RELEASE = re.compile(r'r-[0-9a-f]{64}\Z')
 DATA_FILES = {'data.json', 'catalog.json', 'evidence.json', 'graph.json',
               'techniques.json', 'registry-license.txt'}
+PRODUCTION_DATA_FILES = DATA_FILES | {'identities.json', 'openapi-v1.json'}
 PRODUCTION_FILES = DATA_FILES | {
     'build-manifest.json', 'index.html', 'search.html', 'entry.html', 'technique.html',
     'techniques.html', 'experience-core.js', 'experience.js', 'experience.css',
+    'api-v1.php', 'api-v1-core.php', 'search-engine.php', 'search-engine.js',
+    'identities.json', 'identity.html', 'identities.html', 'api.html', 'openapi-v1.json',
 }
 _FORBIDDEN_PARTS = {'.git', '.hg', '.svn', '.ssh', '.aws', '.codex', '__pycache__'}
 _PRIVATE_NAMES = {'.htpasswd', '.ds_store', 'id_rsa', 'id_dsa', 'id_ecdsa', 'id_ed25519'}
@@ -144,6 +147,8 @@ def verify_data_manifest(files, *, required=False):
     declared = manifest['files']
     if not isinstance(declared, dict) or not DATA_FILES <= declared.keys() or 'build-manifest.json' in declared:
         raise ValueError('data build manifest must cover all public datasets')
+    if any(path.startswith('evidence-records/') and path not in declared for path in files):
+        raise ValueError('evidence shard missing from build inventory')
     for path, digest in declared.items():
         validate_path(path)
         if path not in files or not isinstance(digest, str) or not _SHA.fullmatch(digest) or _sha(files[path]) != digest:
@@ -380,4 +385,6 @@ def package_commit(repo, commit):
     if not PRODUCTION_FILES <= files.keys():
         raise ValueError('committed site is missing required UI or generated dataset files')
     verify_data_manifest(files, required=True)
+    if not PRODUCTION_DATA_FILES <= _parse_json(files['build-manifest.json'])['files'].keys():
+        raise ValueError('production build inventory must cover versioned API and identity datasets')
     return build_package(files, commit)

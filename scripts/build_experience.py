@@ -13,6 +13,7 @@ from pathlib import Path
 import yaml
 
 from scripts.build_site_data import KEEP
+from knowledge.artifacts import evidence_path
 from adapters.projection import build as project
 from phase5.canonical import nfc
 from phase5.state import validate_body, validate_envelope
@@ -32,6 +33,7 @@ def build_experience(entries, state=None):
         seen.add(eid)
         row = {k: copy.deepcopy(entry[k]) for k in KEEP if k in entry}
         row["id"] = eid
+        row["evidence_ref"] = evidence_path(eid)
         # Public interpretation is always rederived from claims, never copied
         # from possibly drifted top-level projections. Raw source evidence stays raw.
         row.update(project(entry.get("enrichment", {})))

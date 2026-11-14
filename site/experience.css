@@ -137,3 +137,10 @@ nav a{font-size:12px}
 
 
 input::placeholder{color:var(--muted);opacity:1}
+
+.query-help,.match-explanation{margin-block:16px;padding:14px;border:1px solid var(--line);background:var(--surface);overflow-wrap:anywhere}
+.query-help p,.match-explanation p{margin-block:12px 0;font-size:13px}
+.identity-member{padding-block:22px;border-top:1px solid var(--line)}
+#api-form{display:grid;gap:12px;max-width:760px;margin-bottom:20px}
+#api-response{max-height:650px;overflow:auto}
+@media(max-width:720px){.bar .wrap{flex-wrap:wrap;gap:12px;padding-block:14px}nav{gap:16px;flex:1;min-width:180px}.edition{display:none}}

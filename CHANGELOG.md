@@ -1,5 +1,26 @@
 # Changelog
 
+## Phases 7–9 — local implementation · 2026-11-14
+
+- Added a versioned knowledge API, OpenAPI contract, dataset/release binding,
+  bounded pagination, strict request validation, conditional responses and exact
+  original evidence shards. Legacy endpoints remain separate.
+- Added matching JavaScript/PHP advanced query engines with bounded Boolean
+  grammar, claim-correlated qualifiers, facets and relevance explanations.
+  Entry-level metadata never borrows another claim's confidence.
+- Added a versioned durable tool registry: three real cross-source declarations,
+  per-membership raw evidence/provenance/confidence, separate low-confidence
+  candidates, retained stale/missing associations and an explicit historical
+  Certutil source-ID alias. No technique merge or transitive identity inference.
+- Added local PHP/JavaScript, adversarial and actual Chromium integration checks,
+  including advanced search errors, pagination, identity witnesses, historical
+  alias UI, sharded evidence and mobile 320px layouts. Current production
+  acceptance and final aggregate results are pending in docs/phase9-delivery.md.
+- Preserved frozen CORE/D1 and the separate D2 publication profile. The current
+  publication snapshot contains 3,336 entries; the historical Phase 6 record
+  below describes its original delivery rather than today's deployment state.
+- Cron remains OFF pending explicit final user activation. Phase 10 remains future.
+
 ## Local delivery through Phase 6 — 2026-11-13
 
 - Added D1 discovery and verified immutable Git acquisition, five observational

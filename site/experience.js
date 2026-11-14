@@ -42,13 +42,15 @@ async function home(){
     replace($('#featured'),...techniques.techniques.slice().sort((a,b)=>b.entry_ids.length-a.entry_ids.length||a.id.localeCompare(b.id)).slice(0,3).map(techniqueCard));
   }catch{fail($('#stats'));}
 }
-const facetConfig=[['platform','Platform','platform'],['source','Source project','source'],['priv','Required privilege','privilege_required'],['cap','Capability','capabilities'],['phase','Phase','phases'],['technique','ATT&CK identifier','attack_techniques'],['confidence','Claim confidence','confidence'],['provenance','Claim origin','provenance'],['freshness','CORE classification','freshness']];
+const facetConfig=[['platform','Platform','platform'],['source','Source project','source'],['type','Entry type','type'],['priv','Required privilege','privilege_required'],['cap','Capability','capabilities'],['phase','Phase','phases'],['technique','ATT&CK identifier','attack_techniques'],['confidence','Claim confidence','confidence'],['provenance','Claim origin','provenance'],['freshness','CORE classification','freshness']];
 async function search(){
   const q=$('#q'), params=new URLSearchParams(location.search);q.value=params.get('q')||'';
   try{
     const [catalog,techniques]=await Promise.all([data('catalog.json'),data('techniques.json').catch(()=>({techniques:[]}))]), entries=catalog.entries;
     const names=new Map(techniques.techniques.map(t=>[t.id,t.name]));
     for(const entry of entries)entry.technique_names=(entry.attack_techniques||[]).map(id=>names.get(id)).filter(Boolean);
+    const fieldNames={cap:'capability',priv:'privilege'};
+    const selects=new Map();
     for(const [key,label,field] of facetConfig){
       let values;
       if(key==='source')values=entries.flatMap(LX.sources);
@@ -58,28 +60,53 @@ async function search(){
       else values=entries.flatMap(e=>Array.isArray(e[field])?e[field]:e[field]?[e[field]]:[]);
       const select=el('select',{id:'f-'+key,name:key},el('option',{value:''},'All'));
       for(const v of [...new Set(values)].sort())select.append(el('option',{value:v},v));
-      // Unknown parameters remain selected and match zero results, never silently broaden.
       if(params.get(key)&&![...select.options].some(o=>o.value===params.get(key)))select.append(el('option',{value:params.get(key)},params.get(key)));
-      select.value=params.get(key)||'';
+      select.value=params.get(key)||'';selects.set(key,select);
       $('#filters').append(el('div',{},el('label',{for:select.id},label),select));
     }
-    let visible=30,hits=[];
+    let shown=0,combined='';
+    const error=el('p',{class:'notice error',role:'alert',hidden:''});$('#search-form').after(error);
     function render(reset=true){
-      if(reset)visible=30;
-      const filters={q:q.value};for(const [k]of facetConfig)filters[k]=$('#f-'+k).value;
-      const url=new URLSearchParams(Object.entries(filters).filter(([,v])=>v));
-      history.replaceState(null,'',location.pathname+(url.size?'?'+url:''));
-      hits=entries.filter(e=>LX.matches(e,filters));
-      $('#result-count').textContent=hits.length.toLocaleString('en')+' results · showing '+Math.min(hits.length,visible);
-      replace($('#results'),...(hits.length?hits.slice(0,visible).map(row):[el('div',{class:'empty'},el('h2',{},'No matching entries'),el('p',{},'Try fewer filters or a different search term.'))]));
-      $('#more').hidden=hits.length<=visible;
+      if(reset){
+        shown=0;
+        const filters={q:q.value};for(const[k,s]of selects)filters[k]=s.value;
+        const url=new URLSearchParams(Object.entries(filters).filter(([,v])=>v));
+        history.replaceState(null,'',location.pathname+(url.size?'?'+url:''));
+        const terms=q.value.trim()?['('+q.value+')']:[];
+        for(const[k,s]of selects)if(s.value)terms.push((fieldNames[k]||k)+':'+JSON.stringify(s.value));
+        combined=terms.join(' AND ');
+      }
+      try{
+        const page=LoldexSearch.search(entries,combined,{offset:shown,limit:30});
+        error.hidden=true;error.textContent='';
+        const rows=page.results.map(hit=>{
+          const article=row(hit.entry),why=el('details',{class:'match-explanation'},el('summary',{},'Why this result · relevance '+hit.score));
+          why.append(el('p',{class:'muted'},'Relevance reflects matching fields, not confidence, risk or freshness.'));
+          const seen=new Set();
+          for(const reason of hit.reasons){
+            const key=JSON.stringify(reason);if(seen.has(key))continue;seen.add(key);
+            const claim=reason.claim, value=claim?.value??reason.value??'';
+            why.append(el('p',{},el('code',{},reason.field),': ',String(value),claim?' · '+claim.provenance?.type+' / '+claim.confidence?.level+' / '+(claim.provenance?.source||'No source declared'):''));
+          }
+          article.append(why);return article;
+        });
+        if(reset)replace($('#results'),...rows);else $('#results').append(...rows);
+        shown+=rows.length;
+        $('#result-count').textContent=page.total.toLocaleString('en')+' results · showing '+shown;
+        if(!page.total)replace($('#results'),el('div',{class:'empty'},el('h2',{},'No matching entries'),el('p',{},'Try fewer filters or a different query.')));
+        $('#more').hidden=shown>=page.total;
+        for(const[k,s]of selects){const counts=new Map((page.facets[fieldNames[k]||k]||[]).map(v=>[v.value,v.count]));for(const option of s.options)if(option.value)option.textContent=option.value+' ('+(counts.get(option.value)||0)+')';}
+      }catch(e){
+        if(!(e instanceof LoldexSearch.QueryError))throw e;
+        error.hidden=false;error.textContent='Invalid query: '+e.message;
+        replace($('#results'));$('#more').hidden=true;$('#result-count').textContent='Query needs correction';
+      }
     }
     $('#search-form').addEventListener('submit',event=>{event.preventDefault();render();});
     q.addEventListener('input',()=>render());
-    for(const [key]of facetConfig)$('#f-'+key).addEventListener('change',()=>render());
-    $('#reset').addEventListener('click',()=>{q.value='';for(const [key]of facetConfig)$('#f-'+key).value='';render();q.focus();});
-    $('#more').addEventListener('click',()=>{visible+=30;render(false);});
-    render();
+    for(const s of selects.values())s.addEventListener('change',()=>render());
+    $('#reset').addEventListener('click',()=>{q.value='';for(const s of selects.values())s.value='';render();q.focus();});
+    $('#more').addEventListener('click',()=>render(false));render();
   }catch{fail($('#results'));$('#result-count').textContent='Index unavailable';}
 }
 async function techniques(){
@@ -123,7 +150,7 @@ async function entry(){
   const target=$('#detail'),id=new URLSearchParams(location.search).get('id');
   try{
     const catalog=await data('catalog.json'),e=catalog.entries.find(e=>e.id===id);
-    if(!e){title(target,'Entry not found','This entry is not in the index.',id||'No ID supplied');target.append(el('a',{href:'./search.html'},'Return to search'));return;}
+    if(!e){title(target,'Entry not found','This entry is not in the index.',id||'No ID supplied');try{const identities=await data('identities.json'),alias=identities.aliases.find(a=>a.old_entry_id===id);if(alias){target.append(el('p',{class:'notice'},'An explicit source-ID mapping exists. No target is selected automatically; these are source records, not a claim of technique equivalence.'));for(const next of alias.new_entry_ids)target.append(el('p',{},el('a',{href:entryURL(next)},next)));target.append(el('pre',{},JSON.stringify(alias,null,2)));}}catch{}target.append(el('a',{href:'./search.html'},'Return to search'));return;}
     title(target,e.platform,e.name||e.id,e.id);
     target.append(el('div',{class:'pills'},LX.sources(e).map(s=>pill(s,searchURL({source:s}))), (e.attack_techniques||[]).map(techniquePill)));
     target.append(el('div',{class:'notice'},freshness(e),'. CORE classification describes observations, not elapsed-time freshness.'));
@@ -139,8 +166,9 @@ async function entry(){
     const disclosure=el('details',{},el('summary',{},'Inspect original source data'));
     let loaded=false;
     disclosure.addEventListener('toggle',async()=>{if(!disclosure.open||loaded)return;loaded=true;const box=el('div',{},'Loading source evidence…');disclosure.append(box);
-      try{const raw=await data('evidence.json');replace(box,el('pre',{},JSON.stringify(raw.entries[id]||{},null,2)));}catch{loaded=false;fail(box,'Source evidence could not be loaded. Close and reopen this section to retry.');}});
+      try{const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(id));const ref='evidence-records/'+Array.from(new Uint8Array(bytes),v=>v.toString(16).padStart(2,'0')).join('')+'.json';if(e.evidence_ref!==ref)throw new Error('Evidence reference mismatch');const raw=await data(ref);replace(box,el('pre',{},JSON.stringify(raw,null,2)));}catch{loaded=false;fail(box,'Source evidence could not be loaded. Close and reopen this section to retry.');}});
     source.append(disclosure);target.append(source);
+    try{target.append(await entryIdentities(e));}catch{target.append(el('p',{class:'notice error'},'Tool identity evidence is unavailable; no membership is inferred.'));}
     try{const graph=await data('graph.json');target.append(relationshipView(graph,'entry:'+id));
       const diagnostics=(graph.diagnostics||[]).filter(d=>d.entry_id===id);
       if(diagnostics.length)target.append(el('section',{},el('h2',{},'Data quality notes'),el('p',{class:'muted'},'A source claim could not form a valid relationship. The original claim is preserved above.'),el('pre',{},JSON.stringify(diagnostics,null,2))));
@@ -175,4 +203,65 @@ async function technique(){
     target.append(el('section',{},el('h2',{},'Entries documenting '+t.id),count,list,more),relationshipView(graph,'technique:'+t.id));
   }catch{target.removeAttribute('aria-busy');fail(target);}
 }
-({home,search,techniques,entry,technique}[document.body.dataset.view]||(()=>{}))();
+const identityURL=id=>'./identity.html?id='+encodeURIComponent(id);
+function membershipBlock(member,catalog){
+  const entry=catalog.entries.find(e=>e.id===member.entry_id),box=el('article',{class:'identity-member'});
+  box.append(el('h3',{},entry?el('a',{href:entryURL(entry.id)},entry.name||entry.id):member.entry_id),el('p',{class:'entry-id'},member.entry_id));
+  box.append(el('p',{},member.relation.replaceAll('_',' '),' · ',member.status==='active'?'Witness matches this dataset':member.status));
+  box.append(claimTable([{field:member.relation,value:member.entry_id,provenance:member.provenance,confidence:member.confidence}]));
+  box.append(el('p',{class:'muted'},'Curator: '+(member.provenance?.curator||'Not declared')+'. This association does not equate techniques or prove runtime binary resolution.'));
+  const evidence=el('details',{},el('summary',{},'Inspect identity witnesses'));
+  evidence.append(el('pre',{},JSON.stringify({review_revision:member.review_revision,current_revision:member.current_revision,evidence:member.evidence},null,2)));box.append(evidence);return box;
+}
+async function identities(){
+  try{
+    const registry=await data('identities.json');
+    if(registry.version!==1||!Array.isArray(registry.entities))throw new Error('Invalid identity registry');
+    const q=$('#identity-q');
+    function render(){const needle=q.value.toLowerCase(),hits=registry.entities.filter(e=>(e.id+' '+e.label).toLowerCase().includes(needle));
+      $('#result-count').textContent=hits.length+' declared tool identities · '+registry.stats.active_memberships+' current witness associations';
+      replace($('#identity-results'),...hits.map(e=>el('article',{class:'tech-card'},el('a',{href:identityURL(e.id)},e.label),el('p',{class:'entry-id'},e.id),el('p',{},e.members.filter(m=>m.status==='active').length+' current associations'),el('small',{},'Tool identity only; techniques stay distinct.'))));
+      if(!hits.length)replace($('#identity-results'),el('p',{class:'empty'},'No declared identity matches. Search entries for the broader source catalogue.'));
+    }
+    q.addEventListener('input',render);render();
+  }catch{fail($('#identity-results'));$('#result-count').textContent='Identity registry unavailable';}
+}
+async function identity(){
+  const target=$('#detail'),id=new URLSearchParams(location.search).get('id');
+  try{
+    const [registry,catalog]=await Promise.all([data('identities.json'),data('catalog.json')]);
+    const entity=registry.entities.find(e=>e.id===id);
+    if(!entity){title(target,'Identity not found','No declared tool identity matches.',id||'No ID supplied');return;}
+    title(target,'Declared tool identity',entity.label,entity.id);
+    target.append(el('p',{class:'notice'},'Memberships preserve their own provenance and confidence. They never make the techniques equivalent, and no confidence is assigned to this entire identity.'));
+    target.append(el('p',{},'Documented runtime scope: '+entity.platform_scope.runtime.join(', ')+'. Entry contexts: '+entity.platform_scope.contexts.join(', ')+'.'));
+    if(entity.scope_note)target.append(el('p',{class:'muted'},entity.scope_note));
+    const active=entity.members.filter(m=>m.status==='active'),inactive=entity.members.filter(m=>m.status!=='active');
+    target.append(el('section',{},el('h2',{},'Current source witnesses'),...active.map(m=>membershipBlock(m,catalog))));
+    if(!active.length)target.append(el('p',{class:'empty'},'No reviewed witness currently matches this dataset. The stable identity record is retained.'));
+    if(inactive.length)target.append(el('section',{},el('h2',{},'Retained historical associations'),el('p',{class:'muted'},'These records remain visible for audit and are excluded from active membership.'),...inactive.map(m=>membershipBlock(m,catalog))));
+    const candidates=registry.candidates.filter(c=>c.entity_id===id);
+    if(candidates.length){const section=el('section',{},el('h2',{},'Unconfirmed candidates'),el('p',{class:'muted'},'These low-confidence suggestions are not identity memberships. A matching executable token is insufficient to prove equivalence.'));
+      for(const c of candidates){const e=catalog.entries.find(v=>v.id===c.entry_id);section.append(el('p',{},el('a',{href:entryURL(c.entry_id)},e?.name||c.entry_id),' · '+c.status+' / '+c.confidence.level));}target.append(section);}
+  }catch{target.removeAttribute('aria-busy');fail(target,'The identity evidence could not be loaded.');}
+}
+async function api(){
+  const form=$('#api-form'),status=$('#api-status'),box=$('#api-response');
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();status.textContent='Reading this release’s API…';box.textContent='';
+    try{const response=await fetch('./api-v1.php?resource=search&limit=5&q='+encodeURIComponent($('#api-q').value));const envelope=await response.json();
+      box.textContent=JSON.stringify(envelope,null,2);status.textContent=response.ok?'API v'+envelope.api_version+' · '+envelope.pagination.total+' results · five shown':(envelope.error?.message||'API request rejected');
+    }catch{status.textContent='API unavailable. This read-only explorer requires the PHP hosting environment.';}
+  });
+}
+async function entryIdentities(e){
+  const registry=await data('identities.json'),refs=registry.entry_index[e.id]||[];
+  const section=el('section',{},el('h2',{},'Tool identity evidence'),el('p',{class:'muted'},'Tool associations do not equate this technique with other entries. Candidate suggestions are kept separate.'));
+  for(const ref of refs){const entity=registry.entities.find(v=>v.id===ref.entity_id),member=entity?.members.find(m=>m.id===ref.claim_id&&m.status==='active');
+    if(!member)throw new Error('Inconsistent identity reference');section.append(el('h3',{},el('a',{href:identityURL(entity.id)},entity.label)),claimTable([{field:member.relation,value:e.id,provenance:member.provenance,confidence:member.confidence}]));}
+  if(!refs.length)section.append(el('p',{},'No active declared tool membership for this entry.'));
+  const candidates=registry.candidates.filter(c=>c.entry_id===e.id);
+  for(const c of candidates)section.append(el('p',{class:'muted'},'Unconfirmed candidate: ',el('a',{href:identityURL(c.entity_id)},c.entity_id),' · heuristic / low; not an identity membership.'));
+  return section;
+}
+({home,search,techniques,entry,technique,identities,identity,api}[document.body.dataset.view]||(()=>{}))();

