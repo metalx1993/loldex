@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: socat -u 'exec:echo DATA' open:/path/to/output-file,creat
   comment: The `echo` command is actually used.
@@ -84,7 +84,7 @@ source_data:
               receiver: tcp-server
     upstream_url: https://gtfobins.github.io/gtfobins/socat/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-write
@@ -120,6 +120,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:4fa8b86759168d6b8468aa3638e54fc847c9b2cb33d81588e1fadf428fa0b29a

@@ -14,7 +14,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 preconditions:
 - shell
 commands:
@@ -43,7 +43,7 @@ source_data:
         \ https://github.com/GhostPack/Rubeus\n  - https://github.com/GhostPack/Rubeus#asreproast\n---\n"
     upstream_url: https://wadcoms.github.io
     upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -90,6 +90,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     WADComs: sha256:747db85102b1c6ab1841ab320c09114e274dfae74690b5897325923db43d94c7

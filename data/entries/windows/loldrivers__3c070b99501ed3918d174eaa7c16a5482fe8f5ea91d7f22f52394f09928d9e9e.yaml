@@ -12,7 +12,7 @@ sources:
   upstream_url: https://www.loldrivers.io
   license: MIT
   upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1068
 opsec:
@@ -856,7 +856,7 @@ source_data:
         \  LoadsDespiteHVCI: 'FALSE'\nCVEs:\n- CVE-2018-19320\n- CVE-2018-19322\n- CVE-2018-19323\n- CVE-2018-19321\n"
     upstream_url: https://www.loldrivers.io
     upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -896,6 +896,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLDrivers: sha256:2c795648a7e91a07d8109fbfb5f5dc7bbb12c954cfd584cbd51fc44900f6b3a8

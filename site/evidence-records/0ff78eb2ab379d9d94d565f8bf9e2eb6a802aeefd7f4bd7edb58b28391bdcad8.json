@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"setlock":{"functions":{"shell":[{"code":"setlock - /bin/sh","contexts":{"sudo":null,"suid":{"code":"setlock - /bin/sh -p","shell":true},"unprivileged":null}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/setlock/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}

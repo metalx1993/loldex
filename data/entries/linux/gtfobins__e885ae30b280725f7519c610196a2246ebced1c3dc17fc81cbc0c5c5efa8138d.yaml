@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: dmidecode --no-sysfs -d x.dmi --dump-bin /path/to/output-file
   comment: 'It can be used to write files using a specially crafted SMBIOS file that can be read as a
@@ -81,7 +81,7 @@ source_data:
                 unprivileged: null
     upstream_url: https://gtfobins.github.io/gtfobins/dmidecode/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-write
@@ -110,6 +110,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:1e538d9d57fe9f8034c75592dfd28272b645dbc0d4ca2de6d7048a059bc9513f

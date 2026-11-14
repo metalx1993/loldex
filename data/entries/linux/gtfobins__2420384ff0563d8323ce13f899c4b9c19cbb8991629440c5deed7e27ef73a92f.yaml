@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: msgconv -P /path/to/input-file
   comment: The file is parsed and displayed as a Java `.properties` file.
@@ -38,7 +38,7 @@ source_data:
                 unprivileged: null
     upstream_url: https://gtfobins.github.io/gtfobins/msgconv/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-read
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:91a2e9d81dcb0a70b061880bacefd611756c8e267826225b2694d4862fec3236

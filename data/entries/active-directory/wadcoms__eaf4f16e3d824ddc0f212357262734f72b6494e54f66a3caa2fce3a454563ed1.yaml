@@ -12,7 +12,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 preconditions:
 - no credentials required
 commands:
@@ -40,7 +40,7 @@ source_data:
         \  - Enumeration\nreferences:\n  - https://linux.die.net/man/1/ldapsearch\n---\n"
     upstream_url: https://wadcoms.github.io
     upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: discovery
@@ -71,6 +71,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     WADComs: sha256:540cd3a8394b5a633b0d5774b45558d09772d981b2fc2e51bb3c251ee57666e7

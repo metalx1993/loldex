@@ -12,7 +12,7 @@ sources:
   upstream_url: https://www.loldrivers.io
   license: MIT
   upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1068
 opsec:
@@ -245,7 +245,7 @@ source_data:
         \ TOSHIBA. All rights reserved.\n  MachineType: AMD64\n  Imports:\n  - ntoskrnl.exe\n"
     upstream_url: https://www.loldrivers.io
     upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -285,6 +285,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLDrivers: sha256:d6fc9ffd493e487a4ba4e6cc5475c7a6a7d30eb4b24ec6a6171db534e0a84de8

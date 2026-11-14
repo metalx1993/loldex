@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1105
 opsec:
@@ -53,7 +53,7 @@ source_data:
       document_sha256: sha256:69aad09d7e315a18cc9f866868c13e67a44ea564bba2f1679ff3e93655def8df
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Certoc/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-download
@@ -90,6 +90,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:6cc89d73d3daa8fd4af28ba8c8f0806da0e9a33ad5c08e7e78b38f6651050018

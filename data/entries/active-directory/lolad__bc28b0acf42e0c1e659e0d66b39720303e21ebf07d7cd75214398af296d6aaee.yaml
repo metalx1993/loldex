@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolad-project.github.io
   license: verify upstream LICENSE
   upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD
     /d 0 /f
@@ -60,7 +60,7 @@ source_data:
       physical_occurrence_count: 2
     upstream_url: https://lolad-project.github.io
     upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: persistence
@@ -92,6 +92,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLAD: sha256:424a6e963e86a2d905902741df8e428482e2fe91eabdb2f3b36ba87320008df9

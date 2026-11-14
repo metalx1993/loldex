@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218.009
 opsec:
@@ -63,7 +63,7 @@ source_data:
       document_sha256: sha256:3ea5c45f313d3f62e7659911d4b6e94e44e74c999596ccbc63a7cc163e63e6e2
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Regasm/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -100,6 +100,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:b6c24f972aed881b17ecb7e4c4dcc621c96237687520f6fcfea0330e1f8c7ea6

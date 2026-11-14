@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218
 opsec:
@@ -51,7 +51,7 @@ source_data:
       document_sha256: sha256:f73112230cffb39f8bb8c30e8229dd8df25b5a7b0a32ad0314d9152a5c0bcb27
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Sigverif/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -88,6 +88,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:200efc766b4e165eff675760534efca6b82ab64ec1d5f63befb26b3f707ddc47

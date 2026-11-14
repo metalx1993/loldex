@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1187
 opsec:
@@ -57,7 +57,7 @@ source_data:
       document_sha256: sha256:f1f944b5ee6435065dd3d1117cdbb86102b4ba70b12ec7a26832cb6226840cba
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Rpcping/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: credential-access
@@ -94,6 +94,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:4886a24f208169e9da3508845730c2477c43938bf9a8a1ebc3f7f6a35b1e268c

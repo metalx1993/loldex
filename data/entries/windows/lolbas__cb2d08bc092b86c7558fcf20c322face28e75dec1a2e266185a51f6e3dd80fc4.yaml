@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218.011
 opsec:
@@ -52,7 +52,7 @@ source_data:
       document_sha256: sha256:ea9a2c2cefc10a4c5f3f09bb4ec921f328c6e27be316c8d28115e1ba122e5940
     upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Zipfldr/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -89,6 +89,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:2fa628794c46dd13737c15c8dfaa980fb53a17a21d101b8118b004f6f84c6f8d

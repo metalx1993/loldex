@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1127
 opsec:
@@ -52,7 +52,7 @@ source_data:
       document_sha256: sha256:ef4bcf4c94b2ccc8f2ee6ffac3536caeffbbc6845dccc039d4d620b0019bca10
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/dotnet-counters/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -89,6 +89,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:59d6abf245527cf56d3402af79a1b5c9b5f3fba2cadd72f3738509a7548761cb

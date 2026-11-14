@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218.011
 opsec:
@@ -48,7 +48,7 @@ source_data:
       document_sha256: sha256:db70b10c81176f2ac8982eeff5aa4e1fab7e7fae69e75e0e8ea22cde8479be3e
     upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Pcwutl/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -85,6 +85,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:0bc9918b5dbdbb9ae555c376ea2ef93f3c939ffc63eb9ca4b5fc06f60da6a24f

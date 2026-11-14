@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"agetty":{"functions":{"shell":[{"code":"agetty -l /bin/sh -o -p -a root tty","contexts":{"suid":{"shell":false}}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/agetty/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}

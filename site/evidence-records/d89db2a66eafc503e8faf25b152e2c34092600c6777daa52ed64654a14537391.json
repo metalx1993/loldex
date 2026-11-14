@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"bbot":{"functions":{"file-read":[{"binary":false,"code":"bbot -d -cy /path/to/input-file","comment":"The file is displayed in the debug log.","contexts":{"sudo":null,"unprivileged":null}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/bbot/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}

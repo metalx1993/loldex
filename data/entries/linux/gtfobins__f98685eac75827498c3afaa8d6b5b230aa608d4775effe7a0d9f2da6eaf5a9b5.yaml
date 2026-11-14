@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: dpkg -i x_1.0_all.deb
   comment: 'Generate the Debian package with [fpm](https://github.com/jordansissel/fpm) and upload it
@@ -63,7 +63,7 @@ source_data:
                 sudo: null
     upstream_url: https://gtfobins.github.io/gtfobins/dpkg/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: shell
@@ -99,6 +99,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:c1f8af5790251f2f11761e24b340cee1da077314c115c4585e92e38003372855

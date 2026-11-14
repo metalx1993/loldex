@@ -13,7 +13,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 preconditions:
 - a valid username
 - a valid password
@@ -51,7 +51,7 @@ source_data:
         \ - https://attack.mitre.org/techniques/T1558/003/\n---\n"
     upstream_url: https://wadcoms.github.io
     upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: credential-access
@@ -98,6 +98,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     WADComs: sha256:94b0ac0fd0bcca9de5548aee58b56abb70c1e2b43f109975cc9e8569951ffc4c

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218
 opsec:
@@ -97,7 +97,7 @@ source_data:
       document_sha256: sha256:07ee72f366c8f6c12f6909e58ae1dc21ed189b9d1cf798d7c35486c6557b1111
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Wmic/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -134,6 +134,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:d0a2f5cbc5e5c0dc46682e8e1f66e53a905db9f4320e20d3d1258a0cddd9bf10

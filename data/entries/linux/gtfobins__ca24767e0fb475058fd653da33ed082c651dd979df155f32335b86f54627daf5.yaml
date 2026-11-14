@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: bee eval '...'
   comment: 'This allows to run PHP code (`...`).
@@ -154,7 +154,7 @@ source_data:
               version: '>= 5.4'
     upstream_url: https://gtfobins.github.io/gtfobins/bee/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -193,6 +193,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:5ad20cc52a1986ee778a4cae961b99bee5831bdcc89251b27afcd4754630d984

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1105
 opsec:
@@ -51,7 +51,7 @@ source_data:
       document_sha256: sha256:4199430e2468dfb6c11c5db1958df4314f59159026f19e2967ab8743ca2a180c
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/ECMangen/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-download
@@ -88,6 +88,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:c826207cea2e37eaa520375b24fcd222fa0bc96f8feb6f6c0e4a71b4afedd3c9

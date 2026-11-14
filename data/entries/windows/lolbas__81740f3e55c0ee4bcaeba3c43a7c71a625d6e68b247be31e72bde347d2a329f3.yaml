@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218
 opsec:
@@ -55,7 +55,7 @@ source_data:
       document_sha256: sha256:5c120c4784ddfbd53d39ff5a0741ab59182de62721561d3da8eab729a9aec872
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Atbroker/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -92,6 +92,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:13487ee4d32f5e4b523976f35454a54a4b5c43d42541639a0cf1d6850fd468e5

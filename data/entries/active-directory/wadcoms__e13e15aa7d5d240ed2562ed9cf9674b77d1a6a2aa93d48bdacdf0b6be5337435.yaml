@@ -12,7 +12,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 preconditions:
 - an NTLM hash (pass-the-hash)
 - a valid username
@@ -41,7 +41,7 @@ source_data:
         ---\n"
     upstream_url: https://wadcoms.github.io
     upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -72,6 +72,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     WADComs: sha256:1c6a2b8a8a9004e5677d0c3703921c4f8c0c92e1f16ec3bd99b0818867d46d27

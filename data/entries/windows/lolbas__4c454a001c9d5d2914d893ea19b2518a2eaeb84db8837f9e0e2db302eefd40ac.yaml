@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1127.002
 opsec:
@@ -53,7 +53,7 @@ source_data:
       document_sha256: sha256:9aefb9adf4e116050bf7084951a48b7cd142446c590f020066e281caa3986cfe
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Dfsvc/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -97,6 +97,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:95ec7849f90dd605b0b0aed44a0e2f063a38d6d4c9ed3c9fc4b83226460ba9b3

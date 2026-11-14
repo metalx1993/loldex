@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1036.005
 opsec:
@@ -50,7 +50,7 @@ source_data:
       document_sha256: sha256:a5916baca8dafb42c6f398520888bf273ccf362f7cb08f8fc992a4e30c0e0340
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Colorcpl/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-write
@@ -87,6 +87,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:c04d647466633240a33f2414217115bcee71be832af7bcc8b7ba4aa23884e0ac

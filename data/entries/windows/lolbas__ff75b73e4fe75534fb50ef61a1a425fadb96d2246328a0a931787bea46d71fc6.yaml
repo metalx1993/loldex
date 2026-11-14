@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1105
 opsec:
@@ -52,7 +52,7 @@ source_data:
       document_sha256: sha256:f0825607854162f65757fd6c0e16bfbce28fe42cab13403a22cb2653db2207c3
     upstream_url: https://lolbas-project.github.io/lolbas/Libraries/PhotoViewer/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-download
@@ -89,6 +89,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:ab7b1f3676e9e2db3ed4293eaf3f4803f6dddaef4c420def3608ea146bf6a2e8

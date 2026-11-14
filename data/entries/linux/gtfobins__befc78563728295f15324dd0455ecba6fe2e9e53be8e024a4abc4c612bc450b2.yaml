@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: echo -e 'x\nx' | passwd
   comment: This changes the root password to `x`, so it's now possible to log in using, for example, `su`.
@@ -36,7 +36,7 @@ source_data:
                 sudo: null
     upstream_url: https://gtfobins.github.io/gtfobins/passwd/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -65,6 +65,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:b05306b5a41e76b752cc2e17113572e16b0877d22f2589ae67ceeb661046fe73

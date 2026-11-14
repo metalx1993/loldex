@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"chattr":{"functions":{"privilege-escalation":[{"code":"chattr +i /path/to/input-file","comment":"Make the target file immutable.","contexts":{"sudo":null,"suid":null}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/chattr/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 preconditions:
 - a valid password
 - a valid username
@@ -41,7 +41,7 @@ source_data:
         \  - https://www.hackingarticles.in/impacket-guide-smb-msrpc/\n---\n"
     upstream_url: https://wadcoms.github.io
     upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: discovery
@@ -72,6 +72,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     WADComs: sha256:0ead9afb877cf674720d86e302d79aae4702012b0f782dbd5631687ec6c42957

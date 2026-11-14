@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 aliases:
 - msedge_proxy
 attack_techniques:
@@ -53,7 +53,7 @@ source_data:
       document_sha256: sha256:30bb47c5eb241fe17446ce91aca58ece8816d7e810b84e186cde32a9bc260d26
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/msedge_proxy/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-download
@@ -90,6 +90,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:22a0271de857c0acff85a69569d1fe4581482731506c8da637e6cda6cdcb2862

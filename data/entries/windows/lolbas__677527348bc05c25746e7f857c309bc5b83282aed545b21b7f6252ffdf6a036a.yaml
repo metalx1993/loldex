@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1202
 opsec:
@@ -56,7 +56,7 @@ source_data:
       document_sha256: sha256:fe9ca77b723f3d6c1bc0642160af5bb63b5b6ffba5fef4a17c0d449321d7363d
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Pcalua/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -93,6 +93,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:ca71f8e21ff4c3cb28aeb0e027a685c916a31d3cbe4cbd0405754ec934687cb5

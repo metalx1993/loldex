@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: bpftrace --unsafe -e 'BEGIN {system("/bin/sh 1<&0");exit()}'
 - template: 'echo ''BEGIN {system("/bin/sh 1<&0");exit()}'' >/path/to/temp-file
@@ -46,7 +46,7 @@ source_data:
                 sudo: null
     upstream_url: https://gtfobins.github.io/gtfobins/bpftrace/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: shell
@@ -82,6 +82,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:d4445035ad845385354b019b26604dd5d6c1ec59dbd6b3a0f45b960fbf76d043

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://www.loldrivers.io
   license: MIT
   upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 aliases:
 - WYProxy32.sys
 attack_techniques:
@@ -89,7 +89,7 @@ source_data:
         \        SHA256: de6bf572d39e2611773e7a01f0388f84fb25da6cba2f1f8b9b36ffba467de6fa\n"
     upstream_url: https://www.loldrivers.io
     upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -129,6 +129,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLDrivers: sha256:99ae8de6400b8d06f97df776e817ba73513ba4994845282cdff3606ae51b31f2

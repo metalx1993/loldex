@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: code tunnel --name xxxxxx
   comment: 'This requires a valid GitHub account.
@@ -92,7 +92,7 @@ source_data:
                   Alternatively it''s possible to just display files.'
     upstream_url: https://gtfobins.github.io/gtfobins/code/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-upload
@@ -128,6 +128,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:81fd21d38168de691c7968b462cf36e0ec934656dac6e58d0a6b589a6278ce20

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1105
 opsec:
@@ -57,7 +57,7 @@ source_data:
       document_sha256: sha256:af3d4e8a53b7b9c8f7b93bd600feef7da74c81efeab3f41dfe28de36324eff17
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Outlook/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-download
@@ -94,6 +94,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:375fbb457224d5c42de48f201e38de838a5b10bc3e3eb57c950afed6da98b9f0

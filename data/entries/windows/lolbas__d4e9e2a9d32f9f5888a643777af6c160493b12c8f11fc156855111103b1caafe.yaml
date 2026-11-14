@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1552.001
 opsec:
@@ -65,7 +65,7 @@ source_data:
       document_sha256: sha256:22581c5c75e108e3c27e5d6e84dc0313fe53805013085b3036f1ecb1249dfa31
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Findstr/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: credential-access
@@ -102,6 +102,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:2f41c90a80bafe2b4e926d9c15fef647d79082dec789c79914005a9e34f7e700

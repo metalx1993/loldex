@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1055
 opsec:
@@ -64,7 +64,7 @@ source_data:
       document_sha256: sha256:4c61e0cbc78fffa94442a3bfa8659a9f35490895ad0cc0a7b9ca17614368b0ff
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Coregen/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -101,6 +101,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:3db4b1e29b180b6b0aaddcf11e4b4e7e0482e860d1ce1e08a9a62f97df413f94

@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: ctr run --rm --mount type=bind,src=/,dst=/,options=rbind -t docker.io/library/alpine:latest
     x
@@ -53,7 +53,7 @@ source_data:
                 suid: null
     upstream_url: https://gtfobins.github.io/gtfobins/ctr/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: shell
@@ -89,6 +89,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:7eb7210523a44ee039a58c400abad5b3c8bb78919a4fbd576f85a7068f442feb

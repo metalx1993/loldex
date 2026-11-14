@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1202
 opsec:
@@ -56,7 +56,7 @@ source_data:
       document_sha256: sha256:5f92ed2bc3c6658460a152c077b50bb341665730404745050f86cef069e0b874
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Pcwrun/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -93,6 +93,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:9aa79315d3e841c397a44f3a4efa598bac49f02a7a5a98c4b540791ef7cd84c4

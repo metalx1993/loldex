@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: 'echo ''/bin/sh </dev/tty >/dev/tty'' >localhost
 
@@ -76,7 +76,7 @@ source_data:
                 sudo: null
     upstream_url: https://gtfobins.github.io/gtfobins/cpio/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: shell
@@ -112,6 +112,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:be758f0f3561c53df58ef5f4e937a5e07ec9c78fb139e2e4a6ec440271fb1363

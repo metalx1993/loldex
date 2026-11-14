@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: exiftool -if '...' /etc/passwd
   comment: This allows to run Perl code (`...`).
@@ -122,7 +122,7 @@ source_data:
               receiver: http-server
     upstream_url: https://gtfobins.github.io/gtfobins/exiftool/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -161,6 +161,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:b8d45a76c59b08c84c18c5716aa9298d7733a9185c94c55711b2129aacad6576

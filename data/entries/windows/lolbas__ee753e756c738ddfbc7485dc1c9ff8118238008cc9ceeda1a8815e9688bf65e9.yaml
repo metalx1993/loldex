@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1059
 opsec:
@@ -62,7 +62,7 @@ source_data:
       document_sha256: sha256:448b8bf3bff06b3781cbec78c9f436ca4e4d86652debc3104d70bcee8006503e
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Fsi/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -106,6 +106,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:17118a1129a676f8716f5c85ee2ea36fdcd3c5ca06cbc0ed0f35d1072887f555

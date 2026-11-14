@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1003.003
 opsec:
@@ -70,7 +70,7 @@ source_data:
       document_sha256: sha256:7294ae279be1a049ab42b1f2efec8fc123528f4fb459709969475c1696c7ad91
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dsdbutil/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: credential-dump
@@ -107,6 +107,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:ff5d03c582b4973a0cc72b9c8be2b6307754cf70401246dfbdc9e30cbbd01bba

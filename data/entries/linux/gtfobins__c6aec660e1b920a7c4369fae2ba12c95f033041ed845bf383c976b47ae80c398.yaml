@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: getent shadow
   comment: This allows to dump password hashes from the `/etc/shadow` file.
@@ -36,7 +36,7 @@ source_data:
                 suid: null
     upstream_url: https://gtfobins.github.io/gtfobins/getent/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -65,6 +65,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:8308554f895005c35b57ed9aa9f99a5ec161f7c362f5c22601166f73cfd9ccb4

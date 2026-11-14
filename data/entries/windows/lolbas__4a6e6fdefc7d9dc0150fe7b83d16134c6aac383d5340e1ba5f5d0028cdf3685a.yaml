@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1562.001
 opsec:
@@ -52,7 +52,7 @@ source_data:
       document_sha256: sha256:1a66e2f94559e3928fe595943b08052f56b77c1a946ba09a64c81536f0a6f520
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/FltMC/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -89,6 +89,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:e96ffd76231d8fb5b3652465058ff82d4f0c3c48661f6e4d8679bbd586cba049

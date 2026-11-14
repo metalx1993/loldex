@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1202
 opsec:
@@ -56,7 +56,7 @@ source_data:
       document_sha256: sha256:51b8e76309856012da727e66d1641dc2f47fbab58cefd07e9d436ff40cacd790
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Scriptrunner/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -93,6 +93,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:9d68eb7b02284533a3220d4f8e2c30ec23b8a50f3f7e9d8cf42234d4e2c87572

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1202
 opsec:
@@ -57,7 +57,7 @@ source_data:
       document_sha256: sha256:49ab044d609cd1a24b35d1279ff9148084e6a73c26a4b6ec36135855b1cef49d
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Diskshadow/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -94,6 +94,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:7385fef7f29a34ab2d674185b64073e9f73fae3d0ef534ad7bdea3c69f16c6fa

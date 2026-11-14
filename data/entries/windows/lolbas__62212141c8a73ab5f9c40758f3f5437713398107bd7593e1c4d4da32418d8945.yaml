@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1127
 opsec:
@@ -45,7 +45,7 @@ source_data:
       document_sha256: sha256:882a981fd3194bf8be7fd63416c41d556ecfc7388cc9721bcaaa3b513cf16886
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Pixtool/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -82,6 +82,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:07ad6c4835ef04f7d2da4c246f4a5ba4d194603ccde842c83d41e957e87cc706

@@ -18,7 +18,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 preconditions:
 - a valid username
 - a valid password
@@ -57,7 +57,7 @@ source_data:
         \    - https://www.netexec.wiki/smb-protocol/scan-for-vulnerabilities\n---\n"
     upstream_url: https://wadcoms.github.io
     upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: discovery
@@ -136,6 +136,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     WADComs: sha256:b3d5c9464a2528e83681526e11fb8222a1c2c100623cb86c33e97683c5e847ea

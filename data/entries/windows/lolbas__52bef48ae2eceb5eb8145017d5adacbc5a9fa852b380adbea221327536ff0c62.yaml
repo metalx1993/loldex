@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1003
 opsec:
@@ -61,7 +61,7 @@ source_data:
       document_sha256: sha256:9f5d93240070f33f17d7b80b4841cb72e5b87c6f635a41b863ae7310210fbdaf
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Rdrleakdiag/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: credential-dump
@@ -98,6 +98,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:e0e5da2c8430803b13c06584fe0df34ca05a333ef9cb434e97c99facaaf0f5ae

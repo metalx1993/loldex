@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1048
 opsec:
@@ -47,7 +47,7 @@ source_data:
       document_sha256: sha256:8ff0bfae3572e10e56718b88cbfdf7a9942f9b6ac1022467a1899e53af0556e4
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Testwindowremoteagent/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-upload
@@ -84,6 +84,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:6189614fcb10563c269709d3c405e8e2e1d7da08787967cf7e2c3109b80c1b9b

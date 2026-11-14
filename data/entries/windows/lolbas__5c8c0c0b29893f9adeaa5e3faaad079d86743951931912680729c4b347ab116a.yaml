@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218.007
 opsec:
@@ -50,7 +50,7 @@ source_data:
       document_sha256: sha256:adc51731e27418866589a985a5d00777b1a0c18740ea62765bb30fe338ef202f
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Devinit/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -87,6 +87,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:47b0af5c8fe86a3d563d1bddc4771ed5bbb16827a7d311f0053ba3cf9becb6f9

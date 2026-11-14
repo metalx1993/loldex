@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1127
 opsec:
@@ -48,7 +48,7 @@ source_data:
       document_sha256: sha256:a3a4535f0888e34e2082bafc6eeaa7ae98f996b72d2685b25c37496ad276c025
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/IntelliTrace/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -85,6 +85,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:3c1c7e74886fec0193a009ca1601dffd8a9e45782d6daae4d7ce4fdbbb377914

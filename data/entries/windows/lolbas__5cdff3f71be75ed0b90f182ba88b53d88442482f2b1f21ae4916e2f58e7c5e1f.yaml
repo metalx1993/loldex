@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1105
 opsec:
@@ -53,7 +53,7 @@ source_data:
       document_sha256: sha256:3b9c549601033711ac84f9672268cc1e4bfcafdf04c6b0e910bf56f79220b184
     upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Shimgvw/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-download
@@ -90,6 +90,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:61409829ed28df45959f3f541316c5fca20866269b69cc754b8ed6b1b5222cd6

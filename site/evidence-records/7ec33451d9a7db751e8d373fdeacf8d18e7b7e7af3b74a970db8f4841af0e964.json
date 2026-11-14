@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"efax":{"functions":{"file-read":[{"binary":false,"code":"efax -d /path/to/input-file","comment":"The content is actually parsed by the command.","contexts":{"sudo":null,"suid":null}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/efax/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}

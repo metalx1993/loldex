@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218.005
 opsec:
@@ -92,7 +92,7 @@ source_data:
       document_sha256: sha256:313ee59a2b54ea747a44f5da614decbe4be07138f5884ff524b2fb910c7a69ab
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Mshta/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -129,6 +129,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:3d40ffe2147f4780c77382573eeb4c580d4a967b0f34b570e11452b2b0c2e4a7

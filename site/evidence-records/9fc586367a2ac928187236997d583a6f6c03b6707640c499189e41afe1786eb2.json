@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"pr":{"functions":{"file-read":[{"binary":false,"code":"pr -T /path/to/input-file","contexts":{"sudo":null,"suid":null,"unprivileged":null}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/pr/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}

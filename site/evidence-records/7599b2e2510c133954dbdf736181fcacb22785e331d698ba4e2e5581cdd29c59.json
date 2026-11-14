@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"getent":{"functions":{"privilege-escalation":[{"code":"getent shadow","comment":"This allows to dump password hashes from the `/etc/shadow` file.","contexts":{"sudo":null,"suid":null}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/getent/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}

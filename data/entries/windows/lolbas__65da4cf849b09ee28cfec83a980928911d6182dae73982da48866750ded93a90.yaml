@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1562.001
 opsec:
@@ -68,7 +68,7 @@ source_data:
       document_sha256: sha256:420a03a02a6d176e867263230b21f56c1852c277eefbbe1bad7bb0d2c2a9fe26
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Fsutil/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -105,6 +105,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:f042997f9c0fb302bab5c3aa26967a46349c6f0f963c59e1345c23cd628a098c

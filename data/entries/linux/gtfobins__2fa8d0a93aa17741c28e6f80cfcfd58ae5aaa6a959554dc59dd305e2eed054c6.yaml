@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: crontab -e
   comment: This spaws the default editor to edit the crontab file, commands can be scheduled to run using
@@ -44,7 +44,7 @@ source_data:
               from: vi
     upstream_url: https://gtfobins.github.io/gtfobins/crontab/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -73,6 +73,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:c408076073dea3667fc7b5f59e0c8673bef9daf81880e21bbbb789094304ac8e

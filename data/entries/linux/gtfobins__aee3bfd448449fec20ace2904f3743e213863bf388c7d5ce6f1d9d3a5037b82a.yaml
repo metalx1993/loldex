@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: sqlmap -u 127.0.0.1 --eval='...'
   comment: This allows to run Python code (`...`).
@@ -130,7 +130,7 @@ source_data:
               receiver: http-client
     upstream_url: https://gtfobins.github.io/gtfobins/sqlmap/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -169,6 +169,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:139d260efdf0d2e59bf6e4162939f8dc0f4c708478b16fec8624b15ae8356854

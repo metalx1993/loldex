@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: chmod 6777 /path/to/input-file
   comment: This can be run with elevated privileges to change permissions (`6` denotes the SUID bits)
@@ -38,7 +38,7 @@ source_data:
                 suid: null
     upstream_url: https://gtfobins.github.io/gtfobins/chmod/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:0ce565956cc6a5da5bb44a461b28d8b4861876674b9d30d658b76a30cc7075e1

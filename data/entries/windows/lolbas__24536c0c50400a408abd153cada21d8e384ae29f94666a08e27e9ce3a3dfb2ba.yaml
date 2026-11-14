@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1003.003
 opsec:
@@ -52,7 +52,7 @@ source_data:
       document_sha256: sha256:28a8b1ba377b3ee2a7e503eb5b4e52d47543b7e27e60e78e7d67ec117f0395b6
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Ntdsutil/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: credential-dump
@@ -89,6 +89,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:cc4b585e18b4f0c97ec85234c9f363edccb79ac1096840c976bce4f6265989fd

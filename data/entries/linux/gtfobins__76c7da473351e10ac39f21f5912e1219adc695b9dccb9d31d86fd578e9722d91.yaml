@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: pkg install -y --no-repo-update ./x-1.0.txz
   comment: 'Generate the FreeBSD package with [fpm](https://github.com/jordansissel/fpm) and upload it
@@ -56,7 +56,7 @@ source_data:
                 sudo: null
     upstream_url: https://gtfobins.github.io/gtfobins/pkg/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -92,6 +92,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:20ebec0d11d9b8187c43bb12d3eb9da5388867778364748484e0d65666b0f616

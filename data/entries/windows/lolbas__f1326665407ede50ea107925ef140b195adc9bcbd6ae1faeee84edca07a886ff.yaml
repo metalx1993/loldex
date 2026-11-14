@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1105
 opsec:
@@ -51,7 +51,7 @@ source_data:
       document_sha256: sha256:21062104bd499df8e22549a74c00c2b9eb083b224d3bfe0cb2d584ab0de182ab
     upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Scrobj/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-download
@@ -88,6 +88,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:a898a086a76a73c3aed1565bf48ff22f3c6ee6619444b1909c4cdaf144867258

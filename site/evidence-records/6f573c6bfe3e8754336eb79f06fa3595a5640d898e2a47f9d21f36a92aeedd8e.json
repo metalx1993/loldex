@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"ar":{"functions":{"file-read":[{"code":"ar r /path/to/output-file /path/to/input-file\nar p /path/to/output-file","contexts":{"sudo":null,"suid":null,"unprivileged":null}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/ar/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}

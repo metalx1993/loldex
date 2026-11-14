@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: mosh --server=mosh-server localhost /bin/sh
   comment: 'This requires a valid SSH access.
@@ -40,7 +40,7 @@ source_data:
                   comment: The `mosh-server` has to be executed via `sudo`, e.g., `'--server=sudo mosh-server'`.
     upstream_url: https://gtfobins.github.io/gtfobins/mosh-server/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: shell
@@ -76,6 +76,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:5dd659236505b73e342c781df69977a68ae4bf967cf7e2e63c8920379e0a216f

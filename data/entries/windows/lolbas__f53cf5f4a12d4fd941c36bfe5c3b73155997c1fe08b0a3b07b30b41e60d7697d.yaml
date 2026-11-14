@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1564.004
 opsec:
@@ -70,7 +70,7 @@ source_data:
       document_sha256: sha256:d60fb20af020dd1eaf1d87011dc559f22bcc0ef3a786c7b12b5a235f3c15e26c
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Makecab/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -107,6 +107,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:20175a2c2d7c113c2759f2f3df22f1df712a6b1ecd4b7385bf4e2dd2ac1c65af

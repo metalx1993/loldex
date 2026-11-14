@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1105
 opsec:
@@ -54,7 +54,7 @@ source_data:
       document_sha256: sha256:8631967f8fb808ab6664a241f3fc36afdb3961ead883a776661944b2d75743d0
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Winproj/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-download
@@ -91,6 +91,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:7ebd580663ad1001f5bfbd1d42c3fbde98e09d1ae8de87ef0d81b8a0621c67e1

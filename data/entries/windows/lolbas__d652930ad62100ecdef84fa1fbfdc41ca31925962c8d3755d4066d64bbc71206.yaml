@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 attack_techniques:
 - T1218
 opsec:
@@ -53,7 +53,7 @@ source_data:
       document_sha256: sha256:9a6841b17f1028ade9b573379c97fe056a2889ade1f49ea639626231ab3afe69
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Infdefaultinstall/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: command-execution
@@ -90,6 +90,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     LOLBAS: sha256:1b74aaf470ec203d02a7bcbf7404a56ba0e61724174cd6cb9420d19f72e941d9

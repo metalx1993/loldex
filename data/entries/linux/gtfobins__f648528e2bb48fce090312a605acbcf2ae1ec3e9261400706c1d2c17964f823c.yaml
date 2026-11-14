@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-13'
+  last_synced: '2026-11-14'
 commands:
 - template: ip -force -batch /path/to/input-file
   comment: The read file content is corrupted by error prints.
@@ -66,7 +66,7 @@ source_data:
               version: This only works for Linux with `CONFIG_NET_NS=y`.
     upstream_url: https://gtfobins.github.io/gtfobins/ip/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-13'
+    last_synced: '2026-11-14'
 enrichment:
   capabilities:
   - value: file-read
@@ -102,6 +102,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-13'
+  projected_at: '2026-11-14'
   source_hashes:
     GTFOBins: sha256:8c11ca4c280c1c3717b09e9331c08b2fe65f6913226a2272019a09ce3a30c180

@@ -1,0 +1,1 @@
+{"GTFOBins":{"last_synced":"2026-11-14","raw":{"documents":{"ascii-xfr":{"functions":{"file-read":[{"code":"ascii-xfr -ns /path/to/input-file","contexts":{"sudo":null,"suid":null,"unprivileged":null}}]}}}},"upstream_url":"https://gtfobins.github.io/gtfobins/ascii-xfr/","upstream_version":"acd524623f9c406acedd2754ebd9c2431f3675ad"}}
