@@ -25,7 +25,7 @@ No email recipients, GitHub secrets or server schedules were added by this work.
 Inspect GitHub Actions results and the private publisher log after the first
 scheduled cycle. Keep all previous releases and the legacy private backup.
 
-## Acceptance prerequisites
+## Original A2/D2 acceptance — 13 November 2026
 
 - Live A2 package verification, HTTPS activation and rollback: passed.
 - Real five-source D2 candidate with zero diagnostics: passed, 3,336 entries.
@@ -38,3 +38,14 @@ All acceptance gates are closed: GO for explicit activation. The full evidence
 is in [a2-completion.md](a2-completion.md).
 
 This file is an activation plan, not evidence that either schedule is enabled.
+
+## Phase 7–9 readiness refresh — 14 November 2026
+
+The new API/search/identity release passed 848 tests in GitHub run 43608361901,
+live HTTPS and cross-origin browser checks, all-file host verification and actual
+rollback/restoration. The identical host publisher command was repeated with no
+change to the active generation. See [phase9-delivery.md](phase9-delivery.md).
+
+GO for explicit activation. GitHub scheduling remains commented out; Site Tools
+was inspected and has zero jobs for loldex.sh. Neither schedule was enabled. A
+manual equivalent cycle passed; no actual scheduled execution is claimed.

@@ -28,7 +28,7 @@ const base=process.env.LOLDEX_TEST_URL||'http://127.0.0.1:8779';
   await page.getByText('Inspect identity witnesses',{exact:true}).first().click();assert(await page.locator('details[open] pre').first().isVisible());
  }
  await page.goto(base+'/identity.html?id='+encodeURIComponent(withCandidates.id));await page.waitForSelector('.identity-member');assert(await page.getByRole('heading',{name:'Unconfirmed candidates',exact:true}).isVisible());
- const alias=identities.aliases[0];assert(alias);await page.goto(base+'/entry.html?id='+encodeURIComponent(alias.old_entry_id));await page.waitForSelector('.detail-title');assert((await page.locator('#detail').textContent()).includes(alias.new_entry_ids[0]));
+ const alias=identities.aliases[0];assert(alias);await page.goto(base+'/entry.html?id='+encodeURIComponent(alias.old_entry_id));await page.locator('#detail a').filter({hasText:alias.new_entry_ids[0]}).waitFor();assert((await page.locator('#detail').textContent()).includes(alias.new_entry_ids[0]));
  const member=identities.entities[0].members.find(m=>m.status==='active');
  await page.goto(base+'/entry.html?id='+encodeURIComponent(member.entry_id));await page.waitForSelector('.claims');const shard=page.waitForResponse(r=>r.url().includes('/evidence-records/')&&r.ok());await page.getByText('Inspect original source data',{exact:true}).click();await shard;assert(requests.some(u=>u.includes('/evidence-records/')),'sharded evidence was not loaded');
  for(const path of ['search.html?q=platform%3Awindows%20confidence%3Ahigh','identities.html','identity.html?id='+encodeURIComponent(withCandidates.id),'entry.html?id='+encodeURIComponent(alias.old_entry_id),'entry.html?id='+encodeURIComponent(member.entry_id)]){

@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "accepted_on": "2026-11-14",
+  "implementation_commit": "5cd24ace1c19bee94d6d49fe10e1cc52a6297d9f",
+  "publication_commit": "d7084febab348a96d6cb00b4a63db705992170c1",
+  "ci": {
+    "url": "https://github.com/metalx1993/loldex/actions/runs/43608361901",
+    "job_id": 132487771702,
+    "passed": 848,
+    "seconds": 701.88,
+    "conclusion": "success"
+  },
+  "sources": [
+    {
+      "source": "GTFOBins",
+      "status": "ok",
+      "entries": 1898,
+      "diagnostics": 0
+    },
+    {
+      "source": "LOLAD",
+      "status": "ok",
+      "entries": 136,
+      "diagnostics": 0
+    },
+    {
+      "source": "LOLBAS",
+      "status": "ok",
+      "entries": 485,
+      "diagnostics": 0
+    },
+    {
+      "source": "LOLDrivers",
+      "status": "ok",
+      "entries": 713,
+      "diagnostics": 0
+    },
+    {
+      "source": "WADComs",
+      "status": "ok",
+      "entries": 104,
+      "diagnostics": 0
+    }
+  ],
+  "identity": {
+    "active_memberships": 15,
+    "candidates": 7,
+    "entities": 3,
+    "inactive_memberships": 0,
+    "aliases": 1
+  },
+  "https": {
+    "release_id": "r-a5d8d76297a9c31a459defa109ed7098578f89ffcfc82021436eabe904150b80",
+    "resources": {
+      "root": {
+        "status": 200,
+        "bytes": 571,
+        "etag": "\"loldex-v1-f4d072c1c0bcecbb838b49884049a2a761273c872b9b5bd93dab9df549b6649c\""
+      },
+      "entries": {
+        "status": 200,
+        "bytes": 3255,
+        "etag": "\"loldex-v1-217d33628d4e1afb75c177834ee9f4f05556e4a3d94189f6b3b66fb99eee4a01\""
+      },
+      "entry": {
+        "status": 200,
+        "bytes": 2234,
+        "etag": "\"loldex-v1-b89031896b99e1b84b5025e398c08619113158eadb31167d751f7b33e5354cad\""
+      },
+      "evidence": {
+        "status": 200,
+        "bytes": 712,
+        "etag": "\"loldex-v1-563b6dd8972fdaa03b97c082da0d618ad3d49ae0b596038195aac9ca55ed7cc6\""
+      },
+      "search": {
+        "status": 200,
+        "bytes": 14180,
+        "etag": "\"loldex-v1-f5c4fefc26074870522fd3e793ee60c5de893c6802607faffa00780d152b330a\""
+      },
+      "graph": {
+        "status": 200,
+        "bytes": 1310,
+        "etag": "\"loldex-v1-53d566727e4c2dfeed1a95f58c9512b651332a888d18b23246ecff25a6ac23ff\""
+      },
+      "techniques": {
+        "status": 200,
+        "bytes": 9850,
+        "etag": "\"loldex-v1-7183756796e5a11994d8dd5f24a4020457e30ab33624abea21182e0037a2ad53\""
+      },
+      "technique": {
+        "status": 200,
+        "bytes": 31049,
+        "etag": "\"loldex-v1-7235808d25cba79864cecdc6e27f851a7806d4a772b973f3af620312df05a310\""
+      },
+      "identities": {
+        "status": 200,
+        "bytes": 17372,
+        "etag": "\"loldex-v1-92160e1b1909217acf68aa65f439f266de4e8800a76eeda64adb5d517c35f047\""
+      },
+      "identity": {
+        "status": 200,
+        "bytes": 4346,
+        "etag": "\"loldex-v1-06b6ffa16a050dd5d18ddb560a1cf8ac1d56e55f138974b0337e2ce584a89e02\""
+      },
+      "resolve": {
+        "status": 200,
+        "bytes": 4325,
+        "etag": "\"loldex-v1-572aa5cd6374c2961e6298647941eadb401721662d3ff4e266dddd4acb50e1ec\""
+      }
+    },
+    "entry_count": 3336,
+    "routes": true,
+    "conditional_304": true,
+    "head": true,
+    "stable_cors": true,
+    "preflight": true,
+    "invalid_queries": true,
+    "static_hashes": true
+  },
+  "browser_api": {
+    "api_explorer": true,
+    "syntax_error": true,
+    "cross_origin_preflight_and_redirect": true,
+    "release_id": "r-a5d8d76297a9c31a459defa109ed7098578f89ffcfc82021436eabe904150b80",
+    "etag": "W/\"loldex-v1-f738fa8ea5c7bf66cc95a022f36a02f34ccfcbefe2ca94c08050fb11ada68c28\""
+  },
+  "browser_ui": {
+    "phase9": true,
+    "legacy_experience": true,
+    "mobile_320": true,
+    "exact_evidence_literals": true,
+    "network_errors_observed": 0,
+    "page_errors_observed": 0
+  },
+  "rollback": {
+    "old_release_id": "r-94142a7cb20e01281af55a6039f45370ffb004681d6fadc1ee834c239d2d92be",
+    "new_release_id": "r-a5d8d76297a9c31a459defa109ed7098578f89ffcfc82021436eabe904150b80",
+    "all_release_files_verified": {
+      "release_id": "r-a5d8d76297a9c31a459defa109ed7098578f89ffcfc82021436eabe904150b80",
+      "commit": "d7084febab348a96d6cb00b4a63db705992170c1",
+      "files": 3369
+    },
+    "root_rollback_and_restore": true,
+    "retained_urls": true,
+    "legacy_api_count": 3336,
+    "final_active": {
+      "version": 1,
+      "generation": 11,
+      "release_id": "r-a5d8d76297a9c31a459defa109ed7098578f89ffcfc82021436eabe904150b80",
+      "previous_release_id": "r-94142a7cb20e01281af55a6039f45370ffb004681d6fadc1ee834c239d2d92be",
+      "commit": "d7084febab348a96d6cb00b4a63db705992170c1"
+    },
+    "cron_enabled": false
+  },
+  "publisher_idempotent": true,
+  "cron": {
+    "ready": true,
+    "github_enabled": false,
+    "siteground_jobs": 0,
+    "site_tools_inspected": true,
+    "actual_scheduled_cycle_observed": false
+  },
+  "core_spec_sha256": "f79aed020b36d1a217b8091319be1e7ec7cf5ac48849c8d0b765a1523f2ef3e0"
+}

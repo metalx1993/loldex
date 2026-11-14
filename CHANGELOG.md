@@ -1,6 +1,6 @@
 # Changelog
 
-## Phases 7–9 — local implementation · 2026-11-14
+## Phases 7–9 — production delivery · 2026-11-14
 
 - Added a versioned knowledge API, OpenAPI contract, dataset/release binding,
   bounded pagination, strict request validation, conditional responses and exact
@@ -14,8 +14,9 @@
   Certutil source-ID alias. No technique merge or transitive identity inference.
 - Added local PHP/JavaScript, adversarial and actual Chromium integration checks,
   including advanced search errors, pagination, identity witnesses, historical
-  alias UI, sharded evidence and mobile 320px layouts. Current production
-  acceptance and final aggregate results are pending in docs/phase9-delivery.md.
+  alias UI, sharded evidence and mobile 320px layouts. Full CI: 848 tests passed.
+  Live API, cross-origin browser, mobile and real rollback/restore passed; see
+  docs/phase9-delivery.md.
 - Preserved frozen CORE/D1 and the separate D2 publication profile. The current
   publication snapshot contains 3,336 entries; the historical Phase 6 record
   below describes its original delivery rather than today's deployment state.

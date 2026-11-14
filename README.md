@@ -118,8 +118,8 @@ See [current roadmap](docs/ROADMAP.md), [delivery evidence](docs/DELIVERY.md),
 [CORE + D1](docs/phase5-d1.md), [graph contract](docs/phase3-design.md),
 [technique registry](docs/phase4-design.md), and [UI contract](docs/phase6-design.md), [API v1](docs/phase7-design.md),
 [advanced search](docs/phase8-design.md), and [durable identities](docs/phase9-design.md).
-Phases 7–9 are implemented and tested locally; production acceptance of this
-new delivery is pending and tracked in [the delivery gates](docs/phase9-delivery.md).
+Phases 7–9 are implemented and published on loldex.sh: 848 CI tests and live
+API/browser/rollback checks passed. See [production acceptance](docs/phase9-delivery.md).
 Cron remains OFF until the user explicitly activates the prepared schedules.
 `site/build-manifest.json` pins the generated data files. Static builds validate
 all derived views before writing. [A2 deployment](docs/a2-design.md) installs
@@ -132,8 +132,8 @@ The versioned public contract is [OpenAPI v1](api/openapi-v1.json). Same-release
 `api-v1.php?resource=...` and `/api/v1/...` expose entries, original evidence,
 advanced search with explanations/facets, graph, techniques, identities and
 explicit historical-ID resolution. Responses identify their dataset; retained
-release URLs remain bound to their own data. New API production acceptance is a
-separate gate from local PHP/browser tests. The legacy routes remain available:
+release URLs remain bound to their own data. API production routing, CORS and
+conditional requests passed live acceptance. The legacy routes remain available:
 
 ```
 /api/stats

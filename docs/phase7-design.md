@@ -1,6 +1,6 @@
 # Phase 7 — Public API v1
 
-Status: implemented locally; production acceptance is tracked separately by the release operator. The API never changes CORE state or acquires upstream data.
+Status: implemented and production-accepted on 14 November 2026; see phase9-delivery.md. The API never changes CORE state or acquires upstream data.
 
 ## Contract
 
@@ -34,7 +34,7 @@ Identity lists use explicit active curated entry_index memberships. Candidates a
 
 `tests/test_api_v1.cjs` runs real PHP 8.3 through the existing isolated PHP runtime and compares the complete AST, ranked results, reasons and facets against the JS engine for 41 valid shared vectors, including future multi-source and no-claim entries; 17 invalid vectors must reject. HTTP cases cover retained-release binding, raw evidence fidelity, strict parameters, GET/HEAD/OPTIONS, CORS and conditional ETags. The independent `tests/test_api_v1_adversarial.cjs` attacks corruption, missing shards, retained-context downgrade, cache-context injection, malformed requests and release-bound conditional responses. The project test wrapper makes these checks part of the test gate.
 
-Runtime tests establish local behavior. Apache routing, public CORS through the stable redirect, hosting runtime limits and retained production URLs require separate deployment acceptance evidence.
+Runtime tests establish local behavior. Apache routing, public CORS through the stable redirect, hosting runtime limits and retained production URLs are recorded in phase9-delivery.md as separate production acceptance evidence.
 
 The real-corpus runner `tests/test_api_v1_corpus.cjs` additionally exercises PHP 8.2 against the built corpus, all resource families, original evidence shards and actual historical aliases, comparing complete ranked results/reasons/facets for representative queries. On the verified 3336-entry build, the runtime reported a 256M memory limit; this is the configured limit, not a measured hosting peak. Nested opaque NOT evaluation memoizes identical scopes within an entry; the bounded worst-case regression runs 50 evaluations below three seconds. Deployment performance remains a separate hosting observation.
 
