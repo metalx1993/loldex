@@ -1,6 +1,6 @@
 name: sync
 
-# Manual verified D2 upstream snapshot: validate, rebuild, test, commit to main.
+# Verified D2 upstream snapshot: validate, rebuild, test, commit to main.
 #
 # Deployment is NOT part of this workflow. Publishing site/ to the live host
 # needs an atomic mechanism (versioned staging plus a server-side switch); the
@@ -8,11 +8,12 @@ name: sync
 # failure, so it has been removed rather than left behind a disabled guard.
 # That work is amendment A2 — Atomic Deployment.
 #
-# Cron remains disabled; A2 atomic deployment requires its separate review.
+# Scheduled refresh enabled after A2/D2 and Phase 7–9 production acceptance.
 
 on:
-  # schedule:
-  #   - cron: "0 4 * * 1"      # every Monday 04:00 UTC — deferred until A2 review
+  schedule:
+    - cron: "0 4 * * 1"        # every Monday 04:00 UTC
+    - cron: "7 16 14 11 *"     # temporary automatic acceptance: 2026-11-14 16:07 UTC; remove after verification
   workflow_dispatch: {}
 
 permissions: {}

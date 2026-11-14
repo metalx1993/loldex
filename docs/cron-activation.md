@@ -1,4 +1,4 @@
-# Cron activation plan — schedules currently disabled
+# Cron activation — first automatic cycle in progress
 
 Two operations have separate responsibilities and need no shared private key:
 
@@ -49,3 +49,18 @@ change to the active generation. See [phase9-delivery.md](phase9-delivery.md).
 GO for explicit activation. GitHub scheduling remains commented out; Site Tools
 was inspected and has zero jobs for loldex.sh. Neither schedule was enabled. A
 manual equivalent cycle passed; no actual scheduled execution is claimed.
+
+## Authorized activation — 14 November 2026
+
+The user explicitly requested both schedules and the first complete automatic
+cycle. GitHub scheduling is enabled by this change: Monday 04:00 UTC plus a
+temporary date-bound acceptance trigger at 16:07 UTC on 14 November. Remove the
+temporary trigger after the complete automatic cycle is observed. The normal
+weekly schedule remains. SiteGround activation is being completed in Site Tools.
+
+Planned SiteGround jobs: the normal hourly publisher at minute 30 and a temporary
+acceptance publisher at 16:47 UTC on 14 November, leaving time for the full
+GitHub acquisition/build/test gate. No workflow_dispatch or manual SSH publisher
+run will count as evidence of an automatic cycle. Status and evidence below will
+be completed from the actual scheduler executions. SiteGround uses UTC; see
+[official timezone documentation](https://www.siteground.com/kb/how_to_adjust_the_time_zone_on_the_server).
