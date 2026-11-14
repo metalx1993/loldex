@@ -120,11 +120,12 @@ See [current roadmap](docs/ROADMAP.md), [delivery evidence](docs/DELIVERY.md),
 [advanced search](docs/phase8-design.md), and [durable identities](docs/phase9-design.md).
 Phases 7–9 are implemented and published on loldex.sh: 848 CI tests and live
 API/browser/rollback checks passed. See [production acceptance](docs/phase9-delivery.md).
-Cron remains OFF until the user explicitly activates the prepared schedules.
+GitHub and SiteGround schedules are enabled; first automatic-cycle verification
+is in progress. See [scheduler status](docs/cron-activation.md).
 `site/build-manifest.json` pins the generated data files. Static builds validate
 all derived views before writing. [A2 deployment](docs/a2-design.md) installs
 immutable committed releases and switches the private active token atomically.
-The live root migration is implemented; scheduling remains an explicit gate.
+The live root migration is implemented; actual scheduled-cycle acceptance is tracked separately.
 
 ## API
 

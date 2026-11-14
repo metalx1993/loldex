@@ -49,9 +49,8 @@ acceptance does not rewrite historical gatekeeper approvals.
 ## Next steps
 
 1. Phases 7–9 production acceptance is complete; see phase9-delivery.md.
-2. Keep cron OFF until explicit activation. Both prepared schedules are ready;
-   the first actual scheduled cycles must be inspected after activation. See
-   cron-activation.md.
+2. GitHub and SiteGround schedules are enabled. Verify the first complete
+   automatic cycle; see cron-activation.md.
 3. Preserve CORE/D1, D2, immutable releases, per-claim evidence and retained
    rollback versions as the project evolves.
 4. Phase 10 remains future quality/governance work; it is not silently completed

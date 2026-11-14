@@ -64,3 +64,9 @@ GitHub acquisition/build/test gate. No workflow_dispatch or manual SSH publisher
 run will count as evidence of an automatic cycle. Status and evidence below will
 be completed from the actual scheduler executions. SiteGround uses UTC; see
 [official timezone documentation](https://www.siteground.com/kb/how_to_adjust_the_time_zone_on_the_server).
+
+Site Tools creation confirmed: hourly job `30 * * * *`, temporary acceptance job
+`47 16 14 11 *`. The temporary job writes a dedicated private
+`first-automatic-cycle-20261114.log`; the regular job writes `publisher.log`.
+Both invoke the reviewed trusted publisher. GitHub activation commit:
+`a84c0a92ac5b49ef46f8632bf6a7c1af0b6b1d0d`. Verification is pending actual events.
