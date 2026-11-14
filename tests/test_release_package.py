@@ -11,7 +11,7 @@ import pytest
 
 from deployment.package import (build_package, read_package, parse_manifest, validate_payload,
                                 validate_path, package_commit, canonical_bytes, DATA_FILES,
-                                PRODUCTION_FILES, verify_data_manifest)
+                                PRODUCTION_FILES, PRODUCTION_DATA_FILES, verify_data_manifest)
 
 COMMIT = 'a' * 40
 
@@ -144,7 +144,7 @@ def test_size_and_count_limits_are_enforced(monkeypatch):
 def production_files():
     files = {name: b'fixture' for name in PRODUCTION_FILES if name != 'build-manifest.json'}
     build = {'version': 1, 'entries': 1, 'registry_checksum': 'sha256:' + '0' * 64,
-             'files': {name: 'sha256:' + hashlib.sha256(files[name]).hexdigest() for name in sorted(DATA_FILES)}}
+             'files': {name: 'sha256:' + hashlib.sha256(files[name]).hexdigest() for name in sorted(PRODUCTION_DATA_FILES)}}
     files['build-manifest.json'] = canonical_bytes(build) + b'\n'
     return files
 
@@ -224,3 +224,23 @@ def test_git_replace_cannot_substitute_site_beneath_declared_commit(tmp_path):
     assert actual == expected
     assert manifest['commit'] == first
     assert files['index.html'] == b'fixture'
+
+
+@pytest.mark.parametrize('omitted', ['identities.json', 'openapi-v1.json'])
+def test_production_commit_rejects_versioned_dataset_omitted_from_build_inventory(tmp_path, omitted):
+    files = production_files()
+    inventory = json.loads(files['build-manifest.json'])
+    del inventory['files'][omitted]
+    files['build-manifest.json'] = canonical_bytes(inventory) + b'\n'
+    git(tmp_path, 'init', '-q')
+    git(tmp_path, 'config', 'user.email', 'fixture@example.invalid')
+    git(tmp_path, 'config', 'user.name', 'Fixture')
+    for name, raw in files.items():
+        target = tmp_path / 'site' / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(raw)
+    git(tmp_path, 'add', 'site')
+    git(tmp_path, 'commit', '-qm', 'fixture missing inventory binding')
+    commit = git(tmp_path, 'rev-parse', 'HEAD').decode().strip()
+    with pytest.raises(ValueError, match='production build inventory'):
+        package_commit(tmp_path, commit)

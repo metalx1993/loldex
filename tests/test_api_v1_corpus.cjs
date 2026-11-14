@@ -27,6 +27,10 @@ const engine=require('../site/search-engine.js');
  for(const alias of identities.aliases){const r=await run('resource=resolve&id='+encodeURIComponent(alias.old_entry_id));assert.equal(r.body.data.kind,'alias');assert.deepEqual(r.body.data.alias,alias);}
  const queries=['source:GTFOBins capability:command-execution','platform:windows confidence:high','NOT (capability:discovery AND confidence:high)','certutil OR source:WADComs'];
  for(const q of queries){const expected=engine.search(catalog.entries,q,{offset:0,limit:5});const actual=await run('resource=search&limit=5&q='+encodeURIComponent(q));assert.deepEqual(actual.body.data,expected.results,q);assert.deepEqual(actual.body.facets,expected.facets,q);assert.equal(actual.body.pagination.total,expected.total);timings[q]=actual.elapsed_ms;}
+ {
+  let q='NoSuchLiteralForBoundedProbe';for(let i=0;i<5;i++)q='NOT ((freshness:NOT_OBSERVED OR freshness:NOT_OBSERVED OR freshness:NOT_OBSERVED OR freshness:NOT_OBSERVED) AND '+q+')';
+  const r=await run('resource=search&limit=1&q='+encodeURIComponent(q));timings.worst_full_corpus=r.elapsed_ms;assert.equal(r.body.pagination.total,catalog.count);const expected=engine.search(catalog.entries,q,{limit:1});assert.deepEqual(r.body.data,expected.results);assert.deepEqual(r.body.facets,expected.facets);assert(r.elapsed_ms<10000,'Worst valid full-corpus search exceeds local 10s gate');console.log('Worst valid full corpus API probe ms='+r.elapsed_ms);
+ }
  // Source-only qualifiers must constrain claim-backed facets/text but preserve metadata predicates.
  const base=JSON.parse(fs.readFileSync('tests/test_advanced_search_vectors.json','utf8')).entries[0];
  const synthetic=structuredClone(base);synthetic.id='multi';synthetic.name='Alpha';synthetic.sources=[{project:'A'},{project:'B'}];synthetic.capabilities=['exclusiveclaim'];synthetic.claims={capabilities:[{value:'exclusiveclaim',provenance:{type:'adapter',source:'A'},confidence:{level:'high'}}]};

@@ -153,8 +153,8 @@ function loldex_search_atom($entry,$atom) {
 function loldex_search_evaluate($entry,$parsed,&$memo=null) {
     if ($memo===null) $memo=array();
     // Opaque NOT scopes are context-independent within one entry evaluation.
-    $memoKey=hash('sha256',serialize($parsed['clauses']));
-    if (array_key_exists($memoKey,$memo)) return $memo[$memoKey];
+    $memoKey=($parsed['op']??null)==='not'?($parsed['_memo_key']??hash('sha256',serialize($parsed['clauses']))):null;
+    if ($memoKey!==null && array_key_exists($memoKey,$memo)) return $memo[$memoKey];
     $best=null;
     foreach ($parsed['clauses'] as $clause) {
         $reasons=array(); $ok=true; $positive=array(); $eligibleClaim=null;
@@ -206,7 +206,7 @@ function loldex_search_evaluate($entry,$parsed,&$memo=null) {
         foreach ($positive as $atom) { $strongest=0; foreach (loldex_search_atom($entry,$atom)['reasons'] as $r) if ($eligibleClaim===null || empty($r['claim_field']) || $eligibleClaim($r)) $strongest=max($strongest,$r['score']); $score+=$strongest; }
         if ($best===null || $score>$best['score']) $best=array('entry'=>$entry,'score'=>$score,'reasons'=>$reasons);
     }
-    $memo[$memoKey]=$best;
+    if ($memoKey!==null) $memo[$memoKey]=$best;
     return $best;
 }
 function loldex_search_values($entry,$field) {
@@ -216,26 +216,43 @@ function loldex_search_values($entry,$field) {
     if (isset(LOLDEX_SEARCH_CLAIM[$field])) { $value=loldex_get($entry,LOLDEX_SEARCH_CLAIM[$field]); return is_array($value)?$value:array($value); }
     return array(loldex_get($entry,$field));
 }
+function loldex_search_prepare($clauses) {
+    foreach ($clauses as &$clause) foreach ($clause as &$atom) {
+        if (($atom['op']??null)==='not') {
+            $atom['_memo_key']=hash('sha256',serialize($atom['clauses']));
+            $atom['clauses']=loldex_search_prepare($atom['clauses']);
+        }
+    }
+    unset($clause,$atom); return $clauses;
+}
 function loldex_search($entries,$query,$offset=0,$limit=50,$extra=array()) {
     if (!is_array($entries)) throw new LoldexQueryError('Entries must be an array');
     if (!is_int($offset) || $offset<0 || !is_int($limit) || $limit<1 || $limit>500) throw new LoldexQueryError('Invalid pagination');
     $parsed=loldex_search_parse($query);
+    $parsed['clauses']=loldex_search_prepare($parsed['clauses']);
     foreach ($parsed['clauses'] as &$clause) $clause=array_merge($clause,$extra); unset($clause);
-    $results=array();
-    foreach ($entries as $entry) { $result=loldex_search_evaluate($entry,$parsed); if ($result!==null) $results[]=$result; }
+    $results=array(); $entryMemos=array();
+    foreach ($entries as $entry) {
+        $key=is_object($entry)?'o'.spl_object_id($entry):'a'.hash('sha256',serialize($entry));
+        $memo=array(); $result=loldex_search_evaluate($entry,$parsed,$memo);
+        if ($result!==null) { $results[]=$result; $entryMemos[$key]=$memo; }
+    }
     usort($results,function($a,$b){return $b['score']<=>$a['score'] ?: strcmp(loldex_get($a['entry'],'id'),loldex_get($b['entry'],'id'));});
     $facets=array();
     foreach (LOLDEX_SEARCH_FIELDS as $field) {
         $counts=array();
         foreach ($results as $result) {
             $entry=$result['entry']; $values=array();
+            $key=is_object($entry)?'o'.spl_object_id($entry):'a'.hash('sha256',serialize($entry));
+            $memo=&$entryMemos[$key];
             foreach (loldex_search_values($entry,$field) as $value) if (is_string($value) && !in_array($value,$values,true)) $values[]=$value;
             foreach ($values as $value) {
                 $constrained=$parsed;
                 foreach ($constrained['clauses'] as &$clause) $clause[]=array('field'=>$field,'value'=>$value); unset($clause);
-                if (loldex_search_evaluate($entry,$constrained)!==null) $counts[$value]=($counts[$value]??0)+1;
+                if (loldex_search_evaluate($entry,$constrained,$memo)!==null) $counts[$value]=($counts[$value]??0)+1;
             }
         }
+        unset($memo);
         uksort($counts,'strcmp'); $facets[$field]=array();
         foreach ($counts as $value=>$count) $facets[$field][]=array('value'=>(string)$value,'count'=>$count);
     }
