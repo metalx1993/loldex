@@ -166,7 +166,7 @@ async function entry(){
     const disclosure=el('details',{},el('summary',{},'Inspect original source data'));
     let loaded=false;
     disclosure.addEventListener('toggle',async()=>{if(!disclosure.open||loaded)return;loaded=true;const box=el('div',{},'Loading source evidence…');disclosure.append(box);
-      try{const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(id));const ref='evidence-records/'+Array.from(new Uint8Array(bytes),v=>v.toString(16).padStart(2,'0')).join('')+'.json';if(e.evidence_ref!==ref)throw new Error('Evidence reference mismatch');const raw=await data(ref);replace(box,el('pre',{},JSON.stringify(raw,null,2)));}catch{loaded=false;fail(box,'Source evidence could not be loaded. Close and reopen this section to retry.');}});
+      try{const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(id));const ref='evidence-records/'+Array.from(new Uint8Array(bytes),v=>v.toString(16).padStart(2,'0')).join('')+'.json';if(e.evidence_ref!==ref)throw new Error('Evidence reference mismatch');const response=await fetch('./'+ref,{cache:'no-cache'});if(!response.ok)throw new Error('Source evidence unavailable');const raw=await response.text();JSON.parse(raw);replace(box,el('pre',{},raw));}catch{loaded=false;fail(box,'Source evidence could not be loaded. Close and reopen this section to retry.');}});
     source.append(disclosure);target.append(source);
     try{target.append(await entryIdentities(e));}catch{target.append(el('p',{class:'notice error'},'Tool identity evidence is unavailable; no membership is inferred.'));}
     try{const graph=await data('graph.json');target.append(relationshipView(graph,'entry:'+id));

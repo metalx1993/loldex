@@ -36,6 +36,14 @@ const base=process.env.LOLDEX_TEST_URL||'http://127.0.0.1:8779';
   await page.waitForFunction(()=>!document.querySelector('[aria-busy=true]')&&!document.body.textContent.includes('Loading index'));
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),path+' overflows at320');
  }
+ // Raw source JSON must retain original numeric literals and structural tokens.
+ const rawEvidence='{\n  "large":18446744073709551615,"empty_object":{},"empty_array":[],"literal":"<img src=x onerror=window.evidenceExecuted=true>"\n}\n';
+ await page.route('**/evidence-records/*.json',route=>route.fulfill({status:200,contentType:'application/json',body:rawEvidence}));
+ await page.goto(base+'/entry.html?id='+encodeURIComponent(member.entry_id));await page.waitForSelector('.claims');
+ const rawDisclosure=page.locator('details').filter({has:page.getByText('Inspect original source data',{exact:true})});
+ await rawDisclosure.locator('summary').click();await rawDisclosure.locator('pre').waitFor();
+ assert.equal(await rawDisclosure.locator('pre').textContent(),rawEvidence);
+ assert.equal(await rawDisclosure.locator('img').count(),0);assert.equal(await page.evaluate(()=>window.evidenceExecuted),undefined);
  assert.deepEqual(errors,[]);console.log('Phase9 browser PASS: advanced valid/invalid/correlated queries, pagination, three identities, candidates, alias, sharded evidence, mobile320; no page errors.');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});
