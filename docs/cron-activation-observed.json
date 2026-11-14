@@ -1,0 +1,117 @@
+{
+  "observed_utc": "2026-11-14T17:47:25.857606+00:00",
+  "active": {
+    "commit": "f2359201a3a9169f670d760761d66da41b042057",
+    "generation": 13,
+    "previous_release_id": "r-39200d452631f79d564a4fa99f7edaebd1a2a7733ec24dc67998830ea49bddd5",
+    "release_id": "r-e1e84862c2c02ed166e92f5499b1a65a401cadb01ec09ed9deced85885711115",
+    "version": 1
+  },
+  "logs": {
+    "publisher.log": {
+      "exists": true,
+      "bytes": 852,
+      "mtime_utc": "2026-11-14T17:30:17.609793+00:00",
+      "tail": [
+        "{\"active\":{\"commit\":\"cbcab282d304b0ba7057520bd245b25f4569018f\",\"generation\":12,\"previous_release_id\":\"r-a5d8d76297a9c31a459defa109ed7098578f89ffcfc82021436eabe904150b80\",\"release_id\":\"r-39200d452631f79d564a4fa99f7edaebd1a2a7733ec24dc67998830ea49bddd5\",\"version\":1},\"commit\":\"cbcab282d304b0ba7057520bd245b25f4569018f\",\"release_id\":\"r-39200d452631f79d564a4fa99f7edaebd1a2a7733ec24dc67998830ea49bddd5\",\"scheduler_enabled\":false}",
+        "{\"active\":{\"commit\":\"cbcab282d304b0ba7057520bd245b25f4569018f\",\"generation\":12,\"previous_release_id\":\"r-a5d8d76297a9c31a459defa109ed7098578f89ffcfc82021436eabe904150b80\",\"release_id\":\"r-39200d452631f79d564a4fa99f7edaebd1a2a7733ec24dc67998830ea49bddd5\",\"version\":1},\"commit\":\"cbcab282d304b0ba7057520bd245b25f4569018f\",\"release_id\":\"r-39200d452631f79d564a4fa99f7edaebd1a2a7733ec24dc67998830ea49bddd5\",\"scheduler_enabled\":false}"
+      ]
+    },
+    "first-automatic-cycle-20261114.log": {
+      "exists": true,
+      "bytes": 426,
+      "mtime_utc": "2026-11-14T17:47:19.665353+00:00",
+      "tail": [
+        "{\"active\":{\"commit\":\"f2359201a3a9169f670d760761d66da41b042057\",\"generation\":13,\"previous_release_id\":\"r-39200d452631f79d564a4fa99f7edaebd1a2a7733ec24dc67998830ea49bddd5\",\"release_id\":\"r-e1e84862c2c02ed166e92f5499b1a65a401cadb01ec09ed9deced85885711115\",\"version\":1},\"commit\":\"f2359201a3a9169f670d760761d66da41b042057\",\"release_id\":\"r-e1e84862c2c02ed166e92f5499b1a65a401cadb01ec09ed9deced85885711115\",\"scheduler_enabled\":false}"
+      ]
+    }
+  },
+  "status": "PARTIAL_PENDING_GITHUB_SCHEDULE_EVENT",
+  "github": {
+    "weekly_cron_utc": "0 4 * * 1",
+    "temporary_crons_utc": [],
+    "schedule_event_runs_observed": 0,
+    "manual_dispatch_counted_as_automatic": false,
+    "last_checked_utc": "2026-11-14T17:49:33Z",
+    "temporary_probes_removed": true
+  },
+  "siteground": {
+    "normal_cron_utc": "30 * * * *",
+    "temporary_cron_utc": null,
+    "temporary_removal": "user_confirmed_removed_and_verified_in_site_tools",
+    "manual_publisher_invoked": false
+  },
+  "local_validation": {
+    "tests": "tests/test_build_all.py",
+    "passed": 6,
+    "workflow_jobs_and_permissions_unchanged": true
+  },
+  "live_checks": {
+    "release_id": "r-e1e84862c2c02ed166e92f5499b1a65a401cadb01ec09ed9deced85885711115",
+    "resources": {
+      "root": {
+        "status": 200,
+        "bytes": 571,
+        "etag": "\"loldex-v1-355803a98fa59eeb2103da8ec0af93967d7b397157f7077d4f258e6c8f6683ef\""
+      },
+      "entries": {
+        "status": 200,
+        "bytes": 3255,
+        "etag": "\"loldex-v1-bf5471e5de8c7995285938e52bc6f5bcf02f27550591c20d702ccf14f34e4ccd\""
+      },
+      "entry": {
+        "status": 200,
+        "bytes": 2234,
+        "etag": "\"loldex-v1-5ba9e6cd2254e8529197c2a63103628d4c1037f6e4234f14f00329563ebf5237\""
+      },
+      "evidence": {
+        "status": 200,
+        "bytes": 712,
+        "etag": "\"loldex-v1-3fb391375c92a31b859bd2989eb5756673db324ce9c950de7fe3b433e3b79f52\""
+      },
+      "search": {
+        "status": 200,
+        "bytes": 14180,
+        "etag": "\"loldex-v1-4810ae6a49206e7ccdc7f6a153313bcba7d71ca05424df9dec20cec6f8849948\""
+      },
+      "graph": {
+        "status": 200,
+        "bytes": 1310,
+        "etag": "\"loldex-v1-34b916d9bad43b8c030f4bfadffd17fb3feb56a6fb3c0593c86af7fd8d8c5692\""
+      },
+      "techniques": {
+        "status": 200,
+        "bytes": 9850,
+        "etag": "\"loldex-v1-cad8d3243ad080b487b21238e4ed960a5d0a1afb8c9f8feca61b20803b4e6033\""
+      },
+      "technique": {
+        "status": 200,
+        "bytes": 31049,
+        "etag": "\"loldex-v1-fca2154b2233954d9a5d269ff48036cda30f21f73b509fc270fc0b11bab0bf09\""
+      },
+      "identities": {
+        "status": 200,
+        "bytes": 17372,
+        "etag": "\"loldex-v1-849aa1cbd15dcb5abd0a1b7b92a3a15f5ee82fb5136cf99f6ce03569ada99dd5\""
+      },
+      "identity": {
+        "status": 200,
+        "bytes": 4346,
+        "etag": "\"loldex-v1-e59c2f232de8bf0268f8e37c0d209fad5ae1ac274320190e20881b80c3b90a6d\""
+      },
+      "resolve": {
+        "status": 200,
+        "bytes": 4325,
+        "etag": "\"loldex-v1-88cfdfdd2b043750028353a482256a0a670dfe883630efcb92c5a36d4e69a69f\""
+      }
+    },
+    "entry_count": 3336,
+    "routes": true,
+    "conditional_304": true,
+    "head": true,
+    "stable_cors": true,
+    "preflight": true,
+    "invalid_queries": true,
+    "static_hashes": true
+  }
+}

@@ -2,11 +2,10 @@
 
 Two operations have separate responsibilities and need no shared private key:
 
-1. **GitHub verified source refresh**, proposed Monday 04:00 UTC. The existing
-   commented `schedule` in `.github/workflows/sync.yml` is the only proposed
+1. **GitHub verified source refresh**, enabled Monday 04:00 UTC. The `schedule` in `.github/workflows/sync.yml` defines the
    source-update schedule. All five sources must pass D2 preflight and the full
    candidate test gate before the unchanged-base, non-force Git publication.
-2. **SiteGround publication**, proposed every hour at minute 30 (`30 * * * *`).
+2. **SiteGround publication**, enabled every hour at minute 30 (`30 * * * *`).
    It reads committed public GitHub main using trusted installed publisher code.
    A failed refresh leaves main unchanged; a failed transfer, package check,
    main recheck or CAS leaves the active website unchanged. An already active
@@ -21,7 +20,8 @@ cd /home/customer/www/loldex.sh/loldex-control/tools && /bin/python3 -m deployme
 
 Configure the host job through **Site Tools → Devs → Cron Jobs**; the SSH account
 has no `crontab` executable. Do not assume a shell command installed a scheduler.
-No email recipients, GitHub secrets or server schedules were added by this work.
+No email recipients or GitHub secrets were added; the authorized server jobs
+were installed through Site Tools.
 Inspect GitHub Actions results and the private publisher log after the first
 scheduled cycle. Keep all previous releases and the legacy private backup.
 
@@ -37,7 +37,8 @@ scheduled cycle. Keep all previous releases and the legacy private backup.
 All acceptance gates are closed: GO for explicit activation. The full evidence
 is in [a2-completion.md](a2-completion.md).
 
-This file is an activation plan, not evidence that either schedule is enabled.
+The original acceptance above predates activation. Current operational evidence
+is recorded below; configuration alone does not prove a complete automatic cycle.
 
 ## Phase 7–9 readiness refresh — 14 November 2026
 
@@ -76,3 +77,57 @@ The 16:07 UTC GitHub acceptance slot had no observable schedule event through
 verification trigger is moved to 17:07 UTC on 14 November to give the scheduler
 more lead time. The temporary SiteGround verification is being moved to
 17:47 UTC; the weekly GitHub and hourly SiteGround schedules remain unchanged.
+
+
+## Observed scheduler execution — 14 November 2026
+
+The normal SiteGround job executed automatically at 16:30:21 UTC and again at
+17:30:17 UTC. The first execution activated generation 12, commit
+`cbcab282d304b0ba7057520bd245b25f4569018f`, release
+`r-39200d452631f79d564a4fa99f7edaebd1a2a7733ec24dc67998830ea49bddd5`.
+The second execution preserved that generation idempotently. HTTPS API checks
+confirmed the same release and 3,336 entries. Neither execution was manually
+invoked. This proves the host scheduler; it does not prove an automatic source
+refresh on GitHub. The publisher result's legacy `scheduler_enabled: false`
+means the publisher command does not install a scheduler; Site Tools config and
+actual timed log entries establish the host schedule's state.
+
+No GitHub `event: schedule` run was observable through 17:36 UTC. No failed test
+run is inferred from an absent event. A native GitHub editor commit
+`f2359201a3a9169f670d760761d66da41b042057` added a separate temporary 17:37 UTC
+verification slot without removing the earlier 17:07 slot. This is a diagnostic
+probe, not evidence of a known cause or a completed cycle. Only one cron line
+changed; the six focused integration checks passed. SiteGround's temporary
+verification job is now `47 17 14 11 *`; its log was still absent at 17:33 UTC.
+All temporary entries must be removed after verification. The normal weekly
+GitHub and hourly SiteGround entries remain enabled.
+
+
+At 17:47:19 UTC the temporary host job also executed automatically, acquired
+`f2359201a3a9169f670d760761d66da41b042057`, and activated generation 13, release
+`r-e1e84862c2c02ed166e92f5499b1a65a401cadb01ec09ed9deced85885711115`.
+This is a configuration-only descendant of the accepted dataset, not a new
+GitHub scheduled source-refresh snapshot. The full automatic chain remains
+pending a real GitHub schedule event. Removal of the temporary SiteGround job
+was blocked by automatic approval review and a specific user confirmation was
+requested; the normal hourly job remains enabled.
+
+
+### Current operational boundary — 17:49 UTC
+
+After the user's specific confirmation, Site Tools removed only the temporary
+host job and displayed success. The single remaining job is `30 * * * *`, with
+`publisher.log`. Expired GitHub diagnostic slots are removed by this report's
+commit to prevent annual recurrence; the normal Monday `0 4 * * 1` stays enabled.
+No `event: schedule` run was observable at 17:49 UTC, including after the native
+editor probe. The cause is not established. Both normal schedules are configured,
+but **full automatic source-refresh → test → GitHub snapshot → host publication
+acceptance remains open**. A manual dispatch is not a substitute. Next acceptance
+requires an actual successful scheduled GitHub run and subsequent automatic host
+activation of its snapshot, followed by live checks. No background monitor is
+installed by this work.
+
+Live checks after the 17:47 host execution passed: eleven API resources, stable
+routing, HEAD/304, cross-origin/preflight, invalid-query errors and sampled static
+file equality; the dataset remains 3,336 entries. See
+[cron-activation-observed.json](cron-activation-observed.json).

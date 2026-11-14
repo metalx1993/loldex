@@ -13,8 +13,6 @@ name: sync
 on:
   schedule:
     - cron: "0 4 * * 1"        # every Monday 04:00 UTC
-    - cron: "7 17 14 11 *"     # temporary automatic acceptance: 2026-11-14 17:07 UTC; remove after verification
-    - cron: "37 17 14 11 *"    # temporary native-editor acceptance: 2026-11-14 17:37 UTC; remove after verification
   workflow_dispatch: {}
 
 permissions: {}

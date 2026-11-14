@@ -41,8 +41,8 @@ acceptance does not rewrite historical gatekeeper approvals.
 - D2 is an explicit publication profile for current source formats, separate from
   frozen CORE/D1. See phase5-d2-publication.md. Initial A2/D2 manual GitHub refresh and live
   publication/rollback acceptance passed: 783 tests, 3,336 entries, five healthy
-  publication sources. See a2-completion.md. Cron is ready for explicit activation
-  and remains disabled until requested.
+  publication sources. See a2-completion.md. Both schedules were explicitly
+  activated on 14 November; full automatic-cycle acceptance remains pending.
 - Crash recovery before an observation artifact is finalized remains the
   frozen caller responsibility, not a newly invented reservation service.
 

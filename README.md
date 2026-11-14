@@ -50,9 +50,10 @@ upstream catalogues        adapters/            data/entries/
   `scripts/build_site_data.py` — builds the site's search data.
 - `site/` — the static site (landing, client-side search, contact) plus a
   self-contained PHP API (`api.php`) and contact handler (`contact.php`).
-- `.github/workflows/sync.yml` — manual verified D2 five-source snapshot:
+- `.github/workflows/sync.yml` — scheduled and manual verified D2 five-source snapshot:
   validates, rebuilds all static knowledge/UI data, tests, and commits onto an
-  unchanged Git base. Cron remains disabled. The separate A2 host publisher
+  unchanged Git base. Scheduling is enabled; full automatic-cycle acceptance
+  remains pending. The separate A2 host publisher
   installs immutable committed versions and activates them atomically. See
   [activation plan](docs/cron-activation.md). CORE observation remains separate.
 
