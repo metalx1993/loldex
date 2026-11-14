@@ -59,8 +59,9 @@ const canonical=v=>JSON.stringify((function sorted(x){if(Array.isArray(x))return
   ['resource=search&q='+encodeURIComponent('capability:A OR capability:B')+'&confidence=high',['a','b','c']],
   ['resource=search&q='+encodeURIComponent('claim-exclusive confidence:high'),['b']],
   ['resource=search&q='+encodeURIComponent('Alpha confidence:high'),['a']],
-  ['resource=search&source=Two&confidence=high',['c']]
- ]){const result=await request(query);assert.equal(result.httpStatusCode,200);assert.deepEqual(body(result).data.map(x=>x.entry.id),ids,query);}
+  ['resource=search&source=Two&confidence=high',['c']],
+  ['resource=search&q='+encodeURIComponent('NOT (capability:A confidence:high) confidence:high'),['a','c']]
+ ]){const result=await request(query);assert.equal(result.httpStatusCode,200);assert.deepEqual(body(result).data.map(x=>x.entry.id),ids,query);assert(!JSON.stringify(body(result).query.ast).includes('\"_memo_key\"'),'private runtime cache keys cannot leak into public AST');}
  const valid=await request('resource=entries&limit=1');const etag=(valid.headers.etag||valid.headers.ETag||[])[0];assert(etag);
  const reordered=await request('limit=1&resource=entries');assert.equal((reordered.headers.etag||reordered.headers.ETag||[])[0],etag,'ETag uses normalized parameter order');
  response=await request('resource=entries&limit=1',{HTTP_IF_NONE_MATCH:etag});assert.equal(response.httpStatusCode,304);
