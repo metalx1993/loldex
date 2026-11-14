@@ -70,3 +70,9 @@ Site Tools creation confirmed: hourly job `30 * * * *`, temporary acceptance job
 `first-automatic-cycle-20261114.log`; the regular job writes `publisher.log`.
 Both invoke the reviewed trusted publisher. GitHub activation commit:
 `a84c0a92ac5b49ef46f8632bf6a7c1af0b6b1d0d`. Verification is pending actual events.
+
+The 16:07 UTC GitHub acceptance slot had no observable schedule event through
+16:25 UTC. This is not recorded as a successful run or a failed test run. The
+verification trigger is moved to 17:07 UTC on 14 November to give the scheduler
+more lead time. The temporary SiteGround verification is being moved to
+17:47 UTC; the weekly GitHub and hourly SiteGround schedules remain unchanged.
