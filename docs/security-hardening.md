@@ -153,7 +153,10 @@ After the new immutable release exists:
    site/.htaccess belongs inside the release. Never swap their roles.
 2. Have SiteGround apply equivalent headers in Nginx, or disable NGINX Direct
    Delivery for loldex.sh in Site Tools → Speed → Caching → NGINX Direct Delivery
-   so Apache rules apply. Preserve unrelated domains/settings.
+   so Apache rules apply. Preserve unrelated domains/settings. The stable root CSP
+   permits only the exact hashes of the frozen legacy contact script/stylesheet
+   and its display:none attribute. This preserves retained forms without a generic
+   unsafe-inline exception. New releases retain their stricter header/meta policy.
 3. Check real HTTPS GET/HEAD responses for root redirect, release index.html,
    contact.html, API JSON and 4xx responses. Expect nosniff, DENY, referrer policy,
    permissions restrictions and CSP with frame-ancestors 'none'. Check HSTS on

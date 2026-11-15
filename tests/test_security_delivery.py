@@ -82,3 +82,21 @@ def test_bootstrap_intercepts_dynamic_retained_paths_before_static_passthrough()
     assert destination('loldex-retained.php') == '-'
     assert destination('loldex-router.php') == '-'
     assert destination('.well-known/acme-challenge/token') == '-'
+
+
+def test_root_csp_legacy_allowances_are_exact_frozen_hashes():
+    import re
+    import base64
+    import hashlib
+    legacy = (ROOT / 'tests/fixtures/retained-pre-hardening/contact.html').read_text()
+    script, = re.findall(r'<script>([\s\S]*?)</script>', legacy)
+    style, = re.findall(r'<style>([\s\S]*?)</style>', legacy)
+    expected = {base64.b64encode(hashlib.sha256(s.encode()).digest()).decode()
+                for s in (script, style, 'display:none')}
+    root = (ROOT / 'deployment/siteground/bootstrap.htaccess').read_text()
+    assert set(re.findall(r"'sha256-([^']+)'", root)) == expected
+    assert "'unsafe-inline'" not in root and "'unsafe-eval'" not in root
+    assert "style-src-attr 'unsafe-hashes'" in root
+    active = (ROOT / 'site/.htaccess').read_text()
+    assert 'sha256-' not in active and "script-src 'self';" in active
+    assert "'unsafe-inline'" not in active and "'unsafe-hashes'" not in active

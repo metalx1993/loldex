@@ -13,6 +13,8 @@ DirectoryIndex loldex-router.php
   RewriteRule ^releases/ - [L]
   RewriteRule ^ loldex-router.php [L]
 </IfModule>
+# Exact hashes preserve the frozen legacy contact page without unsafe-inline.
+# New releases enforce their own stricter header and meta CSP.
 # Nginx Direct Delivery must be disabled or configured with equivalent headers.
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
@@ -20,5 +22,5 @@ DirectoryIndex loldex-router.php
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
   Header always set Strict-Transport-Security "max-age=31536000"
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'; frame-ancestors 'none'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-zvQwBl+58RrvaAcfnHgwof5M59NXRC0iQAAtrf+TaQM='; style-src 'self' 'sha256-4uCR3isZIeD0MXYOkMlBWuXSv5XOfAfiMIHQG56vVXo='; style-src-attr 'unsafe-hashes' 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'; frame-ancestors 'none'"
 </IfModule>
