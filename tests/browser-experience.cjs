@@ -51,6 +51,42 @@ await page.route('**/catalog.json',async route=>{const response=await route.fetc
 await page.goto(base+'/search.html');await page.waitForSelector('.entry-row');
 assert.equal(await page.locator('img').count(),0);
 assert.equal(await page.locator('a[href^="javascript:"]').count(),0);
+// Exercise the entry renderer which actually creates source-reference anchors.
+await page.unroute('**/catalog.json');
+await page.route('**/catalog.json',async route=>{
+ const response=await route.fetch(),json=await response.json();
+ json.entries[0].references=['javascript:alert(1)','data:text/html,<script>alert(1)</script>','https://example.com/safe-reference'];
+ await route.fulfill({json});
+});
+await page.goto(base+'/entry.html?id='+encodeURIComponent(catalog.entries[0].id));
+await page.waitForSelector('.claims');
+assert.equal(await page.locator('a[href^="javascript:"],a[href^="data:"]').count(),0);
+const safeReference=page.locator('a[href="https://example.com/safe-reference"]');
+assert.equal(await safeReference.count(),1);
+assert.equal(await safeReference.getAttribute('rel'),'noopener noreferrer');
+assert.equal(await safeReference.getAttribute('target'),'_blank');
+await page.goto(base+'/contact.html');
+assert.equal(await page.locator('#send').isEnabled(),true);
+assert.equal(await page.locator('script:not([src])').count(),0);
+let contactRequests=0;
+await page.route('**/contact.php',async route=>{
+ contactRequests++;
+ await route.fulfill({status:429,contentType:'application/json',headers:{'Retry-After':'60'},body:JSON.stringify({success:false,message:'Please retry later.'})});
+});
+await page.fill('#name','Browser test');await page.fill('#email','tester@example.invalid');
+await page.fill('#message','漢'.repeat(3000));await page.click('#send');
+assert.equal(contactRequests,0);assert(await page.locator('.field-err[data-for="message"]').isVisible());
+await page.fill('#message','A simulated message; no mail is sent.');await page.click('#send');
+await page.waitForFunction(()=>document.querySelector('#result').textContent==='Please retry later.');
+assert.equal(contactRequests,1);assert.equal(await page.locator('#send').isEnabled(),true);
+await page.evaluate(()=>{
+ window.__cspBlocked=false;
+ document.addEventListener('securitypolicyviolation',event=>{if(event.violatedDirective==='script-src-elem')window.__cspBlocked=true;});
+ const injected=document.createElement('script');injected.textContent='window.__unsafeInlineExecuted=true';document.body.append(injected);
+});
+await page.waitForFunction(()=>window.__cspBlocked===true);
+assert.equal(await page.evaluate(()=>window.__unsafeInlineExecuted),undefined);
+
 assert.deepEqual(errors,[]);
 console.log('Browser checks passed: search, filters, pagination, entry evidence, techniques, 320px layouts, injection rendering.');
 await browser.close();

@@ -1,16 +1,24 @@
 # A2 stable routing bootstrap for SiteGround / Apache. Separate first migration.
-Options -Indexes
+Options -Indexes -MultiViews
+AcceptPathInfo Off
 DirectoryIndex loldex-router.php
 <IfModule mod_rewrite.c>
   RewriteEngine On
   # Keep ACME renewal under the host's existing configuration.
   RewriteRule ^\.well-known/acme-challenge/ - [L]
+  # Stable admission bridge also covers retained releases created before the
+  # guard existed. Keep static/data URLs immutable and release-local.
+  RewriteRule ^loldex-(router|retained)\.php$ - [L]
+  RewriteRule ^releases/r-[a-f0-9]{64}/(?:(?:contact|api|api-v1)\.php(?:/.*)?|api(?:/.*)?)$ loldex-retained.php [L]
   RewriteRule ^releases/ - [L]
-  RewriteRule ^loldex-router\.php$ - [L]
   RewriteRule ^ loldex-router.php [L]
 </IfModule>
+# Nginx Direct Delivery must be disabled or configured with equivalent headers.
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Frame-Options "DENY"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'; frame-ancestors 'none'"
 </IfModule>

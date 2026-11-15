@@ -24,7 +24,8 @@ PRODUCTION_DATA_FILES = DATA_FILES | {'identities.json', 'openapi-v1.json'}
 PRODUCTION_FILES = DATA_FILES | {
     'build-manifest.json', 'index.html', 'search.html', 'entry.html', 'technique.html',
     'techniques.html', 'experience-core.js', 'experience.js', 'experience.css',
-    'api-v1.php', 'api-v1-core.php', 'search-engine.php', 'search-engine.js',
+    'api-v1.php', 'api-v1-core.php', 'request-guard.php', 'search-engine.php', 'search-engine.js',
+    'api.php', 'contact.php', 'contact.html', 'contact.css', 'contact.js', '.htaccess',
     'identities.json', 'identity.html', 'identities.html', 'api.html', 'openapi-v1.json',
 }
 _FORBIDDEN_PARTS = {'.git', '.hg', '.svn', '.ssh', '.aws', '.codex', '__pycache__'}

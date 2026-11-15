@@ -18,7 +18,6 @@ Licence note: verify upstream LICENSE before publishing derived data.
 
 from __future__ import annotations
 import pathlib
-import subprocess
 from typing import Iterable
 
 import yaml
@@ -62,20 +61,14 @@ class WADComsAdapter(Adapter):
     license = "GPL-3.0"
 
     def __init__(self, clone_dir: pathlib.Path | None = None):
-        self.clone_dir = clone_dir or pathlib.Path("/tmp/wadcoms_src")
+        # Retained only for constructor compatibility; acquisition is verified elsewhere.
+        self.clone_dir = clone_dir
 
     def fetch(self):
-        if not (self.clone_dir / "_wadcoms").exists():
-            subprocess.run(
-                ["git", "clone", "--depth", "1", WADCOMS_REPO, str(self.clone_dir)],
-                check=True, capture_output=True,
-            )
-        rev = subprocess.run(
-            ["git", "-C", str(self.clone_dir), "rev-parse", "--short", "HEAD"],
-            capture_output=True, text=True,
-        ).stdout.strip()
-        files = sorted((self.clone_dir / "_wadcoms").glob("*.md"))
-        return {"rev": rev, "files": files}
+        raise RuntimeError(
+            "Legacy acquisition is disabled; use scripts.verified_refresh for verified acquisition. "
+            "Local fixtures may call normalize(raw) explicitly."
+        )
 
     @staticmethod
     def _frontmatter(path: pathlib.Path) -> dict | None:

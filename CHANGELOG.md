@@ -1,5 +1,20 @@
 # Changelog
 
+## Security hardening · 2026-11-15
+
+- Hardened contact and both PHP API generations with strict bounded requests,
+  generic failures and shared private per-client/global admission quotas.
+- Added browser CSP/referrer policies, external contact assets and defensive PHP/
+  Apache headers. Static SiteGround Nginx response headers remain a separate host
+  verification gate; see docs/security-hardening.md.
+- Added a separately installed stable bridge for pre-hardening retained PHP
+  endpoints: old API data stays pinned, old mail handlers cannot run, quotas are
+  shared. Host rewrite installation remains an explicit acceptance gate.
+- Disabled unsafe deprecated clone acquisition; bounded operational D2 YAML
+  expansion and historical Worker fetching without changing frozen CORE semantics.
+- Added independent adversarial and native-concurrency regressions, dependency
+  locks and ephemeral GitHub credential handling. Worker remains undeployed.
+
 ## Phase 10 — quality and governance tools · 2026-11-15
 
 - Added a read-only JSON report sharing existing entry validators and complete

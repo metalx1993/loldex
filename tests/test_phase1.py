@@ -317,7 +317,8 @@ def _run_pilot_one_entry(tmp_path):
     subprocess.run(["git", "-c", "user.email=t@t", "-c", "user.name=t",
                     "commit", "-qm", "x"], cwd=clone, check=True)
     adapter = GTFOBinsAdapter(clone_dir=clone)
-    entries = list(adapter.normalize(adapter.fetch()))
+    revision = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'], cwd=clone, text=True).strip()
+    entries = list(adapter.normalize({'rev': revision, 'files': sorted((clone / '_gtfobins').glob('*'))}))
     assert entries, "pilot produced no entries"
     return entries[0]
 

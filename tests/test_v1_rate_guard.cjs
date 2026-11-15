@@ -1,0 +1,40 @@
+/* Independent integration of the public V1 wrapper with persisted abuse budgets. */
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const modules=process.env.LOLDEX_PHP_WASM_MODULES||path.resolve('work/php-runtime/node_modules');
+const {PHP}=require(path.join(modules,'@php-wasm/universal'));
+const {loadNodeRuntime}=require(path.join(modules,'@php-wasm/node'));
+(async()=>{
+ const php=new PHP(await loadNodeRuntime('8.3',{emscriptenOptions:{processId:process.pid}}));
+ php.mkdir('/www');php.mkdir('/private');
+ const canonical=value=>Array.isArray(value)?'['+value.map(canonical).join(',')+']':value&&typeof value==='object'?'{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+canonical(value[k])).join(',')+'}':JSON.stringify(value);
+ const sha=raw=>'sha256:'+crypto.createHash('sha256').update(raw).digest('hex'),files={};
+ for(const name of ['api-v1.php','api-v1-core.php','request-guard.php','search-engine.php'])files[name]=fs.readFileSync('site/'+name);
+ files['catalog.json']=Buffer.from(canonical({version:1,count:0,entries:[]})+'\n');
+ files['graph.json']=Buffer.from(canonical({version:1,nodes:[],edges:[],diagnostics:[]})+'\n');
+ files['techniques.json']=Buffer.from(canonical({version:1,count:0,registry:{},techniques:[]})+'\n');
+ files['identities.json']=Buffer.from(canonical({version:1,entities:[],candidates:[],entry_index:{},aliases:[]})+'\n');
+ const manifest={version:1,entries:0,registry_checksum:'sha256:'+'c'.repeat(64),files:{}};
+ for(const name of Object.keys(files))if(name.endsWith('.json'))manifest.files[name]=sha(files[name]);
+ files['build-manifest.json']=Buffer.from(canonical(manifest)+'\n');
+ const release={version:1,commit:'a'.repeat(40),files:{}};
+ for(const [name,raw]of Object.entries(files))release.files[name]=sha(raw);
+ release.release_id='r-'+crypto.createHash('sha256').update(canonical(release)).digest('hex');
+ const folder='/www/'+release.release_id;php.mkdir(folder);
+ for(const [name,raw]of Object.entries(files))php.writeFile(folder+'/'+name,raw);
+ php.writeFile(folder+'/release.json',canonical(release));
+ php.writeFile('/www/setup.php',"<?php mkdir('/private/quota',0700); chmod('/private/quota',0700); echo 'ready';");
+ assert.equal((await php.run({scriptPath:'/www/setup.php',usePrimaryPhp:true})).text,'ready');
+ const run=async(method='GET',dir='/private/quota')=>php.run({scriptPath:folder+'/api-v1.php',method,relativeUri:'/releases/'+release.release_id+'/api-v1.php',env:{LOLDEX_RATE_LIMIT_DIR:dir},$_SERVER:{REQUEST_METHOD:method,QUERY_STRING:'',DOCUMENT_ROOT:'',REMOTE_ADDR:'192.0.2.8',REQUEST_URI:'/releases/'+release.release_id+'/api-v1.php'},usePrimaryPhp:true});
+ const header=(r,key)=>(r.headers[key.toLowerCase()]||r.headers[key]||[])[0];
+ let first=await run();assert.equal(first.errors,'');assert.equal(first.httpStatusCode,200,first.text);assert.equal(JSON.parse(first.text).api_version,'1');assert(header(first,'etag'));
+ for(let i=1;i<120;i++){const r=await run();assert.equal(r.errors,'');assert.equal(r.httpStatusCode,200,r.text);}
+ let r=await run();assert.equal(r.errors,'');assert.equal(r.httpStatusCode,429,r.text);assert.equal(JSON.parse(r.text).error.code,'RATE_LIMITED');assert.equal(JSON.parse(r.text).dataset,null);assert.equal(header(r,'cache-control'),'no-store');assert(Number(header(r,'retry-after'))>0);assert.equal(header(r,'etag'),undefined);assert(!r.text.includes('/private'));
+ r=await run('HEAD');assert.equal(r.httpStatusCode,429);assert.equal(r.text,'');assert(Number(header(r,'retry-after'))>0);
+ r=await run('GET',folder+'/served-state');assert.equal(r.httpStatusCode,503);assert.equal(JSON.parse(r.text).error.code,'TEMPORARILY_UNAVAILABLE');assert.equal(header(r,'cache-control'),'no-store');assert.equal(header(r,'etag'),undefined);assert(!r.text.includes('/www'));
+ assert(!php.fileExists(folder+'/served-state'),'public storage rejected before directory creation');
+ r=await run('HEAD',folder+'/served-state');assert.equal(r.httpStatusCode,503);assert.equal(r.text,'');
+ r=await run('OPTIONS',folder+'/served-state');assert.equal(r.httpStatusCode,204);assert.equal(r.text,'');
+ r=await run('POST');assert.equal(r.httpStatusCode,405);assert.equal(JSON.parse(r.text).error.code,'METHOD_NOT_ALLOWED');
+ for(const name of ['content-security-policy','x-frame-options','x-content-type-options','referrer-policy','permissions-policy'])assert(header(r,name),name);
+ php.exit();console.log('Independent V1 wrapper PASS: 120 admitted/121st429, generic503, HEAD errors empty, OPTIONS, private persistence, cache/header contract.');
+})().catch(error=>{console.error(error);process.exit(1)});

@@ -46,7 +46,8 @@ upstream catalogues        adapters/            data/entries/
 - `schema/schema.yaml` — the canonical schema and closed taxonomies.
 - `adapters/` — one adapter per source; each turns upstream data into entries
   that validate against the schema.
-- `scripts/sync.py` — runs every adapter. `scripts/validate.py` — CI gate.
+- `scripts/sync.py` — retired acquisition entry point; use verified D2 refresh.
+  `scripts/validate.py` — CI gate.
   `scripts/build_site_data.py` — builds the site's search data.
 - `site/` — the static site (landing, client-side search, contact) plus a
   self-contained PHP API (`api.php`) and contact handler (`contact.php`).
@@ -62,7 +63,7 @@ upstream catalogues        adapters/            data/entries/
 The checked-in corpus is sufficient. No upstream access is needed for a site build.
 
 ```bash
-python3 -m pip install -r requirements.txt pytest
+python3 -m pip install -r requirements.txt pytest==8.4.2
 python3 -m scripts.validate
 python3 -m scripts.build_all
 python3 -m http.server 8765 --bind 127.0.0.1 --directory site
@@ -101,7 +102,7 @@ python3 -m scripts.build_all --state work/freshness/state.json
 ```
 
 Without a state, the UI says NOT_OBSERVED. Dates and historical corpus counts are
-never evidence of a healthy observation. Legacy `scripts.sync` remains a historical compatibility path. The manual
+never evidence of a healthy observation. Legacy `scripts.sync` acquisition is disabled; use `scripts.verified_refresh` with explicit source repositories. The manual
 publication workflow uses the explicit verified D2 snapshot profile; it is separate
 from the frozen observer. See [D2 publication](docs/phase5-d2-publication.md).
 
@@ -164,3 +165,14 @@ covers. See `CONTRIBUTING.md`.
 
 Code: MIT (`LICENSE`). Aggregated data: redistributed under each upstream
 source's licence — see [ATTRIBUTION.md](ATTRIBUTION.md).
+
+### Security hardening
+
+Contact/API validation, shared private abuse quotas, YAML expansion limits, browser
+restrictions and reproducible CI dependencies are documented in
+[security hardening and host publication steps](docs/security-hardening.md).
+The SiteGround static response-header gate must be verified separately.
+
+CI uses the hash-verified Python 3.12/Linux wheel lock `requirements-ci.lock`.
+For PHP integration tests, copy `tests/php-runtime/package*.json` to
+`work/php-runtime/` and run `npm ci --prefix work/php-runtime --ignore-scripts`.

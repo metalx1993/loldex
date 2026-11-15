@@ -9,7 +9,7 @@ const canonical=v=>JSON.stringify((function sorted(x){if(Array.isArray(x))return
 (async()=>{
  const php=new PHP(await loadNodeRuntime('8.3',{emscriptenOptions:{processId:process.pid}}));
  php.mkdir('/site');php.mkdir('/site/evidence-records');
- for(const name of ['api-v1.php','api-v1-core.php','search-engine.php'])php.writeFile('/site/'+name,fs.readFileSync('site/'+name));
+ for(const name of ['api-v1.php','api-v1-core.php','request-guard.php','search-engine.php'])php.writeFile('/site/'+name,fs.readFileSync('site/'+name));
  const entries=JSON.parse(fs.readFileSync('tests/test_advanced_search_vectors.json','utf8')).entries;
  const evidence={One:{raw:{original:'sensitive original evidence'},upstream_version:'a'.repeat(40)}};
  const files={
@@ -75,18 +75,18 @@ const canonical=v=>JSON.stringify((function sorted(x){if(Array.isArray(x))return
  // A retained release must identify and read only its own immutable snapshot.
  php.mkdir('/releases');
  const payload={version:1,commit:'d'.repeat(40),files:{...manifest.files,'build-manifest.json':'sha256:'+hash(canonical(manifest)+'\n')}};
- for(const name of ['api-v1.php','api-v1-core.php','search-engine.php'])payload.files[name]='sha256:'+hash(fs.readFileSync('site/'+name));
+ for(const name of ['api-v1.php','api-v1-core.php','request-guard.php','search-engine.php'])payload.files[name]='sha256:'+hash(fs.readFileSync('site/'+name));
  const release={...payload,release_id:'r-'+hash(canonical(payload))};const directory='/releases/'+release.release_id;
  php.mkdir(directory);php.mkdir(directory+'/evidence-records');
  for(const [name,raw] of Object.entries(files))php.writeFile(directory+'/'+name,raw);
- for(const name of ['api-v1.php','api-v1-core.php','search-engine.php'])php.writeFile(directory+'/'+name,fs.readFileSync('site/'+name));
+ for(const name of ['api-v1.php','api-v1-core.php','request-guard.php','search-engine.php'])php.writeFile(directory+'/'+name,fs.readFileSync('site/'+name));
  php.writeFile(directory+'/build-manifest.json',canonical(manifest)+'\n');php.writeFile(directory+'/release.json',canonical(release));
  response=await request('resource=entries',{},'GET',directory);assert.equal(response.httpStatusCode,200);assert.equal(body(response).dataset.release_id,release.release_id);assert.equal(body(response).dataset.commit,payload.commit);
  const oldTag=(response.headers.etag||response.headers.ETag||[])[0];
  const otherPayload={...payload,commit:'e'.repeat(40)};const otherRelease={...otherPayload,release_id:'r-'+hash(canonical(otherPayload))};const otherDirectory='/releases/'+otherRelease.release_id;
  php.mkdir(otherDirectory);php.mkdir(otherDirectory+'/evidence-records');
  for(const [name,raw] of Object.entries(files))php.writeFile(otherDirectory+'/'+name,raw);
- for(const name of ['api-v1.php','api-v1-core.php','search-engine.php'])php.writeFile(otherDirectory+'/'+name,fs.readFileSync('site/'+name));
+ for(const name of ['api-v1.php','api-v1-core.php','request-guard.php','search-engine.php'])php.writeFile(otherDirectory+'/'+name,fs.readFileSync('site/'+name));
  php.writeFile(otherDirectory+'/build-manifest.json',canonical(manifest)+'\n');php.writeFile(otherDirectory+'/release.json',canonical(otherRelease));
  const other=await request('resource=entries',{HTTP_IF_NONE_MATCH:oldTag},'GET',otherDirectory);assert.equal(other.httpStatusCode,200,'same datasets in another release must not reuse an ETag for different release metadata');
  assert.notEqual((other.headers.etag||other.headers.ETag||[])[0],oldTag);

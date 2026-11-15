@@ -16,7 +16,6 @@ Licence note: verify upstream LICENSE before publishing derived data.
 from __future__ import annotations
 import pathlib
 import re
-import subprocess
 from typing import Iterable
 
 from .base import Adapter, Entry
@@ -81,20 +80,14 @@ class LOLADAdapter(Adapter):
     license = "verify upstream LICENSE"
 
     def __init__(self, clone_dir: pathlib.Path | None = None):
-        self.clone_dir = clone_dir or pathlib.Path("/tmp/lolad_src")
+        # Retained only for constructor compatibility; acquisition is verified elsewhere.
+        self.clone_dir = clone_dir
 
     def fetch(self):
-        if not (self.clone_dir / "index.html").exists():
-            subprocess.run(
-                ["git", "clone", "--depth", "1", LOLAD_REPO, str(self.clone_dir)],
-                check=True, capture_output=True,
-            )
-        rev = subprocess.run(
-            ["git", "-C", str(self.clone_dir), "rev-parse", "--short", "HEAD"],
-            capture_output=True, text=True,
-        ).stdout.strip()
-        html = (self.clone_dir / "index.html").read_text(encoding="utf-8", errors="replace")
-        return {"rev": rev, "html": html}
+        raise RuntimeError(
+            "Legacy acquisition is disabled; use scripts.verified_refresh for verified acquisition. "
+            "Local fixtures may call normalize(raw) explicitly."
+        )
 
     @staticmethod
     def _rows(html: str):

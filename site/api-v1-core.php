@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/request-guard.php';
+
 /** Version 1 API: immutable release-local datasets; no upstream I/O or writes. */
 require_once __DIR__ . '/search-engine.php';
 class LoldexApiError extends Exception {
@@ -195,12 +197,22 @@ function loldex_v1_resource(&$context,$resource,$params) {
     loldex_v1_fail(404,'NOT_FOUND','Unknown API resource.');
 }
 function loldex_v1_handle($method,$queryString,$directory,$ifNoneMatch=null,$requestUri='') {
-    $headers=array('Content-Type'=>'application/json; charset=utf-8','X-Content-Type-Options'=>'nosniff','Access-Control-Allow-Origin'=>'*','Access-Control-Allow-Methods'=>'GET, HEAD, OPTIONS','Access-Control-Allow-Headers'=>'If-None-Match, Content-Type','Access-Control-Expose-Headers'=>'ETag, X-LOLDEX-Dataset','Allow'=>'GET, HEAD, OPTIONS','Cache-Control'=>'no-store');
+    $headers=array('Content-Type'=>'application/json; charset=utf-8','X-Content-Type-Options'=>'nosniff','Access-Control-Allow-Origin'=>'*','Access-Control-Allow-Methods'=>'GET, HEAD, OPTIONS','Access-Control-Allow-Headers'=>'If-None-Match, Content-Type','Access-Control-Expose-Headers'=>'ETag, X-LOLDEX-Dataset, Retry-After','Allow'=>'GET, HEAD, OPTIONS','Cache-Control'=>'no-store');
+    $headers['X-Frame-Options']='DENY';
+    $headers['Referrer-Policy']='strict-origin-when-cross-origin';
+    $headers['Permissions-Policy']='camera=(), microphone=(), geolocation=(), payment=()';
+    $headers['Content-Security-Policy']="default-src 'none'; frame-ancestors 'none'";
     $dataset=null;
     set_error_handler(function($severity,$message,$file,$line){ if (error_reporting() & $severity) throw new ErrorException('Dataset operation failed',0,$severity); return true; });
     try {
         if ($method==='OPTIONS') return array('status'=>204,'headers'=>$headers,'body'=>'');
         if ($method!=='GET' && $method!=='HEAD') loldex_v1_fail(405,'METHOD_NOT_ALLOWED','Only GET, HEAD and OPTIONS are supported.');
+        $budget=loldex_guard_rate('api');
+        if (!$budget['allowed']) {
+            $headers['Retry-After']=(string)$budget['retry_after'];
+            loldex_v1_fail($budget['status'],$budget['status']===429?'RATE_LIMITED':'TEMPORARILY_UNAVAILABLE',
+                $budget['status']===429?'Too many requests. Please retry later.':'Service temporarily unavailable.');
+        }
         $params=loldex_v1_query($queryString); $resource=$params['resource']??'root';
         $allowed=array(
             'root'=>array(), 'entries'=>array_merge(array('limit','offset'),LOLDEX_SEARCH_FIELDS),

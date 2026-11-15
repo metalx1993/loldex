@@ -5,6 +5,10 @@
  */
 header('Cache-Control: no-store, max-age=0');
 header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+header('Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()');
+header("Content-Security-Policy: default-src 'none'; frame-ancestors 'none'");
 function unavailable() {
     http_response_code(503);
     header('Retry-After: 60');
@@ -51,12 +55,12 @@ foreach ($segments as $segment) {
 $query = isset($parts[1]) ? '?' . $parts[1] : '';
 if (preg_match('/[\r\n]/', $query)) { http_response_code(400); exit; }
 // Public read-only API redirects need CORS too. Preflight cannot redirect.
-$isPublicApi = $path === 'api-v1.php' || $path === 'api/v1' || strpos($path, 'api/v1/') === 0;
+$isPublicApi = $path === 'api-v1.php' || $path === 'api.php' || $path === 'api/v1' || strpos($path, 'api/') === 0;
 if ($isPublicApi) {
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, HEAD, OPTIONS');
     header('Access-Control-Allow-Headers: If-None-Match, Content-Type');
-    header('Access-Control-Expose-Headers: ETag, X-LOLDEX-Dataset');
+    header('Access-Control-Expose-Headers: ETag, X-LOLDEX-Dataset, Retry-After');
     if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         http_response_code(204); exit;
     }

@@ -3,7 +3,7 @@
   "info": {
     "title": "LOLDEX public read-only API",
     "version": "1.0.0",
-    "description": "Release-local immutable API. Stable /api/v1 URLs redirect to a retained release. Use the final retained URL to pin pagination and dependencies. Duplicate parameters and arrays are rejected. ASCII A-Z folding only; Unicode is exact UTF-8. Confidence and provenance belong to individual claims. Search NOT subtrees have independent evidence scope. No authentication or writes. PHP query fallback: ./api-v1.php?resource=search&q=... . Public CORS exposes ETag and X-LOLDEX-Dataset; conditional responses verify consumed file hashes before 304."
+    "description": "Release-local immutable API. Stable /api/v1 URLs redirect to a retained release. Use the final retained URL to pin pagination and dependencies. Duplicate parameters and arrays are rejected. ASCII A-Z folding only; Unicode is exact UTF-8. Confidence and provenance belong to individual claims. Search NOT subtrees have independent evidence scope. No authentication or writes. PHP query fallback: ./api-v1.php?resource=search&q=... . Public CORS exposes ETag, X-LOLDEX-Dataset and Retry-After; conditional responses verify consumed file hashes before 304. Shared fixed-window admission quotas: 120 requests/client/minute and 3000 globally/minute; corrupt or unavailable private state fails closed. OPTIONS is exempt. Retry-After is present on admission refusal; responses are no-store."
   },
   "servers": [
     {
@@ -65,7 +65,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -73,9 +104,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -88,6 +116,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -278,7 +330,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -286,9 +369,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -426,6 +506,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -514,7 +618,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -522,9 +657,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -560,6 +692,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -636,7 +792,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -644,9 +831,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -670,6 +854,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -870,7 +1078,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -878,9 +1117,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -1028,6 +1264,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -1138,7 +1398,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1146,9 +1437,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -1206,6 +1494,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -1306,7 +1618,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1314,9 +1657,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -1364,6 +1704,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -1440,7 +1804,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1448,9 +1843,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -1474,6 +1866,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -1574,7 +1990,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1582,9 +2029,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -1632,6 +2076,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -1708,7 +2176,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1716,9 +2215,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -1742,6 +2238,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },
@@ -1818,7 +2338,38 @@
             }
           },
           "503": {
-            "description": "Required release metadata or dataset integrity failed.",
+            "description": "Required release metadata/dataset integrity failed, or private admission state unavailable. TEMPORARILY_UNAVAILABLE admission errors include Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Shared request admission quota exceeded. Error code RATE_LIMITED; no-store.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1826,9 +2377,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": "Matching representation ETag, after required files have been verified; empty body."
           }
         }
       },
@@ -1852,6 +2400,30 @@
           },
           "304": {
             "description": "Matching representation ETag, after required files have been verified; empty body."
+          },
+          "429": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Same admission refusal and headers as GET; empty body.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until retry is appropriate.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         }
       },

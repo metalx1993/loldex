@@ -32,7 +32,7 @@ const engine=require('../site/search-engine.js');
  };
  const sha=raw=>'sha256:'+crypto.createHash('sha256').update(raw).digest('hex');
  const files={};
- for(const name of ['api-v1.php','api-v1-core.php','search-engine.php'])files[name]=fs.readFileSync('site/'+name);
+ for(const name of ['api-v1.php','api-v1-core.php','request-guard.php','search-engine.php'])files[name]=fs.readFileSync('site/'+name);
  files['catalog.json']=Buffer.from(canonical({version:1,count:fixture.entries.length,entries:fixture.entries})+'\n');
  files['graph.json']=Buffer.from(canonical({version:1,nodes:[],edges:[],diagnostics:[]})+'\n');
  files['techniques.json']=Buffer.from(canonical({version:1,count:0,registry:{},techniques:[]})+'\n');

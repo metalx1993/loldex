@@ -12,7 +12,7 @@ const engine=require('../site/search-engine.js');
  const techniques=JSON.parse(fs.readFileSync('site/techniques.json','utf8'));
  const php=new PHP(await loadNodeRuntime('8.2',{emscriptenOptions:{processId:process.pid}}));
  php.mkdir('/development');php.mkdir('/development/evidence-records');
- const names=new Set(['api-v1.php','api-v1-core.php','search-engine.php','build-manifest.json',...Object.keys(manifest.files)]);
+ const names=new Set(['api-v1.php','api-v1-core.php','request-guard.php','search-engine.php','build-manifest.json',...Object.keys(manifest.files)]);
  for(const name of names)php.writeFile('/development/'+name,fs.readFileSync('site/'+name));
  php.writeFile('/development/limits.php',"<?php echo json_encode(array('version'=>PHP_VERSION,'memory_limit'=>ini_get('memory_limit')));");
  let probe=await php.run({scriptPath:'/development/limits.php',usePrimaryPhp:true});assert.equal(probe.errors,'');const limits=JSON.parse(probe.text);assert(limits.version.startsWith('8.2.'));

@@ -24,6 +24,66 @@ class SourceDataError(ValueError):
         self.code = code
 
 
+# Operational D2 limits, separate from frozen CORE canonical semantics. Repeated
+# aliases count at every occurrence, before a JSON tree or YAML merge is built.
+MAX_DETAIL_NODES = 100_000
+MAX_DETAIL_DEPTH = 64
+MAX_DETAIL_BYTES = 32 * 1024 * 1024
+MAX_DETAIL_INTEGER_BITS = 16_384
+MAX_YAML_INTEGER_CHARS = 4096
+
+
+def _check_detail_budget(value, *, yaml_nodes=False):
+    stack = [(value, 0, frozenset())]
+    nodes, size = 0, 0
+    while stack:
+        item, depth, ancestors = stack.pop()
+        nodes += 1
+        if nodes > MAX_DETAIL_NODES or depth > MAX_DETAIL_DEPTH:
+            raise SourceDataError("SOURCE_DETAIL_LIMIT", "source detail exceeds expansion budget")
+        children = None
+        if yaml_nodes:
+            if isinstance(item, yaml.ScalarNode):
+                scalar = item.value
+                if item.tag == "tag:yaml.org,2002:int" and len(scalar) > MAX_YAML_INTEGER_CHARS:
+                    raise SourceDataError("SOURCE_DETAIL_LIMIT", "source integer exceeds expansion budget")
+            elif isinstance(item, yaml.MappingNode):
+                children = (part for pair in item.value for part in pair)
+            else:
+                children = iter(item.value)
+        elif isinstance(item, dict):
+            children = (part for pair in item.items() for part in pair)
+        elif isinstance(item, (list, set)):
+            children = iter(item)
+        else:
+            scalar = item
+        size += 64  # Covers structural JSON punctuation and typed scalar wrappers.
+        if children is not None:
+            identity = id(item)
+            if identity in ancestors:
+                raise SourceDataError("MALFORMED_RECORD", "cyclic source alias")
+            next_ancestors = ancestors | {identity}
+            # A wide container must be rejected before allocating a wide stack.
+            count = len(item.value) if yaml_nodes else len(item)
+            if isinstance(item, (dict, yaml.MappingNode)):
+                count *= 2
+            if count + len(stack) > MAX_DETAIL_NODES - nodes:
+                raise SourceDataError("SOURCE_DETAIL_LIMIT", "source detail exceeds expansion budget")
+            stack.extend((child, depth + 1, next_ancestors) for child in children)
+        elif isinstance(scalar, str):
+            # Six bytes per character is a conservative JSON escape bound; no
+            # encoded copy of an enormous scalar is allocated during preflight.
+            size += 6 * len(scalar)
+        elif isinstance(scalar, bytes):
+            size += 4 * ((len(scalar) + 2) // 3)
+        elif isinstance(scalar, int):
+            if scalar.bit_length() > MAX_DETAIL_INTEGER_BITS:
+                raise SourceDataError("SOURCE_DETAIL_LIMIT", "source integer exceeds expansion budget")
+            size += scalar.bit_length()  # Conservative decimal encoding bound.
+        if size > MAX_DETAIL_BYTES:
+            raise SourceDataError("SOURCE_DETAIL_LIMIT", "source detail exceeds expansion budget")
+
+
 def text(value, *, required=False):
     if value is None:
         if required:
@@ -91,7 +151,16 @@ def parse_document(raw_text, *, frontmatter=False):
                 raise SourceDataError("PARSE_ERROR", "unterminated YAML frontmatter")
             chunk = "".join(lines[first + 1:end])
     try:
-        document = yaml.safe_load(chunk)
+        loader = yaml.SafeLoader(chunk)
+        try:
+            node = loader.get_single_node()
+            if node is not None:
+                _check_detail_budget(node, yaml_nodes=True)
+            document = loader.construct_document(node) if node is not None else None
+        finally:
+            loader.dispose()
+    except SourceDataError:
+        raise
     except (yaml.YAMLError, ValueError, RecursionError) as exc:
         raise SourceDataError("PARSE_ERROR") from exc
     if document is None:
@@ -119,7 +188,11 @@ def json_detail(value, _active=None):
     unambiguous because source mappings containing the reserved tag key are
     themselves wrapped as mappings. Original YAML remains the raw authority.
     """
-    active = set() if _active is None else _active
+    _check_detail_budget(value)
+    return _json_detail(value, set() if _active is None else _active)
+
+
+def _json_detail(value, active):
     if value is None or isinstance(value, (bool, int)):
         return value
     if isinstance(value, str):
@@ -140,16 +213,16 @@ def json_detail(value, _active=None):
     active.add(identity)
     try:
         if isinstance(value, list):
-            return [json_detail(item, active) for item in value]
+            return [_json_detail(item, active) for item in value]
         if isinstance(value, set):
-            items = [json_detail(item, active) for item in value]
+            items = [_json_detail(item, active) for item in value]
             return {"$yaml_type": "set", "value": sorted(items, key=canonical_bytes)}
         result = {}
         for key, item in value.items():
             key = nfc(text(key, required=True))
             if key in result:
                 raise SourceDataError("MALFORMED_RECORD", "duplicate NFC source detail key")
-            result[key] = json_detail(item, active)
+            result[key] = _json_detail(item, active)
         if "$yaml_type" in result:
             return {"$yaml_type": "mapping", "entries": [[key, result[key]] for key in sorted(result)]}
         return result
