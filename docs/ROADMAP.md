@@ -1,6 +1,6 @@
 # LOLDEX — delivery roadmap
 
-Updated 14 November 2026. This replaces historical progress summaries as the
+Updated 15 November 2026. This replaces historical progress summaries as the
 implementation index; it does not replace any frozen normative CORE clause.
 
 ## Implementation status through Phase 9
@@ -18,7 +18,7 @@ implementation index; it does not replace any frozen normative CORE clause.
 | 7 | Versioned public knowledge API with release-bound data and original evidence | Implemented, tested and published; phase7-design.md; phase9-delivery.md |
 | 8 | Bounded Boolean queries, claim-correlated filters, relevance explanations and facets | Implemented, tested and published; phase8-design.md; phase9-delivery.md |
 | 9 | Durable declared tool identities, separate candidates and explicit historical source-ID aliases | Implemented, tested and published; phase9-design.md; phase9-delivery.md |
-| 10 | Ongoing quality and governance operations | Future phase; not claimed complete |
+| 10 | Ongoing quality and governance operations | Tools/procedures implemented; phase10-delivery.md; real scheduled-cycle operational acceptance pending |
 
 Phases 7–9 passed independent adversarial reviews, 848 CI tests, live API/browser
 checks and actual rollback/restoration on 14 November. See phase9-delivery.md.
@@ -53,5 +53,6 @@ acceptance does not rewrite historical gatekeeper approvals.
    automatic cycle; see cron-activation.md.
 3. Preserve CORE/D1, D2, immutable releases, per-claim evidence and retained
    rollback versions as the project evolves.
-4. Phase 10 remains future quality/governance work; it is not silently completed
-   by the validators and adversarial tests delivered here.
+4. Phase 10 tools, governance procedures and independent regressions are
+   delivered in phase10-delivery.md. The real scheduled-cycle criterion remains
+   open; ongoing maintenance continues after implementation delivery.

@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "recorded_at_utc": "2026-11-15T08:06:57.569343+00:00",
+  "status": "IMPLEMENTATION_VERIFIED_OPERATIONAL_ACCEPTANCE_PENDING",
+  "phase": 10,
+  "source_head_at_validation": "5ac395121777e4abdf4ca662062518bff6ea31b9",
+  "source_was_uncommitted_at_validation": true,
+  "tested_source_sha256": {
+    "scripts/quality_report.py": "fad4e2af112675b62a3274bac3c0f58daf9647f38738554c1d45b8a793fa9f23",
+    "scripts/check_operational_cycle.py": "20f1e528dd52ec3a09624be237366648f5f89a95fcc9b09a984d08be39b4d218",
+    "scripts/build_all.py": "b7b94483780cc4931e1c8f99de813cda14eb81bfbca624be30d8b4990a43746e",
+    "scripts/validate.py": "f10c0c5fb1e21c6fd6160f80dfaf4308a16e9bd598f7759af1dae3daf47b74b8",
+    ".github/workflows/sync.yml": "750cbfadbad82f863c611f730989260e28c2c84b8555c73c747d3a605b44ed54",
+    "tests/test_quality_report.py": "345fed4cfd26e4cbda73683119bba16f140d93ded61052cc3bf84878b17212de",
+    "tests/test_operational_cycle.py": "7c235924730c54b1ee7d346ae62a1a32c751ef12a9acc3f0f3f124296b422311",
+    "tests/test_phase10_adversarial.py": "a9f48967029a554f44e8b6493f3e3bf5f716b4c044ab347349ab5aa67284ed9c",
+    "tests/test_quality_contracts.py": "4055d42e6924903878538cfa314348f7eec057106944f22a902fb897f713da81",
+    "tests/test_quality_workflow.py": "b2a13dbd21348043fbfc9fffccf45d37c430170cec9f78f38b59e5ea6af8931b"
+  },
+  "validation": {
+    "full_suite": {
+      "command": "python3 -m pytest -q",
+      "passed": 928,
+      "seconds": 875.62,
+      "local_listener_access_required": true,
+      "log_sha256": "31bc3e499894ec1366be81325b51947d847eacb4ccdd559274a520195f065147"
+    },
+    "additional_workflow_capture_tests": {
+      "command": "python3 -m pytest -q tests/test_quality_workflow.py",
+      "passed": 2,
+      "note": "Added after full-suite collection; included in final targeted run."
+    },
+    "final_phase10_targeted": {
+      "passed": 82,
+      "seconds": 2.86,
+      "log_sha256": "fc05d00340308ec95b04c7cde1fa398563fd4e5203f12f371e5abd0e2e6c119f"
+    },
+    "final_collected_tests": 930,
+    "unique_tests_executed": 930,
+    "quality_baseline": {
+      "version": 1,
+      "scope": "complete_generated_data_inventory",
+      "status": "PASS",
+      "entries": 3336,
+      "checked_files": 3345,
+      "issues": [],
+      "input_snapshot": {
+        "files": 3341,
+        "sha256": "895475a4d1e2ae1277358b50fa57660b8066415416fdd280b1673b0a0ef0d624",
+        "stable_at_recheck": true
+      },
+      "checkout": {
+        "head": "5ac395121777e4abdf4ca662062518bff6ea31b9",
+        "report_script_sha256": "fad4e2af112675b62a3274bac3c0f58daf9647f38738554c1d45b8a793fa9f23",
+        "tracked_changes": true,
+        "untracked_changes": true
+      },
+      "limits": [
+        "Local filesystem check; files are not locked and concurrent ABA changes cannot be excluded.",
+        "No upstream acquisition, CORE freshness inference or operational-cycle acceptance.",
+        "Handwritten API/runtime and UI assets are outside this generated-data comparison."
+      ]
+    },
+    "post_suite_generated_output_hashes_match": true,
+    "workflow_shell_syntax_checked": true
+  },
+  "adversarial_review": {
+    "agents": 3,
+    "independent_cases": 17,
+    "final_operations_and_independent_cases_passed": 46,
+    "resolved_findings": [
+      "Incomplete entry-schema coverage and generated OpenAPI/licence/manifest comparison.",
+      "Ambiguous duplicate input keys and missing/nonregular/symlink inputs.",
+      "Unreviewed publisher command digest accepted.",
+      "Known failed/malformed evidence hidden by absent sections.",
+      "Completed job containing unfinished steps hidden by incomplete evidence.",
+      "Workflow lacked same-job base/candidate tree captures required by operational contract."
+    ],
+    "unresolved_in_declared_tool_scope": []
+  },
+  "governance": {
+    "procedure": "docs/quality-governance.md",
+    "operations": "docs/operations-governance.md",
+    "decision_templates_delivered": true,
+    "continuous_human_review_not_automated": true
+  },
+  "production_cycle": {
+    "status": "PENDING_GITHUB_SCHEDULE_EVENT",
+    "evidence": "docs/cron-check-2026-11-15.json",
+    "schedule_runs_observed_on_final_recheck": 0,
+    "next_configured_slot_europe_rome": "2026-11-16T05:00:00+01:00",
+    "scheduled_execution_guaranteed": false,
+    "synthetic_fixtures_count_as_production_evidence": false
+  },
+  "preservation": {
+    "site_and_corpus_changed": false,
+    "new_schedulers_installed": false,
+    "core_design_sha256": "f79aed020b36d1a217b8091319be1e7ec7cf5ac48849c8d0b765a1523f2ef3e0",
+    "frozen_CORE_D1_changed": false
+  },
+  "limits": [
+    "Offline operational checker proves supplied-evidence consistency only, not capture authenticity.",
+    "Actual scheduled production cycle criterion10.3 remains open.",
+    "Quality report checks generated data, not handwritten runtime/UI assets or upstream truth.",
+    "No filesystem lock; concurrent ABA changes cannot be excluded.",
+    "Full regression evidence is local, not a new GitHub Actions run."
+  ]
+}

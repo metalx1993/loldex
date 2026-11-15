@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "checked_at_utc": "2026-11-15T07:33:49.416490+00:00",
+  "status": "PENDING_GITHUB_SCHEDULE_EVENT",
+  "github": {
+    "repository": "metalx1993/loldex",
+    "evidence_url": "https://api.github.com/repos/metalx1993/loldex/actions/runs?event=schedule&per_page=10",
+    "observed_schedule_run_count": 0,
+    "remote_workflow_checked": true,
+    "weekly_cron_utc": "0 4 * * 1",
+    "next_configured_slot_utc": "2026-11-16T04:00:00Z",
+    "next_configured_slot_europe_rome": "2026-11-16T05:00:00+01:00",
+    "slot_is_execution_guarantee": false
+  },
+  "host": {
+    "observed_at_utc": "2026-11-15T07:32:39.168574+00:00",
+    "active": {
+      "commit": "5ac395121777e4abdf4ca662062518bff6ea31b9",
+      "generation": 14,
+      "previous_release_id": "r-e1e84862c2c02ed166e92f5499b1a65a401cadb01ec09ed9deced85885711115",
+      "release_id": "r-45c5d35c436fa592310637a993910c4accddef880245b98fef50d435eeea0c79",
+      "version": 1
+    },
+    "publisher_log_mtime_utc": "2026-11-15T07:30:18.741140+00:00",
+    "last_result": {
+      "active": {
+        "commit": "5ac395121777e4abdf4ca662062518bff6ea31b9",
+        "generation": 14,
+        "previous_release_id": "r-e1e84862c2c02ed166e92f5499b1a65a401cadb01ec09ed9deced85885711115",
+        "release_id": "r-45c5d35c436fa592310637a993910c4accddef880245b98fef50d435eeea0c79",
+        "version": 1
+      },
+      "commit": "5ac395121777e4abdf4ca662062518bff6ea31b9",
+      "release_id": "r-45c5d35c436fa592310637a993910c4accddef880245b98fef50d435eeea0c79",
+      "scheduler_enabled": false
+    },
+    "last_execution_source": "existing hourly Site Tools job; read-only SSH observation"
+  },
+  "https_checks": {
+    "release_id": "r-45c5d35c436fa592310637a993910c4accddef880245b98fef50d435eeea0c79",
+    "resources": {
+      "root": {
+        "status": 200,
+        "bytes": 571,
+        "etag": "\"loldex-v1-851700e1c8f719e8208e89e0dd3d019922f7fcbed3d0a02ae0d140a463edecf0\""
+      },
+      "entries": {
+        "status": 200,
+        "bytes": 3255,
+        "etag": "\"loldex-v1-f0188e4504e54145c6aab82a54b2d64cd38037efa18a5f31fff6770400060b04\""
+      },
+      "entry": {
+        "status": 200,
+        "bytes": 2234,
+        "etag": "\"loldex-v1-1a5ec61a5a3a93fd5c24bfb1781b16636f0ecd6f18b0a11a94ebf074202d9c42\""
+      },
+      "evidence": {
+        "status": 200,
+        "bytes": 712,
+        "etag": "\"loldex-v1-d95043c99f4b572f267a783f439ef517f9cf36e41fa70c4f25278a71190ab9d2\""
+      },
+      "search": {
+        "status": 200,
+        "bytes": 14180,
+        "etag": "\"loldex-v1-6c7dfedd5c7740c4d7ebd336832a8c5fea86e122b7e72e2c334d2b00b04bc3d4\""
+      },
+      "graph": {
+        "status": 200,
+        "bytes": 1310,
+        "etag": "\"loldex-v1-fddd792a01afe146c5feb06a1dfff3717b632f747688ed6eaebadb6c905e8de0\""
+      },
+      "techniques": {
+        "status": 200,
+        "bytes": 9850,
+        "etag": "\"loldex-v1-719a50f4ecee315ae7acb77c25654f6dae71e82dd39846c79fed510862730ed9\""
+      },
+      "technique": {
+        "status": 200,
+        "bytes": 31049,
+        "etag": "\"loldex-v1-9222dc2328376cf30725b5b6d4287b689754f04a53ec17943cbfcb59d7d0609a\""
+      },
+      "identities": {
+        "status": 200,
+        "bytes": 17372,
+        "etag": "\"loldex-v1-1e1dec3893beb89e2391f00f95e2b40383c4a588c002e33c1f358564e71250f4\""
+      },
+      "identity": {
+        "status": 200,
+        "bytes": 4346,
+        "etag": "\"loldex-v1-a530a2779b621dc263b48b045d4312ebe1c80df363cefee9a0ab2c2b15badfbf\""
+      },
+      "resolve": {
+        "status": 200,
+        "bytes": 4325,
+        "etag": "\"loldex-v1-25db5639ad5875ec2f0cafa2586840141223a0b0add6c940cd16dd9e9c72a863\""
+      }
+    },
+    "entry_count": 3336,
+    "routes": true,
+    "conditional_304": true,
+    "head": true,
+    "stable_cors": true,
+    "preflight": true,
+    "invalid_queries": true,
+    "static_hashes": true
+  },
+  "limits": [
+    "No scheduled GitHub refresh observed; complete chain not accepted.",
+    "Host commit is an operational-docs descendant of the previously accepted dataset, not a newly scheduled source snapshot.",
+    "No manual workflow dispatch or host publisher invocation performed.",
+    "No additional schedules or background monitor installed.",
+    "Phase 10 planning started; implementation not claimed."
+  ]
+}

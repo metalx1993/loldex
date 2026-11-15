@@ -131,3 +131,25 @@ Live checks after the 17:47 host execution passed: eleven API resources, stable
 routing, HEAD/304, cross-origin/preflight, invalid-query errors and sampled static
 file equality; the dataset remains 3,336 entries. See
 [cron-activation-observed.json](cron-activation-observed.json).
+
+## Follow-up — 15 November 2026
+
+GitHub's schedule-event runs endpoint still returned zero runs. The current
+remote workflow contains only the normal weekly `0 4 * * 1` schedule: its next
+configured time is Monday 16 November at 04:00 UTC (05:00 Europe/Rome), not
+Sunday morning. This is an expected slot, not a guarantee of execution. The
+earlier temporary probes remain historical unobserved slots.
+
+SiteGround has automatically acquired the latest available commit
+`5ac395121777e4abdf4ca662062518bff6ea31b9`: active generation 14, release
+`r-45c5d35c436fa592310637a993910c4accddef880245b98fef50d435eeea0c79`.
+The hourly publisher log recorded a successful idempotent execution at
+07:30:18 UTC (08:30 Europe/Rome). Live API/resource, routing, HEAD/304,
+CORS/preflight, invalid-query and sampled static-file checks passed again,
+with 3,336 entries. No manual dispatch or publisher invocation was performed.
+
+**The complete automatic chain remains pending a genuine scheduled GitHub
+refresh and subsequent scheduled host publication of that snapshot.** No new
+temporary schedule or background monitor was installed. Current evidence:
+[cron-check-2026-11-15.json](cron-check-2026-11-15.json). Phase 10 planning starts
+separately in [phase10-plan.md](phase10-plan.md); it does not close this gate.

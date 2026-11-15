@@ -25,9 +25,19 @@ we need is the layer *on top*.
 3. Map upstream vocabulary into the **closed taxonomies** in
    `schema/schema.yaml`. Need a value that doesn't exist? Open a schema PR — do
    not invent free-form strings.
-4. Register it in `scripts/sync.py`.
-5. Run `python -m scripts.sync --only <yoursource>` then
-   `python -m scripts.validate`.
+4. Propose source admission with pinned discovery/representation fixtures,
+   licence evidence and explicit D2 preflight rules. The current five-source
+   publication contract is [D2](docs/phase5-d2-publication.md); adding a source
+   requires contract review, not just registration in a historical sync list.
+5. Run the relevant adapter/negative tests, `python -m scripts.validate`,
+   `python -m scripts.quality_report` against the matching built views, and the
+   full suite before delivery. `scripts.sync` remains historical compatibility;
+   it is not the current production admission procedure.
+
+For data-quality reports and changes, use the
+[review and correction procedure](docs/quality-governance.md). Record the affected
+revision/claim, pinned source evidence, reproduction, actual test results and
+the review decision. Do not patch public projections independently of enrichment.
 
 ## The inclusion test
 

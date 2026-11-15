@@ -48,32 +48,41 @@ def check_layers(path, d) -> int:
     return errors
 
 
-def main():
-    # 1. code taxonomies must match schema.yaml
+def check_taxonomy():
+    """The CLI and read-only quality report share this non-optional guard."""
     sp, sc, spr = load_schema_taxonomy()
-    assert sp == PHASES, "phase taxonomy drift between schema.yaml and adapters/base.py"
-    assert sc == CAPABILITIES, "capability taxonomy drift"
-    assert spr == PRIVILEGES, "privilege taxonomy drift"
+    for actual, expected, label in ((sp, PHASES, "phase"),
+                                     (sc, CAPABILITIES, "capability"),
+                                     (spr, PRIVILEGES, "privilege")):
+        if actual != expected:
+            raise ValueError(f"{label} taxonomy drift between schema.yaml and adapters/base.py")
 
-    # 2. every entry validates
+
+def check_entry(path, d) -> int:
+    """Existing entry checks, shared without introducing another taxonomy."""
+    errors = 0
+    for field, allowed in (("platform", PLATFORMS), ("type", TYPES),
+                           ("privilege_required", PRIVILEGES)):
+        if d.get(field) not in allowed:
+            print(f"FAIL {path.name}: {field}={d.get(field)!r}"); errors += 1
+    for p in d.get("phases", []):
+        if p not in PHASES:
+            print(f"FAIL {path.name}: phase {p!r}"); errors += 1
+    for c in d.get("capabilities", []):
+        if c not in CAPABILITIES:
+            print(f"FAIL {path.name}: capability {c!r}"); errors += 1
+    if not d.get("sources"):
+        print(f"FAIL {path.name}: missing sources"); errors += 1
+    return errors + check_layers(path, d)
+
+
+def main():
+    check_taxonomy()
     n = errors = 0
     for path in (ROOT / "data" / "entries").rglob("*.yaml"):
         d = yaml.safe_load(path.read_text())
         n += 1
-        for field, allowed in (("platform", PLATFORMS), ("type", TYPES),
-                               ("privilege_required", PRIVILEGES)):
-            if d.get(field) not in allowed:
-                print(f"FAIL {path.name}: {field}={d.get(field)!r}"); errors += 1
-        for p in d.get("phases", []):
-            if p not in PHASES:
-                print(f"FAIL {path.name}: phase {p!r}"); errors += 1
-        for c in d.get("capabilities", []):
-            if c not in CAPABILITIES:
-                print(f"FAIL {path.name}: capability {c!r}"); errors += 1
-        if not d.get("sources"):
-            print(f"FAIL {path.name}: missing sources"); errors += 1
-        errors += check_layers(path, d)
-
+        errors += check_entry(path, d)
     print(f"validated {n} entries — {errors} error(s)")
     return 1 if errors else 0
 

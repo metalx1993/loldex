@@ -1,5 +1,21 @@
 # Changelog
 
+## Phase 10 — quality and governance tools · 2026-11-15
+
+- Added a read-only JSON report sharing existing entry validators and complete
+  generated-artifact construction, including OpenAPI, licence and manifest.
+  Rejects ambiguous keys, nonregular inputs, invalid claim evidence, projection
+  drift and missing/altered/unowned outputs; rechecks portable input fingerprints.
+- Added a strict offline operational-evidence consistency checker, separate
+  changed/no-change/pending/fail outcomes, decision/review procedures and issue/PR
+  templates. Supplied JSON is not authentication of a real production cycle.
+- Added independent adversarial regressions and the existing workflow's quality
+  gate, plus same-job base/candidate tree and publication commit log captures.
+  Existing weekly scheduling and unchanged-base publication protections remain.
+- Rechecked the automatic SiteGround publication and live API. The complete
+  scheduled GitHub-to-host cycle remains pending; see docs/cron-activation.md.
+  See docs/phase10-delivery.md for exact regression results and remaining limits.
+
 ## Phases 7–9 — production delivery · 2026-11-14
 
 - Added a versioned knowledge API, OpenAPI contract, dataset/release binding,

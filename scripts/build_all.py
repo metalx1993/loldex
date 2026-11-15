@@ -46,6 +46,18 @@ def artifacts(entries, registry, state=None, identity_registry=None):
     return payloads
 
 
+def complete_artifacts(entries, registry, state=None, identity_registry=None):
+    """Canonical generated payloads, shared by the writer and read-only audit."""
+    payloads = artifacts(entries, registry, state, identity_registry)
+    openapi = json.loads((ROOT / "api/openapi-v1.json").read_bytes())
+    payloads["openapi-v1.json"] = (json.dumps(openapi, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    payloads["registry-license.txt"] = (ROOT / "data/registry/LICENSE-MITRE.txt").read_bytes()
+    manifest = {"version": 1, "files": {name: "sha256:" + hashlib.sha256(value).hexdigest() for name, value in sorted(payloads.items())},
+                "entries": len(entries), "registry_checksum": registry["checksum"]}
+    payloads["build-manifest.json"] = (json.dumps(manifest, sort_keys=True, separators=(",", ":")) + "\n").encode()
+    return payloads
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--entries", type=Path, default=ROOT / "data/entries")
@@ -57,14 +69,7 @@ def main(argv=None):
     registry = load_registry(args.registry)
     state = validate_envelope(args.state.read_bytes()) if args.state else None
     from knowledge.identities import load_identity_registry, DEFAULT_IDENTITY_REGISTRY
-    parser_identity_path = DEFAULT_IDENTITY_REGISTRY
-    payloads = artifacts(entries, registry, state, load_identity_registry(parser_identity_path))
-    openapi = json.loads((ROOT / "api/openapi-v1.json").read_bytes())
-    payloads["openapi-v1.json"] = (json.dumps(openapi, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
-    payloads["registry-license.txt"] = (ROOT / "data/registry/LICENSE-MITRE.txt").read_bytes()
-    manifest = {"version": 1, "files": {name: "sha256:" + hashlib.sha256(value).hexdigest() for name, value in sorted(payloads.items())},
-                "entries": len(entries), "registry_checksum": registry["checksum"]}
-    payloads["build-manifest.json"] = (json.dumps(manifest, sort_keys=True, separators=(",", ":")) + "\n").encode()
+    payloads = complete_artifacts(entries, registry, state, load_identity_registry(DEFAULT_IDENTITY_REGISTRY))
     write_artifacts(args.out, payloads)
     print(f"Built {len(entries)} entries and all validated graph, technique, evidence and UI datasets")
     return 0

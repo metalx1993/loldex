@@ -109,6 +109,7 @@ from the frozen observer. See [D2 publication](docs/phase5-d2-publication.md).
 
 ```bash
 python3 -m pytest -q
+python3 -m scripts.quality_report  # read-only generated-view baseline, JSON stdout
 node tests/test_experience.js
 # Optional browser regression suite with Playwright installed, preview running:
 node tests/browser-experience.cjs
@@ -123,6 +124,14 @@ Phases 7–9 are implemented and published on loldex.sh: 848 CI tests and live
 API/browser/rollback checks passed. See [production acceptance](docs/phase9-delivery.md).
 GitHub and SiteGround schedules are enabled; first automatic-cycle verification
 is in progress. See [scheduler status](docs/cron-activation.md).
+Phase 10 implements a complete generated-data quality report, an offline
+operational-evidence checker, review/correction procedures and adversarial
+regressions. See [delivery evidence](docs/phase10-delivery.md) and
+[the Phase 10 plan](docs/phase10-plan.md). The real scheduled GitHub-to-host
+acceptance remains open; tool delivery does not certify that production cycle.
+Once captures are retained, correlate them offline with
+`python3 -m scripts.check_operational_cycle work/automatic-cycle-evidence.json`;
+the required evidence contract is in [the operations procedure](docs/operations-governance.md).
 `site/build-manifest.json` pins the generated data files. Static builds validate
 all derived views before writing. [A2 deployment](docs/a2-design.md) installs
 immutable committed releases and switches the private active token atomically.
