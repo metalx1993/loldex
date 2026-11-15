@@ -171,7 +171,8 @@ source's licence — see [ATTRIBUTION.md](ATTRIBUTION.md).
 Contact/API validation, shared private abuse quotas, YAML expansion limits, browser
 restrictions and reproducible CI dependencies are documented in
 [security hardening and host publication steps](docs/security-hardening.md).
-The SiteGround static response-header gate must be verified separately.
+SiteGround bridge/static response-header acceptance completed on15 November2026;
+see the delivery record for exact live checks and provider-filter limits.
 
 CI uses the hash-verified Python 3.12/Linux wheel lock `requirements-ci.lock`.
 For PHP integration tests, copy `tests/php-runtime/package*.json` to

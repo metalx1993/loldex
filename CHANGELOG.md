@@ -5,11 +5,12 @@
 - Hardened contact and both PHP API generations with strict bounded requests,
   generic failures and shared private per-client/global admission quotas.
 - Added browser CSP/referrer policies, external contact assets and defensive PHP/
-  Apache headers. Static SiteGround Nginx response headers remain a separate host
-  verification gate; see docs/security-hardening.md.
+  Apache headers. SiteGround static delivery and live browser/header acceptance
+  completed; see docs/security-hardening.md.
 - Added a separately installed stable bridge for pre-hardening retained PHP
   endpoints: old API data stays pinned, old mail handlers cannot run, quotas are
-  shared. Host rewrite installation remains an explicit acceptance gate.
+  shared. Installed and verified on SiteGround; fixed real child-directory
+  inheritance bypass with native Apache regression. Purged obsolete responses.
 - Disabled unsafe deprecated clone acquisition; bounded operational D2 YAML
   expansion and historical Worker fetching without changing frozen CORE semantics.
 - Added independent adversarial and native-concurrency regressions, dependency

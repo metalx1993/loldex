@@ -39,8 +39,9 @@ frozen CORE/D1 specification. Public knowledge APIs remain public and read-only.
   are never executed: contact is redirected only to a verified guarded active
   release; rollback to an unguarded release fails503 instead of looping. New
   guarded endpoints are dispatched without duplicate admission. The root rewrite
-  must intercept dynamic paths before release passthrough; MultiViews and PATH_INFO
-  are disabled. This requires the host installation below; a GitHub push alone
+  forces InheritDownBefore, matches the translated filename/full request URI and
+  uses absolute targets with END. This prevents old child rules, encoded spellings
+  or repeated separators from bypassing interception. MultiViews/PATH_INFO are disabled. This requires the host installation below; a GitHub push alone
   does not protect historical endpoints.
 - All five deprecated adapter fetch methods now fail closed and direct callers
   to scripts.verified_refresh. Their normalize methods remain available. Shared
@@ -176,3 +177,44 @@ still ship, but the full static response-header gate remains pending. No new
 Cloudflare service, hostname, paid scanner or cronjob is enabled by this delivery.
 The already configured cron schedules and pending scheduled-cycle acceptance
 remain described in docs/cron-activation.md.
+
+## Production acceptance — 15 November 2026
+
+The stable bridge/private helper and defensive headers were installed on
+SiteGround with private backups and atomic root-file replacements. NGINX Direct
+Delivery was disabled for loldex.sh and the dynamic cache was purged. Retained
+release contents were not modified. Source and deployment identities are recorded
+in the private delivery receipt; this document does not claim future commits were
+accepted automatically.
+
+Real deployment testing found a child-directory rewrite bypass missed by the
+interpreter-only fixtures: an old duplicate query reached the previous handler.
+The inheritance/absolute-target correction above closes it. A native OS Apache
+regression now reproduces the vulnerable control and verifies interception with
+MergeSlashes On/Off, including encoded names and repeated separators. The
+independent review added 24 additional path variants. Final focused regressions:
+17 passed; total test collection is now973. The previous full 962-test baseline
+and subsequent45 checks remain historical runs, not a claim of one new full run.
+
+Twenty-seven bounded HTTPS checks passed, including exact static payload bytes,
+new/old dataset binding, query/pretty routes, HEAD/OPTIONS, duplicate/array requests,
+method restrictions, old contact redirect to the guarded active handler, empty
+contact rejection, malformed paths and missing assets. Post-purge ordinary legacy
+responses carry no-store. Three additional uncached requests across new and old
+legacy endpoints incremented the same client/global counts by exactly3; fake
+X-Forwarded-For/X-Real-IP headers did not create a separate client. The client key
+matched the actual requesting address, verified privately without outputting the
+address or key. State permissions and absence of raw addresses were checked.
+
+Live browser checks passed for the current experience and frozen contact page:
+search, evidence, techniques, mobile layouts, safe links, legitimate legacy CSS/JS
+hashes, hidden honeypot and field validation. Contact POSTs were intercepted and
+simulated locally; no email was sent. Unapproved inline script/event handlers were
+blocked. Native PHP8.2.35 quota/concurrency/error-state proofs remain separate
+isolated tests; production quotas were not exhausted to test429.
+
+SiteGround's own filter returns403 for a generic Python-urllib User-Agent; named
+API clients and ordinary browsers pass. Provider-generated denial responses can
+lack application headers. Do not disable provider protection to make an unnamed
+probe pass. Application/static response headers were verified on the served paths;
+this is not a certification of every provider edge error page or a DDoS test.

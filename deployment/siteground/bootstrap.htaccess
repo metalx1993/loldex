@@ -4,14 +4,22 @@ AcceptPathInfo Off
 DirectoryIndex loldex-router.php
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Keep ACME renewal under the host's existing configuration.
-  RewriteRule ^\.well-known/acme-challenge/ - [L]
-  # Stable admission bridge also covers retained releases created before the
-  # guard existed. Keep static/data URLs immutable and release-local.
-  RewriteRule ^loldex-(router|retained)\.php$ - [L]
-  RewriteRule ^releases/r-[a-f0-9]{64}/(?:(?:contact|api|api-v1)\.php(?:/.*)?|api(?:/.*)?)$ loldex-retained.php [L]
-  RewriteRule ^releases/ - [L]
-  RewriteRule ^ loldex-router.php [L]
+  # Retained child .htaccess files define their own rules. Force the security
+  # boundary to run first there, using full URI conditions and absolute targets.
+  RewriteOptions InheritDownBefore
+  RewriteCond %{REQUEST_URI} ^/\.well-known/acme-challenge/
+  RewriteRule ^ - [END]
+  RewriteCond %{REQUEST_URI} ^/loldex-(router|retained)\.php$
+  RewriteRule ^ - [END]
+  # RewriteRule paths are decoded, unlike PHP's original REQUEST_URI. The
+  # translated filename also covers encoded or repeated release separators.
+  RewriteCond %{REQUEST_FILENAME} /+releases/+r-[a-f0-9]{64}/+ [OR]
+  RewriteCond %{REQUEST_URI} ^/+releases/+r-[a-f0-9]{64}/+
+  RewriteRule ^(?:.*/)?(?:(?:contact|api|api-v1)\.php(?:/.*)?|api(?:/.*)?)$ /loldex-retained.php [END]
+  RewriteCond %{REQUEST_FILENAME} /+releases/+ [OR]
+  RewriteCond %{REQUEST_URI} ^/+releases/+
+  RewriteRule ^ - [END]
+  RewriteRule ^ /loldex-router.php [END]
 </IfModule>
 # Exact hashes preserve the frozen legacy contact page without unsafe-inline.
 # New releases enforce their own stricter header and meta CSP.

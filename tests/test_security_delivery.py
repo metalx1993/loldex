@@ -64,21 +64,41 @@ def test_locked_test_runtime_has_integrity_for_every_package():
 
 def test_bootstrap_intercepts_dynamic_retained_paths_before_static_passthrough():
     import re
+    from urllib.parse import unquote
     source = (ROOT / 'deployment/siteground/bootstrap.htaccess').read_text()
-    assert 'Options -Indexes -MultiViews' in source
-    assert 'AcceptPathInfo Off' in source
-    rules = [line.strip().split()[1:3] for line in source.splitlines()
-             if line.strip().startswith('RewriteRule ')]
-    def destination(path):
-        for pattern, target in rules:
-            if re.search(pattern, path):
+    assert 'Options -Indexes -MultiViews' in source and 'AcceptPathInfo Off' in source
+    assert 'RewriteOptions InheritDownBefore' in source
+    rules, conditions = [], []
+    for line in source.splitlines():
+        fields = line.strip().split()
+        if fields[:1] == ['RewriteCond']:
+            conditions.append((fields[1], fields[2], '[OR]' in fields))
+        elif fields[:1] == ['RewriteRule']:
+            assert fields[3] == '[END]'
+            assert fields[2] == '-' or fields[2].startswith('/')
+            rules.append((fields[1], fields[2], conditions))
+            conditions = []
+    def destination(path, child=False):
+        decoded = unquote(path)
+        relative = decoded.split('/', 2)[-1] if child else decoded
+        values = {'%{REQUEST_URI}': '/' + path,
+                  '%{REQUEST_FILENAME}': '/www/public_html/' + decoded}
+        for pattern, target, tests in rules:
+            groups, pending = [], False
+            for variable, expression, or_next in tests:
+                pending = pending or bool(re.search(expression, values[variable]))
+                if not or_next:
+                    groups.append(pending)
+                    pending = False
+            if all(groups) and re.search(pattern, relative):
                 return target
     prefix = 'releases/r-' + 'a' * 64 + '/'
-    for path in ['api.php', 'api.php/path-info', 'api-v1.php', 'contact.php',
-                 'contact.php/path-info', 'api/v1/search', 'api/stats']:
-        assert destination(prefix + path) == 'loldex-retained.php', path
-    for path in ['data.json', 'index.html', 'evidence-records/abc.json']:
-        assert destination(prefix + path) == '-'
+    for child in [False, True]:
+        for path in ['api.php', 'api.php/path-info', 'api-v1.php', 'contact.php',
+                     'contact.php/path-info', 'api/v1/search', 'api/stats', '%61pi.php']:
+            assert destination(prefix + path, child) == '/loldex-retained.php', (path, child)
+        for path in ['data.json', 'index.html', 'evidence-records/abc.json']:
+            assert destination(prefix + path, child) == '-'
     assert destination('loldex-retained.php') == '-'
     assert destination('loldex-router.php') == '-'
     assert destination('.well-known/acme-challenge/token') == '-'
