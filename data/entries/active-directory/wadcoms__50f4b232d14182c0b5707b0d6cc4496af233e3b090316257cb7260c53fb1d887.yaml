@@ -12,7 +12,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 preconditions:
 - a valid username
 - a valid password
@@ -55,7 +55,7 @@ source_data:
         \  - https://github.com/fox-it/BloodHound.py\n---\n"
     upstream_url: https://wadcoms.github.io
     upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: discovery
@@ -86,6 +86,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     WADComs: sha256:22a9558bd0254030d277546107443012388f2122b2c4ccbe241150669560e3ec

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1105
 opsec:
@@ -50,7 +50,7 @@ source_data:
       document_sha256: sha256:6343198a43a9ea29fc6cd6edf9e8f2fcfdaf9b051a8292b109662a079438a3d6
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/IMEWDBLD/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-download
@@ -87,6 +87,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:010d4dc3704fd54e259d44e4d1e8d2a40010865363b6931e7c8f654a23ac3d3a

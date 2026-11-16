@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: rake -f /path/to/input-file
   comment: The file is actually parsed and the first wrong line is returned in an error message.
@@ -44,7 +44,7 @@ source_data:
               from: ruby
     upstream_url: https://gtfobins.github.io/gtfobins/rake/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-read
@@ -80,6 +80,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:66495d445a22150f8d24f75428508bca8896006752c7c56012008813099b0b4e

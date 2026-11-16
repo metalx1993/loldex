@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: nl -bn -w1 -s '' /path/to/input-file
   comment: The read file content is corrupted by a leading space added to each line.
@@ -39,7 +39,7 @@ source_data:
                 unprivileged: null
     upstream_url: https://gtfobins.github.io/gtfobins/nl/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-read
@@ -75,6 +75,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:e91d132c18fa7ba5f498e6b66d9f3b9139f9f0d167b9355077998ee65b52e524

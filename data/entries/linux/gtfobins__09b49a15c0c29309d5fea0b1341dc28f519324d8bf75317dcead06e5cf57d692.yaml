@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: 'echo ''...'' >/path/to/temp-file
 
@@ -121,7 +121,7 @@ source_data:
               receiver: tcp-server
     upstream_url: https://gtfobins.github.io/gtfobins/pandoc/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -160,6 +160,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:113f509943115f948059a587b69a1d3a0c1b04dcb4a67d6ba8bcd280e3947791

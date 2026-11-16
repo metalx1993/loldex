@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1564.004
 opsec:
@@ -81,7 +81,7 @@ source_data:
       document_sha256: sha256:dcf494d25b3fb49cb60e40288a1bbab5301fa4e39046b16b029d07e592b849eb
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Esentutl/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -118,6 +118,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:5d2d91ac8238669fc5c24fb59756c811d8e3191a5b8e7fbd038eaa4481be8164

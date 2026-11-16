@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: busctl set-property org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager
     LogLevel s debug --address=unixexec:path=/bin/sh,argv1=-c,argv2='/bin/sh -i 0<&2 1>&2'
@@ -56,7 +56,7 @@ source_data:
                 unprivileged: null
     upstream_url: https://gtfobins.github.io/gtfobins/busctl/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: shell
@@ -85,6 +85,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:56467a9c4a16efda1432e517d60bd615a6a0a5a1e6b6ba5f58da662123cf424b

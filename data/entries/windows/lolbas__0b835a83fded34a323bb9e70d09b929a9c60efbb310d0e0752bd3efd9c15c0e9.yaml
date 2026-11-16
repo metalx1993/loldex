@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1220
 opsec:
@@ -76,7 +76,7 @@ source_data:
       document_sha256: sha256:2db39b4b725054c7a6120644bc6f54d9e76404539504f78e8e286da75473e76c
     upstream_url: https://lolbas-project.github.io/lolbas/Scripts/Winrm/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -120,6 +120,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:6b0294b4f98d4ed34278b0b712676194c35ed7aff66b1e0373ac8a02d415805d

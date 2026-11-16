@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1564.004
 opsec:
@@ -57,7 +57,7 @@ source_data:
       document_sha256: sha256:f40cb0c5f2942fca137a959bd96f4123efdeeae234c942229cf1c66b159972ed
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Mavinject/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -94,6 +94,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:cf6d7aa54ce8ecae4d4f3d4cf17d73a8b81de865e267f6c9fa7efe6f0459cdc6

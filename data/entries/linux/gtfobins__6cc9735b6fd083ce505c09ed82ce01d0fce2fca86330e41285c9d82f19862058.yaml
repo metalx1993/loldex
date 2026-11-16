@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: dialog --textbox /path/to/input-file 0 0
   comment: The file is shown in an interactive TUI dialog.
@@ -37,7 +37,7 @@ source_data:
                 unprivileged: null
     upstream_url: https://gtfobins.github.io/gtfobins/dialog/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-read
@@ -66,6 +66,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:3b05b5aabc49492828cc7ad28d7cf3a22ef8665b4cbde576b6918058b0d2ecb0

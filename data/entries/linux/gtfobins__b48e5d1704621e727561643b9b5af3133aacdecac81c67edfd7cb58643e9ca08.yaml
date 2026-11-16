@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: ul /path/to/input-file
   comment: The read file content is corrupted by replacing occurrences of `$'\b_'` to terminal sequences
@@ -41,7 +41,7 @@ source_data:
                 unprivileged: null
     upstream_url: https://gtfobins.github.io/gtfobins/ul/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-read
@@ -77,6 +77,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:30498a6c08e5a77d6dccda5d2be5a197af0f9cb13d2a809fe9b2835fba5ba14e

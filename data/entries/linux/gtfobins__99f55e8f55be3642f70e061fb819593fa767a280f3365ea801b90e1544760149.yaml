@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: espeak -qXf /path/to/input-file
   comment: The file content appears in the middle of other textual information as phonemes.
@@ -39,7 +39,7 @@ source_data:
                 unprivileged: null
     upstream_url: https://gtfobins.github.io/gtfobins/espeak/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-read
@@ -75,6 +75,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:91685af1a0761c6e5c2d48dac39e6b85509d4ebe7e86e39e4d2e192b29731fb7

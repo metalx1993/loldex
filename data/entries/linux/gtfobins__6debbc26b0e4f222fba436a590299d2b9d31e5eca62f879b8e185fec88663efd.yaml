@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: 'echo -e ''package main\nimport "os"\nfunc main(){\n\tf, _ := os.OpenFile("/path/to/output-file",
     os.O_RDWR|os.O_CREATE, 0644)\n\tf.Write([]byte("DATA\\n"))\n\tf.Close()\n}'' >/path/to/temp-file.go
@@ -80,7 +80,7 @@ source_data:
                 unprivileged: null
     upstream_url: https://gtfobins.github.io/gtfobins/go/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-write
@@ -109,6 +109,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:cb79c5f08c778363a252c2e149ff9e2c4cb011f2c44f4134ea2d597b6f805db4

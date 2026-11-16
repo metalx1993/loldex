@@ -12,7 +12,7 @@ sources:
   upstream_url: https://www.loldrivers.io
   license: MIT
   upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 aliases:
 - pmxdrv.sys
 - PMxDrv
@@ -585,7 +585,7 @@ source_data:
         \ CN=Intel External Basic Issuing CA 3B\n      Version: 1\n"
     upstream_url: https://www.loldrivers.io
     upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -625,6 +625,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLDrivers: sha256:a8bb7550ddfe5fd8de6d84f7462e5162bd3a377de8a3a902936d7d685629114c

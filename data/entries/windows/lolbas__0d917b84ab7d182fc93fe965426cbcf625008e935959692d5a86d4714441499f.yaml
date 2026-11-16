@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1548.002
 opsec:
@@ -77,7 +77,7 @@ source_data:
       document_sha256: sha256:d2e07565dfeb35f46e6f2ec4793206423ed97f9d6d2e7375deeaa67196ea691c
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Eventvwr/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -121,6 +121,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:5657e81afa09b744db35fdd73a137c76af1fdcfe84c38f7b96aa29d711d9c942

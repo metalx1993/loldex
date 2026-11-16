@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1218.012
 opsec:
@@ -51,7 +51,7 @@ source_data:
       document_sha256: sha256:b1dcc009e36037a26910a630c444570ff9f23d4536de1a9a238c87834fee3b7a
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Verclsid/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -88,6 +88,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:c7572f63dab90b75c3de0acdb224c56383749c48f8086134b41fe0dd9f6a04df

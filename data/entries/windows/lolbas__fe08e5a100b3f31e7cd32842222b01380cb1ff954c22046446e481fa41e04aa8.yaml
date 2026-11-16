@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1047
 opsec:
@@ -59,7 +59,7 @@ source_data:
       document_sha256: sha256:2d25ff47b12ba1c2c91f7bf205a6bcb58e72c577ce3501790e8857ad1d116083
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Mofcomp/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -96,6 +96,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:b2a14a7e641cfdfcef7d942c7330e24811104fbd885b6d4266285ee1ddad6a23

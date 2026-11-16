@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: rake -p '...'
   comment: This allows to run Ruby code (`...`).
@@ -92,7 +92,7 @@ source_data:
               version: '>= 1.9.2'
     upstream_url: https://gtfobins.github.io/gtfobins/rake/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -131,6 +131,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:12638db4f0644f5a4195f11e90bee5beefa9632acfb1dfa2b16e7f7ed61c75f0

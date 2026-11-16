@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1218.011
 opsec:
@@ -74,7 +74,7 @@ source_data:
       document_sha256: sha256:5f4101243010f5cccbdb983276a35c4af844225dbf7fdf77122e08dac2a2bdf6
     upstream_url: https://lolbas-project.github.io/lolbas/Libraries/Ieadvpack/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -118,6 +118,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:f36943856e3565cc46a4edf218f74f3e31ba1d37b2640871a5613f756cec2615

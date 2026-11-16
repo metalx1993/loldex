@@ -12,7 +12,7 @@ sources:
   upstream_url: https://wadcoms.github.io
   license: GPL-3.0
   upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 preconditions:
 - a valid password
 - a valid username
@@ -40,7 +40,7 @@ source_data:
         \  - https://www.puckiestyle.nl/impacket/\n---\n"
     upstream_url: https://wadcoms.github.io
     upstream_version: 0c4609d7dffa7c12a378863a360636c9f275b240
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: discovery
@@ -71,6 +71,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     WADComs: sha256:3f8b1513ec2f4f3e0a6f170ec4e26ffc4763e9c7f9bdacb7271bde0496cb932a

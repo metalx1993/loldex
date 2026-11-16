@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1218.014
 opsec:
@@ -63,7 +63,7 @@ source_data:
       document_sha256: sha256:021733ffe0159debab8c0c114fe65611dc6aa51cfa65c8feb094be54e306ce48
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Mmc/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -107,6 +107,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:06f72d5f4f1bb292d01d265fc1a8236144b668d908abbc1ee67d5e2d45334f6d

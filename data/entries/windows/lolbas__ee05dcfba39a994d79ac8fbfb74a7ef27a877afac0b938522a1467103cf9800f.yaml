@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1127
 opsec:
@@ -63,7 +63,7 @@ source_data:
       document_sha256: sha256:7cd75bc3bba70bc73af272a66043ee7678d3e0a996b6cd501cb4f02a84ec2fcd
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Ttdinject/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -100,6 +100,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:710bd90bacb118c71539952b12bcb9f408a606d7359deffd807446d1e1e08b93

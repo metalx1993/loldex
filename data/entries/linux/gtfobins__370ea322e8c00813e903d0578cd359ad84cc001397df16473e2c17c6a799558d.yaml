@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: sudo /bin/sh
   comment: The invocation is actually `sudo sudo ...`.
@@ -36,7 +36,7 @@ source_data:
                   comment: The invocation is actually `sudo sudo ...`.
     upstream_url: https://gtfobins.github.io/gtfobins/sudo/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: shell
@@ -72,6 +72,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:10e94fd36ce72db3bf5b57a5bc76ba533ed22874c99e22e2e8a9dc9dafcfa24c

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1216
 opsec:
@@ -58,7 +58,7 @@ source_data:
       document_sha256: sha256:24159aae99e112e8d9758c02f28bd28a1aa055634a1ce0157baf7bb94d4185c1
     upstream_url: https://lolbas-project.github.io/lolbas/Scripts/Manage-bde/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -95,6 +95,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:6cad60924e2646ca5924dfa5a7eac28d42e92757f414b96d1f6ed7d018a271dc

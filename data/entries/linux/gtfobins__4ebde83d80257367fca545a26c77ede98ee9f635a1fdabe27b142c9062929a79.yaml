@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: tailscale serve --http=12345 /path/to/input-file
   comment: The URL is reachable by any host of the same Tailnet.
@@ -42,7 +42,7 @@ source_data:
                   The actual URL is returned by the command.'
     upstream_url: https://gtfobins.github.io/gtfobins/tailscale/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-upload
@@ -78,6 +78,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:4a7a727d8931a93537cb05bac71fb1b9a54ef32f8a9d993aa494f72a59615fd2

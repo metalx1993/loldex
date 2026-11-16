@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: python -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh")'
 references:
@@ -119,7 +119,7 @@ source_data:
               receiver: http-client
     upstream_url: https://gtfobins.github.io/gtfobins/python/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: shell
@@ -155,6 +155,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:4f9cb149337e130070b0b9e19a1c75b0687e8406bf4863f7e54c9f0f24a0c837

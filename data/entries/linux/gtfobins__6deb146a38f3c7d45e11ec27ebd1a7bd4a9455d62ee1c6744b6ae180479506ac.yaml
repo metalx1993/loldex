@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: chown $(id -un):$(id -gn) /path/to/input-file
   comment: This can be run with elevated privileges to change ownership and then read, write, or execute
@@ -38,7 +38,7 @@ source_data:
                 suid: null
     upstream_url: https://gtfobins.github.io/gtfobins/chown/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -67,6 +67,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:476ec92aa4c6540de126a461eb80c98a3bf5dbe9c4cbffa8b849b14e64a6ab93

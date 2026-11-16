@@ -12,7 +12,7 @@ sources:
   upstream_url: https://www.loldrivers.io
   license: MIT
   upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 aliases:
 - superman.sys
 attack_techniques:
@@ -631,7 +631,7 @@ source_data:
         \ GMER 2003-2013\n  MachineType: AMD64\n  Imports:\n  - ntoskrnl.exe\n  LoadsDespiteHVCI: 'FALSE'\n"
     upstream_url: https://www.loldrivers.io
     upstream_version: 39c70ca64ae9b66650e2c50e011eec6f7354e9cf
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -671,6 +671,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLDrivers: sha256:6e4099e40380340626eec095792683fa0216d6fc248e231dedb67b1359ad8f85

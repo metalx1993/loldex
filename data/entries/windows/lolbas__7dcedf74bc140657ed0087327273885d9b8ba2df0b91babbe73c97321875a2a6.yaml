@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1127
 opsec:
@@ -62,7 +62,7 @@ source_data:
       document_sha256: sha256:92bba7d39de4d4c0c7144ded40704b0bb64082831cf85ca4b85ebd882dba93d7
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dxcap/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -99,6 +99,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:6d7435ab97daadadc9e5c9b2bea1ba9b4005b03ea70b784fc2f262cf81a3f184

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1564.004
 opsec:
@@ -81,7 +81,7 @@ source_data:
       document_sha256: sha256:267b9ac4bd25820a87ac36b4a91e8c0ee4e13b04bc2e5f783c4396b240a90aa7
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Rundll32/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -118,6 +118,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:2bbb2db3fa5949fec90c1f7f426f81388c9863b86f2064bebb658d5e4ed2883d

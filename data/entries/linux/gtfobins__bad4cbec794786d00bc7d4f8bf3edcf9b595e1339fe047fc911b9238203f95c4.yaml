@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: nft -f /path/to/input-file
   comment: The content is actually parsed and corrupted by the command.
@@ -38,7 +38,7 @@ source_data:
               version: '`nftables` >= 0.9.0'
     upstream_url: https://gtfobins.github.io/gtfobins/nft/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-read
@@ -74,6 +74,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:15482cd9b42169ab16a10a98536a9052bd23a6fa4d4da24189a92ac8f19c52ed

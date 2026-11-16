@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1105
 opsec:
@@ -55,7 +55,7 @@ source_data:
       document_sha256: sha256:99872eeaa37b5a0a0e61502c7d849ae6135151d0a1338d233d5978cfe2e3f5d1
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/PrintBrm/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-download
@@ -92,6 +92,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:9a585806bc4c70ec5804464ff97830a4602a138fb432274a1d5096660ef855da

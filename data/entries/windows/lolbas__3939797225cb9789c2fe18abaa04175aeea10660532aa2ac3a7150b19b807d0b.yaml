@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1548.002
 opsec:
@@ -64,7 +64,7 @@ source_data:
       document_sha256: sha256:45fdf65b58d52ac5f984dc57bcfdde45d30c46efab9c92782998d66e8431a4c9
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Wsreset/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -108,6 +108,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:52c1ce0c0d71ad0960adf45f40e3fe695686b6762a74db5092fdf4765293d524

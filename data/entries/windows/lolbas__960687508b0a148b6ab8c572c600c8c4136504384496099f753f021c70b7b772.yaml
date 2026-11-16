@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1218
 opsec:
@@ -70,7 +70,7 @@ source_data:
       document_sha256: sha256:ce8a757c4f4f467187cf34df396ecf6d1f964a2e2f63aa78724fb92ae1120ed2
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Xwizard/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -107,6 +107,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:7762a1af5020b6875b0a5f92a8dd0758a6182fb9c05f6c77d7b1fb3b175dddd5

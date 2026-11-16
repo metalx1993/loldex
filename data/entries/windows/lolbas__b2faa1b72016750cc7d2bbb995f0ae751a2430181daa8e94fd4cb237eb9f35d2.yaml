@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 aliases:
 - microsoft.workflow.compiler
 attack_techniques:
@@ -80,7 +80,7 @@ source_data:
       document_sha256: sha256:43d148c0d9448a3e9bf5becdac3f6556b00294c4ec69b301c74faa7240ce197b
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Microsoft.Workflow.Compiler/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -124,6 +124,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:9d70abe328e10136b0411ff00385749cc0cb781c60b87fffd5523c4356a5be08

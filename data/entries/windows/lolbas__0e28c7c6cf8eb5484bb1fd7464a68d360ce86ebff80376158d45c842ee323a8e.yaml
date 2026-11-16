@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1218
 opsec:
@@ -50,7 +50,7 @@ source_data:
       document_sha256: sha256:51386770bf7c45ee066af0eaeff93f90f0e2868123c7e52af7e786c511e714ab
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/VSIISExeLauncher/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -87,6 +87,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:792b3f413c24caac273265db4aba775ed56eab516414ed9145f4bbd50ee4f861

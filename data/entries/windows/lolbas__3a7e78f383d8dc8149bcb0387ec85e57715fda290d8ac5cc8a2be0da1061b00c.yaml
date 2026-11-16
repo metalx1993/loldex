@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1202
 opsec:
@@ -51,7 +51,7 @@ source_data:
       document_sha256: sha256:7d75e50b326e82c5ffa9379e5fa38509ecc795007c8897a74bc00bf9ae850802
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/XBootMgr/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -88,6 +88,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:5fb18578cab9886d076ec87e6e5e395cb7653173108af66198833566af707581

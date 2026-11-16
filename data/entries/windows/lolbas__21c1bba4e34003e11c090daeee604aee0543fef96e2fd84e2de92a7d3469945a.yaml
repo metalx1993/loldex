@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 aliases:
 - cl_loadassembly
 attack_techniques:
@@ -53,7 +53,7 @@ source_data:
       document_sha256: sha256:22e5b3f1b1a081b0ae0c5701697bdc56481138f4cd11e60582bd9ac9ee97801a
     upstream_url: https://lolbas-project.github.io/lolbas/Scripts/CL_LoadAssembly/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -90,6 +90,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:920c736088ba1948748dba4d033b106c32778e49118aefdde1948b073812e568

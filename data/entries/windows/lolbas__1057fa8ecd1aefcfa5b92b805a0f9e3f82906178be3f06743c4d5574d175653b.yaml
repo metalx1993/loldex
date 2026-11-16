@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1548.002
 opsec:
@@ -52,7 +52,7 @@ source_data:
       document_sha256: sha256:92ad0cac954698062cbc2de561fc775ce0a3ac4cb30beba224ff6880dba9829b
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Eudcedit/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -96,6 +96,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:5bba3923043b5bee12ece0676bbe3b8af4eb3af6494d54cfa5bea45919b00fcf

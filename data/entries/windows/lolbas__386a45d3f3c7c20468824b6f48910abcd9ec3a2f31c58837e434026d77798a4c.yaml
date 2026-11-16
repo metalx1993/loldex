@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1003.001
 opsec:
@@ -52,7 +52,7 @@ source_data:
       document_sha256: sha256:5b8d6ccc4326b1c7fe22de152a2fa423f55156da0f51fc49b4dd8b744194c3bd
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/DumpMinitool/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: credential-dump
@@ -89,6 +89,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:e89a907af5668e58fe9f566921efeab436ee50164629a282c395e5a0a7d95e3d

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 aliases:
 - mscopilot_proxy
 attack_techniques:
@@ -51,7 +51,7 @@ source_data:
       document_sha256: sha256:5cd225710915b0a960a76bd755effcaca690fb0d67d1eb0c3ac36cfd700e256c
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Mscopilot_proxy/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -88,6 +88,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:1849793ffea1f573f07c3cfdd63420e3bfa712e665cc21fce90600a8bb95e7de

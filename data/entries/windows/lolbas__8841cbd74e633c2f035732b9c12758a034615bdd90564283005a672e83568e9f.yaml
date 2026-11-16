@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1218.003
 opsec:
@@ -81,7 +81,7 @@ source_data:
       document_sha256: sha256:e6f6ddaf68bb4fd189633d20d228c01655a95ab0df4ba8ad78bd06cb304ccda3
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Cmstp/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -118,6 +118,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:3ea00d87524bc0233e5d6171dc0c0a28df816c83ea07b11287f2948c93ada4af

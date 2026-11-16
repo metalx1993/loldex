@@ -12,7 +12,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: setcap cap_setuid+ep /path/to/command
   comment: This can be used to assign capabilities to executable files.
@@ -36,7 +36,7 @@ source_data:
                 suid: null
     upstream_url: https://gtfobins.github.io/gtfobins/setcap/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: privilege-escalation
@@ -65,6 +65,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:769c5670b2069512c187a6d4b84b1fad8abb461eca17ab4fe5fd602feaa43a0e

@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1564.006
 opsec:
@@ -100,7 +100,7 @@ source_data:
       document_sha256: sha256:70fe643ff69405a20ac1fd0e13683286fbd8d4ba7d5d82e38bf65c953af312f9
     upstream_url: https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wsb/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -137,6 +137,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:3cdb07d2995578ed83f47345bf690cded5ea21098795a7ec88e825884d296b85

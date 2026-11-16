@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: nmap -iL /path/to/input-file
   comment: The file is actually parsed as a list of hosts/networks, lines are leaked through error messages.
@@ -67,7 +67,7 @@ source_data:
               version: 2.02 to 5.21
     upstream_url: https://gtfobins.github.io/gtfobins/nmap/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-read
@@ -103,6 +103,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:5adc89fdff68b8f1f08b06282e8853165534dad082a329ed84096224b21aa037

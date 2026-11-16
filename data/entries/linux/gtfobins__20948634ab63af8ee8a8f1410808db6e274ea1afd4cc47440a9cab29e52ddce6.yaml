@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: latexmk -e '...'
   comment: This allows to run Perl code (`...`).
@@ -105,7 +105,7 @@ source_data:
               receiver: http-server
     upstream_url: https://gtfobins.github.io/gtfobins/latexmk/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -144,6 +144,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:37ae41224812c325661491c1ef547c31e1a8f41c7cdd665ec9a6727ffa029ce0

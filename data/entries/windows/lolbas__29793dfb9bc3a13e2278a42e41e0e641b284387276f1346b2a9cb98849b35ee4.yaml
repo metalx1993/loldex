@@ -13,7 +13,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 aliases:
 - aspnet_compiler
 attack_techniques:
@@ -57,7 +57,7 @@ source_data:
       document_sha256: sha256:b158744a8080a2125f0182a7980c54333e1bebd948d2b9d070b5d93c4588c75e
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Aspnet_Compiler/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: defense-evasion
@@ -101,6 +101,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:1998eacc78a463770ed0ca41745c8bae9ab633bc5dfc3eea2bf81c4756baef33

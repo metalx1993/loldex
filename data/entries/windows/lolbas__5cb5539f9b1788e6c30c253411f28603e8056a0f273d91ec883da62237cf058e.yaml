@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 aliases:
 - cl_mutexverifiers
 attack_techniques:
@@ -55,7 +55,7 @@ source_data:
       document_sha256: sha256:2d9123563191165bce722b38ae5b7c06d893a4ca726f5ee8e0b06f74f4b4f5bc
     upstream_url: https://lolbas-project.github.io/lolbas/Scripts/CL_mutexverifiers/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -92,6 +92,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:0f89d5999b42516c132f6caceb7f15eadaa80b4e4f4389518f1873fa5da25eb7

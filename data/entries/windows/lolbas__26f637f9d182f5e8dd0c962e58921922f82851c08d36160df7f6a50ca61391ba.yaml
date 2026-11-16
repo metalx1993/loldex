@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1105
 opsec:
@@ -63,7 +63,7 @@ source_data:
       document_sha256: sha256:c417727d23b4917f2d2edeeb2ca972cb279e7145d8e6b9264e6a36a983239bd4
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/OneDriveStandaloneUpdater/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-download
@@ -100,6 +100,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:b89f3a1f8474a2d3463b601e5fc208f561733f86e3d33fb1283880c1f97ac10e

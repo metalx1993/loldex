@@ -12,7 +12,7 @@ sources:
   upstream_url: https://lolbas-project.github.io
   license: GPL-3.0
   upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 attack_techniques:
 - T1105
 opsec:
@@ -57,7 +57,7 @@ source_data:
       document_sha256: sha256:d348aedcc251389733590d6ac254a65a13bfe1d2d73fb9a8bd620ed2a421bf8a
     upstream_url: https://lolbas-project.github.io/lolbas/Binaries/Finger/
     upstream_version: 2056cb7662509dc998fc6ce79636aec4e6c0397f
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: file-download
@@ -94,6 +94,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     LOLBAS: sha256:7aa678179d030776d1dc0f6f560a6cdb4fd566927c2043e8c8cfbe96156ce5ea

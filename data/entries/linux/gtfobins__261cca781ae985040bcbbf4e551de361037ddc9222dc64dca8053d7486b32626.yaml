@@ -13,7 +13,7 @@ sources:
   upstream_url: https://gtfobins.github.io
   license: GPL-3.0
   upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-  last_synced: '2026-11-14'
+  last_synced: '2026-11-16'
 commands:
 - template: gimp -idf --batch-interpreter=python-fu-eval -b '...'
   comment: This allows to run Python code (`...`). It hangs afterwards and can be terminated by pressing
@@ -132,7 +132,7 @@ source_data:
               receiver: http-client
     upstream_url: https://gtfobins.github.io/gtfobins/gimp/
     upstream_version: acd524623f9c406acedd2754ebd9c2431f3675ad
-    last_synced: '2026-11-14'
+    last_synced: '2026-11-16'
 enrichment:
   capabilities:
   - value: command-execution
@@ -171,6 +171,6 @@ enrichment:
 _meta:
   schema_version: 1
   generated_by: loldex-projection
-  projected_at: '2026-11-14'
+  projected_at: '2026-11-16'
   source_hashes:
     GTFOBins: sha256:b495b2c140ddbfb9a8c47c3378a3af948010124353cdd7df55776dd09e7224d3
