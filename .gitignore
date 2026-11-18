@@ -5,3 +5,8 @@ gtfobins_src/
 .DS_Store
 work/
 .pytest_cache/
+
+# Local environment files may contain API keys and other secrets.
+.env
+.env.*
+*.env
